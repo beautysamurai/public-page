@@ -11,6 +11,11 @@ validates that source and deterministically generates **site/data/**. GitHub
 Actions validates and deploys the already-generated static site; deployment
 does not call ChatGPT, arXiv, or any other AI service.
 
+The interface is Japanese by default. The **日本語 / English** control stores
+English in the shareable `?lang=en` URL and preserves the selected archive
+edition. English editorial copy is a reviewed overlay; official arXiv titles,
+authors, identifiers, dates, links, and numerical ratings remain unchanged.
+
 ## Source of truth
 
 ~~~text
@@ -19,6 +24,7 @@ ChatGPT scheduled-task response history
   -> content/chatgpt_scheduler_history.json
   -> scripts/import_scheduler_history.py
   -> site/data/latest.json + immutable edition archives
+  -> reviewed site/data/i18n/en.json editorial translation overlay
   -> reviewed commit and push
   -> GitHub Pages
 ~~~
@@ -51,6 +57,9 @@ python -m http.server 8000 --directory site
 
 Open **http://localhost:8000**. Avoid opening **site/index.html** directly
 because browser security rules can prevent fetch requests from loading JSON.
+Use **http://localhost:8000/?lang=en** for English, or combine `lang=en` with
+an archive `edition` query. The bilingual coverage tests require every source
+edition, paper, and rating label to have a matching English overlay entry.
 
 The importer is network-free, rejects unknown fields and unsafe public text,
 derives canonical arXiv links from each arXiv ID, refuses to rewrite a different

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'self'; object-src 'none'; media-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
@@ -7,34 +7,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
     <meta name="theme-color" content="#0b1d2a">
-    <meta name="description" content="Scheduled daily screens and weekly reviews of arXiv research for electronic trading, fixed income, and market structure.">
+    <meta name="description" content="電子取引、債券、マーケット・マイクロストラクチャーを対象とする arXiv リサーチの日次スクリーニングと週次レビュー。">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Rates &amp; Execution — scheduled arXiv research">
-    <meta property="og:description" content="Scheduled daily screens and weekly reviews of arXiv research for electronic trading, fixed income, and market structure.">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:title" content="Rates &amp; Execution — arXiv リサーチ">
+    <meta property="og:description" content="電子取引、債券、マーケット・マイクロストラクチャーを対象とする arXiv リサーチの日次スクリーニングと週次レビュー。">
     <meta property="og:url" content="https://beautysamurai.github.io/public-page/">
     <meta property="og:image" content="https://beautysamurai.github.io/public-page/og.png">
-    <meta property="og:image:alt" content="Rates and Execution scheduled arXiv research brief">
+    <meta property="og:image:alt" content="Rates &amp; Execution 定期配信 arXiv リサーチ">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Rates &amp; Execution — scheduled arXiv research">
-    <meta name="twitter:description" content="Scheduled daily screens and weekly reviews of arXiv research for electronic trading, fixed income, and market structure.">
+    <meta name="twitter:title" content="Rates &amp; Execution — arXiv リサーチ">
+    <meta name="twitter:description" content="電子取引、債券、マーケット・マイクロストラクチャーを対象とする arXiv リサーチの日次スクリーニングと週次レビュー。">
     <meta name="twitter:image" content="https://beautysamurai.github.io/public-page/og.png">
-    <meta name="twitter:image:alt" content="Rates and Execution scheduled arXiv research brief">
-    <title>Rates &amp; Execution — scheduled arXiv research</title>
+    <meta name="twitter:image:alt" content="Rates &amp; Execution 定期配信 arXiv リサーチ">
+    <title>Rates &amp; Execution — arXiv リサーチ</title>
     <link rel="stylesheet" href="./styles.css">
+    <script src="./i18n.js" defer></script>
     <script src="./app.js" defer></script>
   </head>
   <body>
-    <a class="skip-link" href="#digest">Skip to the latest research edition</a>
+    <a class="skip-link" href="#digest" data-i18n="skip">最新のリサーチ号へ移動</a>
     <header class="site-header">
       <div class="shell header-inner">
-        <a class="brand" href="./" aria-label="Rates and Execution scheduled arXiv research home">
+        <a class="brand" href="./" aria-label="Rates &amp; Execution スケジュール arXiv リサーチ ホーム" data-i18n-aria-label="brand.home">
           <span class="brand-copy"><strong>Rates &amp; Execution</strong></span>
         </a>
-        <nav class="primary-nav" aria-label="Primary navigation">
-          <a href="#digest">Latest</a><a href="#archive">Archive</a><a href="#method">Method</a>
+        <nav class="primary-nav" aria-label="メインナビゲーション" data-i18n-aria-label="nav.aria">
+          <a href="#digest" data-i18n="nav.latest">最新号</a><a href="#archive" data-i18n="nav.archive">アーカイブ</a><a href="#method" data-i18n="nav.method">選定方法</a>
         </nav>
-        <div class="header-status" id="header-status" aria-live="polite">
-          <span class="status-pulse" aria-hidden="true"></span><span>Checking edition</span>
+        <div class="header-tools">
+          <div class="language-toggle" role="group" aria-label="表示言語" data-i18n-aria-label="language.aria">
+            <button type="button" data-language="ja" aria-pressed="true" lang="ja">日本語</button>
+            <button type="button" data-language="en" aria-pressed="false" lang="en">English</button>
+          </div>
+          <div class="header-status" id="header-status" aria-live="polite">
+            <span class="status-pulse" aria-hidden="true"></span><span data-i18n="header.checking">号を確認中</span>
+          </div>
         </div>
       </div>
     </header>
@@ -42,17 +51,17 @@
       <section class="hero" aria-labelledby="page-title">
         <div class="shell hero-content">
           <div class="eyebrow-row">
-            <p class="eyebrow">Scheduled arXiv research</p>
+            <p class="eyebrow" data-i18n="hero.kicker">定期配信の arXiv リサーチ</p>
             <span class="edition-date" id="edition-date">—</span>
           </div>
-          <h1 id="page-title">Research for rates and electronic markets.</h1>
-          <p class="hero-intro">Focused daily screens and weekly reviews across electronic trading, fixed income, market microstructure, and quantitative methods.</p>
+          <h1 id="page-title" data-i18n="hero.title">金利・電子市場のためのリサーチ。</h1>
+          <p class="hero-intro" data-i18n="hero.intro">電子取引、債券、マーケット・マイクロストラクチャー、クオンツ手法を対象に、日次スクリーニングと週次レビューを掲載します。</p>
           <div class="hero-summary">
-            <a class="hero-link" href="#digest">Read the latest edition <span aria-hidden="true">↓</span></a>
-            <dl class="hero-stats" aria-label="Latest edition summary">
-              <div><dt>Selected</dt><dd id="paper-count">—</dd></div>
-              <div><dt>Topics</dt><dd id="topic-count">—</dd></div>
-              <div><dt>State</dt><dd id="freshness-short">—</dd></div>
+            <a class="hero-link" href="#digest"><span data-i18n="hero.link">最新号を読む</span> <span aria-hidden="true">↓</span></a>
+            <dl class="hero-stats" aria-label="最新号の概要" data-i18n-aria-label="hero.statsAria">
+              <div><dt data-i18n="hero.selected">選定数</dt><dd id="paper-count">—</dd></div>
+              <div><dt data-i18n="hero.topics">トピック</dt><dd id="topic-count">—</dd></div>
+              <div><dt data-i18n="hero.state">状態</dt><dd id="freshness-short">—</dd></div>
             </dl>
           </div>
         </div>
@@ -60,82 +69,82 @@
       <section class="digest-section" id="digest" aria-labelledby="digest-title">
         <div class="shell">
           <div class="section-heading digest-heading">
-            <div><p class="section-kicker">The latest screen</p><h2 id="digest-title">Today’s research brief</h2></div>
-            <p class="update-note" id="update-note" aria-live="polite">Loading the latest edition…</p>
+            <div><p class="section-kicker" data-i18n="digest.kicker">最新スクリーニング</p><h2 id="digest-title" data-i18n="digest.title">今回のリサーチ概要</h2></div>
+            <p class="update-note" id="update-note" aria-live="polite" data-i18n="digest.loading">最新号を読み込んでいます…</p>
           </div>
           <div class="edition-context" id="edition-context" hidden>
             <div class="edition-context-labels">
-              <span class="edition-kind" id="edition-kind">Daily screen</span>
-              <span class="edition-source" id="edition-source">Source unavailable</span>
+              <span class="edition-kind" id="edition-kind">日次スクリーニング</span>
+              <span class="edition-source" id="edition-source">出典情報なし</span>
             </div>
             <dl class="edition-facts">
-              <div><dt>Edition</dt><dd id="edition-id">—</dd></div>
-              <div><dt>Coverage</dt><dd id="edition-period">—</dd></div>
-              <div><dt>Imported</dt><dd id="edition-imported">—</dd></div>
+              <div><dt data-i18n="context.edition">号</dt><dd id="edition-id">—</dd></div>
+              <div><dt data-i18n="context.coverage">対象期間</dt><dd id="edition-period">—</dd></div>
+              <div><dt data-i18n="context.imported">取込日時</dt><dd id="edition-imported">—</dd></div>
             </dl>
           </div>
           <section class="source-section" id="source-section" aria-labelledby="source-title" hidden>
             <div class="source-section-heading">
-              <p class="section-kicker">Scheduled brief</p>
-              <h3 id="source-title">Original research review</h3>
+              <p class="section-kicker" data-i18n="source.kicker">スケジュール配信</p>
+              <h3 id="source-title" data-i18n="source.title">リサーチレビュー原文</h3>
             </div>
             <div class="source-document" id="source-document"></div>
           </section>
           <div class="paper-index-heading" id="paper-index-heading" hidden>
-            <p class="section-kicker">Structured paper index</p>
-            <h3>Selected papers</h3>
+            <p class="section-kicker" data-i18n="papers.kicker">論文インデックス</p>
+            <h3 data-i18n="papers.title">選定論文</h3>
           </div>
           <div class="digest-toolbar" id="digest-toolbar" hidden>
             <div class="search-field">
-              <label for="paper-search">Search this edition</label>
+              <label for="paper-search" data-i18n="search.label">この号を検索</label>
               <span class="search-box">
                 <span class="search-icon" aria-hidden="true"></span>
-                <input id="paper-search" type="search" placeholder="Title, author, topic…" autocomplete="off">
+                <input id="paper-search" type="search" placeholder="タイトル、著者、トピック…" data-i18n-placeholder="search.placeholder" autocomplete="off">
               </span>
             </div>
-            <div class="filter-field"><span id="filter-label">Filter by lens</span><div class="topic-filters" id="topic-filters" role="group" aria-labelledby="filter-label"></div></div>
+            <div class="filter-field"><span id="filter-label" data-i18n="search.filter">分野で絞り込む</span><div class="topic-filters" id="topic-filters" role="group" aria-labelledby="filter-label"></div></div>
           </div>
           <div class="loading-state" id="loading-state" role="status"><span class="loading-line"></span><span class="loading-line"></span><span class="loading-line"></span></div>
           <div class="notice-state" id="notice-state" hidden>
             <span class="notice-index">00</span>
-            <div><p class="section-kicker">Edition notice</p><h3 id="notice-title">No edition available</h3><p id="notice-message">The latest research brief could not be loaded.</p></div>
+            <div><p class="section-kicker" data-i18n="notice.kicker">配信情報</p><h3 id="notice-title" data-i18n="notice.title">号を表示できません</h3><p id="notice-message" data-i18n="notice.message">最新のリサーチ概要を読み込めませんでした。</p></div>
           </div>
           <ol class="paper-list" id="paper-list" aria-live="polite"></ol>
-          <p class="no-results" id="no-results" hidden>No papers match this search and lens.</p>
+          <p class="no-results" id="no-results" hidden data-i18n="search.noResults">検索条件と分野に一致する論文はありません。</p>
         </div>
       </section>
       <section class="lens-section" aria-labelledby="lens-title">
         <div class="shell lens-grid">
           <div class="lens-intro">
-            <p class="section-kicker">The desk lens</p><h2 id="lens-title">A research map, not a market feed.</h2>
-            <p>The selection favors practical relevance to trading systems and rates research while preserving the authors’ original claims and context.</p>
+            <p class="section-kicker" data-i18n="lens.kicker">デスクの視点</p><h2 id="lens-title" data-i18n="lens.title">市場フィードではなく、リサーチマップ。</h2>
+            <p data-i18n="lens.body">著者の主張と文脈を保ちながら、取引システムと金利リサーチへの実務的な関連性を重視して選定しています。</p>
           </div>
-          <div class="lens-visual" id="lens-visual" aria-label="Topics represented in the latest edition"><p class="empty-lens">Topic mix appears with the latest edition.</p></div>
+          <div class="lens-visual" id="lens-visual" aria-label="最新号に含まれるトピック" data-i18n-aria-label="lens.aria"><p class="empty-lens" data-i18n="lens.empty">最新号を読み込むとトピック構成が表示されます。</p></div>
         </div>
       </section>
       <section class="archive-section" id="archive" aria-labelledby="archive-title">
         <div class="shell archive-grid">
           <div class="archive-sticky">
-            <p class="section-kicker">Past editions</p><h2 id="archive-title">Archive</h2>
-            <p>Review prior daily screens and weekly reviews. Every edition is a dated snapshot, not a continuously revised feed.</p>
+            <p class="section-kicker" data-i18n="archive.kicker">過去の号</p><h2 id="archive-title" data-i18n="archive.title">アーカイブ</h2>
+            <p data-i18n="archive.body">過去の日次スクリーニングと週次レビューを閲覧できます。各号は日付時点のスナップショットであり、継続的に改訂されるフィードではありません。</p>
           </div>
           <div>
-            <div class="archive-list" id="archive-list" aria-live="polite"><p class="archive-loading">Loading archived editions…</p></div>
-            <button class="button button-secondary" id="archive-more" type="button" hidden>Show older editions</button>
+            <div class="archive-list" id="archive-list" aria-live="polite"><p class="archive-loading" data-i18n="archive.loading">アーカイブを読み込んでいます…</p></div>
+            <button class="button button-secondary" id="archive-more" type="button" hidden data-i18n="archive.more">さらに過去の号を表示</button>
           </div>
         </div>
       </section>
       <section class="method-section" id="method" aria-labelledby="method-title">
         <div class="shell">
-          <div class="method-heading"><p class="section-kicker">Selection method</p><h2 id="method-title">Transparent by design.</h2></div>
+          <div class="method-heading"><p class="section-kicker" data-i18n="method.kicker">選定方法</p><h2 id="method-title" data-i18n="method.title">透明性を重視。</h2></div>
           <div class="method-grid">
-            <article><span>01</span><h3>Collect</h3><p>Scheduled reviews and local updater results are stored as distinct, dated research editions.</p></article>
-            <article><span>02</span><h3>Explain</h3><p>Source, ratings, selection rationale, and updater state remain visible rather than being flattened into one score.</p></article>
-            <article><span>03</span><h3>Publish</h3><p>The site publishes a dated snapshot with freshness and updater state visible to the reader.</p></article>
+            <article><span>01</span><h3 data-i18n="method.collectTitle">収集</h3><p data-i18n="method.collectBody">スケジュール配信のレビューとローカル更新結果を、日付付きの独立したリサーチ号として保存します。</p></article>
+            <article><span>02</span><h3 data-i18n="method.explainTitle">説明</h3><p data-i18n="method.explainBody">出典、評価、選定理由、更新状態を一つのスコアにまとめず、そのまま見える形で示します。</p></article>
+            <article><span>03</span><h3 data-i18n="method.publishTitle">公開</h3><p data-i18n="method.publishBody">鮮度と更新状態が読者に分かる、日付時点のスナップショットを公開します。</p></article>
           </div>
           <div class="method-caveat">
-            <strong>Research, not advice.</strong>
-            <p>This digest is an automated discovery aid. Verify papers at arXiv and assess methods independently.</p>
+            <strong data-i18n="method.caveatTitle">調査情報であり、投資助言ではありません。</strong>
+            <p data-i18n="method.caveatBody">このダイジェストは自動化された情報探索の補助です。論文は arXiv で確認し、手法を独自に評価してください。</p>
           </div>
         </div>
       </section>
@@ -144,12 +153,12 @@
       <div class="shell footer-grid">
         <div class="footer-brand">
           <span class="brand-mark brand-mark-light" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-          <div><strong>Rates &amp; Execution</strong><small>scheduled arXiv brief</small></div>
+          <div><strong>Rates &amp; Execution</strong><small data-i18n="footer.subtitle">定期配信 arXiv ブリーフ</small></div>
         </div>
-        <p>Independent research discovery. No tracking, analytics, live prices, or third-party scripts.</p>
-        <a href="#page-title">Back to top <span aria-hidden="true">↑</span></a>
+        <p data-i18n="footer.body">独立したリサーチ探索サイトです。トラッキング、アクセス解析、ライブ価格、第三者スクリプトは使用していません。</p>
+        <a href="#page-title"><span data-i18n="footer.top">ページ上部へ</span> <span aria-hidden="true">↑</span></a>
       </div>
     </footer>
-    <noscript><div class="noscript-banner">JavaScript is required to load the research editions and archive data.</div></noscript>
+    <noscript><div class="noscript-banner">リサーチ号とアーカイブの読み込みには JavaScript が必要です。</div></noscript>
   </body>
 </html>

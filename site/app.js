@@ -1,6 +1,13 @@
 (function () {
   "use strict";
 
+  var i18n = window.RatesI18n;
+  var initialParams = new URLSearchParams(window.location.search);
+
+  function normaliseLanguage(value) {
+    return value === "en" ? "en" : "ja";
+  }
+
   var byId = function (id) { return document.getElementById(id); };
   var elements = {
     archiveList: byId("archive-list"),
@@ -34,23 +41,80 @@
     updateNote: byId("update-note")
   };
 
-  var statusCopy = {
-    UPDATE_CONFIRMED: { label: "Update confirmed", state: "fresh", emptyTitle: "The latest batch is confirmed" },
-    NO_RELEVANT_PAPERS: { label: "Screen clear", state: "fresh", emptyTitle: "No papers met today’s screen" },
-    NO_NEW_BATCH_EXPECTED: { label: "No new batch expected", state: "fresh", emptyTitle: "No new arXiv batch was expected" },
-    UPDATE_NOT_CONFIRMED: { label: "Awaiting batch", state: "warn", emptyTitle: "The expected batch is not confirmed" },
-    UPDATER_OFFLINE: { label: "Updater offline", state: "offline", emptyTitle: "The updater is offline" },
-    WEEKLY_REVIEW: { label: "Weekly review", state: "fresh", emptyTitle: "The weekly review contains no selected papers" }
-  };
-
   var state = {
-    archiveEdition: new URLSearchParams(window.location.search).get("edition"),
+    archiveEdition: initialParams.get("edition"),
     archiveVisible: 6,
     filter: "all",
+    language: normaliseLanguage(initialParams.get("lang")),
     query: "",
+    rawReport: null,
     report: null,
-    reports: []
+    reports: [],
+    translations: new Map()
   };
+
+  function t(key, values) {
+    var catalog = i18n && i18n.copy && i18n.copy[state.language];
+    var fallback = i18n && i18n.copy && i18n.copy.ja;
+    var value = catalog && catalog[key] !== undefined ? catalog[key] : fallback && fallback[key];
+    value = value === undefined ? key : String(value);
+    return value.replace(/\{([A-Za-z0-9_]+)\}/g, function (_match, name) {
+      return values && values[name] !== undefined ? String(values[name]) : "{" + name + "}";
+    });
+  }
+
+  function statusCopyFor(status) {
+    var states = {
+      UPDATE_CONFIRMED: "fresh",
+      NO_RELEVANT_PAPERS: "fresh",
+      NO_NEW_BATCH_EXPECTED: "fresh",
+      UPDATE_NOT_CONFIRMED: "warn",
+      UPDATER_OFFLINE: "offline",
+      WEEKLY_REVIEW: "fresh"
+    };
+    var key = states[status] ? status : "";
+    return {
+      label: key ? t("status." + key + ".label") : t("freshness.statusUnknown"),
+      state: states[key] || "warn",
+      emptyTitle: key ? t("status." + key + ".emptyTitle") : t("empty.noPapersTitle")
+    };
+  }
+
+  function topicLabel(topic) {
+    return state.language === "ja" && i18n && i18n.topicsJa[topic] ? i18n.topicsJa[topic] : topic;
+  }
+
+  function languageUrl(language) {
+    var url = new URL(window.location.href);
+    if (language === "en") url.searchParams.set("lang", "en");
+    else url.searchParams.delete("lang");
+    return url;
+  }
+
+  function applyStaticLocale() {
+    document.documentElement.lang = state.language;
+    document.querySelectorAll("[data-i18n]").forEach(function (node) {
+      node.textContent = t(node.dataset.i18n);
+    });
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(function (node) {
+      node.setAttribute("placeholder", t(node.dataset.i18nPlaceholder));
+    });
+    document.querySelectorAll("[data-i18n-aria-label]").forEach(function (node) {
+      node.setAttribute("aria-label", t(node.dataset.i18nAriaLabel));
+    });
+    document.querySelectorAll("[data-language]").forEach(function (button) {
+      button.setAttribute("aria-pressed", String(button.dataset.language === state.language));
+    });
+    var description = document.querySelector('meta[name="description"]');
+    if (description) description.setAttribute("content", t("meta.description"));
+    document.title = t("meta.baseTitle");
+    var brand = document.querySelector(".brand");
+    if (brand) {
+      var homeUrl = new URL("./", document.baseURI);
+      if (state.language === "en") homeUrl.searchParams.set("lang", "en");
+      brand.href = homeUrl.href;
+    }
+  }
 
   function createNode(tag, className, text) {
     var node = document.createElement(tag);
@@ -180,7 +244,7 @@
       score: score,
       scoreReasons: stringList(raw.scoreReasons),
       submittedDate: clean(raw.submittedDate),
-      title: clean(raw.title, "Untitled arXiv record"),
+      title: clean(raw.title, t("paper.untitled")),
       topics: stringList(raw.topics),
       updatedDate: clean(raw.updatedDate)
     };
@@ -259,6 +323,77 @@
     return response.json();
   }
 
+  function normaliseTranslations(raw) {
+    if (!raw || raw.schemaVersion !== 1 || raw.language !== "en" || !Array.isArray(raw.editions)) {
+      throw new Error("Invalid translation manifest.");
+    }
+    var editions = new Map();
+    raw.editions.forEach(function (rawEdition) {
+      if (!rawEdition || typeof rawEdition !== "object") throw new Error("Invalid translated edition.");
+      var editionId = validEditionId(rawEdition.editionId);
+      if (!editionId || editions.has(editionId)) throw new Error("Invalid translated edition identity.");
+      var papers = new Map();
+      if (!Array.isArray(rawEdition.papers)) throw new Error("Invalid translated paper list.");
+      rawEdition.papers.forEach(function (rawPaper) {
+        if (!rawPaper || typeof rawPaper !== "object") throw new Error("Invalid translated paper.");
+        var arxivId = validArxivId(rawPaper.arxivId);
+        if (!arxivId || papers.has(arxivId) || !Array.isArray(rawPaper.ratings)) {
+          throw new Error("Invalid translated paper identity.");
+        }
+        papers.set(arxivId, {
+          arxivId: arxivId,
+          ratings: rawPaper.ratings.map(function (rating) {
+            var label = clean(rating && rating.label);
+            if (!label) throw new Error("Invalid translated rating label.");
+            return { label: label };
+          }),
+          schedulerLabel: clean(rawPaper.schedulerLabel),
+          schedulerSummary: cleanMultiline(rawPaper.schedulerSummary)
+        });
+      });
+      editions.set(editionId, {
+        editionId: editionId,
+        message: clean(rawEdition.message),
+        papers: papers,
+        sourceText: cleanMultiline(rawEdition.sourceText)
+      });
+    });
+    return editions;
+  }
+
+  function localiseReport(report) {
+    if (state.language !== "en") return report;
+    var edition = state.translations.get(report.editionId);
+    if (!edition || edition.papers.size !== report.papers.length || !edition.message || !edition.sourceText) return null;
+    var papers = [];
+    for (var index = 0; index < report.papers.length; index += 1) {
+      var paper = report.papers[index];
+      var translated = edition.papers.get(paper.arxivId);
+      if (!translated || translated.ratings.length !== paper.ratings.length) return null;
+      papers.push(Object.assign({}, paper, {
+        ratings: paper.ratings.map(function (rating, ratingIndex) {
+          return Object.assign({}, rating, { label: translated.ratings[ratingIndex].label });
+        }),
+        schedulerLabel: translated.schedulerLabel,
+        schedulerSummary: translated.schedulerSummary
+      }));
+    }
+    return Object.assign({}, report, {
+      message: edition.message,
+      papers: papers,
+      sourceText: edition.sourceText,
+      statusMessage: edition.message
+    });
+  }
+
+  function fallBackToJapanese() {
+    state.language = "ja";
+    var url = languageUrl("ja");
+    window.history.replaceState(null, "", url.href);
+    applyStaticLocale();
+    renderArchive();
+  }
+
   function archiveDataUrl(item) {
     if (!item || !validArchiveFilename(item.path)) return "";
     var url = new URL("./data/archive/" + item.path, document.baseURI);
@@ -274,43 +409,44 @@
 
   function formatDate(value, compact) {
     var date = dateObject(value);
-    if (!date) return "Date unavailable";
-    return new Intl.DateTimeFormat("en", compact
-      ? { day: "2-digit", month: "short", year: "numeric", timeZone: "UTC" }
+    if (!date) return t("date.unavailable");
+    var locale = state.language === "ja" ? "ja-JP-u-ca-gregory" : "en-GB";
+    return new Intl.DateTimeFormat(locale, compact
+      ? { day: state.language === "ja" ? "numeric" : "2-digit", month: "short", year: "numeric", timeZone: "UTC" }
       : { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }
     ).format(date);
   }
 
   function relativeTime(value, verb) {
     var date = dateObject(value);
-    verb = verb || "checked";
-    if (!date) return verb + " time unavailable";
+    verb = verb || t("time.checked");
+    if (!date) return t("time.unavailable", { verb: verb });
     var minutes = Math.max(0, Math.round((Date.now() - date.getTime()) / 60000));
-    if (minutes < 2) return verb + " just now";
-    if (minutes < 60) return verb + " " + minutes + " min ago";
+    if (minutes < 2) return t("time.justNow", { verb: verb });
+    if (minutes < 60) return t("time.minutes", { verb: verb, count: minutes });
     var hours = Math.round(minutes / 60);
-    if (hours < 48) return verb + " " + hours + " hr ago";
+    if (hours < 48) return t("time.hours", { verb: verb, count: hours });
     var days = Math.round(hours / 24);
-    return verb + " " + days + " day" + (days === 1 ? "" : "s") + " ago";
+    return t(days === 1 ? "time.day" : "time.days", { verb: verb, count: days });
   }
 
   function editionFreshness(report, archived) {
     if (archived) {
-      return { label: "Archived edition", short: "archive", state: "archived" };
+      return { label: t("freshness.archivedLabel"), short: t("freshness.archivedShort"), state: "archived" };
     }
 
-    var copy = statusCopy[report.status] || { label: "Status unknown", state: "warn" };
-    if (copy.state === "offline") return { label: copy.label, short: "offline", state: "offline" };
-    if (report.status === "UPDATE_NOT_CONFIRMED") return { label: copy.label, short: "waiting", state: "warn" };
+    var copy = statusCopyFor(report.status);
+    if (copy.state === "offline") return { label: copy.label, short: t("freshness.offlineShort"), state: "offline" };
+    if (report.status === "UPDATE_NOT_CONFIRMED") return { label: copy.label, short: t("freshness.waitingShort"), state: "warn" };
 
     var checked = dateObject(report.importedAt || report.checkedAt || report.generatedAt);
-    if (!checked) return { label: copy.label + " · time unknown", short: "unknown", state: "warn" };
+    if (!checked) return { label: copy.label + " · " + t("freshness.timeUnknown"), short: t("freshness.timeUnknown"), state: "warn" };
     var ageHours = Math.max(0, (Date.now() - checked.getTime()) / 3600000);
     var staleAfter = report.editionKind === "weekly" ? 240 : 72;
     var delayedAfter = report.editionKind === "weekly" ? 192 : 36;
-    if (ageHours > staleAfter) return { label: "Stale edition", short: "stale", state: "stale" };
-    if (ageHours > delayedAfter) return { label: "Edition delayed", short: "delayed", state: "warn" };
-    return { label: copy.label, short: "fresh", state: "fresh" };
+    if (ageHours > staleAfter) return { label: t("freshness.staleLabel"), short: t("freshness.staleShort"), state: "stale" };
+    if (ageHours > delayedAfter) return { label: t("freshness.delayedLabel"), short: t("freshness.delayedShort"), state: "warn" };
+    return { label: copy.label, short: t("freshness.freshShort"), state: "fresh" };
   }
 
   function topicCounts(papers) {
@@ -348,7 +484,7 @@
     link.href = safe;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
-    link.setAttribute("aria-label", label + " (opens on arXiv in a new tab)");
+    link.setAttribute("aria-label", label + " " + t("link.newTabSuffix"));
     return link;
   }
 
@@ -378,7 +514,7 @@
 
   function appendSourcePre(parent, value, equation) {
     var pre = createNode("pre", equation ? "source-pre source-equation" : "source-pre");
-    if (equation) pre.setAttribute("aria-label", "Equation");
+    if (equation) pre.setAttribute("aria-label", t("equation"));
     pre.appendChild(createNode("code", "", value));
     parent.appendChild(pre);
   }
@@ -509,8 +645,8 @@
 
   function formatDateTime(value) {
     var date = dateObject(value);
-    if (!date) return "Unavailable";
-    return new Intl.DateTimeFormat("en", {
+    if (!date) return t("unavailable");
+    return new Intl.DateTimeFormat(state.language === "ja" ? "ja-JP-u-ca-gregory" : "en-GB", {
       day: "2-digit",
       hour: "2-digit",
       hour12: false,
@@ -531,17 +667,13 @@
     }
 
     elements.editionContext.hidden = false;
-    elements.editionKind.textContent = report.editionKind === "weekly" ? "Weekly review" : "Daily screen";
+    elements.editionKind.textContent = report.editionKind === "weekly" ? t("kind.weeklyReview") : t("kind.dailyScreen");
     elements.editionKind.dataset.kind = report.editionKind;
     var sourceKindLabel = report.sourceKind === "chatgpt-scheduled-task"
-      ? "ChatGPT scheduled task"
-      : "Local arXiv updater";
-    var sourceDisplay = report.sourceLabel || sourceKindLabel;
-    if (sourceDisplay.toLocaleLowerCase().indexOf(sourceKindLabel.toLocaleLowerCase()) === -1) {
-      sourceDisplay += " · " + sourceKindLabel;
-    }
-    elements.editionSource.textContent = sourceDisplay;
-    elements.editionId.textContent = report.editionId || "Unavailable";
+      ? t("source.chatgpt")
+      : report.sourceKind === "local-arxiv-updater" ? t("source.local") : t("source.unknown");
+    elements.editionSource.textContent = sourceKindLabel;
+    elements.editionId.textContent = report.editionId || t("unavailable");
 
     var period = report.periodStart && report.periodEnd
       ? formatDate(report.periodStart, true) + " — " + formatDate(report.periodEnd, true)
@@ -550,10 +682,9 @@
     elements.editionImported.textContent = formatDateTime(report.importedAt);
 
     elements.sourceSection.hidden = !report.sourceText;
-    elements.sourceTitle.textContent = report.editionKind === "weekly"
-      ? "Weekly scheduled research review"
-      : "Daily scheduled research screen";
+    elements.sourceTitle.textContent = report.editionKind === "weekly" ? t("source.weeklyTitle") : t("source.dailyTitle");
     elements.sourceDocument.replaceChildren();
+    elements.sourceDocument.lang = state.language;
     if (report.sourceText) elements.sourceDocument.appendChild(renderMarkdownLite(report.sourceText));
   }
 
@@ -561,14 +692,16 @@
   function renderStatus(report, archived) {
     var freshness = editionFreshness(report, archived);
     var activityAt = report.importedAt || report.checkedAt || report.generatedAt;
-    var checked = archived ? "dated snapshot" : relativeTime(activityAt, report.schemaVersion >= 2 ? "imported" : "checked");
+    var checked = archived
+      ? t("status.snapshot")
+      : relativeTime(activityAt, report.schemaVersion >= 2 ? t("time.imported") : t("time.checked"));
     elements.headerStatus.dataset.state = freshness.state;
     elements.headerStatus.lastElementChild.textContent = freshness.label + " · " + checked;
     elements.freshnessShort.textContent = freshness.short;
     elements.updateNote.dataset.state = freshness.state;
 
     var message = report.message || report.statusMessage || freshness.label + ".";
-    elements.updateNote.textContent = message + (archived ? "" : " " + checked.charAt(0).toUpperCase() + checked.slice(1) + ".");
+    elements.updateNote.textContent = message + (archived ? "" : (state.language === "ja" ? " · " + checked : " " + checked.charAt(0).toUpperCase() + checked.slice(1) + "."));
     return freshness;
   }
   function renderFilters(papers) {
@@ -579,7 +712,7 @@
 
     var fragment = document.createDocumentFragment();
     [["all", papers.length]].concat(counts).forEach(function (entry) {
-      var button = createNode("button", "topic-filter", entry[0] === "all" ? "All · " + entry[1] : entry[0] + " · " + entry[1]);
+      var button = createNode("button", "topic-filter", entry[0] === "all" ? t("filter.all") + " · " + entry[1] : topicLabel(entry[0]) + " · " + entry[1]);
       button.type = "button";
       button.dataset.topic = entry[0];
       button.setAttribute("aria-pressed", String(state.filter === entry[0]));
@@ -602,6 +735,7 @@
       paper.arxivId,
       paper.authors.join(" "),
       paper.topics.join(" "),
+      paper.topics.map(topicLabel).join(" "),
       paper.scoreReasons.join(" "),
       paper.schedulerLabel,
       paper.schedulerSummary,
@@ -644,7 +778,7 @@
     link.href = url;
     link.target = "_blank";
     link.rel = "noopener noreferrer";
-    link.setAttribute("aria-label", ariaLabel + " (opens on arXiv in a new tab)");
+    link.setAttribute("aria-label", ariaLabel + " " + t("link.newTabSuffix"));
     link.appendChild(document.createTextNode(label + " "));
     link.appendChild(createNode("span", "external-arrow", "↗"));
     link.lastElementChild.setAttribute("aria-hidden", "true");
@@ -654,7 +788,7 @@
   function renderSchedulerRatings(paper) {
     if (!paper.ratings.length) return null;
     var block = createNode("div", "scheduler-ratings");
-    block.appendChild(createNode("p", "scheduler-ratings-title", "Scheduled review ratings"));
+    block.appendChild(createNode("p", "scheduler-ratings-title", t("ratings.title")));
     var grid = createNode("div", "scheduler-ratings-grid");
     paper.ratings.forEach(function (rating) {
       var item = createNode("div", "scheduler-rating");
@@ -664,7 +798,7 @@
       item.appendChild(header);
       var track = createNode("span", "scheduler-rating-track");
       track.setAttribute("role", "meter");
-      track.setAttribute("aria-label", rating.label + ": " + displayScore(rating.value) + " out of " + rating.scale);
+      track.setAttribute("aria-label", rating.label + ": " + t("ratings.outOf", { value: displayScore(rating.value), scale: rating.scale }));
       track.setAttribute("aria-valuemin", "0");
       track.setAttribute("aria-valuemax", String(rating.scale));
       track.setAttribute("aria-valuenow", String(rating.value));
@@ -690,43 +824,46 @@
     var main = createNode("article", "paper-main");
     var top = createNode("div", "paper-topline");
     var dateParts = [];
-    if (paper.submittedDate) dateParts.push("Submitted " + formatDate(paper.submittedDate, true));
-    if (paper.updatedDate && paper.updatedDate !== paper.submittedDate) dateParts.push("Updated " + formatDate(paper.updatedDate, true));
+    if (paper.submittedDate) dateParts.push(t("paper.submitted") + " " + formatDate(paper.submittedDate, true));
+    if (paper.updatedDate && paper.updatedDate !== paper.submittedDate) dateParts.push(t("paper.updated") + " " + formatDate(paper.updatedDate, true));
     if (paper.arxivId) dateParts.push("arXiv:" + paper.arxivId);
-    top.appendChild(createNode("span", "paper-date", dateParts.join(" · ") || "arXiv record"));
+    top.appendChild(createNode("span", "paper-date", dateParts.join(" · ") || t("paper.record")));
 
     var badges = createNode("div", "paper-badges");
     if (paper.schedulerLabel) {
       badges.appendChild(createNode("span", "scheduler-label", paper.schedulerLabel));
     }
     if (paper.schedulerRating !== null) {
-      badges.appendChild(createNode("span", "score-pill scheduler-rating-pill", "Review · " + displayScore(paper.schedulerRating) + "/" + paper.schedulerRatingScale));
+      badges.appendChild(createNode("span", "score-pill scheduler-rating-pill", t("paper.review") + " · " + displayScore(paper.schedulerRating) + "/" + paper.schedulerRatingScale));
     }
     if (paper.score !== null) {
-      badges.appendChild(createNode("span", "score-pill", (paper.schedulerRating !== null ? "Screen score · " : "Relevance · ") + displayScore(paper.score)));
+      badges.appendChild(createNode("span", "score-pill", (paper.schedulerRating !== null ? t("paper.screenScore") + " · " : t("paper.relevance") + " · ") + displayScore(paper.score)));
     }
     if (badges.childElementCount) top.appendChild(badges);
     main.appendChild(top);
 
     var heading = createNode("h3", "paper-title");
+    heading.lang = "en";
     if (paper.absUrl) {
-      var titleLink = externalLink(paper.absUrl, "paper-title-link", paper.title, "Open “" + paper.title + "”");
+      var titleLink = externalLink(paper.absUrl, "paper-title-link", paper.title, t("paper.openTitle", { title: paper.title }));
       heading.appendChild(titleLink);
     } else {
       heading.textContent = paper.title;
     }
     main.appendChild(heading);
-    main.appendChild(createNode("p", "paper-authors", paper.authors.length ? paper.authors.join(", ") : "Authors not listed"));
+    var authors = createNode("p", "paper-authors", paper.authors.length ? paper.authors.join(", ") : t("paper.authorsMissing"));
+    if (paper.authors.length) authors.lang = "en";
+    main.appendChild(authors);
 
     if (paper.topics.length) {
       var topicWrap = createNode("div", "paper-topics");
-      paper.topics.forEach(function (topic) { topicWrap.appendChild(createNode("span", "topic-tag", topic)); });
+      paper.topics.forEach(function (topic) { topicWrap.appendChild(createNode("span", "topic-tag", topicLabel(topic))); });
       main.appendChild(topicWrap);
     }
 
     if (paper.schedulerSummary) {
       var summary = createNode("div", "scheduler-summary");
-      summary.appendChild(createNode("span", "scheduler-summary-label", "Scheduled review"));
+      summary.appendChild(createNode("span", "scheduler-summary-label", t("paper.scheduledReview")));
       summary.appendChild(createNode("p", "", paper.schedulerSummary));
       main.appendChild(summary);
     }
@@ -735,11 +872,15 @@
     if (schedulerRatings) main.appendChild(schedulerRatings);
 
     if (paper.abstract) {
-      main.appendChild(createNode("p", "paper-abstract", abstractPreview(paper.abstract)));
+      var abstract = createNode("p", "paper-abstract", abstractPreview(paper.abstract));
+      abstract.lang = "en";
+      main.appendChild(abstract);
       if (paper.abstract.length > 360) {
         var details = createNode("details", "abstract-details");
-        details.appendChild(createNode("summary", "", "Read full abstract"));
-        details.appendChild(createNode("p", "", paper.abstract));
+        details.appendChild(createNode("summary", "", t("paper.fullAbstract")));
+        var fullAbstract = createNode("p", "", paper.abstract);
+        fullAbstract.lang = "en";
+        details.appendChild(fullAbstract);
         main.appendChild(details);
       }
     }
@@ -747,11 +888,11 @@
     if (paper.score !== null || paper.scoreReasons.length) {
       var relevance = createNode("div", "relevance-block");
       var relevanceHead = createNode("div", "relevance-head");
-      relevanceHead.appendChild(createNode("span", "", paper.scoreReasons.length ? "Deterministic screen evidence" : "Deterministic relevance score"));
+      relevanceHead.appendChild(createNode("span", "", paper.scoreReasons.length ? t("paper.deterministicEvidence") : t("paper.deterministicScore")));
       if (paper.score !== null) {
         var track = createNode("span", "score-track");
         track.setAttribute("role", "meter");
-        track.setAttribute("aria-label", "Relevance score " + displayScore(paper.score));
+        track.setAttribute("aria-label", t("paper.relevanceAria", { value: displayScore(paper.score) }));
         track.setAttribute("aria-valuemin", "0");
         track.setAttribute("aria-valuemax", "100");
         track.setAttribute("aria-valuenow", String(scoreWidth(paper.score)));
@@ -770,8 +911,8 @@
     }
 
     var actions = createNode("div", "paper-actions");
-    var abstractLink = externalLink(paper.absUrl, "arxiv-link", "Abstract on arXiv", "Open abstract for “" + paper.title + "”");
-    var pdfLink = externalLink(paper.pdfUrl, "pdf-link", "PDF on arXiv", "Open PDF for “" + paper.title + "”");
+    var abstractLink = externalLink(paper.absUrl, "arxiv-link", t("paper.abstractLink"), t("paper.openAbstract", { title: paper.title }));
+    var pdfLink = externalLink(paper.pdfUrl, "pdf-link", t("paper.pdfLink"), t("paper.openPdf", { title: paper.title }));
     if (abstractLink) actions.appendChild(abstractLink);
     if (pdfLink) actions.appendChild(pdfLink);
     if (actions.childElementCount) main.appendChild(actions);
@@ -792,14 +933,14 @@
   function renderLens(papers) {
     var counts = topicCounts(papers).slice(0, 8);
     if (!counts.length) {
-      elements.lensVisual.replaceChildren(createNode("p", "empty-lens", "No topic mix is available for this edition."));
+      elements.lensVisual.replaceChildren(createNode("p", "empty-lens", t("lens.none")));
       return;
     }
     var maximum = Math.max.apply(null, counts.map(function (entry) { return entry[1]; }));
     var fragment = document.createDocumentFragment();
     counts.forEach(function (entry) {
       var row = createNode("div", "lens-row");
-      row.appendChild(createNode("span", "lens-name", entry[0]));
+      row.appendChild(createNode("span", "lens-name", topicLabel(entry[0])));
       var track = createNode("span", "lens-track");
       var fill = createNode("span", "lens-fill");
       fill.classList.add(widthClass(Math.max(10, Math.round(entry[1] / maximum * 100))));
@@ -820,16 +961,16 @@
 
     var edition = report.editionDate || report.observedBatchDate || report.expectedBatchDate || report.checkedAt || report.generatedAt;
     var displayDate = formatDate(edition, false);
-    var kindLabel = report.editionKind === "weekly" ? "Weekly" : "Daily";
-    elements.editionDate.textContent = (archived ? "Archive · " : kindLabel + " · ") + displayDate;
+    var kindLabel = report.editionKind === "weekly" ? t("kind.weekly") : t("kind.daily");
+    elements.editionDate.textContent = (archived ? t("edition.archivePrefix") + " · " : kindLabel + " · ") + displayDate;
     elements.paperCount.textContent = report.papers.length;
     elements.topicCount.textContent = topicCounts(report.papers).length;
     elements.digestTitle.textContent = report.editionKind === "weekly"
-      ? (archived ? "Weekly review · " + displayDate : "Weekly research review")
-      : (archived ? "Daily brief · " + displayDate : "Today’s research brief");
+      ? (archived ? t("edition.weeklyArchived", { date: displayDate }) : t("edition.weeklyCurrent"))
+      : (archived ? t("edition.dailyArchived", { date: displayDate }) : t("edition.dailyCurrent"));
     document.title = archived
-      ? kindLabel + " review · " + displayDate + " — Rates & Execution"
-      : (report.editionKind === "weekly" ? "Weekly Review — Rates & Execution" : "Rates & Execution — arXiv Daily");
+      ? t("edition.archivedPageTitle", { kind: kindLabel, date: displayDate })
+      : (report.editionKind === "weekly" ? t("edition.weeklyPageTitle") : t("edition.dailyPageTitle"));
     renderEditionContext(report);
     var freshness = renderStatus(report, archived);
 
@@ -844,8 +985,8 @@
       elements.paperIndexHeading.hidden = true;
       elements.toolbar.hidden = true;
       elements.noResults.hidden = true;
-      var copy = statusCopy[report.status] || { emptyTitle: "No papers are available for this edition" };
-      var message = report.message || report.statusMessage || "No selected papers were published in this dated screen.";
+      var copy = statusCopyFor(report.status);
+      var message = report.message || report.statusMessage || t("empty.noPapersMessage");
       showNotice(copy.emptyTitle, message, freshness.state);
     }
     renderLens(report.papers);
@@ -853,41 +994,44 @@
   function archiveHref(editionId) {
     var url = new URL(window.location.href);
     url.searchParams.set("edition", editionId);
+    if (state.language === "en") url.searchParams.set("lang", "en");
+    else url.searchParams.delete("lang");
     url.hash = "digest";
     return url.href;
   }
 
   function archiveState(status) {
-    var copy = statusCopy[status] || { label: "Status unknown", state: "warn" };
+    var copy = statusCopyFor(status);
     return { label: copy.label, state: copy.state };
   }
 
   function renderArchive() {
     if (!state.reports.length) {
-      elements.archiveList.replaceChildren(createNode("p", "archive-empty", "No archived editions have been published yet."));
+      elements.archiveList.replaceChildren(createNode("p", "archive-empty", t("archive.none")));
       elements.archiveMore.hidden = true;
       return;
     }
 
     var fragment = document.createDocumentFragment();
     state.reports.slice(0, state.archiveVisible).forEach(function (report) {
+      var archiveTitle = report.kind === "weekly" ? t("archive.weeklyTitle") : t("archive.dailyTitle");
       var link = createNode("a", "archive-row");
       link.href = archiveHref(report.editionId);
-      link.setAttribute("aria-label", report.title + ", " + formatDate(report.date, true));
+      link.setAttribute("aria-label", archiveTitle + ", " + formatDate(report.date, true));
       if (state.archiveEdition === report.editionId) link.setAttribute("aria-current", "page");
       link.appendChild(createNode("span", "archive-date", formatDate(report.date, true)));
 
       var meta = createNode("span", "archive-meta");
-      meta.appendChild(createNode("strong", "archive-title-text", report.title));
-      meta.appendChild(createNode("span", "archive-kind", report.kind === "weekly" ? "Weekly" : "Daily"));
+      meta.appendChild(createNode("strong", "archive-title-text", archiveTitle));
+      meta.appendChild(createNode("span", "archive-kind", report.kind === "weekly" ? t("kind.weekly") : t("kind.daily")));
       if (report.sourceKind === "chatgpt-scheduled-task") {
-        meta.appendChild(createNode("span", "archive-source", "Scheduled task"));
+        meta.appendChild(createNode("span", "archive-source", t("archive.scheduledTask")));
       }
       var visual = archiveState(report.status);
       var status = createNode("span", "archive-state", visual.label);
       status.dataset.state = visual.state;
       meta.appendChild(status);
-      meta.appendChild(createNode("span", "", report.paperCount + " paper" + (report.paperCount === 1 ? "" : "s")));
+      meta.appendChild(createNode("span", "", t(report.paperCount === 1 ? "paper.countOne" : "paper.countMany", { count: report.paperCount })));
       link.appendChild(meta);
 
       var arrow = createNode("span", "archive-arrow", "→");
@@ -908,7 +1052,7 @@
       return state.reports;
     } catch (_error) {
       state.reports = [];
-      elements.archiveList.replaceChildren(createNode("p", "archive-empty", "The archive index is not available right now."));
+      elements.archiveList.replaceChildren(createNode("p", "archive-empty", t("archive.indexUnavailable")));
       elements.archiveMore.hidden = true;
       return [];
     }
@@ -924,20 +1068,30 @@
     elements.paperList.replaceChildren();
     elements.paperCount.textContent = "0";
     elements.topicCount.textContent = "0";
-    elements.freshnessShort.textContent = "offline";
+    elements.freshnessShort.textContent = t("load.offlineShort");
     elements.headerStatus.dataset.state = "offline";
-    elements.headerStatus.lastElementChild.textContent = "Edition unavailable";
+    elements.headerStatus.lastElementChild.textContent = t("load.editionUnavailable");
     elements.updateNote.dataset.state = "offline";
-    elements.updateNote.textContent = archived ? "This archived edition could not be loaded." : "The latest edition could not be loaded.";
+    elements.updateNote.textContent = archived ? t("load.archivedMessage") : t("load.latestMessage");
     showNotice(
-      archived ? "Archived edition unavailable" : "Latest edition unavailable",
-      "The edition JSON could not be loaded or validated. The archive below may still be available.",
+      archived ? t("load.archivedTitle") : t("load.latestTitle"),
+      t("load.detail"),
       "offline"
     );
     renderLens([]);
   }
 
   async function initialise() {
+    applyStaticLocale();
+
+    document.querySelectorAll("[data-language]").forEach(function (button) {
+      button.lang = button.dataset.language;
+      button.addEventListener("click", function () {
+        var language = normaliseLanguage(button.dataset.language);
+        if (language !== state.language) window.location.assign(languageUrl(language).href);
+      });
+    });
+
     elements.search.addEventListener("input", function () {
       state.query = elements.search.value.trim().toLocaleLowerCase();
       renderPapers();
@@ -948,6 +1102,9 @@
       renderArchive();
     });
 
+    var translationPromise = state.language === "en"
+      ? fetchJson(new URL("./data/i18n/en.json", document.baseURI)).then(normaliseTranslations).catch(function () { return null; })
+      : Promise.resolve(new Map());
     var archivePromise = loadArchiveIndex();
     var archived = false;
     var reportPromise;
@@ -978,7 +1135,19 @@
       if (archived && report.schemaVersion >= 2 && report.editionId !== state.archiveEdition) {
         throw new Error("Archive edition identity mismatch.");
       }
-      renderReport(report, archived);
+      state.rawReport = report;
+      if (state.language === "en") {
+        var translations = await translationPromise;
+        if (translations) state.translations = translations;
+        var translatedReport = translations ? localiseReport(report) : null;
+        if (!translatedReport) {
+          fallBackToJapanese();
+          translatedReport = report;
+        }
+        renderReport(translatedReport, archived);
+      } else {
+        renderReport(report, archived);
+      }
     } catch (_error) {
       showLoadFailure(archived);
     }

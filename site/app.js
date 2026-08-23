@@ -22,7 +22,6 @@
     notice: byId("notice-state"),
     noticeMessage: byId("notice-message"),
     noticeTitle: byId("notice-title"),
-    panelDate: byId("panel-date"),
     paperCount: byId("paper-count"),
     paperIndexHeading: byId("paper-index-heading"),
     paperList: byId("paper-list"),
@@ -823,7 +822,6 @@
     var displayDate = formatDate(edition, false);
     var kindLabel = report.editionKind === "weekly" ? "Weekly" : "Daily";
     elements.editionDate.textContent = (archived ? "Archive · " : kindLabel + " · ") + displayDate;
-    elements.panelDate.textContent = formatDate(edition, true);
     elements.paperCount.textContent = report.papers.length;
     elements.topicCount.textContent = topicCounts(report.papers).length;
     elements.digestTitle.textContent = report.editionKind === "weekly"

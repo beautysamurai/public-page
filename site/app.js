@@ -488,6 +488,37 @@
     return link;
   }
 
+  function linkWeeklySourceText(value, papers) {
+    var text = cleanMultiline(value);
+    if (!text || !Array.isArray(papers) || !papers.length) return text;
+    var paperIndex = 0;
+    var inOtherPapers = false;
+
+    return text.split("\n").map(function (line) {
+      var trimmed = line.trim();
+      if (/^##\s+Other reviewed papers\s*$/i.test(trimmed)) {
+        inOtherPapers = true;
+        return line;
+      }
+      if (/^##\s+Weekly conclusion\s*$/i.test(trimmed)) {
+        inOtherPapers = false;
+        return line;
+      }
+      if (paperIndex >= papers.length) return line;
+
+      var numbered = line.match(/^(##\s+\d+[.)]\s+)(.+)$/);
+      var other = inOtherPapers ? line.match(/^(\*\*)(.+?)(\s+—\s+.+\*\*)$/) : null;
+      var match = numbered || other;
+      if (!match) return line;
+
+      var paper = papers[paperIndex];
+      paperIndex += 1;
+      if (!paper.absUrl || /\[[^\]]+\]\(https:\/\/arxiv\.org\/abs\//i.test(line)) return line;
+      var label = match[2].replace(/[\[\]]/g, "").trim();
+      return match[1] + "[" + label + "](" + paper.absUrl + ")" + (match[3] || "");
+    }).join("\n");
+  }
+
   function appendInline(parent, value) {
     var text = stripRawHtml(value);
     var pattern = /\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)\s]+)\)|(https:\/\/arxiv\.org\/(?:abs|pdf)\/[A-Za-z0-9.\/-]+(?:\.pdf)?)/gi;
@@ -685,7 +716,12 @@
     elements.sourceTitle.textContent = report.editionKind === "weekly" ? t("source.weeklyTitle") : t("source.dailyTitle");
     elements.sourceDocument.replaceChildren();
     elements.sourceDocument.lang = state.language;
-    if (report.sourceText) elements.sourceDocument.appendChild(renderMarkdownLite(report.sourceText));
+    if (report.sourceText) {
+      var sourceText = report.editionKind === "weekly"
+        ? linkWeeklySourceText(report.sourceText, report.papers)
+        : report.sourceText;
+      elements.sourceDocument.appendChild(renderMarkdownLite(sourceText));
+    }
   }
 
 

@@ -130,6 +130,32 @@ class SchedulerTranslationCoverageTests(unittest.TestCase):
         for field in forbidden:
             self.assertNotIn(f'"{field}":', serialized)
 
+    def test_weekly_review_has_one_linkable_label_per_paper_in_both_languages(self):
+        source = next(
+            edition
+            for edition in self.history["editions"]
+            if edition["editionKind"] == "weekly"
+        )
+        translated = next(
+            edition
+            for edition in self.translations["editions"]
+            if edition["editionId"] == source["editionId"]
+        )
+
+        for label, narrative in (
+            ("Japanese", source["sourceText"]),
+            ("English", translated["sourceText"]),
+        ):
+            numbered = re.findall(
+                r"^##\s+\d+[.)]\s+(.+)$", narrative, re.MULTILINE
+            )
+            other_section = narrative.split("## Other reviewed papers", 1)[1]
+            other_section = other_section.split("## Weekly conclusion", 1)[0]
+            other = re.findall(
+                r"^\*\*(.+?)\s+—\s+.+\*\*$", other_section, re.MULTILINE
+            )
+            self.assertEqual(len(numbered + other), len(source["papers"]), label)
+
 
 class InterfaceLocaleContractTests(unittest.TestCase):
     @classmethod
@@ -180,6 +206,13 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         self.assertIn("translated.ratings.length !== paper.ratings.length", self.app)
         self.assertIn("fallBackToJapanese()", self.app)
         self.assertNotIn("innerHTML", self.app)
+
+    def test_weekly_narrative_is_linked_at_render_time(self):
+        self.assertIn("function linkWeeklySourceText(value, papers)", self.app)
+        self.assertIn('report.editionKind === "weekly"', self.app)
+        self.assertIn("linkWeeklySourceText(report.sourceText, report.papers)", self.app)
+        self.assertIn("paper.absUrl", self.app)
+        self.assertIn("renderMarkdownLite(sourceText)", self.app)
 
     def test_every_published_topic_has_a_japanese_label(self):
         topics = {

@@ -105,6 +105,15 @@
     document.querySelectorAll("[data-language]").forEach(function (button) {
       button.setAttribute("aria-pressed", String(button.dataset.language === state.language));
     });
+    document.querySelectorAll("[data-preserve-language]").forEach(function (link) {
+      var href = link.getAttribute("href");
+      if (!href) return;
+      var url = new URL(href, document.baseURI);
+      if (url.origin !== window.location.origin) return;
+      if (state.language === "en") url.searchParams.set("lang", "en");
+      else url.searchParams.delete("lang");
+      link.href = url.href;
+    });
     var description = document.querySelector('meta[name="description"]');
     if (description) description.setAttribute("content", t("meta.description"));
     document.title = t("meta.baseTitle");
@@ -848,11 +857,10 @@
     return block;
   }
 
-  function renderPaper(paper, visibleIndex) {
+  function renderPaper(paper) {
     var item = createNode("li", "paper-card");
-    var rank = paper.schedulerRank === null
-      ? (state.report && state.report.schemaVersion >= 2 ? "—" : String(visibleIndex + 1).padStart(2, "0"))
-      : displayScore(paper.schedulerRank).padStart(2, "0");
+    var number = paper.schedulerRank === null ? paper.index + 1 : paper.schedulerRank;
+    var rank = displayScore(number).padStart(2, "0");
     var index = createNode("span", "paper-index", rank);
     index.setAttribute("aria-hidden", "true");
     item.appendChild(index);

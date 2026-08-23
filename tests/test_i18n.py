@@ -4,6 +4,7 @@ import json
 import re
 import unittest
 from pathlib import Path
+from urllib.parse import urlsplit
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -12,6 +13,9 @@ TRANSLATIONS_PATH = ROOT / "site" / "data" / "i18n" / "en.json"
 INDEX_PATH = ROOT / "site" / "index.html"
 CATALOG_PATH = ROOT / "site" / "i18n.js"
 APP_PATH = ROOT / "site" / "app.js"
+STATIC_PAGE_APP_PATH = ROOT / "site" / "static-page.js"
+THEORY_INDEX_PATH = ROOT / "site" / "theory" / "index.html"
+HJB_INDEX_PATH = ROOT / "site" / "theory" / "hjb" / "index.html"
 
 TOP_LEVEL_FIELDS = {"schemaVersion", "language", "editions"}
 EDITION_FIELDS = {"editionId", "message", "sourceText", "papers"}
@@ -163,6 +167,9 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         cls.index = INDEX_PATH.read_text(encoding="utf-8")
         cls.catalog = CATALOG_PATH.read_text(encoding="utf-8")
         cls.app = APP_PATH.read_text(encoding="utf-8")
+        cls.static_page_app = STATIC_PAGE_APP_PATH.read_text(encoding="utf-8")
+        cls.theory_index = THEORY_INDEX_PATH.read_text(encoding="utf-8")
+        cls.hjb_index = HJB_INDEX_PATH.read_text(encoding="utf-8")
         cls.ja_keys, cls.en_keys = catalog_keys(cls.catalog)
 
     def test_japanese_is_the_static_and_url_default(self):
@@ -174,12 +181,20 @@ class InterfaceLocaleContractTests(unittest.TestCase):
     def test_interface_catalogs_have_identical_complete_keys(self):
         self.assertEqual(self.ja_keys, self.en_keys)
         self.assertGreater(len(self.ja_keys), 100)
-        referenced = set(
-            re.findall(
-                r'data-i18n(?:-placeholder|-aria-label)?="([A-Za-z0-9_.]+)"',
-                self.index,
+        referenced = set()
+        for source in (self.index, self.theory_index, self.hjb_index):
+            referenced.update(
+                re.findall(
+                    r'data-i18n(?:-placeholder|-aria-label)?="([A-Za-z0-9_.]+)"',
+                    source,
+                )
             )
-        )
+            referenced.update(
+                re.findall(
+                    r'data-(?:page-title|description)-key="([A-Za-z0-9_.]+)"',
+                    source,
+                )
+            )
         referenced.update(
             key
             for key in re.findall(r'\bt\("([A-Za-z0-9_.]+)"', self.app)
@@ -198,6 +213,10 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         self.assertIn('url.searchParams.set("edition", editionId)', self.app)
         self.assertIn('window.location.assign(languageUrl(language).href)', self.app)
         self.assertIn('url.hash = "digest"', self.app)
+        self.assertIn('data-i18n="nav.theory" data-preserve-language', self.index)
+        self.assertIn(
+            'document.querySelectorAll("[data-preserve-language]")', self.app
+        )
 
     def test_translation_overlay_is_allowlisted_and_loaded_before_render(self):
         self.assertIn('new URL("./data/i18n/en.json", document.baseURI)', self.app)
@@ -213,6 +232,22 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         self.assertIn("linkWeeklySourceText(report.sourceText, report.papers)", self.app)
         self.assertIn("paper.absUrl", self.app)
         self.assertIn("renderMarkdownLite(sourceText)", self.app)
+
+    def test_unranked_weekly_papers_use_stable_display_numbers(self):
+        weekly = next(
+            edition
+            for edition in load_json(HISTORY_PATH)["editions"]
+            if edition["editionKind"] == "weekly"
+        )
+        self.assertEqual(
+            [paper["schedulerRank"] for paper in weekly["papers"]],
+            [1, 2, 3, None, None],
+        )
+        self.assertIn(
+            "paper.schedulerRank === null ? paper.index + 1 : paper.schedulerRank",
+            self.app,
+        )
+        self.assertNotIn('schemaVersion >= 2 ? "—"', self.app)
 
     def test_every_published_topic_has_a_japanese_label(self):
         topics = {
@@ -230,6 +265,63 @@ class InterfaceLocaleContractTests(unittest.TestCase):
                 ),
                 topic,
             )
+
+
+class StaticTheoryPageContractTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.home = INDEX_PATH.read_text(encoding="utf-8")
+        cls.theory = THEORY_INDEX_PATH.read_text(encoding="utf-8")
+        cls.hjb = HJB_INDEX_PATH.read_text(encoding="utf-8")
+        cls.script = STATIC_PAGE_APP_PATH.read_text(encoding="utf-8")
+
+    def test_physical_theory_routes_and_navigation_exist(self):
+        self.assertTrue(THEORY_INDEX_PATH.is_file())
+        self.assertTrue(HJB_INDEX_PATH.is_file())
+        self.assertIn('href="./theory/"', self.home)
+        self.assertIn('href="./hjb/" data-theory-id="hjb"', self.theory)
+        self.assertIn('href="../" aria-current="page"', self.hjb)
+        for source in (self.theory, self.hjb):
+            self.assertIn('aria-current="page"', source)
+            self.assertIn('id="main-content"', source)
+            self.assertEqual(len(re.findall(r"<h1\b", source)), 1)
+
+    def test_nested_local_assets_and_links_resolve_inside_site(self):
+        site_root = (ROOT / "site").resolve()
+        for page in (THEORY_INDEX_PATH, HJB_INDEX_PATH):
+            source = page.read_text(encoding="utf-8")
+            for raw in re.findall(r'(?:href|src)="([^"]+)"', source):
+                parsed = urlsplit(raw)
+                if parsed.scheme or parsed.netloc or not parsed.path:
+                    continue
+                target = (page.parent / parsed.path).resolve()
+                self.assertTrue(target.is_relative_to(site_root), (page, raw))
+                self.assertTrue(target.exists(), (page, raw))
+                if target.is_dir():
+                    self.assertTrue((target / "index.html").is_file(), (page, raw))
+
+    def test_static_pages_preserve_deep_link_when_switching_language(self):
+        for source in (self.theory, self.hjb):
+            self.assertIn('data-language="ja" aria-pressed="true"', source)
+            self.assertIn('data-language="en" aria-pressed="false"', source)
+            self.assertIn("data-preserve-language", source)
+        self.assertIn("new URLSearchParams(window.location.search)", self.script)
+        self.assertIn("new URL(window.location.href)", self.script)
+        self.assertIn('url.searchParams.set("lang", "en")', self.script)
+        self.assertIn('url.searchParams.delete("lang")', self.script)
+        self.assertIn("window.location.assign(languageUrl(nextLanguage).href)", self.script)
+        self.assertNotIn("innerHTML", self.script)
+
+    def test_hjb_shell_is_prepared_without_article_content(self):
+        self.assertIn('data-theory-id="hjb"', self.hjb)
+        self.assertIn('data-i18n="hjb.title"', self.hjb)
+        self.assertIn('data-i18n="hjb.status"', self.hjb)
+        self.assertIn('<meta name="robots" content="noindex">', self.hjb)
+        content = re.search(
+            r'<div id="theory-content">(.*?)</div>', self.hjb, re.DOTALL
+        )
+        self.assertIsNotNone(content)
+        self.assertFalse(content.group(1).strip())
 
 
 if __name__ == "__main__":

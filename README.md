@@ -16,6 +16,13 @@ English in the shareable `?lang=en` URL and preserves the selected archive
 edition. English editorial copy is a reviewed overlay; official arXiv titles,
 authors, identifiers, dates, links, and numerical ratings remain unchanged.
 
+The site also has a separate theory-note area at **site/theory/**. Its index and
+model pages are ordinary static directory routes, so they work on direct GitHub
+Pages reloads. Shared interface copy lives in **site/i18n.js**, while
+**site/static-page.js** preserves the selected language across those routes.
+The first model shell is **site/theory/hjb/index.html**; its article body is
+intentionally empty until the HJB explanation is written and reviewed.
+
 ## Source of truth
 
 ~~~text

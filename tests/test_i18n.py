@@ -350,6 +350,17 @@ class StaticTheoryPageContractTests(unittest.TestCase):
                 self.assertIn('src="../../model-math.js"', source)
                 self.assertIn('src="../../simulator.js"', source)
                 self.assertNotIn('name="robots" content="noindex"', source)
+                self.assertIn('class="theory-guide"', source)
+                self.assertEqual(source.count('class="theory-guide-block"'), 3)
+                self.assertIn('data-i18n="guide.theoryTitle"', source)
+                self.assertIn('data-i18n="guide.approxTitle"', source)
+                self.assertIn('data-i18n="guide.calibrationTitle"', source)
+                self.assertIn('class="theory-references"', source)
+                for link in re.findall(
+                    r'<a href="https://[^"]+"[^>]+>', source
+                ):
+                    self.assertIn('target="_blank"', link)
+                    self.assertIn('rel="noopener noreferrer"', link)
 
 
 if __name__ == "__main__":

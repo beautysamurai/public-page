@@ -14,6 +14,7 @@ INDEX_PATH = ROOT / "site" / "index.html"
 CATALOG_PATH = ROOT / "site" / "i18n.js"
 APP_PATH = ROOT / "site" / "app.js"
 STATIC_PAGE_APP_PATH = ROOT / "site" / "static-page.js"
+STYLES_PATH = ROOT / "site" / "styles.css"
 THEORY_INDEX_PATH = ROOT / "site" / "theory" / "index.html"
 HJB_INDEX_PATH = ROOT / "site" / "theory" / "hjb" / "index.html"
 BS_INDEX_PATH = ROOT / "site" / "theory" / "black-scholes" / "index.html"
@@ -297,6 +298,7 @@ class StaticTheoryPageContractTests(unittest.TestCase):
             for path in SIMULATOR_PATHS
         }
         cls.script = STATIC_PAGE_APP_PATH.read_text(encoding="utf-8")
+        cls.styles = STYLES_PATH.read_text(encoding="utf-8")
 
     def test_physical_theory_routes_and_navigation_exist(self):
         self.assertTrue(THEORY_INDEX_PATH.is_file())
@@ -415,6 +417,13 @@ class StaticTheoryPageContractTests(unittest.TestCase):
         self.assertIn("node.replaceChildren(fragment)", self.script)
         self.assertNotIn("innerHTML", self.script)
         self.assertNotIn("insertAdjacentHTML", self.script)
+
+        inline_rule = re.search(r"\.inline-math\s*\{(?P<body>[^}]*)\}", self.styles)
+        self.assertIsNotNone(inline_rule)
+        self.assertNotRegex(
+            inline_rule.group("body"),
+            r"(?:^|;)\s*display\s*:",
+        )
 
     def test_all_model_pages_are_interactive_and_indexable(self):
         for slug, source in self.simulators.items():

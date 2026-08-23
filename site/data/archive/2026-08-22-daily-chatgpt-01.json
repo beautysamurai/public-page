@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-08-22-daily-chatgpt-01",
+  "editionDate": "2026-08-22",
+  "editionKind": "daily",
+  "sourceKind": "chatgpt-scheduled-task",
+  "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+  "importedAt": "2026-08-23T03:58:27Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "8月21日バッチから電子取引二本を推薦しました。新規の金利モデル推薦はありません。",
+  "expectedBatchDate": "2026-08-21",
+  "observedBatchDate": "2026-08-21",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年8月22日 — Daily review\n\n最新バッチは8月21日掲載分です。土曜日にさらに新しいannouncementがないことは通常で、サイト不調による持ち越しではありません。\n\n## 1. M3: A State-Event Generative Foundation Model\n\n**重要度: ★★★★★ — 電子取引**\n\nLOBを単なる時系列として予測せず、order eventとLOB stateの相互作用を生成するmarket world modelです。注文をtoken化し、現在のLOBをstate-prefixとしてTransformerへ与え、生成注文をmatching engineへ流して市場ルールに従いLOBを更新します。\n\nLOB state → order event → new LOB stateというfeedback loopを再現します。大規模な実株式order-level dataで学習し、scaling law、stylized facts、liquidity stress、market impactを検証し、square-root impact lawに近い現象も再現したと報告しています。\n\nmarket impact、stress testing、execution backtest、RL training environmentへ直結します。FlowLOBがLOB trajectoryを生成するのに対し、M3は注文を生成してmatching engine経由でLOBを動かすため、simulation設計として一段高く評価します。\n\nequity LOB中心であり、金利RFQへはdealer inventory、recent RFQs、client type、hedge-market stateへstateを置き換える必要があります。\n\n**研究新規性: ★★★★★ — 電子取引実務: ★★★★★ — 金利RFQへの直接性: ★★★☆☆ — 読む優先度: ★★★★★**\n\n## 2. Concentrated Liquidity Provision\n\n**重要度: ★★★☆☆ — market making / RL**\n\nUniswap V3型concentrated liquidity market makerで、いつrebalanceするか、どのprice rangeへliquidityを置くかをRLで決めます。policyはmispricing、transaction cost、uncertainty、inventory exposure、risk preferenceを使い、高不確実性局面でPnL分布のleft tailを圧縮すると報告しています。\n\n通常のdealer market makingとは異なります。inventoryとuncertaintyからstate-dependent actionを学ぶ比較対象としては有用ですが、OTC/RFQ論文ほど直接的ではありません。\n\n**研究新規性: ★★★☆☆ — 電子取引実務: ★★★☆☆ — 金利RFQへの直接性: ★★☆☆☆ — 読む優先度: ★★★☆☆**\n\n## Rates conclusion\n\n推薦に値する新規のHJM、Hull–White、short-rate、yield-curve、swap、swaptionモデル論文は確認できませんでした。一冊だけ読むならM3を推奨します。",
+  "papers": [
+    {
+      "arxivId": "2608.19227v1",
+      "title": "M3: A State-Event Generative Foundation Model for Market Microstructure Dynamics",
+      "authors": [
+        "Yanzhi Zhang",
+        "Yu Ma",
+        "Yilin Cheng",
+        "Jian Li",
+        "Yitong Duan"
+      ],
+      "submittedDate": "2026-07-29",
+      "updatedDate": "2026-07-29",
+      "topics": [
+        "Electronic trading",
+        "Market simulation",
+        "Generative models"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.19227v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.19227v1",
+      "schedulerRank": 1,
+      "schedulerRating": 5,
+      "schedulerRatingScale": 5,
+      "schedulerLabel": "最優先・電子取引",
+      "schedulerSummary": "Order eventを生成しmatching engineでLOB stateを更新するclosed-loop market world modelです。",
+      "ratings": [
+        {
+          "label": "研究新規性",
+          "value": 5,
+          "scale": 5
+        },
+        {
+          "label": "電子取引実務",
+          "value": 5,
+          "scale": 5
+        },
+        {
+          "label": "金利RFQへの直接性",
+          "value": 3,
+          "scale": 5
+        },
+        {
+          "label": "読む優先度",
+          "value": 5,
+          "scale": 5
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.19389v1",
+      "title": "Concentrated Liquidity Provision: a Reinforcement Learning Perspective",
+      "authors": [
+        "Georgios Chionas",
+        "Charalampos Kleitsikas",
+        "Stefanos Leonardos",
+        "Leandro Sánchez-Betancourt",
+        "Carmine Ventre"
+      ],
+      "submittedDate": "2026-08-19",
+      "updatedDate": "2026-08-19",
+      "topics": [
+        "Market making",
+        "Reinforcement learning",
+        "Concentrated liquidity"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.19389v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.19389v1",
+      "schedulerRank": 2,
+      "schedulerRating": 3,
+      "schedulerRatingScale": 5,
+      "schedulerLabel": "market making / RL",
+      "schedulerSummary": "Concentrated-liquidityのrange配置とrebalanceをstate-dependentに学習するRL policyです。",
+      "ratings": [
+        {
+          "label": "研究新規性",
+          "value": 3,
+          "scale": 5
+        },
+        {
+          "label": "電子取引実務",
+          "value": 3,
+          "scale": 5
+        },
+        {
+          "label": "金利RFQへの直接性",
+          "value": 2,
+          "scale": 5
+        },
+        {
+          "label": "読む優先度",
+          "value": 3,
+          "scale": 5
+        }
+      ]
+    }
+  ]
+}

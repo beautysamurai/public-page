@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-08-19-daily-chatgpt-01",
+  "editionDate": "2026-08-19",
+  "editionKind": "daily",
+  "sourceKind": "chatgpt-scheduled-task",
+  "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+  "importedAt": "2026-08-23T03:58:27Z",
+  "status": "UPDATE_NOT_CONFIRMED",
+  "message": "カテゴリ取得のfreshnessを確認できず、「該当なし」とは判定せずに持ち越しました。",
+  "expectedBatchDate": "2026-08-18",
+  "observedBatchDate": null,
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年8月19日 — Freshness not confirmed\n\n今日分の論文紹介を見送り、次回へ持ち越します。\n\nq-fin.TRのnew listingは8月10日、q-fin.MFは8月7日を返し、8月19日時点の最新掲載を信頼して確認できませんでした。一方でMain Site、Search、export、submissionは稼働中と表示されており、arXiv全体の障害とは断定できません。\n\n古い論文を「今日の最新」として再掲したり、「関連論文なし」と誤判定したりせず、freshness未確認として扱います。次回は8月18〜19日分も含めて再確認します。",
+  "papers": []
+}

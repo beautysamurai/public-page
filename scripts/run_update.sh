@@ -25,8 +25,8 @@ printf '[%s] Starting arXiv Daily update.\n' \
 
 cd -- "${repository_root}"
 "${python_bin}" scripts/arxiv_digest.py \
-  --output site/data/latest.json \
-  --archive-dir site/data/archive
+  --output .local/candidate-data/latest.json \
+  --archive-dir .local/candidate-data/archive
 
-printf '[%s] Update completed. Review site/data before committing.\n' \
+printf '[%s] Candidate update completed under .local/candidate-data.\n' \
   "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"

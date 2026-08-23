@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-08-15-daily-chatgpt-01",
+  "editionDate": "2026-08-15",
+  "editionKind": "daily",
+  "sourceKind": "chatgpt-scheduled-task",
+  "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+  "importedAt": "2026-08-23T03:58:27Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "通常の週末スケジュールを確認し、直近バッチから三本を推薦しました。",
+  "expectedBatchDate": "2026-08-14",
+  "observedBatchDate": "2026-08-14",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年8月15日 — Daily review\n\narXiv側の更新停止ではありません。q-fin.TRの最新一覧には2026年8月14日分まで掲載があり、米東部時間の金曜・土曜は通常、新規アナウンスがありません。日本時間の土曜朝に新しい日付がないのは正常です。\n\n## 1. FlowLOB\n\n**重要度: ★★★★★ — 電子取引**\n\nLimit Order Bookの将来パスをFlow Matchingで生成し、trend、volatility、liquidity、order-book imbalanceを条件として与えられるモデルです。八つのHKEX銘柄で共通モデルを学習し、未学習の九銘柄目にもzero-shotで適用しています。\n\nEuler 10 stepですでに良好な品質に達し、同程度の計算量のdiffusion比較に対して価格・出来高のWasserstein distanceが4〜120倍小さいと報告されています。realism指標では30/32ケースで最良、条件生成では42/48ケースで分布を意図した方向へ動かしました。\n\nexecution algoのbacktest、stress test、RL agentの訓練に使うsynthetic market dataとして有望です。ただしHKEX株式のL2 snapshot生成であり、注文message単位のmatching-engine simulationではありません。金利RFQへ直接移植するより、market simulatorの設計思想として読む価値が高い論文です。\n\n## 2. Hull–White with Svensson curves\n\n**重要度: ★★★★☆ — 金利モデル・理論**\n\nHull–WhiteモデルへNelson–Siegel、Bliss、Svensson型の初期curveを入れたとき、将来のyield/forward curveが取り得る形を局所極値の数と並びで分類します。局所極値の最大数はNelson–Siegelで3、Blissで4、Svenssonで5です。Tchebycheff systemとenvelope methodを使い、Nelson–Siegelについて完全なshape分類も与えます。\n\n長期では複雑な初期curveを許しても、正の確率で残るshapeがnormal、inverse、humpedへ絞られます。pricingやcalibrationを高速化する論文ではありませんが、scenario generationとmodel validationで、生成可能・不可能なcurve shapeを理解するのに役立ちます。\n\n**研究重要度: 4/5 — 直接的なdesk実務: 3/5**\n\n## 3. OTC order imbalance, skew and width\n\ncustomer flowがbuy/sellで偏ると、そのimbalanceをquote skewのシフト、widthの拡大、effective cost of carryの変化として吸収できることを示します。\n\n「inventoryがゼロでもflow imbalanceがあればskewすべき」「small imbalanceに対してskewは一次、widthは二次で反応する」という結果は、金利・債券のRFQ market makingへ直接つながります。\n\n**実務関連度: ★★★★★**\n\n## Reading order\n\nFlowLOB → OTC imbalance/skew → Hull–White/Svensson の順を推奨します。",
+  "papers": [
+    {
+      "arxivId": "2608.13096v1",
+      "title": "FlowLOB: Efficient and Controllable Limit Order Book Generation with Flow Matching",
+      "authors": [
+        "Zhuohan Wang",
+        "Andreea Bacalum",
+        "Ollie Olby",
+        "Carmine Ventre",
+        "Namid Stillman"
+      ],
+      "submittedDate": "2026-08-13",
+      "updatedDate": "2026-08-13",
+      "topics": [
+        "Electronic trading",
+        "Market microstructure",
+        "Generative models"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.13096v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.13096v1",
+      "schedulerRank": 1,
+      "schedulerRating": 5,
+      "schedulerRatingScale": 5,
+      "schedulerLabel": "最優先・電子取引",
+      "schedulerSummary": "高速で制御可能なLOBシナリオ生成。execution backtest、stress test、RL環境への応用が中心です。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 5,
+          "scale": 5
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.12016v1",
+      "title": "Term structure shapes in the Hull-White model with Svensson-parameterized initial yield curves",
+      "authors": [
+        "Felix Sachse"
+      ],
+      "submittedDate": "2026-08-12",
+      "updatedDate": "2026-08-12",
+      "topics": [
+        "Interest-rate models",
+        "Yield curves",
+        "Model validation"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.12016v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.12016v1",
+      "schedulerRank": 2,
+      "schedulerRating": 4,
+      "schedulerRatingScale": 5,
+      "schedulerLabel": "金利モデル・理論",
+      "schedulerSummary": "Hull–WhiteとSvensson系初期曲線の組合せが生成できるcurve shapeを数学的に分類します。",
+      "ratings": [
+        {
+          "label": "研究重要度",
+          "value": 4,
+          "scale": 5
+        },
+        {
+          "label": "直接的なdesk実務",
+          "value": 3,
+          "scale": 5
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.07690v1",
+      "title": "On a Simple Relationship Between Order Imbalance, Skew and Width in Over-The-Counter Trading",
+      "authors": [
+        "Peter Cotton"
+      ],
+      "submittedDate": "2026-08-07",
+      "updatedDate": "2026-08-07",
+      "topics": [
+        "OTC trading",
+        "RFQ",
+        "Market making"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.07690v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.07690v1",
+      "schedulerRank": 3,
+      "schedulerRating": 5,
+      "schedulerRatingScale": 5,
+      "schedulerLabel": "実務寄りの直近推薦",
+      "schedulerSummary": "Order imbalanceをskew、width、carryへ翻訳するRFQ market-makingの構造結果です。",
+      "ratings": [
+        {
+          "label": "実務関連度",
+          "value": 5,
+          "scale": 5
+        }
+      ]
+    }
+  ]
+}

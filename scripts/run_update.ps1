@@ -41,9 +41,9 @@ try {
     $updaterArguments = @(
         "scripts/arxiv_digest.py",
         "--output",
-        "site/data/latest.json",
+        ".local/candidate-data/latest.json",
         "--archive-dir",
-        "site/data/archive"
+        ".local/candidate-data/archive"
     )
     & $Python @updaterArguments 2>&1 |
         Tee-Object -FilePath $logFile -Append
@@ -53,7 +53,7 @@ try {
     }
 
     $finishedAt = [DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")
-    "[$finishedAt] Update completed. Review site/data before committing." |
+    "[$finishedAt] Candidate update completed under .local/candidate-data." |
         Tee-Object -FilePath $logFile -Append
 }
 catch {

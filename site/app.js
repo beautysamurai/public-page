@@ -6,7 +6,13 @@
     archiveList: byId("archive-list"),
     archiveMore: byId("archive-more"),
     digestTitle: byId("digest-title"),
+    editionContext: byId("edition-context"),
     editionDate: byId("edition-date"),
+    editionId: byId("edition-id"),
+    editionImported: byId("edition-imported"),
+    editionKind: byId("edition-kind"),
+    editionPeriod: byId("edition-period"),
+    editionSource: byId("edition-source"),
     filters: byId("topic-filters"),
     freshnessShort: byId("freshness-short"),
     headerStatus: byId("header-status"),
@@ -18,8 +24,12 @@
     noticeTitle: byId("notice-title"),
     panelDate: byId("panel-date"),
     paperCount: byId("paper-count"),
+    paperIndexHeading: byId("paper-index-heading"),
     paperList: byId("paper-list"),
     search: byId("paper-search"),
+    sourceDocument: byId("source-document"),
+    sourceSection: byId("source-section"),
+    sourceTitle: byId("source-title"),
     toolbar: byId("digest-toolbar"),
     topicCount: byId("topic-count"),
     updateNote: byId("update-note")
@@ -28,12 +38,14 @@
   var statusCopy = {
     UPDATE_CONFIRMED: { label: "Update confirmed", state: "fresh", emptyTitle: "The latest batch is confirmed" },
     NO_RELEVANT_PAPERS: { label: "Screen clear", state: "fresh", emptyTitle: "No papers met today’s screen" },
+    NO_NEW_BATCH_EXPECTED: { label: "No new batch expected", state: "fresh", emptyTitle: "No new arXiv batch was expected" },
     UPDATE_NOT_CONFIRMED: { label: "Awaiting batch", state: "warn", emptyTitle: "The expected batch is not confirmed" },
-    UPDATER_OFFLINE: { label: "Updater offline", state: "offline", emptyTitle: "The updater is offline" }
+    UPDATER_OFFLINE: { label: "Updater offline", state: "offline", emptyTitle: "The updater is offline" },
+    WEEKLY_REVIEW: { label: "Weekly review", state: "fresh", emptyTitle: "The weekly review contains no selected papers" }
   };
 
   var state = {
-    archiveDate: new URLSearchParams(window.location.search).get("edition"),
+    archiveEdition: new URLSearchParams(window.location.search).get("edition"),
     archiveVisible: 6,
     filter: "all",
     query: "",
@@ -54,6 +66,17 @@
     return result || fallback || "";
   }
 
+  function cleanMultiline(value) {
+    if (typeof value !== "string") return "";
+    return value.replace(/\r\n?/g, "\n").replace(/\u0000/g, "").trim();
+  }
+
+  function nullableNumber(value) {
+    if (value === null || value === undefined || value === "") return null;
+    var number = Number(value);
+    return Number.isFinite(number) ? number : null;
+  }
+
   function stringList(value) {
     if (Array.isArray(value)) {
       return value.map(function (item) { return clean(item); }).filter(Boolean);
@@ -68,6 +91,16 @@
     return typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value);
   }
 
+  function validEditionId(value) {
+    var id = clean(value);
+    return /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/.test(id) ? id : "";
+  }
+
+  function validArchiveFilename(value) {
+    var path = clean(value);
+    return /^[A-Za-z0-9][A-Za-z0-9._-]{0,159}\.json$/.test(path) ? path : "";
+  }
+
   function validArxivId(value) {
     var id = clean(value);
     return /^(?:\d{4}\.\d{4,5}(?:v\d+)?|[a-z][a-z0-9.-]*\/\d{7}(?:v\d+)?)$/i.test(id) ? id : "";
@@ -76,7 +109,15 @@
   function idFromArxivUrl(value) {
     try {
       var url = new URL(value);
-      if (url.protocol !== "https:" || url.hostname !== "arxiv.org" || url.port) return "";
+      if (
+        url.protocol !== "https:" ||
+        url.hostname !== "arxiv.org" ||
+        url.port ||
+        url.username ||
+        url.password ||
+        url.search ||
+        url.hash
+      ) return "";
       var match = url.pathname.match(/^\/(?:abs|pdf)\/(.+?)(?:\.pdf)?$/i);
       return match ? validArxivId(decodeURIComponent(match[1])) : "";
     } catch (_error) {
@@ -91,10 +132,39 @@
     return "https://arxiv.org/" + (kind === "pdf" ? "pdf" : "abs") + "/" + encodedId + (kind === "pdf" ? ".pdf" : "");
   }
 
+  function safeArxivLink(value) {
+    try {
+      var url = new URL(value);
+      var id = idFromArxivUrl(url.href);
+      if (!id) return "";
+      var kind = /^\/pdf\//i.test(url.pathname) ? "pdf" : "abs";
+      return canonicalArxivUrl(id, kind);
+    } catch (_error) {
+      return "";
+    }
+  }
+
+  function normaliseRating(raw) {
+    raw = raw && typeof raw === "object" ? raw : {};
+    var scale = raw.scale === 5 || raw.scale === 10 ? raw.scale : null;
+    var value = nullableNumber(raw.value);
+    if (!clean(raw.label) || scale === null || value === null || value < 0 || value > scale) return null;
+    return { label: clean(raw.label), value: value, scale: scale };
+  }
+
   function normalisePaper(raw, index) {
     raw = raw && typeof raw === "object" ? raw : {};
     var arxivId = validArxivId(raw.arxivId) || idFromArxivUrl(raw.absUrl) || idFromArxivUrl(raw.pdfUrl);
-    var score = Number(raw.score);
+    var score = nullableNumber(raw.score);
+    var schedulerRank = nullableNumber(raw.schedulerRank);
+    var schedulerRating = nullableNumber(raw.schedulerRating);
+    var schedulerRatingScale = raw.schedulerRatingScale === 5 || raw.schedulerRatingScale === 10
+      ? raw.schedulerRatingScale
+      : null;
+    if (schedulerRatingScale === null || schedulerRating === null || schedulerRating < 0 || schedulerRating > schedulerRatingScale) {
+      schedulerRating = null;
+      schedulerRatingScale = null;
+    }
     return {
       abstract: clean(raw.abstract),
       absUrl: canonicalArxivUrl(arxivId, "abs"),
@@ -102,7 +172,13 @@
       authors: stringList(raw.authors),
       index: index,
       pdfUrl: canonicalArxivUrl(arxivId, "pdf"),
-      score: Number.isFinite(score) ? score : null,
+      ratings: Array.isArray(raw.ratings) ? raw.ratings.map(normaliseRating).filter(Boolean) : [],
+      schedulerLabel: clean(raw.schedulerLabel),
+      schedulerRank: schedulerRank !== null && schedulerRank > 0 ? schedulerRank : null,
+      schedulerRating: schedulerRating,
+      schedulerRatingScale: schedulerRatingScale,
+      schedulerSummary: cleanMultiline(raw.schedulerSummary),
+      score: score,
       scoreReasons: stringList(raw.scoreReasons),
       submittedDate: clean(raw.submittedDate),
       title: clean(raw.title, "Untitled arXiv record"),
@@ -115,37 +191,62 @@
     if (!raw || typeof raw !== "object" || Array.isArray(raw)) {
       throw new Error("The edition data is not a JSON object.");
     }
+    var schemaVersion = Number(raw.schemaVersion) || 1;
+    var v2 = schemaVersion >= 2;
     var papers = Array.isArray(raw.papers) ? raw.papers.map(normalisePaper) : [];
+    var expectedDate = isDate(raw.expectedBatchDate) ? raw.expectedBatchDate : "";
+    var editionDate = isDate(raw.editionDate) ? raw.editionDate : expectedDate;
+    var editionId = validEditionId(raw.editionId) || editionDate;
+    var editionKind = raw.editionKind === "weekly" ? "weekly" : "daily";
     return {
       checkedAt: clean(raw.checkedAt),
-      expectedBatchDate: clean(raw.expectedBatchDate),
+      editionDate: editionDate,
+      editionId: editionId,
+      editionKind: editionKind,
+      expectedBatchDate: expectedDate,
       generatedAt: clean(raw.generatedAt),
-      observedBatchDate: clean(raw.observedBatchDate),
+      importedAt: clean(raw.importedAt),
+      message: clean(v2 ? raw.message : raw.statusMessage),
+      observedBatchDate: isDate(raw.observedBatchDate) ? raw.observedBatchDate : "",
       papers: papers,
-      schemaVersion: Number(raw.schemaVersion) || 1,
+      periodEnd: isDate(raw.periodEnd) ? raw.periodEnd : "",
+      periodStart: isDate(raw.periodStart) ? raw.periodStart : "",
+      schemaVersion: schemaVersion,
+      sourceKind: v2 ? clean(raw.sourceKind, "chatgpt-scheduled-task") : "local-arxiv-updater",
+      sourceLabel: v2 ? clean(raw.sourceLabel, "ChatGPT scheduled task") : "Local arXiv updater",
+      sourceText: v2 ? cleanMultiline(raw.sourceText) : "",
       status: clean(raw.status, "UPDATE_NOT_CONFIRMED").toUpperCase(),
-      statusMessage: clean(raw.statusMessage)
+      statusMessage: clean(v2 ? raw.message : raw.statusMessage)
     };
   }
 
   function normaliseArchive(raw) {
-    if (!raw || typeof raw !== "object" || !Array.isArray(raw.reports)) return [];
-    return raw.reports.map(function (item) {
+    if (!raw || typeof raw !== "object") return [];
+    var v2 = Number(raw.schemaVersion) >= 2;
+    var source = v2 && Array.isArray(raw.editions) ? raw.editions : raw.reports;
+    if (!Array.isArray(source)) return [];
+    var reports = source.map(function (item) {
       item = item && typeof item === "object" ? item : {};
       var date = isDate(item.date) ? item.date : "";
-      var expectedFile = date ? date + ".json" : "";
-      var path = clean(item.path);
-      if (!/^\d{4}-\d{2}-\d{2}\.json$/.test(path)) path = expectedFile;
+      var editionId = validEditionId(item.editionId) || date;
+      var expectedFile = editionId ? editionId + ".json" : "";
+      var path = validArchiveFilename(item.path) || validArchiveFilename(expectedFile);
       return {
         date: date,
+        editionId: editionId,
+        kind: item.kind === "weekly" ? "weekly" : "daily",
         paperCount: Math.max(0, Number(item.paperCount) || 0),
         path: path,
-        status: clean(item.status, "UPDATE_NOT_CONFIRMED").toUpperCase()
+        sourceKind: v2 ? clean(item.sourceKind, "chatgpt-scheduled-task") : "local-arxiv-updater",
+        status: clean(item.status, "UPDATE_NOT_CONFIRMED").toUpperCase(),
+        title: clean(item.title, item.kind === "weekly" ? "Weekly research review" : "Daily research screen")
       };
     }).filter(function (item) {
-      return item.date && item.path;
-    }).sort(function (a, b) {
-      return b.date.localeCompare(a.date);
+      return item.date && item.editionId && item.path;
+    });
+    if (v2) return reports;
+    return reports.sort(function (a, b) {
+      return b.date.localeCompare(a.date) || b.editionId.localeCompare(a.editionId);
     });
   }
 
@@ -160,7 +261,7 @@
   }
 
   function archiveDataUrl(item) {
-    if (!item || !/^\d{4}-\d{2}-\d{2}\.json$/.test(item.path)) return "";
+    if (!item || !validArchiveFilename(item.path)) return "";
     var url = new URL("./data/archive/" + item.path, document.baseURI);
     if (url.origin !== window.location.origin) return "";
     return url.href;
@@ -181,16 +282,17 @@
     ).format(date);
   }
 
-  function relativeTime(value) {
+  function relativeTime(value, verb) {
     var date = dateObject(value);
-    if (!date) return "check time unavailable";
+    verb = verb || "checked";
+    if (!date) return verb + " time unavailable";
     var minutes = Math.max(0, Math.round((Date.now() - date.getTime()) / 60000));
-    if (minutes < 2) return "checked just now";
-    if (minutes < 60) return "checked " + minutes + " min ago";
+    if (minutes < 2) return verb + " just now";
+    if (minutes < 60) return verb + " " + minutes + " min ago";
     var hours = Math.round(minutes / 60);
-    if (hours < 48) return "checked " + hours + " hr ago";
+    if (hours < 48) return verb + " " + hours + " hr ago";
     var days = Math.round(hours / 24);
-    return "checked " + days + " day" + (days === 1 ? "" : "s") + " ago";
+    return verb + " " + days + " day" + (days === 1 ? "" : "s") + " ago";
   }
 
   function editionFreshness(report, archived) {
@@ -202,11 +304,13 @@
     if (copy.state === "offline") return { label: copy.label, short: "offline", state: "offline" };
     if (report.status === "UPDATE_NOT_CONFIRMED") return { label: copy.label, short: "waiting", state: "warn" };
 
-    var checked = dateObject(report.checkedAt || report.generatedAt);
+    var checked = dateObject(report.importedAt || report.checkedAt || report.generatedAt);
     if (!checked) return { label: copy.label + " · time unknown", short: "unknown", state: "warn" };
     var ageHours = Math.max(0, (Date.now() - checked.getTime()) / 3600000);
-    if (ageHours > 72) return { label: "Stale edition", short: "stale", state: "stale" };
-    if (ageHours > 36) return { label: "Edition delayed", short: "delayed", state: "warn" };
+    var staleAfter = report.editionKind === "weekly" ? 240 : 72;
+    var delayedAfter = report.editionKind === "weekly" ? 192 : 36;
+    if (ageHours > staleAfter) return { label: "Stale edition", short: "stale", state: "stale" };
+    if (ageHours > delayedAfter) return { label: "Edition delayed", short: "delayed", state: "warn" };
     return { label: copy.label, short: "fresh", state: "fresh" };
   }
 
@@ -232,16 +336,239 @@
   function clearNotice() {
     elements.notice.hidden = true;
   }
+  function stripRawHtml(value) {
+    return String(value || "")
+      .replace(/<!--[\s\S]*?-->/g, "")
+      .replace(/<\/?[A-Za-z][^>]*>/g, "");
+  }
+
+  function sourceLink(url, label) {
+    var safe = safeArxivLink(url);
+    if (!safe) return null;
+    var link = createNode("a", "source-arxiv-link", label);
+    link.href = safe;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.setAttribute("aria-label", label + " (opens on arXiv in a new tab)");
+    return link;
+  }
+
+  function appendInline(parent, value) {
+    var text = stripRawHtml(value);
+    var pattern = /\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)\s]+)\)|(https:\/\/arxiv\.org\/(?:abs|pdf)\/[A-Za-z0-9.\/-]+(?:\.pdf)?)/gi;
+    var cursor = 0;
+    var match;
+
+    while ((match = pattern.exec(text)) !== null) {
+      if (match.index > cursor) parent.appendChild(document.createTextNode(text.slice(cursor, match.index)));
+      if (match[1] !== undefined) {
+        var strong = createNode("strong", "");
+        appendInline(strong, match[1]);
+        parent.appendChild(strong);
+      } else if (match[2] !== undefined) {
+        var markdownLink = sourceLink(match[3], match[2]);
+        parent.appendChild(markdownLink || document.createTextNode(match[2]));
+      } else {
+        var bareLink = sourceLink(match[4], match[4]);
+        parent.appendChild(bareLink || document.createTextNode(match[4]));
+      }
+      cursor = pattern.lastIndex;
+    }
+    if (cursor < text.length) parent.appendChild(document.createTextNode(text.slice(cursor)));
+  }
+
+  function appendSourcePre(parent, value, equation) {
+    var pre = createNode("pre", equation ? "source-pre source-equation" : "source-pre");
+    if (equation) pre.setAttribute("aria-label", "Equation");
+    pre.appendChild(createNode("code", "", value));
+    parent.appendChild(pre);
+  }
+
+  function renderMarkdownLite(value) {
+    var fragment = document.createDocumentFragment();
+    var lines = cleanMultiline(value).split("\n");
+    var index = 0;
+
+    while (index < lines.length) {
+      var raw = lines[index];
+      var trimmed = raw.trim();
+      if (!trimmed) {
+        index += 1;
+        continue;
+      }
+
+      var fence = trimmed.match(/^\x60{3}([A-Za-z0-9_-]*)\s*$/);
+      if (fence) {
+        var code = [];
+        index += 1;
+        while (index < lines.length && !/^\x60{3}\s*$/.test(lines[index].trim())) {
+          code.push(lines[index]);
+          index += 1;
+        }
+        if (index < lines.length) index += 1;
+        appendSourcePre(fragment, code.join("\n"), /^(?:math|latex|equation)$/i.test(fence[1]));
+        continue;
+      }
+
+      if (trimmed === "$$" || trimmed === "\\[") {
+        var closing = trimmed === "$$" ? "$$" : "\\]";
+        var equationLines = [];
+        index += 1;
+        while (index < lines.length && lines[index].trim() !== closing) {
+          equationLines.push(lines[index]);
+          index += 1;
+        }
+        if (index < lines.length) index += 1;
+        appendSourcePre(fragment, equationLines.join("\n"), true);
+        continue;
+      }
+
+      if (/^\$\$[\s\S]+\$\$$/.test(trimmed)) {
+        appendSourcePre(fragment, trimmed.slice(2, -2).trim(), true);
+        index += 1;
+        continue;
+      }
+
+      var heading = trimmed.match(/^(#{1,4})\s+(.+)$/);
+      if (heading) {
+        var headingNode = createNode("h" + Math.min(6, heading[1].length + 2), "source-heading source-heading-" + heading[1].length);
+        appendInline(headingNode, heading[2]);
+        fragment.appendChild(headingNode);
+        index += 1;
+        continue;
+      }
+
+      if (/^[-*]\s+/.test(trimmed)) {
+        var unordered = createNode("ul", "source-list");
+        while (index < lines.length) {
+          var bullet = lines[index].trim().match(/^[-*]\s+(.+)$/);
+          if (!bullet) break;
+          var bulletItem = createNode("li", "");
+          appendInline(bulletItem, bullet[1]);
+          unordered.appendChild(bulletItem);
+          index += 1;
+        }
+        fragment.appendChild(unordered);
+        continue;
+      }
+
+      if (/^\d+[.)]\s+/.test(trimmed)) {
+        var ordered = createNode("ol", "source-list source-list-ordered");
+        var firstNumber = Number(trimmed.match(/^(\d+)/)[1]);
+        if (firstNumber > 1) ordered.start = firstNumber;
+        while (index < lines.length) {
+          var numbered = lines[index].trim().match(/^\d+[.)]\s+(.+)$/);
+          if (!numbered) break;
+          var numberedItem = createNode("li", "");
+          appendInline(numberedItem, numbered[1]);
+          ordered.appendChild(numberedItem);
+          index += 1;
+        }
+        fragment.appendChild(ordered);
+        continue;
+      }
+
+      if (/^ {4}/.test(raw)) {
+        var preLines = [];
+        while (index < lines.length && (/^ {4}/.test(lines[index]) || !lines[index].trim())) {
+          preLines.push(lines[index].replace(/^ {4}/, ""));
+          index += 1;
+        }
+        appendSourcePre(fragment, preLines.join("\n").trimEnd(), false);
+        continue;
+      }
+
+      var paragraphLines = [];
+      while (index < lines.length) {
+        var candidate = lines[index];
+        var candidateTrimmed = candidate.trim();
+        if (
+          !candidateTrimmed ||
+          /^\x60{3}/.test(candidateTrimmed) ||
+          candidateTrimmed === "$$" ||
+          candidateTrimmed === "\\[" ||
+          /^(#{1,4})\s+/.test(candidateTrimmed) ||
+          /^[-*]\s+/.test(candidateTrimmed) ||
+          /^\d+[.)]\s+/.test(candidateTrimmed) ||
+          /^ {4}/.test(candidate)
+        ) break;
+        var safeLine = stripRawHtml(candidateTrimmed);
+        if (safeLine) paragraphLines.push(safeLine);
+        index += 1;
+      }
+      if (paragraphLines.length) {
+        var paragraph = createNode("p", "");
+        appendInline(paragraph, paragraphLines.join(" "));
+        fragment.appendChild(paragraph);
+      } else {
+        index += 1;
+      }
+    }
+
+    return fragment;
+  }
+
+  function formatDateTime(value) {
+    var date = dateObject(value);
+    if (!date) return "Unavailable";
+    return new Intl.DateTimeFormat("en", {
+      day: "2-digit",
+      hour: "2-digit",
+      hour12: false,
+      minute: "2-digit",
+      month: "short",
+      timeZone: "UTC",
+      timeZoneName: "short",
+      year: "numeric"
+    }).format(date);
+  }
+
+  function renderEditionContext(report) {
+    if (report.schemaVersion < 2) {
+      elements.editionContext.hidden = true;
+      elements.sourceSection.hidden = true;
+      elements.sourceDocument.replaceChildren();
+      return;
+    }
+
+    elements.editionContext.hidden = false;
+    elements.editionKind.textContent = report.editionKind === "weekly" ? "Weekly review" : "Daily screen";
+    elements.editionKind.dataset.kind = report.editionKind;
+    var sourceKindLabel = report.sourceKind === "chatgpt-scheduled-task"
+      ? "ChatGPT scheduled task"
+      : "Local arXiv updater";
+    var sourceDisplay = report.sourceLabel || sourceKindLabel;
+    if (sourceDisplay.toLocaleLowerCase().indexOf(sourceKindLabel.toLocaleLowerCase()) === -1) {
+      sourceDisplay += " · " + sourceKindLabel;
+    }
+    elements.editionSource.textContent = sourceDisplay;
+    elements.editionId.textContent = report.editionId || "Unavailable";
+
+    var period = report.periodStart && report.periodEnd
+      ? formatDate(report.periodStart, true) + " — " + formatDate(report.periodEnd, true)
+      : formatDate(report.periodStart || report.periodEnd || report.editionDate, true);
+    elements.editionPeriod.textContent = period;
+    elements.editionImported.textContent = formatDateTime(report.importedAt);
+
+    elements.sourceSection.hidden = !report.sourceText;
+    elements.sourceTitle.textContent = report.editionKind === "weekly"
+      ? "Weekly scheduled research review"
+      : "Daily scheduled research screen";
+    elements.sourceDocument.replaceChildren();
+    if (report.sourceText) elements.sourceDocument.appendChild(renderMarkdownLite(report.sourceText));
+  }
+
 
   function renderStatus(report, archived) {
     var freshness = editionFreshness(report, archived);
-    var checked = archived ? "dated snapshot" : relativeTime(report.checkedAt || report.generatedAt);
+    var activityAt = report.importedAt || report.checkedAt || report.generatedAt;
+    var checked = archived ? "dated snapshot" : relativeTime(activityAt, report.schemaVersion >= 2 ? "imported" : "checked");
     elements.headerStatus.dataset.state = freshness.state;
     elements.headerStatus.lastElementChild.textContent = freshness.label + " · " + checked;
     elements.freshnessShort.textContent = freshness.short;
     elements.updateNote.dataset.state = freshness.state;
 
-    var message = report.statusMessage || freshness.label + ".";
+    var message = report.message || report.statusMessage || freshness.label + ".";
     elements.updateNote.textContent = message + (archived ? "" : " " + checked.charAt(0).toUpperCase() + checked.slice(1) + ".");
     return freshness;
   }
@@ -276,7 +603,10 @@
       paper.arxivId,
       paper.authors.join(" "),
       paper.topics.join(" "),
-      paper.scoreReasons.join(" ")
+      paper.scoreReasons.join(" "),
+      paper.schedulerLabel,
+      paper.schedulerSummary,
+      paper.ratings.map(function (rating) { return rating.label; }).join(" ")
     ].join(" ").toLocaleLowerCase();
   }
 
@@ -322,9 +652,39 @@
     return link;
   }
 
+  function renderSchedulerRatings(paper) {
+    if (!paper.ratings.length) return null;
+    var block = createNode("div", "scheduler-ratings");
+    block.appendChild(createNode("p", "scheduler-ratings-title", "Scheduled review ratings"));
+    var grid = createNode("div", "scheduler-ratings-grid");
+    paper.ratings.forEach(function (rating) {
+      var item = createNode("div", "scheduler-rating");
+      var header = createNode("div", "scheduler-rating-head");
+      header.appendChild(createNode("span", "", rating.label));
+      header.appendChild(createNode("strong", "", displayScore(rating.value) + "/" + rating.scale));
+      item.appendChild(header);
+      var track = createNode("span", "scheduler-rating-track");
+      track.setAttribute("role", "meter");
+      track.setAttribute("aria-label", rating.label + ": " + displayScore(rating.value) + " out of " + rating.scale);
+      track.setAttribute("aria-valuemin", "0");
+      track.setAttribute("aria-valuemax", String(rating.scale));
+      track.setAttribute("aria-valuenow", String(rating.value));
+      var fill = createNode("span", "scheduler-rating-fill");
+      fill.classList.add(widthClass(rating.value / rating.scale * 100));
+      track.appendChild(fill);
+      item.appendChild(track);
+      grid.appendChild(item);
+    });
+    block.appendChild(grid);
+    return block;
+  }
+
   function renderPaper(paper, visibleIndex) {
     var item = createNode("li", "paper-card");
-    var index = createNode("span", "paper-index", String(visibleIndex + 1).padStart(2, "0"));
+    var rank = paper.schedulerRank === null
+      ? (state.report && state.report.schemaVersion >= 2 ? "—" : String(visibleIndex + 1).padStart(2, "0"))
+      : displayScore(paper.schedulerRank).padStart(2, "0");
+    var index = createNode("span", "paper-index", rank);
     index.setAttribute("aria-hidden", "true");
     item.appendChild(index);
 
@@ -336,9 +696,17 @@
     if (paper.arxivId) dateParts.push("arXiv:" + paper.arxivId);
     top.appendChild(createNode("span", "paper-date", dateParts.join(" · ") || "arXiv record"));
 
-    if (paper.score !== null) {
-      top.appendChild(createNode("span", "score-pill", "Relevance · " + displayScore(paper.score)));
+    var badges = createNode("div", "paper-badges");
+    if (paper.schedulerLabel) {
+      badges.appendChild(createNode("span", "scheduler-label", paper.schedulerLabel));
     }
+    if (paper.schedulerRating !== null) {
+      badges.appendChild(createNode("span", "score-pill scheduler-rating-pill", "Review · " + displayScore(paper.schedulerRating) + "/" + paper.schedulerRatingScale));
+    }
+    if (paper.score !== null) {
+      badges.appendChild(createNode("span", "score-pill", (paper.schedulerRating !== null ? "Screen score · " : "Relevance · ") + displayScore(paper.score)));
+    }
+    if (badges.childElementCount) top.appendChild(badges);
     main.appendChild(top);
 
     var heading = createNode("h3", "paper-title");
@@ -357,6 +725,16 @@
       main.appendChild(topicWrap);
     }
 
+    if (paper.schedulerSummary) {
+      var summary = createNode("div", "scheduler-summary");
+      summary.appendChild(createNode("span", "scheduler-summary-label", "Scheduled review"));
+      summary.appendChild(createNode("p", "", paper.schedulerSummary));
+      main.appendChild(summary);
+    }
+
+    var schedulerRatings = renderSchedulerRatings(paper);
+    if (schedulerRatings) main.appendChild(schedulerRatings);
+
     if (paper.abstract) {
       main.appendChild(createNode("p", "paper-abstract", abstractPreview(paper.abstract)));
       if (paper.abstract.length > 360) {
@@ -370,7 +748,7 @@
     if (paper.score !== null || paper.scoreReasons.length) {
       var relevance = createNode("div", "relevance-block");
       var relevanceHead = createNode("div", "relevance-head");
-      relevanceHead.appendChild(createNode("span", "", paper.scoreReasons.length ? "Selection evidence" : "Relevance score"));
+      relevanceHead.appendChild(createNode("span", "", paper.scoreReasons.length ? "Deterministic screen evidence" : "Deterministic relevance score"));
       if (paper.score !== null) {
         var track = createNode("span", "score-track");
         track.setAttribute("role", "meter");
@@ -441,34 +819,42 @@
     elements.search.value = "";
     elements.loading.hidden = true;
 
-    var edition = report.observedBatchDate || report.expectedBatchDate || state.archiveDate || report.checkedAt || report.generatedAt;
+    var edition = report.editionDate || report.observedBatchDate || report.expectedBatchDate || report.checkedAt || report.generatedAt;
     var displayDate = formatDate(edition, false);
-    elements.editionDate.textContent = (archived ? "Archive · " : "Latest · ") + displayDate;
+    var kindLabel = report.editionKind === "weekly" ? "Weekly" : "Daily";
+    elements.editionDate.textContent = (archived ? "Archive · " : kindLabel + " · ") + displayDate;
     elements.panelDate.textContent = formatDate(edition, true);
     elements.paperCount.textContent = report.papers.length;
     elements.topicCount.textContent = topicCounts(report.papers).length;
-    elements.digestTitle.textContent = archived ? "Research brief · " + displayDate : "Today’s research brief";
-    document.title = archived ? displayDate + " — Rates & Execution arXiv Daily" : "Rates & Execution — arXiv Daily";
+    elements.digestTitle.textContent = report.editionKind === "weekly"
+      ? (archived ? "Weekly review · " + displayDate : "Weekly research review")
+      : (archived ? "Daily brief · " + displayDate : "Today’s research brief");
+    document.title = archived
+      ? kindLabel + " review · " + displayDate + " — Rates & Execution"
+      : (report.editionKind === "weekly" ? "Weekly Review — Rates & Execution" : "Rates & Execution — arXiv Daily");
+    renderEditionContext(report);
     var freshness = renderStatus(report, archived);
 
     elements.paperList.replaceChildren();
     if (report.papers.length) {
       clearNotice();
+      elements.paperIndexHeading.hidden = !(report.schemaVersion >= 2 && report.sourceText);
       elements.toolbar.hidden = false;
       renderFilters(report.papers);
       renderPapers();
     } else {
+      elements.paperIndexHeading.hidden = true;
       elements.toolbar.hidden = true;
       elements.noResults.hidden = true;
       var copy = statusCopy[report.status] || { emptyTitle: "No papers are available for this edition" };
-      var message = report.statusMessage || "No selected papers were published in this dated screen.";
+      var message = report.message || report.statusMessage || "No selected papers were published in this dated screen.";
       showNotice(copy.emptyTitle, message, freshness.state);
     }
     renderLens(report.papers);
   }
-  function archiveHref(date) {
+  function archiveHref(editionId) {
     var url = new URL(window.location.href);
-    url.searchParams.set("edition", date);
+    url.searchParams.set("edition", editionId);
     url.hash = "digest";
     return url.href;
   }
@@ -488,11 +874,17 @@
     var fragment = document.createDocumentFragment();
     state.reports.slice(0, state.archiveVisible).forEach(function (report) {
       var link = createNode("a", "archive-row");
-      link.href = archiveHref(report.date);
-      if (state.archiveDate === report.date) link.setAttribute("aria-current", "page");
+      link.href = archiveHref(report.editionId);
+      link.setAttribute("aria-label", report.title + ", " + formatDate(report.date, true));
+      if (state.archiveEdition === report.editionId) link.setAttribute("aria-current", "page");
       link.appendChild(createNode("span", "archive-date", formatDate(report.date, true)));
 
       var meta = createNode("span", "archive-meta");
+      meta.appendChild(createNode("strong", "archive-title-text", report.title));
+      meta.appendChild(createNode("span", "archive-kind", report.kind === "weekly" ? "Weekly" : "Daily"));
+      if (report.sourceKind === "chatgpt-scheduled-task") {
+        meta.appendChild(createNode("span", "archive-source", "Scheduled task"));
+      }
       var visual = archiveState(report.status);
       var status = createNode("span", "archive-state", visual.label);
       status.dataset.state = visual.state;
@@ -527,6 +919,10 @@
   function showLoadFailure(archived) {
     elements.loading.hidden = true;
     elements.toolbar.hidden = true;
+    elements.paperIndexHeading.hidden = true;
+    elements.editionContext.hidden = true;
+    elements.sourceSection.hidden = true;
+    elements.sourceDocument.replaceChildren();
     elements.paperList.replaceChildren();
     elements.paperCount.textContent = "0";
     elements.topicCount.textContent = "0";
@@ -558,16 +954,16 @@
     var archived = false;
     var reportPromise;
 
-    if (state.archiveDate) {
+    if (state.archiveEdition) {
       archived = true;
-      if (!isDate(state.archiveDate)) {
+      if (!validEditionId(state.archiveEdition)) {
         await archivePromise;
         showLoadFailure(true);
         return;
       }
 
       var reports = await archivePromise;
-      var selected = reports.find(function (item) { return item.date === state.archiveDate; });
+      var selected = reports.find(function (item) { return item.editionId === state.archiveEdition; });
       var selectedUrl = archiveDataUrl(selected);
       if (!selected || !selectedUrl) {
         showLoadFailure(true);
@@ -580,7 +976,11 @@
 
     try {
       var raw = await reportPromise;
-      renderReport(normaliseReport(raw), archived);
+      var report = normaliseReport(raw);
+      if (archived && report.schemaVersion >= 2 && report.editionId !== state.archiveEdition) {
+        throw new Error("Archive edition identity mismatch.");
+      }
+      renderReport(report, archived);
     } catch (_error) {
       showLoadFailure(archived);
     }

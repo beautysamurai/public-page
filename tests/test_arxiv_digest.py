@@ -160,6 +160,18 @@ class QueryAndConfigTests(unittest.TestCase):
                 "https://example.invalid/api/query",
             )
 
+    def test_cli_defaults_cannot_overwrite_public_scheduler_artifacts(self):
+        args = digest.build_argument_parser().parse_args([])
+
+        self.assertEqual(
+            args.output,
+            Path(".local/candidate-data/latest.json"),
+        )
+        self.assertEqual(
+            args.archive_dir,
+            Path(".local/candidate-data/archive"),
+        )
+
 
 class AtomParsingTests(unittest.TestCase):
     def test_atom_is_normalised_deduplicated_and_public_links_are_derived(self):

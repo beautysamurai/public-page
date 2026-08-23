@@ -7,29 +7,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
     <meta name="theme-color" content="#0b1d2a">
-    <meta name="description" content="A focused daily digest of arXiv research for electronic trading, fixed income, and market structure.">
+    <meta name="description" content="Scheduled daily screens and weekly reviews of arXiv research for electronic trading, fixed income, and market structure.">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Rates &amp; Execution — arXiv Daily">
-    <meta property="og:description" content="A focused daily digest of arXiv research for electronic trading, fixed income, and market structure.">
+    <meta property="og:title" content="Rates &amp; Execution — scheduled arXiv research">
+    <meta property="og:description" content="Scheduled daily screens and weekly reviews of arXiv research for electronic trading, fixed income, and market structure.">
     <meta property="og:url" content="https://beautysamurai.github.io/public-page/">
     <meta property="og:image" content="https://beautysamurai.github.io/public-page/og.png">
-    <meta property="og:image:alt" content="Rates and Execution arXiv Daily research brief">
+    <meta property="og:image:alt" content="Rates and Execution scheduled arXiv research brief">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Rates &amp; Execution — arXiv Daily">
-    <meta name="twitter:description" content="A focused daily digest of arXiv research for electronic trading, fixed income, and market structure.">
+    <meta name="twitter:title" content="Rates &amp; Execution — scheduled arXiv research">
+    <meta name="twitter:description" content="Scheduled daily screens and weekly reviews of arXiv research for electronic trading, fixed income, and market structure.">
     <meta name="twitter:image" content="https://beautysamurai.github.io/public-page/og.png">
-    <meta name="twitter:image:alt" content="Rates and Execution arXiv Daily research brief">
-    <title>Rates &amp; Execution — arXiv Daily</title>
+    <meta name="twitter:image:alt" content="Rates and Execution scheduled arXiv research brief">
+    <title>Rates &amp; Execution — scheduled arXiv research</title>
     <link rel="stylesheet" href="./styles.css">
     <script src="./app.js" defer></script>
   </head>
   <body>
-    <a class="skip-link" href="#digest">Skip to today’s digest</a>
+    <a class="skip-link" href="#digest">Skip to the latest research edition</a>
     <header class="site-header">
       <div class="shell header-inner">
-        <a class="brand" href="./" aria-label="Rates and Execution arXiv Daily home">
+        <a class="brand" href="./" aria-label="Rates and Execution scheduled arXiv research home">
           <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-          <span class="brand-copy"><strong>Rates &amp; Execution</strong><small>arXiv daily brief</small></span>
+          <span class="brand-copy"><strong>Rates &amp; Execution</strong><small>scheduled arXiv brief</small></span>
         </a>
         <nav class="primary-nav" aria-label="Primary navigation">
           <a href="#digest">Latest</a><a href="#archive">Archive</a><a href="#method">Method</a>
@@ -43,9 +43,9 @@
       <section class="hero" aria-labelledby="page-title">
         <div class="shell hero-grid">
           <div class="hero-copy">
-            <div class="eyebrow-row"><p class="eyebrow">Daily research intelligence</p><span class="edition-date" id="edition-date">—</span></div>
+            <div class="eyebrow-row"><p class="eyebrow">Scheduled research intelligence</p><span class="edition-date" id="edition-date">—</span></div>
             <h1 id="page-title">Ideas moving through<br><em>rates and markets.</em></h1>
-            <p class="hero-intro">A deliberately narrow read of new arXiv research across electronic trading, fixed income, market microstructure, and quantitative methods.</p>
+            <p class="hero-intro">A deliberately narrow read of arXiv research across electronic trading, fixed income, market microstructure, and quantitative methods—published as daily screens and weekly reviews.</p>
             <div class="hero-actions">
               <a class="button button-primary" href="#digest">Read the brief</a>
               <a class="text-link" href="#method">How papers are selected <span aria-hidden="true">↘</span></a>
@@ -81,6 +81,28 @@
             <div><p class="section-kicker">The latest screen</p><h2 id="digest-title">Today’s research brief</h2></div>
             <p class="update-note" id="update-note" aria-live="polite">Loading the latest edition…</p>
           </div>
+          <div class="edition-context" id="edition-context" hidden>
+            <div class="edition-context-labels">
+              <span class="edition-kind" id="edition-kind">Daily screen</span>
+              <span class="edition-source" id="edition-source">Source unavailable</span>
+            </div>
+            <dl class="edition-facts">
+              <div><dt>Edition</dt><dd id="edition-id">—</dd></div>
+              <div><dt>Coverage</dt><dd id="edition-period">—</dd></div>
+              <div><dt>Imported</dt><dd id="edition-imported">—</dd></div>
+            </dl>
+          </div>
+          <section class="source-section" id="source-section" aria-labelledby="source-title" hidden>
+            <div class="source-section-heading">
+              <p class="section-kicker">Scheduled brief</p>
+              <h3 id="source-title">Original research review</h3>
+            </div>
+            <div class="source-document" id="source-document"></div>
+          </section>
+          <div class="paper-index-heading" id="paper-index-heading" hidden>
+            <p class="section-kicker">Structured paper index</p>
+            <h3>Selected papers</h3>
+          </div>
           <div class="digest-toolbar" id="digest-toolbar" hidden>
             <div class="search-field">
               <label for="paper-search">Search this edition</label>
@@ -113,7 +135,7 @@
         <div class="shell archive-grid">
           <div class="archive-sticky">
             <p class="section-kicker">Past editions</p><h2 id="archive-title">Archive</h2>
-            <p>Review prior daily screens. Every edition is a dated snapshot, not a continuously revised feed.</p>
+            <p>Review prior daily screens and weekly reviews. Every edition is a dated snapshot, not a continuously revised feed.</p>
           </div>
           <div>
             <div class="archive-list" id="archive-list" aria-live="polite"><p class="archive-loading">Loading archived editions…</p></div>
@@ -125,8 +147,8 @@
         <div class="shell">
           <div class="method-heading"><p class="section-kicker">Selection method</p><h2 id="method-title">Transparent by design.</h2></div>
           <div class="method-grid">
-            <article><span>01</span><h3>Screen</h3><p>New arXiv records are checked against a documented set of categories and domain terms.</p></article>
-            <article><span>02</span><h3>Rank</h3><p>Matched terms produce a reproducible relevance score, shown on every selected paper.</p></article>
+            <article><span>01</span><h3>Collect</h3><p>Scheduled reviews and local updater results are stored as distinct, dated research editions.</p></article>
+            <article><span>02</span><h3>Explain</h3><p>Source, ratings, selection rationale, and updater state remain visible rather than being flattened into one score.</p></article>
             <article><span>03</span><h3>Publish</h3><p>The site publishes a dated snapshot with freshness and updater state visible to the reader.</p></article>
           </div>
           <div class="method-caveat">
@@ -140,12 +162,12 @@
       <div class="shell footer-grid">
         <div class="footer-brand">
           <span class="brand-mark brand-mark-light" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-          <div><strong>Rates &amp; Execution</strong><small>arXiv daily brief</small></div>
+          <div><strong>Rates &amp; Execution</strong><small>scheduled arXiv brief</small></div>
         </div>
         <p>Independent research discovery. No tracking, analytics, live prices, or third-party scripts.</p>
         <a href="#page-title">Back to top <span aria-hidden="true">↑</span></a>
       </div>
     </footer>
-    <noscript><div class="noscript-banner">JavaScript is required to load the daily digest and archive data.</div></noscript>
+    <noscript><div class="noscript-banner">JavaScript is required to load the research editions and archive data.</div></noscript>
   </body>
 </html>

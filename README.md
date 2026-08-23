@@ -1,160 +1,122 @@
-# Rates & Execution — arXiv Daily
+# Rates & Execution — scheduled arXiv research
 
-Rates & Execution — arXiv Daily is a static, GitHub Pages-ready digest for selected arXiv topics. A
-local Python updater fetches and scores public arXiv metadata, writes a JSON
-snapshot under **site/data/**, and the browser renders that snapshot. GitHub
-Actions only validates the repository and deploys the already-generated static
-site; it does not run the updater, call arXiv, or call an AI service.
+Rates & Execution is a privacy-first static archive of scheduled arXiv research
+reviews across electronic trading, fixed income, market microstructure, and
+quantitative methods. The public site is available at
+[beautysamurai.github.io/public-page](https://beautysamurai.github.io/public-page/).
 
-## How publishing works
+The displayed daily screens and weekly reviews come from the sanitized public
+history in **content/chatgpt_scheduler_history.json**. An offline importer
+validates that source and deterministically generates **site/data/**. GitHub
+Actions validates and deploys the already-generated static site; deployment
+does not call ChatGPT, arXiv, or any other AI service.
+
+## Source of truth
 
 ~~~text
-local scheduled task
-  -> scripts/arxiv_digest.py
-  -> site/data/latest.json (+ dated archive files)
-  -> reviewed git commit and push
-  -> GitHub Pages deployment
+ChatGPT scheduled-task response history
+  -> public wording and privacy review
+  -> content/chatgpt_scheduler_history.json
+  -> scripts/import_scheduler_history.py
+  -> site/data/latest.json + immutable edition archives
+  -> reviewed commit and push
+  -> GitHub Pages
 ~~~
 
-This split is intentional. Search terms, network access, and any future model
-credentials stay under the control of the local machine. The public repository
-contains only the configuration and generated content that you choose to
-commit.
+The source preserves the scheduled review's narrative, rankings when they were
+explicitly assigned, ratings, limitations, and recommendation order. It omits
+private task/thread identifiers, internal citation tokens, tracking parameters,
+prompts, and account details. Archive filenames use unique edition IDs, so a
+daily screen and weekly review can coexist on the same date.
 
-## Run locally
+The deterministic keyword updater remains available as a local candidate feed.
+It is useful for discovery and freshness checks, but it is not allowed to
+overwrite the reviewed scheduler history shown on the public site.
+
+## Generate and preview the public site
 
 Requirements:
 
-- Python 3.12 or another version supported by the updater and tests
-- network access to arXiv when running the updater
+- Python 3.12 or another version supported by the importer and tests
 - a static HTTP server for previewing the site (Python is sufficient)
 
 From the repository root:
 
 ~~~bash
-python scripts/arxiv_digest.py \
-  --output site/data/latest.json \
-  --archive-dir site/data/archive
+python scripts/import_scheduler_history.py
+python scripts/import_scheduler_history.py --check
 python -m unittest discover -s tests -v
 python -m http.server 8000 --directory site
 ~~~
 
 Open **http://localhost:8000**. Avoid opening **site/index.html** directly
-because browser security rules can prevent fetch requests from loading the JSON
-data.
+because browser security rules can prevent fetch requests from loading JSON.
 
-The updater reads **config/topics.json** when that file is present. Its public
-configuration contains:
+The importer is network-free, rejects unknown fields and unsafe public text,
+derives canonical arXiv links from each arXiv ID, refuses to rewrite a different
+immutable archive, and writes deterministic JSON. **--check** is read-only and
+fails when the committed artifacts differ from the reviewed source.
 
-- **categories**: arXiv category identifiers to consider
-- **keywords**: deterministic relevance terms
-- **minimumScore**: the inclusion threshold
-- **maxResults**: the maximum feed results examined
-- **staleAfterDays**: maximum tolerated calendar-day gap between the expected
-  and observed weekday batch dates; this public configuration uses **0** so an
-  older observed batch is never presented as a confirmed no-results day
+## Edition status and provenance
 
-Unknown configuration keys are rejected so that misspellings do not silently
-change the digest.
+Every scheduler-backed edition exposes:
 
-## Freshness and status
+- **editionId**, **editionDate**, and **editionKind** (daily or weekly);
+- a sanitized source label and the time the edition was imported;
+- expected and observed arXiv batch dates when the scheduled response stated
+  them;
+- a weekly coverage period when applicable;
+- the scheduled narrative plus structured paper metadata and ratings; and
+- one of these explicit states:
+  - **UPDATE_CONFIRMED** — a reviewed batch contains selected papers;
+  - **NO_RELEVANT_PAPERS** — a fresh batch was checked and none qualified;
+  - **NO_NEW_BATCH_EXPECTED** — no new batch was expected at that check time;
+  - **UPDATE_NOT_CONFIRMED** — freshness could not be confirmed, so no empty
+    result was asserted;
+  - **UPDATER_OFFLINE** — the scheduled check reported a fetch failure; or
+  - **WEEKLY_REVIEW** — a multi-day review and reprioritization.
 
-The generated snapshot makes update health visible rather than implying that an
-old page is current:
+An empty paper list therefore does not automatically mean failure.
 
-- **checkedAt** and **generatedAt** are RFC 3339 UTC timestamps ending in **Z**.
-- **expectedBatchDate** is the latest weekday on or before the UTC check date.
-- **observedBatchDate** is the newest publication date seen in the Atom feed, or
-  **null** when it cannot be determined.
-- **status** is one of:
-  - **UPDATE_CONFIRMED**: a fresh confirmed batch has qualifying papers;
-  - **NO_RELEVANT_PAPERS**: a fresh confirmed batch has no qualifying papers;
-  - **UPDATE_NOT_CONFIRMED**: the feed is stale, empty, malformed, or otherwise
-    cannot confirm the expected batch;
-  - **UPDATER_OFFLINE**: a network, timeout, or operating-system fetch failure
-    prevented the check.
+## Run the local candidate updater
 
-The UI displays status and timestamps. An empty relevant-paper list is therefore
-not automatically an error.
+The checked-in launchers fetch public arXiv metadata and write only under
+**.local/candidate-data/**, with logs under **.local/logs/**. Both paths are
+ignored by Git. They deliberately do not publish, commit, or push.
 
-## Daily scheduling
+Run directly:
 
-The checked-in launchers update local files and append logs under
-**.local/logs/**. They deliberately do not commit or push. Review the generated
-diff before publishing it.
-
-### Windows Task Scheduler with WSL
-
-Use this route when the checkout lives inside WSL:
-
-1. Open **Task Scheduler** and choose **Create Task**.
-2. Add a daily trigger at the desired local time. arXiv publication timing can
-   vary around weekends and holidays, so the page's batch dates remain the
-   source of truth.
-3. Add an action with program **C:\Windows\System32\wsl.exe**.
-4. Use arguments like the following, replacing the distribution and repository
-   path with local values:
-
-~~~text
--d Ubuntu-24.04 -- bash -lc "cd /home/<linux-user>/path/to/public-page && bash scripts/run_update.sh"
+~~~bash
+python scripts/arxiv_digest.py \
+  --output .local/candidate-data/latest.json \
+  --archive-dir .local/candidate-data/archive
 ~~~
 
-5. Enable **Run task as soon as possible after a scheduled start is missed** and
-   select **Do not start a new instance** if the task is already running.
-
-Run the same command once interactively before relying on the task. Check
-**.local/logs/** and the visible timestamp/status in the site after each run.
-The shell launcher uses **python3** by default; set **PYTHON_BIN** in the task
-command if a different executable is required.
-
-### Windows Task Scheduler with a Windows checkout
-
-Use program **powershell.exe** with arguments:
-
-~~~text
--NoProfile -ExecutionPolicy Bypass -File "C:\path\to\public-page\scripts\run_update.ps1"
-~~~
-
-Set **Start in** to the repository root. If the Python launcher is not named
-**python**, pass it explicitly, for example **-Python py**.
-
-### cron on Linux or WSL
-
-Use an absolute repository path and call the script through Bash. Replace the
-schedule and path with local values:
-
-~~~cron
-15 9 * * * cd /home/<linux-user>/path/to/public-page && /usr/bin/bash scripts/run_update.sh
-~~~
-
-The example time is illustrative, not a claim about arXiv availability.
+Or use **scripts/run_update.sh** from Linux/WSL and
+**scripts/run_update.ps1** from Windows Task Scheduler. The updater reads
+**config/topics.json**, applies a deterministic keyword score, and makes stale,
+empty, or offline states visible. Candidate output must be reviewed against the
+actual scheduled response before anything is added to the public history.
 
 ## Publish with GitHub Pages
 
-1. Run the updater locally and inspect **git diff -- site/data**.
-2. Confirm that the snapshot contains no private notes, credentials, or local
-   paths.
-3. Commit the intended files and push to the repository's **main** branch.
-4. In the GitHub repository settings, set Pages **Source** to **GitHub Actions**.
+1. Add only sanitized scheduled-task results to
+   **content/chatgpt_scheduler_history.json**.
+2. Run the importer, its read-only **--check**, and the full test suite.
+3. Inspect **git diff -- content site/data** and run the privacy checklist in
+   [PRIVACY.md](PRIVACY.md).
+4. Commit the intended files and push to **main**.
 
-The Pages workflow uploads only **site/**. It calls the reusable validation
-workflow first, retains read-only repository access during preparation, and
-receives **pages: write** plus **id-token: write** only in the deployment job.
-There is no scheduled GitHub workflow.
+The Pages workflow uploads only **site/** after validation. The repository has
+no GitHub cron job and no deployment credentials in tracked files.
 
 ## Public-repository privacy boundary
 
-Assume every tracked file, generated snapshot, workflow log, and old Git commit
-is public. In particular:
-
-- **config/topics.json** reveals the published digest's interests.
-- Paper titles, authors, abstracts, scores, and links in **site/data/** are
-  public.
-- Never place API keys, cookies, prompts, private annotations, email addresses,
-  workstation paths, or unpublished research in tracked files.
-- Put local logs, caches, credentials, and experiments under **.local/**, which
-  is ignored by Git. Ignoring a file does not protect it after it has been
-  committed.
+Assume every tracked file, generated edition, workflow log, and old Git commit
+is public. In particular, the full sanitized scheduled narrative and editorial
+ratings in **content/** and **site/data/** are public. Never commit raw ChatGPT
+exports, task/thread IDs, internal citations, prompts, private annotations,
+emails, workstation paths, credentials, or unpublished research.
 
 Read [PRIVACY.md](PRIVACY.md) before publishing and
 [SECURITY.md](SECURITY.md) before adding integrations or credentials.

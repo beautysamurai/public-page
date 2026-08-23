@@ -1,0 +1,513 @@
+{
+  "schemaVersion": 2,
+  "editions": [
+    {
+      "editionId": "2026-08-15-daily-chatgpt-01",
+      "editionDate": "2026-08-15",
+      "editionKind": "daily",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-23T03:58:27Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "通常の週末スケジュールを確認し、直近バッチから三本を推薦しました。",
+      "expectedBatchDate": "2026-08-14",
+      "observedBatchDate": "2026-08-14",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年8月15日 — Daily review\n\narXiv側の更新停止ではありません。q-fin.TRの最新一覧には2026年8月14日分まで掲載があり、米東部時間の金曜・土曜は通常、新規アナウンスがありません。日本時間の土曜朝に新しい日付がないのは正常です。\n\n## 1. FlowLOB\n\n**重要度: ★★★★★ — 電子取引**\n\nLimit Order Bookの将来パスをFlow Matchingで生成し、trend、volatility、liquidity、order-book imbalanceを条件として与えられるモデルです。八つのHKEX銘柄で共通モデルを学習し、未学習の九銘柄目にもzero-shotで適用しています。\n\nEuler 10 stepですでに良好な品質に達し、同程度の計算量のdiffusion比較に対して価格・出来高のWasserstein distanceが4〜120倍小さいと報告されています。realism指標では30/32ケースで最良、条件生成では42/48ケースで分布を意図した方向へ動かしました。\n\nexecution algoのbacktest、stress test、RL agentの訓練に使うsynthetic market dataとして有望です。ただしHKEX株式のL2 snapshot生成であり、注文message単位のmatching-engine simulationではありません。金利RFQへ直接移植するより、market simulatorの設計思想として読む価値が高い論文です。\n\n## 2. Hull–White with Svensson curves\n\n**重要度: ★★★★☆ — 金利モデル・理論**\n\nHull–WhiteモデルへNelson–Siegel、Bliss、Svensson型の初期curveを入れたとき、将来のyield/forward curveが取り得る形を局所極値の数と並びで分類します。局所極値の最大数はNelson–Siegelで3、Blissで4、Svenssonで5です。Tchebycheff systemとenvelope methodを使い、Nelson–Siegelについて完全なshape分類も与えます。\n\n長期では複雑な初期curveを許しても、正の確率で残るshapeがnormal、inverse、humpedへ絞られます。pricingやcalibrationを高速化する論文ではありませんが、scenario generationとmodel validationで、生成可能・不可能なcurve shapeを理解するのに役立ちます。\n\n**研究重要度: 4/5 — 直接的なdesk実務: 3/5**\n\n## 3. OTC order imbalance, skew and width\n\ncustomer flowがbuy/sellで偏ると、そのimbalanceをquote skewのシフト、widthの拡大、effective cost of carryの変化として吸収できることを示します。\n\n「inventoryがゼロでもflow imbalanceがあればskewすべき」「small imbalanceに対してskewは一次、widthは二次で反応する」という結果は、金利・債券のRFQ market makingへ直接つながります。\n\n**実務関連度: ★★★★★**\n\n## Reading order\n\nFlowLOB → OTC imbalance/skew → Hull–White/Svensson の順を推奨します。",
+      "papers": [
+        {
+          "arxivId": "2608.13096v1",
+          "title": "FlowLOB: Efficient and Controllable Limit Order Book Generation with Flow Matching",
+          "authors": [
+            "Zhuohan Wang",
+            "Andreea Bacalum",
+            "Ollie Olby",
+            "Carmine Ventre",
+            "Namid Stillman"
+          ],
+          "submittedDate": "2026-08-13",
+          "updatedDate": "2026-08-13",
+          "topics": [
+            "Electronic trading",
+            "Market microstructure",
+            "Generative models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.13096v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.13096v1",
+          "schedulerRank": 1,
+          "schedulerRating": 5,
+          "schedulerRatingScale": 5,
+          "schedulerLabel": "最優先・電子取引",
+          "schedulerSummary": "高速で制御可能なLOBシナリオ生成。execution backtest、stress test、RL環境への応用が中心です。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 5,
+              "scale": 5
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.12016v1",
+          "title": "Term structure shapes in the Hull-White model with Svensson-parameterized initial yield curves",
+          "authors": [
+            "Felix Sachse"
+          ],
+          "submittedDate": "2026-08-12",
+          "updatedDate": "2026-08-12",
+          "topics": [
+            "Interest-rate models",
+            "Yield curves",
+            "Model validation"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.12016v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.12016v1",
+          "schedulerRank": 2,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 5,
+          "schedulerLabel": "金利モデル・理論",
+          "schedulerSummary": "Hull–WhiteとSvensson系初期曲線の組合せが生成できるcurve shapeを数学的に分類します。",
+          "ratings": [
+            {
+              "label": "研究重要度",
+              "value": 4,
+              "scale": 5
+            },
+            {
+              "label": "直接的なdesk実務",
+              "value": 3,
+              "scale": 5
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.07690v1",
+          "title": "On a Simple Relationship Between Order Imbalance, Skew and Width in Over-The-Counter Trading",
+          "authors": [
+            "Peter Cotton"
+          ],
+          "submittedDate": "2026-08-07",
+          "updatedDate": "2026-08-07",
+          "topics": [
+            "OTC trading",
+            "RFQ",
+            "Market making"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.07690v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.07690v1",
+          "schedulerRank": 3,
+          "schedulerRating": 5,
+          "schedulerRatingScale": 5,
+          "schedulerLabel": "実務寄りの直近推薦",
+          "schedulerSummary": "Order imbalanceをskew、width、carryへ翻訳するRFQ market-makingの構造結果です。",
+          "ratings": [
+            {
+              "label": "実務関連度",
+              "value": 5,
+              "scale": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-17-daily-chatgpt-01",
+      "editionDate": "2026-08-17",
+      "editionKind": "daily",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-23T03:58:27Z",
+      "status": "NO_NEW_BATCH_EXPECTED",
+      "message": "通常の公開時刻前だったため、8月14日分の重複掲載を見送りました。",
+      "expectedBatchDate": "2026-08-14",
+      "observedBatchDate": "2026-08-14",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年8月17日 — Schedule check\n\n新しいarXiv更新はまだ出ていません。q-fin.TRとq-fin.MFの最新掲載は引き続き2026年8月14日分です。\n\nこれはサイト不調ではなく、通常の公開スケジュールによるものです。米東部時間の日曜20:00に週末分が公開されるため、日本時間の月曜朝は確認時刻によってまだ反映前です。\n\n8月14日分を重複して再掲せず、新しい月曜分を次回確認します。",
+      "papers": []
+    },
+    {
+      "editionId": "2026-08-18-daily-chatgpt-01",
+      "editionDate": "2026-08-18",
+      "editionKind": "daily",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-23T03:58:27Z",
+      "status": "NO_RELEVANT_PAPERS",
+      "message": "8月17日バッチには電子取引・金利モデルへ直接該当する新規推薦がありませんでした。",
+      "expectedBatchDate": "2026-08-17",
+      "observedBatchDate": "2026-08-17",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年8月18日 — No relevant papers\n\n確認した最新掲載は8月17日分です。電子取引・金利モデルに直接該当する新規論文はありませんでした。\n\nq-fin.TRは“No updates for this time period”でした。q-fin.MFの二本とq-fin.CP / q-fin.PRのfirst-hitting-time関連論文も、今回の対象から外れるため推薦していません。サービス状態は正常でした。\n\n**おすすめ新規論文: なし**\n\nFlowLOBやHull–White/Svenssonを重複して再掲せず、次回更新を確認します。",
+      "papers": []
+    },
+    {
+      "editionId": "2026-08-19-daily-chatgpt-01",
+      "editionDate": "2026-08-19",
+      "editionKind": "daily",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-23T03:58:27Z",
+      "status": "UPDATE_NOT_CONFIRMED",
+      "message": "カテゴリ取得のfreshnessを確認できず、「該当なし」とは判定せずに持ち越しました。",
+      "expectedBatchDate": "2026-08-18",
+      "observedBatchDate": null,
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年8月19日 — Freshness not confirmed\n\n今日分の論文紹介を見送り、次回へ持ち越します。\n\nq-fin.TRのnew listingは8月10日、q-fin.MFは8月7日を返し、8月19日時点の最新掲載を信頼して確認できませんでした。一方でMain Site、Search、export、submissionは稼働中と表示されており、arXiv全体の障害とは断定できません。\n\n古い論文を「今日の最新」として再掲したり、「関連論文なし」と誤判定したりせず、freshness未確認として扱います。次回は8月18〜19日分も含めて再確認します。",
+      "papers": []
+    },
+    {
+      "editionId": "2026-08-20-daily-chatgpt-01",
+      "editionDate": "2026-08-20",
+      "editionKind": "daily",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-23T03:58:27Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "8月19日バッチのq-fin.TR改訂版を一件再評価しました。新規の金利モデル推薦はありません。",
+      "expectedBatchDate": "2026-08-19",
+      "observedBatchDate": "2026-08-19",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年8月20日 — Daily review\n\n確認できた最新掲載は8月19日分です。arXiv自体は正常で、更新障害による持ち越しではありません。q-fin.TRには新規投稿がなく、一件の改訂版が掲載されました。q-fin.MFは“No updates today”でした。\n\n## Forecasting duration in high-frequency financial data\n\n**arXiv:2604.00346v2 — Kyungsub Lee**  \n**重要度: ★★★★☆ — 電子取引・market microstructure**\n\nLOBでmid-priceが変化するまでのdurationを予測します。Hawkes processのself-excitationを保ちながら、residual分布をGamma、generalized Gamma、Burrへ柔軟化し、heavy tailを表現します。general state-space Markov chainとしてirreducible、aperiodic、positive Harris recurrentでstationary distributionを持つ条件も示します。\n\nAAPLのhigh-frequency mid-price dataを使い、2022年12月をout-of-sampleとして直近5,000 eventsで推定し、100 eventsごとにrolling再推定しています。SE-BurrのrRMSEは1.8033でstandard Hawkesの1.8386を改善しました。一方、R²はSE-Burrの0.1134に対しACD-Gammaが0.1382で、全point metricに圧勝するわけではありません。より明確な改善はdistributional fitです。\n\ndirectional alphaではなく、次にmarket stateが変わるまでの時計を予測すると解釈できます。quote refresh、hedge timing、stale quote検知、short-horizon volatility、liquidity regimeへ応用できます。\n\n**研究新規性: ★★★★☆ — 電子取引実務関連度: ★★★★☆ — 読む優先度: ★★★☆☆〜★★★★☆**\n\nAAPL一銘柄・一か月の実証であり、RFQ pricingやinventory skewへ直接適用するモデルではない点が制約です。",
+      "papers": [
+        {
+          "arxivId": "2604.00346v2",
+          "title": "Forecasting duration in high-frequency financial data using a self-exciting flexible residual point process",
+          "authors": [
+            "Kyungsub Lee"
+          ],
+          "submittedDate": "2026-04-01",
+          "updatedDate": "2026-08-18",
+          "topics": [
+            "Electronic trading",
+            "Point processes",
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2604.00346v2",
+          "pdfUrl": "https://arxiv.org/pdf/2604.00346v2",
+          "schedulerRank": 1,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 5,
+          "schedulerLabel": "改訂版・電子取引",
+          "schedulerSummary": "Heavy-tailed residualを持つself-exciting duration model。価格変化の方向ではなく、次に動くまでの時間を予測します。",
+          "ratings": [
+            {
+              "label": "研究新規性",
+              "value": 4,
+              "scale": 5
+            },
+            {
+              "label": "電子取引実務関連度",
+              "value": 4,
+              "scale": 5
+            },
+            {
+              "label": "読む優先度",
+              "value": 3.5,
+              "scale": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-21-daily-chatgpt-01",
+      "editionDate": "2026-08-21",
+      "editionKind": "daily",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-23T03:58:27Z",
+      "status": "UPDATE_NOT_CONFIRMED",
+      "message": "取得経路のfreshnessが不安定だったため、8月20日分と8月21日分を次回へ持ち越しました。",
+      "expectedBatchDate": "2026-08-20",
+      "observedBatchDate": null,
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年8月21日 — Freshness not confirmed\n\n朝7:30ごろの確認では、今日分の論文紹介を持ち越します。\n\nq-fin.TR /recentは8月10日、q-fin.MF /recentも8月10日以前しか返さず、8月14日以降の論文が存在することと整合しません。この一覧を使って「8月20日掲載分に関連論文なし」と判定するのは危険です。\n\n公式ステータスではMain Site、Search、exportは稼働中で、全体障害というよりカテゴリ一覧や取得経路のfreshnessが不安定な状態と判断しました。古い論文を最新として再掲せず、8月20日分と8月21日分を次回まとめて確認します。",
+      "papers": []
+    },
+    {
+      "editionId": "2026-08-22-daily-chatgpt-01",
+      "editionDate": "2026-08-22",
+      "editionKind": "daily",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-23T03:58:27Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "8月21日バッチから電子取引二本を推薦しました。新規の金利モデル推薦はありません。",
+      "expectedBatchDate": "2026-08-21",
+      "observedBatchDate": "2026-08-21",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年8月22日 — Daily review\n\n最新バッチは8月21日掲載分です。土曜日にさらに新しいannouncementがないことは通常で、サイト不調による持ち越しではありません。\n\n## 1. M3: A State-Event Generative Foundation Model\n\n**重要度: ★★★★★ — 電子取引**\n\nLOBを単なる時系列として予測せず、order eventとLOB stateの相互作用を生成するmarket world modelです。注文をtoken化し、現在のLOBをstate-prefixとしてTransformerへ与え、生成注文をmatching engineへ流して市場ルールに従いLOBを更新します。\n\nLOB state → order event → new LOB stateというfeedback loopを再現します。大規模な実株式order-level dataで学習し、scaling law、stylized facts、liquidity stress、market impactを検証し、square-root impact lawに近い現象も再現したと報告しています。\n\nmarket impact、stress testing、execution backtest、RL training environmentへ直結します。FlowLOBがLOB trajectoryを生成するのに対し、M3は注文を生成してmatching engine経由でLOBを動かすため、simulation設計として一段高く評価します。\n\nequity LOB中心であり、金利RFQへはdealer inventory、recent RFQs、client type、hedge-market stateへstateを置き換える必要があります。\n\n**研究新規性: ★★★★★ — 電子取引実務: ★★★★★ — 金利RFQへの直接性: ★★★☆☆ — 読む優先度: ★★★★★**\n\n## 2. Concentrated Liquidity Provision\n\n**重要度: ★★★☆☆ — market making / RL**\n\nUniswap V3型concentrated liquidity market makerで、いつrebalanceするか、どのprice rangeへliquidityを置くかをRLで決めます。policyはmispricing、transaction cost、uncertainty、inventory exposure、risk preferenceを使い、高不確実性局面でPnL分布のleft tailを圧縮すると報告しています。\n\n通常のdealer market makingとは異なります。inventoryとuncertaintyからstate-dependent actionを学ぶ比較対象としては有用ですが、OTC/RFQ論文ほど直接的ではありません。\n\n**研究新規性: ★★★☆☆ — 電子取引実務: ★★★☆☆ — 金利RFQへの直接性: ★★☆☆☆ — 読む優先度: ★★★☆☆**\n\n## Rates conclusion\n\n推薦に値する新規のHJM、Hull–White、short-rate、yield-curve、swap、swaptionモデル論文は確認できませんでした。一冊だけ読むならM3を推奨します。",
+      "papers": [
+        {
+          "arxivId": "2608.19227v1",
+          "title": "M3: A State-Event Generative Foundation Model for Market Microstructure Dynamics",
+          "authors": [
+            "Yanzhi Zhang",
+            "Yu Ma",
+            "Yilin Cheng",
+            "Jian Li",
+            "Yitong Duan"
+          ],
+          "submittedDate": "2026-07-29",
+          "updatedDate": "2026-07-29",
+          "topics": [
+            "Electronic trading",
+            "Market simulation",
+            "Generative models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.19227v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.19227v1",
+          "schedulerRank": 1,
+          "schedulerRating": 5,
+          "schedulerRatingScale": 5,
+          "schedulerLabel": "最優先・電子取引",
+          "schedulerSummary": "Order eventを生成しmatching engineでLOB stateを更新するclosed-loop market world modelです。",
+          "ratings": [
+            {
+              "label": "研究新規性",
+              "value": 5,
+              "scale": 5
+            },
+            {
+              "label": "電子取引実務",
+              "value": 5,
+              "scale": 5
+            },
+            {
+              "label": "金利RFQへの直接性",
+              "value": 3,
+              "scale": 5
+            },
+            {
+              "label": "読む優先度",
+              "value": 5,
+              "scale": 5
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.19389v1",
+          "title": "Concentrated Liquidity Provision: a Reinforcement Learning Perspective",
+          "authors": [
+            "Georgios Chionas",
+            "Charalampos Kleitsikas",
+            "Stefanos Leonardos",
+            "Leandro Sánchez-Betancourt",
+            "Carmine Ventre"
+          ],
+          "submittedDate": "2026-08-19",
+          "updatedDate": "2026-08-19",
+          "topics": [
+            "Market making",
+            "Reinforcement learning",
+            "Concentrated liquidity"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.19389v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.19389v1",
+          "schedulerRank": 2,
+          "schedulerRating": 3,
+          "schedulerRatingScale": 5,
+          "schedulerLabel": "market making / RL",
+          "schedulerSummary": "Concentrated-liquidityのrange配置とrebalanceをstate-dependentに学習するRL policyです。",
+          "ratings": [
+            {
+              "label": "研究新規性",
+              "value": 3,
+              "scale": 5
+            },
+            {
+              "label": "電子取引実務",
+              "value": 3,
+              "scale": 5
+            },
+            {
+              "label": "金利RFQへの直接性",
+              "value": 2,
+              "scale": 5
+            },
+            {
+              "label": "読む優先度",
+              "value": 3,
+              "scale": 5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-23-weekly-chatgpt-01",
+      "editionDate": "2026-08-23",
+      "editionKind": "weekly",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-23T03:58:27Z",
+      "status": "WEEKLY_REVIEW",
+      "message": "8月17〜21日を再評価しました。電子取引・マイクロストラクチャは強く、金利モデルは弱い週でした。",
+      "expectedBatchDate": null,
+      "observedBatchDate": "2026-08-21",
+      "periodStart": "2026-08-17",
+      "periodEnd": "2026-08-21",
+      "sourceText": "## Week of 2026年8月17日〜21日\n\n電子取引・マイクロストラクチャではかなり面白く、金利モデルでは弱い週でした。LOB state、queue position、order-flow signalをどのように状態変数へ入れるかまで踏み込んだ研究を優先しました。\n\n## 1. Multi-Level Market Making with Reinforcement Learning\n\n**最優先 — 再評価 8.5/10**\n\n複数price levelへのvolume配分、market order、limit order、既存注文のqueue position、inventory、過去のorder flowを同時に状態・行動へ入れます。可変数のresting orderへdeep-set encoderを使い、各levelへの数量配分をlogistic-normal distributionで表現します。\n\n最も難しい環境・20 lotsでは、単純inventory strategyの期待cash flowが−1.44に対しRLは4.99、標準偏差も2.12から1.07へ低下しました。adverse selectionが強いほどbest priceから離れたlevelへ注文を分散し、fill rateを犠牲にpick-offを避けます。\n\nstate設計が有益ですが、結果はsimulation上で、実データでも同じpolicyが成立する証拠ではありません。\n\n## 2. M3\n\n**再評価 8/10**\n\nTransformerが次のorder eventを生成し、matching engineへ流してLOB stateを更新するclosed-loop world modelです。CSI300/500の800銘柄、約319億order eventsで学習したと報告しています。\n\nLOB conditioningを外すと予測性能が落ち、buy flowを増やすとpriceが上がりsell flowでは下がるstress testを通過します。TWAP meta-orderのprice-impact指数はbuyで0.532、sellで0.524となり、square-root lawの1/2に近い結果です。\n\n中国株の単一市場データで、cross-assetやrates/RFQへの一般化は未検証です。価格予測よりmarket simulator / digital twinとして読むべきです。\n\n## 3. Tradable Itô Signatures\n\n**再評価 7.5/10**\n\n各discretized Itô signature componentをunderlyingとcashからなるself-financing strategyでreplicateできるtradable basisとして使います。nonlinear payoffのhedgeをbasis strategyの線形結合へ変換します。\n\nSPX Weekly option 436,135件ではexpiry hedging errorがBlack–Scholesの6.007×10⁻³に対し、plain Itô signatureは5.744×10⁻³、signature-kernelは5.445×10⁻³でした。kernel版がBlack–Scholesを上回った比率は83.9%です。\n\n直接ratesではありませんが、curve historyのsignatureからswaptionやstructured payoffをhedgeする応用余地があります。\n\n## Other reviewed papers\n\n**Concentrated Liquidity Provision — 5.5/10**\n\nvolatility、gas cost、risk aversionに応じrange幅とrebalance頻度を変え、left-tail/CVaRを改善します。実on-chain dataでの検証がなく、興味があれば読む程度です。\n\n**OTC order imbalance, skew and width — 9/10を維持**\n\n金利電子取引実務との距離では依然として最も近い論文です。imbalanceをskewの平行移動、widthの拡大、effective carry costへ吸収し、small imbalanceではskewが一次、widthが二次で反応します。\n\nMulti-Level Market Makingと比べると、queue、LOB state、dynamic adverse selection、predictive order-flow signalはモデル外です。dealer quoteの静的構造には強く、リアルタイムquote engineにはRL論文の方が近いという違いがあります。\n\n## Weekly conclusion\n\n一冊だけ読むならMulti-Level Market Making with RL、数学的にもう一冊ならTradable Itô Signatures、AI engineeringとの接続ならM3を推奨します。\n\nHJM、multi-curve、yield-curve dynamics、swap/swaption pricingへ直接刺さる強い新着はありませんでした。今週は電子取引側へ時間を使う方がよいという結論です。",
+      "papers": [
+        {
+          "arxivId": "2608.18195v1",
+          "title": "Multi-Level Market Making with Reinforcement Learning",
+          "authors": [
+            "Patrick Cheridito",
+            "Moritz Weiss"
+          ],
+          "submittedDate": "2026-08-18",
+          "updatedDate": "2026-08-18",
+          "topics": [
+            "Market making",
+            "Reinforcement learning",
+            "Limit order books"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.18195v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.18195v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8.5,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "最優先",
+          "schedulerSummary": "複数price level、queue position、inventory、order flowを同時に扱うmarket-making RLです。",
+          "ratings": [
+            {
+              "label": "週次再評価",
+              "value": 8.5,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.19227v1",
+          "title": "M3: A State-Event Generative Foundation Model for Market Microstructure Dynamics",
+          "authors": [
+            "Yanzhi Zhang",
+            "Yu Ma",
+            "Yilin Cheng",
+            "Jian Li",
+            "Yitong Duan"
+          ],
+          "submittedDate": "2026-07-29",
+          "updatedDate": "2026-07-29",
+          "topics": [
+            "Electronic trading",
+            "Market simulation",
+            "Generative models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.19227v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.19227v1",
+          "schedulerRank": 2,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "AI / market simulator",
+          "schedulerSummary": "Matching engineを含むclosed-loop market world model。counterfactual simulationを重視します。",
+          "ratings": [
+            {
+              "label": "週次再評価",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.18120v1",
+          "title": "Tradable Itô Signatures: A Model-Free, Interpretable Framework for Dynamic Hedging",
+          "authors": [
+            "Xin Guo",
+            "Binnan Wang",
+            "Ruixun Zhang"
+          ],
+          "submittedDate": "2026-07-14",
+          "updatedDate": "2026-07-14",
+          "topics": [
+            "Dynamic hedging",
+            "Mathematical finance",
+            "Machine learning"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.18120v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.18120v1",
+          "schedulerRank": 3,
+          "schedulerRating": 7.5,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "理論的な最重要",
+          "schedulerSummary": "Itô signature componentをtradable self-financing basisとしてdynamic hedgingへ使います。",
+          "ratings": [
+            {
+              "label": "週次再評価",
+              "value": 7.5,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.19389v1",
+          "title": "Concentrated Liquidity Provision: a Reinforcement Learning Perspective",
+          "authors": [
+            "Georgios Chionas",
+            "Charalampos Kleitsikas",
+            "Stefanos Leonardos",
+            "Leandro Sánchez-Betancourt",
+            "Carmine Ventre"
+          ],
+          "submittedDate": "2026-08-19",
+          "updatedDate": "2026-08-19",
+          "topics": [
+            "Market making",
+            "Reinforcement learning",
+            "Concentrated liquidity"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.19389v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.19389v1",
+          "schedulerRank": null,
+          "schedulerRating": 5.5,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "興味があれば読む",
+          "schedulerSummary": "AMM liquidity rangeとrebalanceをRLで制御し、left-tail riskを抑える研究です。",
+          "ratings": [
+            {
+              "label": "週次再評価",
+              "value": 5.5,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.07690v1",
+          "title": "On a Simple Relationship Between Order Imbalance, Skew and Width in Over-The-Counter Trading",
+          "authors": [
+            "Peter Cotton"
+          ],
+          "submittedDate": "2026-08-07",
+          "updatedDate": "2026-08-07",
+          "topics": [
+            "OTC trading",
+            "RFQ",
+            "Market making"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.07690v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.07690v1",
+          "schedulerRank": null,
+          "schedulerRating": 9,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "実務に最も近い・評価維持",
+          "schedulerSummary": "RFQ flow imbalanceをquote skew、width、carryへ翻訳する静的構造を再評価しました。",
+          "ratings": [
+            {
+              "label": "週次再評価",
+              "value": 9,
+              "scale": 10
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

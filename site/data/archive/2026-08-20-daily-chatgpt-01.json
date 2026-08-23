@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-08-20-daily-chatgpt-01",
+  "editionDate": "2026-08-20",
+  "editionKind": "daily",
+  "sourceKind": "chatgpt-scheduled-task",
+  "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+  "importedAt": "2026-08-23T03:58:27Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "8月19日バッチのq-fin.TR改訂版を一件再評価しました。新規の金利モデル推薦はありません。",
+  "expectedBatchDate": "2026-08-19",
+  "observedBatchDate": "2026-08-19",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年8月20日 — Daily review\n\n確認できた最新掲載は8月19日分です。arXiv自体は正常で、更新障害による持ち越しではありません。q-fin.TRには新規投稿がなく、一件の改訂版が掲載されました。q-fin.MFは“No updates today”でした。\n\n## Forecasting duration in high-frequency financial data\n\n**arXiv:2604.00346v2 — Kyungsub Lee**  \n**重要度: ★★★★☆ — 電子取引・market microstructure**\n\nLOBでmid-priceが変化するまでのdurationを予測します。Hawkes processのself-excitationを保ちながら、residual分布をGamma、generalized Gamma、Burrへ柔軟化し、heavy tailを表現します。general state-space Markov chainとしてirreducible、aperiodic、positive Harris recurrentでstationary distributionを持つ条件も示します。\n\nAAPLのhigh-frequency mid-price dataを使い、2022年12月をout-of-sampleとして直近5,000 eventsで推定し、100 eventsごとにrolling再推定しています。SE-BurrのrRMSEは1.8033でstandard Hawkesの1.8386を改善しました。一方、R²はSE-Burrの0.1134に対しACD-Gammaが0.1382で、全point metricに圧勝するわけではありません。より明確な改善はdistributional fitです。\n\ndirectional alphaではなく、次にmarket stateが変わるまでの時計を予測すると解釈できます。quote refresh、hedge timing、stale quote検知、short-horizon volatility、liquidity regimeへ応用できます。\n\n**研究新規性: ★★★★☆ — 電子取引実務関連度: ★★★★☆ — 読む優先度: ★★★☆☆〜★★★★☆**\n\nAAPL一銘柄・一か月の実証であり、RFQ pricingやinventory skewへ直接適用するモデルではない点が制約です。",
+  "papers": [
+    {
+      "arxivId": "2604.00346v2",
+      "title": "Forecasting duration in high-frequency financial data using a self-exciting flexible residual point process",
+      "authors": [
+        "Kyungsub Lee"
+      ],
+      "submittedDate": "2026-04-01",
+      "updatedDate": "2026-08-18",
+      "topics": [
+        "Electronic trading",
+        "Point processes",
+        "Market microstructure"
+      ],
+      "absUrl": "https://arxiv.org/abs/2604.00346v2",
+      "pdfUrl": "https://arxiv.org/pdf/2604.00346v2",
+      "schedulerRank": 1,
+      "schedulerRating": 4,
+      "schedulerRatingScale": 5,
+      "schedulerLabel": "改訂版・電子取引",
+      "schedulerSummary": "Heavy-tailed residualを持つself-exciting duration model。価格変化の方向ではなく、次に動くまでの時間を予測します。",
+      "ratings": [
+        {
+          "label": "研究新規性",
+          "value": 4,
+          "scale": 5
+        },
+        {
+          "label": "電子取引実務関連度",
+          "value": 4,
+          "scale": 5
+        },
+        {
+          "label": "読む優先度",
+          "value": 3.5,
+          "scale": 5
+        }
+      ]
+    }
+  ]
+}

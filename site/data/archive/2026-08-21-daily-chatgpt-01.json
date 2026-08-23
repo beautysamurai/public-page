@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-08-21-daily-chatgpt-01",
+  "editionDate": "2026-08-21",
+  "editionKind": "daily",
+  "sourceKind": "chatgpt-scheduled-task",
+  "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+  "importedAt": "2026-08-23T03:58:27Z",
+  "status": "UPDATE_NOT_CONFIRMED",
+  "message": "取得経路のfreshnessが不安定だったため、8月20日分と8月21日分を次回へ持ち越しました。",
+  "expectedBatchDate": "2026-08-20",
+  "observedBatchDate": null,
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年8月21日 — Freshness not confirmed\n\n朝7:30ごろの確認では、今日分の論文紹介を持ち越します。\n\nq-fin.TR /recentは8月10日、q-fin.MF /recentも8月10日以前しか返さず、8月14日以降の論文が存在することと整合しません。この一覧を使って「8月20日掲載分に関連論文なし」と判定するのは危険です。\n\n公式ステータスではMain Site、Search、exportは稼働中で、全体障害というよりカテゴリ一覧や取得経路のfreshnessが不安定な状態と判断しました。古い論文を最新として再掲せず、8月20日分と8月21日分を次回まとめて確認します。",
+  "papers": []
+}

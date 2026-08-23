@@ -31,6 +31,9 @@ jobs:
       - name: Run unit tests
         run: python -m unittest discover -s tests -v
 
+      - name: Verify scheduler history artifacts
+        run: python scripts/import_scheduler_history.py --check
+
       - name: Validate committed JSON
         shell: bash
         run: |
@@ -38,7 +41,11 @@ jobs:
           import json
           from pathlib import Path
 
-          paths = [Path("config/topics.json"), *sorted(Path("site").rglob("*.json"))]
+          paths = [
+              Path("config/topics.json"),
+              *sorted(Path("content").rglob("*.json")),
+              *sorted(Path("site").rglob("*.json")),
+          ]
           for path in paths:
               with path.open(encoding="utf-8") as handle:
                   json.load(handle)

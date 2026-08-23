@@ -985,14 +985,14 @@ def build_argument_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("site/data/latest.json"),
-        help="latest JSON path",
+        default=Path(".local/candidate-data/latest.json"),
+        help="local candidate-feed JSON path",
     )
     parser.add_argument(
         "--archive-dir",
         type=Path,
-        default=Path("site/data/archive"),
-        help="dated archive directory",
+        default=Path(".local/candidate-data/archive"),
+        help="local candidate-feed archive directory",
     )
     parser.add_argument(
         "--config",

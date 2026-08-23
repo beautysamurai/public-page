@@ -16,6 +16,10 @@ APP_PATH = ROOT / "site" / "app.js"
 STATIC_PAGE_APP_PATH = ROOT / "site" / "static-page.js"
 THEORY_INDEX_PATH = ROOT / "site" / "theory" / "index.html"
 HJB_INDEX_PATH = ROOT / "site" / "theory" / "hjb" / "index.html"
+BS_INDEX_PATH = ROOT / "site" / "theory" / "black-scholes" / "index.html"
+SABR_INDEX_PATH = ROOT / "site" / "theory" / "sabr" / "index.html"
+ZABR_INDEX_PATH = ROOT / "site" / "theory" / "zabr" / "index.html"
+SIMULATOR_PATHS = (BS_INDEX_PATH, SABR_INDEX_PATH, ZABR_INDEX_PATH, HJB_INDEX_PATH)
 
 TOP_LEVEL_FIELDS = {"schemaVersion", "language", "editions"}
 EDITION_FIELDS = {"editionId", "message", "sourceText", "papers"}
@@ -182,7 +186,8 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         self.assertEqual(self.ja_keys, self.en_keys)
         self.assertGreater(len(self.ja_keys), 100)
         referenced = set()
-        for source in (self.index, self.theory_index, self.hjb_index):
+        simulator_sources = [path.read_text(encoding="utf-8") for path in SIMULATOR_PATHS]
+        for source in (self.index, self.theory_index, *simulator_sources):
             referenced.update(
                 re.findall(
                     r'data-i18n(?:-placeholder|-aria-label)?="([A-Za-z0-9_.]+)"',
@@ -287,22 +292,30 @@ class StaticTheoryPageContractTests(unittest.TestCase):
         cls.home = INDEX_PATH.read_text(encoding="utf-8")
         cls.theory = THEORY_INDEX_PATH.read_text(encoding="utf-8")
         cls.hjb = HJB_INDEX_PATH.read_text(encoding="utf-8")
+        cls.simulators = {
+            path.parent.name: path.read_text(encoding="utf-8")
+            for path in SIMULATOR_PATHS
+        }
         cls.script = STATIC_PAGE_APP_PATH.read_text(encoding="utf-8")
 
     def test_physical_theory_routes_and_navigation_exist(self):
         self.assertTrue(THEORY_INDEX_PATH.is_file())
         self.assertTrue(HJB_INDEX_PATH.is_file())
+        for path in SIMULATOR_PATHS:
+            self.assertTrue(path.is_file(), path)
         self.assertIn('href="./theory/"', self.home)
         self.assertIn('href="./hjb/" data-theory-id="hjb"', self.theory)
+        for slug in ("black-scholes", "sabr", "zabr", "hjb"):
+            self.assertIn(f'href="./{slug}/" data-theory-id="{slug}"', self.theory)
         self.assertIn('href="../" aria-current="page"', self.hjb)
-        for source in (self.theory, self.hjb):
+        for source in (self.theory, *self.simulators.values()):
             self.assertIn('aria-current="page"', source)
             self.assertIn('id="main-content"', source)
             self.assertEqual(len(re.findall(r"<h1\b", source)), 1)
 
     def test_nested_local_assets_and_links_resolve_inside_site(self):
         site_root = (ROOT / "site").resolve()
-        for page in (THEORY_INDEX_PATH, HJB_INDEX_PATH):
+        for page in (THEORY_INDEX_PATH, *SIMULATOR_PATHS):
             source = page.read_text(encoding="utf-8")
             for raw in re.findall(r'(?:href|src)="([^"]+)"', source):
                 parsed = urlsplit(raw)
@@ -315,7 +328,7 @@ class StaticTheoryPageContractTests(unittest.TestCase):
                     self.assertTrue((target / "index.html").is_file(), (page, raw))
 
     def test_static_pages_preserve_deep_link_when_switching_language(self):
-        for source in (self.theory, self.hjb):
+        for source in (self.theory, *self.simulators.values()):
             self.assertIn('data-language="ja" aria-pressed="true"', source)
             self.assertIn('data-language="en" aria-pressed="false"', source)
             self.assertIn("data-preserve-language", source)
@@ -326,16 +339,17 @@ class StaticTheoryPageContractTests(unittest.TestCase):
         self.assertIn("window.location.assign(languageUrl(nextLanguage).href)", self.script)
         self.assertNotIn("innerHTML", self.script)
 
-    def test_hjb_shell_is_prepared_without_article_content(self):
-        self.assertIn('data-theory-id="hjb"', self.hjb)
-        self.assertIn('data-i18n="hjb.title"', self.hjb)
-        self.assertIn('data-i18n="hjb.status"', self.hjb)
-        self.assertIn('<meta name="robots" content="noindex">', self.hjb)
-        content = re.search(
-            r'<div id="theory-content">(.*?)</div>', self.hjb, re.DOTALL
-        )
-        self.assertIsNotNone(content)
-        self.assertFalse(content.group(1).strip())
+    def test_all_model_pages_are_interactive_and_indexable(self):
+        for slug, source in self.simulators.items():
+            with self.subTest(slug=slug):
+                self.assertIn(f'data-simulator="{slug}"', source)
+                self.assertIn("data-simulator-form", source)
+                self.assertIn("data-model-input", source)
+                self.assertIn("aria-live=\"polite\"", source)
+                self.assertIn("<canvas", source)
+                self.assertIn('src="../../model-math.js"', source)
+                self.assertIn('src="../../simulator.js"', source)
+                self.assertNotIn('name="robots" content="noindex"', source)
 
 
 if __name__ == "__main__":

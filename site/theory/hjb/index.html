@@ -1,72 +1,15 @@
 <!doctype html>
 <html lang="ja">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'self'; object-src 'none'; media-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
-    <meta name="referrer" content="no-referrer">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="color-scheme" content="light">
-    <meta name="theme-color" content="#0b1d2a">
-    <meta name="robots" content="noindex">
-    <meta name="description" content="Hamilton–Jacobi–Bellman (HJB) の理論解説ページ。現在準備中です。">
-    <meta property="og:type" content="article">
-    <meta property="og:locale" content="ja_JP">
-    <meta property="og:locale:alternate" content="en_US">
-    <meta property="og:title" content="Hamilton–Jacobi–Bellman (HJB) — 理論解説">
-    <meta property="og:description" content="Hamilton–Jacobi–Bellman (HJB) の理論解説ページ。現在準備中です。">
-    <meta property="og:url" content="https://beautysamurai.github.io/public-page/theory/hjb/">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Hamilton–Jacobi–Bellman (HJB) — 理論解説">
-    <meta name="twitter:description" content="Hamilton–Jacobi–Bellman (HJB) の理論解説ページ。現在準備中です。">
-    <title>Hamilton–Jacobi–Bellman (HJB) — 理論解説</title>
-    <link rel="stylesheet" href="../../styles.css">
-    <script src="../../i18n.js" defer></script>
-    <script src="../../static-page.js" defer></script>
+    <meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'self'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests"><meta name="referrer" content="no-referrer"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light"><meta name="theme-color" content="#0b1d2a"><meta name="description" content="HJBの簡略マーケットメイク式で在庫とbid・askの関係を試せるシミュレーター。"><meta property="og:type" content="article"><meta property="og:locale" content="ja_JP"><meta property="og:locale:alternate" content="en_US"><meta property="og:title" content="HJB — 理論シミュレーター"><meta property="og:description" content="HJBの簡略マーケットメイク式で在庫とbid・askの関係を試せます。"><meta property="og:url" content="https://beautysamurai.github.io/public-page/theory/hjb/"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="HJB — 理論シミュレーター"><meta name="twitter:description" content="HJBの簡略マーケットメイク式で在庫とbid・askの関係を試せます。"><title>HJB — 理論シミュレーター</title>
+    <link rel="stylesheet" href="../../styles.css"><script src="../../i18n.js" defer></script><script src="../../static-page.js" defer></script><script src="../../model-math.js" defer></script><script src="../../simulator.js" defer></script>
   </head>
-  <body data-page-title-key="hjb.pageTitle" data-description-key="hjb.metaDescription" data-theory-id="hjb">
-    <a class="skip-link" href="#main-content" data-i18n="hjb.skip">HJBページへ移動</a>
-    <header class="site-header">
-      <div class="shell header-inner">
-        <a class="brand" href="../../" aria-label="Rates &amp; Execution スケジュール arXiv リサーチ ホーム" data-i18n-aria-label="brand.home" data-preserve-language>
-          <span class="brand-copy"><strong>Rates &amp; Execution</strong></span>
-        </a>
-        <nav class="primary-nav" aria-label="メインナビゲーション" data-i18n-aria-label="nav.aria">
-          <a href="../../#digest" data-i18n="nav.latest" data-preserve-language>最新号</a><a href="../../#archive" data-i18n="nav.archive" data-preserve-language>アーカイブ</a><a href="../../#method" data-i18n="nav.method" data-preserve-language>選定方法</a><a href="../" aria-current="page" data-i18n="nav.theory" data-preserve-language>理論解説</a>
-        </nav>
-        <div class="header-tools">
-          <div class="language-toggle" role="group" aria-label="表示言語" data-i18n-aria-label="language.aria">
-            <button type="button" data-language="ja" aria-pressed="true" lang="ja">日本語</button>
-            <button type="button" data-language="en" aria-pressed="false" lang="en">English</button>
-          </div>
-        </div>
-      </div>
-    </header>
-    <main id="main-content" class="theory-detail-page">
-      <div class="shell">
-        <nav class="theory-breadcrumb" aria-label="パンくずリスト" data-i18n-aria-label="hjb.breadcrumbAria">
-          <a href="../" data-i18n="nav.theory" data-preserve-language>理論解説</a>
-          <span aria-hidden="true">/</span>
-          <span aria-current="page">HJB</span>
-        </nav>
-        <article class="theory-detail" aria-labelledby="hjb-title">
-          <p class="section-kicker" data-i18n="hjb.kicker">Model note 001</p>
-          <h1 id="hjb-title" lang="en" data-i18n="hjb.title">Hamilton–Jacobi–Bellman (HJB)</h1>
-          <p class="theory-detail-status"><span aria-hidden="true"></span><strong data-i18n="hjb.status">準備中</strong></p>
-          <div id="theory-content"></div>
-          <a class="theory-back-link" href="../" data-preserve-language><span aria-hidden="true">←</span> <span data-i18n="hjb.back">理論ノート一覧へ戻る</span></a>
-        </article>
-      </div>
-    </main>
-    <footer class="site-footer">
-      <div class="shell footer-grid">
-        <div class="footer-brand">
-          <span class="brand-mark brand-mark-light" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-          <div><strong>Rates &amp; Execution</strong><small data-i18n="footer.subtitle">定期配信 arXiv ブリーフ</small></div>
-        </div>
-        <p data-i18n="footer.body">独立したリサーチ探索サイトです。トラッキング、アクセス解析、ライブ価格、第三者スクリプトは使用していません。</p>
-        <a href="#main-content"><span data-i18n="footer.top">ページ上部へ</span> <span aria-hidden="true">↑</span></a>
-      </div>
-    </footer>
-    <noscript><div class="noscript-banner">言語切替には JavaScript が必要です。</div></noscript>
+  <body data-page-title-key="hjb.pageTitle" data-description-key="hjb.metaDescription" data-theory-id="hjb"><a class="skip-link" href="#main-content" data-i18n="hjb.skip">HJBへ移動</a>
+    <header class="site-header"><div class="shell header-inner"><a class="brand" href="../../" data-i18n-aria-label="brand.home" data-preserve-language><span class="brand-copy"><strong>Rates &amp; Execution</strong></span></a><nav class="primary-nav" data-i18n-aria-label="nav.aria"><a href="../../#digest" data-i18n="nav.latest" data-preserve-language>最新号</a><a href="../../#archive" data-i18n="nav.archive" data-preserve-language>アーカイブ</a><a href="../../#method" data-i18n="nav.method" data-preserve-language>選定方法</a><a href="../" aria-current="page" data-i18n="nav.theory" data-preserve-language>理論解説</a></nav><div class="header-tools"><div class="language-toggle" role="group" data-i18n-aria-label="language.aria"><button type="button" data-language="ja" aria-pressed="true" lang="ja">日本語</button><button type="button" data-language="en" aria-pressed="false" lang="en">English</button></div></div></div></header>
+    <main id="main-content" class="theory-detail-page simulator-page"><div class="shell"><nav class="theory-breadcrumb" data-i18n-aria-label="sim.breadcrumbAria"><a href="../" data-i18n="nav.theory" data-preserve-language>理論解説</a><span aria-hidden="true">/</span><span aria-current="page">HJB</span></nav><article class="theory-detail simulator-detail" aria-labelledby="model-title"><p class="section-kicker" data-i18n="hjb.kicker">Model lab 004</p><h1 id="model-title">HJB market making</h1><p class="simulator-lead" data-i18n="hjb.lead">在庫、リスク回避度、価格変動を動かして、予約価格と最適bid・askの変化を確認できます。</p>
+      <div class="simulator-shell" data-simulator="hjb"><form class="simulator-controls" data-simulator-form><div class="simulator-panel-heading"><h2 data-i18n="sim.inputs">入力</h2><button type="reset" data-i18n="sim.reset">初期値に戻す</button></div><label><span data-i18n="hjb.mid">ミッド価格</span><input data-model-input name="mid" type="number" min="0.01" step="0.1" value="100"></label><label><span data-i18n="hjb.inventory">在庫 q</span><input data-model-input name="inventory" type="number" min="-10" max="10" step="1" value="2"></label><label><span data-i18n="hjb.remaining">残存時間 T−t</span><input data-model-input name="remaining" type="number" min="0" max="10" step="0.1" value="1"></label><label><span data-i18n="hjb.sigma">価格ボラティリティ σ</span><input data-model-input name="sigma" type="number" min="0" max="20" step="0.1" value="2"></label><label><span data-i18n="hjb.gamma">リスク回避度 γ</span><input data-model-input name="gamma" type="number" min="0.001" max="5" step="0.01" value="0.1"></label><label><span data-i18n="hjb.kappa">約定減衰 κ</span><input data-model-input name="kappa" type="number" min="0.001" max="20" step="0.1" value="1.5"></label><p class="simulator-error" data-simulator-error role="alert" hidden></p></form>
+        <section class="simulator-output" aria-labelledby="result-title"><div class="simulator-panel-heading"><h2 id="result-title" data-i18n="sim.results">結果</h2><span data-i18n="sim.live">入力に連動</span></div><dl class="simulator-metrics" aria-live="polite"><div><dt data-i18n="hjb.reservation">予約価格</dt><dd data-output="reservation">—</dd></div><div><dt>Bid</dt><dd data-output="bid">—</dd></div><div><dt>Ask</dt><dd data-output="ask">—</dd></div><div><dt data-i18n="hjb.spread">スプレッド</dt><dd data-output="spread">—</dd></div></dl><div class="simulator-chart-heading"><h3 data-i18n="hjb.chartTitle">在庫別の最適クォート</h3><div class="chart-legend"><span><i class="legend-call"></i>Bid</span><span><i class="legend-mid"></i><span data-i18n="hjb.reservation">予約価格</span></span><span><i class="legend-put"></i>Ask</span></div></div><canvas width="720" height="360" role="img" data-i18n-aria-label="hjb.chartAria"></canvas></section></div>
+      <section class="simulator-note"><div><p class="section-kicker" data-i18n="sim.assumptions">前提</p><p data-i18n="hjb.assumptions">Avellaneda–Stoikov型HJBの閉形式近似です。単一資産、指数型効用、指数型の約定強度を仮定します。</p></div><div><p class="section-kicker" data-i18n="sim.formula">中心となる式</p><p class="model-formula">r = s − qγσ²(T−t)<br>spread = γσ²(T−t) + 2/γ ln(1+γ/κ)</p></div></section><p class="simulator-disclaimer" data-i18n="sim.disclaimer">学習用の簡略シミュレーターです。</p><a class="theory-back-link" href="../" data-preserve-language><span aria-hidden="true">←</span> <span data-i18n="sim.back">理論ノート一覧へ戻る</span></a></article></div></main>
+    <footer class="site-footer"><div class="shell footer-grid"><div class="footer-brand"><div><strong>Rates &amp; Execution</strong><small data-i18n="footer.subtitle">定期配信 arXiv ブリーフ</small></div></div><p data-i18n="footer.body">独立したリサーチ探索サイトです。</p><a href="#main-content"><span data-i18n="footer.top">ページ上部へ</span> ↑</a></div></footer><noscript><div class="noscript-banner">JavaScript is required for the simulator.</div></noscript>
   </body>
 </html>

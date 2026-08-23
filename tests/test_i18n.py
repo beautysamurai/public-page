@@ -356,6 +356,15 @@ class StaticTheoryPageContractTests(unittest.TestCase):
                 self.assertIn('data-i18n="guide.approxTitle"', source)
                 self.assertIn('data-i18n="guide.calibrationTitle"', source)
                 self.assertIn('class="theory-references"', source)
+                self.assertGreaterEqual(source.count('<math display="block"'), 3)
+                self.assertNotIn('<p class="model-formula">', source)
+                equations = re.findall(
+                    r'<div class="model-equation">(.*?)</div>', source, re.DOTALL
+                )
+                self.assertGreaterEqual(len(equations), 2)
+                self.assertTrue(all("<math " in equation for equation in equations))
+                for math in re.findall(r'<math [^>]+>', source):
+                    self.assertIn('aria-label="', math)
                 for link in re.findall(
                     r'<a href="https://[^"]+"[^>]+>', source
                 ):

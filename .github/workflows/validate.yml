@@ -1,0 +1,99 @@
+name: Validate
+
+on:
+  workflow_call:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-and-privacy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -v
+
+      - name: Validate committed JSON
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          paths = [Path("config/topics.json"), *sorted(Path("site").rglob("*.json"))]
+          for path in paths:
+              with path.open(encoding="utf-8") as handle:
+                  json.load(handle)
+              print(f"valid JSON: {path}")
+          PY
+
+      - name: Reject tracked private state and likely secrets
+        shell: bash
+        run: |
+          python - <<'PY'
+          import re
+          import subprocess
+          from pathlib import Path, PurePosixPath
+
+          output = subprocess.check_output(["git", "ls-files", "-z"])
+          tracked = [name for name in output.decode().split("\0") if name]
+          forbidden_names = {".env", "id_rsa", "id_ed25519"}
+          forbidden_suffixes = {
+              ".key", ".p12", ".pfx", ".pem", ".sqlite", ".sqlite3"
+          }
+          secret_patterns = {
+              "private key block": re.compile(
+                  rb"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"
+              ),
+              "GitHub token": re.compile(
+                  rb"(?:gh[opsu]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{40,})"
+              ),
+              "AWS access key": re.compile(rb"AKIA[0-9A-Z]{16}"),
+              "OpenAI-style key": re.compile(rb"sk-[A-Za-z0-9]{20,}"),
+          }
+
+          problems = []
+          for name in tracked:
+              path = PurePosixPath(name)
+              if path.parts and path.parts[0] == ".local":
+                  problems.append(f"tracked private-state path: {name}")
+              if path.name == ".env" or (
+                  path.name.startswith(".env.") and path.name != ".env.example"
+              ):
+                  problems.append(f"tracked environment/credential file: {name}")
+              if path.name in forbidden_names or path.suffix.lower() in forbidden_suffixes:
+                  problems.append(f"tracked credential/database file: {name}")
+
+              file_path = Path(name)
+              if not file_path.is_file() or file_path.stat().st_size > 2_000_000:
+                  continue
+              data = file_path.read_bytes()
+              if b"\0" in data:
+                  continue
+              for label, pattern in secret_patterns.items():
+                  if pattern.search(data):
+                      problems.append(f"possible {label}: {name}")
+
+          if problems:
+              details = "\n- ".join(sorted(set(problems)))
+              raise SystemExit(f"Privacy scan failed:\n- {details}")
+          print(f"privacy scan passed for {len(tracked)} tracked files")
+          PY

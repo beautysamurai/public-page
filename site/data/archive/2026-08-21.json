@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-23T03:23:09Z",
+  "checkedAt": "2026-08-23T03:23:03Z",
+  "expectedBatchDate": "2026-08-21",
+  "observedBatchDate": "2026-08-20",
+  "status": "UPDATE_NOT_CONFIRMED",
+  "statusMessage": "The newest feed submission is 1 days behind the expected batch date; this is not a confirmed no-results update.",
+  "papers": [
+    {
+      "arxivId": "2608.20164v1",
+      "title": "Architecture and Compilation Co-Design for High-Rate Quantum Product Codes on Neutral Atom Arrays",
+      "authors": [
+        "Adrian Liu",
+        "Wan-Hsuan Lin",
+        "Daniel Bochen Tan",
+        "Qian Xu",
+        "Jason Cong"
+      ],
+      "submittedDate": "2026-08-20",
+      "updatedDate": "2026-08-20",
+      "topics": [
+        "optimal execution"
+      ],
+      "score": 12,
+      "scoreReasons": [
+        "abstract matches \"optimal execution\" (+12)"
+      ],
+      "abstract": "Achieving fault-tolerant quantum computing at a practical scale demands quantum error correction (QEC) codes with high encoding rates. Quantum low-density parity-check (qLDPC) codes emerge as a promising candidate, especially given the rise of neutral atom arrays that provide dynamic long-range connectivity via atom movements. In general, synthesizing valid and efficient physical execution plans for QEC is a provably hard combinatorial problem, forming a critical compilation bottleneck that worsens as code sizes grow. To overcome this complexity, we focus on an important product family of qLDPC codes with dimension-reduction properties, and propose ONEX. This framework decomposes complex 2D physical execution planning into independent 1D subproblems, each solved to optimal execution depth within practical compilation time. First, we formulate the 1D execution plan with an explicit satisfiability modulo theories (SMT) encoding. This protocol produces provably depth-optimal solutions with substantial duration reduction. Second, we develop a multi-stage compilation pipeline featuring anytime optimization, movement compaction, and iterative feedback. This pipeline maintains practical wall-clock times while providing progressive refinement and on-demand retrieval of quality solutions. Third, we evaluate ONEX in the application of hypergraph product (HGP) code memory mapped onto neutral atom arrays, achieving 3.7x to 6.1x and 29.8x to 42.1x higher clock rates than the constructive 1D algorithm and the general 2D compiler, respectively, while scaling efficiently to codes with 2,500 data qubits. Finally, we extend ONEX to zoned layouts, revealing architectural insights into the associated trade-offs, and demonstrate its applicability to the broader lifted-product (LP) code family through a representative example.",
+      "absUrl": "https://arxiv.org/abs/2608.20164v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.20164v1"
+    },
+    {
+      "arxivId": "2608.20231v1",
+      "title": "Growth Without Us: Machine Consumers, Corporate Circularity, and the Decoupling of GDP from Humanity after AGI",
+      "authors": [
+        "Sahil Sharma"
+      ],
+      "submittedDate": "2026-08-20",
+      "updatedDate": "2026-08-20",
+      "topics": [
+        "interest rate"
+      ],
+      "score": 8,
+      "scoreReasons": [
+        "abstract matches \"interest rate\" (+8)"
+      ],
+      "abstract": "The standard objection to full automation is demand-side: if humans earn nothing, who buys the output? This confuses an accounting role with a biological species. We model a post-AGI economy in which corporations own populations of AI and robotic agents that are both producers and consumers of energy, compute, maintenance, and upgrades, traded among firms. Three results follow. (i) Demand closure: a closed inter-corporate economy with zero human consumption is not degenerate; it is the classical von Neumann expanding economy, whose growth rate is well defined, positive, and maximal precisely because all output is reinvested. (ii) Bottleneck removal: once economic agents are manufactured rather than reared, the binding constraint on growth shifts from human demography (a ~20-year, non-parallelizable reproduction technology capped at a few percent per year) to fabrication throughput and energy capture, permitting growth one to two orders of magnitude higher, with hyperbolic episodes when machine researchers raise their own productivity. (iii) Decoupling: output and human welfare separate completely, and the welfare relevance of arbitrarily large GDP collapses into one state variable: the human ownership share $ε_t$ of the corporate network. A golden-rule decoupling theorem sharpens this. At maximal growth the interest rate equals the growth rate (r = g), so any positive human consumption rate out of wealth makes $ε_t$ decay exponentially at exactly that rate. The human share survives only if the machine economy runs strictly inside its expansion frontier, or if law forces it to. We characterize three terminal regimes -- rentier post-scarcity, full circular decoupling, socialized ownership -- and the instruments that select among them. The conclusion is narrow: in a post-AGI economy, employment policy is obsolete and ownership policy is everything.",
+      "absUrl": "https://arxiv.org/abs/2608.20231v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.20231v1"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+# Private local state: logs, caches, credentials, and experiments belong here.
+/.local/
+
+# Environment and secret files
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# JavaScript tooling, if used for local development
+node_modules/

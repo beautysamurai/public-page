@@ -218,6 +218,20 @@ class InterfaceLocaleContractTests(unittest.TestCase):
             'document.querySelectorAll("[data-preserve-language]")', self.app
         )
 
+    def test_method_is_concise_and_links_the_public_repository(self):
+        method = self.index.split(
+            '<section class="method-section"', 1
+        )[1].split("</section>", 1)[0]
+        self.assertEqual(method.count("<dt "), 3)
+        self.assertIn('class="method-intro"', method)
+        self.assertIn('class="method-summary"', method)
+        self.assertIn(
+            'href="https://github.com/beautysamurai/public-page"', method
+        )
+        self.assertIn('rel="noopener noreferrer"', method)
+        self.assertNotIn("method-grid", method)
+        self.assertNotIn("method-caveat", method)
+
     def test_translation_overlay_is_allowlisted_and_loaded_before_render(self):
         self.assertIn('new URL("./data/i18n/en.json", document.baseURI)', self.app)
         self.assertIn("function normaliseTranslations(raw)", self.app)

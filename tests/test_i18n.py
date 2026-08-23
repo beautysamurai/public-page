@@ -371,6 +371,47 @@ class StaticTheoryPageContractTests(unittest.TestCase):
                     self.assertIn('target="_blank"', link)
                     self.assertIn('rel="noopener noreferrer"', link)
 
+    def test_all_model_pages_have_collapsed_expandable_derivations(self):
+        for slug, source in self.simulators.items():
+            with self.subTest(slug=slug):
+                self.assertEqual(source.count('<details class="derivation-disclosure">'), 1)
+                self.assertNotRegex(source, r"<details[^>]*\bopen\b")
+                self.assertRegex(
+                    source,
+                    r'<details class="derivation-disclosure">\s*'
+                    r"<summary>[\s\S]*?</summary>\s*"
+                    r'<div class="derivation-content">',
+                )
+                self.assertIn(
+                    'class="derivation-summary-closed" '
+                    'data-i18n="guide.showDerivation"',
+                    source,
+                )
+                self.assertIn(
+                    'class="derivation-summary-open" '
+                    'data-i18n="guide.hideDerivation"',
+                    source,
+                )
+                self.assertIn('class="derivation-content"', source)
+                self.assertEqual(source.count("derivation-goal"), 1)
+
+                steps = source.split(
+                    '<ol class="derivation-steps">', 1
+                )[1].split("</ol>", 1)[0]
+                self.assertEqual(steps.count("<li>"), 4)
+                self.assertEqual(steps.count("</li>"), 4)
+                self.assertEqual(steps.count("<h4 "), 4)
+                self.assertGreaterEqual(steps.count("derivation-equation"), 4)
+                for math in re.findall(r"<math [^>]+>", steps):
+                    self.assertIn('data-i18n-aria-label="', math)
+                    self.assertIn('aria-label="', math)
+                self.assertNotIn("<mfenced", source)
+                key_prefix = "bs" if slug == "black-scholes" else slug
+                self.assertIn(
+                    f'data-i18n="{key_prefix}.derivationTitle"',
+                    source,
+                )
+
 
 if __name__ == "__main__":
     unittest.main()

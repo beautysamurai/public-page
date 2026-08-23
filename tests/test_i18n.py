@@ -190,7 +190,7 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         for source in (self.index, self.theory_index, *simulator_sources):
             referenced.update(
                 re.findall(
-                    r'data-i18n(?:-placeholder|-aria-label)?="([A-Za-z0-9_.]+)"',
+                    r'data-i18n(?:-placeholder|-aria-label|-rich)?="([A-Za-z0-9_.]+)"',
                     source,
                 )
             )
@@ -338,6 +338,83 @@ class StaticTheoryPageContractTests(unittest.TestCase):
         self.assertIn('url.searchParams.delete("lang")', self.script)
         self.assertIn("window.location.assign(languageUrl(nextLanguage).href)", self.script)
         self.assertNotIn("innerHTML", self.script)
+
+    def test_inline_math_prose_is_safe_localized_mathml(self):
+        expected_keys = {
+            "black-scholes": {
+                "bs.derivationStep1Body",
+                "bs.derivationStep2Body",
+                "bs.derivationStep3Body",
+                "bs.derivationStep4Body",
+            },
+            "sabr": {
+                "sabr.derivationStep1Body",
+                "sabr.derivationStep2Body",
+                "sabr.derivationStep4Body",
+            },
+            "zabr": {
+                "zabr.theoryBody",
+                "zabr.approxBody",
+                "zabr.derivationStep3Body",
+            },
+            "hjb": {
+                "hjb.calibration2",
+                "hjb.derivationStep2Body",
+                "hjb.derivationStep3Body",
+            },
+        }
+        rich_pattern = re.compile(
+            r'<(?P<tag>p|li)\b(?P<attrs>[^>]*)'
+            r'data-i18n-rich="(?P<key>[A-Za-z0-9_.]+)"[^>]*>'
+            r'(?P<body>.*?)</(?P=tag)>',
+            re.DOTALL,
+        )
+        token_pattern = re.compile(r"\{\{([a-z0-9-]+)\}\}")
+
+        for slug, source in self.simulators.items():
+            with self.subTest(slug=slug):
+                rich_blocks = list(rich_pattern.finditer(source))
+                self.assertEqual(
+                    {match.group("key") for match in rich_blocks},
+                    expected_keys[slug],
+                )
+                for match in rich_blocks:
+                    self.assertNotIn('data-i18n="', match.group("attrs"))
+                    body = match.group("body")
+                    inline_math = re.findall(r"<math [^>]+>", body)
+                    self.assertGreaterEqual(len(inline_math), 1)
+                    for math in inline_math:
+                        self.assertIn('class="inline-math"', math)
+                        self.assertIn('display="inline"', math)
+                        self.assertIn('data-inline-token="', math)
+                        self.assertIn('data-i18n-aria-label="', math)
+                        self.assertIn('aria-label="', math)
+                        self.assertNotIn('data-i18n="', math)
+                        self.assertNotIn('aria-hidden="true"', math)
+                    self.assertNotIn("<mfenced", body)
+
+                    html_tokens = re.findall(
+                        r'data-inline-token="([a-z0-9-]+)"',
+                        body,
+                    )
+                    translations = re.findall(
+                        rf'^\s+"{re.escape(match.group("key"))}":\s+"([^"]*)",?$',
+                        CATALOG_PATH.read_text(encoding="utf-8"),
+                        re.MULTILINE,
+                    )
+                    self.assertEqual(len(translations), 2)
+                    for translation in translations:
+                        self.assertEqual(
+                            token_pattern.findall(translation),
+                            html_tokens,
+                        )
+
+        self.assertIn("function applyRichText(node, value)", self.script)
+        self.assertIn("document.createTextNode", self.script)
+        self.assertIn("formula.cloneNode(true)", self.script)
+        self.assertIn("node.replaceChildren(fragment)", self.script)
+        self.assertNotIn("innerHTML", self.script)
+        self.assertNotIn("insertAdjacentHTML", self.script)
 
     def test_all_model_pages_are_interactive_and_indexable(self):
         for slug, source in self.simulators.items():

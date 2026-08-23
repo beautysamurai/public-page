@@ -1160,6 +1160,8 @@ button { color: inherit; }
 .derivation-steps > li::before { position: absolute; top: 27px; left: 0; color: #a8a397; content: counter(derivation-step, decimal-leading-zero); font-family: var(--serif); font-size: 1.2rem; }
 .derivation-steps h4 { margin: 0; font-family: var(--serif); font-size: 1.18rem; font-weight: 400; }
 .derivation-steps p { max-width: 780px; margin: 10px 0 0; color: var(--ink-soft); line-height: 1.75; }
+.inline-math { display: inline; margin-inline: .04em; color: var(--ink); font-family: "STIX Two Math", "Latin Modern Math", "Cambria Math", var(--serif); font-size: 1.04em; math-style: compact; vertical-align: -.08em; white-space: nowrap; }
+.inline-math mfrac { font-size: .96em; }
 .derivation-equation { margin-top: 18px; overflow-x: auto; border-left: 3px solid var(--line); padding: 14px 18px; background: var(--paper-bright); }
 .derivation-equation math { min-width: max-content; margin: 3px 0; font-family: "Cambria Math", "STIX Two Math", "Latin Modern Math", var(--serif); font-size: 1.02em; text-align: left; }
 .derivation-equation math + math { margin-top: 14px; }

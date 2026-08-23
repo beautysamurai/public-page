@@ -35,10 +35,36 @@
     if (node) node.setAttribute("content", value);
   }
 
+  function applyRichText(node, value) {
+    var formulas = new Map();
+    node.querySelectorAll("[data-inline-token]").forEach(function (formula) {
+      formulas.set(formula.dataset.inlineToken, formula.cloneNode(true));
+    });
+
+    var fragment = document.createDocumentFragment();
+    var tokenPattern = /\{\{([a-z0-9-]+)\}\}/g;
+    var cursor = 0;
+    var match;
+
+    while ((match = tokenPattern.exec(value)) !== null) {
+      fragment.append(document.createTextNode(value.slice(cursor, match.index)));
+      var formula = formulas.get(match[1]);
+      fragment.append(
+        formula ? formula.cloneNode(true) : document.createTextNode(match[0])
+      );
+      cursor = match.index + match[0].length;
+    }
+    fragment.append(document.createTextNode(value.slice(cursor)));
+    node.replaceChildren(fragment);
+  }
+
   function applyLocale() {
     document.documentElement.lang = language;
     document.querySelectorAll("[data-i18n]").forEach(function (node) {
       node.textContent = t(node.dataset.i18n);
+    });
+    document.querySelectorAll("[data-i18n-rich]").forEach(function (node) {
+      applyRichText(node, t(node.dataset.i18nRich));
     });
     document.querySelectorAll("[data-i18n-aria-label]").forEach(function (node) {
       node.setAttribute("aria-label", t(node.dataset.i18nAriaLabel));

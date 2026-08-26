@@ -160,6 +160,18 @@ class PublicBundleValidationTests(unittest.TestCase):
                     with self.assertRaises(bundle.PublicBundleError):
                         bundle.load_translation(path)
 
+    def test_translation_loader_rejects_boolean_schema_version(self):
+        value = translations(self.old_english)
+        value["schemaVersion"] = True
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "en.json"
+            path.write_text(json.dumps(value), encoding="utf-8")
+            with self.assertRaisesRegex(
+                bundle.PublicBundleError,
+                "schemaVersion must be integer 1",
+            ):
+                bundle.load_translation(path)
+
     def test_translation_loader_rejects_unknown_fields(self):
         value = translations(self.old_english)
         value["privateNotes"] = "not public"

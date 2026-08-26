@@ -49,7 +49,8 @@ INTERNAL_REFERENCE_RE = re.compile(
     re.IGNORECASE,
 )
 LOCAL_PATH_RE = re.compile(
-    r"(?:[A-Za-z]:[\\/]|\\\\(?:wsl|localhost)[\\/]|"
+    r"(?:[A-Za-z]:[\\/]|"
+    r"\\\\[^\\/\s]+[\\/][^\\/\s]+|"
     r"/(?:home|Users|mnt|tmp|private|var/tmp)/)",
     re.IGNORECASE,
 )

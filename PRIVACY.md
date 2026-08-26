@@ -53,10 +53,45 @@ The local launchers write candidate data and operational logs under
 **.local/**. Importing **content/chatgpt_scheduler_history.json** is offline.
 GitHub Actions performs neither fetch and has no cron schedule.
 
+The optional Windows startup sync uses the local Git and GitHub CLI credentials
+to fetch the public base branch, push a timestamped review branch, and open a
+pull request. Authentication is configured locally with `gh auth login`; no
+GitHub token, account name, credential file, or workstation path belongs in the
+repository. Startup logs, inbox files, processed bundles, and temporary state
+remain local and are never intentionally staged.
+
 The deployed site is static. Do not add analytics, remote fonts, tracking
 pixels, comment widgets, or other third-party browser requests without first
 documenting what is sent, why it is needed, how long it is retained, and how a
 visitor can avoid it.
+
+## Startup-sync publication boundary
+
+The startup sync accepts only a complete, already-reviewed pair of public
+snapshots under **.local/inbox/public-review/**:
+
+- `chatgpt_scheduler_history.json` for the source/Japanese archive;
+- `en.json` for the reviewed English editorial overlay.
+
+It does not scrape ChatGPT, read browser state, or convert raw task exports. A
+separate trusted review/export step must create the two public snapshots.
+
+Before a branch is pushed, the sync:
+
+1. validates both exact schemas and rejects unknown fields;
+2. requires every existing public edition and translation to remain byte-level
+   equivalent as structured JSON;
+3. requires at least one new edition and exact source/translation alignment;
+4. rejects unsafe English text, internal references, email addresses, local
+   paths, and untranslated CJK copy;
+5. regenerates deterministic archives and runs all tests;
+6. permits staged changes only to the reviewed source, English overlay, latest
+   snapshot, and JSON archive paths; and
+7. opens a pull request rather than updating `main` or GitHub Pages directly.
+
+The public site therefore remains on the last merged edition while the machine
+is off, while no reviewed bundle exists, or while a pull request is waiting for
+review.
 
 ## Before publishing an update
 
@@ -68,7 +103,7 @@ visitor can avoid it.
    usernames, or local paths.
 4. Run **python scripts/import_scheduler_history.py --check** and the tests.
 5. Confirm that only intended source and generated snapshots are staged.
-6. Push only after the public preview is acceptable.
+6. Push a review branch and merge only after the public preview is acceptable.
 
 If private data or a secret is pushed, remove access or rotate the secret
 immediately. Then clean the current tree and repository history as appropriate;

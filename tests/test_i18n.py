@@ -103,8 +103,16 @@ class SchedulerTranslationCoverageTests(unittest.TestCase):
                 paper_count += 1
                 rating_count += len(translated_paper["ratings"])
 
-        self.assertEqual(paper_count, 11)
-        self.assertEqual(rating_count, 20)
+        expected_paper_count = sum(
+            len(edition["papers"]) for edition in source_editions
+        )
+        expected_rating_count = sum(
+            len(paper["ratings"])
+            for edition in source_editions
+            for paper in edition["papers"]
+        )
+        self.assertEqual(paper_count, expected_paper_count)
+        self.assertEqual(rating_count, expected_rating_count)
 
     def test_english_editorial_copy_has_no_japanese_or_private_state(self):
         for edition in self.translations["editions"]:

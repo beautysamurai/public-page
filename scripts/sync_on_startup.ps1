@@ -179,13 +179,6 @@ try {
         )
     }
 
-    Write-LocalLog "Validating that the reviewed bundle is append-only and aligned."
-    Invoke-NativeLogged $Python @(
-        "scripts/validate_public_bundle.py",
-        "--incoming-history", $historyInbox,
-        "--incoming-translation", $translationInbox
-    ) | Out-Null
-
     $safePrefix = $BranchPrefix.Trim().TrimEnd("/")
     if (-not $safePrefix -or $safePrefix -notmatch '^[A-Za-z0-9][A-Za-z0-9._/-]*$') {
         throw "BranchPrefix contains unsupported characters."
@@ -206,12 +199,26 @@ try {
     Push-Location $worktreeDirectory
     $locationPushed = $true
 
-    Copy-Item -LiteralPath $historyInbox -Destination (
-        Join-Path $worktreeDirectory "content/chatgpt_scheduler_history.json"
-    ) -Force
-    Copy-Item -LiteralPath $translationInbox -Destination (
-        Join-Path $worktreeDirectory "site/data/i18n/en.json"
-    ) -Force
+    $currentHistory = Join-Path (
+        $worktreeDirectory "content/chatgpt_scheduler_history.json"
+    )
+    $currentTranslation = Join-Path (
+        $worktreeDirectory "site/data/i18n/en.json"
+    )
+
+    Write-LocalLog (
+        "Validating the reviewed bundle against the fetched public base."
+    )
+    Invoke-NativeLogged $Python @(
+        "scripts/validate_public_bundle.py",
+        "--current-history", $currentHistory,
+        "--current-translation", $currentTranslation,
+        "--incoming-history", $historyInbox,
+        "--incoming-translation", $translationInbox
+    ) | Out-Null
+
+    Copy-Item -LiteralPath $historyInbox -Destination $currentHistory -Force
+    Copy-Item -LiteralPath $translationInbox -Destination $currentTranslation -Force
 
     Write-LocalLog "Generating deterministic public artifacts."
     Invoke-NativeLogged $Python @("scripts/import_scheduler_history.py") | Out-Null
@@ -273,7 +280,7 @@ try {
 
 ## Safety checks run locally
 
-- append-only and immutable-edition validation;
+- append-only and immutable-edition validation against the fetched public base;
 - Japanese/English edition, paper, and rating-label alignment;
 - full Python and JavaScript test suites;
 - deterministic artifact check;

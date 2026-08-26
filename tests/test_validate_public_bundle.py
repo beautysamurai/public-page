@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
 SYNC_SCRIPT = SCRIPTS / "sync_on_startup.ps1"
+TRANSLATIONS_PATH = ROOT / "site" / "data" / "i18n" / "en.json"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
@@ -171,6 +172,11 @@ class PublicBundleValidationTests(unittest.TestCase):
                 "schemaVersion must be integer 1",
             ):
                 bundle.load_translation(path)
+
+    def test_committed_translation_schema_version_is_integer_one(self):
+        value = json.loads(TRANSLATIONS_PATH.read_text(encoding="utf-8"))
+        self.assertIs(type(value["schemaVersion"]), int)
+        self.assertEqual(value["schemaVersion"], 1)
 
     def test_translation_loader_rejects_unknown_fields(self):
         value = translations(self.old_english)

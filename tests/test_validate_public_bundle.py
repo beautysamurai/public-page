@@ -10,6 +10,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
+SYNC_SCRIPT = SCRIPTS / "sync_on_startup.ps1"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
@@ -81,6 +82,20 @@ class PublicBundleValidationTests(unittest.TestCase):
                 translations(self.new_english),
             )
 
+    def test_rejects_bundle_that_omits_an_edition_from_fetched_base(self):
+        remote_source = source_edition("2026-08-22-daily-01", "2026-08-22")
+        remote_english = english_edition(remote_source["editionId"])
+        incoming_source = source_edition("2026-08-23-daily-01", "2026-08-23")
+        incoming_english = english_edition(incoming_source["editionId"])
+
+        with self.assertRaisesRegex(bundle.PublicBundleError, "removes existing"):
+            bundle.validate_bundle(
+                history(self.old_source, remote_source),
+                translations(self.old_english, remote_english),
+                history(self.old_source, incoming_source),
+                translations(self.old_english, incoming_english),
+            )
+
     def test_rejects_modifying_an_immutable_public_edition(self):
         changed = deepcopy(self.old_source)
         changed["message"] = "Rewritten old public copy."
@@ -126,6 +141,9 @@ class PublicBundleValidationTests(unittest.TestCase):
         unsafe_cases = (
             "Contact reviewer@example.com",
             "Saved under C:\\Users\\example\\review.json",
+            r"Saved under \\WORKSTATION\Users\alice\review.json",
+            r"Saved under \\SERVER\share\private.txt",
+            r"Saved under \\192.168.1.10\share\file.json",
             "内部メモ",
             "turn12search4",
             "<script>alert(1)</script>",
@@ -150,6 +168,21 @@ class PublicBundleValidationTests(unittest.TestCase):
             path.write_text(json.dumps(value), encoding="utf-8")
             with self.assertRaisesRegex(bundle.PublicBundleError, "unknown"):
                 bundle.load_translation(path)
+
+
+class StartupSyncScriptContractTests(unittest.TestCase):
+    def test_validation_uses_fetched_worktree_before_incoming_files_are_copied(self):
+        source = SYNC_SCRIPT.read_text(encoding="utf-8")
+        worktree_marker = '"worktree", "add", "-b", $branchName'
+        validator_marker = '"scripts/validate_public_bundle.py"'
+        copy_marker = "Copy-Item -LiteralPath $historyInbox"
+
+        self.assertEqual(source.count(validator_marker), 1)
+        self.assertLess(source.index(worktree_marker), source.index(validator_marker))
+        self.assertLess(source.index(validator_marker), source.index(copy_marker))
+        self.assertIn('"--current-history", $currentHistory', source)
+        self.assertIn('"--current-translation", $currentTranslation', source)
+        self.assertIn('$worktreeDirectory, "FETCH_HEAD"', source)
 
 
 if __name__ == "__main__":

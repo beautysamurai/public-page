@@ -198,7 +198,7 @@ try {
     Write-LocalLog "Creating an isolated temporary worktree and review branch."
     Invoke-NativeLogged "git" @(
         "worktree", "add", "-b", $branchName,
-        $worktreeDirectory, "$Remote/$BaseBranch"
+        $worktreeDirectory, "FETCH_HEAD"
     ) | Out-Null
 
     Pop-Location

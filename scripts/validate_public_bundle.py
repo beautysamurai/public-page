@@ -128,8 +128,9 @@ def load_translation(path: Path) -> dict[str, Any]:
     if not isinstance(value, dict):
         raise PublicBundleError("English overlay must be a JSON object")
     _require_exact_keys(value, TRANSLATION_TOP_FIELDS, "English overlay")
-    if value["schemaVersion"] != 1:
-        raise PublicBundleError("English overlay schemaVersion must be 1")
+    schema_version = value["schemaVersion"]
+    if type(schema_version) is not int or schema_version != 1:
+        raise PublicBundleError("English overlay schemaVersion must be integer 1")
     if value["language"] != "en":
         raise PublicBundleError("English overlay language must be 'en'")
     editions = value["editions"]

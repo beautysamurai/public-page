@@ -97,6 +97,33 @@ class PublicBundleValidationTests(unittest.TestCase):
                 translations(self.old_english, incoming_english),
             )
 
+    def test_rejects_reordering_the_existing_source_prefix(self):
+        added_source = source_edition("2026-08-22-daily-01", "2026-08-22")
+        added_english = english_edition(added_source["editionId"])
+
+        with self.assertRaisesRegex(bundle.PublicBundleError, "exact prefix"):
+            bundle.validate_bundle(
+                history(self.old_source, self.new_source),
+                translations(self.old_english, self.new_english),
+                history(self.new_source, self.old_source, added_source),
+                translations(self.new_english, self.old_english, added_english),
+            )
+
+    def test_rejects_reordering_only_the_existing_english_prefix(self):
+        added_source = source_edition("2026-08-22-daily-01", "2026-08-22")
+        added_english = english_edition(added_source["editionId"])
+
+        with self.assertRaisesRegex(
+            bundle.PublicBundleError,
+            "English overlay.*exact prefix",
+        ):
+            bundle.validate_bundle(
+                history(self.old_source, self.new_source),
+                translations(self.old_english, self.new_english),
+                history(self.old_source, self.new_source, added_source),
+                translations(self.new_english, self.old_english, added_english),
+            )
+
     def test_rejects_modifying_an_immutable_public_edition(self):
         changed = deepcopy(self.old_source)
         changed["message"] = "Rewritten old public copy."
@@ -145,6 +172,9 @@ class PublicBundleValidationTests(unittest.TestCase):
             r"Saved under \\WORKSTATION\Users\alice\review.json",
             r"Saved under \\SERVER\share\private.txt",
             r"Saved under \\192.168.1.10\share\file.json",
+            "Saved under /root/alice/review.json",
+            "Saved under /etc/project/secrets.json",
+            "Saved under /opt/company/cache.json",
             "内部メモ",
             "turn12search4",
             "<script>alert(1)</script>",
@@ -160,6 +190,17 @@ class PublicBundleValidationTests(unittest.TestCase):
                     )
                     with self.assertRaises(bundle.PublicBundleError):
                         bundle.load_translation(path)
+
+    def test_translation_loader_allows_urls_and_non_path_slashes(self):
+        value = translations(self.old_english)
+        value["editions"][0]["message"] = (
+            "See https://arxiv.org/abs/2608.24206 and compare buy/sell at 8/10."
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "en.json"
+            path.write_text(json.dumps(value), encoding="utf-8")
+            loaded = bundle.load_translation(path)
+        self.assertEqual(loaded, value)
 
     def test_translation_loader_rejects_boolean_schema_version(self):
         value = translations(self.old_english)
@@ -189,18 +230,33 @@ class PublicBundleValidationTests(unittest.TestCase):
 
 
 class StartupSyncScriptContractTests(unittest.TestCase):
-    def test_validation_uses_fetched_worktree_before_incoming_files_are_copied(self):
+    def test_validation_uses_fetched_worktree_and_claimed_immutable_snapshot(self):
         source = SYNC_SCRIPT.read_text(encoding="utf-8")
+        claim_marker = (
+            "Move-Item -LiteralPath $resolvedInbox "
+            "-Destination $claimedBundleDirectory"
+        )
+        snapshot_marker = "$snapshot = New-ImmutableBundleSnapshot"
         worktree_marker = '"worktree", "add", "-b", $branchName'
         validator_marker = '"scripts/validate_public_bundle.py"'
-        copy_marker = "Copy-Item -LiteralPath $historyInbox"
+        copy_marker = "Copy-Item -LiteralPath $historySnapshot"
 
         self.assertEqual(source.count(validator_marker), 1)
+        self.assertLess(source.index(claim_marker), source.index(snapshot_marker))
+        self.assertLess(source.index(snapshot_marker), source.index(worktree_marker))
         self.assertLess(source.index(worktree_marker), source.index(validator_marker))
         self.assertLess(source.index(validator_marker), source.index(copy_marker))
         self.assertIn('"--current-history", $currentHistory', source)
         self.assertIn('"--current-translation", $currentTranslation', source)
+        self.assertIn('"--incoming-history", $historySnapshot', source)
+        self.assertIn('"--incoming-translation", $translationSnapshot', source)
         self.assertIn('$worktreeDirectory, "FETCH_HEAD"', source)
+        self.assertIn(
+            "Copy-Item -LiteralPath $translationSnapshot",
+            source,
+        )
+        self.assertNotIn("Copy-Item -LiteralPath $historyInbox", source)
+        self.assertNotIn("Move-Item -LiteralPath $historyInbox", source)
 
 
 if __name__ == "__main__":

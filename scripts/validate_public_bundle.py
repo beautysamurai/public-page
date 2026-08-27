@@ -49,10 +49,10 @@ INTERNAL_REFERENCE_RE = re.compile(
     re.IGNORECASE,
 )
 LOCAL_PATH_RE = re.compile(
-    r"(?:[A-Za-z]:[\\/]|"
+    r"(?:(?<![A-Za-z0-9+.-])[A-Za-z]:[\\/]|"
     r"\\\\[^\\/\s]+[\\/][^\\/\s]+|"
-    r"/(?:home|Users|mnt|tmp|private|var/tmp)/)",
-    re.IGNORECASE,
+    r"(?:^|[\s('\"`])/(?!/)[^/\s'\"`]+(?:/[^/\s'\"`]+)*)",
+    re.IGNORECASE | re.MULTILINE,
 )
 UNSAFE_MARKUP_RE = re.compile(r"(?:<\s*script\b|javascript:)", re.IGNORECASE)
 
@@ -212,8 +212,10 @@ def _require_append_only(
     incoming: Sequence[Mapping[str, Any]],
     context: str,
 ) -> None:
-    current_by_id = _by_edition_id(current, f"current {context}")
-    incoming_by_id = _by_edition_id(incoming, f"incoming {context}")
+    current_list = list(current)
+    incoming_list = list(incoming)
+    current_by_id = _by_edition_id(current_list, f"current {context}")
+    incoming_by_id = _by_edition_id(incoming_list, f"incoming {context}")
     missing = sorted(set(current_by_id) - set(incoming_by_id))
     if missing:
         raise PublicBundleError(
@@ -227,6 +229,11 @@ def _require_append_only(
     if changed:
         raise PublicBundleError(
             f"incoming {context} modifies immutable public editions: {changed}"
+        )
+    if incoming_list[: len(current_list)] != current_list:
+        raise PublicBundleError(
+            f"incoming {context} reorders existing public editions; "
+            "the current sequence must remain an exact prefix"
         )
 
 

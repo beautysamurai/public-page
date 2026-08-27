@@ -87,6 +87,70 @@ function Assert-AllowedChangedPaths {
     }
 }
 
+function New-ImmutableBundleSnapshot {
+    param(
+        [Parameter(Mandatory = $true)][string]$ClaimedDirectory,
+        [Parameter(Mandatory = $true)][string]$SnapshotDirectory
+    )
+
+    $historySource = Join-Path $ClaimedDirectory "chatgpt_scheduler_history.json"
+    $translationSource = Join-Path $ClaimedDirectory "en.json"
+    $historySnapshot = Join-Path $SnapshotDirectory "chatgpt_scheduler_history.json"
+    $translationSnapshot = Join-Path $SnapshotDirectory "en.json"
+
+    New-Item -ItemType Directory -Path $SnapshotDirectory | Out-Null
+
+    $historyInput = $null
+    $translationInput = $null
+    $historyOutput = $null
+    $translationOutput = $null
+    try {
+        # Hold both source files with exclusive sharing while copying them. If
+        # an exporter still has either file open for writing, the run fails
+        # closed instead of validating a torn or changing pair.
+        $historyInput = [System.IO.File]::Open(
+            $historySource,
+            [System.IO.FileMode]::Open,
+            [System.IO.FileAccess]::Read,
+            [System.IO.FileShare]::None
+        )
+        $translationInput = [System.IO.File]::Open(
+            $translationSource,
+            [System.IO.FileMode]::Open,
+            [System.IO.FileAccess]::Read,
+            [System.IO.FileShare]::None
+        )
+        $historyOutput = [System.IO.File]::Open(
+            $historySnapshot,
+            [System.IO.FileMode]::CreateNew,
+            [System.IO.FileAccess]::Write,
+            [System.IO.FileShare]::None
+        )
+        $translationOutput = [System.IO.File]::Open(
+            $translationSnapshot,
+            [System.IO.FileMode]::CreateNew,
+            [System.IO.FileAccess]::Write,
+            [System.IO.FileShare]::None
+        )
+
+        $historyInput.CopyTo($historyOutput)
+        $translationInput.CopyTo($translationOutput)
+        $historyOutput.Flush($true)
+        $translationOutput.Flush($true)
+    }
+    finally {
+        if ($translationOutput) { $translationOutput.Dispose() }
+        if ($historyOutput) { $historyOutput.Dispose() }
+        if ($translationInput) { $translationInput.Dispose() }
+        if ($historyInput) { $historyInput.Dispose() }
+    }
+
+    return [PSCustomObject]@{
+        History = $historySnapshot
+        Translation = $translationSnapshot
+    }
+}
+
 try {
     $lockStream = [System.IO.File]::Open(
         $lockPath,
@@ -101,6 +165,7 @@ catch [System.IO.IOException] {
 }
 
 $worktreeDirectory = $null
+$claimedBundleDirectory = $null
 $branchName = $null
 $branchPushed = $false
 $locationPushed = $false
@@ -179,6 +244,24 @@ try {
         )
     }
 
+    # Rename the complete inbox directory within its parent so the two files
+    # are claimed as one filesystem operation. A producer can safely create a
+    # new public-review directory for a later run after this point.
+    $inboxParent = Split-Path -Parent $resolvedInbox
+    $claimRoot = Join-Path $inboxParent ".public-review-claimed"
+    New-Item -ItemType Directory -Force -Path $claimRoot | Out-Null
+    $claimedBundleDirectory = Join-Path $claimRoot $runId
+    Write-LocalLog "Atomically claiming the complete reviewed bundle."
+    Move-Item -LiteralPath $resolvedInbox -Destination $claimedBundleDirectory
+
+    $snapshotDirectory = Join-Path $claimedBundleDirectory ".immutable-snapshot"
+    Write-LocalLog "Creating an exclusive immutable snapshot of the claimed files."
+    $snapshot = New-ImmutableBundleSnapshot `
+        -ClaimedDirectory $claimedBundleDirectory `
+        -SnapshotDirectory $snapshotDirectory
+    $historySnapshot = $snapshot.History
+    $translationSnapshot = $snapshot.Translation
+
     $safePrefix = $BranchPrefix.Trim().TrimEnd("/")
     if (-not $safePrefix -or $safePrefix -notmatch '^[A-Za-z0-9][A-Za-z0-9._/-]*$') {
         throw "BranchPrefix contains unsupported characters."
@@ -207,18 +290,18 @@ try {
     )
 
     Write-LocalLog (
-        "Validating the reviewed bundle against the fetched public base."
+        "Validating the immutable snapshot against the fetched public base."
     )
     Invoke-NativeLogged $Python @(
         "scripts/validate_public_bundle.py",
         "--current-history", $currentHistory,
         "--current-translation", $currentTranslation,
-        "--incoming-history", $historyInbox,
-        "--incoming-translation", $translationInbox
+        "--incoming-history", $historySnapshot,
+        "--incoming-translation", $translationSnapshot
     ) | Out-Null
 
-    Copy-Item -LiteralPath $historyInbox -Destination $currentHistory -Force
-    Copy-Item -LiteralPath $translationInbox -Destination $currentTranslation -Force
+    Copy-Item -LiteralPath $historySnapshot -Destination $currentHistory -Force
+    Copy-Item -LiteralPath $translationSnapshot -Destination $currentTranslation -Force
 
     Write-LocalLog "Generating deterministic public artifacts."
     Invoke-NativeLogged $Python @("scripts/import_scheduler_history.py") | Out-Null
@@ -280,6 +363,7 @@ try {
 
 ## Safety checks run locally
 
+- atomic inbox claim and exclusive immutable snapshot;
 - append-only and immutable-edition validation against the fetched public base;
 - Japanese/English edition, paper, and rating-label alignment;
 - full Python and JavaScript test suites;
@@ -306,20 +390,28 @@ Please review the public prose, dates, ratings, and privacy boundary before merg
         }
     }
 
-    $processedDirectory = Join-Path (
-        Join-Path $localDirectory "processed/public-review"
-    ) $runId
-    New-Item -ItemType Directory -Force -Path $processedDirectory | Out-Null
-    Move-Item -LiteralPath $historyInbox -Destination $processedDirectory
-    Move-Item -LiteralPath $translationInbox -Destination $processedDirectory
+    $processedRoot = Join-Path $localDirectory "processed/public-review"
+    New-Item -ItemType Directory -Force -Path $processedRoot | Out-Null
+    $processedDirectory = Join-Path $processedRoot $runId
+    Move-Item -LiteralPath $claimedBundleDirectory -Destination $processedDirectory
+    $claimedBundleDirectory = $null
 
     Write-LocalLog (
-        "Startup sync completed. The reviewed bundle was moved to the local " +
-        "processed archive; publication still requires PR review and merge."
+        "Startup sync completed. The exact validated snapshot was moved to the " +
+        "local processed archive; publication still requires PR review and merge."
     )
 }
 catch {
     Write-LocalLog "Startup sync failed safely: $($_.Exception.Message)"
+    if (
+        $claimedBundleDirectory -and
+        (Test-Path -LiteralPath $claimedBundleDirectory -PathType Container)
+    ) {
+        Write-LocalLog (
+            "The claimed bundle remains in local processing storage for " +
+            "inspection; none of its unvalidated bytes were published."
+        )
+    }
     exit 1
 }
 finally {

@@ -57,6 +57,14 @@ LOCAL_PATH_RE = re.compile(
     r"(?:/[^/\s'\"`\[\]{}=,:;]+)*)",
     re.IGNORECASE | re.MULTILINE,
 )
+LOCAL_URI_RE = re.compile(r"\b(?:file|vscode)://", re.IGNORECASE)
+RELATIVE_PATH_RE = re.compile(
+    r"(?:^|[\s('\"`\[\]{}=,:;])"
+    r"(?:\.\.?[\\/])+"
+    r"[^\\/\s'\"`\[\]{}=,:;]+"
+    r"(?:[\\/][^\\/\s'\"`\[\]{}=,:;]+)*",
+    re.MULTILINE,
+)
 UNSAFE_MARKUP_RE = re.compile(r"(?:<\s*script\b|javascript:)", re.IGNORECASE)
 
 
@@ -119,6 +127,8 @@ def _validate_public_english_text(value: str, context: str) -> None:
         (UUID_RE, "contains a UUID-like identifier"),
         (INTERNAL_REFERENCE_RE, "contains an internal citation/reference"),
         (LOCAL_PATH_RE, "contains an absolute local path"),
+        (LOCAL_URI_RE, "contains a local file or editor URI"),
+        (RELATIVE_PATH_RE, "contains a relative local path"),
         (UNSAFE_MARKUP_RE, "contains unsafe markup or a javascript URI"),
     )
     for pattern, reason in checks:

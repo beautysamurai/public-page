@@ -51,7 +51,10 @@ INTERNAL_REFERENCE_RE = re.compile(
 LOCAL_PATH_RE = re.compile(
     r"(?:(?<![A-Za-z0-9+.-])[A-Za-z]:[\\/]|"
     r"\\\\[^\\/\s]+[\\/][^\\/\s]+|"
-    r"(?:^|[\s('\"`])/(?!/)[^/\s'\"`]+(?:/[^/\s'\"`]+)*)",
+    r"(?:^|[\s('\"`\[\]{}=,:;])/"
+    r"(?!/)[^/\s'\"`\[\]{}=,:;]+/"
+    r"[^/\s'\"`\[\]{}=,:;]+"
+    r"(?:/[^/\s'\"`\[\]{}=,:;]+)*)",
     re.IGNORECASE | re.MULTILINE,
 )
 UNSAFE_MARKUP_RE = re.compile(r"(?:<\s*script\b|javascript:)", re.IGNORECASE)

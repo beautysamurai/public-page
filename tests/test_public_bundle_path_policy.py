@@ -54,6 +54,25 @@ class PublicBundlePathPolicyTests(unittest.TestCase):
                 ):
                     self.load_with_message(message)
 
+    def test_rejects_local_uris_and_relative_paths(self):
+        unsafe_messages = (
+            "Open file:///home/example/review.json",
+            "Open vscode:///home/example/review.json",
+            "Saved under ../../Users/example/review.json",
+            "Saved under ../private/review.json",
+            r"Saved under .\Users\example\review.json",
+            "Saved as path=../../Users/example/review.json",
+            "See [../private/review.json]",
+            r"Config={.\local\config.json}",
+        )
+        for message in unsafe_messages:
+            with self.subTest(message=message):
+                with self.assertRaisesRegex(
+                    bundle.PublicBundleError,
+                    "local file or editor URI|relative local path",
+                ):
+                    self.load_with_message(message)
+
     def test_allows_urls_ratios_and_single_segment_route_labels(self):
         safe_messages = (
             "The q-fin.TR /recent listing was stale.",
@@ -61,6 +80,7 @@ class PublicBundlePathPolicyTests(unittest.TestCase):
             "See https://arxiv.org/abs/2608.24206 for the paper.",
             "Compare buy/sell flow and a rating of 8/10.",
             "Use /recent as a route label in this public explanation.",
+            "Version 1.2.3 was reviewed.",
         )
         for message in safe_messages:
             with self.subTest(message=message):

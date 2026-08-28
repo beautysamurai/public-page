@@ -114,14 +114,94 @@ Or use **scripts/run_update.sh** from Linux/WSL and
 empty, or offline states visible. Candidate output must be reviewed against the
 actual scheduled response before anything is added to the public history.
 
+## Synchronize reviewed updates when Windows starts
+
+The Windows startup sync never writes to `main`. It refreshes local-only arXiv
+candidates, looks for a producer-complete reviewed public bundle, validates it,
+creates an isolated Git worktree and timestamped automation branch, runs all
+tests, pushes the branch, and opens a pull request for manual review.
+
+The sync does **not** read private ChatGPT task history automatically. A trusted
+local export or review step must first produce two complete reviewed snapshots:
+
+- `chatgpt_scheduler_history.json` for the source/Japanese archive;
+- `en.json` for the reviewed English editorial overlay.
+
+Do not copy or replace those files directly inside an existing inbox. Stage them
+with the checked-in producer handoff script:
+
+~~~powershell
+powershell -ExecutionPolicy Bypass `
+  -File scripts/stage_public_review_bundle.ps1 `
+  -HistoryPath <path-to-reviewed-history.json> `
+  -TranslationPath <path-to-reviewed-en.json>
+~~~
+
+The staging script creates a fresh sibling directory, copies both reviewed
+files, writes `bundle.complete.json` with their exact byte lengths and SHA-256
+digests, validates that three-file bundle, and only then atomically renames the
+completed directory to:
+
+~~~text
+.local/inbox/public-review/
+  chatgpt_scheduler_history.json
+  en.json
+  bundle.complete.json
+~~~
+
+The consumer refuses an inbox without the completion manifest. After atomically
+claiming the directory, it verifies the manifest and hashes **before** creating
+the publication snapshot, copies all three files with exclusive sharing, and
+revalidates the exact snapshot bytes before opening a review branch.
+
+The Japanese/source history and English overlay must contain all existing
+editions unchanged plus at least one new reviewed edition. The validator rejects
+removed or rewritten public history, reordered prefixes, mismatched editions,
+papers or rating labels, unknown fields, untranslated English copy, internal
+citation tokens, email addresses, local paths, and other unsafe public text.
+
+Local prerequisites are Git, Python, Node.js, and the GitHub CLI. Authenticate
+GitHub once without storing a token in this repository:
+
+~~~powershell
+gh auth login
+powershell -ExecutionPolicy Bypass -File scripts/install_startup_sync_task.ps1
+~~~
+
+By default the installer creates two Windows Task Scheduler triggers:
+
+- at logon, so a machine that was off catches up when it is next used;
+- daily at 09:30 local time, with `StartWhenAvailable` enabled for missed runs.
+
+Useful alternatives:
+
+~~~powershell
+# Install only the logon trigger
+powershell -ExecutionPolicy Bypass -File scripts/install_startup_sync_task.ps1 -StartupOnly
+
+# Install and run once immediately
+powershell -ExecutionPolicy Bypass -File scripts/install_startup_sync_task.ps1 -RunNow
+
+# Remove the task
+powershell -ExecutionPolicy Bypass -File scripts/install_startup_sync_task.ps1 -Uninstall
+~~~
+
+Logs and processed review bundles remain below **.local/**. After a PR is opened,
+the claimed manifest-bound bundle is moved to a timestamped local processed
+directory so the next logon does not create a duplicate PR. A failed claim is
+retained locally for inspection. GitHub Pages continues to show the last merged
+edition until the PR is reviewed and merged.
+
 ## Publish with GitHub Pages
 
 1. Add only sanitized scheduled-task results to
-   **content/chatgpt_scheduler_history.json**.
+   **content/chatgpt_scheduler_history.json** and the reviewed English copy to
+   **site/data/i18n/en.json**.
 2. Run the importer, its read-only **--check**, and the full test suite.
 3. Inspect **git diff -- content site/data** and run the privacy checklist in
    [PRIVACY.md](PRIVACY.md).
-4. Commit the intended files and push to **main**.
+4. Push a review branch and merge its pull request only after the public preview
+   is acceptable.
 
 The Pages workflow uploads only **site/** after validation. The repository has
 no GitHub cron job and no deployment credentials in tracked files.

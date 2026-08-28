@@ -53,10 +53,59 @@ The local launchers write candidate data and operational logs under
 **.local/**. Importing **content/chatgpt_scheduler_history.json** is offline.
 GitHub Actions performs neither fetch and has no cron schedule.
 
+The optional Windows startup sync uses the local Git and GitHub CLI credentials
+to fetch the public base branch, push a timestamped review branch, and open a
+pull request. Authentication is configured locally with `gh auth login`; no
+GitHub token, account name, credential file, or workstation path belongs in the
+repository. Startup logs, inbox files, completion manifests, processed bundles,
+and temporary state remain local and are never intentionally staged.
+
 The deployed site is static. Do not add analytics, remote fonts, tracking
 pixels, comment widgets, or other third-party browser requests without first
 documenting what is sent, why it is needed, how long it is retained, and how a
 visitor can avoid it.
+
+## Startup-sync publication boundary
+
+The startup sync accepts only a producer-complete reviewed bundle created by
+**scripts/stage_public_review_bundle.ps1**. The final ignored inbox contains:
+
+- `chatgpt_scheduler_history.json` for the source/Japanese archive;
+- `en.json` for the reviewed English editorial overlay;
+- `bundle.complete.json`, which binds both files to exact byte lengths and
+  SHA-256 digests.
+
+Do not write, replace, or update files directly inside an existing
+**.local/inbox/public-review/** directory. The staging helper copies the two
+reviewed snapshots into a fresh sibling directory, creates and validates the
+completion manifest, and only then atomically renames that completed directory
+into the inbox. An incomplete or legacy two-file inbox is not claimed.
+
+It does not scrape ChatGPT, read browser state, or convert raw task exports. A
+separate trusted review/export step must create the two reviewed public
+snapshots before they are passed to the staging helper.
+
+Before a branch is pushed, the sync:
+
+1. atomically claims the producer-complete inbox directory;
+2. verifies its completion manifest and hashes before snapshotting;
+3. copies the two JSON files and manifest with exclusive sharing and revalidates
+   the exact immutable snapshot;
+4. validates both public schemas and rejects unknown fields;
+5. requires every existing public edition and translation to remain unchanged
+   and in the same prefix order;
+6. requires at least one new edition and exact source/translation alignment;
+7. rejects unsafe English text, internal references, email addresses, local
+   paths, and untranslated CJK copy;
+8. regenerates deterministic archives and runs all tests;
+9. permits staged changes only to the reviewed source, English overlay, latest
+   snapshot, and JSON archive paths; and
+10. opens a pull request rather than updating `main` or GitHub Pages directly.
+
+The public site therefore remains on the last merged edition while the machine
+is off, while no completed reviewed bundle exists, or while a pull request is
+waiting for review. Failed claimed bundles remain local for inspection and are
+not published.
 
 ## Before publishing an update
 
@@ -68,7 +117,7 @@ visitor can avoid it.
    usernames, or local paths.
 4. Run **python scripts/import_scheduler_history.py --check** and the tests.
 5. Confirm that only intended source and generated snapshots are staged.
-6. Push only after the public preview is acceptable.
+6. Push a review branch and merge only after the public preview is acceptable.
 
 If private data or a secret is pushed, remove access or rotate the secret
 immediately. Then clean the current tree and repository history as appropriate;

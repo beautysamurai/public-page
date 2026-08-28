@@ -45,6 +45,7 @@ class PublicBundlePathPolicyTests(unittest.TestCase):
             "Cache: /opt/company/cache.json",
             "State,/var/lib/app/state.json",
             "/usr/local/bin/tool was invoked.",
+            "|/home/example/review.json|",
         )
         for message in unsafe_messages:
             with self.subTest(message=message):
@@ -64,6 +65,7 @@ class PublicBundlePathPolicyTests(unittest.TestCase):
             "Saved as path=../../Users/example/review.json",
             "See [../private/review.json]",
             r"Config={.\local\config.json}",
+            "|../private/review.json|",
         )
         for message in unsafe_messages:
             with self.subTest(message=message):
@@ -81,6 +83,7 @@ class PublicBundlePathPolicyTests(unittest.TestCase):
             "Compare buy/sell flow and a rating of 8/10.",
             "Use /recent as a route label in this public explanation.",
             "Version 1.2.3 was reviewed.",
+            "| Route | Status |\n| /recent | current |",
         )
         for message in safe_messages:
             with self.subTest(message=message):

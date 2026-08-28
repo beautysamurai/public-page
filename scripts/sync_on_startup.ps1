@@ -46,12 +46,25 @@ function Invoke-NativeLogged {
         [switch]$AllowFailure
     )
 
-    & $FilePath @Arguments 2>&1 |
-        ForEach-Object {
-            Write-Host $_
-            Add-Content -LiteralPath $logFile -Value $_ -Encoding UTF8
-        }
-    $exitCode = $LASTEXITCODE
+    $previousErrorActionPreference = $ErrorActionPreference
+    try {
+        # Windows PowerShell 5.1 represents redirected native stderr as
+        # ErrorRecord objects. With the script-wide Stop preference,
+        # harmless Git progress such as "From ..." would otherwise abort
+        # a successful command before LASTEXITCODE can be inspected.
+        $ErrorActionPreference = "Continue"
+        $output = @(& $FilePath @Arguments 2>&1)
+        $exitCode = $LASTEXITCODE
+    }
+    finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
+
+    foreach ($item in $output) {
+        $line = [string]$item
+        Write-Host $line
+        Add-Content -LiteralPath $logFile -Value $line -Encoding UTF8
+    }
     if (-not $AllowFailure -and $exitCode -ne 0) {
         throw "$FilePath exited with code $exitCode."
     }

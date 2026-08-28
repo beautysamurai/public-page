@@ -1,0 +1,132 @@
+name: Apply startup PowerShell syntax fix
+
+on:
+  push:
+    branches:
+      - fix/powershell-startup-syntax
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out fix branch
+        uses: actions/checkout@v7
+        with:
+          ref: fix/powershell-startup-syntax
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: Patch startup script and validation workflow
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          script_path = Path("scripts/sync_on_startup.ps1")
+          script = script_path.read_text(encoding="utf-8")
+          old = '''    $currentHistory = Join-Path (
+                  $worktreeDirectory "content/chatgpt_scheduler_history.json"
+              )
+              $currentTranslation = Join-Path (
+                  $worktreeDirectory "site/data/i18n/en.json"
+              )
+          '''
+          new = '''    $currentHistory = Join-Path -Path $worktreeDirectory -ChildPath "content/chatgpt_scheduler_history.json"
+              $currentTranslation = Join-Path -Path $worktreeDirectory -ChildPath "site/data/i18n/en.json"
+          '''
+          if script.count(old) != 1:
+              raise SystemExit("Expected exactly one malformed Join-Path block")
+          script_path.write_text(script.replace(old, new), encoding="utf-8")
+
+          workflow_path = Path(".github/workflows/validate.yml")
+          workflow = workflow_path.read_text(encoding="utf-8")
+          marker = '''      - name: Run unit tests
+                  run: python -m unittest discover -s tests -v
+          '''
+          parser_step = '''      - name: Parse PowerShell scripts
+                  shell: pwsh
+                  run: |
+                    $failed = $false
+                    Get-ChildItem -Path scripts -Filter *.ps1 -File | ForEach-Object {
+                      $scriptPath = $_.FullName
+                      $tokens = $null
+                      $parseErrors = $null
+                      [System.Management.Automation.Language.Parser]::ParseFile(
+                        $scriptPath,
+                        [ref]$tokens,
+                        [ref]$parseErrors
+                      ) | Out-Null
+                      foreach ($parseError in $parseErrors) {
+                        $failed = $true
+                        $lineNumber = $parseError.Extent.StartLineNumber
+                        $message = $parseError.Message
+                        Write-Output ("{0}:{1}: {2}" -f $scriptPath, $lineNumber, $message)
+                      }
+                    }
+                    if ($failed) { throw "PowerShell parser errors were found." }
+
+                - name: Run unit tests
+                  run: python -m unittest discover -s tests -v
+          '''
+          if workflow.count(marker) != 1:
+              raise SystemExit("Expected exactly one unit-test marker in validate.yml")
+          workflow_path.write_text(
+              workflow.replace(marker, parser_step), encoding="utf-8"
+          )
+          PY
+
+      - name: Parse PowerShell scripts
+        shell: pwsh
+        run: |
+          $failed = $false
+          Get-ChildItem -Path scripts -Filter *.ps1 -File | ForEach-Object {
+            $scriptPath = $_.FullName
+            $tokens = $null
+            $parseErrors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile(
+              $scriptPath,
+              [ref]$tokens,
+              [ref]$parseErrors
+            ) | Out-Null
+            foreach ($parseError in $parseErrors) {
+              $failed = $true
+              $lineNumber = $parseError.Extent.StartLineNumber
+              $message = $parseError.Message
+              Write-Output ("{0}:{1}: {2}" -f $scriptPath, $lineNumber, $message)
+            }
+          }
+          if ($failed) { throw "PowerShell parser errors were found." }
+
+      - name: Run validation
+        shell: bash
+        run: |
+          python -m unittest discover -s tests -v
+          node --test tests/test_model_math.cjs
+          python scripts/import_scheduler_history.py --check
+          git diff --check
+
+      - name: Remove one-shot workflow
+        shell: bash
+        run: rm .github/workflows/apply-startup-syntax-fix.yml
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          git config user.name "Public Research Digest"
+          git config user.email "public-research-digest@users.noreply.github.com"
+          git add -A
+          git commit -m "fix: correct startup sync PowerShell syntax"
+          git push origin HEAD:fix/powershell-startup-syntax

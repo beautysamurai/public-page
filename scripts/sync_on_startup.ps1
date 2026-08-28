@@ -323,12 +323,8 @@ try {
     Push-Location $worktreeDirectory
     $locationPushed = $true
 
-    $currentHistory = Join-Path (
-        $worktreeDirectory "content/chatgpt_scheduler_history.json"
-    )
-    $currentTranslation = Join-Path (
-        $worktreeDirectory "site/data/i18n/en.json"
-    )
+    $currentHistory = Join-Path -Path $worktreeDirectory -ChildPath "content/chatgpt_scheduler_history.json"
+    $currentTranslation = Join-Path -Path $worktreeDirectory -ChildPath "site/data/i18n/en.json"
 
     Write-LocalLog (
         "Validating the immutable snapshot against the fetched public base."

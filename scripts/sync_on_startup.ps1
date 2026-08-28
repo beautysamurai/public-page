@@ -87,67 +87,82 @@ function Assert-AllowedChangedPaths {
     }
 }
 
+function Assert-ExactBundleEntries {
+    param([Parameter(Mandatory = $true)][string]$BundleDirectory)
+
+    $expected = @(
+        "chatgpt_scheduler_history.json",
+        "en.json",
+        "bundle.complete.json"
+    )
+    $actual = @(
+        Get-ChildItem -LiteralPath $BundleDirectory -Force |
+            ForEach-Object { $_.Name }
+    )
+    $missing = @($expected | Where-Object { $_ -notin $actual })
+    $unknown = @($actual | Where-Object { $_ -notin $expected })
+    if ($missing.Count -gt 0 -or $unknown.Count -gt 0) {
+        throw (
+            "Claimed bundle entries do not match the producer-complete " +
+            "handoff contract. Missing=[$($missing -join ', ')]; " +
+            "unknown=[$($unknown -join ', ')]."
+        )
+    }
+}
+
 function New-ImmutableBundleSnapshot {
     param(
         [Parameter(Mandatory = $true)][string]$ClaimedDirectory,
         [Parameter(Mandatory = $true)][string]$SnapshotDirectory
     )
 
-    $historySource = Join-Path $ClaimedDirectory "chatgpt_scheduler_history.json"
-    $translationSource = Join-Path $ClaimedDirectory "en.json"
-    $historySnapshot = Join-Path $SnapshotDirectory "chatgpt_scheduler_history.json"
-    $translationSnapshot = Join-Path $SnapshotDirectory "en.json"
-
+    $names = @(
+        "chatgpt_scheduler_history.json",
+        "en.json",
+        "bundle.complete.json"
+    )
     New-Item -ItemType Directory -Path $SnapshotDirectory | Out-Null
 
-    $historyInput = $null
-    $translationInput = $null
-    $historyOutput = $null
-    $translationOutput = $null
+    $inputStreams = @()
+    $outputStreams = @()
     try {
-        # Hold both source files with exclusive sharing while copying them. If
-        # an exporter still has either file open for writing, the run fails
-        # closed instead of validating a torn or changing pair.
-        $historyInput = [System.IO.File]::Open(
-            $historySource,
-            [System.IO.FileMode]::Open,
-            [System.IO.FileAccess]::Read,
-            [System.IO.FileShare]::None
-        )
-        $translationInput = [System.IO.File]::Open(
-            $translationSource,
-            [System.IO.FileMode]::Open,
-            [System.IO.FileAccess]::Read,
-            [System.IO.FileShare]::None
-        )
-        $historyOutput = [System.IO.File]::Open(
-            $historySnapshot,
-            [System.IO.FileMode]::CreateNew,
-            [System.IO.FileAccess]::Write,
-            [System.IO.FileShare]::None
-        )
-        $translationOutput = [System.IO.File]::Open(
-            $translationSnapshot,
-            [System.IO.FileMode]::CreateNew,
-            [System.IO.FileAccess]::Write,
-            [System.IO.FileShare]::None
-        )
-
-        $historyInput.CopyTo($historyOutput)
-        $translationInput.CopyTo($translationOutput)
-        $historyOutput.Flush($true)
-        $translationOutput.Flush($true)
+        # Open every producer file with exclusive sharing before copying any
+        # bytes. A writer that did not perform the completed-directory handoff
+        # causes the run to fail closed.
+        foreach ($name in $names) {
+            $inputStreams += [System.IO.File]::Open(
+                (Join-Path $ClaimedDirectory $name),
+                [System.IO.FileMode]::Open,
+                [System.IO.FileAccess]::Read,
+                [System.IO.FileShare]::None
+            )
+        }
+        foreach ($name in $names) {
+            $outputStreams += [System.IO.File]::Open(
+                (Join-Path $SnapshotDirectory $name),
+                [System.IO.FileMode]::CreateNew,
+                [System.IO.FileAccess]::Write,
+                [System.IO.FileShare]::None
+            )
+        }
+        for ($index = 0; $index -lt $names.Count; $index++) {
+            $inputStreams[$index].CopyTo($outputStreams[$index])
+            $outputStreams[$index].Flush($true)
+        }
     }
     finally {
-        if ($translationOutput) { $translationOutput.Dispose() }
-        if ($historyOutput) { $historyOutput.Dispose() }
-        if ($translationInput) { $translationInput.Dispose() }
-        if ($historyInput) { $historyInput.Dispose() }
+        foreach ($stream in $outputStreams) {
+            if ($stream) { $stream.Dispose() }
+        }
+        foreach ($stream in $inputStreams) {
+            if ($stream) { $stream.Dispose() }
+        }
     }
 
     return [PSCustomObject]@{
-        History = $historySnapshot
-        Translation = $translationSnapshot
+        History = Join-Path $SnapshotDirectory "chatgpt_scheduler_history.json"
+        Translation = Join-Path $SnapshotDirectory "en.json"
+        Manifest = Join-Path $SnapshotDirectory "bundle.complete.json"
     }
 }
 
@@ -225,34 +240,51 @@ try {
     }
 
     $resolvedInbox = Resolve-LocalPath $InboxDirectory
-    $historyInbox = Join-Path $resolvedInbox "chatgpt_scheduler_history.json"
-    $translationInbox = Join-Path $resolvedInbox "en.json"
-    $historyExists = Test-Path -LiteralPath $historyInbox -PathType Leaf
-    $translationExists = Test-Path -LiteralPath $translationInbox -PathType Leaf
-
-    if (-not $historyExists -and -not $translationExists) {
+    if (-not (Test-Path -LiteralPath $resolvedInbox -PathType Container)) {
         Write-LocalLog (
-            "No reviewed public bundle is waiting. Candidate refresh is complete; " +
-            "no branch or pull request was created."
+            "No producer-complete reviewed bundle is waiting. Candidate refresh " +
+            "is complete; no branch or pull request was created."
         )
         exit 0
     }
-    if ($historyExists -ne $translationExists) {
-        throw (
-            "The reviewed inbox is incomplete. It must contain both " +
-            "chatgpt_scheduler_history.json and en.json."
+
+    $requiredInboxPaths = @(
+        (Join-Path $resolvedInbox "chatgpt_scheduler_history.json"),
+        (Join-Path $resolvedInbox "en.json"),
+        (Join-Path $resolvedInbox "bundle.complete.json")
+    )
+    $missingInboxFiles = @(
+        $requiredInboxPaths |
+            Where-Object { -not (Test-Path -LiteralPath $_ -PathType Leaf) }
+    )
+    if ($missingInboxFiles.Count -gt 0) {
+        Write-LocalLog (
+            "The reviewed inbox has not completed the producer handoff. Use " +
+            "scripts/stage_public_review_bundle.ps1 so both JSON files and the " +
+            "hash-bound completion manifest appear together. Nothing was claimed."
         )
+        exit 0
     }
 
-    # Rename the complete inbox directory within its parent so the two files
-    # are claimed as one filesystem operation. A producer can safely create a
-    # new public-review directory for a later run after this point.
+    # The producer creates a fresh sibling staging directory, writes both JSON
+    # files and their hash-bound completion manifest, and only then renames that
+    # directory to public-review. Claim the completed directory in one move.
     $inboxParent = Split-Path -Parent $resolvedInbox
     $claimRoot = Join-Path $inboxParent ".public-review-claimed"
     New-Item -ItemType Directory -Force -Path $claimRoot | Out-Null
     $claimedBundleDirectory = Join-Path $claimRoot $runId
-    Write-LocalLog "Atomically claiming the complete reviewed bundle."
+    Write-LocalLog "Atomically claiming the producer-complete reviewed bundle."
     Move-Item -LiteralPath $resolvedInbox -Destination $claimedBundleDirectory
+    Assert-ExactBundleEntries -BundleDirectory $claimedBundleDirectory
+
+    # Verify the producer's hash-bound completion manifest before reading any
+    # bytes into the publication snapshot.
+    Write-LocalLog "Verifying the claimed completion manifest before snapshotting."
+    Invoke-NativeLogged $Python @(
+        "scripts/validate_bundle_handoff.py",
+        "validate",
+        "--bundle-dir", $claimedBundleDirectory
+    ) | Out-Null
 
     $snapshotDirectory = Join-Path $claimedBundleDirectory ".immutable-snapshot"
     Write-LocalLog "Creating an exclusive immutable snapshot of the claimed files."
@@ -261,6 +293,15 @@ try {
         -SnapshotDirectory $snapshotDirectory
     $historySnapshot = $snapshot.History
     $translationSnapshot = $snapshot.Translation
+
+    # Revalidate the exact bytes that will be published. This second check
+    # protects the handoff-to-snapshot boundary as well as the producer boundary.
+    Write-LocalLog "Revalidating the immutable snapshot and manifest hashes."
+    Invoke-NativeLogged $Python @(
+        "scripts/validate_bundle_handoff.py",
+        "validate",
+        "--bundle-dir", $snapshotDirectory
+    ) | Out-Null
 
     $safePrefix = $BranchPrefix.Trim().TrimEnd("/")
     if (-not $safePrefix -or $safePrefix -notmatch '^[A-Za-z0-9][A-Za-z0-9._/-]*$') {
@@ -356,13 +397,15 @@ try {
         @"
 ## What this PR does
 
-- imports a complete reviewed scheduler-history snapshot;
+- imports a producer-complete reviewed scheduler-history snapshot;
 - imports the matching reviewed English editorial overlay;
 - regenerates deterministic public JSON archives;
 - leaves `main` and GitHub Pages unchanged until this PR is reviewed and merged.
 
 ## Safety checks run locally
 
+- atomic producer staging and hash-bound completion manifest;
+- manifest verification before snapshotting and revalidation afterward;
 - atomic inbox claim and exclusive immutable snapshot;
 - append-only and immutable-edition validation against the fetched public base;
 - Japanese/English edition, paper, and rating-label alignment;
@@ -397,7 +440,7 @@ Please review the public prose, dates, ratings, and privacy boundary before merg
     $claimedBundleDirectory = $null
 
     Write-LocalLog (
-        "Startup sync completed. The exact validated snapshot was moved to the " +
+        "Startup sync completed. The manifest-verified snapshot was moved to the " +
         "local processed archive; publication still requires PR review and merge."
     )
 }

@@ -51,18 +51,18 @@ INTERNAL_REFERENCE_RE = re.compile(
 LOCAL_PATH_RE = re.compile(
     r"(?:(?<![A-Za-z0-9+.-])[A-Za-z]:[\\/]|"
     r"\\\\[^\\/\s]+[\\/][^\\/\s]+|"
-    r"(?:^|[\s('\"`\[\]{}=,:;])/"
-    r"(?!/)[^/\s'\"`\[\]{}=,:;]+/"
-    r"[^/\s'\"`\[\]{}=,:;]+"
-    r"(?:/[^/\s'\"`\[\]{}=,:;]+)*)",
+    r"(?:^|[\s('\"`\[\]{}=,:;|])/"
+    r"(?!/)[^/\s'\"`\[\]{}=,:;|]+/"
+    r"[^/\s'\"`\[\]{}=,:;|]+"
+    r"(?:/[^/\s'\"`\[\]{}=,:;|]+)*)",
     re.IGNORECASE | re.MULTILINE,
 )
 LOCAL_URI_RE = re.compile(r"\b(?:file|vscode)://", re.IGNORECASE)
 RELATIVE_PATH_RE = re.compile(
-    r"(?:^|[\s('\"`\[\]{}=,:;])"
+    r"(?:^|[\s('\"`\[\]{}=,:;|])"
     r"(?:\.\.?[\\/])+"
-    r"[^\\/\s'\"`\[\]{}=,:;]+"
-    r"(?:[\\/][^\\/\s'\"`\[\]{}=,:;]+)*",
+    r"[^\\/\s'\"`\[\]{}=,:;|]+"
+    r"(?:[\\/][^\\/\s'\"`\[\]{}=,:;|]+)*",
     re.MULTILINE,
 )
 UNSAFE_MARKUP_RE = re.compile(r"(?:<\s*script\b|javascript:)", re.IGNORECASE)

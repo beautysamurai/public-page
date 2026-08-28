@@ -11,6 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ROOT / "scripts"
 SYNC_SCRIPT = SCRIPTS / "sync_on_startup.ps1"
+STAGE_SCRIPT = SCRIPTS / "stage_public_review_bundle.ps1"
 TRANSLATIONS_PATH = ROOT / "site" / "data" / "i18n" / "en.json"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
@@ -230,33 +231,66 @@ class PublicBundleValidationTests(unittest.TestCase):
 
 
 class StartupSyncScriptContractTests(unittest.TestCase):
-    def test_validation_uses_fetched_worktree_and_claimed_immutable_snapshot(self):
+    def test_consumer_requires_and_verifies_manifest_before_snapshot(self):
         source = SYNC_SCRIPT.read_text(encoding="utf-8")
+        completion_marker = 'Join-Path $resolvedInbox "bundle.complete.json"'
         claim_marker = (
             "Move-Item -LiteralPath $resolvedInbox "
             "-Destination $claimedBundleDirectory"
         )
         snapshot_marker = "$snapshot = New-ImmutableBundleSnapshot"
+        handoff_validator_marker = '"scripts/validate_bundle_handoff.py"'
         worktree_marker = '"worktree", "add", "-b", $branchName'
-        validator_marker = '"scripts/validate_public_bundle.py"'
+        bundle_validator_marker = '"scripts/validate_public_bundle.py"'
         copy_marker = "Copy-Item -LiteralPath $historySnapshot"
 
-        self.assertEqual(source.count(validator_marker), 1)
-        self.assertLess(source.index(claim_marker), source.index(snapshot_marker))
-        self.assertLess(source.index(snapshot_marker), source.index(worktree_marker))
-        self.assertLess(source.index(worktree_marker), source.index(validator_marker))
-        self.assertLess(source.index(validator_marker), source.index(copy_marker))
+        first_handoff = source.index(handoff_validator_marker)
+        second_handoff = source.index(
+            handoff_validator_marker,
+            first_handoff + len(handoff_validator_marker),
+        )
+        self.assertEqual(source.count(handoff_validator_marker), 2)
+        self.assertEqual(source.count(bundle_validator_marker), 1)
+        self.assertLess(source.index(completion_marker), source.index(claim_marker))
+        self.assertLess(source.index(claim_marker), first_handoff)
+        self.assertLess(first_handoff, source.index(snapshot_marker))
+        self.assertLess(source.index(snapshot_marker), second_handoff)
+        self.assertLess(second_handoff, source.index(worktree_marker))
+        self.assertLess(
+            source.index(worktree_marker),
+            source.index(bundle_validator_marker),
+        )
+        self.assertLess(source.index(bundle_validator_marker), source.index(copy_marker))
         self.assertIn('"--current-history", $currentHistory', source)
         self.assertIn('"--current-translation", $currentTranslation', source)
         self.assertIn('"--incoming-history", $historySnapshot', source)
         self.assertIn('"--incoming-translation", $translationSnapshot', source)
         self.assertIn('$worktreeDirectory, "FETCH_HEAD"', source)
+        self.assertIn('"bundle.complete.json"', source)
+        self.assertIn("Assert-ExactBundleEntries", source)
         self.assertIn(
             "Copy-Item -LiteralPath $translationSnapshot",
             source,
         )
         self.assertNotIn("Copy-Item -LiteralPath $historyInbox", source)
         self.assertNotIn("Move-Item -LiteralPath $historyInbox", source)
+
+    def test_producer_stages_and_validates_before_atomic_inbox_handoff(self):
+        source = STAGE_SCRIPT.read_text(encoding="utf-8")
+        stage_marker = "New-Item -ItemType Directory -Path $stageDirectory"
+        create_marker = '"scripts/validate_bundle_handoff.py" "create"'
+        validate_marker = '"scripts/validate_bundle_handoff.py" "validate"'
+        handoff_marker = (
+            "Move-Item -LiteralPath $stageDirectory -Destination $resolvedInbox"
+        )
+
+        self.assertIn("if (Test-Path -LiteralPath $resolvedInbox)", source)
+        self.assertLess(source.index(stage_marker), source.index(create_marker))
+        self.assertLess(source.index(create_marker), source.index(validate_marker))
+        self.assertLess(source.index(validate_marker), source.index(handoff_marker))
+        self.assertIn(".public-review-stage-", source)
+        self.assertIn("chatgpt_scheduler_history.json", source)
+        self.assertIn("en.json", source)
 
 
 if __name__ == "__main__":

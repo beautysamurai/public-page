@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-08-27-daily-chatgpt-01",
+  "editionDate": "2026-08-27",
+  "editionKind": "daily",
+  "sourceKind": "chatgpt-scheduled-task",
+  "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+  "importedAt": "2026-08-28T14:01:59Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "8月26日listingからDeFi lendingのrate impactとCFMM均衡の二本を評価しました。",
+  "expectedBatchDate": "2026-08-26",
+  "observedBatchDate": "2026-08-26",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年8月27日 — Daily review\n\n確認できた最新Quantitative Finance listingは2026年8月26日分でした。ページは正常に取得できており、arXiv障害による持ち越しではありません。\n\n## 1. Capital allocation on decentralized lending platforms\n\n**重要度: 6.5/10 — 金利impact・DeFi**\n\n貸し手が複数のlending marketへ資金を配分すると、自分自身の供給によってutilizationと受取金利が下がるというrate impactを明示的に扱います。linear、kinked、Morpho AdaptiveCurveIRMについて最適allocationを導きます。\n\n特に、kinked rate modelではallocation後のutilizationをちょうどkinkへ持っていく解がlender側では最適にならない一方、borrower側では最適になり得るという非対称性を示します。参加者間のインセンティブ衝突がkink周辺のrate volatilityを増幅し得ます。\n\nTerm-structure modelではありませんが、notionalや供給量がrateへ非線形に影響する構造を内生化している点は参考になります。\n\n## 2. Equilibrium in closed constant-function market maker economies\n\n**重要度: 5.5/10 — Market microstructure theory**\n\n二資産・二trader・feeなしのCFMMで均衡を解析します。内部状態がno-trade equilibriumになる必要十分条件は、CFMMのmarginal priceと両traderのmarginal rate of substitutionが一致することです。\n\nIndividual rationalな均衡は固定されたCFMM invariant上でPareto optimalとなり、任意の内部feasible stateへ有限回のtradeで到達でき、交互のutility-maximizing tradeがPareto-optimal equilibriumへ収束します。trade順序によるfirst-mover advantage/disadvantageの条件も導きます。\n\n数学としては明確ですが、LOB、RFQ、inventory、queue、latencyを扱わないため、金利電子取引への直接性は低めです。\n\n## Conclusion\n\n今日読むならCapital allocationを優先します。HJM、multi-curve、yield-curve dynamics、swap/swaption、fixed-income market makingに直接刺さる高優先度の新着はありませんでした。",
+  "papers": [
+    {
+      "arxivId": "2608.24206v1",
+      "title": "Capital allocation on decentralized lending platforms",
+      "authors": [
+        "Bastien Baude",
+        "Vincent Danos",
+        "Hamza El Khalloufi"
+      ],
+      "submittedDate": "2026-08-25",
+      "updatedDate": "2026-08-25",
+      "topics": [
+        "Interest-rate models",
+        "Mathematical finance",
+        "Model validation"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.24206v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.24206v1",
+      "schedulerRank": 1,
+      "schedulerRating": 6.5,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "金利impact・DeFi",
+      "schedulerSummary": "供給量がutilizationと貸出金利へ与える自己impactを含め、複数市場への最適配分を導きます。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 6.5,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.23915v1",
+      "title": "Equilibrium in closed constant-function market maker economies",
+      "authors": [
+        "Muqiao Huang",
+        "Ruodu Wang",
+        "Yiyun Wang"
+      ],
+      "submittedDate": "2026-08-24",
+      "updatedDate": "2026-08-24",
+      "topics": [
+        "Market making",
+        "Mathematical finance",
+        "Market microstructure"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.23915v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.23915v1",
+      "schedulerRank": 2,
+      "schedulerRating": 5.5,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "market microstructure theory",
+      "schedulerSummary": "FeeなしCFMM economyのno-trade equilibrium、Pareto optimality、到達可能性、収束を解析します。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 5.5,
+          "scale": 10
+        }
+      ]
+    }
+  ]
+}

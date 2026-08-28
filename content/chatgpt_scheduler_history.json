@@ -508,6 +508,482 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-08-24-daily-chatgpt-01",
+      "editionDate": "2026-08-24",
+      "editionKind": "daily",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-28T14:01:59Z",
+      "status": "NO_NEW_BATCH_EXPECTED",
+      "message": "次の通常アナウンス前だったため新バッチを持ち越し、8月21日バッチの三本を再評価しました。",
+      "expectedBatchDate": "2026-08-21",
+      "observedBatchDate": "2026-08-21",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年8月24日 — Schedule check and reassessment\n\n確認時点のarXiv Quantitative Finance最新バッチは2026年8月21日分でした。公式の通常スケジュールでは次のアナウンスは日本時間の月曜朝であり、サイト障害ではなく新バッチ公開前です。したがって本日分は持ち越しとし、直近バッチから電子取引・シナリオ生成に近い三本だけを再評価しました。\n\n## 1. M3: A State-Event Generative Foundation Model\n\n**重要度: 8/10 — 電子取引**\n\nOrder eventだけでなく、その結果として変化するLOB stateも同時に扱うclosed-loop生成モデルです。将来のorder-flow trajectoryを生成しながら、matching engineを通じて市場状態を更新します。forecasting、stress test、market impact、RL訓練環境への応用が中心です。\n\nイベント → 市場状態変化 → 次イベントという循環を学習する点が強みです。一方、実証対象は株式LOBで、OTC/RFQ市場へそのまま移植できるわけではありません。\n\n## 2. Concentrated Liquidity Provision\n\n**重要度: 5.5/10 — Market making / RL**\n\nAMMの流動性供給をstochastic impulse controlとして定式化し、RLでrebalance時点とprice rangeを決めます。状態にはmispricing、rebalance cost、uncertainty、inventory、risk preferenceが入り、学習policyはPnLのleft tailを圧縮します。\n\nInventory-aware controlとして参考になりますが、DeFi AMM固有の市場構造であり、通常のdealer marketや金利電子取引への直接性は低めです。\n\n## 3. Deep-MKV-TS\n\n**重要度: 6.5/10 — 隣接領域**\n\n既存の解釈可能なreference modelのdriftを維持しながら、volatility部分だけをpath-dependent McKean–Vlasov controlで補正します。Heston系とintraday futuresでpath・volatility featureの再現性を改善しています。\n\n直接の金利モデルではありませんが、既存curve/rates modelを残し、データ駆動で残差的なdynamicsだけを補正する設計には応用余地があります。\n\n## Rates conclusion\n\nHJM、multi-curve、OIS、swap/swaption、yield-curve dynamicsへ直接刺さる新着は確認できませんでした。新バッチは次回確認へ持ち越します。",
+      "papers": [
+        {
+          "arxivId": "2608.19227v1",
+          "title": "M3: A State-Event Generative Foundation Model for Market Microstructure Dynamics",
+          "authors": [
+            "Yanzhi Zhang",
+            "Yu Ma",
+            "Yilin Cheng",
+            "Jian Li",
+            "Yitong Duan"
+          ],
+          "submittedDate": "2026-07-29",
+          "updatedDate": "2026-07-29",
+          "topics": [
+            "Electronic trading",
+            "Market simulation",
+            "Generative models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.19227v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.19227v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "電子取引・market simulator",
+          "schedulerSummary": "Order eventとLOB stateをmatching engine内で結ぶclosed-loop market world modelです。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.19389v1",
+          "title": "Concentrated Liquidity Provision: a Reinforcement Learning Perspective",
+          "authors": [
+            "Georgios Chionas",
+            "Charalampos Kleitsikas",
+            "Stefanos Leonardos",
+            "Leandro Sánchez-Betancourt",
+            "Carmine Ventre"
+          ],
+          "submittedDate": "2026-08-19",
+          "updatedDate": "2026-08-19",
+          "topics": [
+            "Market making",
+            "Reinforcement learning",
+            "Concentrated liquidity"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.19389v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.19389v1",
+          "schedulerRank": 2,
+          "schedulerRating": 5.5,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "market making / RL",
+          "schedulerSummary": "AMM liquidity rangeとrebalanceをinventory・uncertaintyに応じて学習します。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 5.5,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.19394v1",
+          "title": "Deep-MKV-TS: Path-Dependent McKean--Vlasov Control for Financial Time Series Generation",
+          "authors": [
+            "Samer El Boustany",
+            "Théo Basseras",
+            "Samy Mekkaoui",
+            "Alexandre Alouadi",
+            "Yadh Hafsi",
+            "Huyên Pham"
+          ],
+          "submittedDate": "2026-08-19",
+          "updatedDate": "2026-08-19",
+          "topics": [
+            "Mathematical finance",
+            "Machine learning",
+            "Generative models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.19394v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.19394v1",
+          "schedulerRank": 3,
+          "schedulerRating": 6.5,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "隣接領域・scenario generation",
+          "schedulerSummary": "解釈可能なreference modelを残し、path-dependent controlでvolatility dynamicsを補正します。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 6.5,
+              "scale": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-25-daily-chatgpt-01",
+      "editionDate": "2026-08-25",
+      "editionKind": "daily",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-28T14:01:59Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "8月24日バッチからflow・scenario generation・金利感応度に関する三本を評価しました。",
+      "expectedBatchDate": "2026-08-24",
+      "observedBatchDate": "2026-08-24",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年8月25日 — Daily review\n\n確認できた最新バッチは2026年8月24日分でした。通常アナウンス時刻との整合が取れており、arXiv障害による持ち越しではありません。\n\n## 1. Calibrating Inelastic Markets to Options\n\n**重要度: 8/10 — Flowとoption surface**\n\n市場のorder flowとreturnの相互作用を含むMarketronを、18パラメータから識別可能な9パラメータへ縮約します。flow shockとreturn shockの相関でshort-maturity skewを表し、physical measureからrisk-neutral measureへ段階的にcalibrateします。log-priceをmemory kernelを持つgeneralized Langevin equationとして表現する点も特徴です。\n\n電子取引そのものではありませんが、flowを単なる説明変数ではなく価格形成とoption surfaceへつながる動的状態として扱う考え方は、RFQ後のflowと市場変化をモデル化する際に参考になります。検証はSPX optionで、ratesやRFQへの直接実証はありません。\n\n## 2. Rethinking Synthetic Scenario Realism\n\n**重要度: 6.5/10 — Scenario generation**\n\nSynthetic market pathを見た目のrealismではなく、そのデータで学習したhedgerが実市場でも機能するかというcompatibilityで評価します。hedging errorをlearning errorとcompatibility gapへ分解し、統計的fidelityと意思決定性能が乖離し得ることを示します。\n\nSimulationや生成データでexecution・hedging policyを学習する場合、realism指標だけでモデルを選ばないという重要な注意点です。\n\n## 3. Surrender runs\n\n**重要度: 5/10 — 金利感応度・保険**\n\n金利上昇で保険会社の資産価値が低下し、契約者の外部運用利回りが上昇することで解約runが生じるモデルです。fundamentals-driven runとself-fulfilling runについてclosed-formのinterest-rate thresholdを導きます。\n\n金利感応度としては興味深いものの、HJM、curve construction、swap/swaption pricingの金利モデルではないため優先度は低めです。\n\n## Conclusion\n\n今日の第一候補はMarketronです。HJM、multi-curve、OIS、swap/swaption、yield-curve dynamicsへ直接刺さる強い新着はありませんでした。",
+      "papers": [
+        {
+          "arxivId": "2608.20589v1",
+          "title": "Calibrating Inelastic Markets to Options: The Lean Marketron and the Generalized Langevin Equation",
+          "authors": [
+            "Andrey Itkin"
+          ],
+          "submittedDate": "2026-08-20",
+          "updatedDate": "2026-08-20",
+          "topics": [
+            "Market microstructure",
+            "Mathematical finance",
+            "Model validation"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.20589v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.20589v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "最優先・flowとoption surface",
+          "schedulerSummary": "Order flowとreturnの相互作用を識別可能な縮約モデルとしてoption surfaceへ接続します。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.20842v1",
+          "title": "Rethinking Synthetic Scenario Realism: Compatibility, Not Fidelity, Drives Hedging Performance",
+          "authors": [
+            "Ryuji Hashimoto",
+            "Masanori Hirano",
+            "Ryota Ozaki",
+            "Kentaro Imajo"
+          ],
+          "submittedDate": "2026-08-21",
+          "updatedDate": "2026-08-21",
+          "topics": [
+            "Dynamic hedging",
+            "Machine learning",
+            "Generative models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.20842v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.20842v1",
+          "schedulerRank": 2,
+          "schedulerRating": 6.5,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "scenario generation",
+          "schedulerSummary": "Synthetic pathを統計的realismではなく実市場でのhedging compatibilityで評価します。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 6.5,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.20982v1",
+          "title": "Surrender runs",
+          "authors": [
+            "Andreas Löffler",
+            "Stefan Steins"
+          ],
+          "submittedDate": "2026-08-21",
+          "updatedDate": "2026-08-21",
+          "topics": [
+            "Interest-rate models",
+            "Mathematical finance",
+            "Model validation"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.20982v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.20982v1",
+          "schedulerRank": 3,
+          "schedulerRating": 5,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "金利感応度・保険",
+          "schedulerSummary": "金利上昇下の保険解約runについてfundamental型と自己実現型のthresholdを導きます。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 5,
+              "scale": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-26-daily-chatgpt-01",
+      "editionDate": "2026-08-26",
+      "editionKind": "daily",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-28T14:01:59Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "8月25日バッチからoptimal execution、短期reversal、cross-asset feedback、日本市場data基盤の四本を評価しました。",
+      "expectedBatchDate": "2026-08-25",
+      "observedBatchDate": "2026-08-25",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年8月26日 — Daily review\n\n確認できた最新バッチは2026年8月25日分でした。カテゴリ一覧は正常に更新されており、サイト障害による持ち越しではありません。\n\n## 1. ABIDES-MARL\n\n**重要度: 9/10 — 電子取引**\n\n古典的なoptimal executionではmarket impactを外生的に置きがちですが、この研究はmarket makerも戦略的に反応するfinite-horizon stochastic gameとして市場を扱います。ABIDES環境をmulti-agent RLへ拡張し、流動性をagent間の相互作用から内生的に発生させます。\n\nExecution strategyとmarket-maker behaviorが相互に変わるため、single-agentで最適化したpolicyがadaptiveな相手には崩れ得るという点が重要です。RFQへ直接適用できるわけではありませんが、相手側の反応を含めてexecutionを考える設計は有用です。\n\n## 2. Short-horizon mean reversion in cryptocurrency markets\n\n**重要度: 8.5/10 — Order flowと短期price response**\n\n15分足で、183のBinance銘柄の90%に有意なdirectional reversalが見られる一方、米株・ETFでは2.7%に留まります。単純なreturn autocorrelationより、直前の値動きの符号を逆張りするsignalが中心です。\n\nReversalはaggressive taker flow後に強く、flow intensityとともに増大しますが、消費されたorder-book depthでは説明されません。gross edgeは約1.3bp/tradeで、想定5bpのround-trip costを下回るため、そのまま取引戦略になるわけではありません。\n\n## 3. The Loop-Gain Matrix\n\n**重要度: 8/10 — Cross-asset feedback**\n\nLeveraged productのrebalancing impactを、個別商品のscalar feedbackではなくmatrix feedback systemとして扱います。安定性を見るべき量は各商品の自己gainではなく、loop-gain matrixのspectral radiusです。\n\n各商品の自己feedbackだけを見ると、cross-asset amplificationや一方向のtransmitted displacementを見落とします。複数product・venue間のflow transmissionを監視する考え方として電子取引に有用です。\n\n## 4. tse_tick\n\n**重要度: 6.5/10 — 日本市場のdata infrastructure**\n\nNikkei NEEDSのTSE tick-level trade/quote dataを、Polars、Parquet、DuckDBで扱うためのPython libraryです。date単位のatomic ingestion、memory-aware process pool、partition pruningを備え、worst-day peak memoryを24.5GBから2.4GBへ削減し、単一銘柄time-window queryをpandas CSV scan比で約410倍高速化したと報告しています。\n\n研究モデルではありませんが、日本市場のmicrostructure研究用data pipelineとして実務的です。\n\n## Rates conclusion\n\nHJM、multi-curve、OIS、swap/swaption、yield-curve dynamicsへ直接関係する強い新着はありませんでした。読む順はABIDES-MARL → short-horizon mean reversion → Loop-Gain Matrix → tse_tickです。",
+      "papers": [
+        {
+          "arxivId": "2511.02016v2",
+          "title": "ABIDES-MARL: A Multi-Agent Reinforcement Learning Environment for Optimal Execution with Endogenous Liquidity",
+          "authors": [
+            "Patrick Cheridito",
+            "Jean-Loup Dupret",
+            "Zhexin Wu"
+          ],
+          "submittedDate": "2025-11-03",
+          "updatedDate": "2025-11-05",
+          "topics": [
+            "Electronic trading",
+            "Reinforcement learning",
+            "Limit order books"
+          ],
+          "absUrl": "https://arxiv.org/abs/2511.02016v2",
+          "pdfUrl": "https://arxiv.org/pdf/2511.02016v2",
+          "schedulerRank": 1,
+          "schedulerRating": 9,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "最優先・電子取引",
+          "schedulerSummary": "Adaptive market makerを含むstochastic gameとしてexecutionと内生的流動性を学習します。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 9,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.21888v1",
+          "title": "Short-horizon mean reversion in cryptocurrency markets: a matched cross-market measurement",
+          "authors": [
+            "Nadav A. Kitron",
+            "Jonathan M. Wengrowicz"
+          ],
+          "submittedDate": "2026-08-22",
+          "updatedDate": "2026-08-22",
+          "topics": [
+            "Market microstructure",
+            "Electronic trading",
+            "Limit order books"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.21888v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.21888v1",
+          "schedulerRank": 2,
+          "schedulerRating": 8.5,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "order flow / short-horizon response",
+          "schedulerSummary": "Cryptoの15分reversalを米国株と同一protocolで比較し、aggressive flowとの関係を測定します。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 8.5,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.22768v1",
+          "title": "The Loop-Gain Matrix: Coupled Rebalancing Feedback and the Blind Spots of Scalar Stability Monitoring",
+          "authors": [
+            "Jihwan Woo"
+          ],
+          "submittedDate": "2026-08-24",
+          "updatedDate": "2026-08-24",
+          "topics": [
+            "Market microstructure",
+            "Model validation",
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.22768v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.22768v1",
+          "schedulerRank": 3,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "cross-asset feedback",
+          "schedulerSummary": "Rebalancing feedbackをmatrix化し、spectral radiusで複数商品間の増幅を監視します。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.23053v1",
+          "title": "tse_tick: A Python Library for Parsing and Querying Nikkei NEEDS Tick Data from the Tokyo Stock Exchange",
+          "authors": [
+            "Kazumi Li",
+            "Masataka Hayashi",
+            "Teruo Nakatsuma",
+            "Peter Romero"
+          ],
+          "submittedDate": "2026-08-24",
+          "updatedDate": "2026-08-24",
+          "topics": [
+            "Market microstructure",
+            "Electronic trading",
+            "Limit order books"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.23053v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.23053v1",
+          "schedulerRank": 4,
+          "schedulerRating": 6.5,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "日本市場のdata infrastructure",
+          "schedulerSummary": "TSE tick dataをmemory-awareにingestし、ParquetとDuckDBで高速検索する研究基盤です。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 6.5,
+              "scale": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-27-daily-chatgpt-01",
+      "editionDate": "2026-08-27",
+      "editionKind": "daily",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-28T14:01:59Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "8月26日listingからDeFi lendingのrate impactとCFMM均衡の二本を評価しました。",
+      "expectedBatchDate": "2026-08-26",
+      "observedBatchDate": "2026-08-26",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年8月27日 — Daily review\n\n確認できた最新Quantitative Finance listingは2026年8月26日分でした。ページは正常に取得できており、arXiv障害による持ち越しではありません。\n\n## 1. Capital allocation on decentralized lending platforms\n\n**重要度: 6.5/10 — 金利impact・DeFi**\n\n貸し手が複数のlending marketへ資金を配分すると、自分自身の供給によってutilizationと受取金利が下がるというrate impactを明示的に扱います。linear、kinked、Morpho AdaptiveCurveIRMについて最適allocationを導きます。\n\n特に、kinked rate modelではallocation後のutilizationをちょうどkinkへ持っていく解がlender側では最適にならない一方、borrower側では最適になり得るという非対称性を示します。参加者間のインセンティブ衝突がkink周辺のrate volatilityを増幅し得ます。\n\nTerm-structure modelではありませんが、notionalや供給量がrateへ非線形に影響する構造を内生化している点は参考になります。\n\n## 2. Equilibrium in closed constant-function market maker economies\n\n**重要度: 5.5/10 — Market microstructure theory**\n\n二資産・二trader・feeなしのCFMMで均衡を解析します。内部状態がno-trade equilibriumになる必要十分条件は、CFMMのmarginal priceと両traderのmarginal rate of substitutionが一致することです。\n\nIndividual rationalな均衡は固定されたCFMM invariant上でPareto optimalとなり、任意の内部feasible stateへ有限回のtradeで到達でき、交互のutility-maximizing tradeがPareto-optimal equilibriumへ収束します。trade順序によるfirst-mover advantage/disadvantageの条件も導きます。\n\n数学としては明確ですが、LOB、RFQ、inventory、queue、latencyを扱わないため、金利電子取引への直接性は低めです。\n\n## Conclusion\n\n今日読むならCapital allocationを優先します。HJM、multi-curve、yield-curve dynamics、swap/swaption、fixed-income market makingに直接刺さる高優先度の新着はありませんでした。",
+      "papers": [
+        {
+          "arxivId": "2608.24206v1",
+          "title": "Capital allocation on decentralized lending platforms",
+          "authors": [
+            "Bastien Baude",
+            "Vincent Danos",
+            "Hamza El Khalloufi"
+          ],
+          "submittedDate": "2026-08-25",
+          "updatedDate": "2026-08-25",
+          "topics": [
+            "Interest-rate models",
+            "Mathematical finance",
+            "Model validation"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.24206v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.24206v1",
+          "schedulerRank": 1,
+          "schedulerRating": 6.5,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "金利impact・DeFi",
+          "schedulerSummary": "供給量がutilizationと貸出金利へ与える自己impactを含め、複数市場への最適配分を導きます。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 6.5,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.23915v1",
+          "title": "Equilibrium in closed constant-function market maker economies",
+          "authors": [
+            "Muqiao Huang",
+            "Ruodu Wang",
+            "Yiyun Wang"
+          ],
+          "submittedDate": "2026-08-24",
+          "updatedDate": "2026-08-24",
+          "topics": [
+            "Market making",
+            "Mathematical finance",
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.23915v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.23915v1",
+          "schedulerRank": 2,
+          "schedulerRating": 5.5,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "market microstructure theory",
+          "schedulerSummary": "FeeなしCFMM economyのno-trade equilibrium、Pareto optimality、到達可能性、収束を解析します。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 5.5,
+              "scale": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-28-daily-chatgpt-01",
+      "editionDate": "2026-08-28",
+      "editionKind": "daily",
+      "sourceKind": "chatgpt-scheduled-task",
+      "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+      "importedAt": "2026-08-28T14:01:59Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "8月27日更新からcoupled feedback networkの同定・spectral monitoring論文を一件評価しました。",
+      "expectedBatchDate": "2026-08-27",
+      "observedBatchDate": "2026-08-27",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年8月28日 — Daily review\n\narXiv Quantitative Financeの最新更新は2026年8月27日分まで正常に反映されていました。今日はarXiv側の更新不調による持ち越しではありません。\n\n## Output-Only Identification and Spectral Monitoring of Coupled Feedback Networks\n\n**重要度: 6.5/10 — Feedback network / 電子取引隣接**\n\n複数主体の行動が価格へ影響し、その価格変化が再び主体の行動へ戻るcoupled feedback networkを扱います。観測できるのは各channelのoutputと既知の時変gainだけで、外部probeや真のcoupling matrixを直接観測できない状況から相互作用を同定します。\n\nモデルはL_t = Phi diag(gamma_t)で、gamma_tは観測可能な時変gain、Phiは未知のcouplingです。gainの時間変化を自然実験として使い、十分なvariationとrank conditionの下で局所identificationを得ます。Spectral radiusやresolvent sensitivityを通じて、個別channelでは安全に見えるpositionでも相互作用によって不安定化するリスクを監視します。\n\n金融applicationはleveraged fundのrebalancing feedbackです。Quote engineやRFQ skewを直接改善する論文ではありませんが、client flow → dealer hedge → market move → 他participant flowというfeedbackを、複数tenor・product・venueで解析する発想には応用余地があります。\n\n## Rates conclusion\n\nHJM、short-rate、multi-curve、yield-curve dynamics、swap/swaption calibrationへ直接関係する新しい金利モデル論文は確認できませんでした。今日はこの論文を軽く読む程度で十分です。",
+      "papers": [
+        {
+          "arxivId": "2608.25844v1",
+          "title": "Output-Only Identification and Spectral Monitoring of Coupled Feedback Networks with Known Time-Varying Actuation",
+          "authors": [
+            "Jihwan Woo"
+          ],
+          "submittedDate": "2026-08-26",
+          "updatedDate": "2026-08-26",
+          "topics": [
+            "Market microstructure",
+            "Model validation",
+            "Mathematical finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.25844v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.25844v1",
+          "schedulerRank": 1,
+          "schedulerRating": 6.5,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "feedback network・電子取引隣接",
+          "schedulerSummary": "既知の時変gainとoutputだけからcouplingを同定し、spectral riskとshock transmissionを監視します。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 6.5,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

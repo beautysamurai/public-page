@@ -190,6 +190,171 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-08-24-daily-chatgpt-01",
+      "message": "Because the next normal announcement had not yet occurred, the new batch was deferred and three papers from the August 21 batch were reassessed.",
+      "sourceText": "## August 24, 2026 — Schedule check and reassessment\n\nAt the time of the check, the latest arXiv Quantitative Finance batch was dated August 21, 2026. Under the normal announcement schedule, the next batch was due on Monday morning in Japan. This was therefore a pre-announcement state rather than a site outage. The new batch was deferred, and only three papers from the most recent batch were reassessed.\n\n## 1. M3: A State-Event Generative Foundation Model\n\n**Importance: 8/10 — Electronic trading**\n\nThis is a closed-loop generative model that handles not only order events but also the resulting changes in LOB state. It generates future order-flow trajectories while updating market state through a matching engine. Its main applications are forecasting, stress testing, market-impact analysis, and RL training environments.\n\nIts main strength is learning the cycle event → market-state change → next event. The empirical setting is an equity LOB, however, so it cannot be transferred directly to OTC or RFQ markets.\n\n## 2. Concentrated Liquidity Provision\n\n**Importance: 5.5/10 — Market making / RL**\n\nThe paper formulates AMM liquidity provision as a stochastic impulse-control problem and uses RL to choose both rebalance times and price ranges. The state includes mispricing, rebalancing cost, uncertainty, inventory, and risk preference, while the learned policy compresses the left tail of PnL.\n\nIt is useful as an inventory-aware control example, but its DeFi AMM market structure is less directly relevant to dealer markets and electronic rates trading.\n\n## 3. Deep-MKV-TS\n\n**Importance: 6.5/10 — Adjacent field**\n\nThe method preserves the drift of an interpretable reference model and adjusts only its volatility through path-dependent McKean–Vlasov control. Experiments on Heston-family models and intraday futures improve the reproduction of path and volatility features.\n\nIt is not directly an interest-rate model, but the design is relevant to retaining an existing curve or rates model while correcting only residual dynamics with data-driven methods.\n\n## Rates conclusion\n\nNo new paper directly relevant to HJM, multi-curve, OIS, swaps or swaptions, or yield-curve dynamics was identified. The new batch was carried forward to the next check.",
+      "papers": [
+        {
+          "arxivId": "2608.19227v1",
+          "schedulerLabel": "Electronic trading / market simulator",
+          "schedulerSummary": "A closed-loop market world model that links order events and LOB state through a matching engine.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.19389v1",
+          "schedulerLabel": "Market making / RL",
+          "schedulerSummary": "Learns AMM liquidity ranges and rebalancing decisions from inventory and uncertainty.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.19394v1",
+          "schedulerLabel": "Adjacent field / scenario generation",
+          "schedulerSummary": "Preserves an interpretable reference model while correcting volatility dynamics with path-dependent control.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-25-daily-chatgpt-01",
+      "message": "Three papers from the August 24 batch were assessed across flow modeling, scenario generation, and interest-rate sensitivity.",
+      "sourceText": "## August 25, 2026 — Daily review\n\nThe latest verified batch was dated August 24, 2026. Its timing was consistent with the normal announcement schedule, so this was not a deferral caused by an arXiv outage.\n\n## 1. Calibrating Inelastic Markets to Options\n\n**Importance: 8/10 — Flow and the option surface**\n\nThe paper reduces the Marketron model, which links order flow and returns, from 18 parameters to an identifiable nine-parameter specification. Correlation between flow and return shocks represents short-maturity skew, and calibration proceeds in stages from the physical to the risk-neutral measure. A further feature is the representation of log-price through a generalized Langevin equation with a memory kernel.\n\nThis is not an electronic-trading model by itself, but it treats flow as a dynamic state connected to price formation and the option surface rather than as a simple explanatory variable. That perspective is relevant to modeling post-RFQ flow and subsequent market changes. The empirical application is to SPX options rather than rates or RFQ markets.\n\n## 2. Rethinking Synthetic Scenario Realism\n\n**Importance: 6.5/10 — Scenario generation**\n\nSynthetic market paths are evaluated through compatibility: whether a hedger trained on the generated data remains effective in the real market, rather than only through visual or statistical realism. Hedging error is decomposed into learning error and a compatibility gap, showing that statistical fidelity and decision performance can diverge.\n\nThe practical warning is important for execution or hedging policies trained on simulation: realism metrics alone should not determine the choice of generator.\n\n## 3. Surrender runs\n\n**Importance: 5/10 — Interest-rate sensitivity / insurance**\n\nThe model studies insurance surrender runs when rising rates reduce asset values and increase policyholders' outside investment returns. It derives closed-form interest-rate thresholds for fundamentals-driven and self-fulfilling runs.\n\nThe interest-rate sensitivity is interesting, but this is not a term-structure model for HJM, curve construction, or swap and swaption pricing, so its priority is lower.\n\n## Conclusion\n\nThe first paper to read is the Marketron paper. No strong new paper directly relevant to HJM, multi-curve, OIS, swaps or swaptions, or yield-curve dynamics was identified.",
+      "papers": [
+        {
+          "arxivId": "2608.20589v1",
+          "schedulerLabel": "Top priority · Flow and option surface",
+          "schedulerSummary": "Connects order-flow dynamics to an identifiable reduced model and option-surface calibration.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.20842v1",
+          "schedulerLabel": "Scenario generation",
+          "schedulerSummary": "Evaluates synthetic paths by out-of-sample hedging compatibility rather than statistical realism alone.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.20982v1",
+          "schedulerLabel": "Interest-rate sensitivity / insurance",
+          "schedulerSummary": "Derives rate thresholds for fundamental and self-fulfilling insurance surrender runs.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-26-daily-chatgpt-01",
+      "message": "Four papers from the August 25 batch were assessed across optimal execution, short-horizon reversal, cross-asset feedback, and Japanese-market data infrastructure.",
+      "sourceText": "## August 26, 2026 — Daily review\n\nThe latest verified batch was dated August 25, 2026. The category listings were updating normally, so this was not a deferral caused by a site outage.\n\n## 1. ABIDES-MARL\n\n**Importance: 9/10 — Electronic trading**\n\nClassical optimal-execution models often treat market impact as exogenous. This study instead models the market as a finite-horizon stochastic game in which market makers also react strategically. It extends the ABIDES environment to multi-agent RL, so liquidity emerges endogenously from interaction among agents.\n\nThe key point is that execution strategy and market-maker behavior change together, so a policy optimized against a fixed environment can break down against adaptive counterparties. The setting is not an RFQ market, but the design principle of including the other side's response is highly relevant.\n\n## 2. Short-horizon mean reversion in cryptocurrency markets\n\n**Importance: 8.5/10 — Order flow and short-horizon price response**\n\nAt a 15-minute horizon, 90% of 183 Binance pairs show significant directional reversal, compared with 2.7% of US stocks and ETFs. The main signal is contrarian exposure to the sign of the previous move rather than ordinary return autocorrelation.\n\nReversal is stronger after aggressive taker flow and increases with flow intensity, while consumed order-book depth does not explain it. The gross edge is about 1.3 bp per trade, below an assumed 5 bp round-trip cost, so the result is a microstructure measurement rather than an immediately tradable strategy.\n\n## 3. The Loop-Gain Matrix\n\n**Importance: 8/10 — Cross-asset feedback**\n\nThe paper models rebalancing impact from leveraged products as a matrix feedback system rather than as independent scalar feedback. The relevant stability measure is the spectral radius of the loop-gain matrix, not each product's own gain.\n\nMonitoring only self-feedback misses cross-asset amplification and one-way transmitted displacement. The framework is useful for thinking about flow transmission across products and venues.\n\n## 4. tse_tick\n\n**Importance: 6.5/10 — Japanese-market data infrastructure**\n\nThis Python library processes Nikkei NEEDS tick-level TSE trade and quote data with Polars, Parquet, and DuckDB. It provides atomic per-date ingestion, a memory-aware process pool, and partition pruning. The paper reports reducing worst-day peak memory from 24.5 GB to 2.4 GB and making a single-ticker time-window query roughly 410 times faster than a pandas CSV scan.\n\nIt is infrastructure rather than a market model, but it is practical for Japanese-market microstructure research.\n\n## Rates conclusion\n\nNo strong new paper directly relevant to HJM, multi-curve, OIS, swaps or swaptions, or yield-curve dynamics was identified. The recommended reading order is ABIDES-MARL → short-horizon mean reversion → Loop-Gain Matrix → tse_tick.",
+      "papers": [
+        {
+          "arxivId": "2511.02016v2",
+          "schedulerLabel": "Top priority · Electronic trading",
+          "schedulerSummary": "Models execution and endogenous liquidity as a strategic multi-agent game with adaptive market makers.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.21888v1",
+          "schedulerLabel": "Order flow / short-horizon response",
+          "schedulerSummary": "Measures pervasive 15-minute crypto reversal and its relation to aggressive order flow under a matched cross-market protocol.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.22768v1",
+          "schedulerLabel": "Cross-asset feedback",
+          "schedulerSummary": "Uses a loop-gain matrix and its spectral radius to monitor amplification across products.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.23053v1",
+          "schedulerLabel": "Japanese-market data infrastructure",
+          "schedulerSummary": "Provides memory-aware ingestion and fast Parquet/DuckDB querying for TSE tick data.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-27-daily-chatgpt-01",
+      "message": "Two papers from the August 26 listing were assessed on lending-rate impact and CFMM equilibrium.",
+      "sourceText": "## August 27, 2026 — Daily review\n\nThe latest verified Quantitative Finance listing was dated August 26, 2026. The page was retrieved normally, so this was not a deferral caused by an arXiv outage.\n\n## 1. Capital allocation on decentralized lending platforms\n\n**Importance: 6.5/10 — Rate impact / DeFi**\n\nWhen a lender allocates capital across several lending markets, its own supply lowers utilization and therefore the rate it receives. The paper makes this rate impact explicit and derives optimal allocations for linear, kinked, and Morpho AdaptiveCurveIRM rate models.\n\nA notable asymmetry is that an allocation bringing utilization exactly to the kink is never optimal for the lender under the kinked model, while it can be optimal for a borrower. The resulting conflict of incentives can amplify rate volatility around the kink.\n\nThis is not a term-structure model, but it is useful for thinking about nonlinear effects of notional or supplied capital on rates.\n\n## 2. Equilibrium in closed constant-function market maker economies\n\n**Importance: 5.5/10 — Market-microstructure theory**\n\nThe paper studies equilibrium in a fee-free CFMM economy with two assets and two traders. An interior state is a no-trade equilibrium exactly when the CFMM marginal price equals both traders' marginal rates of substitution.\n\nIndividually rational equilibria are Pareto optimal on a fixed CFMM invariant. Every interior feasible state is reachable through finitely many trades, and alternating utility-maximizing trades converge to a Pareto-optimal equilibrium. Conditions for first-mover advantage or disadvantage are also derived.\n\nThe mathematics is clear, but the model does not include LOBs, RFQs, inventory, queue position, or latency, so its direct relevance to electronic rates trading is limited.\n\n## Conclusion\n\nThe capital-allocation paper is the first one to read. No high-priority new paper directly relevant to HJM, multi-curve, yield-curve dynamics, swaps or swaptions, or fixed-income market making was identified.",
+      "papers": [
+        {
+          "arxivId": "2608.24206v1",
+          "schedulerLabel": "Rate impact / DeFi",
+          "schedulerSummary": "Derives optimal multi-market lender allocation while accounting for the lender's own impact on utilization and rates.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.23915v1",
+          "schedulerLabel": "Market-microstructure theory",
+          "schedulerSummary": "Analyzes no-trade equilibrium, Pareto optimality, reachability, and convergence in a fee-free CFMM economy.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-28-daily-chatgpt-01",
+      "message": "One paper from the August 27 update was assessed on coupled-feedback identification and spectral monitoring.",
+      "sourceText": "## August 28, 2026 — Daily review\n\nThe latest arXiv Quantitative Finance update, dated August 27, 2026, was reflected normally. This review was not deferred because of an arXiv update problem.\n\n## Output-Only Identification and Spectral Monitoring of Coupled Feedback Networks\n\n**Importance: 6.5/10 — Feedback networks / adjacent to electronic trading**\n\nThe paper studies coupled feedback networks in which participants' actions affect prices and the resulting price changes feed back into subsequent actions. Only channel outputs and known time-varying gains are observed; there is no external probe and the true coupling matrix is not directly visible.\n\nThe model is L_t = Phi diag(gamma_t), where gamma_t is an observed time-varying gain and Phi is the unknown coupling. Variation in the gains acts as a natural experiment, allowing local identification under sufficient variation and a rank condition. Spectral-radius and resolvent-sensitivity measures are then used to monitor the risk that positions which look safe channel by channel become unstable through interaction.\n\nThe financial application is leveraged-fund rebalancing feedback. It is not a direct model for quote engines or RFQ skew, but the feedback chain client flow → dealer hedge → market move → other participant flow could be adapted to analysis across tenors, products, and venues.\n\n## Rates conclusion\n\nNo new interest-rate model directly relevant to HJM, short-rate models, multi-curve construction, yield-curve dynamics, or swap and swaption calibration was identified. A light read of this paper is sufficient for today.",
+      "papers": [
+        {
+          "arxivId": "2608.25844v1",
+          "schedulerLabel": "Feedback networks / adjacent to electronic trading",
+          "schedulerSummary": "Identifies coupling from outputs and known time-varying gains, then monitors spectral risk and transmitted disturbances.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

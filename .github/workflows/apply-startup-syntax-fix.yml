@@ -29,7 +29,7 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Patch startup script and validation workflow
+      - name: Patch startup script and add parser regression test
         shell: bash
         run: |
           python - <<'PY'
@@ -47,44 +47,68 @@ jobs:
           new = '''    $currentHistory = Join-Path -Path $worktreeDirectory -ChildPath "content/chatgpt_scheduler_history.json"
               $currentTranslation = Join-Path -Path $worktreeDirectory -ChildPath "site/data/i18n/en.json"
           '''
-          if script.count(old) != 1:
-              raise SystemExit("Expected exactly one malformed Join-Path block")
-          script_path.write_text(script.replace(old, new), encoding="utf-8")
+          if old in script:
+              script = script.replace(old, new, 1)
+              script_path.write_text(script, encoding="utf-8")
+          elif new not in script:
+              raise SystemExit("Neither the expected malformed nor corrected Join-Path block was found")
 
-          workflow_path = Path(".github/workflows/validate.yml")
-          workflow = workflow_path.read_text(encoding="utf-8")
-          marker = '''      - name: Run unit tests
-                  run: python -m unittest discover -s tests -v
-          '''
-          parser_step = '''      - name: Parse PowerShell scripts
-                  shell: pwsh
-                  run: |
-                    $failed = $false
-                    Get-ChildItem -Path scripts -Filter *.ps1 -File | ForEach-Object {
-                      $scriptPath = $_.FullName
-                      $tokens = $null
-                      $parseErrors = $null
-                      [System.Management.Automation.Language.Parser]::ParseFile(
-                        $scriptPath,
-                        [ref]$tokens,
-                        [ref]$parseErrors
-                      ) | Out-Null
-                      foreach ($parseError in $parseErrors) {
-                        $failed = $true
-                        $lineNumber = $parseError.Extent.StartLineNumber
-                        $message = $parseError.Message
-                        Write-Output ("{0}:{1}: {2}" -f $scriptPath, $lineNumber, $message)
-                      }
-                    }
-                    if ($failed) { throw "PowerShell parser errors were found." }
+          test_path = Path("tests/test_powershell_syntax.py")
+          test_path.write_text(
+              '''from __future__ import annotations
 
-                - name: Run unit tests
-                  run: python -m unittest discover -s tests -v
-          '''
-          if workflow.count(marker) != 1:
-              raise SystemExit("Expected exactly one unit-test marker in validate.yml")
-          workflow_path.write_text(
-              workflow.replace(marker, parser_step), encoding="utf-8"
+import shutil
+import subprocess
+import unittest
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+class PowerShellSyntaxTests(unittest.TestCase):
+    def test_all_powershell_scripts_parse(self):
+        executable = shutil.which("pwsh") or shutil.which("powershell")
+        if executable is None:
+            self.skipTest("PowerShell is not installed in this environment")
+
+        command = r'''$failed = $false
+Get-ChildItem -Path scripts -Filter *.ps1 -File | ForEach-Object {
+    $scriptPath = $_.FullName
+    $tokens = $null
+    $parseErrors = $null
+    [System.Management.Automation.Language.Parser]::ParseFile(
+        $scriptPath,
+        [ref]$tokens,
+        [ref]$parseErrors
+    ) | Out-Null
+    foreach ($parseError in $parseErrors) {
+        $failed = $true
+        $lineNumber = $parseError.Extent.StartLineNumber
+        $message = $parseError.Message
+        Write-Output ("{0}:{1}: {2}" -f $scriptPath, $lineNumber, $message)
+    }
+}
+if ($failed) { exit 1 }
+'''
+        completed = subprocess.run(
+            [executable, "-NoProfile", "-NonInteractive", "-Command", command],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(
+            completed.returncode,
+            0,
+            msg=(completed.stdout + completed.stderr).strip(),
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()
+''',
+              encoding="utf-8",
           )
           PY
 
@@ -118,15 +142,15 @@ jobs:
           python scripts/import_scheduler_history.py --check
           git diff --check
 
-      - name: Remove one-shot workflow
-        shell: bash
-        run: rm .github/workflows/apply-startup-syntax-fix.yml
-
-      - name: Commit and push
+      - name: Commit and push source changes
         shell: bash
         run: |
+          if git diff --quiet -- scripts/sync_on_startup.ps1 tests/test_powershell_syntax.py; then
+            echo "Source fix is already present; nothing to commit."
+            exit 0
+          fi
           git config user.name "Public Research Digest"
           git config user.email "public-research-digest@users.noreply.github.com"
-          git add -A
+          git add scripts/sync_on_startup.ps1 tests/test_powershell_syntax.py
           git commit -m "fix: correct startup sync PowerShell syntax"
           git push origin HEAD:fix/powershell-startup-syntax

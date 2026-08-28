@@ -117,23 +117,46 @@ actual scheduled response before anything is added to the public history.
 ## Synchronize reviewed updates when Windows starts
 
 The Windows startup sync never writes to `main`. It refreshes local-only arXiv
-candidates, looks for a complete reviewed public bundle, validates it, creates
-an isolated Git worktree and timestamped automation branch, runs all tests,
-pushes the branch, and opens a pull request for manual review.
+candidates, looks for a producer-complete reviewed public bundle, validates it,
+creates an isolated Git worktree and timestamped automation branch, runs all
+tests, pushes the branch, and opens a pull request for manual review.
 
 The sync does **not** read private ChatGPT task history automatically. A trusted
-local export or review step must first place these two complete snapshots in the
-ignored local inbox:
+local export or review step must first produce two complete reviewed snapshots:
+
+- `chatgpt_scheduler_history.json` for the source/Japanese archive;
+- `en.json` for the reviewed English editorial overlay.
+
+Do not copy or replace those files directly inside an existing inbox. Stage them
+with the checked-in producer handoff script:
+
+~~~powershell
+powershell -ExecutionPolicy Bypass `
+  -File scripts/stage_public_review_bundle.ps1 `
+  -HistoryPath <path-to-reviewed-history.json> `
+  -TranslationPath <path-to-reviewed-en.json>
+~~~
+
+The staging script creates a fresh sibling directory, copies both reviewed
+files, writes `bundle.complete.json` with their exact byte lengths and SHA-256
+digests, validates that three-file bundle, and only then atomically renames the
+completed directory to:
 
 ~~~text
 .local/inbox/public-review/
   chatgpt_scheduler_history.json
   en.json
+  bundle.complete.json
 ~~~
 
-Both files are required. The Japanese/source history and English overlay must
-contain all existing editions unchanged plus at least one new reviewed edition.
-The validator rejects removed or rewritten public history, mismatched editions,
+The consumer refuses an inbox without the completion manifest. After atomically
+claiming the directory, it verifies the manifest and hashes **before** creating
+the publication snapshot, copies all three files with exclusive sharing, and
+revalidates the exact snapshot bytes before opening a review branch.
+
+The Japanese/source history and English overlay must contain all existing
+editions unchanged plus at least one new reviewed edition. The validator rejects
+removed or rewritten public history, reordered prefixes, mismatched editions,
 papers or rating labels, unknown fields, untranslated English copy, internal
 citation tokens, email addresses, local paths, and other unsafe public text.
 
@@ -164,9 +187,10 @@ powershell -ExecutionPolicy Bypass -File scripts/install_startup_sync_task.ps1 -
 ~~~
 
 Logs and processed review bundles remain below **.local/**. After a PR is opened,
-the inbox bundle is moved to a timestamped local processed directory so the next
-logon does not create a duplicate PR. GitHub Pages continues to show the last
-merged edition until the PR is reviewed and merged.
+the claimed manifest-bound bundle is moved to a timestamped local processed
+directory so the next logon does not create a duplicate PR. A failed claim is
+retained locally for inspection. GitHub Pages continues to show the last merged
+edition until the PR is reviewed and merged.
 
 ## Publish with GitHub Pages
 

@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-08-26-daily-chatgpt-01",
+  "editionDate": "2026-08-26",
+  "editionKind": "daily",
+  "sourceKind": "chatgpt-scheduled-task",
+  "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+  "importedAt": "2026-08-28T14:01:59Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "8月25日バッチからoptimal execution、短期reversal、cross-asset feedback、日本市場data基盤の四本を評価しました。",
+  "expectedBatchDate": "2026-08-25",
+  "observedBatchDate": "2026-08-25",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年8月26日 — Daily review\n\n確認できた最新バッチは2026年8月25日分でした。カテゴリ一覧は正常に更新されており、サイト障害による持ち越しではありません。\n\n## 1. ABIDES-MARL\n\n**重要度: 9/10 — 電子取引**\n\n古典的なoptimal executionではmarket impactを外生的に置きがちですが、この研究はmarket makerも戦略的に反応するfinite-horizon stochastic gameとして市場を扱います。ABIDES環境をmulti-agent RLへ拡張し、流動性をagent間の相互作用から内生的に発生させます。\n\nExecution strategyとmarket-maker behaviorが相互に変わるため、single-agentで最適化したpolicyがadaptiveな相手には崩れ得るという点が重要です。RFQへ直接適用できるわけではありませんが、相手側の反応を含めてexecutionを考える設計は有用です。\n\n## 2. Short-horizon mean reversion in cryptocurrency markets\n\n**重要度: 8.5/10 — Order flowと短期price response**\n\n15分足で、183のBinance銘柄の90%に有意なdirectional reversalが見られる一方、米株・ETFでは2.7%に留まります。単純なreturn autocorrelationより、直前の値動きの符号を逆張りするsignalが中心です。\n\nReversalはaggressive taker flow後に強く、flow intensityとともに増大しますが、消費されたorder-book depthでは説明されません。gross edgeは約1.3bp/tradeで、想定5bpのround-trip costを下回るため、そのまま取引戦略になるわけではありません。\n\n## 3. The Loop-Gain Matrix\n\n**重要度: 8/10 — Cross-asset feedback**\n\nLeveraged productのrebalancing impactを、個別商品のscalar feedbackではなくmatrix feedback systemとして扱います。安定性を見るべき量は各商品の自己gainではなく、loop-gain matrixのspectral radiusです。\n\n各商品の自己feedbackだけを見ると、cross-asset amplificationや一方向のtransmitted displacementを見落とします。複数product・venue間のflow transmissionを監視する考え方として電子取引に有用です。\n\n## 4. tse_tick\n\n**重要度: 6.5/10 — 日本市場のdata infrastructure**\n\nNikkei NEEDSのTSE tick-level trade/quote dataを、Polars、Parquet、DuckDBで扱うためのPython libraryです。date単位のatomic ingestion、memory-aware process pool、partition pruningを備え、worst-day peak memoryを24.5GBから2.4GBへ削減し、単一銘柄time-window queryをpandas CSV scan比で約410倍高速化したと報告しています。\n\n研究モデルではありませんが、日本市場のmicrostructure研究用data pipelineとして実務的です。\n\n## Rates conclusion\n\nHJM、multi-curve、OIS、swap/swaption、yield-curve dynamicsへ直接関係する強い新着はありませんでした。読む順はABIDES-MARL → short-horizon mean reversion → Loop-Gain Matrix → tse_tickです。",
+  "papers": [
+    {
+      "arxivId": "2511.02016v2",
+      "title": "ABIDES-MARL: A Multi-Agent Reinforcement Learning Environment for Optimal Execution with Endogenous Liquidity",
+      "authors": [
+        "Patrick Cheridito",
+        "Jean-Loup Dupret",
+        "Zhexin Wu"
+      ],
+      "submittedDate": "2025-11-03",
+      "updatedDate": "2025-11-05",
+      "topics": [
+        "Electronic trading",
+        "Reinforcement learning",
+        "Limit order books"
+      ],
+      "absUrl": "https://arxiv.org/abs/2511.02016v2",
+      "pdfUrl": "https://arxiv.org/pdf/2511.02016v2",
+      "schedulerRank": 1,
+      "schedulerRating": 9,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "最優先・電子取引",
+      "schedulerSummary": "Adaptive market makerを含むstochastic gameとしてexecutionと内生的流動性を学習します。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 9,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.21888v1",
+      "title": "Short-horizon mean reversion in cryptocurrency markets: a matched cross-market measurement",
+      "authors": [
+        "Nadav A. Kitron",
+        "Jonathan M. Wengrowicz"
+      ],
+      "submittedDate": "2026-08-22",
+      "updatedDate": "2026-08-22",
+      "topics": [
+        "Market microstructure",
+        "Electronic trading",
+        "Limit order books"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.21888v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.21888v1",
+      "schedulerRank": 2,
+      "schedulerRating": 8.5,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "order flow / short-horizon response",
+      "schedulerSummary": "Cryptoの15分reversalを米国株と同一protocolで比較し、aggressive flowとの関係を測定します。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 8.5,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.22768v1",
+      "title": "The Loop-Gain Matrix: Coupled Rebalancing Feedback and the Blind Spots of Scalar Stability Monitoring",
+      "authors": [
+        "Jihwan Woo"
+      ],
+      "submittedDate": "2026-08-24",
+      "updatedDate": "2026-08-24",
+      "topics": [
+        "Market microstructure",
+        "Model validation",
+        "Electronic trading"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.22768v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.22768v1",
+      "schedulerRank": 3,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "cross-asset feedback",
+      "schedulerSummary": "Rebalancing feedbackをmatrix化し、spectral radiusで複数商品間の増幅を監視します。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.23053v1",
+      "title": "tse_tick: A Python Library for Parsing and Querying Nikkei NEEDS Tick Data from the Tokyo Stock Exchange",
+      "authors": [
+        "Kazumi Li",
+        "Masataka Hayashi",
+        "Teruo Nakatsuma",
+        "Peter Romero"
+      ],
+      "submittedDate": "2026-08-24",
+      "updatedDate": "2026-08-24",
+      "topics": [
+        "Market microstructure",
+        "Electronic trading",
+        "Limit order books"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.23053v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.23053v1",
+      "schedulerRank": 4,
+      "schedulerRating": 6.5,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "日本市場のdata infrastructure",
+      "schedulerSummary": "TSE tick dataをmemory-awareにingestし、ParquetとDuckDBで高速検索する研究基盤です。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 6.5,
+          "scale": 10
+        }
+      ]
+    }
+  ]
+}

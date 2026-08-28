@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-08-25-daily-chatgpt-01",
+  "editionDate": "2026-08-25",
+  "editionKind": "daily",
+  "sourceKind": "chatgpt-scheduled-task",
+  "sourceLabel": "ChatGPT scheduled task · sanitized public archive",
+  "importedAt": "2026-08-28T14:01:59Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "8月24日バッチからflow・scenario generation・金利感応度に関する三本を評価しました。",
+  "expectedBatchDate": "2026-08-24",
+  "observedBatchDate": "2026-08-24",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年8月25日 — Daily review\n\n確認できた最新バッチは2026年8月24日分でした。通常アナウンス時刻との整合が取れており、arXiv障害による持ち越しではありません。\n\n## 1. Calibrating Inelastic Markets to Options\n\n**重要度: 8/10 — Flowとoption surface**\n\n市場のorder flowとreturnの相互作用を含むMarketronを、18パラメータから識別可能な9パラメータへ縮約します。flow shockとreturn shockの相関でshort-maturity skewを表し、physical measureからrisk-neutral measureへ段階的にcalibrateします。log-priceをmemory kernelを持つgeneralized Langevin equationとして表現する点も特徴です。\n\n電子取引そのものではありませんが、flowを単なる説明変数ではなく価格形成とoption surfaceへつながる動的状態として扱う考え方は、RFQ後のflowと市場変化をモデル化する際に参考になります。検証はSPX optionで、ratesやRFQへの直接実証はありません。\n\n## 2. Rethinking Synthetic Scenario Realism\n\n**重要度: 6.5/10 — Scenario generation**\n\nSynthetic market pathを見た目のrealismではなく、そのデータで学習したhedgerが実市場でも機能するかというcompatibilityで評価します。hedging errorをlearning errorとcompatibility gapへ分解し、統計的fidelityと意思決定性能が乖離し得ることを示します。\n\nSimulationや生成データでexecution・hedging policyを学習する場合、realism指標だけでモデルを選ばないという重要な注意点です。\n\n## 3. Surrender runs\n\n**重要度: 5/10 — 金利感応度・保険**\n\n金利上昇で保険会社の資産価値が低下し、契約者の外部運用利回りが上昇することで解約runが生じるモデルです。fundamentals-driven runとself-fulfilling runについてclosed-formのinterest-rate thresholdを導きます。\n\n金利感応度としては興味深いものの、HJM、curve construction、swap/swaption pricingの金利モデルではないため優先度は低めです。\n\n## Conclusion\n\n今日の第一候補はMarketronです。HJM、multi-curve、OIS、swap/swaption、yield-curve dynamicsへ直接刺さる強い新着はありませんでした。",
+  "papers": [
+    {
+      "arxivId": "2608.20589v1",
+      "title": "Calibrating Inelastic Markets to Options: The Lean Marketron and the Generalized Langevin Equation",
+      "authors": [
+        "Andrey Itkin"
+      ],
+      "submittedDate": "2026-08-20",
+      "updatedDate": "2026-08-20",
+      "topics": [
+        "Market microstructure",
+        "Mathematical finance",
+        "Model validation"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.20589v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.20589v1",
+      "schedulerRank": 1,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "最優先・flowとoption surface",
+      "schedulerSummary": "Order flowとreturnの相互作用を識別可能な縮約モデルとしてoption surfaceへ接続します。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.20842v1",
+      "title": "Rethinking Synthetic Scenario Realism: Compatibility, Not Fidelity, Drives Hedging Performance",
+      "authors": [
+        "Ryuji Hashimoto",
+        "Masanori Hirano",
+        "Ryota Ozaki",
+        "Kentaro Imajo"
+      ],
+      "submittedDate": "2026-08-21",
+      "updatedDate": "2026-08-21",
+      "topics": [
+        "Dynamic hedging",
+        "Machine learning",
+        "Generative models"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.20842v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.20842v1",
+      "schedulerRank": 2,
+      "schedulerRating": 6.5,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "scenario generation",
+      "schedulerSummary": "Synthetic pathを統計的realismではなく実市場でのhedging compatibilityで評価します。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 6.5,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.20982v1",
+      "title": "Surrender runs",
+      "authors": [
+        "Andreas Löffler",
+        "Stefan Steins"
+      ],
+      "submittedDate": "2026-08-21",
+      "updatedDate": "2026-08-21",
+      "topics": [
+        "Interest-rate models",
+        "Mathematical finance",
+        "Model validation"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.20982v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.20982v1",
+      "schedulerRank": 3,
+      "schedulerRating": 5,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "金利感応度・保険",
+      "schedulerSummary": "金利上昇下の保険解約runについてfundamental型と自己実現型のthresholdを導きます。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 5,
+          "scale": 10
+        }
+      ]
+    }
+  ]
+}

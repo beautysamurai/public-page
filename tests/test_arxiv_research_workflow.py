@@ -55,7 +55,7 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
             "Run daily research",
             "Validate generated research boundary",
             "Persist research state and report",
-            "Publish completed research report",
+            "Reconcile completed research reports",
         ]
         positions = [self.position(name) for name in expected_order]
         self.assertEqual(positions, sorted(positions))
@@ -74,15 +74,17 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
         self.assertNotIn("site/data", commit)
         self.assertIn('git push origin "HEAD:$AUTOMATION_BRANCH"', commit)
 
-    def test_only_completed_reports_reach_publication(self) -> None:
-        publication = self.step("Publish completed research report")
-        self.assertIn("if: steps.research.outputs.publishable == 'true'", publication)
+    def test_every_durable_completed_report_is_reconciled(self) -> None:
+        publication = self.step("Reconcile completed research reports")
+        self.assertNotIn("steps.research.outputs.publishable", publication)
         self.assertIn("python scripts/research_publication.py", publication)
-        self.assertIn('${{ steps.research.outputs.report_path }}', publication)
+        self.assertIn("--daily-report-dir research/daily", publication)
+        self.assertNotIn('${{ steps.research.outputs.report_path }}', publication)
+        self.assertIn("--regenerate-site", publication)
 
     def test_publication_is_fully_validated_and_committed_separately(self) -> None:
         expected_order = [
-            "Publish completed research report",
+            "Reconcile completed research reports",
             "Validate generated publication and change scope",
             "Reject private state and likely secrets before publication commit",
             "Commit generated publication",
@@ -91,6 +93,7 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
         self.assertEqual(positions, sorted(positions))
 
         validation = self.step("Validate generated publication and change scope")
+        self.assertNotIn("steps.research.outputs.publishable", validation)
         self.assertIn("python -m unittest discover -s tests -v", validation)
         self.assertIn("node --test tests/test_model_math.cjs", validation)
         self.assertIn("python scripts/import_scheduler_history.py --check", validation)
@@ -101,6 +104,7 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
         privacy = self.step(
             "Reject private state and likely secrets before publication commit"
         )
+        self.assertNotIn("steps.research.outputs.publishable", privacy)
         self.assertIn('"git", "ls-files", "-z", "--cached", "--others"', privacy)
         self.assertIn("private key block", privacy)
         self.assertIn("GitHub token", privacy)
@@ -109,6 +113,7 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
 
         commit = self.step("Commit generated publication")
         self.assertIn("id: publication_commit", commit)
+        self.assertNotIn("steps.research.outputs.publishable", commit)
         self.assertIn(
             "git add -- content/chatgpt_scheduler_history.json site/data", commit
         )

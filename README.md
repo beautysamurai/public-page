@@ -297,9 +297,11 @@ JST) and also supports manual dispatch.
 The workflow persists `research/state.json`, candidate-stage checkpoints, and
 daily JSON/Markdown on the fixed `automation/openai-arxiv-research` branch.
 Reusing this branch lets an unconfirmed batch resume on the next run without
-repeating completed model calls. Completed daily reports are
-converted to public editions; incomplete JSON/Markdown remains visible on the
-review branch but is not appended to the public archive. Weekly and monthly
+repeating completed model calls. Every run reconciles all durable completed
+daily reports into public editions, so an interruption after the research push
+is repaired on the next run even when the current report is incomplete.
+Incomplete JSON/Markdown remains visible on the review branch but is not
+appended to the public archive. Weekly and monthly
 reviews are intentionally excluded from this cloud workflow and are generated
 by local Codex schedules from these stored daily reports. The workflow runs the
 complete Python and Node test suite before paid research, validates and pushes

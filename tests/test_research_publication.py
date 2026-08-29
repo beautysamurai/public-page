@@ -418,6 +418,116 @@ class ResearchReportAdapterTests(unittest.TestCase):
 
 
 class ResearchPublicationPersistenceTests(unittest.TestCase):
+    def test_reconciliation_publishes_all_prior_completed_when_current_is_incomplete(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            history_path, translation_path = write_base_bundle(root)
+            report_dir = root / "research" / "daily"
+            report_dir.mkdir(parents=True)
+            prior_reports = (
+                completed_report(report_date="2026-08-29"),
+                completed_report(report_date="2026-08-30"),
+            )
+            current = completed_report(report_date="2026-08-31")
+            current["status"] = "UPDATE_NOT_CONFIRMED"
+            current["papers"] = []
+            for report in (*prior_reports, current):
+                (report_dir / f"{report['reportDate']}.json").write_text(
+                    json.dumps(report, ensure_ascii=False, indent=2) + "\n",
+                    encoding="utf-8",
+                )
+            latest = root / "site" / "data" / "latest.json"
+            archive = root / "site" / "data" / "archive"
+
+            first = publication.reconcile_daily_reports(
+                report_dir,
+                history_path,
+                translation_path,
+                regenerate_site=True,
+                latest_path=latest,
+                archive_dir=archive,
+            )
+
+            self.assertEqual(first.report_count, 3)
+            self.assertEqual(first.completed_count, 2)
+            self.assertEqual(
+                first.published_edition_ids,
+                (
+                    "2026-08-29-daily-openai-01",
+                    "2026-08-30-daily-openai-01",
+                ),
+            )
+            self.assertEqual(first.existing_edition_ids, ())
+            self.assertEqual(first.incomplete_count, 1)
+            published_ids = [
+                edition["editionId"]
+                for edition in importer.load_history(history_path)["editions"]
+            ]
+            self.assertIn("2026-08-29-daily-openai-01", published_ids)
+            self.assertIn("2026-08-30-daily-openai-01", published_ids)
+            self.assertNotIn("2026-08-31-daily-openai-01", published_ids)
+            self.assertTrue(latest.is_file())
+            self.assertTrue(
+                (archive / "2026-08-29-daily-openai-01.json").is_file()
+            )
+            self.assertTrue(
+                (archive / "2026-08-30-daily-openai-01.json").is_file()
+            )
+
+            history_before = history_path.read_bytes()
+            translation_before = translation_path.read_bytes()
+            second = publication.reconcile_daily_reports(
+                report_dir,
+                history_path,
+                translation_path,
+                regenerate_site=True,
+                latest_path=latest,
+                archive_dir=archive,
+            )
+            self.assertEqual(second.published_edition_ids, ())
+            self.assertEqual(
+                second.existing_edition_ids,
+                (
+                    "2026-08-29-daily-openai-01",
+                    "2026-08-30-daily-openai-01",
+                ),
+            )
+            self.assertEqual(history_path.read_bytes(), history_before)
+            self.assertEqual(translation_path.read_bytes(), translation_before)
+
+    def test_reconciliation_preflights_every_report_before_writing(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            history_path, translation_path = write_base_bundle(root)
+            report_dir = root / "research" / "daily"
+            report_dir.mkdir(parents=True)
+            report = completed_report(report_date="2026-08-29")
+            (report_dir / "2026-08-29.json").write_text(
+                json.dumps(report, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            mismatched = completed_report(report_date="2026-08-29")
+            (report_dir / "2026-08-30.json").write_text(
+                json.dumps(mismatched, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            before = history_path.read_bytes(), translation_path.read_bytes()
+
+            with self.assertRaisesRegex(
+                publication.ResearchReportSchemaError,
+                "filename must match reportDate",
+            ):
+                publication.reconcile_daily_reports(
+                    report_dir,
+                    history_path,
+                    translation_path,
+                )
+
+            self.assertEqual(
+                (history_path.read_bytes(), translation_path.read_bytes()),
+                before,
+            )
+
     def test_append_is_valid_prefix_preserving_and_idempotent(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

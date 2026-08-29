@@ -289,17 +289,15 @@ jobs:
           git push origin "HEAD:$AUTOMATION_BRANCH"
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
-      - name: Publish completed research report
-        if: steps.research.outputs.publishable == 'true'
+      - name: Reconcile completed research reports
         shell: bash
         run: |
           set -euo pipefail
           python scripts/research_publication.py \
-            --report "${{ steps.research.outputs.report_path }}" \
+            --daily-report-dir research/daily \
             --regenerate-site
 
       - name: Validate generated publication and change scope
-        if: steps.research.outputs.publishable == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -358,7 +356,6 @@ jobs:
           PY
 
       - name: Reject private state and likely secrets before publication commit
-        if: steps.research.outputs.publishable == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -417,7 +414,6 @@ jobs:
 
       - name: Commit generated publication
         id: publication_commit
-        if: steps.research.outputs.publishable == 'true'
         shell: bash
         run: |
           set -euo pipefail

@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Publish a completed automated-research report into the public v2 history.
 
-The research report is untrusted input.  This adapter accepts one exact report
+Research reports are untrusted input.  This adapter accepts one exact report
 shape, maps only allowlisted fields, renders deterministic bilingual editorial
-text, and validates the complete candidate bundle before changing either public
-source file.  Existing editions are immutable; repeating the exact same report
-is a no-op while reusing an edition ID for different content is an error.
+text, and can reconcile every durable completed daily report.  It validates the
+complete candidate bundle before changing either public source file. Existing
+editions are immutable; repeating the exact same report is a no-op while reusing
+an edition ID for different content is an error.
 """
 
 from __future__ import annotations
@@ -126,6 +127,10 @@ REPORT_STATUSES = frozenset(
         "UPDATER_OFFLINE",
     }
 )
+INCOMPLETE_REPORT_STATUSES = frozenset(
+    {"UPDATE_NOT_CONFIRMED", "UPDATER_OFFLINE"}
+)
+MAX_DAILY_REPORT_FILES = 5_000
 
 DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
 WHITESPACE_RE = re.compile(r"\s+")
@@ -222,6 +227,16 @@ class AdaptedPublication:
 class PublicationResult:
     edition_id: str
     changed: bool
+    generated_paths: tuple[Path, ...] = ()
+
+
+@dataclass(frozen=True)
+class ReconciliationResult:
+    report_count: int
+    completed_count: int
+    published_edition_ids: tuple[str, ...]
+    existing_edition_ids: tuple[str, ...]
+    incomplete_count: int
     generated_paths: tuple[Path, ...] = ()
 
 
@@ -982,10 +997,7 @@ def publish_research_report(
     """Validate, append, and atomically commit one immutable public edition."""
 
     validated_report = validate_research_report(report)
-    if validated_report["status"] in {
-        "UPDATE_NOT_CONFIRMED",
-        "UPDATER_OFFLINE",
-    }:
+    if validated_report["status"] in INCOMPLETE_REPORT_STATUSES:
         raise ResearchPublicationError(
             "incomplete research reports cannot be published"
         )
@@ -1067,9 +1079,159 @@ def publish_research_report(
     )
 
 
+def reconcile_daily_reports(
+    report_dir: Path,
+    history_path: Path,
+    translation_path: Path,
+    *,
+    regenerate_site: bool = False,
+    latest_path: Path = Path("site/data/latest.json"),
+    archive_dir: Path = Path("site/data/archive"),
+) -> ReconciliationResult:
+    """Publish every durable completed daily report that is not public yet."""
+
+    if report_dir.is_symlink() or not report_dir.is_dir():
+        raise ResearchPublicationError(
+            f"daily report directory is not a regular directory: {report_dir}"
+        )
+    try:
+        report_paths = sorted(
+            (
+                path
+                for path in report_dir.iterdir()
+                if path.suffix.lower() == ".json"
+            ),
+            key=lambda path: path.name,
+        )
+    except OSError as exc:
+        raise ResearchPublicationError(
+            f"cannot enumerate daily report directory: {report_dir}"
+        ) from exc
+    if len(report_paths) > MAX_DAILY_REPORT_FILES:
+        raise ResearchPublicationError(
+            f"daily report directory exceeds the {MAX_DAILY_REPORT_FILES}-file limit"
+        )
+
+    completed_reports: list[dict[str, Any]] = []
+    incomplete_count = 0
+    for path in report_paths:
+        if path.is_symlink() or not path.is_file():
+            raise ResearchPublicationError(
+                f"daily research report is not a regular file: {path}"
+            )
+        report = load_research_report(path)
+        if report["reportKind"] != "daily":
+            raise ResearchReportSchemaError(
+                f"daily report directory contains a non-daily report: {path}"
+            )
+        expected_name = f"{report['reportDate']}.json"
+        if path.name != expected_name:
+            raise ResearchReportSchemaError(
+                f"daily report filename must match reportDate: {path}"
+            )
+        if report["status"] in INCOMPLETE_REPORT_STATUSES:
+            incomplete_count += 1
+            continue
+        completed_reports.append(report)
+
+    try:
+        current_history = load_history(history_path)
+        current_translation = load_translation(translation_path)
+    except OSError as exc:
+        raise ResearchPublicationError(
+            "both existing public source files must be readable"
+        ) from exc
+
+    source_editions = {
+        edition["editionId"]: edition for edition in current_history["editions"]
+    }
+    english_editions = {
+        edition["editionId"]: edition
+        for edition in current_translation["editions"]
+    }
+    pending: list[tuple[dict[str, Any], AdaptedPublication]] = []
+    existing_ids: list[str] = []
+    seen_ids: set[str] = set()
+    for report in completed_reports:
+        adapted = adapt_research_report(report)
+        edition_id = adapted.source_edition["editionId"]
+        if edition_id in seen_ids:
+            raise PublicationConflictError(
+                f"daily reports contain duplicate edition {edition_id!r}"
+            )
+        seen_ids.add(edition_id)
+        source_existing = source_editions.get(edition_id)
+        english_existing = english_editions.get(edition_id)
+        if source_existing is None and english_existing is None:
+            pending.append((report, adapted))
+            continue
+        if source_existing is None or english_existing is None:
+            raise PublicationConflictError(
+                f"edition {edition_id!r} exists in only one public source"
+            )
+        if (
+            dict(source_existing) != adapted.source_edition
+            or dict(english_existing) != adapted.english_edition
+        ):
+            raise PublicationConflictError(
+                f"refusing conflicting content for immutable edition {edition_id!r}"
+            )
+        existing_ids.append(edition_id)
+
+    if pending:
+        candidate_history = deepcopy(current_history)
+        candidate_translation = deepcopy(current_translation)
+        for _report, adapted in pending:
+            candidate_history["editions"].append(adapted.source_edition)
+            candidate_translation["editions"].append(adapted.english_edition)
+        candidate_history = validate_history(candidate_history)
+        candidate_translation = validate_translation(candidate_translation)
+        validate_bundle(
+            current_history,
+            current_translation,
+            candidate_history,
+            candidate_translation,
+        )
+
+    published_ids: list[str] = []
+    for report, adapted in pending:
+        result = publish_research_report(
+            report,
+            history_path,
+            translation_path,
+        )
+        if not result.changed:
+            raise PublicationConflictError(
+                f"edition {result.edition_id!r} changed during reconciliation"
+            )
+        published_ids.append(adapted.source_edition["editionId"])
+
+    generated_paths: tuple[Path, ...] = ()
+    if regenerate_site:
+        final_history = load_history(history_path)
+        artifacts = generate_artifacts(final_history)
+        generated_paths = tuple(
+            persist_artifacts(artifacts, latest_path, archive_dir)
+        )
+    return ReconciliationResult(
+        report_count=len(report_paths),
+        completed_count=len(completed_reports),
+        published_edition_ids=tuple(published_ids),
+        existing_edition_ids=tuple(existing_ids),
+        incomplete_count=incomplete_count,
+        generated_paths=generated_paths,
+    )
+
+
 def build_argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--report", type=Path, required=True)
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("--report", type=Path)
+    source.add_argument(
+        "--daily-report-dir",
+        type=Path,
+        help="reconcile every completed YYYY-MM-DD.json daily report",
+    )
     parser.add_argument(
         "--history",
         type=Path,
@@ -1097,15 +1259,26 @@ def build_argument_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_argument_parser().parse_args(argv)
     try:
-        report = load_research_report(args.report)
-        result = publish_research_report(
-            report,
-            args.history,
-            args.translation,
-            regenerate_site=args.regenerate_site,
-            latest_path=args.latest,
-            archive_dir=args.archive_dir,
-        )
+        if args.report is not None:
+            report = load_research_report(args.report)
+            result = publish_research_report(
+                report,
+                args.history,
+                args.translation,
+                regenerate_site=args.regenerate_site,
+                latest_path=args.latest,
+                archive_dir=args.archive_dir,
+            )
+        else:
+            assert args.daily_report_dir is not None
+            reconciliation = reconcile_daily_reports(
+                args.daily_report_dir,
+                args.history,
+                args.translation,
+                regenerate_site=args.regenerate_site,
+                latest_path=args.latest,
+                archive_dir=args.archive_dir,
+            )
     except (
         HistoryImportError,
         PublicBundleError,
@@ -1114,8 +1287,16 @@ def main(argv: Sequence[str] | None = None) -> int:
     ) as exc:
         print(f"research_publication: {exc}", file=sys.stderr)
         return 1
-    action = "published" if result.changed else "already published"
-    print(f"{action}: {result.edition_id}")
+    if args.report is not None:
+        action = "published" if result.changed else "already published"
+        print(f"{action}: {result.edition_id}")
+    else:
+        print(
+            f"reconciled {reconciliation.report_count} daily report(s): "
+            f"published {len(reconciliation.published_edition_ids)}, "
+            f"already published {len(reconciliation.existing_edition_ids)}, "
+            f"incomplete {reconciliation.incomplete_count}"
+        )
     return 0
 
 

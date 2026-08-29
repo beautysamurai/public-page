@@ -87,7 +87,7 @@ def completed_report(
                     "reason": "regimeを跨ぐmodel selectionが実務に直結します。",
                     "tags": ["電子取引", "market microstructure"],
                     "english": {
-                        "classification": "Electronic trading and market microstructure",
+                        "classification": "mixed",
                         "summary": "Evaluates signal selection designed to remain robust across regimes.",
                         "mainResult": "Selection across several periods was more stable than a single-period choice.",
                         "practicalApplication": "The design can test the robustness of quote parameters.",
@@ -257,6 +257,134 @@ class ResearchReportAdapterTests(unittest.TestCase):
                     publication.ResearchReportSchemaError, "unknown"
                 ):
                     publication.adapt_research_report(report)
+
+    def test_rejects_pure_english_in_each_primary_narrative_field(self):
+        for field in (
+            "summary",
+            "mainResult",
+            "practicalApplication",
+            "methodology",
+            "limitations",
+            "reason",
+        ):
+            with self.subTest(field=field):
+                report = completed_report()
+                analysis = report["papers"][0]["finalAnalysis"]
+                analysis[field] = analysis["english"][field]
+
+                with self.assertRaisesRegex(
+                    publication.ResearchReportSchemaError,
+                    rf"{field} must contain Japanese text",
+                ):
+                    publication.adapt_research_report(report)
+
+    def test_rejects_one_han_suffix_and_chinese_only_primary_narratives(self):
+        for value in (
+            "This is otherwise an entirely English research summary. 日",
+            "这是关于市场微观结构和电子交易的研究。",
+        ):
+            with self.subTest(value=value):
+                report = completed_report()
+                report["papers"][0]["finalAnalysis"]["summary"] = value
+
+                with self.assertRaisesRegex(
+                    publication.ResearchReportSchemaError,
+                    r"summary must contain Japanese text",
+                ):
+                    publication.adapt_research_report(report)
+
+    def test_accepts_english_narrative_with_short_japanese_proper_noun(self):
+        report = completed_report()
+        english_summary = (
+            "The study measures 日本国債 market liquidity and dealer behavior."
+        )
+        report["papers"][0]["finalAnalysis"]["english"][
+            "summary"
+        ] = english_summary
+
+        adapted = publication.adapt_research_report(report)
+
+        self.assertEqual(
+            adapted.english_edition["papers"][0]["schedulerSummary"],
+            english_summary,
+        )
+        self.assertIn(english_summary, adapted.english_edition["sourceText"])
+
+    def test_combined_english_source_allows_repeated_short_japanese_names(self):
+        report = completed_report()
+        english = report["papers"][0]["finalAnalysis"]["english"]
+        english["summary"] = (
+            "The 日本国債市場流動性 measure remains stable across regimes."
+        )
+        english["mainResult"] = (
+            "The 東京証券取引所市場構造 result supports the reported mechanism."
+        )
+
+        adapted = publication.adapt_research_report(report)
+
+        self.assertIn(english["summary"], adapted.english_edition["sourceText"])
+        self.assertIn(english["mainResult"], adapted.english_edition["sourceText"])
+
+    def test_rejects_mismatched_english_classification(self):
+        report = completed_report()
+        report["papers"][0]["finalAnalysis"]["english"][
+            "classification"
+        ] = "yield_curve"
+
+        with self.assertRaisesRegex(
+            publication.ResearchReportSchemaError,
+            r"english\.classification must exactly match classification",
+        ):
+            publication.adapt_research_report(report)
+
+    def test_english_schema_tokens_require_latin_but_not_natural_prose(self):
+        report = completed_report()
+        report["papers"][0]["metadata"]["categories"] = ["q"]
+        report["papers"][0]["finalAnalysis"]["english"]["tags"] = ["RL"]
+
+        adapted = publication.adapt_research_report(report)
+
+        self.assertEqual(
+            adapted.source_edition["papers"][0]["topics"],
+            ["q", "RL"],
+        )
+
+        for field_path in ("categories", "tags"):
+            with self.subTest(field_path=field_path):
+                invalid = completed_report()
+                if field_path == "categories":
+                    invalid["papers"][0]["metadata"]["categories"] = ["123"]
+                else:
+                    invalid["papers"][0]["finalAnalysis"]["english"][
+                        "tags"
+                    ] = ["123"]
+                with self.assertRaisesRegex(
+                    publication.ResearchReportSchemaError,
+                    "must contain English text",
+                ):
+                    publication.adapt_research_report(invalid)
+
+    def test_accepts_japanese_narratives_with_english_technical_terms(self):
+        report = completed_report()
+        analysis = report["papers"][0]["finalAnalysis"]
+        mixed_narratives = {
+            "summary": "Cross-regime validationでsignalの頑健性を評価します。",
+            "mainResult": "OOS Sharpeが単一期間の選択より安定しました。",
+            "practicalApplication": "quote engineのparameter選択に応用できます。",
+            "methodology": "Bayesian optimizationとholdout比較を使います。",
+            "limitations": "survivorship biasとtransaction costに注意が必要です。",
+            "reason": "model selectionの実務設計として読む価値があります。",
+        }
+        analysis.update(mixed_narratives)
+
+        adapted = publication.adapt_research_report(report)
+
+        self.assertEqual(
+            adapted.source_edition["papers"][0]["schedulerSummary"],
+            mixed_narratives["summary"],
+        )
+        for narrative in mixed_narratives.values():
+            self.assertIn(narrative, adapted.source_edition["sourceText"])
 
     def test_rejects_unsafe_text_invalid_types_and_status_paper_mismatch(self):
         cases: list[tuple[str, dict]] = []

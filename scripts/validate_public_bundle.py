@@ -21,6 +21,11 @@ from pathlib import Path
 from typing import Any, Mapping, Sequence
 
 from import_scheduler_history import HistoryImportError, load_history
+from research_language import (
+    contains_english_document,
+    contains_english_prose,
+    contains_japanese_characters,
+)
 
 
 MAX_BYTES = 16 * 1024 * 1024
@@ -33,7 +38,6 @@ TRANSLATION_PAPER_FIELDS = frozenset(
 )
 TRANSLATION_RATING_FIELDS = frozenset({"label"})
 
-CJK_RE = re.compile(r"[\u3040-\u30ff\u3400-\u9fff]")
 EMAIL_RE = re.compile(
     r"(?<![\w.+-])[\w.+-]+@(?:[A-Za-z0-9-]+\.)+[A-Za-z]{2,}(?![\w.-])"
 )
@@ -120,9 +124,27 @@ def _require_nonempty_string(value: Any, context: str) -> str:
     return value
 
 
-def _validate_public_english_text(value: str, context: str) -> None:
+def _validate_public_english_text(
+    value: str,
+    context: str,
+    *,
+    narrative: bool,
+    document: bool = False,
+) -> None:
+    if narrative:
+        valid_english = (
+            contains_english_document(value)
+            if document
+            else contains_english_prose(value)
+        )
+        if not valid_english:
+            raise PublicBundleError(
+                f"{context} must contain predominantly English text"
+            )
+    elif contains_japanese_characters(value):
+        raise PublicBundleError(f"{context} contains Japanese/CJK text")
+
     checks = (
-        (CJK_RE, "contains Japanese/CJK text"),
         (EMAIL_RE, "contains an email address"),
         (UUID_RE, "contains a UUID-like identifier"),
         (INTERNAL_REFERENCE_RE, "contains an internal citation/reference"),
@@ -166,7 +188,12 @@ def validate_translation(value: object) -> dict[str, Any]:
 
         for field in ("message", "sourceText"):
             text = _require_nonempty_string(edition[field], f"{context}.{field}")
-            _validate_public_english_text(text, f"{context}.{field}")
+            _validate_public_english_text(
+                text,
+                f"{context}.{field}",
+                narrative=True,
+                document=field == "sourceText",
+            )
 
         papers = edition["papers"]
         if not isinstance(papers, list):
@@ -189,7 +216,11 @@ def validate_translation(value: object) -> dict[str, Any]:
                 text = _require_nonempty_string(
                     paper[field], f"{paper_context}.{field}"
                 )
-                _validate_public_english_text(text, f"{paper_context}.{field}")
+                _validate_public_english_text(
+                    text,
+                    f"{paper_context}.{field}",
+                    narrative=field == "schedulerSummary",
+                )
 
             ratings = paper["ratings"]
             if not isinstance(ratings, list):
@@ -204,7 +235,11 @@ def validate_translation(value: object) -> dict[str, Any]:
                 label = _require_nonempty_string(
                     rating["label"], f"{rating_context}.label"
                 )
-                _validate_public_english_text(label, f"{rating_context}.label")
+                _validate_public_english_text(
+                    label,
+                    f"{rating_context}.label",
+                    narrative=False,
+                )
     return value
 
 

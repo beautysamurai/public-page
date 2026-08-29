@@ -308,6 +308,74 @@ class ResponsesAdapterTests(unittest.TestCase):
                 with self.assertRaises(pipeline.StructuredOutputError):
                     pipeline.validate_analysis(bad)
 
+        short_classification = analysis()
+        short_classification["classification"] = "mixed"
+        short_classification["english"]["classification"] = "mixed"
+        self.assertEqual(
+            pipeline.validate_analysis(short_classification),
+            short_classification,
+        )
+
+    def test_primary_narratives_require_japanese_but_allow_mixed_terms(self):
+        for field in pipeline.PRIMARY_NARRATIVE_FIELDS:
+            with self.subTest(field=field):
+                bad = analysis()
+                bad[field] = bad["english"][field]
+                with self.assertRaisesRegex(
+                    pipeline.StructuredOutputError,
+                    rf"{field} must contain Japanese text",
+                ):
+                    pipeline.validate_analysis(bad)
+
+        for almost_japanese in (
+            "This remains an English sentence with one ideograph 日",
+            "金融市场微观结构研究",
+            "这是关于市场微观结构・电子交易的研究。",
+            "这是关于市场微观结构和电子交易の研究。",
+        ):
+            bad = analysis()
+            bad["summary"] = almost_japanese
+            with self.subTest(almost_japanese=almost_japanese):
+                with self.assertRaisesRegex(
+                    pipeline.StructuredOutputError,
+                    "summary must contain Japanese text",
+                ):
+                    pipeline.validate_analysis(bad)
+
+        mixed = analysis()
+        mixed.update(
+            {
+                "summary": "Cross-regime validationでsignalを評価します。",
+                "mainResult": "OOS Sharpeが安定しました。",
+                "practicalApplication": "quote engineへ応用できます。",
+                "methodology": "Bayesian optimizationを使います。",
+                "limitations": "survivorship biasに注意が必要です。",
+                "reason": "model selectionの実務に役立ちます。",
+            }
+        )
+        self.assertEqual(pipeline.validate_analysis(mixed), mixed)
+
+        mixed["english"]["summary"] = (
+            "The study measures 日本国債 market liquidity under stress."
+        )
+        self.assertEqual(pipeline.validate_analysis(mixed), mixed)
+
+    def test_model_narratives_must_already_satisfy_public_text_rules(self):
+        for unsafe in (
+            "<b>日本語の要約です。</b>",
+            "結果は https://doi.org/10.1000/example で確認できます。",
+            "日本語の要約です。\ue000",
+            "日本語の要約です。\u0080",
+        ):
+            bad = analysis()
+            bad["summary"] = unsafe
+            with self.subTest(unsafe=unsafe):
+                with self.assertRaisesRegex(
+                    pipeline.StructuredOutputError,
+                    "summary is not safe for publication",
+                ):
+                    pipeline.validate_analysis(bad)
+
     def test_client_initialization_error_is_sanitized(self):
         sensitive_detail = "malformed OPENAI_API_KEY sk-private-value"
 
@@ -1095,6 +1163,10 @@ class ConfigAndCliTests(unittest.TestCase):
                 "OPENAI_MONTHLY_MODEL": "monthly-env",
                 "OPENAI_SCREENING_REASONING_EFFORT": "none",
                 "OPENAI_PDF_DETAIL": "high",
+                "OPENAI_RESPONSES_TIMEOUT_SECONDS": "90",
+                "RESEARCH_DAILY_TIME_BUDGET_SECONDS": "1500",
+                "OPENAI_SYNTHESIS_CHUNK_MAX_ITEMS": "12",
+                "OPENAI_SYNTHESIS_CHUNK_MAX_BYTES": "180000",
             },
             clear=False,
         ):
@@ -1109,6 +1181,10 @@ class ConfigAndCliTests(unittest.TestCase):
         self.assertEqual(loaded.pdf_detail, "high")
         self.assertEqual(loaded.max_candidates, 100)
         self.assertEqual(loaded.retries, 3)
+        self.assertEqual(loaded.openai_timeout, 90)
+        self.assertEqual(loaded.daily_time_budget, 1500)
+        self.assertEqual(loaded.synthesis_chunk_max_items, 12)
+        self.assertEqual(loaded.synthesis_chunk_max_bytes, 180000)
         self.assertEqual(loaded.no_announcement_dates, ())
 
     def test_legacy_synthesis_env_is_fallback_and_period_env_wins(self):
@@ -1140,6 +1216,20 @@ class ConfigAndCliTests(unittest.TestCase):
         for bad_config in (
             {"pdfDetail": ["low"]},
             {"screenReasoningEffort": {"value": "low"}},
+        ):
+            with self.subTest(bad_config=bad_config):
+                with tempfile.TemporaryDirectory() as directory:
+                    config_path = Path(directory) / "research.json"
+                    config_path.write_text(json.dumps(bad_config), encoding="utf-8")
+                    with self.assertRaises(pipeline.ConfigurationError):
+                        pipeline.load_pipeline_config(config_path)
+
+    def test_invalid_resilience_and_chunk_limits_are_configuration_errors(self):
+        for bad_config in (
+            {"openaiTimeoutSeconds": 0},
+            {"dailyTimeBudgetSeconds": 3000},
+            {"synthesisChunkMaxItems": 0},
+            {"synthesisChunkMaxBytes": 1000},
         ):
             with self.subTest(bad_config=bad_config):
                 with tempfile.TemporaryDirectory() as directory:

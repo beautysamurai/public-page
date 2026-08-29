@@ -20,6 +20,10 @@
   "maxCandidates": 100,
   "retries": 3,
   "timeoutSeconds": 25,
+  "openaiTimeoutSeconds": 120,
+  "dailyTimeBudgetSeconds": 1800,
+  "synthesisChunkMaxItems": 20,
+  "synthesisChunkMaxBytes": 200000,
   "noAnnouncementDates": [
     "2026-01-01",
     "2026-01-19",

@@ -203,6 +203,39 @@ class PublicBundleValidationTests(unittest.TestCase):
             loaded = bundle.load_translation(path)
         self.assertEqual(loaded, value)
 
+    def test_translation_loader_allows_short_japanese_proper_noun_in_prose(self):
+        value = translations(self.old_english)
+        value["editions"][0]["sourceText"] = (
+            "## Daily review\n\n"
+            "The study measures 日本国債 market liquidity and dealer behavior."
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "en.json"
+            path.write_text(
+                json.dumps(value, ensure_ascii=False), encoding="utf-8"
+            )
+            loaded = bundle.load_translation(path)
+        self.assertEqual(loaded, value)
+
+    def test_translation_loader_rejects_non_english_cjk_narrative(self):
+        for source_text in (
+            "## Daily review\n\n内部メモです。",
+            "这是关于市场微观结构和电子交易的研究。",
+        ):
+            with self.subTest(source_text=source_text):
+                value = translations(self.old_english)
+                value["editions"][0]["sourceText"] = source_text
+                with tempfile.TemporaryDirectory() as temporary:
+                    path = Path(temporary) / "en.json"
+                    path.write_text(
+                        json.dumps(value, ensure_ascii=False), encoding="utf-8"
+                    )
+                    with self.assertRaisesRegex(
+                        bundle.PublicBundleError,
+                        "predominantly English",
+                    ):
+                        bundle.load_translation(path)
+
     def test_translation_loader_rejects_boolean_schema_version(self):
         value = translations(self.old_english)
         value["schemaVersion"] = True

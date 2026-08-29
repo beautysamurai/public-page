@@ -33,6 +33,12 @@ from import_scheduler_history import (
     persist_artifacts,
     validate_history,
 )
+from research_language import (
+    contains_english_prose,
+    contains_japanese_characters,
+    contains_japanese_prose,
+    contains_latin_characters,
+)
 from validate_public_bundle import (
     PublicBundleError,
     load_translation,
@@ -99,7 +105,6 @@ ENGLISH_FIELDS = frozenset(
         "tags",
     }
 )
-
 REPORT_KINDS = frozenset({"daily", "weekly", "monthly"})
 CLASSIFICATIONS = frozenset(
     {
@@ -125,7 +130,6 @@ REPORT_STATUSES = frozenset(
 DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
 WHITESPACE_RE = re.compile(r"\s+")
 MARKDOWN_ESCAPE_RE = re.compile(r"([\\`*_\[\]#!|])")
-CJK_RE = re.compile(r"[\u3040-\u30ff\u3400-\u9fff]")
 
 JA_STATUS_MESSAGES = {
     "UPDATE_CONFIRMED": "arXivの更新を確認し、対象論文を評価しました。",
@@ -257,6 +261,7 @@ def _safe_plain_text(
     *,
     maximum: int,
     english: bool = False,
+    japanese: bool = False,
 ) -> str:
     if not isinstance(value, str):
         raise ResearchReportSchemaError(f"{context} must be a string")
@@ -271,8 +276,10 @@ def _safe_plain_text(
         raise ResearchReportSchemaError(
             f"{context} contains a control, private-use, or formatting character"
         )
-    if english and CJK_RE.search(normalized):
+    if english and not contains_english_prose(normalized):
         raise ResearchReportSchemaError(f"{context} must contain English text")
+    if japanese and not contains_japanese_prose(normalized):
+        raise ResearchReportSchemaError(f"{context} must contain Japanese text")
     try:
         _validate_public_text(normalized, context, maximum=maximum)
     except HistoryImportError as exc:
@@ -301,10 +308,18 @@ def _safe_string_list(
             item,
             f"{context}[{index}]",
             maximum=maximum_string,
-            english=english,
         )
         for index, item in enumerate(value)
     ]
+    if english:
+        for index, item in enumerate(result):
+            if (
+                contains_japanese_characters(item)
+                or not contains_latin_characters(item)
+            ):
+                raise ResearchReportSchemaError(
+                    f"{context}[{index}] must contain English text"
+                )
     folded = [item.casefold() for item in result]
     if len(folded) != len(set(folded)):
         raise ResearchReportSchemaError(f"{context} contains duplicate values")
@@ -356,7 +371,6 @@ def _validate_analysis(
     )
 
     narrative_limits = {
-        "classification": 500,
         "summary": 10_000,
         "mainResult": 10_000,
         "practicalApplication": 10_000,
@@ -364,26 +378,46 @@ def _validate_analysis(
         "limitations": 10_000,
         "reason": 5_000,
     }
-    classification = analysis["classification"]
+    classification = _safe_plain_text(
+        analysis["classification"],
+        f"{context}.classification",
+        maximum=500,
+    )
     if classification not in CLASSIFICATIONS:
         raise ResearchReportSchemaError(f"{context}.classification is invalid")
+    english_classification = _safe_plain_text(
+        english_value["classification"],
+        f"{context}.english.classification",
+        maximum=500,
+    )
+    if english_classification != classification:
+        raise ResearchReportSchemaError(
+            f"{context}.english.classification must exactly match classification"
+        )
 
     validated: dict[str, Any] = {
-        field: _safe_plain_text(
-            analysis[field],
-            f"{context}.{field}",
-            maximum=maximum,
-        )
-        for field, maximum in narrative_limits.items()
+        "classification": classification,
+        **{
+            field: _safe_plain_text(
+                analysis[field],
+                f"{context}.{field}",
+                maximum=maximum,
+                japanese=True,
+            )
+            for field, maximum in narrative_limits.items()
+        },
     }
     english_analysis: dict[str, Any] = {
-        field: _safe_plain_text(
-            english_value[field],
-            f"{context}.english.{field}",
-            maximum=maximum,
-            english=True,
-        )
-        for field, maximum in narrative_limits.items()
+        "classification": english_classification,
+        **{
+            field: _safe_plain_text(
+                english_value[field],
+                f"{context}.english.{field}",
+                maximum=maximum,
+                english=True,
+            )
+            for field, maximum in narrative_limits.items()
+        },
     }
 
     importance = analysis["importance"]
@@ -504,7 +538,7 @@ def validate_research_report(value: object) -> dict[str, Any]:
     if not isinstance(status, str) or status not in REPORT_STATUSES:
         raise ResearchReportSchemaError("research report status is invalid")
     message = _safe_plain_text(
-        report["message"], "research report message", maximum=2_000, english=True
+        report["message"], "research report message", maximum=2_000
     )
 
     expected_batch_date = _safe_date(

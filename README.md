@@ -87,6 +87,13 @@ environment variables override the configured models and PDF detail:
 - `OPENAI_MONTHLY_MODEL` for monthly synthesis; and
 - `OPENAI_PDF_DETAIL` (`low`, `high`, or `auto`) for PDF page images.
 
+Runtime safety limits also have optional local overrides:
+
+- `OPENAI_RESPONSES_TIMEOUT_SECONDS` bounds each Responses API attempt;
+- `RESEARCH_DAILY_TIME_BUDGET_SECONDS` sets the daily soft deadline; and
+- `OPENAI_SYNTHESIS_CHUNK_MAX_ITEMS` and
+  `OPENAI_SYNTHESIS_CHUNK_MAX_BYTES` bound each weekly/monthly request.
+
 The checked-in reasoning defaults are `low` for Luna screening, `medium` for
 Terra PDF and weekly analysis, and `high` for the monthly Sol synthesis. Each
 has a matching `OPENAI_*_REASONING_EFFORT` override shown in `.env.example`.
@@ -126,6 +133,18 @@ This produces matching `YYYY-MM-DD.json` and `YYYY-MM-DD.md` files under
 **.local/research/daily/**. It updates state only after both files are written.
 Re-running the same completed date is byte-stable; an incomplete attempt may be
 replaced only by the later completed result for that date.
+
+Validated abstract and PDF stages are atomically checkpointed under
+**.local/research/checkpoints/**. If the 30-minute default soft deadline or a
+remote failure interrupts a busy batch, the report remains incomplete and the
+next run resumes at the unfinished stage instead of repeating completed API
+calls. Each Responses attempt has a separate 120-second default timeout and SDK
+retries are disabled; the pipeline's explicit retry policy is the only retry
+layer. The daily budget plus the longest configured request timeout must leave
+at least ten minutes inside the 45-minute Actions limit. A model, prompt,
+schema, PDF setting, metadata, abstract, or candidate-set change invalidates the
+corresponding checkpoint before reuse. A malformed matching checkpoint is
+replaced with a clean one instead of permanently blocking that batch.
 
 Daily states have distinct meanings:
 
@@ -181,6 +200,14 @@ be reused, but the aggregate cannot overstate its coverage. Missing
 weekend/holiday reports do not create a false research gap because no batch was
 due, while an explicit failed report on one of those days still blocks
 completion.
+
+All stored papers are partitioned deterministically into bounded synthesis
+chunks before any API request. The defaults are at most 20 papers and 200,000
+UTF-8 prompt bytes per request. A single stored paper that exceeds the byte
+budget fails locally before an API call rather than being truncated or silently
+dropped. Chunk responses may contain only IDs from their own input chunk, and
+the merged report is sorted independently of chunk order. Input truncation is
+explicitly disabled and every response also has a bounded output-token budget.
 
 ## Publish a completed report locally
 
@@ -267,15 +294,17 @@ JST) and also supports manual dispatch.
    **Allow GitHub Actions to create and approve pull requests**.
 4. Run the workflow once manually and review the pull request it creates.
 
-The workflow persists `research/state.json` and daily JSON/Markdown on the fixed
-`automation/openai-arxiv-research` branch. Reusing this branch lets an
-unconfirmed batch survive to the next run. Completed daily reports are
+The workflow persists `research/state.json`, candidate-stage checkpoints, and
+daily JSON/Markdown on the fixed `automation/openai-arxiv-research` branch.
+Reusing this branch lets an unconfirmed batch resume on the next run without
+repeating completed model calls. Completed daily reports are
 converted to public editions; incomplete JSON/Markdown remains visible on the
 review branch but is not appended to the public archive. Weekly and monthly
 reviews are intentionally excluded from this cloud workflow and are generated
 by local Codex schedules from these stored daily reports. The workflow runs the
-complete Python and Node test suite before pushing and never pushes `main`
-directly.
+complete Python and Node test suite before paid research, validates and pushes
+safe research state before attempting publication, then validates generated
+public data again. It never pushes `main` directly.
 
 ## Local weekly and monthly schedules
 

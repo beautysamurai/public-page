@@ -121,7 +121,13 @@ def config(**changes) -> pipeline.PipelineConfig:
         "pdf_importance_threshold": 3,
         "screen_model": "screen-model",
         "full_model": "full-model",
-        "synthesis_model": "synthesis-model",
+        "weekly_model": "weekly-model",
+        "monthly_model": "monthly-model",
+        "screen_reasoning_effort": "low",
+        "full_reasoning_effort": "medium",
+        "weekly_reasoning_effort": "medium",
+        "monthly_reasoning_effort": "high",
+        "pdf_detail": "low",
         "max_candidates": 100,
         "retries": 0,
         "timeout": 2.0,
@@ -259,13 +265,31 @@ class ResponsesAdapterTests(unittest.TestCase):
             self.assertIs(call["text"]["format"]["strict"], True)
             self.assertIn("untrusted", call["instructions"].casefold())
         self.assertEqual(abstract_call["model"], "screen-model")
+        self.assertEqual(abstract_call["reasoning"], {"effort": "low"})
         self.assertEqual(pdf_call["model"], "full-model")
+        self.assertEqual(pdf_call["reasoning"], {"effort": "medium"})
         contents = pdf_call["input"][0]["content"]
         file_input = next(item for item in contents if item["type"] == "input_file")
         self.assertEqual(
             file_input,
-            {"type": "input_file", "file_url": "https://arxiv.org/pdf/2608.12345v1"},
+            {
+                "type": "input_file",
+                "file_url": "https://arxiv.org/pdf/2608.12345v1",
+                "detail": "low",
+            },
         )
+
+    def test_weekly_and_monthly_synthesis_use_distinct_models(self):
+        responses = RecordingResponses([{"papers": []}, {"papers": []}])
+        adapter = pipeline.ResponsesAnalyzer(config(), SimpleNamespace(responses=responses))
+
+        adapter.synthesize([], pipeline.WEEKLY, date(2026, 8, 22), date(2026, 8, 28))
+        adapter.synthesize([], pipeline.MONTHLY, date(2026, 8, 1), date(2026, 8, 31))
+
+        self.assertEqual(responses.calls[0]["model"], "weekly-model")
+        self.assertEqual(responses.calls[0]["reasoning"], {"effort": "medium"})
+        self.assertEqual(responses.calls[1]["model"], "monthly-model")
+        self.assertEqual(responses.calls[1]["reasoning"], {"effort": "high"})
 
     def test_structured_output_validation_rejects_missing_extra_and_bool_importance(self):
         mismatched_classification = analysis()
@@ -1067,7 +1091,10 @@ class ConfigAndCliTests(unittest.TestCase):
             {
                 "OPENAI_SCREENING_MODEL": "screen-env",
                 "OPENAI_FULL_TEXT_MODEL": "full-env",
-                "OPENAI_SYNTHESIS_MODEL": "synthesis-env",
+                "OPENAI_WEEKLY_MODEL": "weekly-env",
+                "OPENAI_MONTHLY_MODEL": "monthly-env",
+                "OPENAI_SCREENING_REASONING_EFFORT": "none",
+                "OPENAI_PDF_DETAIL": "high",
             },
             clear=False,
         ):
@@ -1076,10 +1103,50 @@ class ConfigAndCliTests(unittest.TestCase):
         self.assertEqual(loaded.pdf_importance_threshold, 3)
         self.assertEqual(loaded.screen_model, "screen-env")
         self.assertEqual(loaded.full_model, "full-env")
-        self.assertEqual(loaded.synthesis_model, "synthesis-env")
+        self.assertEqual(loaded.weekly_model, "weekly-env")
+        self.assertEqual(loaded.monthly_model, "monthly-env")
+        self.assertEqual(loaded.screen_reasoning_effort, "none")
+        self.assertEqual(loaded.pdf_detail, "high")
         self.assertEqual(loaded.max_candidates, 100)
         self.assertEqual(loaded.retries, 3)
         self.assertEqual(loaded.no_announcement_dates, ())
+
+    def test_legacy_synthesis_env_is_fallback_and_period_env_wins(self):
+        with tempfile.TemporaryDirectory() as directory:
+            config_path = Path(directory) / "research.json"
+            config_path.write_text(
+                json.dumps(
+                    {
+                        "weeklyModel": "weekly-config",
+                        "monthlyModel": "monthly-config",
+                    }
+                ),
+                encoding="utf-8",
+            )
+            with mock.patch.dict(
+                os.environ,
+                {
+                    "OPENAI_SYNTHESIS_MODEL": "legacy-env",
+                    "OPENAI_WEEKLY_MODEL": "weekly-env",
+                },
+                clear=True,
+            ):
+                loaded = pipeline.load_pipeline_config(config_path)
+
+        self.assertEqual(loaded.weekly_model, "weekly-env")
+        self.assertEqual(loaded.monthly_model, "legacy-env")
+
+    def test_invalid_pdf_detail_and_reasoning_types_are_configuration_errors(self):
+        for bad_config in (
+            {"pdfDetail": ["low"]},
+            {"screenReasoningEffort": {"value": "low"}},
+        ):
+            with self.subTest(bad_config=bad_config):
+                with tempfile.TemporaryDirectory() as directory:
+                    config_path = Path(directory) / "research.json"
+                    config_path.write_text(json.dumps(bad_config), encoding="utf-8")
+                    with self.assertRaises(pipeline.ConfigurationError):
+                        pipeline.load_pipeline_config(config_path)
 
     def test_configured_no_announcement_date_rolls_back_expected_batch(self):
         holiday = date(2026, 8, 31)

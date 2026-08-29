@@ -90,7 +90,7 @@ jobs:
       - name: Install the OpenAI SDK
         run: python -m pip install -r requirements.txt
 
-      - name: Run daily research and due period reviews
+      - name: Run daily research
         id: research
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -98,8 +98,6 @@ jobs:
         run: |
           set -euo pipefail
           generated_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          run_date="${generated_at%%T*}"
-
           python scripts/research_pipeline.py \
             --config config/research.json \
             --env-file /dev/null \
@@ -110,63 +108,15 @@ jobs:
             > "$RUNNER_TEMP/daily-report.json"
 
           daily_report_date="$(python -c 'import json,sys; print(json.load(open(sys.argv[1], encoding="utf-8"))["reportDate"])' "$RUNNER_TEMP/daily-report.json")"
-          report_paths=("research/daily/${daily_report_date}.json")
-
-          weekday="$(date -u -d "$run_date" +'%u')"
-          days_since_friday="$(( (10#$weekday + 2) % 7 ))"
-          weekly_end="$(date -u -d "$run_date - $days_since_friday days" +'%Y-%m-%d')"
-
-          first_of_month="${run_date:0:7}-01"
-          current_month_end="$(date -u -d "$first_of_month +1 month -1 day" +'%Y-%m-%d')"
-          if [[ "$run_date" == "$current_month_end" ]]; then
-            monthly_end="$run_date"
+          report_path="research/daily/${daily_report_date}.json"
+          status="$(python -c 'import json,sys; print(json.load(open(sys.argv[1], encoding="utf-8"))["status"])' "$report_path")"
+          if [[ "$status" == "UPDATE_NOT_CONFIRMED" || "$status" == "UPDATER_OFFLINE" ]]; then
+            echo "Keeping incomplete report out of the public archive: $report_path ($status)"
           else
-            monthly_end="$(date -u -d "$first_of_month -1 day" +'%Y-%m-%d')"
-          fi
-
-          run_due_aggregate() {
-            local period="$1"
-            local period_end="$2"
-            local report_path="research/reviews/${period}/${period_end}.json"
-            local temporary_report="$RUNNER_TEMP/${period}-report.json"
-            local status=""
-
-            if [[ -f "$report_path" ]]; then
-              status="$(python -c 'import json,sys; print(json.load(open(sys.argv[1], encoding="utf-8"))["status"])' "$report_path")"
-            fi
-            if [[ "$status" == "UPDATE_CONFIRMED" || "$status" == "NO_RELEVANT_PAPERS" ]]; then
-              echo "The ${period} review ending ${period_end} is already complete."
-            elif ! python scripts/research_pipeline.py \
-              --config config/research.json \
-              --env-file /dev/null \
-              aggregate \
-              --period "$period" \
-              --period-end "$period_end" \
-              --generated-at "$generated_at" \
-              --daily-dir research/daily \
-              --output-dir research/reviews \
-              > "$temporary_report"; then
-              echo "::warning::The ${period} review ending ${period_end} could not be generated; daily state will still be saved."
-            fi
-
-            if [[ -f "$report_path" ]]; then
-              report_paths+=("$report_path")
-            fi
-          }
-
-          run_due_aggregate weekly "$weekly_end"
-          run_due_aggregate monthly "$monthly_end"
-
-          for report_path in "${report_paths[@]}"; do
-            status="$(python -c 'import json,sys; print(json.load(open(sys.argv[1], encoding="utf-8"))["status"])' "$report_path")"
-            if [[ "$status" == "UPDATE_NOT_CONFIRMED" || "$status" == "UPDATER_OFFLINE" ]]; then
-              echo "Keeping incomplete report out of the public archive: $report_path ($status)"
-              continue
-            fi
             python scripts/research_publication.py \
               --report "$report_path" \
               --regenerate-site
-          done
+          fi
 
       - name: Validate generated site and privacy boundary
         shell: bash
@@ -259,7 +209,7 @@ jobs:
               --base main \
               --head "$AUTOMATION_BRANCH" \
               --title "research: automated arXiv review" \
-              --body "Automated daily screen and any due weekly/monthly review. arXiv/OpenAI failures remain incomplete and are not published. Review the generated prose and ratings before merge."
+              --body "Automated daily arXiv screen. Weekly and monthly synthesis run from local Codex schedules. arXiv/OpenAI failures remain incomplete and are not published. Review the generated prose and ratings before merge."
           else
             echo "Updated existing review PR #$existing."
           fi

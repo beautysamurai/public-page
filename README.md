@@ -19,10 +19,10 @@ to `main` starts the existing GitHub Pages deployment.
 
 ~~~text
 official arXiv new-list pages + validated export metadata
-  -> abstract screening with strict Responses API JSON Schema
-  -> full-PDF analysis only when importance >= configured threshold
+  -> abstract screening with GPT-5.6 Luna and strict Responses API JSON Schema
+  -> GPT-5.6 Terra full-PDF analysis only when importance >= threshold
   -> durable state + daily JSON/Markdown
-  -> weekly/monthly synthesis from stored daily JSON
+  -> local scheduled weekly Terra / monthly Sol synthesis from stored daily JSON
   -> scripts/research_publication.py
   -> content/chatgpt_scheduler_history.json + English overlay
   -> deterministic site/data generation
@@ -77,12 +77,22 @@ OPENAI_API_KEY=your-key-here
 
 Public model and category defaults live in **config/research.json**. The default
 categories are q-fin.TR, q-fin.MF, q-fin.CP, q-fin.PR, q-fin.RM, and q-fin.EC.
-The default PDF threshold is importance 3. These optional environment variables
-override the configured models:
+The default PDF threshold is importance 3. PDF page images use explicit `low`
+detail by default; extracted PDF text is still included. These optional
+environment variables override the configured models and PDF detail:
 
 - `OPENAI_SCREENING_MODEL` for abstract screening;
-- `OPENAI_FULL_TEXT_MODEL` for full-paper analysis; and
-- `OPENAI_SYNTHESIS_MODEL` for weekly/monthly synthesis.
+- `OPENAI_FULL_TEXT_MODEL` for full-paper analysis;
+- `OPENAI_WEEKLY_MODEL` for weekly synthesis;
+- `OPENAI_MONTHLY_MODEL` for monthly synthesis; and
+- `OPENAI_PDF_DETAIL` (`low`, `high`, or `auto`) for PDF page images.
+
+The checked-in reasoning defaults are `low` for Luna screening, `medium` for
+Terra PDF and weekly analysis, and `high` for the monthly Sol synthesis. Each
+has a matching `OPENAI_*_REASONING_EFFORT` override shown in `.env.example`.
+
+`OPENAI_SYNTHESIS_MODEL` remains a backward-compatible fallback when neither
+period-specific override is set.
 
 `noAnnouncementDates` contains the official arXiv no-announcement dates for
 the current calendar year. Refresh this small list from arXiv's
@@ -246,7 +256,7 @@ powershell -ExecutionPolicy Bypass `
 The consumer refuses incomplete, rewritten, reordered, untranslated, or unsafe
 public bundles and opens a pull request rather than updating Pages directly.
 
-## Enable GitHub Actions automation
+## Enable daily GitHub Actions automation
 
 The **Automated arXiv research** workflow runs every day at 06:30 UTC (15:30
 JST) and also supports manual dispatch.
@@ -257,13 +267,33 @@ JST) and also supports manual dispatch.
    **Allow GitHub Actions to create and approve pull requests**.
 4. Run the workflow once manually and review the pull request it creates.
 
-The workflow persists `research/state.json`, daily JSON/Markdown, and due
-Friday weekly or calendar-month-end monthly reviews on the fixed
+The workflow persists `research/state.json` and daily JSON/Markdown on the fixed
 `automation/openai-arxiv-research` branch. Reusing this branch lets an
-unconfirmed batch survive to the next run. Completed reports are converted to
-public editions; incomplete JSON/Markdown remains visible on the review branch
-but is not appended to the public archive. The workflow runs the complete
-Python and Node test suite before pushing and never pushes `main` directly.
+unconfirmed batch survive to the next run. Completed daily reports are
+converted to public editions; incomplete JSON/Markdown remains visible on the
+review branch but is not appended to the public archive. Weekly and monthly
+reviews are intentionally excluded from this cloud workflow and are generated
+by local Codex schedules from these stored daily reports. The workflow runs the
+complete Python and Node test suite before pushing and never pushes `main`
+directly.
+
+## Local weekly and monthly schedules
+
+The recommended Codex schedules run in the saved local `public-page` project:
+
+- weekly: Sunday 08:00 local time, GPT-5.6 Terra, covering the seven days ending
+  on the most recent Friday;
+- monthly: the first day of each month at 23:00 local time, GPT-5.6 Sol,
+  covering the complete previous calendar month.
+
+Each local task fetches the durable `automation/openai-arxiv-research` branch
+without changing the user's current checkout, reuses its `research/daily` JSON,
+and writes the matching aggregate under ignored `.local/research/reviews/` for
+manual review. It does not commit, push, update `main`, or publish Pages.
+Publication remains a separate reviewed action. Keep `OPENAI_API_KEY` in the
+ignored local `.env`; never put it in an automation prompt or tracked file. A
+powered-off machine cannot run a local schedule at its nominal time, so review
+the task status after the next startup.
 
 Merging the review pull request triggers the unchanged **Deploy GitHub Pages**
 workflow. The Pages job uploads only **site/** and never receives the OpenAI

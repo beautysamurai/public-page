@@ -261,6 +261,13 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         self.assertIn("paper.absUrl", self.app)
         self.assertIn("renderMarkdownLite(sourceText)", self.app)
 
+    def test_monthly_and_responses_api_editions_are_not_downgraded(self):
+        self.assertIn('value === "weekly" || value === "monthly"', self.app)
+        self.assertIn('report.sourceKind === "openai-responses-api"', self.app)
+        self.assertIn('"status.MONTHLY_REVIEW.label"', self.catalog)
+        self.assertIn('"kind.monthlyReview"', self.catalog)
+        self.assertIn('"source.openai"', self.catalog)
+
     def test_unranked_weekly_papers_use_stable_display_numbers(self):
         weekly = next(
             edition

@@ -51,7 +51,9 @@ jobs:
 
           paths = [
               Path("config/topics.json"),
+              Path("config/research.json"),
               *sorted(Path("content").rglob("*.json")),
+              *sorted(Path("research").rglob("*.json")),
               *sorted(Path("site").rglob("*.json")),
           ]
           for path in paths:
@@ -82,7 +84,7 @@ jobs:
                   rb"(?:gh[opsu]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{40,})"
               ),
               "AWS access key": re.compile(rb"AKIA[0-9A-Z]{16}"),
-              "OpenAI-style key": re.compile(rb"sk-[A-Za-z0-9]{20,}"),
+              "OpenAI-style key": re.compile(rb"sk-[A-Za-z0-9_-]{20,}"),
           }
 
           problems = []

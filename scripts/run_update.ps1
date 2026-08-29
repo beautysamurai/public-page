@@ -32,18 +32,23 @@ $logFile = Join-Path $logDirectory (
 $locationPushed = $false
 
 try {
-    "[$startedAt] Starting arXiv Daily update." |
+    "[$startedAt] Starting automated arXiv research update." |
         Tee-Object -FilePath $logFile -Append
 
     Push-Location $repositoryRoot
     $locationPushed = $true
 
     $updaterArguments = @(
-        "scripts/arxiv_digest.py",
-        "--output",
-        ".local/candidate-data/latest.json",
-        "--archive-dir",
-        ".local/candidate-data/archive"
+        "scripts/research_pipeline.py",
+        "--config",
+        "config/research.json",
+        "--env-file",
+        ".env",
+        "daily",
+        "--state",
+        ".local/research/state.json",
+        "--output-dir",
+        ".local/research/daily"
     )
     & $Python @updaterArguments 2>&1 |
         Tee-Object -FilePath $logFile -Append
@@ -53,7 +58,7 @@ try {
     }
 
     $finishedAt = [DateTime]::UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")
-    "[$finishedAt] Candidate update completed under .local/candidate-data." |
+    "[$finishedAt] Research update completed under .local/research." |
         Tee-Object -FilePath $logFile -Append
 }
 catch {

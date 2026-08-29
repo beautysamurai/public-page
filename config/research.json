@@ -1,0 +1,38 @@
+{
+  "categories": [
+    "q-fin.TR",
+    "q-fin.MF",
+    "q-fin.CP",
+    "q-fin.PR",
+    "q-fin.RM",
+    "q-fin.EC"
+  ],
+  "pdfImportanceThreshold": 3,
+  "screenModel": "gpt-5.6-luna",
+  "fullModel": "gpt-5.6-terra",
+  "weeklyModel": "gpt-5.6-terra",
+  "monthlyModel": "gpt-5.6-sol",
+  "screenReasoningEffort": "low",
+  "fullReasoningEffort": "medium",
+  "weeklyReasoningEffort": "medium",
+  "monthlyReasoningEffort": "high",
+  "pdfDetail": "low",
+  "maxCandidates": 100,
+  "retries": 3,
+  "timeoutSeconds": 25,
+  "openaiTimeoutSeconds": 120,
+  "dailyTimeBudgetSeconds": 1800,
+  "synthesisChunkMaxItems": 20,
+  "synthesisChunkMaxBytes": 200000,
+  "noAnnouncementDates": [
+    "2026-01-01",
+    "2026-01-19",
+    "2026-06-19",
+    "2026-07-03",
+    "2026-09-07",
+    "2026-11-26",
+    "2026-12-25",
+    "2026-12-29",
+    "2026-12-31"
+  ]
+}

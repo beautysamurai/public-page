@@ -7,9 +7,10 @@ Latest-edition ordering is deliberately independent of input order:
 2. importedAt (compared as an absolute timezone-aware instant),
 3. editionId (lexicographic tie-breaker).
 
-editionKind never participates in ordering. A weekly edition can therefore win
-on a same-day tie only because its explicit importedAt or editionId sorts later,
-never because weekly reports receive an implicit preference.
+editionKind never participates in ordering. A weekly or monthly edition can
+therefore win on a same-day tie only because its explicit importedAt or
+editionId sorts later, never because aggregate reports receive an implicit
+preference.
 """
 
 from __future__ import annotations
@@ -78,8 +79,10 @@ INDEX_EDITION_FIELDS = (
     "title",
 )
 
-EDITION_KINDS = frozenset({"daily", "weekly"})
-SOURCE_KIND = "chatgpt-scheduled-task"
+EDITION_KINDS = frozenset({"daily", "weekly", "monthly"})
+SOURCE_KINDS = frozenset(
+    {"chatgpt-scheduled-task", "openai-responses-api"}
+)
 STATUSES = frozenset(
     {
         "UPDATE_CONFIRMED",
@@ -88,6 +91,7 @@ STATUSES = frozenset(
         "UPDATER_OFFLINE",
         "NO_NEW_BATCH_EXPECTED",
         "WEEKLY_REVIEW",
+        "MONTHLY_REVIEW",
     }
 )
 
@@ -532,9 +536,9 @@ def _validate_edition(value: object, index: int) -> dict[str, Any]:
     if not isinstance(edition_kind, str) or edition_kind not in EDITION_KINDS:
         raise HistorySchemaError(f"{field}.editionKind is invalid")
     source_kind = value["sourceKind"]
-    if source_kind != SOURCE_KIND:
+    if not isinstance(source_kind, str) or source_kind not in SOURCE_KINDS:
         raise HistorySchemaError(
-            f"{field}.sourceKind must be {SOURCE_KIND!r}"
+            f"{field}.sourceKind must be one of {sorted(SOURCE_KINDS)!r}"
         )
     source_label = _validate_public_text(
         value["sourceLabel"],
@@ -744,11 +748,11 @@ def generate_artifacts(history: Mapping[str, Any]) -> GeneratedArtifacts:
             "sourceKind": edition["sourceKind"],
             # Keep sourceLabel as provenance in the edition document. The
             # index title describes the edition itself and is stable by kind.
-            "title": (
-                "Weekly research review"
-                if edition["editionKind"] == "weekly"
-                else "Daily research screen"
-            ),
+            "title": {
+                "daily": "Daily research screen",
+                "weekly": "Weekly research review",
+                "monthly": "Monthly research review",
+            }[edition["editionKind"]],
         }
         for edition in ordered
     ]

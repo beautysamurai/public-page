@@ -18,29 +18,34 @@ should be acknowledged and assessed before public disclosure whenever possible.
 
 - The deployed product is a static site. It has no account system, server-side
   application, or runtime repository credentials.
-- arXiv access and any future AI/API processing run locally, never on a GitHub
-  Actions schedule.
+- arXiv and OpenAI processing can run locally or in the dedicated scheduled
+  research workflow. That workflow has no pull-request trigger, receives the
+  OpenAI key only from Actions secrets, and writes to a fixed review branch.
+- The research workflow never pushes `main`. A human-reviewed merge remains the
+  boundary before generated prose and ratings reach GitHub Pages.
 - The validation workflow has read-only repository access.
 - The Pages workflow has read-only repository access while verifying and
   building. Only its deployment job receives **pages: write** and
   **id-token: write**; no repository-content write permission is granted.
 - Local-only logs, caches, credentials, and experiments belong in **.local/**,
-  which is ignored by Git.
+  which is ignored by Git. Sanitized reports under tracked **research/** are
+  public review artifacts, not private storage.
 
 These boundaries reduce exposure but do not make committed data private. Review
 generated **site/data/** files before every push.
 
 ## Credential handling
 
-The current updater does not require a repository secret. If a future local
-integration needs credentials:
+The Responses API pipeline requires `OPENAI_API_KEY` when candidate papers need
+analysis:
 
-1. Store them outside tracked files, preferably in the operating system's
-   credential store or in a file under **.local/** with restrictive permissions.
-2. Pass them to the local process at runtime; do not serialize them into the
-   generated snapshot or logs.
-3. Do not add them to GitHub Actions unless the architecture and threat model
-   are deliberately changed and documented.
+1. For local use, store it in ignored `.env` or the operating-system credential
+   store and pass it only at runtime.
+2. For scheduled Actions, store it only as the repository secret named
+   `OPENAI_API_KEY`; never place it in variables, workflow text, artifacts, or
+   pull-request content.
+3. Do not serialize credentials, request headers, or raw API responses into
+   reports, state, site data, or logs.
 
 If a credential is committed, assume it is compromised: revoke or rotate it
 first, then remove it from the current tree and Git history. Adding the path to
@@ -50,6 +55,9 @@ first, then remove it from the current tree and Git history. Adding the path to
 
 Keep GitHub Actions pinned to trusted publishers and review version changes.
 Treat arXiv titles, author names, and abstracts as untrusted text: render them as
-text, not HTML. External links should use safe browser attributes when opening a
-new tab. Do not weaken the site's content-security posture to support an
-unreviewed script or analytics provider.
+text, not HTML. Treat PDF content as untrusted model input as well: document
+instructions cannot override the fixed developer prompt or strict schema. The
+pipeline requests `store=false`, revalidates structured output locally, and
+keeps arXiv identity fields outside model control. External links should use
+safe browser attributes when opening a new tab. Do not weaken the site's
+content-security posture to support an unreviewed script or analytics provider.

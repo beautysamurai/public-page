@@ -1,0 +1,28 @@
+{
+  "categories": [
+    "q-fin.TR",
+    "q-fin.MF",
+    "q-fin.CP",
+    "q-fin.PR",
+    "q-fin.RM",
+    "q-fin.EC"
+  ],
+  "pdfImportanceThreshold": 3,
+  "screenModel": "gpt-5.4-mini",
+  "fullModel": "gpt-5.4",
+  "synthesisModel": "gpt-5.4-mini",
+  "maxCandidates": 100,
+  "retries": 3,
+  "timeoutSeconds": 25,
+  "noAnnouncementDates": [
+    "2026-01-01",
+    "2026-01-19",
+    "2026-06-19",
+    "2026-07-03",
+    "2026-09-07",
+    "2026-11-26",
+    "2026-12-25",
+    "2026-12-29",
+    "2026-12-31"
+  ]
+}

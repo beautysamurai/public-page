@@ -136,8 +136,9 @@ def _validate_public_english_text(value: str, context: str) -> None:
             raise PublicBundleError(f"{context} {reason}")
 
 
-def load_translation(path: Path) -> dict[str, Any]:
-    value = _read_json(path)
+def validate_translation(value: object) -> dict[str, Any]:
+    """Return a strictly validated English public-overlay object."""
+
     if not isinstance(value, dict):
         raise PublicBundleError("English overlay must be a JSON object")
     _require_exact_keys(value, TRANSLATION_TOP_FIELDS, "English overlay")
@@ -205,6 +206,10 @@ def load_translation(path: Path) -> dict[str, Any]:
                 )
                 _validate_public_english_text(label, f"{rating_context}.label")
     return value
+
+
+def load_translation(path: Path) -> dict[str, Any]:
+    return validate_translation(_read_json(path))
 
 
 def _by_edition_id(

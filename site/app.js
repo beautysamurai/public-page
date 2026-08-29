@@ -8,6 +8,16 @@
     return value === "en" ? "en" : "ja";
   }
 
+  function normaliseEditionKind(value) {
+    return value === "weekly" || value === "monthly" ? value : "daily";
+  }
+
+  function kindValue(kind, dailyValue, weeklyValue, monthlyValue) {
+    if (kind === "weekly") return weeklyValue;
+    if (kind === "monthly") return monthlyValue;
+    return dailyValue;
+  }
+
   var byId = function (id) { return document.getElementById(id); };
   var elements = {
     archiveList: byId("archive-list"),
@@ -70,7 +80,8 @@
       NO_NEW_BATCH_EXPECTED: "fresh",
       UPDATE_NOT_CONFIRMED: "warn",
       UPDATER_OFFLINE: "offline",
-      WEEKLY_REVIEW: "fresh"
+      WEEKLY_REVIEW: "fresh",
+      MONTHLY_REVIEW: "fresh"
     };
     var key = states[status] ? status : "";
     return {
@@ -269,7 +280,7 @@
     var expectedDate = isDate(raw.expectedBatchDate) ? raw.expectedBatchDate : "";
     var editionDate = isDate(raw.editionDate) ? raw.editionDate : expectedDate;
     var editionId = validEditionId(raw.editionId) || editionDate;
-    var editionKind = raw.editionKind === "weekly" ? "weekly" : "daily";
+    var editionKind = normaliseEditionKind(raw.editionKind);
     return {
       checkedAt: clean(raw.checkedAt),
       editionDate: editionDate,
@@ -306,12 +317,17 @@
       return {
         date: date,
         editionId: editionId,
-        kind: item.kind === "weekly" ? "weekly" : "daily",
+        kind: normaliseEditionKind(item.kind),
         paperCount: Math.max(0, Number(item.paperCount) || 0),
         path: path,
         sourceKind: v2 ? clean(item.sourceKind, "chatgpt-scheduled-task") : "local-arxiv-updater",
         status: clean(item.status, "UPDATE_NOT_CONFIRMED").toUpperCase(),
-        title: clean(item.title, item.kind === "weekly" ? "Weekly research review" : "Daily research screen")
+        title: clean(item.title, kindValue(
+          normaliseEditionKind(item.kind),
+          "Daily research screen",
+          "Weekly research review",
+          "Monthly research review"
+        ))
       };
     }).filter(function (item) {
       return item.date && item.editionId && item.path;
@@ -451,8 +467,8 @@
     var checked = dateObject(report.importedAt || report.checkedAt || report.generatedAt);
     if (!checked) return { label: copy.label + " · " + t("freshness.timeUnknown"), short: t("freshness.timeUnknown"), state: "warn" };
     var ageHours = Math.max(0, (Date.now() - checked.getTime()) / 3600000);
-    var staleAfter = report.editionKind === "weekly" ? 240 : 72;
-    var delayedAfter = report.editionKind === "weekly" ? 192 : 36;
+    var staleAfter = kindValue(report.editionKind, 72, 240, 840);
+    var delayedAfter = kindValue(report.editionKind, 36, 192, 744);
     if (ageHours > staleAfter) return { label: t("freshness.staleLabel"), short: t("freshness.staleShort"), state: "stale" };
     if (ageHours > delayedAfter) return { label: t("freshness.delayedLabel"), short: t("freshness.delayedShort"), state: "warn" };
     return { label: copy.label, short: t("freshness.freshShort"), state: "fresh" };
@@ -707,11 +723,18 @@
     }
 
     elements.editionContext.hidden = false;
-    elements.editionKind.textContent = report.editionKind === "weekly" ? t("kind.weeklyReview") : t("kind.dailyScreen");
+    elements.editionKind.textContent = t(kindValue(
+      report.editionKind,
+      "kind.dailyScreen",
+      "kind.weeklyReview",
+      "kind.monthlyReview"
+    ));
     elements.editionKind.dataset.kind = report.editionKind;
     var sourceKindLabel = report.sourceKind === "chatgpt-scheduled-task"
       ? t("source.chatgpt")
-      : report.sourceKind === "local-arxiv-updater" ? t("source.local") : t("source.unknown");
+      : report.sourceKind === "openai-responses-api"
+        ? t("source.openai")
+        : report.sourceKind === "local-arxiv-updater" ? t("source.local") : t("source.unknown");
     elements.editionSource.textContent = sourceKindLabel;
     elements.editionId.textContent = report.editionId || t("unavailable");
 
@@ -722,11 +745,16 @@
     elements.editionImported.textContent = formatDateTime(report.importedAt);
 
     elements.sourceSection.hidden = !report.sourceText;
-    elements.sourceTitle.textContent = report.editionKind === "weekly" ? t("source.weeklyTitle") : t("source.dailyTitle");
+    elements.sourceTitle.textContent = t(kindValue(
+      report.editionKind,
+      "source.dailyTitle",
+      "source.weeklyTitle",
+      "source.monthlyTitle"
+    ));
     elements.sourceDocument.replaceChildren();
     elements.sourceDocument.lang = state.language;
     if (report.sourceText) {
-      var sourceText = report.editionKind === "weekly"
+      var sourceText = report.editionKind === "weekly" || report.editionKind === "monthly"
         ? linkWeeklySourceText(report.sourceText, report.papers)
         : report.sourceText;
       elements.sourceDocument.appendChild(renderMarkdownLite(sourceText));
@@ -1005,16 +1033,38 @@
 
     var edition = report.editionDate || report.observedBatchDate || report.expectedBatchDate || report.checkedAt || report.generatedAt;
     var displayDate = formatDate(edition, false);
-    var kindLabel = report.editionKind === "weekly" ? t("kind.weekly") : t("kind.daily");
+    var kindLabel = t(kindValue(
+      report.editionKind,
+      "kind.daily",
+      "kind.weekly",
+      "kind.monthly"
+    ));
     elements.editionDate.textContent = (archived ? t("edition.archivePrefix") + " · " : kindLabel + " · ") + displayDate;
     elements.paperCount.textContent = report.papers.length;
     elements.topicCount.textContent = topicCounts(report.papers).length;
-    elements.digestTitle.textContent = report.editionKind === "weekly"
-      ? (archived ? t("edition.weeklyArchived", { date: displayDate }) : t("edition.weeklyCurrent"))
-      : (archived ? t("edition.dailyArchived", { date: displayDate }) : t("edition.dailyCurrent"));
+    var currentTitleKey = kindValue(
+      report.editionKind,
+      "edition.dailyCurrent",
+      "edition.weeklyCurrent",
+      "edition.monthlyCurrent"
+    );
+    var archivedTitleKey = kindValue(
+      report.editionKind,
+      "edition.dailyArchived",
+      "edition.weeklyArchived",
+      "edition.monthlyArchived"
+    );
+    elements.digestTitle.textContent = archived
+      ? t(archivedTitleKey, { date: displayDate })
+      : t(currentTitleKey);
     document.title = archived
       ? t("edition.archivedPageTitle", { kind: kindLabel, date: displayDate })
-      : (report.editionKind === "weekly" ? t("edition.weeklyPageTitle") : t("edition.dailyPageTitle"));
+      : t(kindValue(
+        report.editionKind,
+        "edition.dailyPageTitle",
+        "edition.weeklyPageTitle",
+        "edition.monthlyPageTitle"
+      ));
     renderEditionContext(report);
     var freshness = renderStatus(report, archived);
 
@@ -1058,7 +1108,12 @@
 
     var fragment = document.createDocumentFragment();
     state.reports.slice(0, state.archiveVisible).forEach(function (report) {
-      var archiveTitle = report.kind === "weekly" ? t("archive.weeklyTitle") : t("archive.dailyTitle");
+      var archiveTitle = t(kindValue(
+        report.kind,
+        "archive.dailyTitle",
+        "archive.weeklyTitle",
+        "archive.monthlyTitle"
+      ));
       var link = createNode("a", "archive-row");
       link.href = archiveHref(report.editionId);
       link.setAttribute("aria-label", archiveTitle + ", " + formatDate(report.date, true));
@@ -1067,9 +1122,16 @@
 
       var meta = createNode("span", "archive-meta");
       meta.appendChild(createNode("strong", "archive-title-text", archiveTitle));
-      meta.appendChild(createNode("span", "archive-kind", report.kind === "weekly" ? t("kind.weekly") : t("kind.daily")));
+      meta.appendChild(createNode("span", "archive-kind", t(kindValue(
+        report.kind,
+        "kind.daily",
+        "kind.weekly",
+        "kind.monthly"
+      ))));
       if (report.sourceKind === "chatgpt-scheduled-task") {
         meta.appendChild(createNode("span", "archive-source", t("archive.scheduledTask")));
+      } else if (report.sourceKind === "openai-responses-api") {
+        meta.appendChild(createNode("span", "archive-source", t("archive.openai")));
       }
       var visual = archiveState(report.status);
       var status = createNode("span", "archive-state", visual.label);

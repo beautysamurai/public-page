@@ -199,7 +199,7 @@ $branchPushed = $false
 $locationPushed = $false
 
 try {
-    Write-LocalLog "Starting local candidate refresh and reviewed-bundle sync."
+    Write-LocalLog "Starting local research refresh and reviewed-bundle sync."
     Require-Command "git"
     Require-Command $Python
     Require-Command "node"
@@ -236,17 +236,18 @@ try {
     }
 
     if (-not $SkipCandidateUpdate) {
-        Write-LocalLog "Refreshing local-only arXiv candidates."
+        Write-LocalLog "Running the local OpenAI arXiv research pipeline."
         $candidateExit = Invoke-NativeLogged $Python @(
-            "scripts/arxiv_digest.py",
-            "--output",
-            ".local/candidate-data/latest.json",
-            "--archive-dir",
-            ".local/candidate-data/archive"
+            "scripts/research_pipeline.py",
+            "--config", "config/research.json",
+            "--env-file", ".env",
+            "daily",
+            "--state", ".local/research/state.json",
+            "--output-dir", ".local/research/daily"
         ) -AllowFailure
         if ($candidateExit -ne 0) {
             Write-LocalLog (
-                "Candidate refresh failed, but an already-reviewed public bundle " +
+                "Research refresh failed, but an already-reviewed public bundle " +
                 "may still be synchronized."
             )
         }
@@ -255,7 +256,7 @@ try {
     $resolvedInbox = Resolve-LocalPath $InboxDirectory
     if (-not (Test-Path -LiteralPath $resolvedInbox -PathType Container)) {
         Write-LocalLog (
-            "No producer-complete reviewed bundle is waiting. Candidate refresh " +
+            "No producer-complete reviewed bundle is waiting. Research refresh " +
             "is complete; no branch or pull request was created."
         )
         exit 0

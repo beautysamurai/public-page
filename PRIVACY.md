@@ -3,10 +3,10 @@
 ## Scope
 
 This repository produces a public static digest from sanitized scheduled-task
-reviews and public arXiv metadata. It does not need user accounts, form
-submissions, or a server-side database. The checked-in workflows validate files
-and deploy **site/**; they do not run a scheduled task, query arXiv, or send
-content to an AI service.
+reviews, automated Responses API reviews, and public arXiv metadata. It does not
+need user accounts, form submissions, or a server-side database. The dedicated
+research workflow queries arXiv and OpenAI on a schedule; the separate Pages
+workflow only validates files and deploys **site/**.
 
 External sites linked from the digest, including arXiv, operate under their own
 privacy policies.
@@ -16,9 +16,11 @@ privacy policies.
 Assume all of the following can be read and copied by anyone:
 
 - every tracked file and its Git history;
-- **config/topics.json**, including categories, keywords, and thresholds;
+- **config/topics.json** and **config/research.json**, including categories,
+  keywords, thresholds, and model names;
 - every sanitized scheduled narrative, rating, recommendation, and limitation
   in **content/chatgpt_scheduler_history.json**;
+- every committed state and sanitized JSON/Markdown report under **research/**;
 - generated paper metadata, status, provenance, and update timestamps in
   **site/data/**;
 - GitHub Actions logs and the deployed GitHub Pages site.
@@ -47,11 +49,18 @@ Before adding any file, use **git status** and inspect the staged diff.
 
 ## Network behavior
 
-Running **scripts/arxiv_digest.py** locally sends the configured public
-categories and keywords as part of requests needed to retrieve arXiv metadata.
-The local launchers write candidate data and operational logs under
-**.local/**. Importing **content/chatgpt_scheduler_history.json** is offline.
-GitHub Actions performs neither fetch and has no cron schedule.
+Running **scripts/research_pipeline.py** locally or in the research workflow
+sends configured public categories to arXiv. It sends public titles, abstracts,
+validated metadata, and only high-importance canonical PDF URLs to OpenAI. It
+does not send the repository, local notes, browser state, or Git credentials.
+The local launchers write state, reports, and logs under **.local/**. Importing
+**content/chatgpt_scheduler_history.json** remains offline.
+
+The scheduled research workflow runs at 06:30 UTC, stores the API key only in
+the process environment, and writes sanitized results to a fixed review branch.
+GitHub Actions logs and pull-request diffs are public to the same extent as the
+repository, so prompts, raw responses, headers, and credentials must never be
+printed or committed.
 
 The optional Windows startup sync uses the local Git and GitHub CLI credentials
 to fetch the public base branch, push a timestamped review branch, and open a
@@ -109,7 +118,7 @@ not published.
 
 ## Before publishing an update
 
-1. Inspect **git diff -- content site/data config/topics.json**.
+1. Inspect **git diff -- content research site/data config**.
 2. Confirm the edition date, status, expected/observed batch dates, coverage
    period, provenance, and paper ratings accurately describe the response.
 3. Confirm source text contains no raw citation markers, task/thread IDs,

@@ -2,7 +2,7 @@
 param(
     [string]$TaskName = "PublicPageStartupSync",
     [string]$Python = "python",
-    [string]$DailyAt = "09:30",
+    [string]$DailyAt = "15:30",
     [switch]$StartupOnly,
     [switch]$RunNow,
     [switch]$Uninstall
@@ -29,10 +29,29 @@ $syncScript = (Resolve-Path (Join-Path $scriptDirectory "sync_on_startup.ps1")).
 $powerShellExecutable = (Get-Process -Id $PID).Path
 $currentIdentity = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
 
-foreach ($command in @("git", "gh", "node", $Python)) {
+foreach ($command in @("git", "gh", "node")) {
     if (-not (Get-Command $command -ErrorAction SilentlyContinue)) {
         throw "Required command is not available: $command"
     }
+}
+
+$pythonCommand = Get-Command `
+    -Name $Python `
+    -CommandType Application `
+    -ErrorAction SilentlyContinue |
+    Select-Object -First 1
+if (-not $pythonCommand) {
+    throw "Python executable is not available: $Python"
+}
+$Python = $pythonCommand.Path
+try {
+    & $Python --version *> $null
+}
+catch {
+    throw "Python executable could not be started: $Python"
+}
+if ($LASTEXITCODE -ne 0) {
+    throw "Python executable failed its version check: $Python"
 }
 
 & gh auth status *> $null
@@ -91,7 +110,7 @@ Register-ScheduledTask `
     -Settings $settings `
     -Principal $principal `
     -Description (
-        "Refresh local arXiv candidates and open a review PR only when a " +
+        "Run the local OpenAI arXiv research pipeline and open a review PR only when a " +
         "complete sanitized public bundle is waiting in the local inbox."
     ) `
     -Force | Out-Null

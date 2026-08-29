@@ -1,0 +1,1089 @@
+#!/usr/bin/env python3
+"""Publish a completed automated-research report into the public v2 history.
+
+The research report is untrusted input.  This adapter accepts one exact report
+shape, maps only allowlisted fields, renders deterministic bilingual editorial
+text, and validates the complete candidate bundle before changing either public
+source file.  Existing editions are immutable; repeating the exact same report
+is a no-op while reusing an edition ID for different content is an error.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import re
+import sys
+import tempfile
+import unicodedata
+from copy import deepcopy
+from dataclasses import dataclass
+from datetime import date
+from pathlib import Path
+from typing import Any, Iterable, Mapping, Sequence
+
+from import_scheduler_history import (
+    ARXIV_ID_RE,
+    HistoryImportError,
+    _parse_imported_at,
+    _validate_public_text,
+    generate_artifacts,
+    load_history,
+    persist_artifacts,
+    validate_history,
+)
+from validate_public_bundle import (
+    PublicBundleError,
+    load_translation,
+    validate_bundle,
+    validate_translation,
+)
+
+
+REPORT_SCHEMA_VERSION = 2
+MAX_REPORT_BYTES = 16 * 1024 * 1024
+SOURCE_KIND = "openai-responses-api"
+SOURCE_LABEL = "OpenAI Responses API · automated research pipeline"
+
+REPORT_FIELDS = frozenset(
+    {
+        "schemaVersion",
+        "reportKind",
+        "reportDate",
+        "generatedAt",
+        "status",
+        "message",
+        "expectedBatchDate",
+        "observedBatchDate",
+        "periodStart",
+        "periodEnd",
+        "papers",
+    }
+)
+PAPER_FIELDS = frozenset({"metadata", "finalAnalysis"})
+METADATA_FIELDS = frozenset(
+    {
+        "arxivId",
+        "title",
+        "authors",
+        "submittedDate",
+        "updatedDate",
+        "categories",
+    }
+)
+ANALYSIS_FIELDS = frozenset(
+    {
+        "classification",
+        "summary",
+        "mainResult",
+        "practicalApplication",
+        "methodology",
+        "limitations",
+        "importance",
+        "recommended",
+        "reason",
+        "tags",
+        "english",
+    }
+)
+ENGLISH_FIELDS = frozenset(
+    {
+        "classification",
+        "summary",
+        "mainResult",
+        "practicalApplication",
+        "methodology",
+        "limitations",
+        "reason",
+        "tags",
+    }
+)
+
+REPORT_KINDS = frozenset({"daily", "weekly", "monthly"})
+CLASSIFICATIONS = frozenset(
+    {
+        "electronic_trading",
+        "market_microstructure",
+        "interest_rate_models",
+        "yield_curve",
+        "rates",
+        "mixed",
+        "out_of_scope",
+    }
+)
+REPORT_STATUSES = frozenset(
+    {
+        "UPDATE_CONFIRMED",
+        "NO_RELEVANT_PAPERS",
+        "NO_NEW_BATCH_EXPECTED",
+        "UPDATE_NOT_CONFIRMED",
+        "UPDATER_OFFLINE",
+    }
+)
+
+DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
+WHITESPACE_RE = re.compile(r"\s+")
+MARKDOWN_ESCAPE_RE = re.compile(r"([\\`*_\[\]#!|])")
+CJK_RE = re.compile(r"[\u3040-\u30ff\u3400-\u9fff]")
+
+JA_STATUS_MESSAGES = {
+    "UPDATE_CONFIRMED": "arXivの更新を確認し、対象論文を評価しました。",
+    "NO_RELEVANT_PAPERS": (
+        "arXivの更新を確認しましたが、今回の条件に合う推薦論文は"
+        "ありませんでした。"
+    ),
+    "NO_NEW_BATCH_EXPECTED": (
+        "通常の公開スケジュール上、新しいarXivバッチは予定されていません。"
+    ),
+    "UPDATE_NOT_CONFIRMED": (
+        "予定されたarXivバッチの反映を確認できないため、レビューは完了扱いにせず"
+        "翌日に持ち越します。"
+    ),
+    "UPDATER_OFFLINE": (
+        "arXivの更新状況を確認できないため、レビューは完了扱いにせず翌日に"
+        "持ち越します。"
+    ),
+    "WEEKLY_REVIEW": "対象期間の週次レビューを生成しました。",
+    "MONTHLY_REVIEW": "対象期間の月次レビューを生成しました。",
+}
+EN_STATUS_MESSAGES = {
+    "UPDATE_CONFIRMED": (
+        "The arXiv update was confirmed and the qualifying papers were assessed."
+    ),
+    "NO_RELEVANT_PAPERS": (
+        "The arXiv update was confirmed, but no papers met the recommendation "
+        "criteria."
+    ),
+    "NO_NEW_BATCH_EXPECTED": (
+        "No new arXiv batch was expected under the normal announcement schedule."
+    ),
+    "UPDATE_NOT_CONFIRMED": (
+        "The expected arXiv batch could not be confirmed, so this review remains "
+        "incomplete and is carried forward."
+    ),
+    "UPDATER_OFFLINE": (
+        "The arXiv update status could not be checked, so this review remains "
+        "incomplete and is carried forward."
+    ),
+    "WEEKLY_REVIEW": "The weekly review for the selected period was generated.",
+    "MONTHLY_REVIEW": "The monthly review for the selected period was generated.",
+}
+
+JA_KIND_LABELS = {
+    "daily": "日次レビュー",
+    "weekly": "週次レビュー",
+    "monthly": "月次レビュー",
+}
+EN_KIND_LABELS = {
+    "daily": "Daily review",
+    "weekly": "Weekly review",
+    "monthly": "Monthly review",
+}
+ENGLISH_MONTHS = (
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+)
+
+
+class ResearchPublicationError(RuntimeError):
+    """Base class for expected report-adaptation and publication failures."""
+
+
+class ResearchReportSchemaError(ResearchPublicationError):
+    """The completed research report does not match the exact safe contract."""
+
+
+class PublicationConflictError(ResearchPublicationError):
+    """An immutable edition ID already exists with different public content."""
+
+
+@dataclass(frozen=True)
+class AdaptedPublication:
+    source_edition: dict[str, Any]
+    english_edition: dict[str, Any]
+
+
+@dataclass(frozen=True)
+class PublicationResult:
+    edition_id: str
+    changed: bool
+    generated_paths: tuple[Path, ...] = ()
+
+
+def _reject_duplicate_json_keys(
+    pairs: list[tuple[str, Any]],
+) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ResearchReportSchemaError(
+                f"research report contains duplicate key {key!r}"
+            )
+        result[key] = value
+    return result
+
+
+def _require_exact_keys(
+    value: object,
+    expected: frozenset[str],
+    context: str,
+) -> dict[str, Any]:
+    if not isinstance(value, dict):
+        raise ResearchReportSchemaError(f"{context} must be an object")
+    actual = frozenset(value)
+    if actual != expected:
+        missing = sorted(expected - actual)
+        unknown = sorted(actual - expected)
+        raise ResearchReportSchemaError(
+            f"{context} has invalid fields; missing={missing}, unknown={unknown}"
+        )
+    return value
+
+
+def _safe_plain_text(
+    value: object,
+    context: str,
+    *,
+    maximum: int,
+    english: bool = False,
+) -> str:
+    if not isinstance(value, str):
+        raise ResearchReportSchemaError(f"{context} must be a string")
+    normalized = unicodedata.normalize("NFC", value)
+    normalized = WHITESPACE_RE.sub(" ", normalized.strip())
+    if not normalized or len(normalized) > maximum:
+        raise ResearchReportSchemaError(f"{context} has an invalid length")
+    if any(
+        unicodedata.category(character) in {"Cc", "Cf", "Cs", "Co"}
+        for character in normalized
+    ):
+        raise ResearchReportSchemaError(
+            f"{context} contains a control, private-use, or formatting character"
+        )
+    if english and CJK_RE.search(normalized):
+        raise ResearchReportSchemaError(f"{context} must contain English text")
+    try:
+        _validate_public_text(normalized, context, maximum=maximum)
+    except HistoryImportError as exc:
+        raise ResearchReportSchemaError(str(exc)) from exc
+    return normalized
+
+
+def _safe_string_list(
+    value: object,
+    context: str,
+    *,
+    maximum_items: int,
+    maximum_string: int,
+    english: bool = False,
+) -> list[str]:
+    if (
+        not isinstance(value, list)
+        or not value
+        or len(value) > maximum_items
+    ):
+        raise ResearchReportSchemaError(
+            f"{context} must be a non-empty bounded list"
+        )
+    result = [
+        _safe_plain_text(
+            item,
+            f"{context}[{index}]",
+            maximum=maximum_string,
+            english=english,
+        )
+        for index, item in enumerate(value)
+    ]
+    folded = [item.casefold() for item in result]
+    if len(folded) != len(set(folded)):
+        raise ResearchReportSchemaError(f"{context} contains duplicate values")
+    return result
+
+
+def _safe_date(
+    value: object,
+    context: str,
+    *,
+    nullable: bool = False,
+) -> str | None:
+    if value is None and nullable:
+        return None
+    if not isinstance(value, str) or not DATE_RE.fullmatch(value):
+        raise ResearchReportSchemaError(f"{context} must be YYYY-MM-DD")
+    try:
+        parsed = date.fromisoformat(value)
+    except ValueError as exc:
+        raise ResearchReportSchemaError(
+            f"{context} must be a calendar date"
+        ) from exc
+    if parsed.isoformat() != value:
+        raise ResearchReportSchemaError(
+            f"{context} must be canonical YYYY-MM-DD"
+        )
+    return value
+
+
+def _safe_timestamp(value: object, context: str) -> str:
+    if not isinstance(value, str):
+        raise ResearchReportSchemaError(
+            f"{context} must be a timezone-aware RFC 3339 timestamp"
+        )
+    try:
+        _parse_imported_at(value, context)
+    except HistoryImportError as exc:
+        raise ResearchReportSchemaError(str(exc)) from exc
+    return value
+
+
+def _validate_analysis(
+    value: object,
+    context: str,
+) -> dict[str, Any]:
+    analysis = _require_exact_keys(value, ANALYSIS_FIELDS, context)
+    english_value = _require_exact_keys(
+        analysis["english"], ENGLISH_FIELDS, f"{context}.english"
+    )
+
+    narrative_limits = {
+        "classification": 500,
+        "summary": 10_000,
+        "mainResult": 10_000,
+        "practicalApplication": 10_000,
+        "methodology": 10_000,
+        "limitations": 10_000,
+        "reason": 5_000,
+    }
+    classification = analysis["classification"]
+    if classification not in CLASSIFICATIONS:
+        raise ResearchReportSchemaError(f"{context}.classification is invalid")
+
+    validated: dict[str, Any] = {
+        field: _safe_plain_text(
+            analysis[field],
+            f"{context}.{field}",
+            maximum=maximum,
+        )
+        for field, maximum in narrative_limits.items()
+    }
+    english_analysis: dict[str, Any] = {
+        field: _safe_plain_text(
+            english_value[field],
+            f"{context}.english.{field}",
+            maximum=maximum,
+            english=True,
+        )
+        for field, maximum in narrative_limits.items()
+    }
+
+    importance = analysis["importance"]
+    if (
+        type(importance) is not int
+        or importance < 1
+        or importance > 5
+    ):
+        raise ResearchReportSchemaError(
+            f"{context}.importance must be an integer from 1 through 5"
+        )
+    recommended = analysis["recommended"]
+    if type(recommended) is not bool:
+        raise ResearchReportSchemaError(f"{context}.recommended must be boolean")
+
+    tags = _safe_string_list(
+        analysis["tags"],
+        f"{context}.tags",
+        maximum_items=12,
+        maximum_string=120,
+    )
+    english_tags = _safe_string_list(
+        english_value["tags"],
+        f"{context}.english.tags",
+        maximum_items=12,
+        maximum_string=120,
+        english=True,
+    )
+    validated.update(
+        {
+            "importance": importance,
+            "recommended": recommended,
+            "tags": tags,
+            "english": {**english_analysis, "tags": english_tags},
+        }
+    )
+    return validated
+
+
+def _validate_paper(value: object, index: int) -> dict[str, Any]:
+    context = f"research report papers[{index}]"
+    paper = _require_exact_keys(value, PAPER_FIELDS, context)
+    metadata = _require_exact_keys(
+        paper["metadata"], METADATA_FIELDS, f"{context}.metadata"
+    )
+
+    arxiv_id = metadata["arxivId"]
+    if not isinstance(arxiv_id, str) or not ARXIV_ID_RE.fullmatch(arxiv_id):
+        raise ResearchReportSchemaError(f"{context}.metadata.arxivId is invalid")
+    arxiv_id = _safe_plain_text(
+        arxiv_id,
+        f"{context}.metadata.arxivId",
+        maximum=80,
+    )
+    title = _safe_plain_text(
+        metadata["title"],
+        f"{context}.metadata.title",
+        maximum=500,
+    )
+    authors = _safe_string_list(
+        metadata["authors"],
+        f"{context}.metadata.authors",
+        maximum_items=100,
+        maximum_string=300,
+    )
+    submitted_date = _safe_date(
+        metadata["submittedDate"], f"{context}.metadata.submittedDate"
+    )
+    updated_date = _safe_date(
+        metadata["updatedDate"], f"{context}.metadata.updatedDate"
+    )
+    assert submitted_date is not None and updated_date is not None
+    if date.fromisoformat(updated_date) < date.fromisoformat(submitted_date):
+        raise ResearchReportSchemaError(
+            f"{context}.metadata.updatedDate cannot precede submittedDate"
+        )
+    categories = _safe_string_list(
+        metadata["categories"],
+        f"{context}.metadata.categories",
+        maximum_items=50,
+        maximum_string=120,
+        english=True,
+    )
+
+    return {
+        "metadata": {
+            "arxivId": arxiv_id,
+            "title": title,
+            "authors": authors,
+            "submittedDate": submitted_date,
+            "updatedDate": updated_date,
+            "categories": categories,
+        },
+        "finalAnalysis": _validate_analysis(
+            paper["finalAnalysis"], f"{context}.finalAnalysis"
+        ),
+    }
+
+
+def validate_research_report(value: object) -> dict[str, Any]:
+    """Validate and normalize one completed pipeline report."""
+
+    report = _require_exact_keys(value, REPORT_FIELDS, "research report")
+    schema_version = report["schemaVersion"]
+    if type(schema_version) is not int or schema_version != REPORT_SCHEMA_VERSION:
+        raise ResearchReportSchemaError(
+            f"research report schemaVersion must be integer {REPORT_SCHEMA_VERSION}"
+        )
+
+    report_kind = report["reportKind"]
+    if not isinstance(report_kind, str) or report_kind not in REPORT_KINDS:
+        raise ResearchReportSchemaError("research report reportKind is invalid")
+    report_date = _safe_date(report["reportDate"], "research report reportDate")
+    generated_at = _safe_timestamp(
+        report["generatedAt"], "research report generatedAt"
+    )
+    status = report["status"]
+    if not isinstance(status, str) or status not in REPORT_STATUSES:
+        raise ResearchReportSchemaError("research report status is invalid")
+    message = _safe_plain_text(
+        report["message"], "research report message", maximum=2_000, english=True
+    )
+
+    expected_batch_date = _safe_date(
+        report["expectedBatchDate"],
+        "research report expectedBatchDate",
+        nullable=True,
+    )
+    observed_batch_date = _safe_date(
+        report["observedBatchDate"],
+        "research report observedBatchDate",
+        nullable=True,
+    )
+    period_start = _safe_date(
+        report["periodStart"], "research report periodStart", nullable=True
+    )
+    period_end = _safe_date(
+        report["periodEnd"], "research report periodEnd", nullable=True
+    )
+
+    if report_kind == "daily":
+        if (
+            expected_batch_date is None
+            or period_start is not None
+            or period_end is not None
+        ):
+            raise ResearchReportSchemaError(
+                "daily research reports require expectedBatchDate and null periods"
+            )
+    else:
+        if expected_batch_date is not None or observed_batch_date is not None:
+            raise ResearchReportSchemaError(
+                "aggregate research reports require null batch dates"
+            )
+        if period_start is None or period_end is None:
+            raise ResearchReportSchemaError(
+                "aggregate research reports require periodStart and periodEnd"
+            )
+        if report_date != period_end:
+            raise ResearchReportSchemaError(
+                "aggregate research reportDate must equal periodEnd"
+            )
+    if (
+        period_start is not None
+        and period_end is not None
+        and date.fromisoformat(period_end) < date.fromisoformat(period_start)
+    ):
+        raise ResearchReportSchemaError(
+            "research report periodEnd cannot precede periodStart"
+        )
+
+    papers_value = report["papers"]
+    if not isinstance(papers_value, list) or len(papers_value) > 2_000:
+        raise ResearchReportSchemaError(
+            "research report papers must be a bounded list"
+        )
+    papers = [_validate_paper(paper, index) for index, paper in enumerate(papers_value)]
+    paper_ids = [
+        re.sub(r"v\d+$", "", paper["metadata"]["arxivId"], flags=re.IGNORECASE)
+        .casefold()
+        for paper in papers
+    ]
+    if len(paper_ids) != len(set(paper_ids)):
+        raise ResearchReportSchemaError(
+            "research report papers contain duplicate arXiv IDs"
+        )
+
+    statuses_requiring_no_papers = {
+        "NO_RELEVANT_PAPERS",
+        "NO_NEW_BATCH_EXPECTED",
+        "UPDATER_OFFLINE",
+    }
+    if status in statuses_requiring_no_papers and papers:
+        raise ResearchReportSchemaError(
+            f"research report status {status} cannot contain papers"
+        )
+    if status == "UPDATE_NOT_CONFIRMED" and report_kind == "daily" and papers:
+        raise ResearchReportSchemaError(
+            "daily UPDATE_NOT_CONFIRMED research reports cannot contain papers"
+        )
+    if status == "UPDATE_CONFIRMED" and not papers:
+        raise ResearchReportSchemaError(
+            "UPDATE_CONFIRMED research reports must contain at least one paper"
+        )
+
+    return {
+        "schemaVersion": REPORT_SCHEMA_VERSION,
+        "reportKind": report_kind,
+        "reportDate": report_date,
+        "generatedAt": generated_at,
+        "status": status,
+        "message": message,
+        "expectedBatchDate": expected_batch_date,
+        "observedBatchDate": observed_batch_date,
+        "periodStart": period_start,
+        "periodEnd": period_end,
+        "papers": papers,
+    }
+
+
+def load_research_report(path: Path) -> dict[str, Any]:
+    try:
+        raw = path.read_bytes()
+    except OSError as exc:
+        raise ResearchPublicationError(f"cannot read research report: {path}") from exc
+    if len(raw) > MAX_REPORT_BYTES:
+        raise ResearchReportSchemaError(
+            f"research report exceeds the {MAX_REPORT_BYTES}-byte limit"
+        )
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ResearchReportSchemaError("research report must be UTF-8") from exc
+    try:
+        value = json.loads(text, object_pairs_hook=_reject_duplicate_json_keys)
+    except json.JSONDecodeError as exc:
+        raise ResearchReportSchemaError("research report is not valid JSON") from exc
+    return validate_research_report(value)
+
+
+def _public_status(report_kind: str, report_status: str) -> str:
+    if report_status == "UPDATE_CONFIRMED" and report_kind == "weekly":
+        return "WEEKLY_REVIEW"
+    if report_status == "UPDATE_CONFIRMED" and report_kind == "monthly":
+        return "MONTHLY_REVIEW"
+    return report_status
+
+
+def _deduplicate(values: Iterable[str]) -> list[str]:
+    result: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        folded = value.casefold()
+        if folded not in seen:
+            result.append(value)
+            seen.add(folded)
+    return result
+
+
+def _markdown_text(value: str) -> str:
+    """Escape model-controlled Markdown and remove HTML-shaped angle brackets."""
+
+    value = value.replace("<", "‹").replace(">", "›")
+    return MARKDOWN_ESCAPE_RE.sub(r"\\\1", value)
+
+
+def _ja_date(value: str) -> str:
+    parsed = date.fromisoformat(value)
+    return f"{parsed.year}年{parsed.month}月{parsed.day}日"
+
+
+def _en_date(value: str) -> str:
+    parsed = date.fromisoformat(value)
+    return f"{ENGLISH_MONTHS[parsed.month - 1]} {parsed.day}, {parsed.year}"
+
+
+def _render_source_text(
+    report: Mapping[str, Any],
+    *,
+    english: bool,
+    public_status: str,
+) -> str:
+    kind = report["reportKind"]
+    report_date = report["reportDate"]
+    if english:
+        heading = f"## {_en_date(report_date)} — {EN_KIND_LABELS[kind]}"
+        status_message = EN_STATUS_MESSAGES[public_status]
+    else:
+        heading = f"## {_ja_date(report_date)} — {JA_KIND_LABELS[kind]}"
+        status_message = JA_STATUS_MESSAGES[public_status]
+    parts = [heading, "", status_message]
+
+    papers = report["papers"]
+    if not papers:
+        parts.extend(
+            [
+                "",
+                (
+                    "**Recommended papers: None**"
+                    if english
+                    else "**推薦論文: なし**"
+                ),
+            ]
+        )
+        return "\n".join(parts)
+
+    for index, paper in enumerate(papers, start=1):
+        metadata = paper["metadata"]
+        analysis = paper["finalAnalysis"]
+        localized = analysis["english"] if english else analysis
+        importance = analysis["importance"]
+        recommended = analysis["recommended"]
+        recommendation = (
+            ("Recommended" if recommended else "Not recommended")
+            if english
+            else ("推奨" if recommended else "非推奨")
+        )
+        labels = (
+            (
+                ("Classification", "classification"),
+                ("Summary", "summary"),
+                ("Methodology", "methodology"),
+                ("Main result", "mainResult"),
+                ("Practical application", "practicalApplication"),
+                ("Limitations", "limitations"),
+                ("Recommendation rationale", "reason"),
+            )
+            if english
+            else (
+                ("分類", "classification"),
+                ("要約", "summary"),
+                ("手法", "methodology"),
+                ("主な結果", "mainResult"),
+                ("実務への応用", "practicalApplication"),
+                ("限界", "limitations"),
+                ("推奨理由", "reason"),
+            )
+        )
+        parts.extend(
+            [
+                "",
+                f"## {index}. {_markdown_text(metadata['title'])}",
+                "",
+                (
+                    f"[arXiv:{metadata['arxivId']}]"
+                    f"(https://arxiv.org/abs/{metadata['arxivId']})"
+                ),
+                "",
+                (
+                    f"**Importance: {importance}/5 — {recommendation}**"
+                    if english
+                    else f"**重要度: {importance}/5 — {recommendation}**"
+                ),
+            ]
+        )
+        for label, field in labels:
+            parts.extend(
+                ["", f"### {label}", "", _markdown_text(localized[field])]
+            )
+        tags_label = "Tags" if english else "タグ"
+        tag_separator = ", " if english else "・"
+        parts.extend(
+            [
+                "",
+                f"### {tags_label}",
+                "",
+                tag_separator.join(_markdown_text(tag) for tag in localized["tags"]),
+            ]
+        )
+    return "\n".join(parts)
+
+
+def adapt_research_report(value: object) -> AdaptedPublication:
+    """Map exactly one validated research report to the two public schemas."""
+
+    report = validate_research_report(value)
+    kind = report["reportKind"]
+    report_date = report["reportDate"]
+    edition_id = f"{report_date}-{kind}-openai-01"
+    public_status = _public_status(kind, report["status"])
+    ja_message = JA_STATUS_MESSAGES[public_status]
+    en_message = EN_STATUS_MESSAGES[public_status]
+
+    source_papers: list[dict[str, Any]] = []
+    english_papers: list[dict[str, Any]] = []
+    for rank, paper in enumerate(report["papers"], start=1):
+        metadata = paper["metadata"]
+        analysis = paper["finalAnalysis"]
+        english_analysis = analysis["english"]
+        arxiv_id = metadata["arxivId"]
+        topics = _deduplicate(
+            [*metadata["categories"], *english_analysis["tags"]]
+        )
+        recommended_ja = "推奨" if analysis["recommended"] else "非推奨"
+        recommended_en = (
+            "Recommended" if analysis["recommended"] else "Not recommended"
+        )
+        source_papers.append(
+            {
+                "arxivId": arxiv_id,
+                "title": metadata["title"],
+                "authors": metadata["authors"],
+                "submittedDate": metadata["submittedDate"],
+                "updatedDate": metadata["updatedDate"],
+                "topics": topics,
+                "absUrl": f"https://arxiv.org/abs/{arxiv_id}",
+                "pdfUrl": f"https://arxiv.org/pdf/{arxiv_id}",
+                "schedulerRank": rank,
+                "schedulerRating": analysis["importance"],
+                "schedulerRatingScale": 5,
+                "schedulerLabel": (
+                    f"{recommended_ja}・重要度 {analysis['importance']}/5"
+                ),
+                "schedulerSummary": analysis["summary"],
+                "ratings": [
+                    {
+                        "label": "重要度",
+                        "value": analysis["importance"],
+                        "scale": 5,
+                    }
+                ],
+            }
+        )
+        english_papers.append(
+            {
+                "arxivId": arxiv_id,
+                "schedulerLabel": (
+                    f"{recommended_en} · Importance {analysis['importance']}/5"
+                ),
+                "schedulerSummary": english_analysis["summary"],
+                "ratings": [{"label": "Importance"}],
+            }
+        )
+
+    source_edition = {
+        "editionId": edition_id,
+        "editionDate": report_date,
+        "editionKind": kind,
+        "sourceKind": SOURCE_KIND,
+        "sourceLabel": SOURCE_LABEL,
+        "importedAt": report["generatedAt"],
+        "status": public_status,
+        "message": ja_message,
+        "expectedBatchDate": report["expectedBatchDate"],
+        "observedBatchDate": report["observedBatchDate"],
+        "periodStart": report["periodStart"],
+        "periodEnd": report["periodEnd"],
+        "sourceText": _render_source_text(
+            report, english=False, public_status=public_status
+        ),
+        "papers": source_papers,
+    }
+    english_edition = {
+        "editionId": edition_id,
+        "message": en_message,
+        "sourceText": _render_source_text(
+            report, english=True, public_status=public_status
+        ),
+        "papers": english_papers,
+    }
+
+    validated_source = validate_history(
+        {"schemaVersion": 2, "editions": [source_edition]}
+    )["editions"][0]
+    validated_english = validate_translation(
+        {
+            "schemaVersion": 1,
+            "language": "en",
+            "editions": [english_edition],
+        }
+    )["editions"][0]
+    return AdaptedPublication(validated_source, validated_english)
+
+
+def _json_bytes(value: Mapping[str, Any]) -> bytes:
+    return (
+        json.dumps(value, ensure_ascii=False, indent=2, allow_nan=False) + "\n"
+    ).encode("utf-8")
+
+
+def _prepare_atomic_file(path: Path, content: bytes) -> Path:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    handle = tempfile.NamedTemporaryFile(
+        "wb",
+        dir=path.parent,
+        prefix=f".{path.name}.",
+        suffix=".tmp",
+        delete=False,
+    )
+    temporary = Path(handle.name)
+    try:
+        with handle:
+            handle.write(content)
+            handle.flush()
+            os.fsync(handle.fileno())
+    except BaseException:
+        temporary.unlink(missing_ok=True)
+        raise
+    return temporary
+
+
+def _replace_pair_atomically(
+    history_path: Path,
+    history_content: bytes,
+    history_original: bytes,
+    translation_path: Path,
+    translation_content: bytes,
+    translation_original: bytes,
+) -> None:
+    if history_path.resolve(strict=False) == translation_path.resolve(strict=False):
+        raise ResearchPublicationError(
+            "history and English-overlay paths must be different"
+        )
+    history_temporary = _prepare_atomic_file(history_path, history_content)
+    translation_temporary = _prepare_atomic_file(
+        translation_path, translation_content
+    )
+    history_replaced = False
+    try:
+        if history_path.read_bytes() != history_original:
+            raise PublicationConflictError(
+                "history changed while the publication candidate was prepared"
+            )
+        if translation_path.read_bytes() != translation_original:
+            raise PublicationConflictError(
+                "English overlay changed while the publication candidate was prepared"
+            )
+        os.replace(history_temporary, history_path)
+        history_replaced = True
+        os.replace(translation_temporary, translation_path)
+    except BaseException:
+        if history_replaced:
+            rollback = _prepare_atomic_file(history_path, history_original)
+            try:
+                os.replace(rollback, history_path)
+            finally:
+                rollback.unlink(missing_ok=True)
+        raise
+    finally:
+        history_temporary.unlink(missing_ok=True)
+        translation_temporary.unlink(missing_ok=True)
+
+
+def _edition_by_id(
+    editions: Sequence[Mapping[str, Any]], edition_id: str
+) -> Mapping[str, Any] | None:
+    for edition in editions:
+        if edition["editionId"] == edition_id:
+            return edition
+    return None
+
+
+def publish_research_report(
+    report: object,
+    history_path: Path,
+    translation_path: Path,
+    *,
+    regenerate_site: bool = False,
+    latest_path: Path = Path("site/data/latest.json"),
+    archive_dir: Path = Path("site/data/archive"),
+) -> PublicationResult:
+    """Validate, append, and atomically commit one immutable public edition."""
+
+    validated_report = validate_research_report(report)
+    if validated_report["status"] in {
+        "UPDATE_NOT_CONFIRMED",
+        "UPDATER_OFFLINE",
+    }:
+        raise ResearchPublicationError(
+            "incomplete research reports cannot be published"
+        )
+    publication = adapt_research_report(validated_report)
+    edition_id = publication.source_edition["editionId"]
+    try:
+        history_original = history_path.read_bytes()
+        translation_original = translation_path.read_bytes()
+    except OSError as exc:
+        raise ResearchPublicationError(
+            "both existing public source files must be readable"
+        ) from exc
+
+    current_history = load_history(history_path)
+    current_translation = load_translation(translation_path)
+    source_existing = _edition_by_id(current_history["editions"], edition_id)
+    english_existing = _edition_by_id(
+        current_translation["editions"], edition_id
+    )
+
+    if source_existing is not None or english_existing is not None:
+        if source_existing is None or english_existing is None:
+            raise PublicationConflictError(
+                f"edition {edition_id!r} exists in only one public source"
+            )
+        if (
+            dict(source_existing) != publication.source_edition
+            or dict(english_existing) != publication.english_edition
+        ):
+            raise PublicationConflictError(
+                f"refusing conflicting content for immutable edition {edition_id!r}"
+            )
+        generated_paths: tuple[Path, ...] = ()
+        if regenerate_site:
+            artifacts = generate_artifacts(current_history)
+            generated_paths = tuple(
+                persist_artifacts(artifacts, latest_path, archive_dir)
+            )
+        return PublicationResult(
+            edition_id=edition_id,
+            changed=False,
+            generated_paths=generated_paths,
+        )
+
+    incoming_history = deepcopy(current_history)
+    incoming_translation = deepcopy(current_translation)
+    incoming_history["editions"].append(publication.source_edition)
+    incoming_translation["editions"].append(publication.english_edition)
+    incoming_history = validate_history(incoming_history)
+    incoming_translation = validate_translation(incoming_translation)
+    validate_bundle(
+        current_history,
+        current_translation,
+        incoming_history,
+        incoming_translation,
+    )
+
+    history_content = _json_bytes(incoming_history)
+    translation_content = _json_bytes(incoming_translation)
+    _replace_pair_atomically(
+        history_path,
+        history_content,
+        history_original,
+        translation_path,
+        translation_content,
+        translation_original,
+    )
+
+    generated_paths: tuple[Path, ...] = ()
+    if regenerate_site:
+        artifacts = generate_artifacts(incoming_history)
+        generated_paths = tuple(
+            persist_artifacts(artifacts, latest_path, archive_dir)
+        )
+    return PublicationResult(
+        edition_id=edition_id,
+        changed=True,
+        generated_paths=generated_paths,
+    )
+
+
+def build_argument_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--report", type=Path, required=True)
+    parser.add_argument(
+        "--history",
+        type=Path,
+        default=Path("content/chatgpt_scheduler_history.json"),
+    )
+    parser.add_argument(
+        "--translation",
+        type=Path,
+        default=Path("site/data/i18n/en.json"),
+    )
+    parser.add_argument(
+        "--regenerate-site",
+        action="store_true",
+        help="also regenerate latest.json and the immutable archive/index",
+    )
+    parser.add_argument(
+        "--latest", type=Path, default=Path("site/data/latest.json")
+    )
+    parser.add_argument(
+        "--archive-dir", type=Path, default=Path("site/data/archive")
+    )
+    return parser
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    args = build_argument_parser().parse_args(argv)
+    try:
+        report = load_research_report(args.report)
+        result = publish_research_report(
+            report,
+            args.history,
+            args.translation,
+            regenerate_site=args.regenerate_site,
+            latest_path=args.latest,
+            archive_dir=args.archive_dir,
+        )
+    except (
+        HistoryImportError,
+        PublicBundleError,
+        ResearchPublicationError,
+        OSError,
+    ) as exc:
+        print(f"research_publication: {exc}", file=sys.stderr)
+        return 1
+    action = "published" if result.changed else "already published"
+    print(f"{action}: {result.edition_id}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

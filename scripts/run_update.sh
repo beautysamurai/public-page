@@ -20,13 +20,16 @@ fi
 
 exec >>"${log_file}" 2>&1
 
-printf '[%s] Starting arXiv Daily update.\n' \
+printf '[%s] Starting automated arXiv research update.\n' \
   "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
 
 cd -- "${repository_root}"
-"${python_bin}" scripts/arxiv_digest.py \
-  --output .local/candidate-data/latest.json \
-  --archive-dir .local/candidate-data/archive
+"${python_bin}" scripts/research_pipeline.py \
+  --config config/research.json \
+  --env-file .env \
+  daily \
+  --state .local/research/state.json \
+  --output-dir .local/research/daily
 
-printf '[%s] Candidate update completed under .local/candidate-data.\n' \
+printf '[%s] Research update completed under .local/research.\n' \
   "$(date -u +'%Y-%m-%dT%H:%M:%SZ')"

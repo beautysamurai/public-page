@@ -50,6 +50,11 @@ class ArxivPeriodWorkflowTests(unittest.TestCase):
         marker_commit = self.step("Persist period retry markers")
         self.assertIn("id: period_marker_commit", marker_commit)
         self.assertIn("git add -A -- research/pending-periods", marker_commit)
+        self.assertIn("reject_duplicate_keys", marker_commit)
+        self.assertIn("marker_path.stat().st_size > 4096", marker_commit)
+        self.assertIn("set(marker) != fields", marker_commit)
+        self.assertIn("period marker identity mismatch", marker_commit)
+        self.assertNotIn("OPENAI_API_KEY", marker_commit)
         self.assertIn('git push origin "HEAD:$AUTOMATION_BRANCH"', marker_commit)
 
         aggregate = self.step("Run weekly or monthly reviews")
@@ -57,7 +62,14 @@ class ArxivPeriodWorkflowTests(unittest.TestCase):
         self.assertIn("OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}", aggregate)
         self.assertIn('done < "$targets_path"', aggregate)
         self.assertIn('echo "failed=$failed"', aggregate)
+        self.assertIn("terminal_statuses", aggregate)
+        self.assertIn('if persisted["status"] in terminal_statuses:', aggregate)
         self.assertIn("marker_path.unlink()", aggregate)
+        self.assertGreater(
+            aggregate.index("marker_path.unlink()"),
+            aggregate.index('if persisted["status"] in terminal_statuses:'),
+        )
+        self.assertIn("keeping retry marker for incomplete", aggregate)
         self.assertIn("remains queued", aggregate)
         self.assertNotIn("persist_report", aggregate)
         self.assertIn("aggregate \\", aggregate)

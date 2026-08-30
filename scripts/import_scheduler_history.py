@@ -71,6 +71,7 @@ INDEX_FIELDS = ("schemaVersion", "editions")
 INDEX_EDITION_FIELDS = (
     "editionId",
     "date",
+    "periodEnd",
     "kind",
     "path",
     "status",
@@ -741,6 +742,7 @@ def generate_artifacts(history: Mapping[str, Any]) -> GeneratedArtifacts:
         {
             "editionId": edition["editionId"],
             "date": edition["editionDate"],
+            "periodEnd": edition["periodEnd"],
             "kind": edition["editionKind"],
             "path": f"{edition['editionId']}.json",
             "status": edition["status"],

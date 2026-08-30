@@ -218,6 +218,7 @@ class ResearchReportAdapterTests(unittest.TestCase):
             item for item in index["editions"] if item["kind"] == "monthly"
         )
         self.assertEqual(monthly_index["title"], "Monthly research review")
+        self.assertEqual(monthly_index["periodEnd"], "2026-08-29")
 
     def test_incomplete_weekly_report_can_reuse_completed_papers(self):
         report = completed_report(kind="weekly")

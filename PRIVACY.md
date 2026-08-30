@@ -8,8 +8,8 @@ need user accounts, form submissions, or a server-side database. The dedicated
 research workflow queries arXiv and OpenAI on a schedule; the separate Pages
 workflow only validates files and deploys **site/**.
 
-External sites linked from the digest, including arXiv, operate under their own
-privacy policies.
+External sites linked from the digest, including arXiv, Google Search, and X,
+operate under their own privacy policies.
 
 ## What becomes public
 
@@ -73,6 +73,12 @@ The deployed site is static. Do not add analytics, remote fonts, tracking
 pixels, comment widgets, or other third-party browser requests without first
 documenting what is sent, why it is needed, how long it is retained, and how a
 visitor can avoid it.
+
+Paper cards provide optional outbound Web and X search links for following a
+paper after publication. The static page makes no request to Google or X while
+it loads. Only clicking one of those links sends the paper title and canonical,
+version-free arXiv identifier as a search query to the selected service, in a
+new tab without a referrer.
 
 ## Startup-sync publication boundary
 

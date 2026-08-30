@@ -24,6 +24,7 @@
     <title>Rates &amp; Execution — arXiv リサーチ</title>
     <link rel="stylesheet" href="./styles.css">
     <script src="./i18n.js" defer></script>
+    <script src="./archive-ui.js" defer></script>
     <script src="./app.js" defer></script>
   </head>
   <body>
@@ -126,10 +127,34 @@
         <div class="shell archive-grid">
           <div class="archive-sticky">
             <p class="section-kicker" data-i18n="archive.kicker">過去の号</p><h2 id="archive-title" data-i18n="archive.title">アーカイブ</h2>
-            <p data-i18n="archive.body">過去の日次スクリーニングと週次レビューを閲覧できます。各号は日付時点のスナップショットであり、継続的に改訂されるフィードではありません。</p>
+            <p data-i18n="archive.body">過去の日次スクリーニングと週次・月次レビューを閲覧できます。各号は日付時点のスナップショットであり、継続的に改訂されるフィードではありません。</p>
           </div>
           <div>
-            <div class="archive-list" id="archive-list" aria-live="polite"><p class="archive-loading" data-i18n="archive.loading">アーカイブを読み込んでいます…</p></div>
+            <div class="archive-controls" data-i18n-aria-label="archive.filterAria" aria-label="アーカイブを絞り込む">
+              <div class="archive-kind-control">
+                <span class="archive-control-label" id="archive-kind-label" data-i18n="archive.kindLabel">レビュー種別</span>
+                <div class="archive-kind-options" role="group" aria-labelledby="archive-kind-label">
+                  <button class="archive-kind-button" type="button" data-archive-kind="all" aria-pressed="true"><span data-i18n="archive.kindAll">すべて</span><span class="archive-kind-count" data-archive-count="all">0</span></button>
+                  <button class="archive-kind-button" type="button" data-archive-kind="daily" aria-pressed="false"><span data-i18n="archive.kindDaily">日次</span><span class="archive-kind-count" data-archive-count="daily">0</span></button>
+                  <button class="archive-kind-button" type="button" data-archive-kind="weekly" aria-pressed="false"><span data-i18n="archive.kindWeekly">週次</span><span class="archive-kind-count" data-archive-count="weekly">0</span></button>
+                  <button class="archive-kind-button" type="button" data-archive-kind="monthly" aria-pressed="false"><span data-i18n="archive.kindMonthly">月次</span><span class="archive-kind-count" data-archive-count="monthly">0</span></button>
+                </div>
+              </div>
+              <div class="archive-date-control">
+                <span class="archive-control-label" id="archive-date-label" data-i18n="archive.dateLabel">号の日付</span>
+                <div class="archive-date-fields" role="group" aria-labelledby="archive-date-label">
+                  <label for="archive-from"><span data-i18n="archive.fromLabel">開始日</span><input id="archive-from" type="date" aria-describedby="archive-date-help"></label>
+                  <span class="archive-date-separator" aria-hidden="true">—</span>
+                  <label for="archive-to"><span data-i18n="archive.toLabel">終了日</span><input id="archive-to" type="date" aria-describedby="archive-date-help"></label>
+                </div>
+                <p class="archive-date-help" id="archive-date-help" data-i18n="archive.dateHelp">週次・月次は対象期間の終了日で絞り込みます。</p>
+              </div>
+              <div class="archive-filter-footer">
+                <p class="archive-results" id="archive-results" role="status" aria-live="polite"></p>
+                <button class="archive-clear" id="archive-clear" type="button" disabled data-i18n="archive.clear">条件をクリア</button>
+              </div>
+            </div>
+            <div class="archive-list" id="archive-list" role="list"><p class="archive-loading" data-i18n="archive.loading">アーカイブを読み込んでいます…</p></div>
             <button class="button button-secondary" id="archive-more" type="button" hidden data-i18n="archive.more">さらに過去の号を表示</button>
           </div>
         </div>

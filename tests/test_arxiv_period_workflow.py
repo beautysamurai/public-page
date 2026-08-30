@@ -41,7 +41,7 @@ class ArxivPeriodWorkflowTests(unittest.TestCase):
         targets = self.step("Plan period review targets")
         self.assertIn("report_to_markdown", targets)
         self.assertIn("pending[:2]", targets)
-        self.assertIn("candidates = [*pending[:2], current_end]", targets)
+        self.assertIn("candidates = [current_end, *pending[:2]]", targets)
         self.assertIn("if explicit_end:", targets)
         self.assertNotIn("OPENAI_API_KEY", targets)
 
@@ -49,6 +49,9 @@ class ArxivPeriodWorkflowTests(unittest.TestCase):
         self.assertIn("steps.period_targets.outputs.count != '0'", aggregate)
         self.assertIn("OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}", aggregate)
         self.assertIn('done < "$targets_path"', aggregate)
+        self.assertIn('echo "failed=$failed"', aggregate)
+        self.assertIn("UPDATER_OFFLINE", aggregate)
+        self.assertIn("persist_report", aggregate)
         self.assertIn("aggregate \\", aggregate)
         self.assertIn("--daily-dir research/daily", aggregate)
         self.assertIn("--output-dir research/reviews", aggregate)
@@ -64,6 +67,26 @@ class ArxivPeriodWorkflowTests(unittest.TestCase):
             "OPENAI_API_KEY",
             self.step("Preflight before paid research"),
         )
+
+    def test_period_failures_are_reported_after_persistence_and_pr_update(self) -> None:
+        aggregate_position = self.workflow.index(
+            "      - name: Run weekly or monthly reviews\n"
+        )
+        commit_position = self.workflow.index(
+            "      - name: Persist research state and report\n"
+        )
+        pull_request_position = self.workflow.index(
+            "      - name: Open or update the review pull request\n"
+        )
+        failure_position = self.workflow.index(
+            "      - name: Report period review failures\n"
+        )
+        self.assertLess(aggregate_position, commit_position)
+        self.assertLess(commit_position, pull_request_position)
+        self.assertLess(pull_request_position, failure_position)
+        failure = self.step("Report period review failures")
+        self.assertIn("steps.aggregate.outputs.failed == 'true'", failure)
+        self.assertIn("exit 1", failure)
 
     def test_reconciliation_repairs_all_completed_period_reports(self) -> None:
         publication = self.step("Reconcile completed research reports")

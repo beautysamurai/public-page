@@ -37,15 +37,18 @@ class ArxivPeriodWorkflowTests(unittest.TestCase):
         self.assertIn("weekly period_end must be a Friday", planner)
         self.assertIn("monthly period_end must be the final day of a month", planner)
 
-    def test_paid_period_call_reuses_daily_json_and_skips_completed_review(self) -> None:
-        inspect = self.step("Inspect existing period review")
-        self.assertIn('echo "complete=$complete"', inspect)
-        self.assertIn("report_to_markdown", inspect)
-        self.assertNotIn("OPENAI_API_KEY", inspect)
+    def test_paid_period_call_reuses_daily_json_and_carries_incomplete_reviews(self) -> None:
+        targets = self.step("Plan period review targets")
+        self.assertIn("report_to_markdown", targets)
+        self.assertIn("pending[:2]", targets)
+        self.assertIn("candidates = [*pending[:2], current_end]", targets)
+        self.assertIn("if explicit_end:", targets)
+        self.assertNotIn("OPENAI_API_KEY", targets)
 
-        aggregate = self.step("Run weekly or monthly review")
-        self.assertIn("steps.period_review.outputs.complete != 'true'", aggregate)
+        aggregate = self.step("Run weekly or monthly reviews")
+        self.assertIn("steps.period_targets.outputs.count != '0'", aggregate)
         self.assertIn("OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}", aggregate)
+        self.assertIn('done < "$targets_path"', aggregate)
         self.assertIn("aggregate \\", aggregate)
         self.assertIn("--daily-dir research/daily", aggregate)
         self.assertIn("--output-dir research/reviews", aggregate)

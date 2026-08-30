@@ -1160,7 +1160,7 @@
     elements.archiveFrom.value = state.archiveFrom;
     elements.archiveTo.value = state.archiveTo;
     var dates = state.reports.map(function (report) {
-      return archiveUi.normaliseDate(report.date);
+      return archiveUi.reportFilterDate(report);
     }).filter(Boolean).sort();
     if (dates.length) {
       elements.archiveFrom.min = dates[0];

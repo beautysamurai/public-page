@@ -39,6 +39,16 @@
     return { from: safeFrom, to: safeTo };
   }
 
+  function reportFilterDate(report) {
+    if (!report || typeof report !== "object") return "";
+    var kind = normaliseReportKind(report.kind);
+    if (kind !== "daily") {
+      var periodEnd = normaliseDate(report.periodEnd);
+      if (periodEnd) return periodEnd;
+    }
+    return normaliseDate(report.date);
+  }
+
   function filterReports(reports, filters) {
     var source = Array.isArray(reports) ? reports : [];
     var options = filters && typeof filters === "object" ? filters : {};
@@ -46,7 +56,7 @@
     var range = normaliseRange(options.from, options.to);
     return source.filter(function (report) {
       if (!report || typeof report !== "object") return false;
-      var date = normaliseDate(report.date);
+      var date = reportFilterDate(report);
       if (!date) return false;
       if (kind !== "all" && normaliseReportKind(report.kind) !== kind) return false;
       if (range.from && date < range.from) return false;
@@ -101,6 +111,7 @@
     normaliseKind: normaliseKind,
     normaliseRange: normaliseRange,
     paperSearchQuery: paperSearchQuery,
+    reportFilterDate: reportFilterDate,
     versionlessArxivId: versionlessArxivId,
     webSearchUrl: webSearchUrl,
     xSearchUrl: xSearchUrl

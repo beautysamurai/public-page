@@ -43,9 +43,11 @@ edition. The separate theory-note area under **site/theory/** continues to use
 ordinary static routes that work on direct GitHub Pages reloads.
 
 The archive can be filtered by daily, weekly, or monthly edition and by an
-inclusive edition-date range. Filter state stays in the URL when an edition is
-opened or the language changes. Each paper card also provides optional Web and
-X searches built from its public title and version-free arXiv identifier; these
+inclusive date range. Daily editions use their edition date; weekly and monthly
+reviews use the end of their coverage period. Filter state stays in the URL
+when an edition is opened or the language changes. Each paper card also
+provides optional Web and X searches built from its public title and
+version-free arXiv identifier; these
 links make no third-party request until clicked.
 
 ## Install and configure

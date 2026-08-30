@@ -46,6 +46,7 @@ def edition(
     edition_kind: str = "daily",
     imported_at: str = "2026-08-15T07:32:01+09:00",
     status: str = "UPDATE_CONFIRMED",
+    period_end: str | None = None,
     papers: list[dict] | None = None,
     source_text: str = (
         "今朝の確認結果です。\r\n"
@@ -69,7 +70,7 @@ def edition(
         "expectedBatchDate": None if is_weekly else edition_date,
         "observedBatchDate": None if is_weekly else "2026-08-14",
         "periodStart": "2026-08-10" if is_weekly else None,
-        "periodEnd": edition_date if is_weekly else None,
+        "periodEnd": (period_end or edition_date) if is_weekly else None,
         "sourceText": source_text,
         "papers": [paper()] if papers is None else papers,
     }
@@ -381,6 +382,7 @@ class PersistenceAndCheckTests(unittest.TestCase):
             edition_kind="weekly",
             imported_at="2026-08-23T10:00:00+09:00",
             status="WEEKLY_REVIEW",
+            period_end="2026-08-21",
             papers=[
                 paper("2608.13096v1", rank=1),
                 paper("2608.12016v1", rank=2, rating=4),
@@ -406,6 +408,7 @@ class PersistenceAndCheckTests(unittest.TestCase):
                     {
                         "editionId": "2026-08-23-weekly-1000",
                         "date": "2026-08-23",
+                        "periodEnd": "2026-08-21",
                         "kind": "weekly",
                         "path": "2026-08-23-weekly-1000.json",
                         "status": "WEEKLY_REVIEW",
@@ -416,6 +419,7 @@ class PersistenceAndCheckTests(unittest.TestCase):
                     {
                         "editionId": "2026-08-23-daily-0930",
                         "date": "2026-08-23",
+                        "periodEnd": None,
                         "kind": "daily",
                         "path": "2026-08-23-daily-0930.json",
                         "status": "UPDATE_CONFIRMED",

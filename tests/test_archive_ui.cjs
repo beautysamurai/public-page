@@ -6,8 +6,8 @@ const archiveUi = require("../site/archive-ui.js");
 
 const reports = [
   { editionId: "d3", date: "2026-08-30", kind: "daily" },
-  { editionId: "m1", date: "2026-08-29", kind: "monthly" },
-  { editionId: "w1", date: "2026-08-28", kind: "weekly" },
+  { editionId: "m1", date: "2026-08-30", periodEnd: "2026-08-29", kind: "monthly" },
+  { editionId: "w1", date: "2026-08-30", periodEnd: "2026-08-28", kind: "weekly" },
   { editionId: "d2", date: "2026-08-27", kind: "daily" },
   { editionId: "d1", date: "2026-08-26", kind: "daily" }
 ];
@@ -52,6 +52,16 @@ test("kind counts reflect the selected date range", () => {
   assert.deepEqual(
     archiveUi.countKinds(reports, "2026-08-27", "2026-08-29"),
     { all: 3, daily: 1, weekly: 1, monthly: 1 }
+  );
+});
+
+test("aggregate editions use period end while daily editions use edition date", () => {
+  assert.equal(archiveUi.reportFilterDate(reports[0]), "2026-08-30");
+  assert.equal(archiveUi.reportFilterDate(reports[1]), "2026-08-29");
+  assert.equal(archiveUi.reportFilterDate(reports[2]), "2026-08-28");
+  assert.deepEqual(
+    archiveUi.filterReports(reports, { to: "2026-08-28" }).map((report) => report.editionId),
+    ["w1", "d2", "d1"]
   );
 });
 

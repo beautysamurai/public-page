@@ -192,103 +192,147 @@ jobs:
           git diff --check
 
 
-      - name: Inspect existing period review
+      - name: Plan period review targets
         if: steps.plan.outputs.mode != 'daily'
-        id: period_review
+        id: period_targets
         env:
           REVIEW_PERIOD: ${{ steps.plan.outputs.mode }}
           REVIEW_PERIOD_END: ${{ steps.plan.outputs.period_end }}
+          EXPLICIT_PERIOD_END: ${{ inputs.period_end || '' }}
         shell: bash
         run: |
           set -euo pipefail
-          review_json="research/reviews/${REVIEW_PERIOD}/${REVIEW_PERIOD_END}.json"
-          review_markdown="research/reviews/${REVIEW_PERIOD}/${REVIEW_PERIOD_END}.md"
-          complete="$(PYTHONPATH=scripts python - "$review_json" "$review_markdown" "$REVIEW_PERIOD" "$REVIEW_PERIOD_END" <<'PY'
+          targets_path="$RUNNER_TEMP/period-review-targets.txt"
+          PYTHONPATH=scripts python - "$targets_path" "$REVIEW_PERIOD" "$REVIEW_PERIOD_END" "$EXPLICIT_PERIOD_END" <<'PY'
           import json
+          import os
           import sys
           from pathlib import Path
 
           from research_pipeline import report_to_markdown, validate_report
 
-          json_path = Path(sys.argv[1])
-          markdown_path = Path(sys.argv[2])
-          expected_kind = sys.argv[3]
-          expected_end = sys.argv[4]
-
-          if not json_path.exists():
-              if markdown_path.exists():
-                  raise SystemExit(f"period Markdown exists without JSON: {markdown_path}")
-              print("false")
-              raise SystemExit(0)
-          if json_path.is_symlink() or not json_path.is_file():
-              raise SystemExit(f"period JSON is not a regular file: {json_path}")
-
-          with json_path.open("r", encoding="utf-8") as handle:
-              report = json.load(handle)
-          validate_report(report)
-          if (
-              report["reportKind"] != expected_kind
-              or report["reportDate"] != expected_end
-              or report["periodEnd"] != expected_end
-          ):
-              raise SystemExit(f"period report identity mismatch: {json_path}")
-
+          targets_path = Path(sys.argv[1])
+          expected_kind = sys.argv[2]
+          current_end = sys.argv[3]
+          explicit_end = sys.argv[4]
+          report_dir = Path("research/reviews") / expected_kind
           completed = {
               "UPDATE_CONFIRMED",
               "NO_RELEVANT_PAPERS",
               "NO_NEW_BATCH_EXPECTED",
           }
-          if report["status"] not in completed:
-              print("false")
-              raise SystemExit(0)
+          incomplete = {"UPDATE_NOT_CONFIRMED", "UPDATER_OFFLINE"}
+          status_by_end: dict[str, str] = {}
 
-          rendered = report_to_markdown(report)
-          existing = (
-              markdown_path.read_text(encoding="utf-8")
-              if markdown_path.exists() and not markdown_path.is_symlink()
-              else None
+          if report_dir.exists():
+              if report_dir.is_symlink() or not report_dir.is_dir():
+                  raise SystemExit(f"period report directory is invalid: {report_dir}")
+              for markdown_path in sorted(report_dir.glob("*.md")):
+                  if markdown_path.is_symlink() or not markdown_path.is_file():
+                      raise SystemExit(
+                          f"period Markdown is not a regular file: {markdown_path}"
+                      )
+                  if not markdown_path.with_suffix(".json").exists():
+                      raise SystemExit(
+                          f"period Markdown exists without JSON: {markdown_path}"
+                      )
+              for json_path in sorted(report_dir.glob("*.json")):
+                  if json_path.is_symlink() or not json_path.is_file():
+                      raise SystemExit(f"period JSON is not a regular file: {json_path}")
+                  with json_path.open("r", encoding="utf-8") as handle:
+                      report = json.load(handle)
+                  validate_report(report)
+                  if (
+                      report["reportKind"] != expected_kind
+                      or report["reportDate"] != json_path.stem
+                      or report["periodEnd"] != json_path.stem
+                  ):
+                      raise SystemExit(f"period report identity mismatch: {json_path}")
+                  status = report["status"]
+                  if status not in completed | incomplete:
+                      raise SystemExit(
+                          f"unexpected period report status {status!r}: {json_path}"
+                      )
+                  status_by_end[json_path.stem] = status
+
+                  markdown_path = json_path.with_suffix(".md")
+                  rendered = report_to_markdown(report)
+                  existing = (
+                      markdown_path.read_text(encoding="utf-8")
+                      if markdown_path.exists() and not markdown_path.is_symlink()
+                      else None
+                  )
+                  if markdown_path.is_symlink():
+                      raise SystemExit(
+                          f"period Markdown is not a regular file: {markdown_path}"
+                      )
+                  if existing != rendered:
+                      markdown_path.write_text(
+                          rendered, encoding="utf-8", newline="\n"
+                      )
+
+          pending = sorted(
+              period_end
+              for period_end, status in status_by_end.items()
+              if status in incomplete and period_end != current_end
           )
-          if markdown_path.is_symlink():
-              raise SystemExit(f"period Markdown is not a regular file: {markdown_path}")
-          if existing != rendered:
-              markdown_path.write_text(rendered, encoding="utf-8", newline="\n")
-          print("true")
+          if explicit_end:
+              candidates = [current_end]
+          else:
+              # Bound each scheduled recovery run while guaranteeing current coverage.
+              candidates = [*pending[:2], current_end]
+          targets = [
+              period_end
+              for period_end in dict.fromkeys(candidates)
+              if status_by_end.get(period_end) not in completed
+          ]
+          targets_path.write_text(
+              "".join(f"{period_end}\n" for period_end in targets),
+              encoding="utf-8",
+              newline="\n",
+          )
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"count={len(targets)}\n")
+          if targets:
+              print(
+                  f"planned {expected_kind} target(s): "
+                  + ", ".join(targets)
+              )
+          else:
+              print(f"all selected {expected_kind} reviews are already complete")
           PY
-          )"
-          {
-            echo "complete=$complete"
-            echo "report_path=$review_json"
-          } >> "$GITHUB_OUTPUT"
-          if [[ "$complete" == "true" ]]; then
-            echo "Reusing completed period review without another API call: $review_json"
-          fi
 
-      - name: Run weekly or monthly review
-        if: steps.plan.outputs.mode != 'daily' && steps.period_review.outputs.complete != 'true'
+      - name: Run weekly or monthly reviews
+        if: steps.plan.outputs.mode != 'daily' && steps.period_targets.outputs.count != '0'
         id: aggregate
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           REVIEW_PERIOD: ${{ steps.plan.outputs.mode }}
-          REVIEW_PERIOD_END: ${{ steps.plan.outputs.period_end }}
         shell: bash
         run: |
           set -euo pipefail
           generated_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          result_path="$RUNNER_TEMP/${REVIEW_PERIOD}-report.json"
-          python scripts/research_pipeline.py \
-            --config config/research.json \
-            --env-file /dev/null \
-            aggregate \
-            --period "$REVIEW_PERIOD" \
-            --period-end "$REVIEW_PERIOD_END" \
-            --daily-dir research/daily \
-            --output-dir research/reviews \
-            --generated-at "$generated_at" \
-            > "$result_path"
+          targets_path="$RUNNER_TEMP/period-review-targets.txt"
+          while IFS= read -r review_period_end; do
+            if [[ ! "$review_period_end" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+              printf '::error::Invalid period review target: %q\n' "$review_period_end"
+              exit 1
+            fi
+            result_path="$RUNNER_TEMP/${REVIEW_PERIOD}-${review_period_end}-report.json"
+            python scripts/research_pipeline.py \
+              --config config/research.json \
+              --env-file /dev/null \
+              aggregate \
+              --period "$REVIEW_PERIOD" \
+              --period-end "$review_period_end" \
+              --daily-dir research/daily \
+              --output-dir research/reviews \
+              --generated-at "$generated_at" \
+              > "$result_path"
 
-          report_path="research/reviews/${REVIEW_PERIOD}/${REVIEW_PERIOD_END}.json"
-          markdown_path="research/reviews/${REVIEW_PERIOD}/${REVIEW_PERIOD_END}.md"
-          PYTHONPATH=scripts python - "$result_path" "$report_path" "$markdown_path" "$REVIEW_PERIOD" "$REVIEW_PERIOD_END" <<'PY'
+            report_path="research/reviews/${REVIEW_PERIOD}/${review_period_end}.json"
+            markdown_path="research/reviews/${REVIEW_PERIOD}/${review_period_end}.md"
+            PYTHONPATH=scripts python - "$result_path" "$report_path" "$markdown_path" "$REVIEW_PERIOD" "$review_period_end" <<'PY'
           import json
           import sys
           from pathlib import Path
@@ -317,6 +361,7 @@ jobs:
               raise SystemExit("aggregate output identity mismatch")
           print(f"generated {expected_kind} review: {report_path} ({persisted['status']})")
           PY
+          done < "$targets_path"
 
       - name: Run daily research
         if: steps.plan.outputs.mode == 'daily'

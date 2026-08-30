@@ -260,6 +260,11 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         self.assertIn("state.archiveVisible >= filteredReports.length", self.app)
         self.assertIn("Math.min(state.archiveVisible, filteredReports.length)", self.app)
         self.assertIn('t("archive.noMatches")', self.app)
+        self.assertIn(
+            'periodEnd: isDate(item.periodEnd) ? item.periodEnd : ""',
+            self.app,
+        )
+        self.assertIn("archiveUi.reportFilterDate(report)", self.app)
 
     def test_paper_cards_offer_safe_web_and_x_search_actions(self):
         self.assertIn('new URL("https://www.google.com/search")', self.archive_ui)

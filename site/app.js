@@ -334,6 +334,7 @@
         kind: normaliseEditionKind(item.kind),
         paperCount: Math.max(0, Number(item.paperCount) || 0),
         path: path,
+        periodEnd: isDate(item.periodEnd) ? item.periodEnd : "",
         sourceKind: v2 ? clean(item.sourceKind, "chatgpt-scheduled-task") : "local-arxiv-updater",
         status: clean(item.status, "UPDATE_NOT_CONFIRMED").toUpperCase(),
         title: clean(item.title, kindValue(

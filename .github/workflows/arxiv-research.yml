@@ -228,6 +228,16 @@ jobs:
           marker_fields = {"schemaVersion", "reportKind", "periodEnd"}
           status_by_end: dict[str, str] = {}
 
+          def reject_duplicate_keys(
+              pairs: list[tuple[str, object]],
+          ) -> dict[str, object]:
+              value: dict[str, object] = {}
+              for key, item in pairs:
+                  if key in value:
+                      raise SystemExit(f"period marker contains duplicate key {key!r}")
+                  value[key] = item
+              return value
+
           def validate_period_end(value: object, context: str) -> str:
               if not isinstance(value, str):
                   raise SystemExit(f"{context} periodEnd must be YYYY-MM-DD")
@@ -312,8 +322,13 @@ jobs:
                       raise SystemExit(
                           f"period marker is not a regular JSON file: {marker_path}"
                       )
+                  if marker_path.stat().st_size > 4096:
+                      raise SystemExit(f"period marker is too large: {marker_path}")
                   with marker_path.open("r", encoding="utf-8") as handle:
-                      marker = json.load(handle)
+                      marker = json.load(
+                          handle,
+                          object_pairs_hook=reject_duplicate_keys,
+                      )
                   if not isinstance(marker, dict) or set(marker) != marker_fields:
                       raise SystemExit(f"period marker schema is invalid: {marker_path}")
                   marker_end = validate_period_end(
@@ -399,6 +414,95 @@ jobs:
           if [[ -d research/pending-periods ]] || [[ -n "$(git ls-files -- research/pending-periods)" ]]; then
             git add -A -- research/pending-periods
           fi
+
+          python - <<'PY'
+          import calendar
+          import json
+          from datetime import date
+          from pathlib import Path
+
+          root = Path("research/pending-periods")
+          fields = {"schemaVersion", "reportKind", "periodEnd"}
+
+          def reject_duplicate_keys(
+              pairs: list[tuple[str, object]],
+          ) -> dict[str, object]:
+              value: dict[str, object] = {}
+              for key, item in pairs:
+                  if key in value:
+                      raise SystemExit(f"period marker contains duplicate key {key!r}")
+                  value[key] = item
+              return value
+
+          if root.exists():
+              if root.is_symlink() or not root.is_dir():
+                  raise SystemExit(f"period marker root is invalid: {root}")
+              for kind_path in sorted(root.iterdir()):
+                  if (
+                      kind_path.is_symlink()
+                      or not kind_path.is_dir()
+                      or kind_path.name not in {"weekly", "monthly"}
+                  ):
+                      raise SystemExit(
+                          f"unexpected period marker directory: {kind_path}"
+                      )
+                  for marker_path in sorted(kind_path.iterdir()):
+                      if (
+                          marker_path.is_symlink()
+                          or not marker_path.is_file()
+                          or marker_path.suffix.lower() != ".json"
+                          or marker_path.stat().st_size > 4096
+                      ):
+                          raise SystemExit(
+                              f"period marker is not a bounded regular JSON file: "
+                              f"{marker_path}"
+                          )
+                      with marker_path.open("r", encoding="utf-8") as handle:
+                          marker = json.load(
+                              handle,
+                              object_pairs_hook=reject_duplicate_keys,
+                          )
+                      if not isinstance(marker, dict) or set(marker) != fields:
+                          raise SystemExit(
+                              f"period marker schema is invalid: {marker_path}"
+                          )
+                      period_end = marker["periodEnd"]
+                      if not isinstance(period_end, str):
+                          raise SystemExit(
+                              f"period marker periodEnd is invalid: {marker_path}"
+                          )
+                      try:
+                          parsed_end = date.fromisoformat(period_end)
+                      except ValueError as exc:
+                          raise SystemExit(
+                              f"period marker periodEnd is invalid: {marker_path}"
+                          ) from exc
+                      if parsed_end.isoformat() != period_end:
+                          raise SystemExit(
+                              f"period marker periodEnd is not canonical: {marker_path}"
+                          )
+                      if kind_path.name == "weekly" and parsed_end.weekday() != 4:
+                          raise SystemExit(
+                              f"weekly marker must end on Friday: {marker_path}"
+                          )
+                      if kind_path.name == "monthly":
+                          last_day = calendar.monthrange(
+                              parsed_end.year, parsed_end.month
+                          )[1]
+                          if parsed_end.day != last_day:
+                              raise SystemExit(
+                                  f"monthly marker must end at month-end: {marker_path}"
+                              )
+                      if (
+                          type(marker["schemaVersion"]) is not int
+                          or marker["schemaVersion"] != 1
+                          or marker["reportKind"] != kind_path.name
+                          or marker_path.stem != period_end
+                      ):
+                          raise SystemExit(
+                              f"period marker identity mismatch: {marker_path}"
+                          )
+          PY
 
           while IFS= read -r -d '' marker_path; do
             case "$marker_path" in
@@ -503,7 +607,18 @@ jobs:
               "periodEnd": expected_end,
           }:
               raise SystemExit("period retry marker identity mismatch")
-          marker_path.unlink()
+          terminal_statuses = {
+              "UPDATE_CONFIRMED",
+              "NO_RELEVANT_PAPERS",
+              "NO_NEW_BATCH_EXPECTED",
+          }
+          if persisted["status"] in terminal_statuses:
+              marker_path.unlink()
+          else:
+              print(
+                  f"keeping retry marker for incomplete {expected_kind} "
+                  f"review {expected_end}"
+              )
           print(f"generated {expected_kind} review: {report_path} ({persisted['status']})")
           PY
             then

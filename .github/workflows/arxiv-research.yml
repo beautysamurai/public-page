@@ -3,8 +3,29 @@ name: Automated arXiv research
 on:
   schedule:
     # 15:30 JST, after arXiv's normal daily announcement/feed window.
-    - cron: "30 6 * * *"
+    - cron: "30 15 * * *"
+      timezone: "Asia/Tokyo"
+    # Weekly synthesis on Sunday morning, covering the seven days through Friday.
+    - cron: "0 8 * * 0"
+      timezone: "Asia/Tokyo"
+    # Monthly synthesis on the first morning, covering the previous calendar month.
+    - cron: "0 8 1 * *"
+      timezone: "Asia/Tokyo"
   workflow_dispatch:
+    inputs:
+      run_mode:
+        description: "Review to run"
+        required: true
+        default: daily
+        type: choice
+        options:
+          - daily
+          - weekly
+          - monthly
+      period_end:
+        description: "Optional recovery date (Friday for weekly, month-end for monthly)"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -12,15 +33,82 @@ permissions:
 
 concurrency:
   group: automated-arxiv-research
-  cancel-in-progress: false
+  queue: max
 
 jobs:
   research:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     env:
       AUTOMATION_BRANCH: automation/openai-arxiv-research
     steps:
+
+      - name: Plan review mode
+        id: plan
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          SCHEDULE_EXPRESSION: ${{ github.event.schedule || '' }}
+          REQUESTED_MODE: ${{ inputs.run_mode || '' }}
+          REQUESTED_PERIOD_END: ${{ inputs.period_end || '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import calendar
+          import os
+          from datetime import date, datetime, timedelta
+          from zoneinfo import ZoneInfo
+
+          event_name = os.environ["EVENT_NAME"]
+          schedule = os.environ["SCHEDULE_EXPRESSION"]
+          requested_mode = os.environ["REQUESTED_MODE"].strip()
+          requested_period_end = os.environ["REQUESTED_PERIOD_END"].strip()
+
+          if event_name == "workflow_dispatch":
+              mode = requested_mode or "daily"
+          else:
+              mode = {
+                  "30 15 * * *": "daily",
+                  "0 8 * * 0": "weekly",
+                  "0 8 1 * *": "monthly",
+              }.get(schedule)
+              if mode is None:
+                  raise SystemExit(f"unexpected schedule expression: {schedule!r}")
+
+          if mode not in {"daily", "weekly", "monthly"}:
+              raise SystemExit(f"unexpected review mode: {mode!r}")
+
+          today_jst = datetime.now(ZoneInfo("Asia/Tokyo")).date()
+          period_end = ""
+          if mode == "daily":
+              if requested_period_end:
+                  raise SystemExit("period_end is only valid for weekly or monthly runs")
+          else:
+              if requested_period_end:
+                  try:
+                      parsed_end = date.fromisoformat(requested_period_end)
+                  except ValueError as exc:
+                      raise SystemExit("period_end must be a valid YYYY-MM-DD date") from exc
+                  if parsed_end.isoformat() != requested_period_end:
+                      raise SystemExit("period_end must be a canonical YYYY-MM-DD date")
+              elif mode == "weekly":
+                  parsed_end = today_jst - timedelta(days=(today_jst.weekday() - 4) % 7)
+              else:
+                  parsed_end = today_jst.replace(day=1) - timedelta(days=1)
+
+              if mode == "weekly" and parsed_end.weekday() != 4:
+                  raise SystemExit("weekly period_end must be a Friday")
+              if mode == "monthly":
+                  last_day = calendar.monthrange(parsed_end.year, parsed_end.month)[1]
+                  if parsed_end.day != last_day:
+                      raise SystemExit("monthly period_end must be the final day of a month")
+              period_end = parsed_end.isoformat()
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"mode={mode}\n")
+              output.write(f"period_end={period_end}\n")
+          print(f"planned {mode} review" + (f" ending {period_end}" if period_end else ""))
+          PY
       - name: Check out repository history
         uses: actions/checkout@v7
         with:
@@ -103,7 +191,447 @@ jobs:
           python scripts/import_scheduler_history.py --check
           git diff --check
 
+
+      - name: Plan period review targets
+        if: steps.plan.outputs.mode != 'daily'
+        id: period_targets
+        env:
+          REVIEW_PERIOD: ${{ steps.plan.outputs.mode }}
+          REVIEW_PERIOD_END: ${{ steps.plan.outputs.period_end }}
+          EXPLICIT_PERIOD_END: ${{ inputs.period_end || '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          targets_path="$RUNNER_TEMP/period-review-targets.txt"
+          PYTHONPATH=scripts python - "$targets_path" "$REVIEW_PERIOD" "$REVIEW_PERIOD_END" "$EXPLICIT_PERIOD_END" <<'PY'
+          import calendar
+          import json
+          import os
+          import sys
+          from datetime import date
+          from pathlib import Path
+
+          from research_pipeline import report_to_markdown, validate_report
+
+          targets_path = Path(sys.argv[1])
+          expected_kind = sys.argv[2]
+          current_end = sys.argv[3]
+          explicit_end = sys.argv[4]
+          report_dir = Path("research/reviews") / expected_kind
+          marker_dir = Path("research/pending-periods") / expected_kind
+          completed = {
+              "UPDATE_CONFIRMED",
+              "NO_RELEVANT_PAPERS",
+              "NO_NEW_BATCH_EXPECTED",
+          }
+          incomplete = {"UPDATE_NOT_CONFIRMED", "UPDATER_OFFLINE"}
+          marker_fields = {"schemaVersion", "reportKind", "periodEnd"}
+          status_by_end: dict[str, str] = {}
+
+          def reject_duplicate_keys(
+              pairs: list[tuple[str, object]],
+          ) -> dict[str, object]:
+              value: dict[str, object] = {}
+              for key, item in pairs:
+                  if key in value:
+                      raise SystemExit(f"period marker contains duplicate key {key!r}")
+                  value[key] = item
+              return value
+
+          def validate_period_end(value: object, context: str) -> str:
+              if not isinstance(value, str):
+                  raise SystemExit(f"{context} periodEnd must be YYYY-MM-DD")
+              try:
+                  parsed = date.fromisoformat(value)
+              except ValueError as exc:
+                  raise SystemExit(f"{context} periodEnd must be a calendar date") from exc
+              if parsed.isoformat() != value:
+                  raise SystemExit(f"{context} periodEnd must be canonical")
+              if expected_kind == "weekly" and parsed.weekday() != 4:
+                  raise SystemExit(f"{context} weekly periodEnd must be a Friday")
+              if expected_kind == "monthly":
+                  last_day = calendar.monthrange(parsed.year, parsed.month)[1]
+                  if parsed.day != last_day:
+                      raise SystemExit(
+                          f"{context} monthly periodEnd must be month-end"
+                      )
+              return value
+
+          validate_period_end(current_end, "planned review")
+
+          if report_dir.exists():
+              if report_dir.is_symlink() or not report_dir.is_dir():
+                  raise SystemExit(f"period report directory is invalid: {report_dir}")
+              for markdown_path in sorted(report_dir.glob("*.md")):
+                  if markdown_path.is_symlink() or not markdown_path.is_file():
+                      raise SystemExit(
+                          f"period Markdown is not a regular file: {markdown_path}"
+                      )
+                  if not markdown_path.with_suffix(".json").exists():
+                      raise SystemExit(
+                          f"period Markdown exists without JSON: {markdown_path}"
+                      )
+              for json_path in sorted(report_dir.glob("*.json")):
+                  if json_path.is_symlink() or not json_path.is_file():
+                      raise SystemExit(f"period JSON is not a regular file: {json_path}")
+                  with json_path.open("r", encoding="utf-8") as handle:
+                      report = json.load(handle)
+                  validate_report(report)
+                  report_end = validate_period_end(
+                      report["periodEnd"], f"period report {json_path}"
+                  )
+                  if (
+                      report["reportKind"] != expected_kind
+                      or report["reportDate"] != json_path.stem
+                      or report_end != json_path.stem
+                  ):
+                      raise SystemExit(f"period report identity mismatch: {json_path}")
+                  status = report["status"]
+                  if status not in completed | incomplete:
+                      raise SystemExit(
+                          f"unexpected period report status {status!r}: {json_path}"
+                      )
+                  status_by_end[json_path.stem] = status
+
+                  markdown_path = json_path.with_suffix(".md")
+                  rendered = report_to_markdown(report)
+                  existing = (
+                      markdown_path.read_text(encoding="utf-8")
+                      if markdown_path.exists() and not markdown_path.is_symlink()
+                      else None
+                  )
+                  if markdown_path.is_symlink():
+                      raise SystemExit(
+                          f"period Markdown is not a regular file: {markdown_path}"
+                      )
+                  if existing != rendered:
+                      markdown_path.write_text(
+                          rendered, encoding="utf-8", newline="\n"
+                      )
+
+          marker_ends: set[str] = set()
+          if marker_dir.exists():
+              if marker_dir.is_symlink() or not marker_dir.is_dir():
+                  raise SystemExit(f"period marker directory is invalid: {marker_dir}")
+              for marker_path in sorted(marker_dir.iterdir()):
+                  if (
+                      marker_path.is_symlink()
+                      or not marker_path.is_file()
+                      or marker_path.suffix.lower() != ".json"
+                  ):
+                      raise SystemExit(
+                          f"period marker is not a regular JSON file: {marker_path}"
+                      )
+                  if marker_path.stat().st_size > 4096:
+                      raise SystemExit(f"period marker is too large: {marker_path}")
+                  with marker_path.open("r", encoding="utf-8") as handle:
+                      marker = json.load(
+                          handle,
+                          object_pairs_hook=reject_duplicate_keys,
+                      )
+                  if not isinstance(marker, dict) or set(marker) != marker_fields:
+                      raise SystemExit(f"period marker schema is invalid: {marker_path}")
+                  marker_end = validate_period_end(
+                      marker["periodEnd"], f"period marker {marker_path}"
+                  )
+                  if (
+                      type(marker["schemaVersion"]) is not int
+                      or marker["schemaVersion"] != 1
+                      or marker["reportKind"] != expected_kind
+                      or marker_end != marker_path.stem
+                  ):
+                      raise SystemExit(f"period marker identity mismatch: {marker_path}")
+                  if status_by_end.get(marker_end) in completed:
+                      marker_path.unlink()
+                  else:
+                      marker_ends.add(marker_end)
+
+          pending_reports = {
+              period_end
+              for period_end, status in status_by_end.items()
+              if status in incomplete
+          }
+          pending = sorted((pending_reports | marker_ends) - {current_end})
+          if explicit_end:
+              candidates = [current_end]
+          else:
+              # Bound recovery work while guaranteeing current-period coverage.
+              candidates = [current_end, *pending[:2]]
+          targets = [
+              validate_period_end(period_end, "selected review")
+              for period_end in dict.fromkeys(candidates)
+              if status_by_end.get(period_end) not in completed
+          ]
+
+          if targets:
+              marker_dir.mkdir(parents=True, exist_ok=True)
+          for period_end in targets:
+              marker_path = marker_dir / f"{period_end}.json"
+              if marker_path.exists():
+                  continue
+              marker = {
+                  "schemaVersion": 1,
+                  "reportKind": expected_kind,
+                  "periodEnd": period_end,
+              }
+              marker_path.write_text(
+                  json.dumps(
+                      marker,
+                      ensure_ascii=False,
+                      sort_keys=True,
+                      indent=2,
+                  )
+                  + "\n",
+                  encoding="utf-8",
+                  newline="\n",
+              )
+
+          targets_path.write_text(
+              "".join(f"{period_end}\n" for period_end in targets),
+              encoding="utf-8",
+              newline="\n",
+          )
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"count={len(targets)}\n")
+          if targets:
+              print(
+                  f"planned {expected_kind} target(s): "
+                  + ", ".join(targets)
+              )
+          else:
+              print(f"all selected {expected_kind} reviews are already complete")
+          PY
+
+      - name: Persist period retry markers
+        if: steps.plan.outputs.mode != 'daily'
+        id: period_marker_commit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          if [[ -d research/pending-periods ]] || [[ -n "$(git ls-files -- research/pending-periods)" ]]; then
+            git add -A -- research/pending-periods
+          fi
+
+          python - <<'PY'
+          import calendar
+          import json
+          from datetime import date
+          from pathlib import Path
+
+          root = Path("research/pending-periods")
+          fields = {"schemaVersion", "reportKind", "periodEnd"}
+
+          def reject_duplicate_keys(
+              pairs: list[tuple[str, object]],
+          ) -> dict[str, object]:
+              value: dict[str, object] = {}
+              for key, item in pairs:
+                  if key in value:
+                      raise SystemExit(f"period marker contains duplicate key {key!r}")
+                  value[key] = item
+              return value
+
+          if root.exists():
+              if root.is_symlink() or not root.is_dir():
+                  raise SystemExit(f"period marker root is invalid: {root}")
+              for kind_path in sorted(root.iterdir()):
+                  if (
+                      kind_path.is_symlink()
+                      or not kind_path.is_dir()
+                      or kind_path.name not in {"weekly", "monthly"}
+                  ):
+                      raise SystemExit(
+                          f"unexpected period marker directory: {kind_path}"
+                      )
+                  for marker_path in sorted(kind_path.iterdir()):
+                      if (
+                          marker_path.is_symlink()
+                          or not marker_path.is_file()
+                          or marker_path.suffix.lower() != ".json"
+                          or marker_path.stat().st_size > 4096
+                      ):
+                          raise SystemExit(
+                              f"period marker is not a bounded regular JSON file: "
+                              f"{marker_path}"
+                          )
+                      with marker_path.open("r", encoding="utf-8") as handle:
+                          marker = json.load(
+                              handle,
+                              object_pairs_hook=reject_duplicate_keys,
+                          )
+                      if not isinstance(marker, dict) or set(marker) != fields:
+                          raise SystemExit(
+                              f"period marker schema is invalid: {marker_path}"
+                          )
+                      period_end = marker["periodEnd"]
+                      if not isinstance(period_end, str):
+                          raise SystemExit(
+                              f"period marker periodEnd is invalid: {marker_path}"
+                          )
+                      try:
+                          parsed_end = date.fromisoformat(period_end)
+                      except ValueError as exc:
+                          raise SystemExit(
+                              f"period marker periodEnd is invalid: {marker_path}"
+                          ) from exc
+                      if parsed_end.isoformat() != period_end:
+                          raise SystemExit(
+                              f"period marker periodEnd is not canonical: {marker_path}"
+                          )
+                      if kind_path.name == "weekly" and parsed_end.weekday() != 4:
+                          raise SystemExit(
+                              f"weekly marker must end on Friday: {marker_path}"
+                          )
+                      if kind_path.name == "monthly":
+                          last_day = calendar.monthrange(
+                              parsed_end.year, parsed_end.month
+                          )[1]
+                          if parsed_end.day != last_day:
+                              raise SystemExit(
+                                  f"monthly marker must end at month-end: {marker_path}"
+                              )
+                      if (
+                          type(marker["schemaVersion"]) is not int
+                          or marker["schemaVersion"] != 1
+                          or marker["reportKind"] != kind_path.name
+                          or marker_path.stem != period_end
+                      ):
+                          raise SystemExit(
+                              f"period marker identity mismatch: {marker_path}"
+                          )
+          PY
+
+          while IFS= read -r -d '' marker_path; do
+            case "$marker_path" in
+              research/pending-periods/weekly/*.json|research/pending-periods/monthly/*.json)
+                ;;
+              *)
+                printf '::error::Unexpected period marker path: %q\n' "$marker_path"
+                exit 1
+                ;;
+            esac
+            mode="$(git ls-files -s -- "$marker_path" | awk 'NR == 1 { print $1 }')"
+            if [[ -z "$mode" ]]; then
+              mode="$(git ls-tree HEAD -- "$marker_path" | awk 'NR == 1 { print $1 }')"
+            fi
+            if [[ "$mode" != "100644" ]]; then
+              printf '::error::Period markers must be regular non-executable files: %q\n' "$marker_path"
+              exit 1
+            fi
+          done < <(git diff --cached --name-only -z --no-renames)
+
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          git commit -m "research: queue period review retries"
+          git push origin "HEAD:$AUTOMATION_BRANCH"
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Run weekly or monthly reviews
+        if: steps.plan.outputs.mode != 'daily' && steps.period_targets.outputs.count != '0'
+        id: aggregate
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          REVIEW_PERIOD: ${{ steps.plan.outputs.mode }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          generated_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          targets_path="$RUNNER_TEMP/period-review-targets.txt"
+          failed=false
+          while IFS= read -r review_period_end; do
+            if [[ ! "$review_period_end" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+              printf '::error::Invalid period review target: %q\n' "$review_period_end"
+              exit 1
+            fi
+            result_path="$RUNNER_TEMP/${REVIEW_PERIOD}-${review_period_end}-report.json"
+            if python scripts/research_pipeline.py \
+              --config config/research.json \
+              --env-file /dev/null \
+              aggregate \
+              --period "$REVIEW_PERIOD" \
+              --period-end "$review_period_end" \
+              --daily-dir research/daily \
+              --output-dir research/reviews \
+              --generated-at "$generated_at" \
+              > "$result_path"
+            then
+              :
+            else
+              echo "::error::Period synthesis failed and remains queued: $REVIEW_PERIOD $review_period_end"
+              failed=true
+              continue
+            fi
+
+            report_path="research/reviews/${REVIEW_PERIOD}/${review_period_end}.json"
+            markdown_path="research/reviews/${REVIEW_PERIOD}/${review_period_end}.md"
+            marker_path="research/pending-periods/${REVIEW_PERIOD}/${review_period_end}.json"
+            if PYTHONPATH=scripts python - "$result_path" "$report_path" "$markdown_path" "$marker_path" "$REVIEW_PERIOD" "$review_period_end" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          from research_pipeline import validate_report
+
+          result_path, report_path, markdown_path, marker_path = map(
+              Path, sys.argv[1:5]
+          )
+          expected_kind = sys.argv[5]
+          expected_end = sys.argv[6]
+          for path in (result_path, report_path, markdown_path, marker_path):
+              if path.is_symlink() or not path.is_file():
+                  raise SystemExit(f"aggregate output/marker is invalid: {path}")
+          with result_path.open("r", encoding="utf-8") as handle:
+              returned = json.load(handle)
+          with report_path.open("r", encoding="utf-8") as handle:
+              persisted = json.load(handle)
+          with marker_path.open("r", encoding="utf-8") as handle:
+              marker = json.load(handle)
+          validate_report(returned)
+          validate_report(persisted)
+          if returned != persisted:
+              raise SystemExit("aggregate command output differs from persisted report")
+          if (
+              persisted["reportKind"] != expected_kind
+              or persisted["reportDate"] != expected_end
+              or persisted["periodEnd"] != expected_end
+          ):
+              raise SystemExit("aggregate output identity mismatch")
+          if marker != {
+              "schemaVersion": 1,
+              "reportKind": expected_kind,
+              "periodEnd": expected_end,
+          }:
+              raise SystemExit("period retry marker identity mismatch")
+          terminal_statuses = {
+              "UPDATE_CONFIRMED",
+              "NO_RELEVANT_PAPERS",
+              "NO_NEW_BATCH_EXPECTED",
+          }
+          if persisted["status"] in terminal_statuses:
+              marker_path.unlink()
+          else:
+              print(
+                  f"keeping retry marker for incomplete {expected_kind} "
+                  f"review {expected_end}"
+              )
+          print(f"generated {expected_kind} review: {report_path} ({persisted['status']})")
+          PY
+            then
+              :
+            else
+              echo "::error::Generated period review failed validation: $REVIEW_PERIOD $review_period_end"
+              failed=true
+            fi
+          done < "$targets_path"
+          echo "failed=$failed" >> "$GITHUB_OUTPUT"
+
       - name: Run daily research
+        if: steps.plan.outputs.mode == 'daily'
         id: research
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -289,10 +817,62 @@ jobs:
           git push origin "HEAD:$AUTOMATION_BRANCH"
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
+
       - name: Reconcile completed research reports
         shell: bash
         run: |
           set -euo pipefail
+          python scripts/research_publication.py \
+            --daily-report-dir research/daily
+
+          python - <<'PY'
+          import json
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          incomplete = {"UPDATE_NOT_CONFIRMED", "UPDATER_OFFLINE"}
+          completed = {
+              "UPDATE_CONFIRMED",
+              "NO_RELEVANT_PAPERS",
+              "NO_NEW_BATCH_EXPECTED",
+          }
+          for kind in ("weekly", "monthly"):
+              report_dir = Path("research/reviews") / kind
+              if not report_dir.exists():
+                  continue
+              if report_dir.is_symlink() or not report_dir.is_dir():
+                  raise SystemExit(f"aggregate report directory is invalid: {report_dir}")
+              for report_path in sorted(report_dir.glob("*.json")):
+                  if report_path.is_symlink() or not report_path.is_file():
+                      raise SystemExit(f"aggregate report is not a regular file: {report_path}")
+                  with report_path.open("r", encoding="utf-8") as handle:
+                      report = json.load(handle)
+                  if (
+                      report.get("reportKind") != kind
+                      or report.get("reportDate") != report_path.stem
+                      or report.get("periodEnd") != report_path.stem
+                  ):
+                      raise SystemExit(f"aggregate report identity mismatch: {report_path}")
+                  status = report.get("status")
+                  if status in incomplete:
+                      print(f"keeping incomplete aggregate out of publication: {report_path}")
+                      continue
+                  if status not in completed:
+                      raise SystemExit(
+                          f"unexpected aggregate report status {status!r}: {report_path}"
+                      )
+                  subprocess.run(
+                      [
+                          sys.executable,
+                          "scripts/research_publication.py",
+                          "--report",
+                          str(report_path),
+                      ],
+                      check=True,
+                  )
+          PY
+
           python scripts/research_publication.py \
             --daily-report-dir research/daily \
             --regenerate-site
@@ -449,7 +1029,7 @@ jobs:
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
       - name: Open or update the review pull request
-        if: always() && (steps.research_commit.outputs.changed == 'true' || steps.publication_commit.outputs.changed == 'true')
+        if: always() && (steps.period_marker_commit.outputs.changed == 'true' || steps.research_commit.outputs.changed == 'true' || steps.publication_commit.outputs.changed == 'true')
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -461,7 +1041,14 @@ jobs:
               --base main \
               --head "$AUTOMATION_BRANCH" \
               --title "research: automated arXiv review" \
-              --body "Automated daily arXiv screen. Weekly and monthly synthesis run from local Codex schedules. arXiv/OpenAI failures remain incomplete and are not published. Review the generated prose and ratings before merge."
+              --body "Automated daily arXiv screening plus scheduled weekly and monthly synthesis. arXiv/OpenAI failures remain incomplete and are not published. Completed reports are reconciled into the static archive; review the generated prose and ratings before merge."
           else
             echo "Updated existing review PR #$existing."
           fi
+
+      - name: Report period review failures
+        if: always() && steps.aggregate.outputs.failed == 'true'
+        shell: bash
+        run: |
+          echo "::error::One or more weekly/monthly targets remain pending for automatic retry."
+          exit 1

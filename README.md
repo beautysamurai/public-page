@@ -22,7 +22,7 @@ official arXiv new-list pages + validated export metadata
   -> abstract screening with GPT-5.6 Luna and strict Responses API JSON Schema
   -> GPT-5.6 Terra full-PDF analysis only when importance >= threshold
   -> durable state + daily JSON/Markdown
-  -> local scheduled weekly Terra / monthly Sol synthesis from stored daily JSON
+  -> GitHub Actions weekly Terra / monthly Sol synthesis from stored daily JSON
   -> scripts/research_publication.py
   -> content/chatgpt_scheduler_history.json + English overlay
   -> deterministic site/data generation
@@ -141,7 +141,7 @@ next run resumes at the unfinished stage instead of repeating completed API
 calls. Each Responses attempt has a separate 120-second default timeout and SDK
 retries are disabled; the pipeline's explicit retry policy is the only retry
 layer. The daily budget plus the longest configured request timeout must leave
-at least ten minutes inside the 45-minute Actions limit. A model, prompt,
+at least ten minutes inside the 90-minute Actions limit. A model, prompt,
 schema, PDF setting, metadata, abstract, or candidate-set change invalidates the
 corresponding checkpoint before reuse. A malformed matching checkpoint is
 replaced with a clean one instead of permanently blocking that batch.
@@ -283,10 +283,21 @@ powershell -ExecutionPolicy Bypass `
 The consumer refuses incomplete, rewritten, reordered, untranslated, or unsafe
 public bundles and opens a pull request rather than updating Pages directly.
 
-## Enable daily GitHub Actions automation
+## Enable GitHub Actions automation
 
-The **Automated arXiv research** workflow runs every day at 06:30 UTC (15:30
-JST) and also supports manual dispatch.
+The **Automated arXiv research** workflow runs entirely on GitHub-hosted
+runners in the `Asia/Tokyo` time zone:
+
+- daily at 15:30 JST for arXiv discovery, abstract screening, and selected-PDF
+  analysis;
+- weekly on Sunday at 08:00 JST for the seven days ending on the most recent
+  Friday; and
+- monthly on the first day at 08:00 JST for the complete previous calendar
+  month.
+
+The local computer and Codex app do not need to be running. GitHub may start a
+scheduled workflow slightly after its nominal time. Overlapping daily, weekly,
+and monthly runs share one queue so none is replaced by a later scheduled run.
 
 1. Open repository **Settings → Secrets and variables → Actions**.
 2. Add the repository secret `OPENAI_API_KEY`.
@@ -294,37 +305,38 @@ JST) and also supports manual dispatch.
    **Allow GitHub Actions to create and approve pull requests**.
 4. Run the workflow once manually and review the pull request it creates.
 
+Manual dispatch supports `daily`, `weekly`, and `monthly`. For recovery,
+an optional explicit period end may be supplied: it must be a Friday for a
+weekly review or the final calendar day for a monthly review.
+
 The workflow persists `research/state.json`, candidate-stage checkpoints, and
 daily JSON/Markdown on the fixed `automation/openai-arxiv-research` branch.
-Reusing this branch lets an unconfirmed batch resume on the next run without
-repeating completed model calls. Every run reconciles all durable completed
-daily reports into public editions, so an interruption after the research push
-is repaired on the next run even when the current report is incomplete.
-Incomplete JSON/Markdown remains visible on the review branch but is not
-appended to the public archive. Weekly and monthly
-reviews are intentionally excluded from this cloud workflow and are generated
-by local Codex schedules from these stored daily reports. The workflow runs the
-complete Python and Node test suite before paid research, validates and pushes
-safe research state before attempting publication, then validates generated
-public data again. It never pushes `main` directly.
+Weekly and monthly outputs are stored under
+`research/reviews/weekly/YYYY-MM-DD.{json,md}` and
+`research/reviews/monthly/YYYY-MM-DD.{json,md}`. Period jobs reuse the daily
+JSON and never fetch arXiv metadata or PDFs again, but they do call the
+Responses API for synthesis using the configured weekly Terra/medium and
+monthly Sol/high settings. A completed period review is detected before the
+paid step and is reused without another API call. Each scheduled period run also
+carries forward up to the two oldest incomplete reviews of the same kind,
+alongside the current period, so transient failures are retried automatically
+without relying on a manual reminder. Before any paid period synthesis, compact
+queue markers are committed under `research/pending-periods/`. A runner timeout
+therefore leaves a durable target for the next same-kind scheduled run. The
+marker is removed only after a validated terminal aggregate report has been
+persisted; an incomplete review keeps its marker and remains queued.
 
-## Local weekly and monthly schedules
+Reusing the durable branch lets an unconfirmed daily batch resume on the next
+run without repeating completed model calls. Every run reconciles all durable
+completed daily, weekly, and monthly reports into public editions, so an
+interruption after the research push is repaired later. Incomplete
+JSON/Markdown remains visible on the review branch but is never appended to the
+public archive.
 
-The recommended Codex schedules run in the saved local `public-page` project:
-
-- weekly: Sunday 08:00 local time, GPT-5.6 Terra, covering the seven days ending
-  on the most recent Friday;
-- monthly: the first day of each month at 23:00 local time, GPT-5.6 Sol,
-  covering the complete previous calendar month.
-
-Each local task fetches the durable `automation/openai-arxiv-research` branch
-without changing the user's current checkout, reuses its `research/daily` JSON,
-and writes the matching aggregate under ignored `.local/research/reviews/` for
-manual review. It does not commit, push, update `main`, or publish Pages.
-Publication remains a separate reviewed action. Keep `OPENAI_API_KEY` in the
-ignored local `.env`; never put it in an automation prompt or tracked file. A
-powered-off machine cannot run a local schedule at its nominal time, so review
-the task status after the next startup.
+The workflow runs the complete Python and Node test suite before paid research,
+validates and pushes safe research state before attempting publication, then
+validates generated public data again. It never pushes `main` directly. It
+opens or updates one review pull request; approval and merge remain manual.
 
 Merging the review pull request triggers the unchanged **Deploy GitHub Pages**
 workflow. The Pages job uploads only **site/** and never receives the OpenAI

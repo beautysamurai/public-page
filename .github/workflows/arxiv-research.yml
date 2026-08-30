@@ -837,6 +837,9 @@ jobs:
               --head "$AUTOMATION_BRANCH" \
               --title "research: automated arXiv review" \
               --body "Automated daily arXiv screening plus scheduled weekly and monthly synthesis. arXiv/OpenAI failures remain incomplete and are not published. Completed reports are reconciled into the static archive; review the generated prose and ratings before merge."
+          else
+            echo "Updated existing review PR #$existing."
+          fi
 
       - name: Report period review failures
         if: always() && steps.aggregate.outputs.failed == 'true'
@@ -844,6 +847,3 @@ jobs:
         run: |
           echo "::error::One or more weekly/monthly targets remain pending for automatic retry."
           exit 1
-          else
-            echo "Updated existing review PR #$existing."
-          fi

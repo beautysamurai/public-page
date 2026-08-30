@@ -280,7 +280,7 @@ jobs:
               candidates = [current_end]
           else:
               # Bound each scheduled recovery run while guaranteeing current coverage.
-              candidates = [*pending[:2], current_end]
+              candidates = [current_end, *pending[:2]]
           targets = [
               period_end
               for period_end in dict.fromkeys(candidates)
@@ -313,13 +313,14 @@ jobs:
           set -euo pipefail
           generated_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
           targets_path="$RUNNER_TEMP/period-review-targets.txt"
+          failed=false
           while IFS= read -r review_period_end; do
             if [[ ! "$review_period_end" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
               printf '::error::Invalid period review target: %q\n' "$review_period_end"
               exit 1
             fi
             result_path="$RUNNER_TEMP/${REVIEW_PERIOD}-${review_period_end}-report.json"
-            python scripts/research_pipeline.py \
+            if python scripts/research_pipeline.py \
               --config config/research.json \
               --env-file /dev/null \
               aggregate \
@@ -329,10 +330,64 @@ jobs:
               --output-dir research/reviews \
               --generated-at "$generated_at" \
               > "$result_path"
+            then
+              :
+            else
+              echo "::error::Period synthesis failed and remains pending: $REVIEW_PERIOD $review_period_end"
+              PYTHONPATH=scripts python - "$REVIEW_PERIOD" "$review_period_end" "$generated_at" <<'PY'
+          import sys
+          from datetime import date, datetime, timedelta
+          from pathlib import Path
+
+          from research_pipeline import (
+              MONTHLY,
+              UPDATER_OFFLINE,
+              WEEKLY,
+              _report,
+              persist_report,
+          )
+
+          kind = sys.argv[1]
+          period_end = date.fromisoformat(sys.argv[2])
+          generated_raw = sys.argv[3]
+          generated_at = datetime.fromisoformat(
+              generated_raw[:-1] + "+00:00"
+              if generated_raw.endswith("Z")
+              else generated_raw
+          )
+          period_start = (
+              period_end - timedelta(days=6)
+              if kind == WEEKLY
+              else period_end.replace(day=1)
+          )
+          placeholder = _report(
+              report_kind=kind,
+              report_date=period_end,
+              generated_at=generated_at,
+              status=UPDATER_OFFLINE,
+              message=(
+                  f"The scheduled {kind} synthesis failed before a completed "
+                  "report could be persisted; this period remains pending for "
+                  "automatic retry."
+              ),
+              expected_batch_date=None,
+              observed_batch_date=None,
+              period_start=period_start,
+              period_end=period_end,
+              papers=[],
+          )
+          persist_report(
+              placeholder,
+              Path("research/reviews") / kind,
+          )
+          PY
+              failed=true
+              continue
+            fi
 
             report_path="research/reviews/${REVIEW_PERIOD}/${review_period_end}.json"
             markdown_path="research/reviews/${REVIEW_PERIOD}/${review_period_end}.md"
-            PYTHONPATH=scripts python - "$result_path" "$report_path" "$markdown_path" "$REVIEW_PERIOD" "$review_period_end" <<'PY'
+            if PYTHONPATH=scripts python - "$result_path" "$report_path" "$markdown_path" "$REVIEW_PERIOD" "$review_period_end" <<'PY'
           import json
           import sys
           from pathlib import Path
@@ -361,7 +416,14 @@ jobs:
               raise SystemExit("aggregate output identity mismatch")
           print(f"generated {expected_kind} review: {report_path} ({persisted['status']})")
           PY
+            then
+              :
+            else
+              echo "::error::Generated period review failed validation: $REVIEW_PERIOD $review_period_end"
+              failed=true
+            fi
           done < "$targets_path"
+          echo "failed=$failed" >> "$GITHUB_OUTPUT"
 
       - name: Run daily research
         if: steps.plan.outputs.mode == 'daily'
@@ -775,6 +837,13 @@ jobs:
               --head "$AUTOMATION_BRANCH" \
               --title "research: automated arXiv review" \
               --body "Automated daily arXiv screening plus scheduled weekly and monthly synthesis. arXiv/OpenAI failures remain incomplete and are not published. Completed reports are reconciled into the static archive; review the generated prose and ratings before merge."
+
+      - name: Report period review failures
+        if: always() && steps.aggregate.outputs.failed == 'true'
+        shell: bash
+        run: |
+          echo "::error::One or more weekly/monthly targets remain pending for automatic retry."
+          exit 1
           else
             echo "Updated existing review PR #$existing."
           fi

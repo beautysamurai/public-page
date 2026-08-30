@@ -2,7 +2,13 @@
   "use strict";
 
   var i18n = window.RatesI18n;
+  var archiveUi = window.RatesArchiveUi;
+  if (!archiveUi) throw new Error("Archive UI helpers are unavailable.");
   var initialParams = new URLSearchParams(window.location.search);
+  var initialArchiveRange = archiveUi.normaliseRange(
+    initialParams.get("archive-from"),
+    initialParams.get("archive-to")
+  );
 
   function normaliseLanguage(value) {
     return value === "en" ? "en" : "ja";
@@ -20,8 +26,13 @@
 
   var byId = function (id) { return document.getElementById(id); };
   var elements = {
+    archiveClear: byId("archive-clear"),
+    archiveFrom: byId("archive-from"),
+    archiveKindButtons: Array.from(document.querySelectorAll("[data-archive-kind]")),
     archiveList: byId("archive-list"),
     archiveMore: byId("archive-more"),
+    archiveResults: byId("archive-results"),
+    archiveTo: byId("archive-to"),
     digestTitle: byId("digest-title"),
     editionContext: byId("edition-context"),
     editionDate: byId("edition-date"),
@@ -53,6 +64,9 @@
 
   var state = {
     archiveEdition: initialParams.get("edition"),
+    archiveFrom: initialArchiveRange.from,
+    archiveKind: archiveUi.normaliseKind(initialParams.get("archive-kind")),
+    archiveTo: initialArchiveRange.to,
     archiveVisible: 6,
     filter: "all",
     language: normaliseLanguage(initialParams.get("lang")),
@@ -983,10 +997,34 @@
     }
 
     var actions = createNode("div", "paper-actions");
+    var sourceActions = createNode("div", "paper-source-actions");
     var abstractLink = externalLink(paper.absUrl, "arxiv-link", t("paper.abstractLink"), t("paper.openAbstract", { title: paper.title }));
     var pdfLink = externalLink(paper.pdfUrl, "pdf-link", t("paper.pdfLink"), t("paper.openPdf", { title: paper.title }));
-    if (abstractLink) actions.appendChild(abstractLink);
-    if (pdfLink) actions.appendChild(pdfLink);
+    if (abstractLink) sourceActions.appendChild(abstractLink);
+    if (pdfLink) sourceActions.appendChild(pdfLink);
+    if (sourceActions.childElementCount) actions.appendChild(sourceActions);
+
+    var impactActions = createNode("div", "paper-impact-actions");
+    var webSearchLink = externalLink(
+      archiveUi.webSearchUrl(paper),
+      "impact-search-link impact-search-web",
+      t("paper.webSearch"),
+      t("paper.searchWebAria", { title: paper.title })
+    );
+    var xSearchLink = externalLink(
+      archiveUi.xSearchUrl(paper),
+      "impact-search-link impact-search-x",
+      t("paper.xSearch"),
+      t("paper.searchXAria", { title: paper.title })
+    );
+    if (webSearchLink || xSearchLink) {
+      impactActions.setAttribute("role", "group");
+      impactActions.setAttribute("aria-label", t("paper.impactLabel"));
+      impactActions.appendChild(createNode("span", "paper-impact-label", t("paper.impactLabel")));
+      if (webSearchLink) impactActions.appendChild(webSearchLink);
+      if (xSearchLink) impactActions.appendChild(xSearchLink);
+      actions.appendChild(impactActions);
+    }
     if (actions.childElementCount) main.appendChild(actions);
 
     item.appendChild(main);
@@ -1085,6 +1123,88 @@
     }
     renderLens(report.papers);
   }
+
+  function archiveFilters() {
+    return {
+      kind: state.archiveKind,
+      from: state.archiveFrom,
+      to: state.archiveTo
+    };
+  }
+
+  function filteredArchiveReports() {
+    return archiveUi.filterReports(state.reports, archiveFilters());
+  }
+
+  function syncArchiveFilterUrl() {
+    var url = new URL(window.location.href);
+    if (state.archiveKind === "all") url.searchParams.delete("archive-kind");
+    else url.searchParams.set("archive-kind", state.archiveKind);
+    if (state.archiveFrom) url.searchParams.set("archive-from", state.archiveFrom);
+    else url.searchParams.delete("archive-from");
+    if (state.archiveTo) url.searchParams.set("archive-to", state.archiveTo);
+    else url.searchParams.delete("archive-to");
+    window.history.replaceState(null, "", url.href);
+  }
+
+  function renderArchiveControls(filteredReports) {
+    var counts = archiveUi.countKinds(state.reports, state.archiveFrom, state.archiveTo);
+    elements.archiveKindButtons.forEach(function (button) {
+      var kind = archiveUi.normaliseKind(button.dataset.archiveKind);
+      button.setAttribute("aria-pressed", String(kind === state.archiveKind));
+      button.disabled = !state.reports.length;
+      var count = button.querySelector("[data-archive-count]");
+      if (count) count.textContent = String(counts[kind]);
+    });
+
+    elements.archiveFrom.value = state.archiveFrom;
+    elements.archiveTo.value = state.archiveTo;
+    var dates = state.reports.map(function (report) {
+      return archiveUi.normaliseDate(report.date);
+    }).filter(Boolean).sort();
+    if (dates.length) {
+      elements.archiveFrom.min = dates[0];
+      elements.archiveFrom.max = dates[dates.length - 1];
+      elements.archiveTo.min = dates[0];
+      elements.archiveTo.max = dates[dates.length - 1];
+      elements.archiveFrom.disabled = false;
+      elements.archiveTo.disabled = false;
+    } else {
+      elements.archiveFrom.removeAttribute("min");
+      elements.archiveFrom.removeAttribute("max");
+      elements.archiveTo.removeAttribute("min");
+      elements.archiveTo.removeAttribute("max");
+      elements.archiveFrom.disabled = true;
+      elements.archiveTo.disabled = true;
+    }
+
+    var filtersActive = state.archiveKind !== "all" || state.archiveFrom || state.archiveTo;
+    elements.archiveClear.disabled = !filtersActive;
+    elements.archiveResults.textContent = t("archive.results", {
+      count: filteredReports.length,
+      total: state.reports.length,
+      visible: Math.min(state.archiveVisible, filteredReports.length)
+    });
+  }
+
+  function applyArchiveFilterChange() {
+    state.archiveVisible = 6;
+    syncArchiveFilterUrl();
+    renderArchive();
+  }
+
+  function updateArchiveDate(boundary, rawValue) {
+    var value = archiveUi.normaliseDate(rawValue);
+    if (boundary === "from") {
+      state.archiveFrom = value;
+      if (value && state.archiveTo && value > state.archiveTo) state.archiveTo = value;
+    } else {
+      state.archiveTo = value;
+      if (value && state.archiveFrom && value < state.archiveFrom) state.archiveFrom = value;
+    }
+    applyArchiveFilterChange();
+  }
+
   function archiveHref(editionId) {
     var url = new URL(window.location.href);
     url.searchParams.set("edition", editionId);
@@ -1100,14 +1220,21 @@
   }
 
   function renderArchive() {
+    var filteredReports = filteredArchiveReports();
+    renderArchiveControls(filteredReports);
     if (!state.reports.length) {
       elements.archiveList.replaceChildren(createNode("p", "archive-empty", t("archive.none")));
       elements.archiveMore.hidden = true;
       return;
     }
+    if (!filteredReports.length) {
+      elements.archiveList.replaceChildren(createNode("p", "archive-empty", t("archive.noMatches")));
+      elements.archiveMore.hidden = true;
+      return;
+    }
 
     var fragment = document.createDocumentFragment();
-    state.reports.slice(0, state.archiveVisible).forEach(function (report) {
+    filteredReports.slice(0, state.archiveVisible).forEach(function (report) {
       var archiveTitle = t(kindValue(
         report.kind,
         "archive.dailyTitle",
@@ -1116,7 +1243,6 @@
       ));
       var link = createNode("a", "archive-row");
       link.href = archiveHref(report.editionId);
-      link.setAttribute("aria-label", archiveTitle + ", " + formatDate(report.date, true));
       if (state.archiveEdition === report.editionId) link.setAttribute("aria-current", "page");
       link.appendChild(createNode("span", "archive-date", formatDate(report.date, true)));
 
@@ -1137,17 +1263,27 @@
       var status = createNode("span", "archive-state", visual.label);
       status.dataset.state = visual.state;
       meta.appendChild(status);
-      meta.appendChild(createNode("span", "", t(report.paperCount === 1 ? "paper.countOne" : "paper.countMany", { count: report.paperCount })));
+      var paperCount = t(report.paperCount === 1 ? "paper.countOne" : "paper.countMany", { count: report.paperCount });
+      meta.appendChild(createNode("span", "", paperCount));
       link.appendChild(meta);
+      link.setAttribute("aria-label", [
+        archiveTitle,
+        formatDate(report.date, true),
+        visual.label,
+        paperCount
+      ].join(", "));
 
       var arrow = createNode("span", "archive-arrow", "→");
       arrow.setAttribute("aria-hidden", "true");
       link.appendChild(arrow);
-      fragment.appendChild(link);
+      var archiveItem = createNode("div", "archive-item");
+      archiveItem.setAttribute("role", "listitem");
+      archiveItem.appendChild(link);
+      fragment.appendChild(archiveItem);
     });
 
     elements.archiveList.replaceChildren(fragment);
-    elements.archiveMore.hidden = state.archiveVisible >= state.reports.length;
+    elements.archiveMore.hidden = state.archiveVisible >= filteredReports.length;
   }
 
   async function loadArchiveIndex() {
@@ -1158,6 +1294,7 @@
       return state.reports;
     } catch (_error) {
       state.reports = [];
+      renderArchiveControls([]);
       elements.archiveList.replaceChildren(createNode("p", "archive-empty", t("archive.indexUnavailable")));
       elements.archiveMore.hidden = true;
       return [];
@@ -1189,6 +1326,7 @@
 
   async function initialise() {
     applyStaticLocale();
+    syncArchiveFilterUrl();
 
     document.querySelectorAll("[data-language]").forEach(function (button) {
       button.lang = button.dataset.language;
@@ -1201,6 +1339,28 @@
     elements.search.addEventListener("input", function () {
       state.query = elements.search.value.trim().toLocaleLowerCase();
       renderPapers();
+    });
+
+    elements.archiveKindButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        state.archiveKind = archiveUi.normaliseKind(button.dataset.archiveKind);
+        applyArchiveFilterChange();
+      });
+    });
+
+    elements.archiveFrom.addEventListener("change", function () {
+      updateArchiveDate("from", elements.archiveFrom.value);
+    });
+
+    elements.archiveTo.addEventListener("change", function () {
+      updateArchiveDate("to", elements.archiveTo.value);
+    });
+
+    elements.archiveClear.addEventListener("click", function () {
+      state.archiveKind = "all";
+      state.archiveFrom = "";
+      state.archiveTo = "";
+      applyArchiveFilterChange();
     });
 
     elements.archiveMore.addEventListener("click", function () {

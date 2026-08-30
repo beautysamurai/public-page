@@ -371,7 +371,7 @@ try {
         "-m", "unittest", "discover", "-s", "tests", "-v"
     ) | Out-Null
     Invoke-NativeLogged "node" @(
-        "--test", "tests/test_model_math.cjs"
+        "--test", "tests/test_model_math.cjs", "tests/test_archive_ui.cjs"
     ) | Out-Null
     Invoke-NativeLogged $Python @(
         "scripts/import_scheduler_history.py", "--check"

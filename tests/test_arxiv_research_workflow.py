@@ -28,6 +28,7 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
         preflight = self.step("Preflight before paid research")
         self.assertIn("python -m unittest discover -s tests -v", preflight)
         self.assertIn("node --test tests/test_model_math.cjs", preflight)
+        self.assertIn("tests/test_archive_ui.cjs", preflight)
         self.assertIn("python scripts/import_scheduler_history.py --check", preflight)
         self.assertIn("git diff --check", preflight)
         self.assertLess(
@@ -96,6 +97,7 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
         self.assertNotIn("steps.research.outputs.publishable", validation)
         self.assertIn("python -m unittest discover -s tests -v", validation)
         self.assertIn("node --test tests/test_model_math.cjs", validation)
+        self.assertIn("tests/test_archive_ui.cjs", validation)
         self.assertIn("python scripts/import_scheduler_history.py --check", validation)
         self.assertIn("git diff --check", validation)
         self.assertIn('name == "content/chatgpt_scheduler_history.json"', validation)

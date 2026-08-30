@@ -13,6 +13,7 @@ TRANSLATIONS_PATH = ROOT / "site" / "data" / "i18n" / "en.json"
 INDEX_PATH = ROOT / "site" / "index.html"
 CATALOG_PATH = ROOT / "site" / "i18n.js"
 APP_PATH = ROOT / "site" / "app.js"
+ARCHIVE_UI_PATH = ROOT / "site" / "archive-ui.js"
 STATIC_PAGE_APP_PATH = ROOT / "site" / "static-page.js"
 STYLES_PATH = ROOT / "site" / "styles.css"
 THEORY_INDEX_PATH = ROOT / "site" / "theory" / "index.html"
@@ -180,6 +181,7 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         cls.index = INDEX_PATH.read_text(encoding="utf-8")
         cls.catalog = CATALOG_PATH.read_text(encoding="utf-8")
         cls.app = APP_PATH.read_text(encoding="utf-8")
+        cls.archive_ui = ARCHIVE_UI_PATH.read_text(encoding="utf-8")
         cls.static_page_app = STATIC_PAGE_APP_PATH.read_text(encoding="utf-8")
         cls.theory_index = THEORY_INDEX_PATH.read_text(encoding="utf-8")
         cls.hjb_index = HJB_INDEX_PATH.read_text(encoding="utf-8")
@@ -231,6 +233,46 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         self.assertIn(
             'document.querySelectorAll("[data-preserve-language]")', self.app
         )
+
+    def test_archive_has_kind_date_and_url_backed_filters(self):
+        self.assertLess(
+            self.index.index('<script src="./archive-ui.js" defer>'),
+            self.index.index('<script src="./app.js" defer>'),
+        )
+        for kind in ("all", "daily", "weekly", "monthly"):
+            self.assertIn(f'data-archive-kind="{kind}"', self.index)
+            self.assertIn(f'data-archive-count="{kind}"', self.index)
+        self.assertIn('id="archive-from" type="date"', self.index)
+        self.assertIn('id="archive-to" type="date"', self.index)
+        self.assertIn('id="archive-clear"', self.index)
+        self.assertIn(
+            'id="archive-results" role="status" aria-live="polite"', self.index
+        )
+        self.assertIn('id="archive-list" role="list"', self.index)
+        self.assertNotIn('id="archive-list" aria-live=', self.index)
+        self.assertIn('initialParams.get("archive-kind")', self.app)
+        self.assertIn('initialParams.get("archive-from")', self.app)
+        self.assertIn('initialParams.get("archive-to")', self.app)
+        for key in ("archive-kind", "archive-from", "archive-to"):
+            self.assertIn(f'url.searchParams.set("{key}"', self.app)
+            self.assertIn(f'url.searchParams.delete("{key}")', self.app)
+        self.assertIn("filteredReports.slice(0, state.archiveVisible)", self.app)
+        self.assertIn("state.archiveVisible >= filteredReports.length", self.app)
+        self.assertIn("Math.min(state.archiveVisible, filteredReports.length)", self.app)
+        self.assertIn('t("archive.noMatches")', self.app)
+
+    def test_paper_cards_offer_safe_web_and_x_search_actions(self):
+        self.assertIn('new URL("https://www.google.com/search")', self.archive_ui)
+        self.assertIn('new URL("https://x.com/search")', self.archive_ui)
+        self.assertIn('url.searchParams.set("q", query)', self.archive_ui)
+        self.assertIn('url.searchParams.set("f", "live")', self.archive_ui)
+        self.assertIn("archiveUi.webSearchUrl(paper)", self.app)
+        self.assertIn("archiveUi.xSearchUrl(paper)", self.app)
+        self.assertIn('t("paper.impactLabel")', self.app)
+        self.assertIn('link.target = "_blank"', self.app)
+        self.assertIn('link.rel = "noopener noreferrer"', self.app)
+        self.assertNotIn("innerHTML", self.archive_ui)
+        self.assertNotIn("window.open", self.app)
 
     def test_method_is_concise_and_links_the_public_repository(self):
         method = self.index.split(

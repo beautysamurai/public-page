@@ -322,8 +322,9 @@ carries forward up to the two oldest incomplete reviews of the same kind,
 alongside the current period, so transient failures are retried automatically
 without relying on a manual reminder. Before any paid period synthesis, compact
 queue markers are committed under `research/pending-periods/`. A runner timeout
-therefore leaves a durable target for the next scheduled run; the marker is
-removed only after a validated aggregate report has been persisted.
+therefore leaves a durable target for the next same-kind scheduled run. The
+marker is removed only after a validated terminal aggregate report has been
+persisted; an incomplete review keeps its marker and remains queued.
 
 Reusing the durable branch lets an unconfirmed daily batch resume on the next
 run without repeating completed model calls. Every run reconciles all durable

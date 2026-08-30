@@ -3,8 +3,29 @@ name: Automated arXiv research
 on:
   schedule:
     # 15:30 JST, after arXiv's normal daily announcement/feed window.
-    - cron: "30 6 * * *"
+    - cron: "30 15 * * *"
+      timezone: "Asia/Tokyo"
+    # Weekly synthesis on Sunday morning, covering the seven days through Friday.
+    - cron: "0 8 * * 0"
+      timezone: "Asia/Tokyo"
+    # Monthly synthesis on the first morning, covering the previous calendar month.
+    - cron: "0 8 1 * *"
+      timezone: "Asia/Tokyo"
   workflow_dispatch:
+    inputs:
+      run_mode:
+        description: "Review to run"
+        required: true
+        default: daily
+        type: choice
+        options:
+          - daily
+          - weekly
+          - monthly
+      period_end:
+        description: "Optional recovery date (Friday for weekly, month-end for monthly)"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -12,15 +33,82 @@ permissions:
 
 concurrency:
   group: automated-arxiv-research
-  cancel-in-progress: false
+  queue: max
 
 jobs:
   research:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     env:
       AUTOMATION_BRANCH: automation/openai-arxiv-research
     steps:
+
+      - name: Plan review mode
+        id: plan
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          SCHEDULE_EXPRESSION: ${{ github.event.schedule || '' }}
+          REQUESTED_MODE: ${{ inputs.run_mode || '' }}
+          REQUESTED_PERIOD_END: ${{ inputs.period_end || '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import calendar
+          import os
+          from datetime import date, datetime, timedelta
+          from zoneinfo import ZoneInfo
+
+          event_name = os.environ["EVENT_NAME"]
+          schedule = os.environ["SCHEDULE_EXPRESSION"]
+          requested_mode = os.environ["REQUESTED_MODE"].strip()
+          requested_period_end = os.environ["REQUESTED_PERIOD_END"].strip()
+
+          if event_name == "workflow_dispatch":
+              mode = requested_mode or "daily"
+          else:
+              mode = {
+                  "30 15 * * *": "daily",
+                  "0 8 * * 0": "weekly",
+                  "0 8 1 * *": "monthly",
+              }.get(schedule)
+              if mode is None:
+                  raise SystemExit(f"unexpected schedule expression: {schedule!r}")
+
+          if mode not in {"daily", "weekly", "monthly"}:
+              raise SystemExit(f"unexpected review mode: {mode!r}")
+
+          today_jst = datetime.now(ZoneInfo("Asia/Tokyo")).date()
+          period_end = ""
+          if mode == "daily":
+              if requested_period_end:
+                  raise SystemExit("period_end is only valid for weekly or monthly runs")
+          else:
+              if requested_period_end:
+                  try:
+                      parsed_end = date.fromisoformat(requested_period_end)
+                  except ValueError as exc:
+                      raise SystemExit("period_end must be a valid YYYY-MM-DD date") from exc
+                  if parsed_end.isoformat() != requested_period_end:
+                      raise SystemExit("period_end must be a canonical YYYY-MM-DD date")
+              elif mode == "weekly":
+                  parsed_end = today_jst - timedelta(days=(today_jst.weekday() - 4) % 7)
+              else:
+                  parsed_end = today_jst.replace(day=1) - timedelta(days=1)
+
+              if mode == "weekly" and parsed_end.weekday() != 4:
+                  raise SystemExit("weekly period_end must be a Friday")
+              if mode == "monthly":
+                  last_day = calendar.monthrange(parsed_end.year, parsed_end.month)[1]
+                  if parsed_end.day != last_day:
+                      raise SystemExit("monthly period_end must be the final day of a month")
+              period_end = parsed_end.isoformat()
+
+          with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
+              output.write(f"mode={mode}\n")
+              output.write(f"period_end={period_end}\n")
+          print(f"planned {mode} review" + (f" ending {period_end}" if period_end else ""))
+          PY
       - name: Check out repository history
         uses: actions/checkout@v7
         with:
@@ -103,7 +191,135 @@ jobs:
           python scripts/import_scheduler_history.py --check
           git diff --check
 
+
+      - name: Inspect existing period review
+        if: steps.plan.outputs.mode != 'daily'
+        id: period_review
+        env:
+          REVIEW_PERIOD: ${{ steps.plan.outputs.mode }}
+          REVIEW_PERIOD_END: ${{ steps.plan.outputs.period_end }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          review_json="research/reviews/${REVIEW_PERIOD}/${REVIEW_PERIOD_END}.json"
+          review_markdown="research/reviews/${REVIEW_PERIOD}/${REVIEW_PERIOD_END}.md"
+          complete="$(PYTHONPATH=scripts python - "$review_json" "$review_markdown" "$REVIEW_PERIOD" "$REVIEW_PERIOD_END" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          from research_pipeline import report_to_markdown, validate_report
+
+          json_path = Path(sys.argv[1])
+          markdown_path = Path(sys.argv[2])
+          expected_kind = sys.argv[3]
+          expected_end = sys.argv[4]
+
+          if not json_path.exists():
+              if markdown_path.exists():
+                  raise SystemExit(f"period Markdown exists without JSON: {markdown_path}")
+              print("false")
+              raise SystemExit(0)
+          if json_path.is_symlink() or not json_path.is_file():
+              raise SystemExit(f"period JSON is not a regular file: {json_path}")
+
+          with json_path.open("r", encoding="utf-8") as handle:
+              report = json.load(handle)
+          validate_report(report)
+          if (
+              report["reportKind"] != expected_kind
+              or report["reportDate"] != expected_end
+              or report["periodEnd"] != expected_end
+          ):
+              raise SystemExit(f"period report identity mismatch: {json_path}")
+
+          completed = {
+              "UPDATE_CONFIRMED",
+              "NO_RELEVANT_PAPERS",
+              "NO_NEW_BATCH_EXPECTED",
+          }
+          if report["status"] not in completed:
+              print("false")
+              raise SystemExit(0)
+
+          rendered = report_to_markdown(report)
+          existing = (
+              markdown_path.read_text(encoding="utf-8")
+              if markdown_path.exists() and not markdown_path.is_symlink()
+              else None
+          )
+          if markdown_path.is_symlink():
+              raise SystemExit(f"period Markdown is not a regular file: {markdown_path}")
+          if existing != rendered:
+              markdown_path.write_text(rendered, encoding="utf-8", newline="\n")
+          print("true")
+          PY
+          )"
+          {
+            echo "complete=$complete"
+            echo "report_path=$review_json"
+          } >> "$GITHUB_OUTPUT"
+          if [[ "$complete" == "true" ]]; then
+            echo "Reusing completed period review without another API call: $review_json"
+          fi
+
+      - name: Run weekly or monthly review
+        if: steps.plan.outputs.mode != 'daily' && steps.period_review.outputs.complete != 'true'
+        id: aggregate
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          REVIEW_PERIOD: ${{ steps.plan.outputs.mode }}
+          REVIEW_PERIOD_END: ${{ steps.plan.outputs.period_end }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          generated_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          result_path="$RUNNER_TEMP/${REVIEW_PERIOD}-report.json"
+          python scripts/research_pipeline.py \
+            --config config/research.json \
+            --env-file /dev/null \
+            aggregate \
+            --period "$REVIEW_PERIOD" \
+            --period-end "$REVIEW_PERIOD_END" \
+            --daily-dir research/daily \
+            --output-dir research/reviews \
+            --generated-at "$generated_at" \
+            > "$result_path"
+
+          report_path="research/reviews/${REVIEW_PERIOD}/${REVIEW_PERIOD_END}.json"
+          markdown_path="research/reviews/${REVIEW_PERIOD}/${REVIEW_PERIOD_END}.md"
+          PYTHONPATH=scripts python - "$result_path" "$report_path" "$markdown_path" "$REVIEW_PERIOD" "$REVIEW_PERIOD_END" <<'PY'
+          import json
+          import sys
+          from pathlib import Path
+
+          from research_pipeline import validate_report
+
+          result_path, report_path, markdown_path = map(Path, sys.argv[1:4])
+          expected_kind = sys.argv[4]
+          expected_end = sys.argv[5]
+          for path in (result_path, report_path, markdown_path):
+              if path.is_symlink() or not path.is_file():
+                  raise SystemExit(f"aggregate output is not a regular file: {path}")
+          with result_path.open("r", encoding="utf-8") as handle:
+              returned = json.load(handle)
+          with report_path.open("r", encoding="utf-8") as handle:
+              persisted = json.load(handle)
+          validate_report(returned)
+          validate_report(persisted)
+          if returned != persisted:
+              raise SystemExit("aggregate command output differs from persisted report")
+          if (
+              persisted["reportKind"] != expected_kind
+              or persisted["reportDate"] != expected_end
+              or persisted["periodEnd"] != expected_end
+          ):
+              raise SystemExit("aggregate output identity mismatch")
+          print(f"generated {expected_kind} review: {report_path} ({persisted['status']})")
+          PY
+
       - name: Run daily research
+        if: steps.plan.outputs.mode == 'daily'
         id: research
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -289,10 +505,62 @@ jobs:
           git push origin "HEAD:$AUTOMATION_BRANCH"
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
+
       - name: Reconcile completed research reports
         shell: bash
         run: |
           set -euo pipefail
+          python scripts/research_publication.py \
+            --daily-report-dir research/daily
+
+          python - <<'PY'
+          import json
+          import subprocess
+          import sys
+          from pathlib import Path
+
+          incomplete = {"UPDATE_NOT_CONFIRMED", "UPDATER_OFFLINE"}
+          completed = {
+              "UPDATE_CONFIRMED",
+              "NO_RELEVANT_PAPERS",
+              "NO_NEW_BATCH_EXPECTED",
+          }
+          for kind in ("weekly", "monthly"):
+              report_dir = Path("research/reviews") / kind
+              if not report_dir.exists():
+                  continue
+              if report_dir.is_symlink() or not report_dir.is_dir():
+                  raise SystemExit(f"aggregate report directory is invalid: {report_dir}")
+              for report_path in sorted(report_dir.glob("*.json")):
+                  if report_path.is_symlink() or not report_path.is_file():
+                      raise SystemExit(f"aggregate report is not a regular file: {report_path}")
+                  with report_path.open("r", encoding="utf-8") as handle:
+                      report = json.load(handle)
+                  if (
+                      report.get("reportKind") != kind
+                      or report.get("reportDate") != report_path.stem
+                      or report.get("periodEnd") != report_path.stem
+                  ):
+                      raise SystemExit(f"aggregate report identity mismatch: {report_path}")
+                  status = report.get("status")
+                  if status in incomplete:
+                      print(f"keeping incomplete aggregate out of publication: {report_path}")
+                      continue
+                  if status not in completed:
+                      raise SystemExit(
+                          f"unexpected aggregate report status {status!r}: {report_path}"
+                      )
+                  subprocess.run(
+                      [
+                          sys.executable,
+                          "scripts/research_publication.py",
+                          "--report",
+                          str(report_path),
+                      ],
+                      check=True,
+                  )
+          PY
+
           python scripts/research_publication.py \
             --daily-report-dir research/daily \
             --regenerate-site
@@ -461,7 +729,7 @@ jobs:
               --base main \
               --head "$AUTOMATION_BRANCH" \
               --title "research: automated arXiv review" \
-              --body "Automated daily arXiv screen. Weekly and monthly synthesis run from local Codex schedules. arXiv/OpenAI failures remain incomplete and are not published. Review the generated prose and ratings before merge."
+              --body "Automated daily arXiv screening plus scheduled weekly and monthly synthesis. arXiv/OpenAI failures remain incomplete and are not published. Completed reports are reconciled into the static archive; review the generated prose and ratings before merge."
           else
             echo "Updated existing review PR #$existing."
           fi

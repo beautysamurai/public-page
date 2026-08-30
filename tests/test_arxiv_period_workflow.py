@@ -43,15 +43,23 @@ class ArxivPeriodWorkflowTests(unittest.TestCase):
         self.assertIn("pending[:2]", targets)
         self.assertIn("candidates = [current_end, *pending[:2]]", targets)
         self.assertIn("if explicit_end:", targets)
+        self.assertIn('Path("research/pending-periods")', targets)
+        self.assertIn('"schemaVersion": 1', targets)
         self.assertNotIn("OPENAI_API_KEY", targets)
+
+        marker_commit = self.step("Persist period retry markers")
+        self.assertIn("id: period_marker_commit", marker_commit)
+        self.assertIn("git add -A -- research/pending-periods", marker_commit)
+        self.assertIn('git push origin "HEAD:$AUTOMATION_BRANCH"', marker_commit)
 
         aggregate = self.step("Run weekly or monthly reviews")
         self.assertIn("steps.period_targets.outputs.count != '0'", aggregate)
         self.assertIn("OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}", aggregate)
         self.assertIn('done < "$targets_path"', aggregate)
         self.assertIn('echo "failed=$failed"', aggregate)
-        self.assertIn("UPDATER_OFFLINE", aggregate)
-        self.assertIn("persist_report", aggregate)
+        self.assertIn("marker_path.unlink()", aggregate)
+        self.assertIn("remains queued", aggregate)
+        self.assertNotIn("persist_report", aggregate)
         self.assertIn("aggregate \\", aggregate)
         self.assertIn("--daily-dir research/daily", aggregate)
         self.assertIn("--output-dir research/reviews", aggregate)
@@ -69,6 +77,9 @@ class ArxivPeriodWorkflowTests(unittest.TestCase):
         )
 
     def test_period_failures_are_reported_after_persistence_and_pr_update(self) -> None:
+        marker_position = self.workflow.index(
+            "      - name: Persist period retry markers\n"
+        )
         aggregate_position = self.workflow.index(
             "      - name: Run weekly or monthly reviews\n"
         )
@@ -81,8 +92,11 @@ class ArxivPeriodWorkflowTests(unittest.TestCase):
         failure_position = self.workflow.index(
             "      - name: Report period review failures\n"
         )
+        self.assertLess(marker_position, aggregate_position)
         self.assertLess(aggregate_position, commit_position)
         self.assertLess(commit_position, pull_request_position)
+        pull_request = self.step("Open or update the review pull request")
+        self.assertIn("steps.period_marker_commit.outputs.changed == 'true'", pull_request)
         self.assertLess(pull_request_position, failure_position)
         failure = self.step("Report period review failures")
         self.assertIn("steps.aggregate.outputs.failed == 'true'", failure)

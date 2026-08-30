@@ -320,7 +320,10 @@ monthly Sol/high settings. A completed period review is detected before the
 paid step and is reused without another API call. Each scheduled period run also
 carries forward up to the two oldest incomplete reviews of the same kind,
 alongside the current period, so transient failures are retried automatically
-without relying on a manual reminder.
+without relying on a manual reminder. Before any paid period synthesis, compact
+queue markers are committed under `research/pending-periods/`. A runner timeout
+therefore leaves a durable target for the next scheduled run; the marker is
+removed only after a validated aggregate report has been persisted.
 
 Reusing the durable branch lets an unconfirmed daily batch resume on the next
 run without repeating completed model calls. Every run reconciles all durable

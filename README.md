@@ -317,7 +317,10 @@ Weekly and monthly outputs are stored under
 JSON and never fetch arXiv metadata or PDFs again, but they do call the
 Responses API for synthesis using the configured weekly Terra/medium and
 monthly Sol/high settings. A completed period review is detected before the
-paid step and is reused without another API call.
+paid step and is reused without another API call. Each scheduled period run also
+carries forward up to the two oldest incomplete reviews of the same kind,
+alongside the current period, so transient failures are retried automatically
+without relying on a manual reminder.
 
 Reusing the durable branch lets an unconfirmed daily batch resume on the next
 run without repeating completed model calls. Every run reconciles all durable

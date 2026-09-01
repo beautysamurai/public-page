@@ -118,6 +118,15 @@ CLASSIFICATIONS = frozenset(
         "out_of_scope",
     }
 )
+PUBLIC_TOPIC_BY_CLASSIFICATION = {
+    "electronic_trading": "Electronic trading",
+    "market_microstructure": "Market microstructure",
+    "interest_rate_models": "Interest-rate models",
+    "yield_curve": "Yield curves",
+    "rates": "Rates",
+    "mixed": "Cross-disciplinary finance",
+    "out_of_scope": "Out of scope",
+}
 REPORT_STATUSES = frozenset(
     {
         "UPDATE_CONFIRMED",
@@ -823,9 +832,7 @@ def adapt_research_report(value: object) -> AdaptedPublication:
         analysis = paper["finalAnalysis"]
         english_analysis = analysis["english"]
         arxiv_id = metadata["arxivId"]
-        topics = _deduplicate(
-            [*metadata["categories"], *english_analysis["tags"]]
-        )
+        topics = [PUBLIC_TOPIC_BY_CLASSIFICATION[analysis["classification"]]]
         recommended_ja = "推奨" if analysis["recommended"] else "非推奨"
         recommended_en = (
             "Recommended" if analysis["recommended"] else "Not recommended"

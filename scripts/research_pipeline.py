@@ -99,6 +99,12 @@ MONTHLY = "monthly"
 REPORT_KINDS = frozenset({DAILY, WEEKLY, MONTHLY})
 LISTING_TYPES = frozenset({"new", "cross", "replacement"})
 INCLUDED_LISTING_TYPES = frozenset({"new", "cross"})
+ARXIV_METADATA_CATEGORY_RE = re.compile(
+    r"(?:astro-ph|cond-mat|cs|econ|eess|math|nlin|physics|q-bio|q-fin|stat)"
+    r"\.[A-Za-z0-9-]+"
+    r"|(?:astro-ph|gr-qc|hep-ex|hep-lat|hep-ph|hep-th|math-ph|nucl-ex|"
+    r"nucl-th|quant-ph)"
+)
 
 DEFAULT_CATEGORIES = (
     "q-fin.TR",
@@ -463,6 +469,12 @@ def _require_exact_keys(
 def _validate_nonempty_string(value: object, field: str, limit: int = 20_000) -> None:
     if not isinstance(value, str) or not value.strip() or len(value) > limit:
         raise StructuredOutputError(f"{field} must be a non-empty string")
+    if value != value.strip() or any(
+        line != line.strip() for line in value.splitlines()
+    ):
+        raise StructuredOutputError(
+            f"{field} must not have leading or trailing whitespace"
+        )
     if any(ord(character) < 9 for character in value):
         raise StructuredOutputError(f"{field} contains control characters")
     if any(
@@ -585,15 +597,25 @@ def validate_metadata(value: Mapping[str, Any]) -> None:
         raise StructuredOutputError(
             "metadata.updatedDate cannot precede metadata.submittedDate"
         )
-    _validate_string_list(
-        value["categories"],
-        "metadata.categories",
-        min_items=1,
-        max_items=50,
-        max_string=120,
-        unique=True,
-        english_only=True,
-    )
+    categories = value["categories"]
+    if not isinstance(categories, list) or not 1 <= len(categories) <= 50:
+        raise StructuredOutputError(
+            "metadata.categories must be a non-empty bounded list"
+        )
+    seen_categories: set[str] = set()
+    for category in categories:
+        if (
+            not isinstance(category, str)
+            or len(category) > 120
+            or not ARXIV_METADATA_CATEGORY_RE.fullmatch(category)
+        ):
+            raise StructuredOutputError(
+                "metadata.categories contains an invalid arXiv category"
+            )
+        key = category.casefold()
+        if key in seen_categories:
+            raise StructuredOutputError("metadata.categories contains duplicates")
+        seen_categories.add(key)
 
 
 def validate_paper(value: Mapping[str, Any]) -> None:
@@ -1715,10 +1737,10 @@ def report_to_markdown(report: Mapping[str, Any]) -> str:
             [
                 f"## {index}. {_markdown_escape(metadata['title'])}",
                 "",
-                f"**arXiv:** [{_markdown_escape(arxiv_id)}](https://arxiv.org/abs/{urllib.parse.quote(arxiv_id, safe='./')})  ",
-                f"**Importance:** {analysis['importance']}/5  ",
-                f"**Recommended:** {'Yes' if analysis['recommended'] else 'No'}  ",
-                f"**Classification:** `{analysis['classification']}`",
+                f"- **arXiv:** [{_markdown_escape(arxiv_id)}](https://arxiv.org/abs/{urllib.parse.quote(arxiv_id, safe='./')})",
+                f"- **Importance:** {analysis['importance']}/5",
+                f"- **Recommended:** {'Yes' if analysis['recommended'] else 'No'}",
+                f"- **Classification:** `{analysis['classification']}`",
                 "",
                 f"**要約:** {_markdown_escape(analysis['summary'])}",
                 "",

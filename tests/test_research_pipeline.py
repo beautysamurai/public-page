@@ -299,6 +299,35 @@ class MetadataFetchTests(unittest.TestCase):
         self.assertEqual(observed_query["max_results"], [str(len(arxiv_ids))])
         self.assertEqual(observed_query["id_list"], [",".join(arxiv_ids)])
 
+    def test_metadata_accepts_canonical_cross_list_category_tokens(self):
+        source = digest.AtomEntry(
+            arxiv_id="2608.12345v1",
+            title="Cross-listed rates research",
+            authors=("Researcher One",),
+            submitted_at=datetime(2026, 8, 28, 8, 0, tzinfo=UTC),
+            updated_at=datetime(2026, 8, 28, 9, 0, tzinfo=UTC),
+            categories=("cs.AI", "econ.GN", "q-fin.TR"),
+            abstract="Market microstructure research.",
+        )
+
+        metadata = pipeline.metadata_from_entry(source)
+
+        self.assertEqual(metadata["categories"], ["cs.AI", "econ.GN", "q-fin.TR"])
+
+    def test_metadata_rejects_non_category_values_and_duplicates(self):
+        valid = pipeline.metadata_from_entry(entry("2608.12345"))
+        for categories in (
+            ["https://example.com"],
+            ["example.com"],
+            ["cs.example.com"],
+            ["q-fin.TR", "Q-FIN.tr"],
+            [],
+        ):
+            with self.subTest(categories=categories):
+                invalid = {**valid, "categories": categories}
+                with self.assertRaises(pipeline.StructuredOutputError):
+                    pipeline.validate_metadata(invalid)
+
 
 class RecordingResponses:
     def __init__(self, outputs):
@@ -437,6 +466,21 @@ class ResponsesAdapterTests(unittest.TestCase):
                 ):
                     pipeline.validate_analysis(bad)
 
+    def test_model_narratives_reject_line_edge_whitespace(self):
+        for unsafe in (
+            " 日本語の要約です。",
+            "日本語の要約です。 ",
+            "日本語の要約です。 \n二行目です。",
+        ):
+            bad = analysis()
+            bad["summary"] = unsafe
+            with self.subTest(unsafe=unsafe):
+                with self.assertRaisesRegex(
+                    pipeline.StructuredOutputError,
+                    "summary must not have leading or trailing whitespace",
+                ):
+                    pipeline.validate_analysis(bad)
+
     def test_client_initialization_error_is_sanitized(self):
         sensitive_detail = "malformed OPENAI_API_KEY sk-private-value"
 
@@ -502,6 +546,12 @@ class PersistenceTests(unittest.TestCase):
             return real_replace(source, destination)
 
         return replace
+
+    def test_generated_markdown_has_no_trailing_whitespace(self):
+        markdown = pipeline.report_to_markdown(self.completed_report())
+
+        self.assertIn("- **arXiv:**", markdown)
+        self.assertTrue(all(line == line.rstrip() for line in markdown.splitlines()))
 
     def test_initial_pair_failure_rolls_back_and_retry_writes_both_files(self):
         report = self.completed_report()

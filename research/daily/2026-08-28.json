@@ -2,12 +2,69 @@
   "schemaVersion": 2,
   "reportKind": "daily",
   "reportDate": "2026-08-28",
-  "generatedAt": "2026-08-29T15:36:21Z",
-  "status": "UPDATE_NOT_CONFIRMED",
-  "message": "The arXiv batch or structured analysis could not be validated; the review remains pending.",
+  "generatedAt": "2026-09-01T11:55:59Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "Recovered carried arXiv batch 2026-08-28 from the bounded past-week listing with 1 relevant paper(s).",
   "expectedBatchDate": "2026-08-28",
   "observedBatchDate": "2026-08-28",
   "periodStart": null,
   "periodEnd": null,
-  "papers": []
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2608.27076v1",
+        "title": "Tabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal Generation",
+        "authors": [
+          "Joshua Le Grice"
+        ],
+        "submittedDate": "2026-08-27",
+        "updatedDate": "2026-08-27",
+        "categories": [
+          "cs.LG",
+          "q-fin.CP",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "米国大型株約300銘柄の日次クロスセクション予測で、複数市場レジームの取引成績を同時に最適化するBayesian optimisationを検証したMSc研究である。XGBoost、MLP、TabNet、FT-Transformer等を比較し、XGBoostとTabNetのrank aggregation ensembleを提示する。",
+        "mainResult": "著者の2025年OOSバックテストでは、Hybrid ensembleは総収益51.26%、Sharpe 2.44、最大ドローダウン-7.76%で、CAPM年率alpha 0.423はp=0.011と報告された。XGBoostが最良の単体モデルであり、TabNetとFT-Transformerは単独ではXGBoostを上回らなかった。四半期別のLong/Short precisionは各々約23～26%で、外側decileの10%ランダム基準を上回ったとされる。",
+        "practicalApplication": "実務上は、予測精度ではなくコスト控除後のlong-short portfolio成績を目的に、複数レジームをまたぐwalk-forward validationとモデル間のsignal orthogonalityを用いる設計の参考になる。もっとも、終値執行近似、固定2.2bpコスト、短期借株料・availability・market impactの未反映により、提示収益をそのまま執行可能な期待収益として扱うべきではない。",
+        "methodology": "2015～2024年を学習・検証、2025年をOOSとし、2022～2024年のexpanding-window 3 foldで30 trial/modelのTPE Bayesian optimisationを行う。翌日リターンのクロスセクション上位・下位10%をLong/Short classとし、各日5～8銘柄ずつのドル中立・日次リバランスportfolioを構築する。目的関数はfold平均の年率リターン、Sharpe、drawdownと、負のfold成績へのペナルティである。",
+        "limitations": "OOSは2025年の252営業日のみで統計的検出力が限定的であり、多数の試行・ensemble選択に対するDeflated Sharpe Ratioも未算出である。期末時点のS&P 500構成銘柄を使うためsurvivorship biasがあり、Bloomberg由来データは独立再現を難しくする。さらに、cross-regime最適化と同一条件のsingle-regime tuning比較がなく、その因果的優位は直接には示されていない。Gaussian noiseテストは実運用で起こる構造的な欠損・データ障害を十分に再現しない。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "電子取引・株式シグナル生成に直接関係し、レジーム横断のportfolio目的hyperparameter tuningと異質モデルのensembleという実務的論点を具体化している。一方で、単年OOS、実行コストとshort constraintsの簡略化、survivorship bias、未査読のMSc研究という制約が大きく、手法アイデアとして参照しつつ独立した再検証が必要である。",
+        "tags": [
+          "アルゴリズム取引",
+          "株式クロスセクション予測",
+          "Bayesian optimisation",
+          "レジーム頑健性",
+          "TabNet",
+          "XGBoost",
+          "アンサンブル",
+          "バックテスト"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This MSc study examines Bayesian optimisation that jointly targets trading performance across multiple market regimes for daily cross-sectional prediction of roughly 300 large-cap US equities. It compares XGBoost, MLP, TabNet, and FT-Transformer, among others, and presents a rank-aggregation ensemble of XGBoost and TabNet.",
+          "mainResult": "In the authors' 2025 OOS backtest, the Hybrid ensemble reportedly delivered a 51.26% total return, a 2.44 Sharpe ratio, and a -7.76% maximum drawdown; its annualized CAPM alpha of 0.423 was reported with p=0.011. XGBoost was the strongest standalone model, while TabNet and FT-Transformer did not surpass XGBoost individually. Quarterly Long/Short precision was reported at roughly 23-26%, above the 10% random benchmark implied by the outer-decile target.",
+          "practicalApplication": "In practice, the study is useful as a design reference for optimizing across multiple regimes with walk-forward validation and using signal orthogonality between models, rather than predictive accuracy alone, as a portfolio-selection criterion. However, its closing-price execution proxy, fixed 2.2bp cost, and omission of short borrow fees, availability, and market impact mean that the reported returns should not be treated as directly executable expected returns.",
+          "methodology": "The study uses 2015-2024 for training and validation and 2025 as OOS, with three expanding-window folds for 2022-2024 and 30 TPE Bayesian-optimisation trials per model. It labels the top and bottom 10% of next-day cross-sectional returns as Long and Short classes and constructs a daily rebalanced, dollar-neutral portfolio with 5-8 stocks on each side. The objective combines fold-average annualized return, Sharpe ratio, drawdown, and penalties for adverse fold outcomes.",
+          "limitations": "The OOS sample contains only 252 trading days in 2025, limiting statistical power; the study also does not calculate a Deflated Sharpe Ratio for the many trials and ensemble selections. Using end-of-sample S&P 500 constituents creates survivorship bias, while Bloomberg-sourced data limits independent replication. Moreover, there is no identically specified single-regime-tuning baseline, so a causal advantage of cross-regime optimisation is not directly established. Gaussian-noise tests also do not adequately represent structured missingness or data failures in live operations.",
+          "reason": "The paper is directly relevant to electronic trading and equity signal generation, and concretely develops practical issues of cross-regime, portfolio-objective hyperparameter tuning and heterogeneous-model ensembles. However, its single-year OOS test, simplified execution costs and short constraints, survivorship bias, and status as an unreviewed MSc study are material limitations; it should be used as a methodological idea requiring independent validation.",
+          "tags": [
+            "algorithmic trading",
+            "cross-sectional equity prediction",
+            "Bayesian optimisation",
+            "regime robustness",
+            "TabNet",
+            "XGBoost",
+            "ensemble",
+            "backtesting"
+          ]
+        }
+      }
+    }
+  ]
 }

@@ -161,12 +161,7 @@ class ResearchReportAdapterTests(unittest.TestCase):
         )
         self.assertEqual(
             source["papers"][0]["topics"],
-            [
-                "q-fin.TR",
-                "cs.LG",
-                "Electronic trading",
-                "Market microstructure",
-            ],
+            ["Cross-disciplinary finance"],
         )
         for heading in ("### 要約", "### 主な結果", "### 実務への応用", "### 限界"):
             self.assertIn(heading, source["sourceText"])
@@ -347,7 +342,7 @@ class ResearchReportAdapterTests(unittest.TestCase):
 
         self.assertEqual(
             adapted.source_edition["papers"][0]["topics"],
-            ["q", "RL"],
+            ["Cross-disciplinary finance"],
         )
 
         for field_path in ("categories", "tags"):

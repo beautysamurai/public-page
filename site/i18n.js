@@ -830,6 +830,7 @@
 
   var topics = {
     "Concentrated liquidity": "集中流動性",
+    "Cross-disciplinary finance": "複合金融研究",
     "Dynamic hedging": "動的ヘッジ",
     "Electronic trading": "電子取引",
     "Generative models": "生成モデル",
@@ -842,9 +843,11 @@
     "Mathematical finance": "数理ファイナンス",
     "Model validation": "モデル検証",
     "OTC trading": "OTC 取引",
+    "Out of scope": "対象外",
     "Point processes": "点過程",
     "Reinforcement learning": "強化学習",
     "RFQ": "RFQ",
+    "Rates": "金利",
     "Yield curves": "イールドカーブ"
   };
 

@@ -684,6 +684,14 @@ class PersistenceTests(unittest.TestCase):
             )
 
     def test_pending_aggregate_with_same_coverage_remains_immutable(self):
+        first_paper = {
+            "metadata": pipeline.metadata_from_entry(entry("2608.12345")),
+            "finalAnalysis": analysis(importance=4),
+        }
+        second_paper = {
+            "metadata": pipeline.metadata_from_entry(entry("2608.54321")),
+            "finalAnalysis": analysis(importance=3),
+        }
         original = pipeline._report(
             report_kind=pipeline.WEEKLY,
             report_date=date(2026, 8, 28),
@@ -694,10 +702,11 @@ class PersistenceTests(unittest.TestCase):
             observed_batch_date=None,
             period_start=date(2026, 8, 22),
             period_end=date(2026, 8, 28),
-            papers=[],
+            papers=[first_paper, second_paper],
         )
         rerun = dict(original)
         rerun["generatedAt"] = "2026-09-01T12:00:00Z"
+        rerun["papers"] = [second_paper, first_paper]
         with tempfile.TemporaryDirectory() as directory:
             output_dir = Path(directory)
             pipeline.persist_report(original, output_dir)

@@ -998,7 +998,7 @@
       "observedBatchDate": "2026-08-28",
       "periodStart": null,
       "periodEnd": null,
-      "sourceText": "## 2026年8月28日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n## 1. Tabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal Generation\n\n[arXiv:2608.27076v1](https://arxiv.org/abs/2608.27076v1)\n\n**重要度: 5/5 — 推奨**\n\n### 分類\n\nelectronic\\_trading\n\n### 要約\n\n米国大型株約300銘柄の日次クロスセクション予測で、複数市場レジームの取引成績を同時に最適化するBayesian optimisationを検証したMSc研究である。XGBoost、MLP、TabNet、FT-Transformer等を比較し、XGBoostとTabNetのrank aggregation ensembleを提示する。\n\n### 手法\n\n2015～2024年を学習・検証、2025年をOOSとし、2022～2024年のexpanding-window 3 foldで30 trial/modelのTPE Bayesian optimisationを行う。翌日リターンのクロスセクション上位・下位10%をLong/Short classとし、各日5～8銘柄ずつのドル中立・日次リバランスportfolioを構築する。目的関数はfold平均の年率リターン、Sharpe、drawdownと、負のfold成績へのペナルティである。\n\n### 主な結果\n\n著者の2025年OOSバックテストでは、Hybrid ensembleは総収益51.26%、Sharpe 2.44、最大ドローダウン-7.76%で、CAPM年率alpha 0.423はp=0.011と報告された。XGBoostが最良の単体モデルであり、TabNetとFT-Transformerは単独ではXGBoostを上回らなかった。四半期別のLong/Short precisionは各々約23～26%で、外側decileの10%ランダム基準を上回ったとされる。\n\n### 実務への応用\n\n実務上は、予測精度ではなくコスト控除後のlong-short portfolio成績を目的に、複数レジームをまたぐwalk-forward validationとモデル間のsignal orthogonalityを用いる設計の参考になる。もっとも、終値執行近似、固定2.2bpコスト、短期借株料・availability・market impactの未反映により、提示収益をそのまま執行可能な期待収益として扱うべきではない。\n\n### 限界\n\nOOSは2025年の252営業日のみで統計的検出力が限定的であり、多数の試行・ensemble選択に対するDeflated Sharpe Ratioも未算出である。期末時点のS&P 500構成銘柄を使うためsurvivorship biasがあり、Bloomberg由来データは独立再現を難しくする。さらに、cross-regime最適化と同一条件のsingle-regime tuning比較がなく、その因果的優位は直接には示されていない。Gaussian noiseテストは実運用で起こる構造的な欠損・データ障害を十分に再現しない。\n\n### 推奨理由\n\n電子取引・株式シグナル生成に直接関係し、レジーム横断のportfolio目的hyperparameter tuningと異質モデルのensembleという実務的論点を具体化している。一方で、単年OOS、実行コストとshort constraintsの簡略化、survivorship bias、未査読のMSc研究という制約が大きく、手法アイデアとして参照しつつ独立した再検証が必要である。\n\n### タグ\n\nアルゴリズム取引・株式クロスセクション予測・Bayesian optimisation・レジーム頑健性・TabNet・XGBoost・アンサンブル・バックテスト",
+      "sourceText": "## 2026年8月28日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n## 1. Tabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal Generation\n\n**[arXiv:2608.27076v1](https://arxiv.org/abs/2608.27076v1) — Joshua Le Grice**\n\n**重要度: 10/10 — 推奨・アルゴリズム取引**\n\n米国大型株約300銘柄の日次クロスセクション予測で、複数市場レジームの取引成績を同時に最適化するBayesian optimisationを検証したMSc研究である。XGBoost、MLP、TabNet、FT-Transformer等を比較し、XGBoostとTabNetのrank aggregation ensembleを提示する。\n\n2015～2024年を学習・検証、2025年をOOSとし、2022～2024年のexpanding-window 3 foldで30 trial/modelのTPE Bayesian optimisationを行う。翌日リターンのクロスセクション上位・下位10%をLong/Short classとし、各日5～8銘柄ずつのドル中立・日次リバランスportfolioを構築する。目的関数はfold平均の年率リターン、Sharpe、drawdownと、負のfold成績へのペナルティである。 著者の2025年OOSバックテストでは、Hybrid ensembleは総収益51.26%、Sharpe 2.44、最大ドローダウン-7.76%で、CAPM年率alpha 0.423はp=0.011と報告された。XGBoostが最良の単体モデルであり、TabNetとFT-Transformerは単独ではXGBoostを上回らなかった。四半期別のLong/Short precisionは各々約23～26%で、外側decileの10%ランダム基準を上回ったとされる。\n\n実務上は、予測精度ではなくコスト控除後のlong-short portfolio成績を目的に、複数レジームをまたぐwalk-forward validationとモデル間のsignal orthogonalityを用いる設計の参考になる。もっとも、終値執行近似、固定2.2bpコスト、短期借株料・availability・market impactの未反映により、提示収益をそのまま執行可能な期待収益として扱うべきではない。 OOSは2025年の252営業日のみで統計的検出力が限定的であり、多数の試行・ensemble選択に対するDeflated Sharpe Ratioも未算出である。期末時点のS&P 500構成銘柄を使うためsurvivorship biasがあり、Bloomberg由来データは独立再現を難しくする。さらに、cross-regime最適化と同一条件のsingle-regime tuning比較がなく、その因果的優位は直接には示されていない。Gaussian noiseテストは実運用で起こる構造的な欠損・データ障害を十分に再現しない。\n\n電子取引・株式シグナル生成に直接関係し、レジーム横断のportfolio目的hyperparameter tuningと異質モデルのensembleという実務的論点を具体化している。一方で、単年OOS、実行コストとshort constraintsの簡略化、survivorship bias、未査読のMSc研究という制約が大きく、手法アイデアとして参照しつつ独立した再検証が必要である。",
       "papers": [
         {
           "arxivId": "2608.27076v1",
@@ -1014,15 +1014,15 @@
           "absUrl": "https://arxiv.org/abs/2608.27076v1",
           "pdfUrl": "https://arxiv.org/pdf/2608.27076v1",
           "schedulerRank": 1,
-          "schedulerRating": 5,
-          "schedulerRatingScale": 5,
-          "schedulerLabel": "推奨・重要度 5/5",
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 10/10",
           "schedulerSummary": "米国大型株約300銘柄の日次クロスセクション予測で、複数市場レジームの取引成績を同時に最適化するBayesian optimisationを検証したMSc研究である。XGBoost、MLP、TabNet、FT-Transformer等を比較し、XGBoostとTabNetのrank aggregation ensembleを提示する。",
           "ratings": [
             {
               "label": "重要度",
-              "value": 5,
-              "scale": 5
+              "value": 10,
+              "scale": 10
             }
           ]
         }
@@ -1041,7 +1041,7 @@
       "observedBatchDate": "2026-08-31",
       "periodStart": null,
       "periodEnd": null,
-      "sourceText": "## 2026年8月31日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n## 1. RetailAgent: Structured Adverse Timing in Self-Conditioned Multimodal LLM Trading Agents\n\n[arXiv:2608.28399v1](https://arxiv.org/abs/2608.28399v1)\n\n**重要度: 3/5 — 推奨**\n\n### 分類\n\nelectronic\\_trading\n\n### 要約\n\n本稿は、匿名化されたCSI-500構成銘柄の日中価格系列に対し、LLMが各区間でlong/flatを選ぶRetailAgentを構築し、行動列の予測可能な逆張り的タイミングを検査する。主結果は、保有比率を控除した銘柄日内タイミング指標が、複数の入力形式・時間軸・状態プロンプト・モデルで負となる点である。\n\n### 手法\n\n固定された歴史的な匿名日中価格パス上で、LLMは将来区間リターンが開示される前に二値ポジションを選ぶ。評価量はA=Σt(p\\_t−p̄)r\\_tで、各stock-day内の平均long exposureを除いたlong/flatの相対的な保有タイミングを測る。数値テキスト、chart、両者、5/10/20分間隔、口座状態、Qwen・Haiku・Granite、自己生成メモリー、soft-token状態を比較し、日付クラスタ・ブートストラップ、露出率保存シャッフル、補完行動列、GRU/GBDT/reversalとの線形overlapを用いる。\n\n### 主な結果\n\nQwen3.5の10分価格テキスト条件では平均タイミングalphaが−45.7 bp/stock-day（95% CI: −49.4, −41.8）であり、chart（−29.9 bp）とmultimodal（−48.9 bp）も負であった。行動をシャッフルすると−3.5 bpまたは−8.7 bpへ弱まり、著者らは将来リターンとの逐次的な行動整合が負の推定値の大部分を生むと解釈する。自己生成メモリーでは、過去1件を追加表示する条件が、両アクションを含む採用stock-dayでswitchesを2.5から1.7へ下げ、タイミングを−62.8から−74.1 bpへ悪化させた。\n\n### 実務への応用\n\nLLMをシグナル生成や自動売買に用いる場合、平均リターンだけでなく、保有率を固定したwithin-stock timing、アクションの連続性、自己生成メモリーによるアンカリングを監査するための実験設計として有用である。実運用上の収益機会や逆張り執行戦略を直接示すものではなく、cost・impact・latencyを含む執行可能性検証が必要である。\n\n### 限界\n\n結論は固定された過去のCSI-500匿名価格パスにおける研究用return labelと、long/flatのみのLLM方策に限定される。標準・narrative推定値は両アクションを持つ軌跡だけを採用しており、選別バイアスを伴い得る。条件間でサンプル、プロンプト文言、評価手順が異なるため、多くの大きさ比較は記述的である。fine chartとencoder入力は将来label行にも依存する復元系列であり、厳密な情報境界の証拠は主にnumerical-text条件に限られる。取引コスト、bid-ask spread、market impact、借株、容量、遅延、戦略的相手方、価格フィードバック、人間投資家との対応は未検証である。さらに、Graniteは点推定のみでAPI失敗時の前ポジション維持を含み、coarse-image行の正確なcheckpointも未確認、学習済み条件の完全な再現設定も未確定である。\n\n### 推奨理由\n\n電子取引・LLM agentの行動監査として、露出調整済みタイミングと自己条件付けによる持続性を明示的に分けて測る点は有益であり、豊富な行動列保存とシャッフル対照も評価できる。ただし、これは実行可能なalphaや市場でのadversarial exploitationの実証ではなく、入力復元のlook-ahead懸念、条件選別、異質な比較枠、未完備な再現性記録が結論の外的妥当性を大きく制約する。\n\n### タグ\n\nLLM trading agents・electronic trading・intraday equities・timing alpha・self-conditioning・memory・behavioral audit・backtesting limitations",
+      "sourceText": "## 2026年8月31日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n## 1. RetailAgent: Structured Adverse Timing in Self-Conditioned Multimodal LLM Trading Agents\n\n**[arXiv:2608.28399v1](https://arxiv.org/abs/2608.28399v1) — Yupeng Zhang, Liuyuan Jiang, Hongyi Huang, Bingheng Li, Lisha Chen**\n\n**重要度: 6/10 — 推奨・LLM trading agents**\n\n本稿は、匿名化されたCSI-500構成銘柄の日中価格系列に対し、LLMが各区間でlong/flatを選ぶRetailAgentを構築し、行動列の予測可能な逆張り的タイミングを検査する。主結果は、保有比率を控除した銘柄日内タイミング指標が、複数の入力形式・時間軸・状態プロンプト・モデルで負となる点である。\n\n固定された歴史的な匿名日中価格パス上で、LLMは将来区間リターンが開示される前に二値ポジションを選ぶ。評価量は$A=\\sum_t (p_t-\\bar{p})r_t$で、各stock-day内の平均long exposureを除いたlong/flatの相対的な保有タイミングを測る。数値テキスト、chart、両者、5/10/20分間隔、口座状態、Qwen・Haiku・Granite、自己生成メモリー、soft-token状態を比較し、日付クラスタ・ブートストラップ、露出率保存シャッフル、補完行動列、GRU/GBDT/reversalとの線形overlapを用いる。 Qwen3.5の10分価格テキスト条件では平均タイミングalphaが−45.7 bp/stock-day（95% CI: −49.4, −41.8）であり、chart（−29.9 bp）とmultimodal（−48.9 bp）も負であった。行動をシャッフルすると−3.5 bpまたは−8.7 bpへ弱まり、著者らは将来リターンとの逐次的な行動整合が負の推定値の大部分を生むと解釈する。自己生成メモリーでは、過去1件を追加表示する条件が、両アクションを含む採用stock-dayでswitchesを2.5から1.7へ下げ、タイミングを−62.8から−74.1 bpへ悪化させた。\n\nLLMをシグナル生成や自動売買に用いる場合、平均リターンだけでなく、保有率を固定したwithin-stock timing、アクションの連続性、自己生成メモリーによるアンカリングを監査するための実験設計として有用である。実運用上の収益機会や逆張り執行戦略を直接示すものではなく、cost・impact・latencyを含む執行可能性検証が必要である。 結論は固定された過去のCSI-500匿名価格パスにおける研究用return labelと、long/flatのみのLLM方策に限定される。標準・narrative推定値は両アクションを持つ軌跡だけを採用しており、選別バイアスを伴い得る。条件間でサンプル、プロンプト文言、評価手順が異なるため、多くの大きさ比較は記述的である。fine chartとencoder入力は将来label行にも依存する復元系列であり、厳密な情報境界の証拠は主にnumerical-text条件に限られる。取引コスト、bid-ask spread、market impact、借株、容量、遅延、戦略的相手方、価格フィードバック、人間投資家との対応は未検証である。さらに、Graniteは点推定のみでAPI失敗時の前ポジション維持を含み、coarse-image行の正確なcheckpointも未確認、学習済み条件の完全な再現設定も未確定である。\n\n電子取引・LLM agentの行動監査として、露出調整済みタイミングと自己条件付けによる持続性を明示的に分けて測る点は有益であり、豊富な行動列保存とシャッフル対照も評価できる。ただし、これは実行可能なalphaや市場でのadversarial exploitationの実証ではなく、入力復元のlook-ahead懸念、条件選別、異質な比較枠、未完備な再現性記録が結論の外的妥当性を大きく制約する。",
       "papers": [
         {
           "arxivId": "2608.28399v1",
@@ -1061,15 +1061,15 @@
           "absUrl": "https://arxiv.org/abs/2608.28399v1",
           "pdfUrl": "https://arxiv.org/pdf/2608.28399v1",
           "schedulerRank": 1,
-          "schedulerRating": 3,
-          "schedulerRatingScale": 5,
-          "schedulerLabel": "推奨・重要度 3/5",
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 6/10",
           "schedulerSummary": "本稿は、匿名化されたCSI-500構成銘柄の日中価格系列に対し、LLMが各区間でlong/flatを選ぶRetailAgentを構築し、行動列の予測可能な逆張り的タイミングを検査する。主結果は、保有比率を控除した銘柄日内タイミング指標が、複数の入力形式・時間軸・状態プロンプト・モデルで負となる点である。",
           "ratings": [
             {
               "label": "重要度",
-              "value": 3,
-              "scale": 5
+              "value": 6,
+              "scale": 10
             }
           ]
         }

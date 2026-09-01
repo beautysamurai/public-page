@@ -41,6 +41,18 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
         self.assertIn("scripts/research_language.py", verification)
         self.assertIn('git ls-tree origin/main -- "$path"', verification)
 
+    def test_durable_branch_configures_bot_identity_before_merging_main(self) -> None:
+        continuation = self.step("Continue the durable automation branch")
+        self.assertIn('git config user.name "github-actions[bot]"', continuation)
+        self.assertIn(
+            'git config user.email "41898282+github-actions[bot]@users.noreply.github.com"',
+            continuation,
+        )
+        self.assertLess(
+            continuation.index("git config user.name"),
+            continuation.index("git merge --no-edit origin/main"),
+        )
+
     def test_daily_run_only_generates_research_and_classifies_completion(self) -> None:
         daily = self.step("Run daily research")
         self.assertIn("python scripts/research_pipeline.py", daily)

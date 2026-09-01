@@ -1004,7 +1004,15 @@ def fetch_metadata(
         if not digest.ARXIV_ID_RE.fullmatch(arxiv_id):
             raise ListingParseError("invalid metadata arXiv id")
         clean_ids.append(_base_arxiv_id(arxiv_id))
-    query = urllib.parse.urlencode({"id_list": ",".join(clean_ids)})
+    # The arXiv API otherwise applies its default page size of 10 even when
+    # id_list contains more ids, which makes a valid multi-category batch look
+    # like an incomplete metadata response.
+    query = urllib.parse.urlencode(
+        {
+            "id_list": ",".join(clean_ids),
+            "max_results": len(clean_ids),
+        }
+    )
     url = f"{METADATA_ENDPOINT}?{query}"
     raw = digest.fetch_atom_xml(url, timeout=timeout, opener=opener)
     feed = digest.parse_atom_feed(raw)

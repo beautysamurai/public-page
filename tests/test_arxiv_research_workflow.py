@@ -128,6 +128,22 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
         self.assertIn("steps.research_commit.outputs.changed == 'true'", pull_request)
         self.assertIn("steps.publication_commit.outputs.changed == 'true'", pull_request)
 
+    def test_incomplete_daily_run_fails_only_after_state_and_pr_are_persisted(self) -> None:
+        reporter = self.step("Report incomplete daily research")
+        self.assertIn("if: always()", reporter)
+        self.assertIn("steps.plan.outputs.mode == 'daily'", reporter)
+        self.assertIn("steps.research.outputs.status == 'UPDATE_NOT_CONFIRMED'", reporter)
+        self.assertIn("steps.research.outputs.status == 'UPDATER_OFFLINE'", reporter)
+        self.assertIn("exit 1", reporter)
+        self.assertLess(
+            self.position("Persist research state and report"),
+            self.position("Report incomplete daily research"),
+        )
+        self.assertLess(
+            self.position("Open or update the review pull request"),
+            self.position("Report incomplete daily research"),
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

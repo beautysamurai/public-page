@@ -1,9 +1,12 @@
+import html
+import io
 import json
 import os
 import sys
 import tempfile
 import unittest
 import urllib.error
+import urllib.parse
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
@@ -237,6 +240,64 @@ class ListingParsingTests(unittest.TestCase):
         self.assertTrue(pipeline.contains_topic_term("An RFQ execution protocol", "RFQ"))
         self.assertFalse(pipeline.contains_topic_term("A nonrfqsignal classifier", "RFQ"))
         self.assertFalse(pipeline.contains_topic_term("RFQuality image restoration", "RFQ"))
+
+
+class MetadataFetchTests(unittest.TestCase):
+    def test_requests_every_id_beyond_arxiv_default_page_size(self):
+        arxiv_ids = tuple(f"2608.{index:05d}" for index in range(10001, 10014))
+        observed_query = {}
+
+        class FakeResponse:
+            def __init__(self, body):
+                self._body = io.BytesIO(body)
+
+            def read(self, size=-1):
+                return self._body.read(size)
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return None
+
+        def opener(request, timeout=0):
+            query = urllib.parse.parse_qs(
+                urllib.parse.urlparse(request.full_url).query
+            )
+            observed_query.update(query)
+            requested = query["id_list"][0].split(",")
+            # Reproduce arXiv's default maximum of 10 when max_results is
+            # omitted so the regression test exercises the original failure.
+            limit = int(query.get("max_results", ["10"])[0])
+            entries = "".join(
+                f"""
+                <entry>
+                  <id>http://arxiv.org/abs/{html.escape(arxiv_id)}v1</id>
+                  <updated>2026-08-28T09:00:00Z</updated>
+                  <published>2026-08-28T08:00:00Z</published>
+                  <title>Metadata test {html.escape(arxiv_id)}</title>
+                  <summary>Market microstructure metadata test.</summary>
+                  <author><name>Researcher One</name></author>
+                  <category term="q-fin.TR" />
+                </entry>
+                """
+                for arxiv_id in requested[:limit]
+            )
+            feed = f"""<?xml version="1.0" encoding="UTF-8"?>
+            <feed xmlns="http://www.w3.org/2005/Atom">
+              <id>https://export.arxiv.org/api/query</id>
+              <updated>2026-08-28T12:00:00Z</updated>
+              <title>arXiv Query</title>
+              {entries}
+            </feed>
+            """.encode("utf-8")
+            return FakeResponse(feed)
+
+        fetched = pipeline.fetch_metadata(arxiv_ids, timeout=7.0, opener=opener)
+
+        self.assertEqual(set(fetched), set(arxiv_ids))
+        self.assertEqual(observed_query["max_results"], [str(len(arxiv_ids))])
+        self.assertEqual(observed_query["id_list"], [",".join(arxiv_ids)])
 
 
 class RecordingResponses:

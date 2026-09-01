@@ -466,6 +466,21 @@ class ResponsesAdapterTests(unittest.TestCase):
                 ):
                     pipeline.validate_analysis(bad)
 
+    def test_model_narratives_reject_line_edge_whitespace(self):
+        for unsafe in (
+            " 日本語の要約です。",
+            "日本語の要約です。 ",
+            "日本語の要約です。 \n二行目です。",
+        ):
+            bad = analysis()
+            bad["summary"] = unsafe
+            with self.subTest(unsafe=unsafe):
+                with self.assertRaisesRegex(
+                    pipeline.StructuredOutputError,
+                    "summary must not have leading or trailing whitespace",
+                ):
+                    pipeline.validate_analysis(bad)
+
     def test_client_initialization_error_is_sanitized(self):
         sensitive_detail = "malformed OPENAI_API_KEY sk-private-value"
 
@@ -531,6 +546,12 @@ class PersistenceTests(unittest.TestCase):
             return real_replace(source, destination)
 
         return replace
+
+    def test_generated_markdown_has_no_trailing_whitespace(self):
+        markdown = pipeline.report_to_markdown(self.completed_report())
+
+        self.assertIn("- **arXiv:**", markdown)
+        self.assertTrue(all(line == line.rstrip() for line in markdown.splitlines()))
 
     def test_initial_pair_failure_rolls_back_and_retry_writes_both_files(self):
         report = self.completed_report()

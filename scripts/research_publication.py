@@ -144,6 +144,12 @@ MAX_DAILY_REPORT_FILES = 5_000
 DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
 WHITESPACE_RE = re.compile(r"\s+")
 MARKDOWN_ESCAPE_RE = re.compile(r"([\\`*_\[\]#!|])")
+ARXIV_METADATA_CATEGORY_RE = re.compile(
+    r"(?:astro-ph|cond-mat|cs|econ|eess|math|nlin|physics|q-bio|q-fin|stat)"
+    r"\.[A-Za-z0-9-]+"
+    r"|(?:astro-ph|gr-qc|hep-ex|hep-lat|hep-ph|hep-th|math-ph|nucl-ex|"
+    r"nucl-th|quant-ph)"
+)
 
 JA_STATUS_MESSAGES = {
     "UPDATE_CONFIRMED": "arXivの更新を確認し、対象論文を評価しました。",
@@ -350,6 +356,33 @@ def _safe_string_list(
     return result
 
 
+def _safe_arxiv_category_list(value: object, context: str) -> list[str]:
+    """Validate arXiv taxonomy tokens without treating ``cs.AI`` as a URL."""
+
+    if not isinstance(value, list) or not value or len(value) > 50:
+        raise ResearchReportSchemaError(
+            f"{context} must be a non-empty bounded list"
+        )
+    result: list[str] = []
+    for index, item in enumerate(value):
+        if not isinstance(item, str):
+            raise ResearchReportSchemaError(f"{context}[{index}] must be a string")
+        normalized = unicodedata.normalize("NFC", item)
+        if (
+            normalized != item
+            or len(normalized) > 120
+            or not ARXIV_METADATA_CATEGORY_RE.fullmatch(normalized)
+        ):
+            raise ResearchReportSchemaError(
+                f"{context}[{index}] is not a valid arXiv category"
+            )
+        result.append(normalized)
+    folded = [item.casefold() for item in result]
+    if len(folded) != len(set(folded)):
+        raise ResearchReportSchemaError(f"{context} contains duplicate values")
+    return result
+
+
 def _safe_date(
     value: object,
     context: str,
@@ -518,12 +551,9 @@ def _validate_paper(value: object, index: int) -> dict[str, Any]:
         raise ResearchReportSchemaError(
             f"{context}.metadata.updatedDate cannot precede submittedDate"
         )
-    categories = _safe_string_list(
+    categories = _safe_arxiv_category_list(
         metadata["categories"],
         f"{context}.metadata.categories",
-        maximum_items=50,
-        maximum_string=120,
-        english=True,
     )
 
     return {

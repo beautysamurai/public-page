@@ -335,7 +335,7 @@ class ResearchReportAdapterTests(unittest.TestCase):
 
     def test_english_schema_tokens_require_latin_but_not_natural_prose(self):
         report = completed_report()
-        report["papers"][0]["metadata"]["categories"] = ["q"]
+        report["papers"][0]["metadata"]["categories"] = ["q-fin.TR"]
         report["papers"][0]["finalAnalysis"]["english"]["tags"] = ["RL"]
 
         adapted = publication.adapt_research_report(report)
@@ -345,20 +345,38 @@ class ResearchReportAdapterTests(unittest.TestCase):
             ["Cross-disciplinary finance"],
         )
 
-        for field_path in ("categories", "tags"):
-            with self.subTest(field_path=field_path):
-                invalid = completed_report()
-                if field_path == "categories":
-                    invalid["papers"][0]["metadata"]["categories"] = ["123"]
-                else:
-                    invalid["papers"][0]["finalAnalysis"]["english"][
-                        "tags"
-                    ] = ["123"]
-                with self.assertRaisesRegex(
-                    publication.ResearchReportSchemaError,
-                    "must contain English text",
-                ):
-                    publication.adapt_research_report(invalid)
+        invalid = completed_report()
+        invalid["papers"][0]["finalAnalysis"]["english"]["tags"] = ["123"]
+        with self.assertRaisesRegex(
+            publication.ResearchReportSchemaError,
+            "must contain English text",
+        ):
+            publication.adapt_research_report(invalid)
+
+    def test_accepts_arxiv_categories_that_resemble_web_domains(self):
+        report = completed_report()
+        report["papers"][0]["metadata"]["categories"] = [
+            "cs.AI",
+            "econ.GN",
+            "hep-ph",
+        ]
+
+        adapted = publication.adapt_research_report(report)
+
+        self.assertEqual(
+            adapted.source_edition["papers"][0]["arxivId"],
+            "2608.27076v1",
+        )
+
+    def test_rejects_non_arxiv_category_that_looks_like_a_domain(self):
+        report = completed_report()
+        report["papers"][0]["metadata"]["categories"] = ["example.com"]
+
+        with self.assertRaisesRegex(
+            publication.ResearchReportSchemaError,
+            "is not a valid arXiv category",
+        ):
+            publication.adapt_research_report(report)
 
     def test_accepts_japanese_narratives_with_english_technical_terms(self):
         report = completed_report()

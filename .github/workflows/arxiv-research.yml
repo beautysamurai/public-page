@@ -1046,6 +1046,13 @@ jobs:
             echo "Updated existing review PR #$existing."
           fi
 
+      - name: Report incomplete daily research
+        if: always() && steps.plan.outputs.mode == 'daily' && (steps.research.outputs.status == 'UPDATE_NOT_CONFIRMED' || steps.research.outputs.status == 'UPDATER_OFFLINE')
+        shell: bash
+        run: |
+          echo "::error::Daily arXiv research remains incomplete and was not published. Durable state was saved for automatic retry."
+          exit 1
+
       - name: Report period review failures
         if: always() && steps.aggregate.outputs.failed == 'true'
         shell: bash

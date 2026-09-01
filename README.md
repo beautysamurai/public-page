@@ -319,6 +319,10 @@ weekly review or the final calendar day for a monthly review.
 
 The workflow persists `research/state.json`, candidate-stage checkpoints, and
 daily JSON/Markdown on the fixed `automation/openai-arxiv-research` branch.
+An incomplete daily attempt is persisted and offered in the review PR first,
+then the Actions job is marked failed so a stalled batch is visible instead of
+appearing as a successful empty review. The next daily run retries it
+automatically.
 Weekly and monthly outputs are stored under
 `research/reviews/weekly/YYYY-MM-DD.{json,md}` and
 `research/reviews/monthly/YYYY-MM-DD.{json,md}`. Period jobs reuse the daily

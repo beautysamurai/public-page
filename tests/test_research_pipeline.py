@@ -532,6 +532,12 @@ class PersistenceTests(unittest.TestCase):
 
         return replace
 
+    def test_generated_markdown_has_no_trailing_whitespace(self):
+        markdown = pipeline.report_to_markdown(self.completed_report())
+
+        self.assertIn("- **arXiv:**", markdown)
+        self.assertTrue(all(line == line.rstrip() for line in markdown.splitlines()))
+
     def test_initial_pair_failure_rolls_back_and_retry_writes_both_files(self):
         report = self.completed_report()
         with tempfile.TemporaryDirectory() as directory:

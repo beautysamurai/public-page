@@ -1786,12 +1786,13 @@ def _read_persisted_report(path: Path) -> dict[str, Any]:
 
 
 def persist_report(report: Mapping[str, Any], output_dir: Path) -> dict[str, Any]:
-    """Persist one immutable edition, allowing only pending-to-complete repair.
+    """Persist one immutable edition, allowing pending aggregate repair.
 
     Re-running a completed date must not silently mutate an edition whose public
-    id is derived from that date.  An unconfirmed/offline placeholder may be
-    replaced by a confirmed result for the same date; other collisions return
-    the already persisted edition unchanged.
+    id is derived from that date. An unconfirmed/offline placeholder may be
+    replaced by a confirmed result for the same date. Unpublished weekly and
+    monthly placeholders may also refresh when their coverage or paper set
+    changes; other collisions return the already persisted edition unchanged.
     """
 
     validate_report(report)
@@ -1802,10 +1803,31 @@ def persist_report(report: Mapping[str, Any], output_dir: Path) -> dict[str, Any
         existing = _read_persisted_report(json_path)
         pending = {UPDATE_NOT_CONFIRMED, UPDATER_OFFLINE}
         completed = {UPDATE_CONFIRMED, NO_RELEVANT_PAPERS, NO_NEW_BATCH_EXPECTED}
+        existing_ids = {
+            paper["metadata"]["arxivId"].casefold()
+            for paper in existing["papers"]
+        }
+        incoming_ids = {
+            paper["metadata"]["arxivId"].casefold()
+            for paper in report["papers"]
+        }
+        refresh_pending_aggregate = (
+            existing["reportKind"] in {WEEKLY, MONTHLY}
+            and existing["status"] in pending
+            and report["status"] in pending
+            and (
+                existing["status"] != report["status"]
+                or existing["message"] != report["message"]
+                or existing_ids != incoming_ids
+            )
+        )
         replace_pending = (
             existing != report
             and existing["status"] in pending
-            and report["status"] in completed
+            and (
+                report["status"] in completed
+                or refresh_pending_aggregate
+            )
         )
         if not replace_pending:
             existing_json = json_path.read_bytes()

@@ -642,6 +642,70 @@ class PersistenceTests(unittest.TestCase):
             self.assertEqual(pipeline._read_persisted_report(json_path), completed)
             self.assertEqual(markdown_path.read_text(encoding="utf-8"), pipeline.report_to_markdown(completed))
 
+    def test_pending_aggregate_refreshes_when_coverage_changes(self):
+        paper = {
+            "metadata": pipeline.metadata_from_entry(entry("2608.12345")),
+            "finalAnalysis": analysis(importance=4),
+        }
+        original = pipeline._report(
+            report_kind=pipeline.MONTHLY,
+            report_date=date(2026, 8, 31),
+            generated_at=CHECKED_AT,
+            status=pipeline.UPDATE_NOT_CONFIRMED,
+            message="Coverage is incomplete: 20 announcement dates are missing.",
+            expected_batch_date=None,
+            observed_batch_date=None,
+            period_start=date(2026, 8, 1),
+            period_end=date(2026, 8, 31),
+            papers=[],
+        )
+        refreshed = pipeline._report(
+            report_kind=pipeline.MONTHLY,
+            report_date=date(2026, 8, 31),
+            generated_at=datetime(2026, 9, 1, 12, 0, tzinfo=UTC),
+            status=pipeline.UPDATE_NOT_CONFIRMED,
+            message="Coverage is incomplete: 19 announcement dates are missing.",
+            expected_batch_date=None,
+            observed_batch_date=None,
+            period_start=date(2026, 8, 1),
+            period_end=date(2026, 8, 31),
+            papers=[paper],
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            output_dir = Path(directory)
+            pipeline.persist_report(original, output_dir)
+
+            stored = pipeline.persist_report(refreshed, output_dir)
+
+            self.assertEqual(stored, refreshed)
+            self.assertEqual(
+                pipeline._read_persisted_report(output_dir / "2026-08-31.json"),
+                refreshed,
+            )
+
+    def test_pending_aggregate_with_same_coverage_remains_immutable(self):
+        original = pipeline._report(
+            report_kind=pipeline.WEEKLY,
+            report_date=date(2026, 8, 28),
+            generated_at=CHECKED_AT,
+            status=pipeline.UPDATE_NOT_CONFIRMED,
+            message="Coverage is incomplete: four announcement dates are missing.",
+            expected_batch_date=None,
+            observed_batch_date=None,
+            period_start=date(2026, 8, 22),
+            period_end=date(2026, 8, 28),
+            papers=[],
+        )
+        rerun = dict(original)
+        rerun["generatedAt"] = "2026-09-01T12:00:00Z"
+        with tempfile.TemporaryDirectory() as directory:
+            output_dir = Path(directory)
+            pipeline.persist_report(original, output_dir)
+
+            stored = pipeline.persist_report(rerun, output_dir)
+
+            self.assertEqual(stored, original)
+
 
 class DailyWorkflowTests(unittest.TestCase):
     def run_in_temp(self, *, page, entries=None, analyzer=None, checked_at=CHECKED_AT, initial_state=None):

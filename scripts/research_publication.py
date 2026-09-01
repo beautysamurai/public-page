@@ -1053,6 +1053,39 @@ def _managed_edition_anchor(edition: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _managed_archive_refresh_ids(
+    history: Mapping[str, Any], archive_dir: Path
+) -> set[str]:
+    """Find stale managed archives that still match immutable identity fields."""
+
+    refresh_ids: set[str] = set()
+    for expected in history["editions"]:
+        if expected["sourceKind"] != SOURCE_KIND:
+            continue
+        archive_path = archive_dir / f"{expected['editionId']}.json"
+        try:
+            raw = json.loads(
+                archive_path.read_text(encoding="utf-8"),
+                object_pairs_hook=_reject_duplicate_json_keys,
+            )
+            if not isinstance(raw, dict) or raw.pop("schemaVersion", None) != 2:
+                continue
+            existing = validate_history(
+                {"schemaVersion": 2, "editions": [raw]}
+            )["editions"][0]
+        except (
+            OSError,
+            UnicodeError,
+            ValueError,
+            HistoryImportError,
+            ResearchPublicationError,
+        ):
+            continue
+        if _managed_edition_anchor(existing) == _managed_edition_anchor(expected):
+            refresh_ids.add(expected["editionId"])
+    return refresh_ids
+
+
 def _validate_bundle_alignment(
     history: Mapping[str, Any], translation: Mapping[str, Any]
 ) -> None:
@@ -1179,12 +1212,16 @@ def publish_research_report(
         generated_paths: tuple[Path, ...] = ()
         if regenerate_site:
             artifacts = generate_artifacts(candidate_history)
+            refresh_archive_ids = _managed_archive_refresh_ids(
+                candidate_history, archive_dir
+            )
+            refresh_archive_ids.add(edition_id)
             generated_paths = tuple(
                 persist_artifacts(
                     artifacts,
                     latest_path,
                     archive_dir,
-                    refresh_archive_ids=(edition_id,),
+                    refresh_archive_ids=refresh_archive_ids,
                 )
             )
         return PublicationResult(
@@ -1392,12 +1429,16 @@ def reconcile_daily_reports(
     if regenerate_site:
         final_history = load_history(history_path)
         artifacts = generate_artifacts(final_history)
+        refresh_archive_ids = _managed_archive_refresh_ids(
+            final_history, archive_dir
+        )
+        refresh_archive_ids.update(refreshed_ids)
         generated_paths = tuple(
             persist_artifacts(
                 artifacts,
                 latest_path,
                 archive_dir,
-                refresh_archive_ids=refreshed_ids,
+                refresh_archive_ids=refresh_archive_ids,
             )
         )
     return ReconciliationResult(

@@ -607,9 +607,6 @@ class ResearchPublicationPersistenceTests(unittest.TestCase):
                 report_dir,
                 history_path,
                 translation_path,
-                regenerate_site=True,
-                latest_path=latest,
-                archive_dir=archive,
             )
 
             edition_id = "2026-08-29-daily-openai-01"
@@ -619,6 +616,17 @@ class ResearchPublicationPersistenceTests(unittest.TestCase):
             self.assertEqual(refreshed["papers"][0]["schedulerRating"], 8)
             self.assertEqual(refreshed["papers"][0]["schedulerRatingScale"], 10)
             self.assertNotIn("### 要約", refreshed["sourceText"])
+
+            finalized = publication.reconcile_daily_reports(
+                report_dir,
+                history_path,
+                translation_path,
+                regenerate_site=True,
+                latest_path=latest,
+                archive_dir=archive,
+            )
+            self.assertEqual(finalized.refreshed_edition_ids, ())
+            self.assertEqual(finalized.existing_edition_ids, (edition_id,))
             archived = json.loads((archive / f"{edition_id}.json").read_text())
             self.assertEqual(archived["papers"][0]["schedulerRatingScale"], 10)
 

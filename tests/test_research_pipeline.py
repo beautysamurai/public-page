@@ -299,6 +299,35 @@ class MetadataFetchTests(unittest.TestCase):
         self.assertEqual(observed_query["max_results"], [str(len(arxiv_ids))])
         self.assertEqual(observed_query["id_list"], [",".join(arxiv_ids)])
 
+    def test_metadata_accepts_canonical_cross_list_category_tokens(self):
+        source = digest.AtomEntry(
+            arxiv_id="2608.12345v1",
+            title="Cross-listed rates research",
+            authors=("Researcher One",),
+            submitted_at=datetime(2026, 8, 28, 8, 0, tzinfo=UTC),
+            updated_at=datetime(2026, 8, 28, 9, 0, tzinfo=UTC),
+            categories=("cs.AI", "econ.GN", "q-fin.TR"),
+            abstract="Market microstructure research.",
+        )
+
+        metadata = pipeline.metadata_from_entry(source)
+
+        self.assertEqual(metadata["categories"], ["cs.AI", "econ.GN", "q-fin.TR"])
+
+    def test_metadata_rejects_non_category_values_and_duplicates(self):
+        valid = pipeline.metadata_from_entry(entry("2608.12345"))
+        for categories in (
+            ["https://example.com"],
+            ["example.com"],
+            ["cs.example.com"],
+            ["q-fin.TR", "Q-FIN.tr"],
+            [],
+        ):
+            with self.subTest(categories=categories):
+                invalid = {**valid, "categories": categories}
+                with self.assertRaises(pipeline.StructuredOutputError):
+                    pipeline.validate_metadata(invalid)
+
 
 class RecordingResponses:
     def __init__(self, outputs):

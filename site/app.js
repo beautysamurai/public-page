@@ -561,7 +561,7 @@
 
   function appendInline(parent, value) {
     var text = stripRawHtml(value);
-    var pattern = /\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)\s]+)\)|(https:\/\/arxiv\.org\/(?:abs|pdf)\/[A-Za-z0-9.\/-]+(?:\.pdf)?)/gi;
+    var pattern = /\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)\s]+)\)|(?<![\\$])\$([^$\n]+)\$(?!\$)|(https:\/\/arxiv\.org\/(?:abs|pdf)\/[A-Za-z0-9.\/-]+(?:\.pdf)?)/gi;
     var cursor = 0;
     var match;
 
@@ -574,9 +574,12 @@
       } else if (match[2] !== undefined) {
         var markdownLink = sourceLink(match[3], match[2]);
         parent.appendChild(markdownLink || document.createTextNode(match[2]));
+      } else if (match[4] !== undefined) {
+        var inlineMath = window.RatesTexMath && window.RatesTexMath.render(match[4], false, document);
+        parent.appendChild(inlineMath || createNode("code", "source-tex-fallback", match[4]));
       } else {
-        var bareLink = sourceLink(match[4], match[4]);
-        parent.appendChild(bareLink || document.createTextNode(match[4]));
+        var bareLink = sourceLink(match[5], match[5]);
+        parent.appendChild(bareLink || document.createTextNode(match[5]));
       }
       cursor = pattern.lastIndex;
     }
@@ -584,6 +587,13 @@
   }
 
   function appendSourcePre(parent, value, equation) {
+    if (equation) {
+      var math = window.RatesTexMath && window.RatesTexMath.render(value, true, document);
+      if (math) {
+        parent.appendChild(math);
+        return;
+      }
+    }
     var pre = createNode("pre", equation ? "source-pre source-equation" : "source-pre");
     if (equation) pre.setAttribute("aria-label", t("equation"));
     pre.appendChild(createNode("code", "", value));

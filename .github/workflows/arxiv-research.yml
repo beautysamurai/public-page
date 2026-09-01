@@ -118,6 +118,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin main
           if git ls-remote --exit-code --heads origin "$AUTOMATION_BRANCH" >/dev/null 2>&1; then
             git fetch origin "$AUTOMATION_BRANCH"

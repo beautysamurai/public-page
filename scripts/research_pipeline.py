@@ -99,6 +99,12 @@ MONTHLY = "monthly"
 REPORT_KINDS = frozenset({DAILY, WEEKLY, MONTHLY})
 LISTING_TYPES = frozenset({"new", "cross", "replacement"})
 INCLUDED_LISTING_TYPES = frozenset({"new", "cross"})
+ARXIV_METADATA_CATEGORY_RE = re.compile(
+    r"(?:astro-ph|cond-mat|cs|econ|eess|math|nlin|physics|q-bio|q-fin|stat)"
+    r"\.[A-Za-z0-9-]+"
+    r"|(?:astro-ph|gr-qc|hep-ex|hep-lat|hep-ph|hep-th|math-ph|nucl-ex|"
+    r"nucl-th|quant-ph)"
+)
 
 DEFAULT_CATEGORIES = (
     "q-fin.TR",
@@ -585,15 +591,25 @@ def validate_metadata(value: Mapping[str, Any]) -> None:
         raise StructuredOutputError(
             "metadata.updatedDate cannot precede metadata.submittedDate"
         )
-    _validate_string_list(
-        value["categories"],
-        "metadata.categories",
-        min_items=1,
-        max_items=50,
-        max_string=120,
-        unique=True,
-        english_only=True,
-    )
+    categories = value["categories"]
+    if not isinstance(categories, list) or not 1 <= len(categories) <= 50:
+        raise StructuredOutputError(
+            "metadata.categories must be a non-empty bounded list"
+        )
+    seen_categories: set[str] = set()
+    for category in categories:
+        if (
+            not isinstance(category, str)
+            or len(category) > 120
+            or not ARXIV_METADATA_CATEGORY_RE.fullmatch(category)
+        ):
+            raise StructuredOutputError(
+                "metadata.categories contains an invalid arXiv category"
+            )
+        key = category.casefold()
+        if key in seen_categories:
+            raise StructuredOutputError("metadata.categories contains duplicates")
+        seen_categories.add(key)
 
 
 def validate_paper(value: Mapping[str, Any]) -> None:

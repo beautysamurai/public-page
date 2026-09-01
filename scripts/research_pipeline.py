@@ -469,6 +469,12 @@ def _require_exact_keys(
 def _validate_nonempty_string(value: object, field: str, limit: int = 20_000) -> None:
     if not isinstance(value, str) or not value.strip() or len(value) > limit:
         raise StructuredOutputError(f"{field} must be a non-empty string")
+    if value != value.strip() or any(
+        line != line.strip() for line in value.splitlines()
+    ):
+        raise StructuredOutputError(
+            f"{field} must not have leading or trailing whitespace"
+        )
     if any(ord(character) < 9 for character in value):
         raise StructuredOutputError(f"{field} contains control characters")
     if any(

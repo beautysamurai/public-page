@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-08-28-daily-openai-01",
+  "editionDate": "2026-08-28",
+  "editionKind": "daily",
+  "sourceKind": "openai-responses-api",
+  "sourceLabel": "OpenAI Responses API · automated research pipeline",
+  "importedAt": "2026-09-01T11:55:59Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXivの更新を確認し、対象論文を評価しました。",
+  "expectedBatchDate": "2026-08-28",
+  "observedBatchDate": "2026-08-28",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年8月28日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n## 1. Tabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal Generation\n\n[arXiv:2608.27076v1](https://arxiv.org/abs/2608.27076v1)\n\n**重要度: 5/5 — 推奨**\n\n### 分類\n\nelectronic\\_trading\n\n### 要約\n\n米国大型株約300銘柄の日次クロスセクション予測で、複数市場レジームの取引成績を同時に最適化するBayesian optimisationを検証したMSc研究である。XGBoost、MLP、TabNet、FT-Transformer等を比較し、XGBoostとTabNetのrank aggregation ensembleを提示する。\n\n### 手法\n\n2015～2024年を学習・検証、2025年をOOSとし、2022～2024年のexpanding-window 3 foldで30 trial/modelのTPE Bayesian optimisationを行う。翌日リターンのクロスセクション上位・下位10%をLong/Short classとし、各日5～8銘柄ずつのドル中立・日次リバランスportfolioを構築する。目的関数はfold平均の年率リターン、Sharpe、drawdownと、負のfold成績へのペナルティである。\n\n### 主な結果\n\n著者の2025年OOSバックテストでは、Hybrid ensembleは総収益51.26%、Sharpe 2.44、最大ドローダウン-7.76%で、CAPM年率alpha 0.423はp=0.011と報告された。XGBoostが最良の単体モデルであり、TabNetとFT-Transformerは単独ではXGBoostを上回らなかった。四半期別のLong/Short precisionは各々約23～26%で、外側decileの10%ランダム基準を上回ったとされる。\n\n### 実務への応用\n\n実務上は、予測精度ではなくコスト控除後のlong-short portfolio成績を目的に、複数レジームをまたぐwalk-forward validationとモデル間のsignal orthogonalityを用いる設計の参考になる。もっとも、終値執行近似、固定2.2bpコスト、短期借株料・availability・market impactの未反映により、提示収益をそのまま執行可能な期待収益として扱うべきではない。\n\n### 限界\n\nOOSは2025年の252営業日のみで統計的検出力が限定的であり、多数の試行・ensemble選択に対するDeflated Sharpe Ratioも未算出である。期末時点のS&P 500構成銘柄を使うためsurvivorship biasがあり、Bloomberg由来データは独立再現を難しくする。さらに、cross-regime最適化と同一条件のsingle-regime tuning比較がなく、その因果的優位は直接には示されていない。Gaussian noiseテストは実運用で起こる構造的な欠損・データ障害を十分に再現しない。\n\n### 推奨理由\n\n電子取引・株式シグナル生成に直接関係し、レジーム横断のportfolio目的hyperparameter tuningと異質モデルのensembleという実務的論点を具体化している。一方で、単年OOS、実行コストとshort constraintsの簡略化、survivorship bias、未査読のMSc研究という制約が大きく、手法アイデアとして参照しつつ独立した再検証が必要である。\n\n### タグ\n\nアルゴリズム取引・株式クロスセクション予測・Bayesian optimisation・レジーム頑健性・TabNet・XGBoost・アンサンブル・バックテスト",
+  "papers": [
+    {
+      "arxivId": "2608.27076v1",
+      "title": "Tabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal Generation",
+      "authors": [
+        "Joshua Le Grice"
+      ],
+      "submittedDate": "2026-08-27",
+      "updatedDate": "2026-08-27",
+      "topics": [
+        "Electronic trading"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.27076v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.27076v1",
+      "schedulerRank": 1,
+      "schedulerRating": 5,
+      "schedulerRatingScale": 5,
+      "schedulerLabel": "推奨・重要度 5/5",
+      "schedulerSummary": "米国大型株約300銘柄の日次クロスセクション予測で、複数市場レジームの取引成績を同時に最適化するBayesian optimisationを検証したMSc研究である。XGBoost、MLP、TabNet、FT-Transformer等を比較し、XGBoostとTabNetのrank aggregation ensembleを提示する。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 5,
+          "scale": 5
+        }
+      ]
+    }
+  ]
+}

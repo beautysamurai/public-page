@@ -1,0 +1,70 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "weekly",
+  "reportDate": "2026-08-28",
+  "generatedAt": "2026-09-01T12:28:04Z",
+  "status": "UPDATE_NOT_CONFIRMED",
+  "message": "Coverage is incomplete: 4 announcement date(s) had no stored daily report (2026-08-24, 2026-08-25, 2026-08-26, 2026-08-27); 1 completed paper review(s) were still reused.",
+  "expectedBatchDate": null,
+  "observedBatchDate": null,
+  "periodStart": "2026-08-22",
+  "periodEnd": "2026-08-28",
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2608.27076v1",
+        "title": "Tabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal Generation",
+        "authors": [
+          "Joshua Le Grice"
+        ],
+        "submittedDate": "2026-08-27",
+        "updatedDate": "2026-08-27",
+        "categories": [
+          "cs.LG",
+          "q-fin.CP",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "米国大型株約300銘柄の日次クロスセクション予測において、複数市場レジームの取引成績を同時に最適化するBayesian optimisationを検証したMSc研究である。XGBoost、MLP、TabNet、FT-Transformer等を比較し、XGBoostとTabNetのrank aggregation ensembleを提示する。",
+        "mainResult": "著者の2025年OOSバックテストでは、Hybrid ensembleは総収益51.26%、Sharpe 2.44、最大ドローダウン-7.76%、年率CAPM alpha 0.423（p=0.011）と報告された。単体ではXGBoostが最良で、TabNetとFT-TransformerはXGBoostを上回らなかった。",
+        "practicalApplication": "予測精度だけでなくコスト控除後のlong-short portfolio成績を目的に、複数レジームをまたぐwalk-forward validationとモデル間signal orthogonalityを用いる設計の参考となる。ただし、終値執行近似、固定2.2bpコスト、借株制約・market impactの未反映により、報告収益を実行可能な期待収益とみなすことはできない。",
+        "methodology": "2015～2024年を学習・検証、2025年をOOSとし、2022～2024年のexpanding-window 3 foldで各モデル30回のTPE Bayesian optimisationを実施する。翌日リターンの上位・下位10%をLong/Short classとし、各日5～8銘柄ずつのドル中立・日次リバランスportfolioを構築する。",
+        "limitations": "OOSは2025年の252営業日のみで統計的検出力が限られ、多数の試行・ensemble選択に対するDeflated Sharpe Ratioも示されない。期末時点のS&P 500構成銘柄によるsurvivorship bias、Bloombergデータによる再現性の制約がある。さらに、同条件のsingle-regime tuning比較がなく、cross-regime最適化の因果的優位は直接示されていない。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "電子取引に直接関係し、portfolio目的のhyperparameter tuningと異質モデルensembleという実務的論点を具体化している。一方、単年OOS、簡略化されたコスト・short制約、survivorship bias、未査読のMSc研究という重要な制約があり、手法アイデアとして独立検証を要する。",
+        "tags": [
+          "アルゴリズム取引",
+          "株式クロスセクション予測",
+          "Bayesian optimisation",
+          "レジーム頑健性",
+          "TabNet",
+          "XGBoost",
+          "アンサンブル",
+          "バックテスト"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This MSc study examines Bayesian optimisation that jointly targets trading performance across multiple market regimes for daily cross-sectional prediction of roughly 300 large-cap US equities. It compares XGBoost, MLP, TabNet, and FT-Transformer, among others, and presents a rank-aggregation ensemble of XGBoost and TabNet.",
+          "mainResult": "In the authors' 2025 OOS backtest, the Hybrid ensemble reportedly achieved a 51.26% total return, a 2.44 Sharpe ratio, a -7.76% maximum drawdown, and an annualized CAPM alpha of 0.423 (p=0.011). XGBoost was the strongest standalone model, while TabNet and FT-Transformer did not outperform it.",
+          "practicalApplication": "The work is a useful design reference for using walk-forward validation across multiple regimes and model-signal orthogonality, with cost-adjusted long-short portfolio performance rather than predictive accuracy as the objective. However, a closing-price execution proxy, fixed 2.2bp costs, and omitted borrow constraints and market impact mean the reported returns cannot be considered executable expected returns.",
+          "methodology": "The study uses 2015-2024 for training and validation and 2025 as OOS, applying 30 TPE Bayesian-optimisation trials per model over three expanding-window folds from 2022-2024. It defines the top and bottom 10% of next-day cross-sectional returns as Long and Short classes and builds a dollar-neutral, daily rebalanced portfolio with 5-8 stocks on each side.",
+          "limitations": "The OOS period contains only 252 trading days in 2025, limiting statistical power, and no Deflated Sharpe Ratio is provided for the many trials and ensemble selections. End-of-sample S&P 500 constituents introduce survivorship bias, while Bloomberg data constrain reproducibility. Moreover, no identically specified single-regime-tuning comparison is provided, so a causal advantage of cross-regime optimisation is not directly established.",
+          "reason": "The paper is directly relevant to electronic trading and makes practical issues of portfolio-objective hyperparameter tuning and heterogeneous-model ensembles concrete. However, the single-year OOS sample, simplified costs and short constraints, survivorship bias, and unreviewed MSc status are material limitations; the approach requires independent validation.",
+          "tags": [
+            "algorithmic trading",
+            "cross-sectional equity prediction",
+            "Bayesian optimisation",
+            "regime robustness",
+            "TabNet",
+            "XGBoost",
+            "ensemble",
+            "backtesting"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -239,6 +239,10 @@ class InterfaceLocaleContractTests(unittest.TestCase):
             self.index.index('<script src="./archive-ui.js" defer>'),
             self.index.index('<script src="./app.js" defer>'),
         )
+        self.assertLess(
+            self.index.index('<script src="./tex-math.js" defer>'),
+            self.index.index('<script src="./app.js" defer>'),
+        )
         for kind in ("all", "daily", "weekly", "monthly"):
             self.assertIn(f'data-archive-kind="{kind}"', self.index)
             self.assertIn(f'data-archive-count="{kind}"', self.index)
@@ -253,6 +257,20 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         self.assertIn('initialParams.get("archive-kind")', self.app)
         self.assertIn('initialParams.get("archive-from")', self.app)
         self.assertIn('initialParams.get("archive-to")', self.app)
+
+    def test_research_tex_uses_safe_native_mathml(self):
+        styles = STYLES_PATH.read_text(encoding="utf-8")
+        self.assertIn("window.RatesTexMath.render", self.app)
+        self.assertIn("documentRef.createElementNS", (ROOT / "site" / "tex-math.js").read_text(encoding="utf-8"))
+        self.assertNotIn("innerHTML", (ROOT / "site" / "tex-math.js").read_text(encoding="utf-8"))
+        for class_name in ("source-inline-math", "source-block-math"):
+            rules = re.findall(
+                rf"\.{class_name}\s*\{{(?P<body>[^}}]*)\}}",
+                styles,
+            )
+            self.assertTrue(rules)
+            for body in rules:
+                self.assertNotRegex(body, r"(?:^|;)\s*display\s*:")
         for key in ("archive-kind", "archive-from", "archive-to"):
             self.assertIn(f'url.searchParams.set("{key}"', self.app)
             self.assertIn(f'url.searchParams.delete("{key}")', self.app)

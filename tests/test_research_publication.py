@@ -150,7 +150,8 @@ class ResearchReportAdapterTests(unittest.TestCase):
         self.assertEqual(source["editionKind"], "daily")
         self.assertEqual(source["status"], "UPDATE_CONFIRMED")
         self.assertEqual(source["papers"][0]["schedulerRank"], 1)
-        self.assertEqual(source["papers"][0]["schedulerRating"], 4)
+        self.assertEqual(source["papers"][0]["schedulerRating"], 8)
+        self.assertEqual(source["papers"][0]["schedulerRatingScale"], 10)
         self.assertEqual(
             source["papers"][0]["absUrl"],
             "https://arxiv.org/abs/2608.27076v1",
@@ -163,21 +164,21 @@ class ResearchReportAdapterTests(unittest.TestCase):
             source["papers"][0]["topics"],
             ["Cross-disciplinary finance"],
         )
-        for heading in ("### 要約", "### 主な結果", "### 実務への応用", "### 限界"):
-            self.assertIn(heading, source["sourceText"])
-        self.assertIn("**重要度: 4/5 — 推奨**", source["sourceText"])
+        self.assertNotIn("### 要約", source["sourceText"])
+        self.assertNotIn("### 分類", source["sourceText"])
+        self.assertIn(
+            "**重要度: 8/10 — 推奨・電子取引**", source["sourceText"]
+        )
         self.assertIn("Robust Signals \\*Across\\* Regimes", source["sourceText"])
         self.assertIn(
             "[arXiv:2608.27076v1](https://arxiv.org/abs/2608.27076v1)",
             source["sourceText"],
         )
-        for heading in (
-            "### Summary",
-            "### Main result",
-            "### Practical application",
-            "### Limitations",
-        ):
-            self.assertIn(heading, english["sourceText"])
+        self.assertNotIn("### Summary", english["sourceText"])
+        self.assertIn(
+            "**Importance: 8/10 — Recommended · Electronic trading**",
+            english["sourceText"],
+        )
         self.assertEqual(
             english["papers"][0]["schedulerSummary"],
             completed_report()["papers"][0]["finalAnalysis"]["english"][
@@ -400,6 +401,23 @@ class ResearchReportAdapterTests(unittest.TestCase):
         for narrative in mixed_narratives.values():
             self.assertIn(narrative, adapted.source_edition["sourceText"])
 
+    def test_preserves_tex_in_public_markdown(self):
+        report = completed_report()
+        report["papers"][0]["finalAnalysis"]["methodology"] = (
+            r"指標 $A=\sum_t (p_t-\bar{p})r_t$ を推定します。"
+        )
+        report["papers"][0]["finalAnalysis"]["english"]["methodology"] = (
+            r"Estimates $A=\sum_t (p_t-\bar{p})r_t$."
+        )
+
+        adapted = publication.adapt_research_report(report)
+
+        self.assertIn(
+            r"$A=\sum_t (p_t-\bar{p})r_t$",
+            adapted.source_edition["sourceText"],
+        )
+        self.assertNotIn(r"\_t", adapted.source_edition["sourceText"])
+
     def test_rejects_unsafe_text_invalid_types_and_status_paper_mismatch(self):
         cases: list[tuple[str, dict]] = []
 
@@ -540,6 +558,99 @@ class ResearchPublicationPersistenceTests(unittest.TestCase):
             self.assertEqual(
                 (history_path.read_bytes(), translation_path.read_bytes()),
                 before,
+            )
+
+    def test_reconciliation_refreshes_only_managed_presentation_and_archive(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            history_path, translation_path = write_base_bundle(root)
+            report_dir = root / "research" / "daily"
+            report_dir.mkdir(parents=True)
+            report = completed_report()
+            (report_dir / "2026-08-29.json").write_text(
+                json.dumps(report, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            publication.publish_research_report(
+                report, history_path, translation_path
+            )
+
+            history = importer.load_history(history_path)
+            translation = bundle.load_translation(translation_path)
+            managed_source = history["editions"][-1]
+            managed_english = translation["editions"][-1]
+            managed_source["sourceText"] = "## Old segmented format\n\n### 要約"
+            managed_source["papers"][0]["schedulerRating"] = 4
+            managed_source["papers"][0]["schedulerRatingScale"] = 5
+            managed_source["papers"][0]["schedulerLabel"] = "推奨・重要度 4/5"
+            managed_source["papers"][0]["ratings"][0]["value"] = 4
+            managed_source["papers"][0]["ratings"][0]["scale"] = 5
+            managed_english["sourceText"] = "## Old segmented format\n\n### Summary"
+            managed_english["papers"][0]["schedulerLabel"] = (
+                "Recommended · Importance 4/5"
+            )
+            history_path.write_text(
+                json.dumps(history, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            translation_path.write_text(
+                json.dumps(translation, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            latest = root / "site" / "data" / "latest.json"
+            archive = root / "site" / "data" / "archive"
+            importer.persist_artifacts(
+                importer.generate_artifacts(history), latest, archive
+            )
+
+            result = publication.reconcile_daily_reports(
+                report_dir,
+                history_path,
+                translation_path,
+                regenerate_site=True,
+                latest_path=latest,
+                archive_dir=archive,
+            )
+
+            edition_id = "2026-08-29-daily-openai-01"
+            self.assertEqual(result.published_edition_ids, ())
+            self.assertEqual(result.refreshed_edition_ids, (edition_id,))
+            refreshed = importer.load_history(history_path)["editions"][-1]
+            self.assertEqual(refreshed["papers"][0]["schedulerRating"], 8)
+            self.assertEqual(refreshed["papers"][0]["schedulerRatingScale"], 10)
+            self.assertNotIn("### 要約", refreshed["sourceText"])
+            archived = json.loads((archive / f"{edition_id}.json").read_text())
+            self.assertEqual(archived["papers"][0]["schedulerRatingScale"], 10)
+
+    def test_reconciliation_refuses_managed_identity_change(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            history_path, translation_path = write_base_bundle(root)
+            report_dir = root / "research" / "daily"
+            report_dir.mkdir(parents=True)
+            report = completed_report()
+            (report_dir / "2026-08-29.json").write_text(
+                json.dumps(report, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            publication.publish_research_report(
+                report, history_path, translation_path
+            )
+            history = importer.load_history(history_path)
+            history["editions"][-1]["papers"][0]["title"] = "Changed identity"
+            history_path.write_text(
+                json.dumps(history, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            before = history_path.read_bytes(), translation_path.read_bytes()
+
+            with self.assertRaises(publication.PublicationConflictError):
+                publication.reconcile_daily_reports(
+                    report_dir, history_path, translation_path
+                )
+
+            self.assertEqual(
+                (history_path.read_bytes(), translation_path.read_bytes()), before
             )
 
     def test_append_is_valid_prefix_preserving_and_idempotent(self):
@@ -683,6 +794,51 @@ class ResearchPublicationPersistenceTests(unittest.TestCase):
             self.assertFalse(retry.changed)
             self.assertTrue(latest.is_file())
             self.assertIn(latest, retry.generated_paths)
+
+    def test_direct_publication_refreshes_managed_aggregate_presentation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            history_path, translation_path = write_base_bundle(root)
+            report = completed_report(kind="weekly")
+            publication.publish_research_report(
+                report, history_path, translation_path
+            )
+            history = importer.load_history(history_path)
+            translation = bundle.load_translation(translation_path)
+            history["editions"][-1]["sourceText"] = "## Old format\n\n### 要約"
+            history["editions"][-1]["papers"][0]["schedulerRating"] = 4
+            history["editions"][-1]["papers"][0]["schedulerRatingScale"] = 5
+            translation["editions"][-1]["sourceText"] = (
+                "## Old format\n\n### Summary"
+            )
+            history_path.write_text(
+                json.dumps(history, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            translation_path.write_text(
+                json.dumps(translation, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            latest = root / "site" / "data" / "latest.json"
+            archive = root / "site" / "data" / "archive"
+            importer.persist_artifacts(
+                importer.generate_artifacts(history), latest, archive
+            )
+
+            refreshed = publication.publish_research_report(
+                report,
+                history_path,
+                translation_path,
+                regenerate_site=True,
+                latest_path=latest,
+                archive_dir=archive,
+            )
+
+            self.assertTrue(refreshed.changed)
+            edition = importer.load_history(history_path)["editions"][-1]
+            self.assertEqual(edition["papers"][0]["schedulerRating"], 8)
+            self.assertEqual(edition["papers"][0]["schedulerRatingScale"], 10)
+            self.assertNotIn("### 要約", edition["sourceText"])
 
     def test_incomplete_report_is_never_committed(self):
         with tempfile.TemporaryDirectory() as temporary:

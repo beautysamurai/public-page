@@ -828,14 +828,25 @@ def persist_artifacts(
     artifacts: GeneratedArtifacts,
     output: Path,
     archive_dir: Path,
+    *,
+    refresh_archive_ids: Iterable[str] = (),
 ) -> list[Path]:
-    """Persist safely, treating existing dated archives as immutable."""
+    """Persist artifacts, with explicit opt-in for managed archive refreshes."""
 
     planned = _artifact_paths(artifacts, output, archive_dir)
+    refresh_names = {f"{edition_id}.json" for edition_id in refresh_archive_ids}
+    archive_names = {
+        path.name for path, _content, immutable in planned if immutable
+    }
+    unknown_refreshes = sorted(refresh_names - archive_names)
+    if unknown_refreshes:
+        raise HistoryImportError(
+            f"archive refresh targets are not generated editions: {unknown_refreshes}"
+        )
     # Preflight every immutable archive before any mutation. This prevents a
     # partial latest/index update when a historical edition conflicts.
     for path, expected, immutable in planned:
-        if not immutable:
+        if not immutable or path.name in refresh_names:
             continue
         try:
             existing = path.read_bytes()

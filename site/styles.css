@@ -496,6 +496,35 @@ button { color: inherit; }
   color: var(--acid);
 }
 
+.source-inline-math,
+.source-block-math {
+  color: var(--ink);
+  font-family: "STIX Two Math", "Latin Modern Math", "Cambria Math", var(--serif);
+}
+
+.source-inline-math {
+  margin-inline: .08em;
+  font-size: 1.04em;
+  math-style: compact;
+  vertical-align: -.08em;
+  white-space: nowrap;
+}
+
+.source-block-math {
+  max-width: 100%;
+  margin: 24px 0;
+  overflow-x: auto;
+  padding: 18px 20px;
+  border-left: 4px solid var(--acid);
+  background: var(--paper-deep);
+  font-size: 1.08rem;
+}
+
+.source-tex-fallback {
+  font-family: var(--mono);
+  font-size: .9em;
+}
+
 .paper-index-heading {
   margin: 52px 0 0;
   border-bottom: 1px solid var(--ink);

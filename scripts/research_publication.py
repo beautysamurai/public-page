@@ -5,8 +5,9 @@ Research reports are untrusted input.  This adapter accepts one exact report
 shape, maps only allowlisted fields, renders deterministic bilingual editorial
 text, and can reconcile every durable completed daily report.  It validates the
 complete candidate bundle before changing either public source file. Existing
-editions are immutable; repeating the exact same report is a no-op while reusing
-an edition ID for different content is an error.
+editions are immutable except for a narrowly checked presentation refresh of
+pipeline-managed editions; reusing an edition ID with different identity or
+summary content is an error.
 """
 
 from __future__ import annotations
@@ -144,6 +145,7 @@ MAX_DAILY_REPORT_FILES = 5_000
 DATE_RE = re.compile(r"\d{4}-\d{2}-\d{2}")
 WHITESPACE_RE = re.compile(r"\s+")
 MARKDOWN_ESCAPE_RE = re.compile(r"([\\`*_\[\]#!|])")
+TEX_MARKDOWN_RE = re.compile(r"(\$\$[^$]+\$\$|\$[^$\n]+\$)")
 ARXIV_METADATA_CATEGORY_RE = re.compile(
     r"(?:astro-ph|cond-mat|cs|econ|eess|math|nlin|physics|q-bio|q-fin|stat)"
     r"\.[A-Za-z0-9-]+"
@@ -250,6 +252,7 @@ class ReconciliationResult:
     report_count: int
     completed_count: int
     published_edition_ids: tuple[str, ...]
+    refreshed_edition_ids: tuple[str, ...]
     existing_edition_ids: tuple[str, ...]
     incomplete_count: int
     generated_paths: tuple[Path, ...] = ()
@@ -735,7 +738,12 @@ def _markdown_text(value: str) -> str:
     """Escape model-controlled Markdown and remove HTML-shaped angle brackets."""
 
     value = value.replace("<", "‹").replace(">", "›")
-    return MARKDOWN_ESCAPE_RE.sub(r"\\\1", value)
+    return "".join(
+        part
+        if TEX_MARKDOWN_RE.fullmatch(part)
+        else MARKDOWN_ESCAPE_RE.sub(r"\\\1", part)
+        for part in TEX_MARKDOWN_RE.split(value)
+    )
 
 
 def _ja_date(value: str) -> str:
@@ -782,63 +790,44 @@ def _render_source_text(
         metadata = paper["metadata"]
         analysis = paper["finalAnalysis"]
         localized = analysis["english"] if english else analysis
-        importance = analysis["importance"]
+        public_importance = analysis["importance"] * 2
         recommended = analysis["recommended"]
         recommendation = (
             ("Recommended" if recommended else "Not recommended")
             if english
             else ("推奨" if recommended else "非推奨")
         )
-        labels = (
-            (
-                ("Classification", "classification"),
-                ("Summary", "summary"),
-                ("Methodology", "methodology"),
-                ("Main result", "mainResult"),
-                ("Practical application", "practicalApplication"),
-                ("Limitations", "limitations"),
-                ("Recommendation rationale", "reason"),
-            )
-            if english
-            else (
-                ("分類", "classification"),
-                ("要約", "summary"),
-                ("手法", "methodology"),
-                ("主な結果", "mainResult"),
-                ("実務への応用", "practicalApplication"),
-                ("限界", "limitations"),
-                ("推奨理由", "reason"),
-            )
-        )
+        authors = ", ".join(_markdown_text(author) for author in metadata["authors"])
+        topic = _markdown_text(localized["tags"][0])
         parts.extend(
             [
                 "",
                 f"## {index}. {_markdown_text(metadata['title'])}",
                 "",
                 (
-                    f"[arXiv:{metadata['arxivId']}]"
-                    f"(https://arxiv.org/abs/{metadata['arxivId']})"
+                    f"**[arXiv:{metadata['arxivId']}]"
+                    f"(https://arxiv.org/abs/{metadata['arxivId']}) — {authors}**"
                 ),
                 "",
                 (
-                    f"**Importance: {importance}/5 — {recommendation}**"
+                    f"**Importance: {public_importance}/10 — {recommendation} · {topic}**"
                     if english
-                    else f"**重要度: {importance}/5 — {recommendation}**"
+                    else f"**重要度: {public_importance}/10 — {recommendation}・{topic}**"
                 ),
-            ]
-        )
-        for label, field in labels:
-            parts.extend(
-                ["", f"### {label}", "", _markdown_text(localized[field])]
-            )
-        tags_label = "Tags" if english else "タグ"
-        tag_separator = ", " if english else "・"
-        parts.extend(
-            [
                 "",
-                f"### {tags_label}",
+                _markdown_text(localized["summary"]),
                 "",
-                tag_separator.join(_markdown_text(tag) for tag in localized["tags"]),
+                (
+                    f"{_markdown_text(localized['methodology'])} "
+                    f"{_markdown_text(localized['mainResult'])}"
+                ),
+                "",
+                (
+                    f"{_markdown_text(localized['practicalApplication'])} "
+                    f"{_markdown_text(localized['limitations'])}"
+                ),
+                "",
+                _markdown_text(localized["reason"]),
             ]
         )
     return "\n".join(parts)
@@ -867,6 +856,7 @@ def adapt_research_report(value: object) -> AdaptedPublication:
         recommended_en = (
             "Recommended" if analysis["recommended"] else "Not recommended"
         )
+        public_importance = analysis["importance"] * 2
         source_papers.append(
             {
                 "arxivId": arxiv_id,
@@ -878,17 +868,17 @@ def adapt_research_report(value: object) -> AdaptedPublication:
                 "absUrl": f"https://arxiv.org/abs/{arxiv_id}",
                 "pdfUrl": f"https://arxiv.org/pdf/{arxiv_id}",
                 "schedulerRank": rank,
-                "schedulerRating": analysis["importance"],
-                "schedulerRatingScale": 5,
+                "schedulerRating": public_importance,
+                "schedulerRatingScale": 10,
                 "schedulerLabel": (
-                    f"{recommended_ja}・重要度 {analysis['importance']}/5"
+                    f"{recommended_ja}・重要度 {public_importance}/10"
                 ),
                 "schedulerSummary": analysis["summary"],
                 "ratings": [
                     {
                         "label": "重要度",
-                        "value": analysis["importance"],
-                        "scale": 5,
+                        "value": public_importance,
+                        "scale": 10,
                     }
                 ],
             }
@@ -897,7 +887,7 @@ def adapt_research_report(value: object) -> AdaptedPublication:
             {
                 "arxivId": arxiv_id,
                 "schedulerLabel": (
-                    f"{recommended_en} · Importance {analysis['importance']}/5"
+                    f"{recommended_en} · Importance {public_importance}/10"
                 ),
                 "schedulerSummary": english_analysis["summary"],
                 "ratings": [{"label": "Importance"}],
@@ -1022,6 +1012,76 @@ def _edition_by_id(
     return None
 
 
+def _managed_edition_anchor(edition: Mapping[str, Any]) -> dict[str, Any]:
+    """Return identity/provenance fields that a presentation refresh cannot alter."""
+
+    return {
+        field: edition[field]
+        for field in (
+            "editionId",
+            "editionDate",
+            "editionKind",
+            "sourceKind",
+            "sourceLabel",
+            "importedAt",
+            "status",
+            "message",
+            "expectedBatchDate",
+            "observedBatchDate",
+            "periodStart",
+            "periodEnd",
+        )
+    } | {
+        "papers": [
+            {
+                field: paper[field]
+                for field in (
+                    "arxivId",
+                    "title",
+                    "authors",
+                    "submittedDate",
+                    "updatedDate",
+                    "topics",
+                    "absUrl",
+                    "pdfUrl",
+                    "schedulerRank",
+                    "schedulerSummary",
+                )
+            }
+            for paper in edition["papers"]
+        ]
+    }
+
+
+def _validate_bundle_alignment(
+    history: Mapping[str, Any], translation: Mapping[str, Any]
+) -> None:
+    source_editions = history["editions"]
+    english_editions = translation["editions"]
+    source_ids = [edition["editionId"] for edition in source_editions]
+    english_ids = [edition["editionId"] for edition in english_editions]
+    if source_ids != english_ids:
+        raise PublicationConflictError(
+            "English overlay edition order/identity must match source history"
+        )
+    for source, english in zip(source_editions, english_editions, strict=True):
+        source_papers = source["papers"]
+        english_papers = english["papers"]
+        if [paper["arxivId"] for paper in source_papers] != [
+            paper["arxivId"] for paper in english_papers
+        ]:
+            raise PublicationConflictError(
+                f"English paper identity mismatch in {source['editionId']}"
+            )
+        for source_paper, english_paper in zip(
+            source_papers, english_papers, strict=True
+        ):
+            if len(source_paper["ratings"]) != len(english_paper["ratings"]):
+                raise PublicationConflictError(
+                    f"English rating-label count mismatch in {source['editionId']}"
+                )
+
+
 def publish_research_report(
     report: object,
     history_path: Path,
@@ -1061,21 +1121,75 @@ def publish_research_report(
                 f"edition {edition_id!r} exists in only one public source"
             )
         if (
-            dict(source_existing) != publication.source_edition
-            or dict(english_existing) != publication.english_edition
+            dict(source_existing) == publication.source_edition
+            and dict(english_existing) == publication.english_edition
+        ):
+            generated_paths: tuple[Path, ...] = ()
+            if regenerate_site:
+                artifacts = generate_artifacts(current_history)
+                generated_paths = tuple(
+                    persist_artifacts(artifacts, latest_path, archive_dir)
+                )
+            return PublicationResult(
+                edition_id=edition_id,
+                changed=False,
+                generated_paths=generated_paths,
+            )
+        if (
+            source_existing["sourceKind"] != SOURCE_KIND
+            or _managed_edition_anchor(source_existing)
+            != _managed_edition_anchor(publication.source_edition)
+            or [paper["schedulerSummary"] for paper in english_existing["papers"]]
+            != [
+                paper["schedulerSummary"]
+                for paper in publication.english_edition["papers"]
+            ]
         ):
             raise PublicationConflictError(
                 f"refusing conflicting content for immutable edition {edition_id!r}"
             )
+        _validate_bundle_alignment(current_history, current_translation)
+        candidate_history = deepcopy(current_history)
+        candidate_translation = deepcopy(current_translation)
+        source_index = next(
+            index
+            for index, edition in enumerate(candidate_history["editions"])
+            if edition["editionId"] == edition_id
+        )
+        english_index = next(
+            index
+            for index, edition in enumerate(candidate_translation["editions"])
+            if edition["editionId"] == edition_id
+        )
+        candidate_history["editions"][source_index] = publication.source_edition
+        candidate_translation["editions"][english_index] = (
+            publication.english_edition
+        )
+        candidate_history = validate_history(candidate_history)
+        candidate_translation = validate_translation(candidate_translation)
+        _validate_bundle_alignment(candidate_history, candidate_translation)
+        _replace_pair_atomically(
+            history_path,
+            _json_bytes(candidate_history),
+            history_original,
+            translation_path,
+            _json_bytes(candidate_translation),
+            translation_original,
+        )
         generated_paths: tuple[Path, ...] = ()
         if regenerate_site:
-            artifacts = generate_artifacts(current_history)
+            artifacts = generate_artifacts(candidate_history)
             generated_paths = tuple(
-                persist_artifacts(artifacts, latest_path, archive_dir)
+                persist_artifacts(
+                    artifacts,
+                    latest_path,
+                    archive_dir,
+                    refresh_archive_ids=(edition_id,),
+                )
             )
         return PublicationResult(
             edition_id=edition_id,
-            changed=False,
+            changed=True,
             generated_paths=generated_paths,
         )
 
@@ -1172,6 +1286,8 @@ def reconcile_daily_reports(
         completed_reports.append(report)
 
     try:
+        history_original = history_path.read_bytes()
+        translation_original = translation_path.read_bytes()
         current_history = load_history(history_path)
         current_translation = load_translation(translation_path)
     except OSError as exc:
@@ -1179,14 +1295,19 @@ def reconcile_daily_reports(
             "both existing public source files must be readable"
         ) from exc
 
-    source_editions = {
-        edition["editionId"]: edition for edition in current_history["editions"]
+    _validate_bundle_alignment(current_history, current_translation)
+    candidate_history = deepcopy(current_history)
+    candidate_translation = deepcopy(current_translation)
+    source_indexes = {
+        edition["editionId"]: index
+        for index, edition in enumerate(candidate_history["editions"])
     }
-    english_editions = {
-        edition["editionId"]: edition
-        for edition in current_translation["editions"]
+    english_indexes = {
+        edition["editionId"]: index
+        for index, edition in enumerate(candidate_translation["editions"])
     }
-    pending: list[tuple[dict[str, Any], AdaptedPublication]] = []
+    published_ids: list[str] = []
+    refreshed_ids: list[str] = []
     existing_ids: list[str] = []
     seen_ids: set[str] = set()
     for report in completed_reports:
@@ -1197,63 +1318,93 @@ def reconcile_daily_reports(
                 f"daily reports contain duplicate edition {edition_id!r}"
             )
         seen_ids.add(edition_id)
-        source_existing = source_editions.get(edition_id)
-        english_existing = english_editions.get(edition_id)
-        if source_existing is None and english_existing is None:
-            pending.append((report, adapted))
+        source_index = source_indexes.get(edition_id)
+        english_index = english_indexes.get(edition_id)
+        if source_index is None and english_index is None:
+            source_indexes[edition_id] = len(candidate_history["editions"])
+            english_indexes[edition_id] = len(candidate_translation["editions"])
+            candidate_history["editions"].append(adapted.source_edition)
+            candidate_translation["editions"].append(adapted.english_edition)
+            published_ids.append(edition_id)
             continue
-        if source_existing is None or english_existing is None:
+        if source_index is None or english_index is None:
             raise PublicationConflictError(
                 f"edition {edition_id!r} exists in only one public source"
             )
+        source_existing = candidate_history["editions"][source_index]
+        english_existing = candidate_translation["editions"][english_index]
         if (
-            dict(source_existing) != adapted.source_edition
-            or dict(english_existing) != adapted.english_edition
+            dict(source_existing) == adapted.source_edition
+            and dict(english_existing) == adapted.english_edition
+        ):
+            existing_ids.append(edition_id)
+            continue
+        if (
+            source_existing["sourceKind"] != SOURCE_KIND
+            or _managed_edition_anchor(source_existing)
+            != _managed_edition_anchor(adapted.source_edition)
+            or [paper["schedulerSummary"] for paper in english_existing["papers"]]
+            != [
+                paper["schedulerSummary"]
+                for paper in adapted.english_edition["papers"]
+            ]
         ):
             raise PublicationConflictError(
                 f"refusing conflicting content for immutable edition {edition_id!r}"
             )
-        existing_ids.append(edition_id)
+        candidate_history["editions"][source_index] = adapted.source_edition
+        candidate_translation["editions"][english_index] = adapted.english_edition
+        refreshed_ids.append(edition_id)
 
-    if pending:
-        candidate_history = deepcopy(current_history)
-        candidate_translation = deepcopy(current_translation)
-        for _report, adapted in pending:
-            candidate_history["editions"].append(adapted.source_edition)
-            candidate_translation["editions"].append(adapted.english_edition)
-        candidate_history = validate_history(candidate_history)
-        candidate_translation = validate_translation(candidate_translation)
+    candidate_history = validate_history(candidate_history)
+    candidate_translation = validate_translation(candidate_translation)
+    _validate_bundle_alignment(candidate_history, candidate_translation)
+    if published_ids and not refreshed_ids:
         validate_bundle(
             current_history,
             current_translation,
             candidate_history,
             candidate_translation,
         )
-
-    published_ids: list[str] = []
-    for report, adapted in pending:
-        result = publish_research_report(
-            report,
-            history_path,
-            translation_path,
-        )
-        if not result.changed:
+    elif refreshed_ids:
+        current_source_ids = [
+            edition["editionId"] for edition in current_history["editions"]
+        ]
+        candidate_source_ids = [
+            edition["editionId"] for edition in candidate_history["editions"]
+        ]
+        if candidate_source_ids[: len(current_source_ids)] != current_source_ids:
             raise PublicationConflictError(
-                f"edition {result.edition_id!r} changed during reconciliation"
+                "managed presentation refresh cannot remove or reorder editions"
             )
-        published_ids.append(adapted.source_edition["editionId"])
+
+    if published_ids or refreshed_ids:
+        _replace_pair_atomically(
+            history_path,
+            _json_bytes(candidate_history),
+            history_original,
+            translation_path,
+            _json_bytes(candidate_translation),
+            translation_original,
+        )
 
     generated_paths: tuple[Path, ...] = ()
     if regenerate_site:
         final_history = load_history(history_path)
         artifacts = generate_artifacts(final_history)
         generated_paths = tuple(
-            persist_artifacts(artifacts, latest_path, archive_dir)
+            persist_artifacts(
+                artifacts,
+                latest_path,
+                archive_dir,
+                refresh_archive_ids=refreshed_ids,
+            )
         )
     return ReconciliationResult(
         report_count=len(report_paths),
         completed_count=len(completed_reports),
         published_edition_ids=tuple(published_ids),
+        refreshed_edition_ids=tuple(refreshed_ids),
         existing_edition_ids=tuple(existing_ids),
         incomplete_count=incomplete_count,
         generated_paths=generated_paths,
@@ -1331,6 +1482,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(
             f"reconciled {reconciliation.report_count} daily report(s): "
             f"published {len(reconciliation.published_edition_ids)}, "
+            f"refreshed {len(reconciliation.refreshed_edition_ids)}, "
             f"already published {len(reconciliation.existing_edition_ids)}, "
             f"incomplete {reconciliation.incomplete_count}"
         )

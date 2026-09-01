@@ -551,7 +551,21 @@ class PersistenceTests(unittest.TestCase):
         markdown = pipeline.report_to_markdown(self.completed_report())
 
         self.assertIn("- **arXiv:**", markdown)
+        self.assertIn("- **Importance:** 8/10", markdown)
         self.assertTrue(all(line == line.rstrip() for line in markdown.splitlines()))
+
+    def test_generated_markdown_preserves_tex_delimiters_and_commands(self):
+        report = self.completed_report()
+        formula = r"$A=\sum_t (p_t-\bar{p})r_t$"
+        report["papers"][0]["finalAnalysis"]["methodology"] = (
+            f"この指標 {formula} を使います。"
+        )
+
+        markdown = pipeline.report_to_markdown(report)
+
+        self.assertIn(formula, markdown)
+        self.assertNotIn(r"\_t", markdown)
+        self.assertNotIn(r"\\sum", markdown)
 
     def test_initial_pair_failure_rolls_back_and_retry_writes_both_files(self):
         report = self.completed_report()

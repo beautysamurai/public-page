@@ -466,6 +466,21 @@ class ResponsesAdapterTests(unittest.TestCase):
                 ):
                     pipeline.validate_analysis(bad)
 
+    def test_model_narratives_reject_line_edge_whitespace(self):
+        for unsafe in (
+            " 日本語の要約です。",
+            "日本語の要約です。 ",
+            "日本語の要約です。 \n二行目です。",
+        ):
+            bad = analysis()
+            bad["summary"] = unsafe
+            with self.subTest(unsafe=unsafe):
+                with self.assertRaisesRegex(
+                    pipeline.StructuredOutputError,
+                    "summary must not have leading or trailing whitespace",
+                ):
+                    pipeline.validate_analysis(bad)
+
     def test_client_initialization_error_is_sanitized(self):
         sensitive_detail = "malformed OPENAI_API_KEY sk-private-value"
 

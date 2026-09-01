@@ -1803,12 +1803,14 @@ def persist_report(report: Mapping[str, Any], output_dir: Path) -> dict[str, Any
         existing = _read_persisted_report(json_path)
         pending = {UPDATE_NOT_CONFIRMED, UPDATER_OFFLINE}
         completed = {UPDATE_CONFIRMED, NO_RELEVANT_PAPERS, NO_NEW_BATCH_EXPECTED}
-        existing_ids = [
-            paper["metadata"]["arxivId"] for paper in existing["papers"]
-        ]
-        incoming_ids = [
-            paper["metadata"]["arxivId"] for paper in report["papers"]
-        ]
+        existing_ids = {
+            paper["metadata"]["arxivId"].casefold()
+            for paper in existing["papers"]
+        }
+        incoming_ids = {
+            paper["metadata"]["arxivId"].casefold()
+            for paper in report["papers"]
+        }
         refresh_pending_aggregate = (
             existing["reportKind"] in {WEEKLY, MONTHLY}
             and existing["status"] in pending

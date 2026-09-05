@@ -258,6 +258,14 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         self.assertIn('initialParams.get("archive-from")', self.app)
         self.assertIn('initialParams.get("archive-to")', self.app)
 
+    def test_shared_archive_link_scrolls_after_async_content_has_settled(self):
+        self.assertIn('var initialHash = window.location.hash;', self.app)
+        wait = self.app.index('await Promise.all([archivePromise, cataloguePromise]);')
+        scroll = self.app.index('section.scrollIntoView({ block: "start", behavior: "instant" })')
+        self.assertGreater(scroll, wait)
+        self.assertGreater(wait, self.app.rindex('renderReport(report, archived)'))
+        self.assertIn('window.location.hash === initialHash', self.app)
+
     def test_research_tex_uses_safe_native_mathml(self):
         styles = STYLES_PATH.read_text(encoding="utf-8")
         self.assertIn("window.RatesTexMath.render", self.app)

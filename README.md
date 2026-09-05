@@ -351,8 +351,15 @@ failure. The default daily target is the latest expected announcement batch,
 not the oldest unfinished date. Old incomplete JSON/checkpoints are left intact
 and never marked complete just because a newer review succeeded. Their missing
 coverage remains visible in weekly/monthly reports. Historical recovery requires
-an explicit local `daily --recover-pending` request (within arXiv's bounded
-past-week coverage); the scheduled workflow never enables it. After a new batch
+an explicit local `daily --recover-pending` request, or a manual GitHub Actions
+daily dispatch with `recover_pending=true` (within arXiv's bounded past-week
+coverage). Each recovery dispatch processes one oldest pending batch and resumes
+its saved stages. Dispatch sequentially and verify the returned report date and
+completion before proceeding to the next date; do not run a normal daily job
+between recovery dispatches because that intentionally resets the pending cursor
+to the newest batch. Stop after the requested dates are complete. The recovery
+flag defaults to false and is rejected for schedules and weekly/monthly runs;
+normal schedules never enable it. After a new batch
 is completed, `lastCompletedBatchDate` records that latest completion, not a
 claim that every intervening date was reviewed.
 

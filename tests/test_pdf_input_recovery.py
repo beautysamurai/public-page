@@ -45,6 +45,7 @@ class PdfInputRecoveryTests(unittest.TestCase):
         self.assertIn("category=file_url_download", stderr.getvalue())
 
     def test_other_errors_never_trigger_inline_retry(self):
+        self.assertTrue(p._file_url_download_error(self.error(400, "Error while downloading https://arxiv.org/pdf/2608.12345v1")))
         for status, message in [(429, "rate limit"), (401, "unauthorized"), (400, "context too long"), (500, "download file URL"), (None, "timeout")]:
             with self.subTest(status=status):
                 responses = SimpleNamespace(create=mock.Mock(side_effect=self.error(status, message)))

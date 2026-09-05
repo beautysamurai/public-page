@@ -1128,7 +1128,9 @@ def _file_url_download_error(exc: Exception) -> bool:
     if not isinstance(error, Mapping):
         return False
     message = str(error.get("message", "")).lower()
-    return ("download" in message or "fetch" in message) and ("file" in message or "url" in message)
+    return ("download" in message or "fetch" in message) and (
+        "file" in message or "url" in message or "https://arxiv.org/pdf/" in message
+    )
 
 
 def fetch_pdf_for_inline_input(arxiv_id: str, *, timeout: float) -> bytes:

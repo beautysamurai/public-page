@@ -1294,3 +1294,30 @@ button { color: inherit; }
 .personal-message:empty { margin: 0; }
 .personal-saved-filter { display: flex; align-items: center; gap: .5rem; font-size: .9375rem; margin-top: 1rem; }
 .personal-saved-filter input { width: 1.2rem; height: 1.2rem; accent-color: #174842; }
+
+/* Compact, opt-in tools above the review; never part of the sticky header. */
+.research-tools { padding: 1rem 0; border-bottom: 1px solid var(--line); background: var(--paper-bright); }
+.research-tools-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: start; gap: 1rem; }
+.research-tools details { min-width: 0; margin: 0; padding: 0; border: 1px solid #b8c7c2; border-radius: .5rem; background: #f1f5f2; }
+.research-tools details > summary { padding: .9rem 1.1rem; font-size: 1rem; font-weight: 700; cursor: pointer; overflow-wrap: anywhere; }
+.research-tools details > summary::marker { color: var(--mint-dark); }
+.research-tools details[open] > summary { border-bottom: 1px solid #b8c7c2; }
+.research-tools .personal-library > :not(summary) { margin-left: 1.1rem; margin-right: 1.1rem; }
+.research-tools .archive-controls { margin: 0; padding: 1.1rem; border: 0; background: transparent; box-shadow: none; }
+.research-tools .digest-toolbar { display: flex; flex-direction: column; align-items: stretch; margin: 0; padding: 1.1rem; gap: 1rem; border-top: 1px solid #b8c7c2; }
+.research-tools .archive-filter-footer { flex-wrap: wrap; }
+.research-tools .archive-control-label, .research-tools .archive-paper-fields label,
+.research-tools .archive-date-fields label, .research-tools .archive-date-help,
+.research-tools .archive-view-options button, .research-tools .archive-kind-button,
+.research-tools .search-field > label, .research-tools .filter-field > span,
+.research-tools .archive-clear, .archive-results-toolbar .archive-clear { font-size: .875rem; }
+.research-tools input, .research-tools select { font-size: 1rem; }
+.tools-results-link { font-size: .9375rem; font-weight: 700; color: var(--mint-dark); text-underline-offset: 4px; }
+.archive-results-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem; margin-bottom: 1rem; }
+.archive-results-toolbar .archive-results { margin: 0; }
+@media (max-width: 800px) {
+  .research-tools-grid { grid-template-columns: minmax(0, 1fr); gap: .65rem; }
+}
+@media (max-width: 540px) {
+  .research-tools .archive-paper-fields { grid-template-columns: minmax(0, 1fr); }
+}

@@ -53,6 +53,98 @@
       </div>
     </header>
     <main>
+      <section class="research-tools" id="research-tools" aria-label="検索とマイライブラリ" data-i18n-aria-label="tools.label">
+        <div class="shell research-tools-grid">
+          <details class="research-filters" id="research-filters">
+            <summary id="research-filters-summary" data-i18n="tools.filtersTitle">検索・フィルター · 日付 / 評価 / タグ</summary>
+            <div class="archive-controls" data-i18n-aria-label="archive.filterAria" aria-label="アーカイブを絞り込む">
+              <div class="archive-view-options" role="group" data-i18n-aria-label="archive.viewLabel" aria-label="探し方">
+                <button type="button" data-archive-view="editions" aria-pressed="true" data-i18n="archive.viewEditions">号から探す</button>
+                <button type="button" data-archive-view="papers" aria-pressed="false" data-i18n="archive.viewPapers">論文から探す · 評価 / タグ</button>
+              </div>
+              <div class="archive-paper-controls" id="archive-paper-controls" hidden>
+                <div class="archive-paper-fields">
+                  <label for="archive-rating"><span data-i18n="archive.ratingLabel">評価（10点満点）</span><select id="archive-rating">
+                    <option value="" data-i18n="archive.ratingAll">すべての評価</option>
+                  </select></label>
+                  <label for="archive-tag"><span data-i18n="archive.tagLabel">タグ</span><select id="archive-tag"><option value="" data-i18n="archive.tagAll">すべてのタグ</option></select></label>
+                  <label for="archive-sort"><span data-i18n="archive.sortLabel">並び順</span><select id="archive-sort">
+                    <option value="rating" data-i18n="archive.sortRating">評価の高い順</option>
+                    <option value="date" data-i18n="archive.sortDate">レビューの新しい順</option>
+                  </select></label>
+                  <label for="archive-search"><span data-i18n="archive.searchLabel">論文を検索</span><input id="archive-search" type="search" maxlength="180" data-i18n-placeholder="archive.searchPlaceholder" placeholder="タイトル・著者・arXiv ID"></label>
+                </div>
+                <p class="archive-date-help" data-i18n="archive.paperHelp">日付未指定なら全期間を検索。同じ論文は1件にまとめ、選択期間・種別内の最新レビューの評価とタグを使います。旧5点評価は10点に換算して比較します（再評価はしません）。</p>
+                <label class="personal-saved-filter"><input id="archive-saved-only" type="checkbox"><span data-i18n="personal.savedOnly">ブックマークのみ</span></label>
+              </div>
+              <div class="archive-kind-control">
+                <span class="archive-control-label" id="archive-kind-label" data-i18n="archive.kindLabel">レビュー種別</span>
+                <div class="archive-kind-options" role="group" aria-labelledby="archive-kind-label">
+                  <button class="archive-kind-button" type="button" data-archive-kind="all" aria-pressed="true"><span data-i18n="archive.kindAll">すべて</span><span class="archive-kind-count" data-archive-count="all">0</span></button>
+                  <button class="archive-kind-button" type="button" data-archive-kind="daily" aria-pressed="false"><span data-i18n="archive.kindDaily">日次</span><span class="archive-kind-count" data-archive-count="daily">0</span></button>
+                  <button class="archive-kind-button" type="button" data-archive-kind="weekly" aria-pressed="false"><span data-i18n="archive.kindWeekly">週次</span><span class="archive-kind-count" data-archive-count="weekly">0</span></button>
+                  <button class="archive-kind-button" type="button" data-archive-kind="monthly" aria-pressed="false"><span data-i18n="archive.kindMonthly">月次</span><span class="archive-kind-count" data-archive-count="monthly">0</span></button>
+                </div>
+              </div>
+              <div class="archive-date-control">
+                <span class="archive-control-label" id="archive-date-label" data-i18n="archive.dateLabel">号の日付</span>
+                <div class="archive-date-fields" role="group" aria-labelledby="archive-date-label">
+                  <label for="archive-from"><span data-i18n="archive.fromLabel">開始日</span><input id="archive-from" type="date" aria-describedby="archive-date-help"></label>
+                  <span class="archive-date-separator" aria-hidden="true">—</span>
+                  <label for="archive-to"><span data-i18n="archive.toLabel">終了日</span><input id="archive-to" type="date" aria-describedby="archive-date-help"></label>
+                </div>
+                <p class="archive-date-help" id="archive-date-help" data-i18n="archive.dateHelp">週次・月次は対象期間の終了日で絞り込みます。</p>
+              </div>
+              <div class="archive-filter-footer">
+                <a class="tools-results-link" id="archive-show-results" href="#archive" data-i18n="tools.viewResults">検索結果を見る ↓</a>
+                <button class="archive-clear" id="archive-clear" type="button" disabled data-i18n="archive.clear">条件をクリア</button>
+              </div>
+            </div>
+          <div class="digest-toolbar" id="digest-toolbar" hidden>
+            <div class="search-field">
+              <label for="paper-search" data-i18n="search.label">この号を検索</label>
+              <span class="search-box">
+                <span class="search-icon" aria-hidden="true"></span>
+                <input id="paper-search" type="search" placeholder="タイトル、著者、トピック…" data-i18n-placeholder="search.placeholder" autocomplete="off">
+              </span>
+            </div>
+            <div class="filter-field"><span id="filter-label" data-i18n="search.filter">分野で絞り込む</span><div class="topic-filters" id="topic-filters" role="group" aria-labelledby="filter-label"></div></div>
+            <a class="tools-results-link" id="digest-show-results" href="#paper-list" data-i18n="tools.viewIssueResults">この号の検索結果を見る ↓</a>
+          </div>
+          </details>
+            <details class="personal-library" id="personal-library">
+              <summary data-i18n="personal.title">マイライブラリ · 登録 / ログイン</summary>
+              <p class="personal-help" data-i18n="personal.intro">同じメールアドレスでログインすると、別の端末でも保存内容を使えます。閲覧だけならログイン不要です。</p>
+              <p id="personal-not-configured" data-i18n="personal.notConfigured">個人同期は準備中です。公開リサーチと検索はそのまま利用できます。</p>
+              <form id="personal-login" class="personal-form" hidden>
+                <label for="personal-email"><span data-i18n="personal.email">メールアドレス</span><input id="personal-email" type="email" autocomplete="email" maxlength="254" required></label>
+                <button id="personal-send" type="submit" data-i18n="personal.send">確認コードを送信</button>
+              </form>
+              <form id="personal-code-form" class="personal-form" hidden>
+                <label for="personal-token"><span data-i18n="personal.code">メールに届いた確認コード</span><input id="personal-token" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" maxlength="10" required disabled></label>
+                <button id="personal-verify" type="submit" disabled data-i18n="personal.verify">ログイン</button>
+              </form>
+              <div id="personal-account" hidden>
+                <p id="personal-identity" class="personal-identity"></p>
+                <div class="personal-actions">
+                  <button id="personal-show-saved" type="button" data-i18n="personal.showSaved">全期間のブックマークを表示</button>
+                  <button id="personal-refresh" type="button" data-i18n="personal.refresh">同期する</button>
+                  <button id="personal-export" type="button" data-i18n="personal.export">保存内容をダウンロード</button>
+                  <button id="personal-signout" type="button" data-i18n="personal.signout">ログアウト</button>
+                </div>
+                <form id="personal-preset-form" class="personal-form">
+                  <label for="personal-preset-name"><span data-i18n="personal.presetName">プリセット名</span><input id="personal-preset-name" type="text" maxlength="80" required></label>
+                  <button id="personal-preset-save" type="submit" data-i18n="personal.savePreset">現在の検索条件を保存</button>
+                </form>
+                <p class="personal-help" data-i18n="personal.presetHelp">評価・タグ・キーワード・日付・種別・並び順を保存します。日付を空欄にすると、今後の論文も含めて検索できます。</p>
+                <ul id="personal-presets" class="personal-presets"></ul>
+              </div>
+              <p id="personal-status" class="personal-help" role="status" aria-live="polite"></p>
+              <p id="personal-message" class="personal-message" role="status" aria-live="polite"></p>
+              <p class="personal-help" data-i18n="personal.privacy">ログイン時にメールアドレス、保存した論文ID・検索条件をSupabaseに送信します。ログイン状態はこのブラウザーに保存されます。共用端末では利用後にログアウトしてください。</p>
+            </details>
+        </div>
+      </section>
       <section class="hero" aria-labelledby="page-title">
         <div class="shell hero-content">
           <div class="eyebrow-row">
@@ -99,22 +191,12 @@
             <p class="section-kicker" data-i18n="papers.kicker">論文インデックス</p>
             <h3 data-i18n="papers.title">選定論文</h3>
           </div>
-          <div class="digest-toolbar" id="digest-toolbar" hidden>
-            <div class="search-field">
-              <label for="paper-search" data-i18n="search.label">この号を検索</label>
-              <span class="search-box">
-                <span class="search-icon" aria-hidden="true"></span>
-                <input id="paper-search" type="search" placeholder="タイトル、著者、トピック…" data-i18n-placeholder="search.placeholder" autocomplete="off">
-              </span>
-            </div>
-            <div class="filter-field"><span id="filter-label" data-i18n="search.filter">分野で絞り込む</span><div class="topic-filters" id="topic-filters" role="group" aria-labelledby="filter-label"></div></div>
-          </div>
           <div class="loading-state" id="loading-state" role="status"><span class="loading-line"></span><span class="loading-line"></span><span class="loading-line"></span></div>
           <div class="notice-state" id="notice-state" hidden>
             <span class="notice-index">00</span>
             <div><p class="section-kicker" data-i18n="notice.kicker">配信情報</p><h3 id="notice-title" data-i18n="notice.title">号を表示できません</h3><p id="notice-message" data-i18n="notice.message">最新のリサーチ概要を読み込めませんでした。</p></div>
           </div>
-          <ol class="paper-list" id="paper-list" aria-live="polite"></ol>
+          <ol class="paper-list" id="paper-list" tabindex="-1" aria-live="polite"></ol>
           <p class="no-results" id="no-results" hidden data-i18n="search.noResults">検索条件と分野に一致する論文はありません。</p>
         </div>
       </section>
@@ -130,83 +212,13 @@
       <section class="archive-section" id="archive" aria-labelledby="archive-title">
         <div class="shell archive-grid">
           <div class="archive-sticky">
-            <p class="section-kicker" data-i18n="archive.kicker">過去の号</p><h2 id="archive-title" data-i18n="archive.title">アーカイブ</h2>
+            <p class="section-kicker" data-i18n="archive.kicker">過去の号</p><h2 id="archive-title" tabindex="-1" data-i18n="archive.title">アーカイブ</h2>
             <p data-i18n="archive.body">号を日付でたどるほか、全期間の論文を評価・タグから探せます。保存済みレビューを使うため、追加の再評価は行いません。</p>
           </div>
           <div>
-            <details class="personal-library" id="personal-library">
-              <summary data-i18n="personal.title">マイライブラリ · ブックマーク / プリセット</summary>
-              <p class="personal-help" data-i18n="personal.intro">同じメールアドレスでログインすると、別の端末でも保存内容を使えます。閲覧だけならログイン不要です。</p>
-              <p id="personal-not-configured" data-i18n="personal.notConfigured">個人同期は準備中です。公開リサーチと検索はそのまま利用できます。</p>
-              <form id="personal-login" class="personal-form" hidden>
-                <label for="personal-email"><span data-i18n="personal.email">メールアドレス</span><input id="personal-email" type="email" autocomplete="email" maxlength="254" required></label>
-                <button id="personal-send" type="submit" data-i18n="personal.send">確認コードを送信</button>
-              </form>
-              <form id="personal-code-form" class="personal-form" hidden>
-                <label for="personal-token"><span data-i18n="personal.code">メールに届いた確認コード</span><input id="personal-token" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" maxlength="10" required disabled></label>
-                <button id="personal-verify" type="submit" disabled data-i18n="personal.verify">ログイン</button>
-              </form>
-              <div id="personal-account" hidden>
-                <p id="personal-identity" class="personal-identity"></p>
-                <div class="personal-actions">
-                  <button id="personal-show-saved" type="button" data-i18n="personal.showSaved">全期間のブックマークを表示</button>
-                  <button id="personal-refresh" type="button" data-i18n="personal.refresh">同期する</button>
-                  <button id="personal-export" type="button" data-i18n="personal.export">保存内容をダウンロード</button>
-                  <button id="personal-signout" type="button" data-i18n="personal.signout">ログアウト</button>
-                </div>
-                <form id="personal-preset-form" class="personal-form">
-                  <label for="personal-preset-name"><span data-i18n="personal.presetName">プリセット名</span><input id="personal-preset-name" type="text" maxlength="80" required></label>
-                  <button id="personal-preset-save" type="submit" data-i18n="personal.savePreset">現在の検索条件を保存</button>
-                </form>
-                <p class="personal-help" data-i18n="personal.presetHelp">評価・タグ・キーワード・日付・種別・並び順を保存します。日付を空欄にすると、今後の論文も含めて検索できます。</p>
-                <ul id="personal-presets" class="personal-presets"></ul>
-              </div>
-              <p id="personal-status" class="personal-help" role="status" aria-live="polite"></p>
-              <p id="personal-message" class="personal-message" role="status" aria-live="polite"></p>
-              <p class="personal-help" data-i18n="personal.privacy">ログイン時にメールアドレス、保存した論文ID・検索条件をSupabaseに送信します。ログイン状態はこのブラウザーに保存されます。共用端末では利用後にログアウトしてください。</p>
-            </details>
-            <div class="archive-controls" data-i18n-aria-label="archive.filterAria" aria-label="アーカイブを絞り込む">
-              <div class="archive-view-options" role="group" data-i18n-aria-label="archive.viewLabel" aria-label="探し方">
-                <button type="button" data-archive-view="editions" aria-pressed="true" data-i18n="archive.viewEditions">号から探す</button>
-                <button type="button" data-archive-view="papers" aria-pressed="false" data-i18n="archive.viewPapers">論文から探す · 評価 / タグ</button>
-              </div>
-              <div class="archive-paper-controls" id="archive-paper-controls" hidden>
-                <div class="archive-paper-fields">
-                  <label for="archive-rating"><span data-i18n="archive.ratingLabel">評価（10点満点）</span><select id="archive-rating">
-                    <option value="" data-i18n="archive.ratingAll">すべての評価</option>
-                  </select></label>
-                  <label for="archive-tag"><span data-i18n="archive.tagLabel">タグ</span><select id="archive-tag"><option value="" data-i18n="archive.tagAll">すべてのタグ</option></select></label>
-                  <label for="archive-sort"><span data-i18n="archive.sortLabel">並び順</span><select id="archive-sort">
-                    <option value="rating" data-i18n="archive.sortRating">評価の高い順</option>
-                    <option value="date" data-i18n="archive.sortDate">レビューの新しい順</option>
-                  </select></label>
-                  <label for="archive-search"><span data-i18n="archive.searchLabel">論文を検索</span><input id="archive-search" type="search" maxlength="180" data-i18n-placeholder="archive.searchPlaceholder" placeholder="タイトル・著者・arXiv ID"></label>
-                </div>
-                <p class="archive-date-help" data-i18n="archive.paperHelp">日付未指定なら全期間を検索。同じ論文は1件にまとめ、選択期間・種別内の最新レビューの評価とタグを使います。旧5点評価は10点に換算して比較します（再評価はしません）。</p>
-                <label class="personal-saved-filter"><input id="archive-saved-only" type="checkbox"><span data-i18n="personal.savedOnly">ブックマークのみ</span></label>
-              </div>
-              <div class="archive-kind-control">
-                <span class="archive-control-label" id="archive-kind-label" data-i18n="archive.kindLabel">レビュー種別</span>
-                <div class="archive-kind-options" role="group" aria-labelledby="archive-kind-label">
-                  <button class="archive-kind-button" type="button" data-archive-kind="all" aria-pressed="true"><span data-i18n="archive.kindAll">すべて</span><span class="archive-kind-count" data-archive-count="all">0</span></button>
-                  <button class="archive-kind-button" type="button" data-archive-kind="daily" aria-pressed="false"><span data-i18n="archive.kindDaily">日次</span><span class="archive-kind-count" data-archive-count="daily">0</span></button>
-                  <button class="archive-kind-button" type="button" data-archive-kind="weekly" aria-pressed="false"><span data-i18n="archive.kindWeekly">週次</span><span class="archive-kind-count" data-archive-count="weekly">0</span></button>
-                  <button class="archive-kind-button" type="button" data-archive-kind="monthly" aria-pressed="false"><span data-i18n="archive.kindMonthly">月次</span><span class="archive-kind-count" data-archive-count="monthly">0</span></button>
-                </div>
-              </div>
-              <div class="archive-date-control">
-                <span class="archive-control-label" id="archive-date-label" data-i18n="archive.dateLabel">号の日付</span>
-                <div class="archive-date-fields" role="group" aria-labelledby="archive-date-label">
-                  <label for="archive-from"><span data-i18n="archive.fromLabel">開始日</span><input id="archive-from" type="date" aria-describedby="archive-date-help"></label>
-                  <span class="archive-date-separator" aria-hidden="true">—</span>
-                  <label for="archive-to"><span data-i18n="archive.toLabel">終了日</span><input id="archive-to" type="date" aria-describedby="archive-date-help"></label>
-                </div>
-                <p class="archive-date-help" id="archive-date-help" data-i18n="archive.dateHelp">週次・月次は対象期間の終了日で絞り込みます。</p>
-              </div>
-              <div class="archive-filter-footer">
-                <p class="archive-results" id="archive-results" role="status" aria-live="polite"></p>
-                <button class="archive-clear" id="archive-clear" type="button" disabled data-i18n="archive.clear">条件をクリア</button>
-              </div>
+            <div class="archive-results-toolbar">
+              <p class="archive-results" id="archive-results" role="status" aria-live="polite"></p>
+              <button class="archive-clear" id="archive-edit-filters" type="button" data-i18n="tools.editFilters">検索条件を変更 ↑</button>
             </div>
             <div class="archive-list" id="archive-list" role="list"><p class="archive-loading" data-i18n="archive.loading">アーカイブを読み込んでいます…</p></div>
             <button class="button button-secondary" id="archive-more" type="button" hidden data-i18n="archive.more">さらに過去の号を表示</button>

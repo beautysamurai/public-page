@@ -3,7 +3,12 @@
 
   var copy = {
     ja: {
-      "personal.title": "マイライブラリ · ブックマーク / プリセット",
+      "personal.title": "マイライブラリ · 登録 / ログイン",
+      "tools.label": "検索とマイライブラリ",
+      "tools.filtersTitle": "検索・フィルター · 日付 / 評価 / タグ",
+      "tools.viewResults": "検索結果を見る ↓",
+      "tools.viewIssueResults": "この号の検索結果を見る ↓",
+      "tools.editFilters": "検索条件を変更 ↑",
       "personal.intro": "同じメールアドレスでログインすると、別の端末でも保存内容を使えます。閲覧だけならログイン不要です。",
       "personal.notConfigured": "個人同期は準備中です。公開リサーチと検索はそのまま利用できます。",
       "personal.configInvalid": "個人同期の接続設定を確認中です。公開リサーチと検索は利用できます。",
@@ -476,7 +481,12 @@
       "hjb.eqQuoteConclusion": "近似予約価格と最適総スプレッド",
     },
     en: {
-      "personal.title": "My library · Bookmarks / Presets",
+      "personal.title": "My library · Sign up / Sign in",
+      "tools.label": "Search and personal library",
+      "tools.filtersTitle": "Search & filters · Date / Rating / Tag",
+      "tools.viewResults": "View search results ↓",
+      "tools.viewIssueResults": "View this issue's search results ↓",
+      "tools.editFilters": "Edit search filters ↑",
       "personal.intro": "Sign in with the same email address to use your saved library on another device. Public reading needs no login.",
       "personal.notConfigured": "Personal sync is not configured yet. Public research and search remain available.",
       "personal.configInvalid": "Personal sync configuration needs attention. Public research and search remain available.",

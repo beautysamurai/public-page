@@ -34,6 +34,7 @@
     archiveList: byId("archive-list"),
     archiveMore: byId("archive-more"),
     archiveResults: byId("archive-results"),
+    researchFilters: byId("research-filters"),
     archiveTo: byId("archive-to"),
     archiveViewButtons: Array.from(document.querySelectorAll("[data-archive-view]")),
     archivePaperControls: byId("archive-paper-controls"),
@@ -1244,6 +1245,32 @@
     renderArchive();
   }
 
+  function openResearchFilters() {
+    var url = new URL(window.location.href);
+    if (url.hash !== "#research-filters") {
+      url.hash = "research-filters";
+      window.history.pushState(null, "", url.href);
+    }
+    elements.researchFilters.open = true;
+    var summary = byId("research-filters-summary");
+    summary.scrollIntoView({ block: "start", behavior: "smooth" });
+    summary.focus({ preventScroll: true });
+  }
+
+  function showSearchResults(sectionId, focusId) {
+    // Only explicit navigation closes the tools; typing/filter changes never
+    // scroll away or discard the current form state.
+    elements.researchFilters.open = false;
+    byId("personal-library").open = false;
+    var url = new URL(window.location.href);
+    if (url.hash !== "#" + sectionId) {
+      url.hash = sectionId;
+      window.history.pushState(null, "", url.href);
+    }
+    byId(focusId).focus({ preventScroll: true });
+    byId(sectionId).scrollIntoView({ block: "start", behavior: "smooth" });
+  }
+
   function updateArchiveDate(boundary, rawValue) {
     var value = archiveUi.normaliseDate(rawValue);
     if (boundary === "from") {
@@ -1570,9 +1597,28 @@
         elements.archiveSearch.value = filters.query;
         applyArchiveFilterChange();
         if (state.archiveView === "papers") loadPaperCatalogue();
+        showSearchResults("archive", "archive-title");
       }
     });
     syncArchiveFilterUrl();
+
+    byId("archive-show-results").addEventListener("click", function (event) {
+      event.preventDefault();
+      showSearchResults("archive", "archive-title");
+    });
+    byId("digest-show-results").addEventListener("click", function (event) {
+      event.preventDefault();
+      showSearchResults("paper-list", "paper-list");
+    });
+    byId("archive-edit-filters").addEventListener("click", openResearchFilters);
+    // Shared result/filter URLs do not open anything unless a disclosure itself
+    // was explicitly linked. The normal home page always starts collapsed.
+    function openLinkedTools() {
+      if (window.location.hash === "#research-filters") elements.researchFilters.open = true;
+      if (window.location.hash === "#personal-library") byId("personal-library").open = true;
+    }
+    openLinkedTools();
+    window.addEventListener("hashchange", openLinkedTools);
 
     document.querySelectorAll("[data-language]").forEach(function (button) {
       button.lang = button.dataset.language;
@@ -1706,7 +1752,7 @@
     // Native fragment navigation happens before the asynchronous review text
     // has its final height. Restore shared section links after layout settles.
     // Do not override navigation to another section while loading.
-    if (window.location.hash === initialHash && /^#(?:archive|digest|method|page-title)$/.test(initialHash)) {
+    if (window.location.hash === initialHash && /^#(?:archive|digest|method|page-title|paper-list|research-tools|research-filters|personal-library)$/.test(initialHash)) {
       var section = byId(initialHash.slice(1));
       if (section) section.scrollIntoView({ block: "start", behavior: "instant" });
     }

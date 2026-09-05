@@ -69,6 +69,119 @@ HTML insertion; unsupported commands remain visible as literal fallback text.
 
 ## Install and configure
 
+### Optional personal bookmarks and search presets (Supabase)
+
+Public research remains on GitHub Pages and needs no login. **マイライブラリ /
+My library** adds email-code login, bookmarks shared across a paper's versions,
+and named filter presets. Stars appear in both the issue and archive paper cards.
+**全期間のブックマークを表示 / Show bookmarks across all dates** starts across
+all review types/dates; rating, tag and keyword filters can then be combined.
+Presets save conditions, not a fixed list of results. Leave dates empty to match
+future papers. Applying a preset preserves the page language; deleting a preset
+does not delete its papers or reviews. Names are not unique: saving creates a new
+preset, avoiding silent overwrites of a similarly named preset on another device.
+
+The only local persistence is the Supabase login session. Personal records live
+in Supabase with per-user RLS policies; they are never published to GitHub or
+sent to OpenAI. Sync occurs after sign-in, after each write, when returning to
+the visible page (throttled to 30 seconds), or via **同期する / Sync now**. It is
+not continuous realtime streaming. Offline writes are not queued; failures stay
+unconfirmed until a successful sync. Edits operate on individual rows rather
+than replacing the whole library; simultaneous bookmark edits follow the last
+accepted server operation. Other device sessions remain logged in after logout.
+
+#### 1. Supabase setup (one-time)
+
+1. Create a Supabase project in your own account. A Free project can be used;
+   this repository does not create a subscription or upgrade a plan. Review the
+   current [quotas and inactivity policy](https://supabase.com/pricing).
+2. In its SQL Editor, run
+   **supabase/migrations/202609050001_personal_library.sql** once. Alternatively,
+   apply it with the Supabase CLI migration workflow. The migration creates
+   `research_bookmarks` and `research_presets`, user foreign keys, size checks,
+   grants and ownership policies together. Do not disable RLS. It deliberately
+   fails if applied a second time; future schema changes need new migrations.
+3. Enable the Email provider and allow new signups in Authentication. Configure
+   BOTH the **Confirm signup** and **Magic Link / OTP** email templates to show
+   the code, for example `Your Rates & Execution code: {{ .Token }}`. Existing
+   and new users can use different templates. This site accepts 6–10 digits and
+   calls `verifyOtp` with `type: "email"`; it does not consume magic-link tokens
+   or credentials from a URL. Set the Site URL to
+   `https://beautysamurai.github.io/public-page/`.
+4. Configure **custom SMTP** before offering sign-in to general visitors.
+   Supabase's built-in sender is for testing, sends only to your organization
+   team's addresses, and has a low rate limit (currently two emails/hour).
+   SMTP credentials stay in Supabase, never GitHub/browser configuration. Your
+   email provider may have its own charges and quotas. Set appropriate Auth
+   rate limits and review signup/email abuse before public launch. See
+   [SMTP setup](https://supabase.com/docs/guides/auth/auth-smtp) and
+   [email code sign-in](https://supabase.com/docs/guides/auth/auth-email-passwordless).
+5. Copy the project's HTTPS **Project URL** and **publishable key** beginning
+   `sb_publishable_`. Only these two public values are needed. Do NOT use a
+   `sb_secret_` key, legacy `service_role` JWT, database password, or OpenAI key.
+   This implementation intentionally accepts only the hosted `*.supabase.co`
+   project URL and modern publishable keys. See [key types](https://supabase.com/docs/guides/getting-started/api-keys).
+
+#### 2. Local preview
+
+Add `SUPABASE_URL` and `SUPABASE_PUBLISHABLE_KEY` to the ignored root `.env`
+(see `.env.example`). Leave both blank for the public-only mode. The Node.js
+22+ build reads `.env` without exposing other values, bundles the pinned official
+SDK locally, and generates a separate `.local/site` directory. It never edits
+the committed disabled configuration or the immutable review data.
+
+~~~powershell
+npm ci --ignore-scripts
+npm test
+npm run build
+python -m http.server 8765 --bind 127.0.0.1 --directory .local/site
+~~~
+
+Open `http://127.0.0.1:8765/` and expand My library. Use the built directory, not
+raw `site/`, to test configured login. Both values absent means a visible
+"not configured" message, not a fake local save. A partial/invalid configuration
+fails the build rather than silently enabling a broken connection.
+
+#### 3. GitHub Pages settings
+
+In **Settings → Secrets and variables → Actions → Variables**, add these
+repository variables (not research secrets):
+
+- `SUPABASE_URL`: the project's HTTPS URL;
+- `SUPABASE_PUBLISHABLE_KEY`: its public browser key.
+
+Then run **Deploy GitHub Pages** on `main`, or allow the next merged change to
+deploy it. No database administrator credential belongs in Actions. The Pages
+workflow uploads only `.local/site`, with the exact project's HTTPS origin added
+to the homepage's `connect-src`. Scripts/styles still come from this site;
+there is no CDN dependency, wildcard connection permission or analytics.
+The existing daily/weekly/monthly research workflow and automatic data-only merge
+rules are unchanged. Every subsequent Pages deployment uses the same variables.
+To disable personal sync, remove BOTH variables and redeploy; cloud data remains.
+
+#### 4. Verify before inviting users
+
+`npm test` includes controller race tests, DOM-level login/bookmark/preset flows,
+and the exact SQL migration on a local PostgreSQL engine with simulated auth
+claims. Tests cover anonymous access denial, A/B user separation, ownership
+reassignment denial, own CRUD, cascade deletion, failed requests and late
+responses after logout. Tests make no real Supabase/OpenAI requests.
+
+After setup, separately verify real email delivery for a new user and a returning
+user; save on device A, sign in as the same user on device B and sync; then sign
+in as a different user and verify an empty independent library. Also test
+cross-user API reads/writes using those users' own sessions (never a service-role
+key). A hosted two-user end-to-end check cannot be completed without your project
+and working email delivery. Review [PRIVACY.md](PRIVACY.md) before public signup;
+configure provider-log/backup retention and a user deletion contact/process.
+
+To export, use **保存内容をダウンロード / Download saved library**. Remove
+individual stars/presets in the UI. Account deletion is an operator action in
+Supabase Authentication and cascades to both personal tables; it does not delete
+public research. Export files are private and must not be added to this repository.
+
+### Research pipeline setup
+
 Requirements:
 
 - Python 3.12 or another supported Python 3 release;

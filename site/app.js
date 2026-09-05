@@ -3,6 +3,7 @@
 
   var i18n = window.RatesI18n;
   var archiveUi = window.RatesArchiveUi;
+  var personal = null;
   if (!archiveUi) throw new Error("Archive UI helpers are unavailable.");
   var initialParams = new URLSearchParams(window.location.search);
   var initialHash = window.location.hash;
@@ -44,6 +45,7 @@
     archivePaperStatus: byId("archive-paper-status"),
     archivePaperRetry: byId("archive-paper-retry"),
     archivePaperMore: byId("archive-paper-more"),
+    archiveSavedOnly: byId("archive-saved-only"),
     digestTitle: byId("digest-title"),
     editionContext: byId("edition-context"),
     editionDate: byId("edition-date"),
@@ -85,6 +87,7 @@
     archiveSort: archiveUi.normalisePaperSort(initialParams.get("archive-sort")),
     archiveQuery: clean(initialParams.get("archive-query")).slice(0, 180),
     archivePaperVisible: 12,
+    archiveSavedOnly: initialParams.get("archive-saved") === "1",
     paperEditions: null,
     paperLoading: false,
     paperError: false,
@@ -1031,6 +1034,8 @@
     }
 
     var actions = createNode("div", "paper-actions");
+    var bookmark = personal && personal.bookmarkButton(paper.arxivId);
+    if (bookmark) actions.appendChild(bookmark);
     var sourceActions = createNode("div", "paper-source-actions");
     var abstractLink = externalLink(paper.absUrl, "arxiv-link", t("paper.abstractLink"), t("paper.openAbstract", { title: paper.title }));
     var pdfLink = externalLink(paper.pdfUrl, "pdf-link", t("paper.pdfLink"), t("paper.openPdf", { title: paper.title }));
@@ -1182,7 +1187,8 @@
       ["archive-view", state.archiveView === "papers" ? "papers" : ""],
       ["archive-rating", state.archiveRating], ["archive-tag", state.archiveTag],
       ["archive-sort", state.archiveSort === "date" ? "date" : ""],
-      ["archive-query", state.archiveQuery]
+      ["archive-query", state.archiveQuery],
+      ["archive-saved", state.archiveSavedOnly ? "1" : ""]
     ].forEach(function (pair) {
       if (pair[1] !== "") url.searchParams.set(pair[0], pair[1]);
       else url.searchParams.delete(pair[0]);
@@ -1222,7 +1228,7 @@
     }
 
     var filtersActive = state.archiveKind !== "all" || state.archiveFrom || state.archiveTo ||
-      (state.archiveView === "papers" && (state.archiveRating !== "" || state.archiveTag || state.archiveQuery || state.archiveSort !== "rating"));
+      (state.archiveView === "papers" && (state.archiveRating !== "" || state.archiveTag || state.archiveQuery || state.archiveSavedOnly || state.archiveSort !== "rating"));
     elements.archiveClear.disabled = !filtersActive;
     elements.archiveResults.textContent = t("archive.results", {
       count: filteredReports.length,
@@ -1333,6 +1339,8 @@
       })));
     }
     var actions = createNode("div", "paper-actions");
+    var bookmark = personal && personal.bookmarkButton(paper.arxivId);
+    if (bookmark) actions.appendChild(bookmark);
     var read = createNode("a", "paper-link", t("archive.openReview") + " →");
     read.href = archiveHref(review.editionId);
     actions.appendChild(read);
@@ -1399,6 +1407,9 @@
     var matches = archiveUi.filterPapers(entries, {
       minRating: state.archiveRating, tag: state.archiveTag, sort: state.archiveSort, query: state.archiveQuery
     });
+    elements.archiveSavedOnly.checked = state.archiveSavedOnly;
+    var personalUnavailable = state.archiveSavedOnly && (!personal || !personal.ready());
+    if (state.archiveSavedOnly) matches = personalUnavailable ? [] : matches.filter(function (entry) { return personal.saved(entry.paper.arxivId); });
     var unavailable = state.paperEditions === null;
     elements.archiveResults.textContent = unavailable ? "" : t("archive.paperResults", {
       count: matches.length, total: archiveUi.collectPapers(state.paperEditions).length,
@@ -1407,6 +1418,11 @@
     elements.archivePaperStatus.hidden = !unavailable && matches.length > 0;
     elements.archivePaperStatus.textContent = unavailable
       ? t(state.paperError ? "archive.paperUnavailable" : "archive.paperLoading") : t("archive.paperNoMatches");
+    if (personalUnavailable) {
+      elements.archiveResults.textContent = "";
+      elements.archivePaperStatus.hidden = false;
+      elements.archivePaperStatus.textContent = t("personal.filterUnavailable");
+    }
     elements.archivePaperRetry.hidden = !state.paperError;
     elements.archivePaperList.setAttribute("aria-busy", String(state.paperLoading));
     var fragment = document.createDocumentFragment();
@@ -1537,6 +1553,25 @@
 
   async function initialise() {
     applyStaticLocale();
+    if (window.RatesPersonalUi) personal = window.RatesPersonalUi.create({
+      t: t,
+      onChange: function () { renderArchive(); },
+      getFilters: function () {
+        return { view: state.archiveView, kind: state.archiveKind, from: state.archiveFrom, to: state.archiveTo,
+          minRating: state.archiveRating, tag: state.archiveTag, sort: state.archiveSort, query: state.archiveQuery,
+          savedOnly: state.archiveSavedOnly };
+      },
+      applyFilters: function (raw) {
+        var filters = window.RatesPersonalLibrary.presetFilters(raw);
+        state.archiveView = filters.view; state.archiveKind = filters.kind;
+        state.archiveFrom = filters.from; state.archiveTo = filters.to;
+        state.archiveRating = filters.minRating; state.archiveTag = filters.tag;
+        state.archiveSort = filters.sort; state.archiveQuery = filters.query; state.archiveSavedOnly = filters.savedOnly;
+        elements.archiveSearch.value = filters.query;
+        applyArchiveFilterChange();
+        if (state.archiveView === "papers") loadPaperCatalogue();
+      }
+    });
     syncArchiveFilterUrl();
 
     document.querySelectorAll("[data-language]").forEach(function (button) {
@@ -1582,6 +1617,11 @@
       applyArchiveFilterChange();
     });
     elements.archivePaperRetry.addEventListener("click", loadPaperCatalogue);
+    elements.archiveSavedOnly.addEventListener("change", function () {
+      state.archiveSavedOnly = elements.archiveSavedOnly.checked;
+      applyArchiveFilterChange();
+      if (state.archiveSavedOnly && personal && !personal.ready()) personal.open();
+    });
     elements.archivePaperMore.addEventListener("click", function () {
       state.archivePaperVisible += 12;
       renderArchive();
@@ -1603,6 +1643,7 @@
       state.archiveTag = "";
       state.archiveSort = "rating";
       state.archiveQuery = "";
+      state.archiveSavedOnly = false;
       applyArchiveFilterChange();
     });
 

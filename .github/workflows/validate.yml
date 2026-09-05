@@ -37,7 +37,12 @@ jobs:
         run: python -m unittest discover -s tests -v
 
       - name: Run JavaScript tests
-        run: node --test tests/test_model_math.cjs tests/test_archive_ui.cjs tests/test_tex_math.cjs
+        run: |
+          npm ci --ignore-scripts
+          npm test
+
+      - name: Build public-only site
+        run: npm run build
 
       - name: Verify scheduler history artifacts
         run: python scripts/import_scheduler_history.py --check
@@ -85,6 +90,7 @@ jobs:
               ),
               "AWS access key": re.compile(rb"AKIA[0-9A-Z]{16}"),
               "OpenAI-style key": re.compile(rb"sk-[A-Za-z0-9_-]{20,}"),
+              "Supabase secret key": re.compile(rb"sb_secret_[A-Za-z0-9_-]{12,}"),
           }
 
           problems = []

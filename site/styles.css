@@ -1273,3 +1273,24 @@ button { color: inherit; }
   .derivation-content { padding-inline: 18px; }
   .derivation-steps > li { padding-left: 38px; }
 }
+/* Personal controls extend the existing editorial palette; MathML is untouched. */
+.personal-library { margin-bottom: 1.5rem; padding: 1rem 1.25rem; border: 1px solid #b8c7c2; border-radius: .5rem; background: #f1f5f2; }
+.personal-library summary { cursor: pointer; font-size: 1rem; font-weight: 700; }
+.personal-help { font-size: .875rem; line-height: 1.7; color: #425b60; margin: .8rem 0; }
+.personal-identity { overflow-wrap: anywhere; font-size: .9375rem; }
+.personal-form, .personal-actions { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; margin: 1rem 0; }
+.personal-form label { flex: 1 1 14rem; display: grid; gap: .4rem; font-size: .875rem; }
+.personal-form input { min-width: 0; width: 100%; border: 1px solid #849b99; border-radius: .25rem; padding: .65rem; background: white; font: inherit; font-size: 1rem; color: #0b1d2a; }
+.personal-library button, .bookmark-button { border: 1px solid #547673; border-radius: .3rem; background: transparent; padding: .6rem .8rem; color: #174842; font: inherit; font-size: .875rem; cursor: pointer; }
+.personal-library button:hover, .bookmark-button:hover { background: #dfece6; }
+.personal-library button:disabled, .bookmark-button:disabled { opacity: .6; cursor: wait; }
+.personal-library button:focus-visible, .bookmark-button:focus-visible { outline: 3px solid #bc7b27; outline-offset: 3px; }
+.bookmark-button[aria-pressed="true"] { background: #174842; color: white; }
+.personal-presets { list-style: none; padding: 0; }
+.personal-presets li { display: flex; align-items: center; gap: .5rem; margin-top: .5rem; }
+.personal-preset-apply { flex: 1; text-align: left; overflow-wrap: anywhere; min-width: 0; }
+.personal-preset-delete { flex-shrink: 0; }
+.personal-message { font-size: .9375rem; line-height: 1.6; }
+.personal-message:empty { margin: 0; }
+.personal-saved-filter { display: flex; align-items: center; gap: .5rem; font-size: .9375rem; margin-top: 1rem; }
+.personal-saved-filter input { width: 1.2rem; height: 1.2rem; accent-color: #174842; }

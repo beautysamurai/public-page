@@ -214,7 +214,7 @@ CHECKPOINT_FIELDS = (
 )
 CHECKPOINT_RESULT_FIELDS = ("status", "screenAnalysis", "finalAnalysis")
 CHECKPOINT_RESULT_STATUSES = frozenset(
-    {"awaiting_pdf", "completed", "screened_out", "pdf_out_of_scope"}
+    {"awaiting_pdf", "completed", "screened_out", "pdf_out_of_scope", "withdrawn"}
 )
 
 
@@ -240,6 +240,10 @@ class ConfigurationError(PipelineError):
 
 class UpdaterOfflineError(PipelineError):
     """A required remote service could not be reached after retries."""
+
+
+class PaperWithdrawn(PipelineError):
+    """The exact requested version has an official withdrawal notice."""
 
 
 class WorkBudgetExceeded(PipelineError):
@@ -1133,11 +1137,26 @@ def _file_url_download_error(exc: Exception) -> bool:
     )
 
 
+def _is_withdrawn(arxiv_id: str, *, timeout: float) -> bool:
+    url = f"https://arxiv.org/abs/{arxiv_id}"
+    digest.validate_arxiv_url(url, "abs", arxiv_id)
+    with urllib.request.urlopen(url, timeout=timeout) as response:
+        digest.validate_arxiv_url(response.geturl(), "abs", arxiv_id)
+        body = response.read(MAX_LIST_BYTES + 1)
+    if len(body) > MAX_LIST_BYTES:
+        raise ListingParseError("abstract page exceeds size limit")
+    return bool(re.search(
+        r'<span\b[^>]*\bclass=["\']error["\'][^>]*>\s*This paper has been withdrawn by\s+[^<]+</span>',
+        body.decode("utf-8"),
+    ))
+
+
 def fetch_pdf_for_inline_input(arxiv_id: str, *, timeout: float) -> bytes:
     url = f"https://arxiv.org/pdf/{arxiv_id}"
     digest.validate_arxiv_url(url, "pdf", arxiv_id)
     limit = 20 * 1024 * 1024
     endpoints = (url, url.replace("https://arxiv.org/", "https://export.arxiv.org/", 1))
+    download_statuses = []
     for index, endpoint in enumerate(endpoints):
         request = urllib.request.Request(endpoint, headers={"Accept": "application/pdf", "User-Agent": USER_AGENT})
         try:
@@ -1152,7 +1171,10 @@ def fetch_pdf_for_inline_input(arxiv_id: str, *, timeout: float) -> bytes:
             status = getattr(exc, "code", None)
             safe_status = status if isinstance(status, int) and 400 <= status <= 599 else "unavailable"
             print(f"PDF fallback download failed: endpoint={index + 1}; status={safe_status}", file=sys.stderr)
+            download_statuses.append(safe_status)
             if index == len(endpoints) - 1:
+                if download_statuses == [404, 404] and _is_withdrawn(arxiv_id, timeout=timeout):
+                    raise PaperWithdrawn(arxiv_id) from exc
                 raise
     if not body.startswith(b"%PDF-") or len(body) > limit:
         raise UpdaterOfflineError("PDF fallback is invalid or exceeds the safe size limit")
@@ -1570,7 +1592,7 @@ def _validate_checkpoint(
             final = validate_analysis(final_value) if final_value is not None else None
         except StructuredOutputError as exc:
             raise StateError(f"checkpoint result {key} is invalid") from exc
-        if status == "awaiting_pdf":
+        if status in {"awaiting_pdf", "withdrawn"}:
             valid = screen["classification"] != "out_of_scope" and final is None
         elif status == "screened_out":
             valid = screen["classification"] == "out_of_scope" and final is None
@@ -1952,7 +1974,7 @@ def _retry(
             raise WorkBudgetExceeded("daily research soft deadline reached")
         try:
             return operation()
-        except (KeyboardInterrupt, SystemExit, WorkBudgetExceeded):
+        except (KeyboardInterrupt, SystemExit, WorkBudgetExceeded, PaperWithdrawn):
             raise
         except Exception as exc:  # Classification happens at the workflow boundary.
             last_error = exc
@@ -2422,18 +2444,23 @@ def run_daily(
                 )
 
             if result["status"] == "awaiting_pdf":
-                final_analysis = _retry(
-                    lambda candidate=candidate: validate_analysis(
-                        require_analyzer().analyze_pdf(candidate)
-                    ),
-                    config.retries,
-                    sleep_fn,
-                    deadline=deadline,
-                    monotonic_fn=monotonic_fn,
-                )
+                withdrawn = False
+                try:
+                    final_analysis = _retry(
+                        lambda candidate=candidate: validate_analysis(
+                            require_analyzer().analyze_pdf(candidate)
+                        ),
+                        config.retries,
+                        sleep_fn,
+                        deadline=deadline,
+                        monotonic_fn=monotonic_fn,
+                    )
+                except PaperWithdrawn:
+                    withdrawn = True
+                    final_analysis = None
                 result = {
                     "status": (
-                        "pdf_out_of_scope"
+                        "withdrawn" if withdrawn else "pdf_out_of_scope"
                         if final_analysis["classification"] == "out_of_scope"
                         else "completed"
                     ),
@@ -2476,6 +2503,10 @@ def run_daily(
             )
         if skipped_count:
             message += f" Skipped {skipped_count} previously reviewed paper(s) without API calls."
+        withdrawn_ids = [candidates[key].entry.arxiv_id for key, value in checkpoint_results.items()
+                         if value["status"] == "withdrawn"]
+        if withdrawn_ids:
+            message += " Excluded officially withdrawn paper(s), without full-text analysis: " + ", ".join(withdrawn_ids) + "."
         report = _report(
             report_kind=DAILY,
             report_date=target,

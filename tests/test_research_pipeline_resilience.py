@@ -201,7 +201,7 @@ class DailyResilienceTests(unittest.TestCase):
             self.assertEqual(second["status"], pipeline.UPDATE_CONFIRMED)
             self.assertEqual(second_analyzer.screened, [arxiv_ids[1]])
             self.assertEqual(len(second["papers"]), 2)
-            self.assertFalse(checkpoint_path.exists())
+            self.assertTrue(checkpoint_path.exists())
 
     def test_resume_from_awaiting_pdf_does_not_repeat_abstract_screen(self):
         arxiv_id = "2608.10001"
@@ -237,9 +237,9 @@ class DailyResilienceTests(unittest.TestCase):
             self.assertEqual(second["status"], pipeline.UPDATE_CONFIRMED)
             self.assertEqual(second_analyzer.screened, [])
             self.assertEqual(second_analyzer.pdfs, [arxiv_id])
-            self.assertFalse(checkpoint_path.exists())
+            self.assertTrue(checkpoint_path.exists())
 
-    def test_fingerprint_change_discards_checkpoint_and_reanalyzes(self):
+    def test_model_change_preserves_completed_candidate_analysis(self):
         arxiv_ids = ("2608.10001", "2608.10002")
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -267,9 +267,9 @@ class DailyResilienceTests(unittest.TestCase):
             )
 
             self.assertEqual(second["status"], pipeline.UPDATE_CONFIRMED)
-            self.assertEqual(second_analyzer.screened, list(arxiv_ids))
+            self.assertEqual(second_analyzer.screened, [arxiv_ids[1]])
 
-    def test_invalid_matching_checkpoint_is_replaced_with_a_clean_checkpoint(self):
+    def test_invalid_checkpoint_is_preserved_without_paid_reanalysis(self):
         arxiv_id = "2608.10001"
         candidate = pipeline.PaperCandidate(
             entry(arxiv_id), ("new",), ("q-fin.TR",)
@@ -316,19 +316,17 @@ class DailyResilienceTests(unittest.TestCase):
             for invalid in invalid_checkpoints:
                 with self.subTest(invalid=invalid):
                     pipeline.atomic_write_json(checkpoint_path, invalid)
-                    checkpoint = pipeline._load_or_create_checkpoint(
-                        checkpoint_path,
-                        target=TARGET,
-                        fingerprint=fingerprint,
-                        candidate_keys=(arxiv_id,),
-                    )
-                    self.assertEqual(
-                        checkpoint,
-                        pipeline._new_checkpoint(TARGET, fingerprint),
-                    )
+                    with self.assertRaises(pipeline.StateError):
+                        pipeline._load_or_create_checkpoint(
+                            checkpoint_path,
+                            target=TARGET,
+                            fingerprint=fingerprint,
+                            candidate_keys=(arxiv_id,),
+                            candidate_fingerprints={arxiv_id: pipeline._candidate_resume_fingerprint(candidate)},
+                        )
                     self.assertEqual(
                         json.loads(checkpoint_path.read_text(encoding="utf-8")),
-                        checkpoint,
+                        invalid,
                     )
 
     def test_completed_report_repairs_state_after_one_state_write_failure(self):
@@ -362,11 +360,11 @@ class DailyResilienceTests(unittest.TestCase):
             self.assertEqual(state["lastStatus"], pipeline.UPDATE_CONFIRMED)
             self.assertEqual(state["lastCompletedBatchDate"], TARGET.isoformat())
             self.assertIsNone(state["pendingBatchDate"])
-            self.assertFalse(
+            self.assertTrue(
                 (root / "checkpoints" / "2026-08-28.json").exists()
             )
 
-    def test_success_removes_checkpoint(self):
+    def test_success_retains_decisions_to_prevent_later_reanalysis(self):
         arxiv_id = "2608.10001"
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -379,7 +377,7 @@ class DailyResilienceTests(unittest.TestCase):
             )
 
             self.assertEqual(report["status"], pipeline.UPDATE_CONFIRMED)
-            self.assertFalse(
+            self.assertTrue(
                 (root / "checkpoints" / "2026-08-28.json").exists()
             )
 

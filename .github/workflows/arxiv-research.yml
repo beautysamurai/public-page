@@ -654,6 +654,7 @@ jobs:
             daily \
             --checked-at "$generated_at" \
             --state research/state.json \
+            --published-history content/chatgpt_scheduler_history.json \
             --output-dir research/daily \
             > "$RUNNER_TEMP/daily-report.json"
 

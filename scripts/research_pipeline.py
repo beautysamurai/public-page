@@ -36,7 +36,7 @@ from typing import Any, Callable, Iterable, Mapping, Protocol, Sequence
 
 try:  # Direct script execution puts scripts/ on sys.path.
     import arxiv_digest as digest
-    from import_scheduler_history import HistoryImportError, _validate_public_text
+    from import_scheduler_history import HistoryImportError, _validate_public_text, load_history
     from research_language import (
         contains_english_prose,
         contains_japanese_characters,
@@ -48,6 +48,7 @@ except ImportError:  # pragma: no cover - useful when imported as a package.
     from .import_scheduler_history import (  # type: ignore
         HistoryImportError,
         _validate_public_text,
+        load_history,
     )
     from .research_language import (  # type: ignore
         contains_english_prose,
@@ -59,7 +60,7 @@ except ImportError:  # pragma: no cover - useful when imported as a package.
 
 REPORT_SCHEMA_VERSION = 2
 STATE_SCHEMA_VERSION = 1
-CHECKPOINT_SCHEMA_VERSION = 1
+CHECKPOINT_SCHEMA_VERSION = 2
 MAX_LIST_BYTES = 4 * 1024 * 1024
 MAX_LIST_IDS = 2_000
 MAX_CHECKPOINT_BYTES = 32 * 1024 * 1024
@@ -1411,9 +1412,11 @@ def _checkpoint_fingerprint(
     config: PipelineConfig,
     target: date,
     candidates: Mapping[str, PaperCandidate],
+    *,
+    schema_version: int = CHECKPOINT_SCHEMA_VERSION,
 ) -> str:
     source = {
-        "checkpointSchemaVersion": CHECKPOINT_SCHEMA_VERSION,
+        "checkpointSchemaVersion": schema_version,
         "batchDate": target.isoformat(),
         "screenModel": config.screen_model,
         "fullModel": config.full_model,
@@ -1437,11 +1440,14 @@ def _checkpoint_fingerprint(
     ).hexdigest()
 
 
-def _new_checkpoint(target: date, fingerprint: str) -> dict[str, Any]:
+def _new_checkpoint(
+    target: date, fingerprint: str, candidate_fingerprints: Mapping[str, str] | None = None
+) -> dict[str, Any]:
     return {
         "schemaVersion": CHECKPOINT_SCHEMA_VERSION,
         "batchDate": target.isoformat(),
         "fingerprint": fingerprint,
+        "candidateFingerprints": dict(candidate_fingerprints or {}),
         "results": {},
     }
 
@@ -1456,10 +1462,13 @@ def _validate_checkpoint(
     if not isinstance(value, Mapping):
         raise StateError("checkpoint must be an object")
     try:
-        _require_exact_keys(value, CHECKPOINT_FIELDS, "checkpoint")
+        fields = set(CHECKPOINT_FIELDS)
+        if value.get("schemaVersion") == CHECKPOINT_SCHEMA_VERSION:
+            fields.add("candidateFingerprints")
+        _require_exact_keys(value, fields, "checkpoint")
     except StructuredOutputError as exc:
         raise StateError(str(exc)) from exc
-    if value["schemaVersion"] != CHECKPOINT_SCHEMA_VERSION:
+    if value["schemaVersion"] not in {1, CHECKPOINT_SCHEMA_VERSION}:
         raise StateError("unsupported checkpoint schemaVersion")
     if value["batchDate"] != target.isoformat():
         raise StateError("checkpoint batchDate is inconsistent")
@@ -1474,6 +1483,17 @@ def _validate_checkpoint(
     if not isinstance(results, Mapping):
         raise StateError("checkpoint results must be an object")
     allowed = set(candidate_keys)
+    if any(not digest.ARXIV_ID_RE.fullmatch(key) for key in allowed):
+        raise StateError("checkpoint contains an invalid candidate ID")
+    if value["schemaVersion"] == CHECKPOINT_SCHEMA_VERSION:
+        identities = value["candidateFingerprints"]
+        if (
+            not isinstance(identities, Mapping)
+            or set(identities) != allowed
+            or any(not isinstance(item, str) or not re.fullmatch(r"[0-9a-f]{64}", item)
+                   for item in identities.values())
+        ):
+            raise StateError("checkpoint candidate fingerprints are inconsistent")
     if not set(results).issubset(allowed):
         raise StateError("checkpoint contains an unknown candidate")
     for key, raw_result in results.items():
@@ -1520,45 +1540,53 @@ def _load_or_create_checkpoint(
     target: date,
     fingerprint: str,
     candidate_keys: Iterable[str],
+    candidate_fingerprints: Mapping[str, str],
+    legacy_fingerprint: str | None = None,
 ) -> dict[str, Any]:
     candidate_keys = tuple(candidate_keys)
 
-    def reset_checkpoint() -> dict[str, Any]:
-        checkpoint = _new_checkpoint(target, fingerprint)
+    if not path.exists():
+        checkpoint = _new_checkpoint(target, fingerprint, candidate_fingerprints)
         atomic_write_json(path, checkpoint)
         return checkpoint
-
-    if not path.exists():
-        return reset_checkpoint()
     try:
+        if path.is_symlink():
+            raise StateError("checkpoint is not a regular file")
         if path.stat().st_size > MAX_CHECKPOINT_BYTES:
-            return reset_checkpoint()
+            raise StateError("checkpoint exceeds the size limit; saved analysis was preserved")
         with path.open("r", encoding="utf-8") as handle:
             loaded = json.load(handle)
-    except json.JSONDecodeError:
-        return reset_checkpoint()
-    except OSError as exc:
+    except (OSError, json.JSONDecodeError) as exc:
         raise StateError(f"cannot read checkpoint: {path}") from exc
     if not isinstance(loaded, Mapping):
-        return reset_checkpoint()
+        raise StateError("invalid checkpoint; saved analysis was preserved")
     stored_fingerprint = loaded.get("fingerprint")
-    stored_batch = loaded.get("batchDate")
-    if (
-        isinstance(stored_fingerprint, str)
-        and re.fullmatch(r"[0-9a-f]{64}", stored_fingerprint)
-        and stored_fingerprint != fingerprint
-    ) or stored_batch != target.isoformat():
-        return reset_checkpoint()
     checkpoint = json.loads(json.dumps(loaded, ensure_ascii=False))
-    try:
-        _validate_checkpoint(
-            checkpoint,
-            target=target,
-            fingerprint=fingerprint,
-            candidate_keys=candidate_keys,
-        )
-    except StateError:
-        return reset_checkpoint()
+    identities = checkpoint.get("candidateFingerprints", {})
+    if not isinstance(identities, Mapping):
+        raise StateError("invalid checkpoint identities; saved analysis was preserved")
+    _validate_checkpoint(
+        checkpoint,
+        target=target,
+        fingerprint=stored_fingerprint,
+        candidate_keys=identities if checkpoint["schemaVersion"] == 2 else candidate_keys,
+    )
+    if checkpoint["schemaVersion"] == 1:
+        # Legacy checkpoints cannot prove per-paper input identity after any
+        # batch change. Never erase paid work and silently analyze it again.
+        if stored_fingerprint not in {fingerprint, legacy_fingerprint}:
+            raise StateError("legacy checkpoint changed; explicit recovery is required")
+    else:
+        for key in checkpoint["results"]:
+            if identities.get(key) != candidate_fingerprints.get(key):
+                raise StateError("an analyzed paper changed; saved analysis was preserved")
+    checkpoint["schemaVersion"] = CHECKPOINT_SCHEMA_VERSION
+    checkpoint["fingerprint"] = fingerprint
+    checkpoint["candidateFingerprints"] = dict(candidate_fingerprints)
+    _validate_checkpoint(
+        checkpoint, target=target, fingerprint=fingerprint, candidate_keys=candidate_keys
+    )
+    atomic_write_json(path, checkpoint)
     return checkpoint
 
 
@@ -1577,14 +1605,6 @@ def _save_checkpoint(
         candidate_keys=candidate_keys,
     )
     atomic_write_json(path, checkpoint)
-
-
-def _remove_checkpoint_best_effort(path: Path) -> None:
-    try:
-        path.unlink(missing_ok=True)
-    except OSError:
-        # A stale checkpoint is fingerprinted and never changes completed state.
-        pass
 
 
 def _prepare_atomic_file(path: Path, data: bytes) -> Path:
@@ -1900,7 +1920,9 @@ def _updated_state(
     updated["lastStatus"] = status
     updated["lastAttemptedAt"] = _format_utc(attempted_at)
     if completed is not None:
-        updated["lastCompletedBatchDate"] = completed.isoformat()
+        updated["lastCompletedBatchDate"] = max(
+            completed.isoformat(), state["lastCompletedBatchDate"] or ""
+        )
         updated["pendingBatchDate"] = None
         updated["retryCount"] = 0
     elif status == NO_NEW_BATCH_EXPECTED:
@@ -1908,7 +1930,11 @@ def _updated_state(
         updated["retryCount"] = 0
     else:
         updated["pendingBatchDate"] = target.isoformat()
-        updated["retryCount"] = int(state["retryCount"]) + 1
+        updated["retryCount"] = (
+            int(state["retryCount"]) + 1
+            if state["pendingBatchDate"] == target.isoformat()
+            else 1
+        )
     validate_state(updated)
     return updated
 
@@ -1997,6 +2023,51 @@ def _recover_pending_pages(
     return recovered
 
 
+def _previously_reviewed_ids(
+    output_dir: Path,
+    checkpoint_dir: Path,
+    target: date,
+    published_history: Path | None,
+) -> set[str]:
+    """Read public, validated IDs only; never resummarize a historical paper."""
+    seen: set[str] = set()
+    for path in sorted(output_dir.glob("*.json")):
+        if path.is_symlink() or path.stat().st_size > MAX_CHECKPOINT_BYTES:
+            raise StateError("stored daily report is unsafe")
+        report = _read_persisted_report(path)
+        if report["reportKind"] != DAILY or report["reportDate"] != path.stem:
+            raise StateError("stored daily report identity mismatch")
+        if path.stem < target.isoformat() and report["status"] in {
+            UPDATE_CONFIRMED, NO_RELEVANT_PAPERS,
+        }:
+            seen.update(_base_arxiv_id(p["metadata"]["arxivId"]).casefold() for p in report["papers"])
+    for path in sorted(checkpoint_dir.glob("*.json")):
+        if path.stem >= target.isoformat():
+            continue  # The current batch resumes its own unfinished stages.
+        if path.is_symlink() or path.stat().st_size > MAX_CHECKPOINT_BYTES:
+            raise StateError("stored checkpoint is unsafe")
+        try:
+            checkpoint = json.loads(path.read_text(encoding="utf-8"))
+            batch = date.fromisoformat(path.stem)
+        except (ValueError, OSError) as exc:
+            raise StateError("cannot validate historical checkpoint") from exc
+        if not isinstance(checkpoint, Mapping):
+            raise StateError("invalid historical checkpoint")
+        keys = checkpoint.get("candidateFingerprints", checkpoint.get("results", {}))
+        if not isinstance(keys, Mapping):
+            raise StateError("invalid historical checkpoint candidates")
+        _validate_checkpoint(checkpoint, target=batch,
+                             fingerprint=checkpoint.get("fingerprint"), candidate_keys=keys)
+        seen.update(_base_arxiv_id(key).casefold() for key in checkpoint["results"])
+    if published_history is not None:
+        if published_history.is_symlink() or published_history.stat().st_size > MAX_CHECKPOINT_BYTES:
+            raise StateError("published history is unsafe")
+        history = load_history(published_history)
+        for edition in history["editions"]:
+            seen.update(_base_arxiv_id(paper["arxivId"]).casefold() for paper in edition["papers"])
+    return seen
+
+
 def run_daily(
     config: PipelineConfig,
     *,
@@ -2010,8 +2081,10 @@ def run_daily(
     sleep_fn: Callable[[float], None] = time.sleep,
     checkpoint_dir: Path | None = None,
     monotonic_fn: Callable[[], float] = time.monotonic,
+    recover_pending: bool = False,
+    published_history: Path | None = None,
 ) -> dict[str, Any]:
-    """Run one resumable daily review and persist report plus state atomically."""
+    """Review the latest expected batch; historical recovery is explicit opt-in."""
 
     _validate_daily_runtime_limits(config)
     checked_at = checked_at or datetime.now(timezone.utc)
@@ -2024,9 +2097,22 @@ def run_daily(
     last_completed = _parse_date(
         state["lastCompletedBatchDate"], "lastCompletedBatchDate", True
     )
-    if pending is not None:
+    if recover_pending:
+        # Old gaps remain explicitly incomplete on disk after the latest-batch
+        # cursor advances. Only an operator-requested recovery visits them.
+        pending_dates = [pending] if pending is not None else []
+        for path in sorted(output_dir.glob("*.json")):
+            report = _read_persisted_report(path)
+            if report["reportKind"] == DAILY and report["status"] in {
+                UPDATE_NOT_CONFIRMED, UPDATER_OFFLINE,
+            }:
+                batch = _parse_date(report["reportDate"], "reportDate")
+                if batch <= expected:
+                    pending_dates.append(batch)
+        pending = min(pending_dates) if pending_dates else None
+    if recover_pending and pending is not None:
         target = pending
-    elif last_completed is not None and last_completed < expected:
+    elif recover_pending and last_completed is not None and last_completed < expected:
         # A scheduler can miss an entire weekday.  Resume from the first
         # unprocessed configured announcement instead of silently jumping to
         # today's listing; the bounded past-week path below will recover it.
@@ -2040,7 +2126,27 @@ def run_daily(
     else:
         target = expected
 
-    if pending is None and last_completed is not None and last_completed >= expected:
+    # The stored report is authoritative even if a previous state write failed.
+    # Repair state BEFORE fetching metadata, constructing a client, or paying to
+    # reanalyze papers. Keep the original JSON, timestamps, and ratings intact.
+    existing_path = output_dir / f"{target.isoformat()}.json"
+    if existing_path.exists():
+        if existing_path.is_symlink():
+            raise StateError("stored daily report is not a regular file")
+        existing = _read_persisted_report(existing_path)
+        if existing["reportKind"] != DAILY or existing["reportDate"] != target.isoformat():
+            raise StateError("stored daily report identity mismatch")
+        if existing["status"] in {UPDATE_CONFIRMED, NO_RELEVANT_PAPERS}:
+            save_state(state_path, _updated_state(
+                state, status=existing["status"], attempted_at=checked_at,
+                target=target, completed=target,
+            ))
+            if recover_pending or checked_at.astimezone(timezone.utc).date() == target:
+                return persist_report(existing, output_dir)
+            state = load_state(state_path)
+            last_completed = _parse_date(state["lastCompletedBatchDate"], "lastCompletedBatchDate", True)
+
+    if (not recover_pending or pending is None) and last_completed is not None and last_completed >= expected:
         no_new_report_date = checked_at.astimezone(timezone.utc).date()
         report = _report(
             report_kind=DAILY,
@@ -2067,9 +2173,6 @@ def run_daily(
                 target=target,
                 completed=None,
             ),
-        )
-        _remove_checkpoint_best_effort(
-            _checkpoint_path(state_path, expected, checkpoint_dir)
         )
         return report
 
@@ -2132,6 +2235,8 @@ def run_daily(
             )
             return report
         if observed > target:
+            if not recover_pending:
+                raise ListingParseError("listing is newer than the expected announcement date")
             latest_observed = observed
             pages = _recover_pending_pages(
                 target=target,
@@ -2152,6 +2257,13 @@ def run_daily(
             )
 
         candidate_buckets = _candidate_map(pages)
+        reviewed_ids = _previously_reviewed_ids(
+            output_dir, checkpoint_dir or state_path.parent / "checkpoints", target,
+            published_history,
+        )
+        skipped_count = len(set(candidate_buckets) & reviewed_ids)
+        candidate_buckets = {key: bucket for key, bucket in candidate_buckets.items()
+                             if key not in reviewed_ids}
         if len(candidate_buckets) > config.max_candidates:
             raise ListingParseError(
                 "candidate count exceeds maxCandidates; refusing a partial review"
@@ -2193,6 +2305,9 @@ def run_daily(
             target=target,
             fingerprint=fingerprint,
             candidate_keys=candidate_keys,
+            candidate_fingerprints={key: _candidate_resume_fingerprint(candidate)
+                                    for key, candidate in candidates.items()},
+            legacy_fingerprint=_checkpoint_fingerprint(config, target, candidates, schema_version=1),
         )
         checkpoint_results = checkpoint["results"]
         assert isinstance(checkpoint_results, dict)
@@ -2303,6 +2418,8 @@ def run_daily(
                 if papers
                 else f"arXiv batch {observed.isoformat()} was confirmed with no relevant papers."
             )
+        if skipped_count:
+            message += f" Skipped {skipped_count} previously reviewed paper(s) without API calls."
         report = _report(
             report_kind=DAILY,
             report_date=target,
@@ -2327,7 +2444,8 @@ def run_daily(
             updated_state["pendingBatchDate"] = next_pending.isoformat()
             validate_state(updated_state)
         save_state(state_path, updated_state)
-        _remove_checkpoint_best_effort(checkpoint_path)
+        # Retain the validated decisions (including screened-out papers) so a
+        # later cross-list or revision cannot trigger another paid evaluation.
         return report
     except WorkBudgetExceeded:
         status = UPDATE_NOT_CONFIRMED
@@ -2341,7 +2459,7 @@ def run_daily(
     except (urllib.error.URLError, TimeoutError, OSError, http.client.HTTPException):
         status = UPDATER_OFFLINE
         message = "arXiv could not be reached; the review remains pending."
-    except (ListingParseError, digest.FeedParseError, StructuredOutputError, StateError):
+    except (ListingParseError, digest.FeedParseError, StructuredOutputError, StateError, HistoryImportError):
         status = UPDATE_NOT_CONFIRMED
         message = "The arXiv batch or structured analysis could not be validated; the review remains pending."
 
@@ -2377,9 +2495,6 @@ def run_daily(
             repaired_state["pendingBatchDate"] = next_pending.isoformat()
             validate_state(repaired_state)
         save_state(state_path, repaired_state)
-        _remove_checkpoint_best_effort(
-            _checkpoint_path(state_path, target, checkpoint_dir)
-        )
     else:
         save_state(
             state_path,
@@ -2921,6 +3036,10 @@ def build_argument_parser() -> argparse.ArgumentParser:
         "--output-dir", type=Path, default=Path(".local/research/daily")
     )
     daily.add_argument("--checked-at", type=_cli_datetime)
+    daily.add_argument("--published-history", type=Path,
+                       help="validated public history whose paper IDs must not be analyzed again")
+    daily.add_argument("--recover-pending", action="store_true",
+                       help="explicitly recover an old pending batch instead of scanning the latest; never scheduled")
 
     aggregate = subparsers.add_parser(
         "aggregate", help="generate a weekly or monthly review from daily JSON"
@@ -2948,6 +3067,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 state_path=args.state,
                 output_dir=args.output_dir,
                 checked_at=args.checked_at,
+                recover_pending=args.recover_pending,
+                published_history=args.published_history,
             )
         else:
             generated_at = args.generated_at or datetime.now(timezone.utc)

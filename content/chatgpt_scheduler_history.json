@@ -1387,6 +1387,78 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-09-03-daily-openai-01",
+      "editionDate": "2026-09-03",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-05T15:03:39Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-03",
+      "observedBatchDate": "2026-09-03",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月3日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n## 1. Price manipulation in nonlinear transient impact models: rigidity before memory and complete positivity after memory\n\n**[arXiv:2609.02447v1](https://arxiv.org/abs/2609.02447v1) — Minhyeok Lee**\n\n**重要度: 8/10 — 非推奨・market impact**\n\n本稿は、非線形 transient impact model における price manipulation の不在条件を、非線形性を memory kernel の前に置くか後に置くかで分類する理論研究である。主張の中心は、rate-inside 型では非ゼロの可積分 Volterra kernel に対する round-trip 安全性が impact law の affine 性を強制し、state-outside 型では全単調 readout に対する安全性が kernel の complete positivity と同値になる、という点である。\n\n有限個の定数 block からなる round trip を admissible control とし、rate-inside 側では zero-volume chattering pump と thin baseline trade を用いて非線形性から負コスト戦略を構成する。state-outside 側では Volterra resolvent、complementary kernel、Bregman divergence を用いた storage-dissipation identity により complete positivity の必要十分性を導く。さらに remote compensating block で round-trip safety と all-input safety を比較し、Prony 系では inverse-kernel の residue 条件および有限 cut linear program による unsafe certificate を提示する。 著者の定理によれば、power-law memory $G(t)=t^{-\\gamma}$、$0‹\\gamma‹1$ の rate-inside model では、$f(x)=\\operatorname{sgn}(x)|x|^{\\delta}$ が manipulation-free となるのは $\\delta=1$ のみであり、square-root impact を含む $\\delta\\ne1$ は有限個の piecewise-constant block による manipulation を許す。他方、同じ非線形 readout を memory state の後に適用する state-outside model では、power-law kernel が completely positive であるため、単調 readout に対して安全だと主張する。\n\nexecution model の設計・検証では、concave instantaneous impact を rate に直接適用する propagator specification を no-manipulation 条件だけで採用すべきでないことを示唆する。実務上は、impact state を resilience kernel で形成してから concave readout を適用する architecture、または spread と temporary cost を含む friction を明示的に導入する際の理論的な判定枠組みとなり得る。Prony kernel、time-varying resilience、matrix memory に対する条件は、数値実装可能な model diagnostics の候補でもある。 これは単一著者による arXiv v1 preprint であり、掲載誌での査読、独立再現、引用文献や既存結果との整合性は本資料だけでは確認できない。結論は frictionless impact cost、causal Volterra memory、有限 piecewise-constant control、ならびに多くの定理で全単調 readout class という強い仮定に依存する。実データでの calibration、discrete market rules、stochastic order flow、risk、latency、order-book constraints を直接検証してはいない。計算証明の一部は ancillary supplement に依存すると記載されるが、その内容は本資料に含まれない。著者自身が生成 AI による実質的な研究・証明・原稿作成支援を開示しており、広範な新規主張は特に慎重な数理レビューを要する。\n\n市場 impact と optimal execution に直接関係する非常に野心的な分類であり、rate-inside power-law model の広い no-manipulation 主張を覆すなら重要である。ただし、既存の open problem を解決するとする多数の強い定理を単一の未査読 preprint が提示しており、補題・境界条件・引用・計算補助資料を独立に検証するまでは、実務モデルの変更根拠として推奨できない。\n\n## 2. Competitive Market Behavior of LLMs\n\n**[arXiv:2609.02580v1](https://arxiv.org/abs/2609.02580v1) — Pawel Struski, Jakub Swistak, Inez Okulska, Przemyslaw Biecek**\n\n**重要度: 6/10 — 推奨・LLM agents**\n\nLLMエージェントを連続ダブルオークションに参加させ、Smith型の人間実験と比較した研究である。3モデル群の10反復では、いずれも競争均衡価格$2.00$・均衡数量$6$への完全収束を示さず、人間ベンチマークより価格分散が大きく、配分効率も完全には達しなかった。\n\n買い手・売り手各11名に$0.75$から$3.25$の私的予約価格を$0.25$刻みで割り当て、競争均衡を$(p^\\star,q^\\star)=(2.00,6)$とする対称的CDAを設計した。各実験は5ラウンド、各ラウンド最大$300$回のランダム選択機会で構成され、改善注文のみを板に残し、クロス注文は既存最良気配で即時約定する。GPT Large、GPT Small、Gemini Largeをデフォルト設定・temperature $1$で各10シード反復し、取引数、平均取引価格、均衡価格周りの価格分散$\\alpha=100\\cdot\\sigma_0/P_0$、配分効率を集計した。加えて、Gemini Largeの公開されたreasoning traceについて、クロス注文と小刻み改善の語彙を加重log-odds比で比較した。 GPT Smallのみ価格分散がラウンドを通じて$27.6$から$11.7$へ低下し、効率が$0.79$から$0.91$へ上昇したが、最終ラウンドでも人間ベンチマークの分散$3.5$を大きく上回った。GPT Largeはスプレッドをほぼゼロまで待つ小刻みな改善に偏り、平均取引数は$2.2$から$3.8$、効率は$0.36$から$0.67$にとどまった。著者らは、LLMの利幅追求と取引完了のトレードオフが市場全体の収束・効率を左右すると報告する。\n\n電子市場でLLMを自律的な発注主体として導入・評価する際、単体の収益性や会話能力だけでなく、約定率、スプレッド横断行動、価格分散、取引量、実現余剰を人間および理論ベンチマークと比較する検証枠組みとして有用である。また、高価格や$0.01$刻みのアンダーカットを直ちに協調行動と解釈せず、非協調LLM市場自体の収束性を先に確認すべきことを示唆する。 結果は特定時点の3モデル、各条件10反復、5ラウンド、対称的な単一財・固定的予約価格・最大$300$反復という簡略化された環境に限られる。モデル設定はデフォルトかつtemperature $1$であり、プロンプト、API挙動、モデル更新、反復上限、情報設計に感応的でありうる。人間比較はSmith (1962) の集計ベンチマークで、同一実装下の同時対照実験ではない。モデル規模の因果効果は識別しておらず、GPT Smallの優位を一般化できない。reasoning trace分析はGemini Largeのみで、語彙と行動の関連を示すにとどまり、内部意思決定の因果的証拠ではない。\n\n市場マイクロストラクチャの基本制度であるCDAについて、LLM注文行動を価格収束、取引量、余剰効率という明確な指標で人間実験と比較する点は、AIエージェントの電子執行・市場設計上の検証に直接関連する。一方、短い実験地平、限定的なモデル数・反復数、歴史的な人間ベンチマークとの比較のため、実運用市場への外挿や一般的なLLM能力比較の根拠としては限定的である。",
+      "papers": [
+        {
+          "arxivId": "2609.02447v1",
+          "title": "Price manipulation in nonlinear transient impact models: rigidity before memory and complete positivity after memory",
+          "authors": [
+            "Minhyeok Lee"
+          ],
+          "submittedDate": "2026-09-02",
+          "updatedDate": "2026-09-02",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.02447v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.02447v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・重要度 8/10",
+          "schedulerSummary": "本稿は、非線形 transient impact model における price manipulation の不在条件を、非線形性を memory kernel の前に置くか後に置くかで分類する理論研究である。主張の中心は、rate-inside 型では非ゼロの可積分 Volterra kernel に対する round-trip 安全性が impact law の affine 性を強制し、state-outside 型では全単調 readout に対する安全性が kernel の complete positivity と同値になる、という点である。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.02580v1",
+          "title": "Competitive Market Behavior of LLMs",
+          "authors": [
+            "Pawel Struski",
+            "Jakub Swistak",
+            "Inez Okulska",
+            "Przemyslaw Biecek"
+          ],
+          "submittedDate": "2026-09-02",
+          "updatedDate": "2026-09-02",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.02580v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.02580v1",
+          "schedulerRank": 2,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 6/10",
+          "schedulerSummary": "LLMエージェントを連続ダブルオークションに参加させ、Smith型の人間実験と比較した研究である。3モデル群の10反復では、いずれも競争均衡価格$2.00$・均衡数量$6$への完全収束を示さず、人間ベンチマークより価格分散が大きく、配分効率も完全には達しなかった。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

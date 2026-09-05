@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-09-01-daily-openai-01",
+  "editionDate": "2026-09-01",
+  "editionKind": "daily",
+  "sourceKind": "openai-responses-api",
+  "sourceLabel": "OpenAI Responses API · automated research pipeline",
+  "importedAt": "2026-09-05T14:57:41Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXivの更新を確認し、対象論文を評価しました。",
+  "expectedBatchDate": "2026-09-01",
+  "observedBatchDate": "2026-09-01",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年9月1日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n## 1. Deep Hedging Under Realistic Market Frictions: A Regime-Conditional Empirical Study of Dynamic Option Hedging on Bitcoin Options\n\n**[arXiv:2608.29025v1](https://arxiv.org/abs/2608.29025v1) — Sheryan Kumar**\n\n**重要度: 10/10 — 推奨・深層ヘッジ**\n\nDeribitのBTCオプションについて、同一の往復$5$ bp取引コストの下で、Black-Scholes、Leland、Whalley-Wilmottの古典的ヘッジとCVaR学習の深層ヘッジを比較した実証研究である。対象期間・データ構造が限定的であり、結論はレジーム依存の条件付き証拠として読むべきである。\n\n2020年から2024年の月初日61日分のDeribit hourly options snapshotを用い、各契約・日を最大24ステップの独立episodeとして扱う。ショート・オプションをBTCで毎時ヘッジし、BS delta、Leland、$\\lambda=60$のWhalley-Wilmott、LSTM 2仕様、feedforward 1仕様を評価した。深層モデルは$95\\%$ CVaRにturnover penaltyを加えて学習し、日単位16ブロックの5,000回bootstrapで検定した。 2023年9月から2024年12月の11,546テストepisodeでは、Whalley-Wilmott no-trade bandが平均コストでBS delta比$1.79ドル$低く、ブロックbootstrapの$95\\%$ CIは$[-2.21,-1.39]$、$p‹0.0001$だった。平均P&Lと$95\\%$ CVaRも同手法が最良だが、BSおよびLelandに対するP&L優位は有意ではない。3つの深層ヘッジ仕様は全測定指標で古典ベンチマークを下回り、ほぼ毎時取引したと報告する。\n\nBTCオプションの離散ヘッジでは、ニューラルpolicyを導入する前に、明示的なno-trade bandを含むコスト対応型ベンチマークと同一コスト仮定で比較する実務上の重要性を示す。特に連続出力policyへのturnover penaltyだけでは取引頻度を抑えられない可能性があり、thresholdまたはgatingを持つ執行ロジックの検討余地がある。 連続履歴ではなく月初日のみで、テストの実効独立標本は16日である。Whalley-Wilmottの$\\lambda=60$は目視で選ばれ、感度分析や独立較正がない。コストは時変流動性・市場impactを含まない固定の往復$5$ bpであり、BTC・Deribit・単一の上昇トレンドを含むテスト窓への一般化はできない。深層モデルの探索範囲も3仕様に限られる。\n\n深層ヘッジを摩擦対応の古典手法と公平に比較し、日クラスタリングを考慮した点は電子執行・ヘッジ設計に有用である。一方、限定的な日次サンプル、恣意的なband較正、単純なコストモデルのため、手法の優劣を一般化する決定的証拠ではなく、再現・拡張を前提としたケーススタディとして推奨する。\n\n## 2. Improving Swaption Calibration in Factor HJM Stochastic Volatility Models: A First-Order Correction to Frozen Swap-Rate Loadings\n\n**[arXiv:2608.29423v1](https://arxiv.org/abs/2608.29423v1) — Bram Brongers**\n\n**重要度: 10/10 — 推奨・金利モデル**\n\n本稿は、factor HJM 確率ボラティリティ・モデルにおける swaption pricing の frozen swap-rate loading を、期待状態の周りで一次 Taylor 展開して補正する手法を提案する。追加の較正パラメータを導入せず、既存の Fourier pricing 枠組みで計算可能な補正を目指している。\n\n非線形 swap-rate loading を期待状態パス上で一次線形化し、補助スケール $\\gamma$ による transform の一次摂動を導出する。scalar Cheyette では、一次変分を定数項・主因子項・補助因子項からなる affine-state basis に閉じ、一次元 volatility PDE を得る。E1 ODE、log-volatility finite-difference PDE、Chebyshev collocation、pathwise randomized-QMC derivative、Gaussian limit、および symbolic check を相互検証に用いる。較正評価は合成の非線形モデル価格を対象に、3つの swaption smile の fit/holdout panel、common-random-number 誤差分解、Jacobian singular-value analysis で行う。 著者は、凍結した annuity-measure drift を維持する条件下で、state-linear loading に対する swap-rate transform の一次変分が中心化された金利状態に関して affine になることを導出した。scalar Cheyette と quadratic-drift lognormal volatility では、補正は volatility の一次元 PDE、または E1 polynomial approximation による有限次元 ODE で評価できる。独立に生成した非線形モデルの合成 swaption prices に対する実験では、通常の3設定で corrected model が frozen model より held-out RMSE と相関 volatility loading $\\beta$ の回収バイアスを大幅に低減したと報告する。例えば Moderate 設定の held-out RMSE は $0.3169$ から $0.0118$ normal-volatility bp に低下した。\n\nfactor HJM/Cheyette 型モデルで swaption smile を較正する際、frozen loading が stochastic-volatility parameter に生む補償的なバイアスを抑える候補となる。通常の検証設定では、既存の E1 Fourier pricer に少数の ODE 係数を追加して実装できる。volatility 分布が広い場合は E1 の単項式展開が不安定になり得るため、log-volatility PDE または spectral solver と、quote-level の精度検証を併用すべきである。 結論は主に合成データ、one-factor Cheyette、限定された5つの parameter regime に基づくため、市場 swaption cube での実証的な安定性や multifactor FHJM への有効性は未検証である。補正後も deterministic centering、frozen annuity drift、loading の一次 Taylor remainder、及び $\\gamma=1$ での一次摂動打切りが残る。stress cases では一次元 PDE 自体は安定でも、最大 quote-level residual が事前閾値を超え、有限 E1 表現は broad-volatility 条件で数値的に破綻したと著者は報告する。なおこれは査読状況が示されない単著の arXiv preprint であり、結果は独立再現と実データ検証を要する。\n\n金利デリバティブのモデル較正に直接関係し、frozen-coefficient approximation の parameter-recovery bias を明示的に分離して検証している点は有用である。理論上の一次元 reduction、複数の数値クロスチェック、holdout と full-nonlinear repricing は評価できる。一方、証拠は著者設計の合成実験に限られ、stress regime と E1 instability も明示されているため、実運用への採用には市場データ、multifactor 実装、速度・安定性の独立検証が必要である。\n\n## 3. The Convergence Rate of Stochastic Tracking with Application to Optimal Execution\n\n**[arXiv:2608.29468v1](https://arxiv.org/abs/2608.29468v1) — Marcel Nutz, Moritz Voss**\n\n**重要度: 10/10 — 推奨・optimal execution**\n\n一般の確率的ターゲットを絶対連続な制御で追跡する二次最適化について、ターゲットの $L^2$ 時間並進モジュラスに基づく非漸近的誤差上界を導出する。これをランダムな満期在庫を持つ一般化 Obizhaeva–Wang transient-impact execution に適用し、特異な最適執行を滑らかな執行で近似するコストが $O( \\sqrt{\\varepsilon})$ であることを示す。\n\n前半は構成的な指数追跡制御と terminal bridge を用い、時間並進モジュラスによる上界と対応する下界を導く。後半は impact process を Hilbert 空間の元として表現し、unregularized execution を閉 affine subspace への直交射影として解く。次に impact 過剰コストを最適在庫への $L^2$ 追跡誤差で支配し、構成した絶対連続 strategy の誤差評価へ帰着する。 追跡摩擦 $ \\kappa\\downarrow0$ に対し、ターゲットのモジュラスが $ \\omega_\\xi(h)=O(h^\\alpha)$ なら、初期乖離を除く追跡値は $O(\\kappa^{\\alpha/2})$ と評価される。平方可積分 càdlàg semimartingale では通常 $O(\\sqrt{\\kappa})$ であり、連続 martingale やジャンプを含む決定論的ターゲットではこの次数が鋭い。fractional Brownian motion では値が $\\kappa^H$ オーダーとなる。execution 部分では、正則化値差 $V(\\varepsilon)-V(0)=O(\\sqrt{\\varepsilon})$ を示し、定数係数・決定論的満期在庫では正の一次係数を持つ $\\sqrt{\\varepsilon}$ 展開により鋭さを確認する。\n\n実装上は、閉形式が得られない正則化 optimizer の代わりに、非正則化 Obizhaeva–Wang optimizer を時定数 $\\sqrt{\\varepsilon}$ の指数フィルタで追跡し、満期前の最終区間で terminal bridge に切り替える明示的 feedback strategy を利用できる。これはランダムな注文フローにより最終執行量が逐次学習される central risk book 型の execution に特に関連する。 結果は二次 tracking cost、絶対連続な正則化戦略、deterministic で有限変動の resilience/depth、および price manipulation を排除する係数条件に依存する。ランダム満期在庫には到達可能性条件 $\\int_0^T \\frac{dE[\\Xi_t^2]}{T-t}‹\\infty$ が必要である。$O(\\sqrt{\\varepsilon})$ の鋭さは本文では定数係数・決定論的満期在庫の benchmark で示されており、一般の確率的係数や実市場データでの推定・アウトオブサンプル性能は検証していない。\n\n電子執行と market microstructure に直接関係し、transient impact 下で特異な最適執行を実装可能な滑らかな方策へ置換する際の明示的・非漸近的保証を与える。特に stochastic terminal inventory を扱い、実装可能な方策にも optimizer と同次数の保証を与える点が有用である。ただし理論モデルへの依存が強く、実証的な執行性能の結論には直結しない。\n\n## 4. Decarbonising price formation: unit-level evidence on battery storage and the imbalance price in the GB Balancing Mechanism\n\n**[arXiv:2608.29818v1](https://arxiv.org/abs/2608.29818v1) — Robert Dalton, Aidan O'Sullivan**\n\n**重要度: 8/10 — 推奨・市場マイクロストラクチャー**\n\n本稿は、2023年から2025年のGB Balancing Mechanismにおける50,684の半時間Settlement Periodを対象に、NIVで区分したbid側・offer側の適格energy-action stackの価格端を、BMU単位で限界行動の代理変数として再構築する。著者らの集計では、battery storageの限界シェアはbid側で0.8%から36.2%、offer側で3.2%から26.9%へ上昇した。\n\nElexonのISPStack、System Price、NIV、BOD、BMU metadataを結合し、CADL、SO、STOR等を除外した。short systemでは適格offerの最高final price、long systemでは適格bidの最低final priceを限界候補として選び、同価格のBMUには合計1となるtie weightを配分した。battery BMU-quarter panelには二元固定効果モデル$$S_{i,t}=\\beta(K_i\\times A_{i,t})+\\alpha_i+\\gamma_t+\\epsilon_{i,t}$$を推定し、さらにBODから同期間の未使用非battery volumeを用いるfixed-ladder replacement VWAP比較を行った。 著者らは、batteryが通常時の価格形成に広く参加し、bid側では主にCCGT、offer側では主にpumped storageの限界シェア低下と対応したと報告する。2025年にはbatteryの行動価格が同一期間・同一側のvolume-matched非battery代替より平均約£9から£10/MWh有利だった一方、short-systemの高価格上位5%ではbatteryの比率が全体シェア比で12.9 percentage points低い。したがって、batteryの台頭は価格分布の中心部で顕著であり、極端なshort-system価格ではCCGTとpumped storageがなお重要だという結論である。\n\nGB電力のbalancing cost、storage入札、duration投資、ならびにreal-time electricity marketの監視に有用である。電子市場の観点では、bidとofferを統合せず、unit-level attribution、co-marginal tie、同一時点の残余ladderを分けて扱う設計は、約定データから価格形成を分析する際の実務的な枠組みとなる。 最重要の制約は、選んだ価格端が公式System Price算定やNESO dispatchの完全な再現ではなく、限界価格設定者のproxyにとどまる点である。PAR、replacement pricing、de minimis、arbitrage removal、Reserve Scarcity Price floorを完全には再構築していない。固定ladder比較も位置、ramping、duration、state of charge、ancillary-service commitment、acceptance orderingを観測できず、consumer savingや因果的なdispatch反実仮想を示さない。固定効果のcapacity係数は因果効果ではなく、storage durationもcapacity正規化に含まれない。\n\n電力市場に固有の研究であり金利・債券への直接的な適用性は低い。しかし、リアルタイムのbid/offer stack、限界価格帰属、同一時点の代替流動性という分析は、electronic executionおよびmarket microstructureの読者に有益である。結論は価格端proxyへの依存が大きいため、batteryが公式に価格を「設定した」との強い解釈ではなく、透明な観測データに基づく記述的証拠として読むべきである。\n\n## 5. Optimal Block Time for AMM Liquidity Providers under Jump-Diffusion Prices\n\n**[arXiv:2608.30321v1](https://arxiv.org/abs/2608.30321v1) — Nils Bundi**\n\n**重要度: 6/10 — 推奨・AMM**\n\n本稿は、constant-product AMMのLPが負担するLoss-versus-Rebalancing（LVR）を、参照価格が有限活動のjump-diffusionに従う場合へ拡張する。著者は、手数料と離散ブロックを含む近似的な分離式において、ブロック時間に依存する拡散由来のLVRと、ブロック時間に依存しないジャンプ由来の項を分ける。対称ジャンプ分布など追加条件の下では、ジャンプ項が厳密な正の下限になると主張する。\n\nCPMMの価値関数$V(P)=2\\sqrt{LP}$にItô--Lévy公式を適用し、連続裁定時の拡散・ジャンプLVRを導出する。次に、外部価格をMerton型compound-Poisson jump-diffusion、ブロック到着をPoisson process、裁定者を無制約・リスク中立・連続観測可能と仮定する。手数料帯域内へ価格をresetするmispricing過程の定常分布を用い、$\\lambda=0$で既知の閉形式とジャンプ一件の二次近似を組み合わせる。分離残差$E(\\Delta t)$には、対称ジャンプ分布および数値的に確認したmixing conditionの下で上下界を与える。数値例はBinance ETH/USDTの$5$分足、2020年1月から2026年6月の$2,373$日を使い、bipower variationとLee--Mykland jump testで$\\sigma$、$\\lambda$、$\\delta$を推定したと報告している。 ゼロ手数料・連続裁定のCPMMでは、LVR率は$$\\ell=\\frac{\\sigma^2}{8}V+\\frac{\\lambda}{2}V\\mathbb{E}\\left[\\left(e^{J/2}-1\\right)^2\\right]$$と導かれる。手数料$\\gamma$と平均ブロック時間$\\Delta t$を導入すると、著者は二次損失 surrogate に基づき$$\\ell(\\Delta t)=\\frac{\\sigma^2}{8}V F\\left(\\frac{\\gamma}{\\sigma\\sqrt{\\Delta t}}\\right)+\\lambda V G_\\nu(\\gamma)+E(\\Delta t)$$を提示する。ここで$F(\\kappa)=\\left(1+\\sqrt{2}\\kappa\\right)^{-1}$、$G_\\nu(\\gamma)=\\frac18\\mathbb{E}\\left[(|J|-\\gamma)^2\\mathbf{1}_{\\{|J|›\\gamma\\}}\\right]$である。対称性とジャンプ集約仮定の下で、著者は$\\ell(\\Delta t)\\geq\\lambda V G_\\nu(\\gamma)›0$というジャンプ床を証明する。分離目的$\\ell_0(\\Delta t)+c/\\Delta t$では、最適ブロック時間はジャンプ・パラメータに依存せず、$\\eta/(1+\\eta)^2=V\\gamma^2/(8c)$および$\\Delta t_{\\rm opt}=2\\gamma^2/(\\sigma^2\\eta^2)$で特徴付けられる。\n\nAMM設計者・チェーン設計者は、短いブロック時間が削減できるのは主に拡散起源の裁定損失であり、大きな価格ジャンプによるLP損失をブロック高速化だけでは除去できない、という設計上の切り分けに利用できる。著者のETH/USDT仮想フルレンジLP校正では、$12$秒で$471$ bp/yr、短時間極限のジャンプ床が$125$ bp/yrと報告され、発行額をconsensus costのproxyとするLP限定の目的では最適値が約$8.4$秒となる。ジャンプ床へのレバーとしては、ブロック時間より手数料とジャンプ・サイズの比$\\gamma/\\delta$、batch auction、LVR rebate機構が示唆される。 結論の中心であるジャンプ・パラメータ不変性は厳密なLVR率ではなく、$\\Delta t$非依存のジャンプ項を持つ分離率$\\ell_0$についての結果である。著者自身も、厳密な残差$E(\\Delta t)$にはジャンプ・パラメータとブロック時間の相互作用が残り、最適値の不変性は近似的・校正依存であると認める。厳密なジャンプ床には対称ジャンプ分布と集約仮定が必要で、非対称ジャンプでは同じ証明は成立しない。さらに、full-range CPMM、有限活動ジャンプ、Poisson block arrival、無限資本・ゼロ遅延の裁定者、外部価格の連続観測を仮定しており、concentrated liquidity、実際のblock schedule、競争的MEV・latencyには直接対応しない。consensus costは観測されたEthereum issuanceを資源費用のproxyとしてpool TVL比で配賦しており、補助金、MEV、手数料収入、native-token保有者への希薄化を十分に表現しない。目的関数もLP-LVRとconsensus costに限定され、finality、oracle freshness、censorship resistance、MEV配分などを含む社会厚生の最適化ではない。\n\nAMMのadverse selectionとblock cadenceを結ぶLVR研究として、電子取引・market microstructureに実質的に関連する。特に、価格ジャンプを入れることで「より短いブロックは常にLP損失を減らす」というGBMベースの直観を限定し、block-time依存成分と非依存成分を分離した点は有用である。ただし、主張の一部は二次surrogateと分離近似に依存し、厳密な床にも対称性など強い条件があるため、プロトコル設計の一般的結論としてではなく、明示的な仮定の下のモデル結果として扱うべきである。\n\n## 6. Agentic Quantitative Trading: A Survey of Workflows, Systems, and Evaluation\n\n**[arXiv:2608.31041v1](https://arxiv.org/abs/2608.31041v1) — Fengrui Hua, Hengyi Yang, Xinlei Hao, Haohan Zhang, Bokai Cao, Yiyan Qi, Jia Li, Jian Guo**\n\n**重要度: 6/10 — 推奨・agentic trading**\n\nLLMベースのagentic quantitative tradingを、factor mining、signal discovery、portfolio construction、order execution、risk managementの5段階で整理したサーベイである。さらに、システムをarchitecture、coordination、adaptationで分類し、戦略構築、offline trading、live evaluation、reliability evaluationのベンチマークを比較する。\n\n主に2025–2026年のLLM agent研究を対象に、非agent型予測研究と一般的な金融LLM応用を除外して文献レビューを行う。代表的な20システムを5つのworkflow stageと3つのsystem-design dimensionで符号化し、15 benchmarkを4類型に分類して記述的に集計・比較している。 著者らが整理した20システムではsignal discoveryが全件で中核機能である一方、5段階を少なくとも部分的にカバーするものは4件、全段階を中核機能として扱うものは2件にとどまる。multi-agent systemではaggregationが優勢であり、live市場・leakage・slippage・misinformationを考慮した評価では、予測性能やbacktest収益が実運用収益を保証しないと報告している。\n\n電子執行を含むagentic tradingの設計レビューとして有用である。実装者は、LLMを直接的な売買判断に限定せず、factor research、例外処理、情報統合、監視に配置し、portfolio optimizer、execution algorithm、hard risk gateは従来型コンポーネントとして検証可能に保つ設計を検討できる。評価では時点整合性、取引コスト、流動性、slippage、リスク制約、帰属分析を含めるべきである。 原著の実証研究ではなく、結論は著者らが選定・分類した文献集合に依存する。集計は母集団全体を表すものではなく、採用研究の多くはpreprintを含む。個別論文の再現性、実取引での執行可能性、手数料・市場インパクト・容量制約の統一的な再検証は本稿自体では行われていない。したがって、live evaluationに関する主張も引用ベンチマークの報告として解釈すべきである。\n\nagentic tradingをsignal生成だけでなくportfolio construction、order execution、risk control、評価信頼性まで接続して整理しており、電子取引システムの研究地図として有用である。ただしサーベイであり、直接のexecution alphaやmarket microstructureの新規実証を提供する研究ではない。",
+  "papers": [
+    {
+      "arxivId": "2608.29025v1",
+      "title": "Deep Hedging Under Realistic Market Frictions: A Regime-Conditional Empirical Study of Dynamic Option Hedging on Bitcoin Options",
+      "authors": [
+        "Sheryan Kumar"
+      ],
+      "submittedDate": "2026-08-29",
+      "updatedDate": "2026-08-29",
+      "topics": [
+        "Electronic trading"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.29025v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.29025v1",
+      "schedulerRank": 1,
+      "schedulerRating": 10,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・重要度 10/10",
+      "schedulerSummary": "DeribitのBTCオプションについて、同一の往復$5$ bp取引コストの下で、Black-Scholes、Leland、Whalley-Wilmottの古典的ヘッジとCVaR学習の深層ヘッジを比較した実証研究である。対象期間・データ構造が限定的であり、結論はレジーム依存の条件付き証拠として読むべきである。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 10,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.29423v1",
+      "title": "Improving Swaption Calibration in Factor HJM Stochastic Volatility Models: A First-Order Correction to Frozen Swap-Rate Loadings",
+      "authors": [
+        "Bram Brongers"
+      ],
+      "submittedDate": "2026-08-29",
+      "updatedDate": "2026-08-29",
+      "topics": [
+        "Interest-rate models"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.29423v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.29423v1",
+      "schedulerRank": 2,
+      "schedulerRating": 10,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・重要度 10/10",
+      "schedulerSummary": "本稿は、factor HJM 確率ボラティリティ・モデルにおける swaption pricing の frozen swap-rate loading を、期待状態の周りで一次 Taylor 展開して補正する手法を提案する。追加の較正パラメータを導入せず、既存の Fourier pricing 枠組みで計算可能な補正を目指している。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 10,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.29468v1",
+      "title": "The Convergence Rate of Stochastic Tracking with Application to Optimal Execution",
+      "authors": [
+        "Marcel Nutz",
+        "Moritz Voss"
+      ],
+      "submittedDate": "2026-08-29",
+      "updatedDate": "2026-08-29",
+      "topics": [
+        "Electronic trading"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.29468v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.29468v1",
+      "schedulerRank": 3,
+      "schedulerRating": 10,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・重要度 10/10",
+      "schedulerSummary": "一般の確率的ターゲットを絶対連続な制御で追跡する二次最適化について、ターゲットの $L^2$ 時間並進モジュラスに基づく非漸近的誤差上界を導出する。これをランダムな満期在庫を持つ一般化 Obizhaeva–Wang transient-impact execution に適用し、特異な最適執行を滑らかな執行で近似するコストが $O( \\sqrt{\\varepsilon})$ であることを示す。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 10,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.29818v1",
+      "title": "Decarbonising price formation: unit-level evidence on battery storage and the imbalance price in the GB Balancing Mechanism",
+      "authors": [
+        "Robert Dalton",
+        "Aidan O'Sullivan"
+      ],
+      "submittedDate": "2026-08-30",
+      "updatedDate": "2026-08-30",
+      "topics": [
+        "Market microstructure"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.29818v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.29818v1",
+      "schedulerRank": 4,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・重要度 8/10",
+      "schedulerSummary": "本稿は、2023年から2025年のGB Balancing Mechanismにおける50,684の半時間Settlement Periodを対象に、NIVで区分したbid側・offer側の適格energy-action stackの価格端を、BMU単位で限界行動の代理変数として再構築する。著者らの集計では、battery storageの限界シェアはbid側で0.8%から36.2%、offer側で3.2%から26.9%へ上昇した。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.30321v1",
+      "title": "Optimal Block Time for AMM Liquidity Providers under Jump-Diffusion Prices",
+      "authors": [
+        "Nils Bundi"
+      ],
+      "submittedDate": "2026-08-31",
+      "updatedDate": "2026-08-31",
+      "topics": [
+        "Market microstructure"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.30321v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.30321v1",
+      "schedulerRank": 5,
+      "schedulerRating": 6,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・重要度 6/10",
+      "schedulerSummary": "本稿は、constant-product AMMのLPが負担するLoss-versus-Rebalancing（LVR）を、参照価格が有限活動のjump-diffusionに従う場合へ拡張する。著者は、手数料と離散ブロックを含む近似的な分離式において、ブロック時間に依存する拡散由来のLVRと、ブロック時間に依存しないジャンプ由来の項を分ける。対称ジャンプ分布など追加条件の下では、ジャンプ項が厳密な正の下限になると主張する。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 6,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2608.31041v1",
+      "title": "Agentic Quantitative Trading: A Survey of Workflows, Systems, and Evaluation",
+      "authors": [
+        "Fengrui Hua",
+        "Hengyi Yang",
+        "Xinlei Hao",
+        "Haohan Zhang",
+        "Bokai Cao",
+        "Yiyan Qi",
+        "Jia Li",
+        "Jian Guo"
+      ],
+      "submittedDate": "2026-08-31",
+      "updatedDate": "2026-08-31",
+      "topics": [
+        "Electronic trading"
+      ],
+      "absUrl": "https://arxiv.org/abs/2608.31041v1",
+      "pdfUrl": "https://arxiv.org/pdf/2608.31041v1",
+      "schedulerRank": 6,
+      "schedulerRating": 6,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・重要度 6/10",
+      "schedulerSummary": "LLMベースのagentic quantitative tradingを、factor mining、signal discovery、portfolio construction、order execution、risk managementの5段階で整理したサーベイである。さらに、システムをarchitecture、coordination、adaptationで分類し、戦略構築、offline trading、live evaluation、reliability evaluationのベンチマークを比較する。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 6,
+          "scale": 10
+        }
+      ]
+    }
+  ]
+}

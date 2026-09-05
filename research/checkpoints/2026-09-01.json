@@ -693,7 +693,7 @@
       "finalAnalysis": null
     },
     "2608.30999": {
-      "status": "awaiting_pdf",
+      "status": "withdrawn",
       "screenAnalysis": {
         "classification": "market_microstructure",
         "summary": "匿名の取引・気配データからsynthetic metaorder reconstructionを行い、LMF order-splitting theoryとの整合性を検証した研究です。JSEの大型239銘柄について、2023年から2025年までのデータを用いて再構成パラメータをgrid searchしています。",
@@ -737,6 +737,91 @@
         }
       },
       "finalAnalysis": null
+    },
+    "2608.31041": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "mixed",
+        "summary": "本論文は、推論・ツール利用・記憶・フィードバックを組み合わせるagentic quantitative tradingの研究を、ファクター発掘、シグナル発見、ポートフォリオ構築、注文執行、リスク管理の5段階で概観するサーベイである。",
+        "mainResult": "レビューによれば、既存システムはシグナル発見に偏っており、ポートフォリオ構築、執行、リスク管理までを統合したワークフローは少ない。また、マルチエージェント系は多様な構造が増えている一方で集約処理への依存が大きく、モデルや予測能力の高さはライブ市場での収益性や信頼性を保証しない。",
+        "practicalApplication": "研究動向の整理、agentic tradingシステムの設計比較、注文執行やリスク管理を含む評価ベンチマークの設計に利用できる。ただし、個別の執行アルゴリズムや市場マイクロ構造上の実装手法を直接提示する論文ではない。",
+        "methodology": "既存研究を、取引ワークフローの5段階、システムのアーキテクチャ・協調・適応性、および戦略構築、オフライン取引、ライブ市場評価、信頼性評価のベンチマークという観点から比較・整理するサーベイである。",
+        "limitations": "提示された抄録からは、収録文献の選定基準、比較対象、定量的な評価結果、ライブ市場データの詳細は確認できない。また、結論はサーベイが報告する傾向であり、各システムの性能や因果的優位性を独立に実証したものではない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "電子取引の注文執行を含むagentic tradingの全体像と評価上の課題を整理しており、関連分野の研究動向を把握する資料として有用である。一方、対象範囲が広く、執行・金利モデル・イールドカーブ・市場マイクロ構造への専門的貢献は限定的である。",
+        "tags": [
+          "agentic quantitative trading",
+          "multi-agent systems",
+          "order execution",
+          "portfolio construction",
+          "risk management",
+          "market evaluation",
+          "survey"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "This paper surveys agentic quantitative trading, which combines reasoning, tool use, memory, and feedback, across five stages: factor mining, signal discovery, portfolio construction, order execution, and risk management.",
+          "mainResult": "The review reports that existing systems remain concentrated on signal discovery, while workflows integrating portfolio construction, execution, and risk management are uncommon. It also finds that multi-agent systems rely heavily on aggregation despite increasingly diverse structures, and that strong model or forecasting capability does not guarantee profitability or reliability in live markets.",
+          "practicalApplication": "The survey can support research reviews, comparative design of agentic trading systems, and the development of evaluation benchmarks covering order execution and risk management. However, it does not directly provide a specific execution algorithm or market-microstructure implementation.",
+          "methodology": "The authors compare and organize prior work by five trading-workflow stages, system architecture, coordination, and adaptation, as well as benchmarks for strategy construction, offline trading, live-market evaluation, and reliability assessment.",
+          "limitations": "The abstract does not specify the literature-selection criteria, comparison set, quantitative evaluation details, or live-market data characteristics. The conclusions describe trends reported by the survey and do not independently establish the performance or causal superiority of individual systems.",
+          "reason": "The paper is useful for understanding the research landscape and evaluation challenges of agentic trading, including electronic order execution. Its scope is broad, however, and its specialized contribution to execution, interest-rate models, yield curves, or market microstructure appears limited.",
+          "tags": [
+            "agentic quantitative trading",
+            "multi-agent systems",
+            "order execution",
+            "portfolio construction",
+            "risk management",
+            "market evaluation",
+            "survey"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "LLMベースのagentic quantitative tradingを、factor mining、signal discovery、portfolio construction、order execution、risk managementの5段階で整理したサーベイである。さらに、システムをarchitecture、coordination、adaptationで分類し、戦略構築、offline trading、live evaluation、reliability evaluationのベンチマークを比較する。",
+        "mainResult": "著者らが整理した20システムではsignal discoveryが全件で中核機能である一方、5段階を少なくとも部分的にカバーするものは4件、全段階を中核機能として扱うものは2件にとどまる。multi-agent systemではaggregationが優勢であり、live市場・leakage・slippage・misinformationを考慮した評価では、予測性能やbacktest収益が実運用収益を保証しないと報告している。",
+        "practicalApplication": "電子執行を含むagentic tradingの設計レビューとして有用である。実装者は、LLMを直接的な売買判断に限定せず、factor research、例外処理、情報統合、監視に配置し、portfolio optimizer、execution algorithm、hard risk gateは従来型コンポーネントとして検証可能に保つ設計を検討できる。評価では時点整合性、取引コスト、流動性、slippage、リスク制約、帰属分析を含めるべきである。",
+        "methodology": "主に2025–2026年のLLM agent研究を対象に、非agent型予測研究と一般的な金融LLM応用を除外して文献レビューを行う。代表的な20システムを5つのworkflow stageと3つのsystem-design dimensionで符号化し、15 benchmarkを4類型に分類して記述的に集計・比較している。",
+        "limitations": "原著の実証研究ではなく、結論は著者らが選定・分類した文献集合に依存する。集計は母集団全体を表すものではなく、採用研究の多くはpreprintを含む。個別論文の再現性、実取引での執行可能性、手数料・市場インパクト・容量制約の統一的な再検証は本稿自体では行われていない。したがって、live evaluationに関する主張も引用ベンチマークの報告として解釈すべきである。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "agentic tradingをsignal生成だけでなくportfolio construction、order execution、risk control、評価信頼性まで接続して整理しており、電子取引システムの研究地図として有用である。ただしサーベイであり、直接のexecution alphaやmarket microstructureの新規実証を提供する研究ではない。",
+        "tags": [
+          "agentic trading",
+          "LLM agents",
+          "electronic trading",
+          "order execution",
+          "portfolio construction",
+          "risk management",
+          "benchmarking",
+          "evaluation",
+          "information leakage",
+          "slippage"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This survey organizes LLM-based agentic quantitative trading into five stages: factor mining, signal discovery, portfolio construction, order execution, and risk management. It further classifies systems by architecture, coordination, and adaptation, and compares benchmarks for strategy construction, offline trading, live evaluation, and reliability evaluation.",
+          "mainResult": "Among the 20 systems catalogued by the authors, signal discovery is a core function in every case, whereas only four cover all five stages at least partially and only two treat every stage as a core function. Aggregation dominates multi-agent systems. The survey reports that, under evaluations accounting for live markets, leakage, slippage, and misinformation, forecasting quality or backtest returns do not guarantee realized trading returns.",
+          "practicalApplication": "The paper is useful as a design review for agentic trading, including electronic execution. Practitioners can consider using LLMs for factor research, exception handling, information synthesis, and monitoring rather than only direct trade decisions, while retaining conventional portfolio optimizers, execution algorithms, and hard risk gates as auditable components. Evaluations should include temporal alignment, transaction costs, liquidity, slippage, risk constraints, and attribution analysis.",
+          "methodology": "The authors conduct a literature review focused mainly on 2025–2026 LLM-agent research, excluding non-agent predictive studies and general financial-LLM applications. They code 20 representative systems by five workflow stages and three system-design dimensions, and descriptively classify and compare 15 benchmarks across four groups.",
+          "limitations": "This is not an original empirical study; its conclusions depend on the literature set selected and classified by the authors. The counts do not represent the entire research population, and many included studies are preprints. The survey itself does not independently verify reproducibility, real-world executability, or transaction fees, market impact, and capacity constraints across studies. Claims regarding live evaluation should therefore be read as reports from the cited benchmarks.",
+          "reason": "It usefully connects agentic trading beyond signal generation to portfolio construction, order execution, risk control, and evaluation reliability, making it a valuable research map for electronic trading systems. However, it is a survey and does not provide novel direct evidence on execution alpha or market microstructure.",
+          "tags": [
+            "agentic trading",
+            "LLM agents",
+            "electronic trading",
+            "order execution",
+            "portfolio construction",
+            "risk management",
+            "benchmarking",
+            "evaluation",
+            "information leakage",
+            "slippage"
+          ]
+        }
+      }
     }
   },
   "candidateFingerprints": {

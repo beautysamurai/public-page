@@ -1,7 +1,7 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "batchDate": "2026-09-01",
-  "fingerprint": "23be67de5f7e58d4b8c979b267ee42f1a22dcc797089ed5ffefb10a163f3723b",
+  "fingerprint": "e23551310a2e3f88f83d7578424f6fc87590cf59879e10f65060c45ebf5c9c78",
   "results": {
     "2608.29025": {
       "status": "completed",
@@ -87,7 +87,7 @@
       }
     },
     "2608.29423": {
-      "status": "awaiting_pdf",
+      "status": "completed",
       "screenAnalysis": {
         "classification": "interest_rate_models",
         "summary": "本論文は、因子HJM stochastic volatilityモデルにおけるswaption calibrationの精度向上を扱う。決定論的な期待状態経路で凍結していたswap-rate loadingに一次Taylor補正を加え、追加パラメータなしで非線形なイールドカーブ状態依存性を部分的に回復する。",
@@ -126,7 +126,633 @@
           ]
         }
       },
+      "finalAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "本稿は、factor HJM 確率ボラティリティ・モデルにおける swaption pricing の frozen swap-rate loading を、期待状態の周りで一次 Taylor 展開して補正する手法を提案する。追加の較正パラメータを導入せず、既存の Fourier pricing 枠組みで計算可能な補正を目指している。",
+        "mainResult": "著者は、凍結した annuity-measure drift を維持する条件下で、state-linear loading に対する swap-rate transform の一次変分が中心化された金利状態に関して affine になることを導出した。scalar Cheyette と quadratic-drift lognormal volatility では、補正は volatility の一次元 PDE、または E1 polynomial approximation による有限次元 ODE で評価できる。独立に生成した非線形モデルの合成 swaption prices に対する実験では、通常の3設定で corrected model が frozen model より held-out RMSE と相関 volatility loading $\\beta$ の回収バイアスを大幅に低減したと報告する。例えば Moderate 設定の held-out RMSE は $0.3169$ から $0.0118$ normal-volatility bp に低下した。",
+        "practicalApplication": "factor HJM/Cheyette 型モデルで swaption smile を較正する際、frozen loading が stochastic-volatility parameter に生む補償的なバイアスを抑える候補となる。通常の検証設定では、既存の E1 Fourier pricer に少数の ODE 係数を追加して実装できる。volatility 分布が広い場合は E1 の単項式展開が不安定になり得るため、log-volatility PDE または spectral solver と、quote-level の精度検証を併用すべきである。",
+        "methodology": "非線形 swap-rate loading を期待状態パス上で一次線形化し、補助スケール $\\gamma$ による transform の一次摂動を導出する。scalar Cheyette では、一次変分を定数項・主因子項・補助因子項からなる affine-state basis に閉じ、一次元 volatility PDE を得る。E1 ODE、log-volatility finite-difference PDE、Chebyshev collocation、pathwise randomized-QMC derivative、Gaussian limit、および symbolic check を相互検証に用いる。較正評価は合成の非線形モデル価格を対象に、3つの swaption smile の fit/holdout panel、common-random-number 誤差分解、Jacobian singular-value analysis で行う。",
+        "limitations": "結論は主に合成データ、one-factor Cheyette、限定された5つの parameter regime に基づくため、市場 swaption cube での実証的な安定性や multifactor FHJM への有効性は未検証である。補正後も deterministic centering、frozen annuity drift、loading の一次 Taylor remainder、及び $\\gamma=1$ での一次摂動打切りが残る。stress cases では一次元 PDE 自体は安定でも、最大 quote-level residual が事前閾値を超え、有限 E1 表現は broad-volatility 条件で数値的に破綻したと著者は報告する。なおこれは査読状況が示されない単著の arXiv preprint であり、結果は独立再現と実データ検証を要する。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "金利デリバティブのモデル較正に直接関係し、frozen-coefficient approximation の parameter-recovery bias を明示的に分離して検証している点は有用である。理論上の一次元 reduction、複数の数値クロスチェック、holdout と full-nonlinear repricing は評価できる。一方、証拠は著者設計の合成実験に限られ、stress regime と E1 instability も明示されているため、実運用への採用には市場データ、multifactor 実装、速度・安定性の独立検証が必要である。",
+        "tags": [
+          "金利モデル",
+          "HJM",
+          "Cheyetteモデル",
+          "スワップション",
+          "確率的ボラティリティ",
+          "モデル較正",
+          "Fourier pricing",
+          "摂動法"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This paper proposes a first-order Taylor correction around the expected state for the frozen swap-rate loading used in swaption pricing in factor-HJM stochastic-volatility models. It aims to retain computability within the existing Fourier-pricing framework without adding calibration parameters.",
+          "mainResult": "The author derives that, conditional on retaining the frozen annuity-measure drift, the first variation of the swap-rate transform under a state-linear loading is affine in centered rate states. For scalar Cheyette dynamics with quadratic-drift lognormal volatility, the correction can be evaluated through one-dimensional volatility PDEs or a finite-dimensional ODE based on the E1 polynomial approximation. In synthetic swaption-price experiments independently generated from the nonlinear model, the corrected model reportedly reduces held-out RMSE and bias in recovery of the correlated volatility loading $\\beta$ relative to the frozen model in three ordinary regimes. For example, held-out RMSE in the Moderate regime falls from $0.3169$ to $0.0118$ normal-volatility bp.",
+          "practicalApplication": "For calibration of swaption smiles in factor-HJM/Cheyette models, this is a candidate method for reducing compensating bias in stochastic-volatility parameters caused by a frozen loading. In the ordinary validated regimes, it can be implemented by adding a small number of ODE coefficients to an existing E1 Fourier pricer. When the volatility distribution is broad, the E1 monomial expansion can become unstable; a log-volatility PDE or spectral solver and quote-level accuracy checks should then be used.",
+          "methodology": "The nonlinear swap-rate loading is linearized to first order along an expected-state path, and a first perturbation of the transform is derived using an auxiliary scale $\\gamma$. In scalar Cheyette dynamics, the first variation closes on an affine-state basis comprising a constant, principal-factor, and auxiliary-factor term, yielding one-dimensional volatility PDEs. The study cross-checks E1 ODEs, log-volatility finite-difference PDEs, Chebyshev collocation, pathwise randomized-QMC derivatives, a Gaussian limit, and symbolic calculations. Calibration is assessed against synthetic nonlinear-model prices using three swaption smiles, fit and holdout panels, a common-random-number error decomposition, and Jacobian singular-value analysis.",
+          "limitations": "The conclusions are based mainly on synthetic data, one-factor Cheyette dynamics, and five selected parameter regimes, so empirical stability on market swaption cubes and applicability to multifactor FHJM remain untested. The correction still retains deterministic centering, a frozen annuity drift, a first-order Taylor remainder for the loading, and first-order perturbative truncation at $\\gamma=1$. In stress cases, the one-dimensional PDE remains numerically stable but the maximum quote-level residual exceeds the pre-specified threshold, while the finite E1 representation reportedly becomes numerically unreliable under broad volatility. This is also a sole-authored arXiv preprint with no stated peer-review status; independent replication and market-data validation are needed.",
+          "reason": "The work is directly relevant to interest-rate-derivative model calibration and usefully isolates and tests parameter-recovery bias from a frozen-coefficient approximation. Its theoretical one-dimensional reduction, multiple numerical cross-checks, holdout tests, and full-nonlinear repricing are strengths. However, the evidence is limited to author-designed synthetic experiments, and the paper itself identifies stress-regime limitations and E1 instability. Production adoption therefore requires independent validation on market data, multifactor implementations, and verification of speed and numerical stability.",
+          "tags": [
+            "interest-rate models",
+            "HJM",
+            "Cheyette model",
+            "swaptions",
+            "stochastic volatility",
+            "model calibration",
+            "Fourier pricing",
+            "perturbation methods"
+          ]
+        }
+      }
+    },
+    "2608.29468": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "確率的ターゲットを絶対連続制御で追跡する問題について、Besov型の連続性指標に基づく非漸近的な誤差上界と収束率を導出し、一般化Obizhaeva–Wangモデルの最適執行へ応用した研究です。",
+        "mainResult": "半マルチンゲール型ターゲットでは追跡誤差の収束率が平方根オーダーになることを示しています。ランダムな終端在庫を含む一般化Obizhaeva–Wangモデルでは、取引率への二次ペナルティ係数を$\\varepsilon$とした正則化問題の最適執行コストと超過価格インパクト費用が、最適化された非正則化問題に対してシャープな$O(\\sqrt{\\varepsilon})$率で収束します。さらに、閉形式で得られない正則化最適戦略に代わり、同じ近似率を持つ実装容易な準最適戦略を構成しています。",
+        "practicalApplication": "取引スパイクを抑制するための取引率ペナルティを、執行コストと近似誤差の定量的なトレードオフとして設計する際に利用できます。閉形式解が得られない場合でも、実装可能な準最適戦略の性能保証を与えられる点が実務上有用です。",
+        "methodology": "一般の確率的ターゲットに対する二次追跡問題を、Besov型モジュラスに基づく非漸近的上界で解析しています。続いて、ジャンプを含む最適戦略をHilbert空間アプローチで特徴付け、取引率ペナルティを導入した一般化Obizhaeva–Wangモデルに収束率の結果を適用しています。",
+        "limitations": "評価は提示された要旨に基づくため、仮定、定数、モデルのパラメータ化、準最適戦略の具体的なアルゴリズム、数値検証の詳細は確認できません。$O(\\sqrt{\\varepsilon})$の結果は要旨で述べられたモデルと確率過程の条件に依存し、実際の市場の離散時間性、注文簿の不均一性、執行リスク、推定誤差を直接扱うとは限りません。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "最適執行に直接関係し、取引スパイクを抑制する正則化と実装可能な準最適戦略について明示的な収束率を与えているため、電子執行分野との関連性と実務的価値が高い研究です。ただし、実証分析や現実的な市場マイクロ構造への検証は要旨からは確認できません。",
+        "tags": [
+          "optimal execution",
+          "stochastic tracking",
+          "Obizhaeva–Wang model",
+          "market impact",
+          "trading-rate penalty",
+          "convergence rates",
+          "semimartingale",
+          "nearly optimal strategy"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This paper derives non-asymptotic error bounds and convergence rates for tracking a stochastic target with absolutely continuous controls, using a Besov-type regularity measure, and applies the results to optimal execution in a generalized Obizhaeva–Wang model.",
+          "mainResult": "For semimartingale targets, the tracking error has square-root-order convergence. In the generalized Obizhaeva–Wang model with random terminal inventory, adding a quadratic trading-rate penalty with coefficient $\\varepsilon$ leads to a regularized optimal execution cost, and hence excess price impact cost, that converges to the unregularized benchmark at the sharp rate $O(\\sqrt{\\varepsilon})$. The authors also construct an implementable nearly optimal strategy with the same approximation rate, despite the absence of a closed-form regularized optimum.",
+          "practicalApplication": "The results can support the design of trading-rate penalties that suppress execution spikes while quantifying the trade-off between execution cost and approximation error. The implementable nearly optimal strategy is useful when the regularized optimal strategy cannot be obtained in closed form.",
+          "methodology": "The authors analyze a quadratic stochastic tracking problem through non-asymptotic bounds based on a Besov-type modulus. They then characterize the optimal strategy, including jumps, using a Hilbert-space approach and apply the convergence results to a generalized Obizhaeva–Wang model with a trading-rate penalty.",
+          "limitations": "The assessment is based only on the abstract, so the assumptions, constants, model parameterization, detailed algorithm for the nearly optimal strategy, and numerical evidence cannot be evaluated. The $O(\\sqrt{\\varepsilon})$ result depends on the stated model and process conditions and may not directly cover discrete-time markets, heterogeneous order books, execution risk, or parameter-estimation error.",
+          "reason": "The paper is directly relevant to optimal execution and provides explicit convergence guarantees for regularization that suppresses trading spikes, as well as an implementable nearly optimal strategy. However, the abstract does not establish empirical validation or robustness to realistic market microstructure.",
+          "tags": [
+            "optimal execution",
+            "stochastic tracking",
+            "Obizhaeva–Wang model",
+            "market impact",
+            "trading-rate penalty",
+            "convergence rates",
+            "semimartingale",
+            "nearly optimal strategy"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "一般の確率的ターゲットを絶対連続な制御で追跡する二次最適化について、ターゲットの $L^2$ 時間並進モジュラスに基づく非漸近的誤差上界を導出する。これをランダムな満期在庫を持つ一般化 Obizhaeva–Wang transient-impact execution に適用し、特異な最適執行を滑らかな執行で近似するコストが $O(\n\\sqrt{\\varepsilon})$ であることを示す。",
+        "mainResult": "追跡摩擦 $\n\\kappa\\downarrow0$ に対し、ターゲットのモジュラスが $\n\\omega_\\xi(h)=O(h^\\alpha)$ なら、初期乖離を除く追跡値は $O(\\kappa^{\\alpha/2})$ と評価される。平方可積分 càdlàg semimartingale では通常 $O(\\sqrt{\\kappa})$ であり、連続 martingale やジャンプを含む決定論的ターゲットではこの次数が鋭い。fractional Brownian motion では値が $\\kappa^H$ オーダーとなる。execution 部分では、正則化値差 $V(\\varepsilon)-V(0)=O(\\sqrt{\\varepsilon})$ を示し、定数係数・決定論的満期在庫では正の一次係数を持つ $\\sqrt{\\varepsilon}$ 展開により鋭さを確認する。",
+        "practicalApplication": "実装上は、閉形式が得られない正則化 optimizer の代わりに、非正則化 Obizhaeva–Wang optimizer を時定数 $\\sqrt{\\varepsilon}$ の指数フィルタで追跡し、満期前の最終区間で terminal bridge に切り替える明示的 feedback strategy を利用できる。これはランダムな注文フローにより最終執行量が逐次学習される central risk book 型の execution に特に関連する。",
+        "methodology": "前半は構成的な指数追跡制御と terminal bridge を用い、時間並進モジュラスによる上界と対応する下界を導く。後半は impact process を Hilbert 空間の元として表現し、unregularized execution を閉 affine subspace への直交射影として解く。次に impact 過剰コストを最適在庫への $L^2$ 追跡誤差で支配し、構成した絶対連続 strategy の誤差評価へ帰着する。",
+        "limitations": "結果は二次 tracking cost、絶対連続な正則化戦略、deterministic で有限変動の resilience/depth、および price manipulation を排除する係数条件に依存する。ランダム満期在庫には到達可能性条件 $\\int_0^T \\frac{dE[\\Xi_t^2]}{T-t}<\\infty$ が必要である。$O(\\sqrt{\\varepsilon})$ の鋭さは本文では定数係数・決定論的満期在庫の benchmark で示されており、一般の確率的係数や実市場データでの推定・アウトオブサンプル性能は検証していない。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "電子執行と market microstructure に直接関係し、transient impact 下で特異な最適執行を実装可能な滑らかな方策へ置換する際の明示的・非漸近的保証を与える。特に stochastic terminal inventory を扱い、実装可能な方策にも optimizer と同次数の保証を与える点が有用である。ただし理論モデルへの依存が強く、実証的な執行性能の結論には直結しない。",
+        "tags": [
+          "optimal execution",
+          "Obizhaeva–Wang model",
+          "transient price impact",
+          "stochastic tracking",
+          "regularization",
+          "stochastic terminal constraint",
+          "market microstructure",
+          "Hilbert-space method",
+          "convergence rate"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper derives non-asymptotic error bounds for quadratic tracking of a general stochastic target by absolutely continuous controls, expressed through the target's $L^2$ time-translation modulus. It applies these results to generalized Obizhaeva–Wang execution with a random terminal inventory and shows that the cost of approximating a singular optimal execution strategy by a smooth one is $O(\\sqrt{\\varepsilon})$.",
+          "mainResult": "As tracking friction $\\kappa\\downarrow0$, if the target modulus satisfies $\\omega_\\xi(h)=O(h^\\alpha)$, then, excluding initial mismatch, the tracking value is $O(\\kappa^{\\alpha/2})$. For square-integrable càdlàg semimartingales, the generic rate is $O(\\sqrt{\\kappa})$, and the paper establishes sharpness for continuous martingales and deterministic targets with jumps. For fractional Brownian motion, the value is of order $\\kappa^H$. In the execution application, $V(\\varepsilon)-V(0)=O(\\sqrt{\\varepsilon})$; sharpness is verified through a constant-coefficient, deterministic-terminal-inventory expansion with a positive $\\sqrt{\\varepsilon}$ leading term.",
+          "practicalApplication": "Instead of using the regularized optimizer, which is not available in closed form in this setting, practitioners can use an explicit feedback strategy: exponentially filter the unregularized Obizhaeva–Wang optimizer at time scale $\\sqrt{\\varepsilon}$, then switch to a terminal bridge near maturity. This is particularly relevant to central-risk-book-style execution in which the eventual quantity is progressively learned from random order flow.",
+          "methodology": "The first part constructs an exponential tracker and a terminal bridge, deriving upper bounds from time-translation moduli and complementary lower bounds. The second part represents the impact process in a Hilbert space and solves unregularized execution as an orthogonal projection onto a closed affine subspace. Excess impact cost is then bounded by the $L^2$ tracking error relative to the unregularized optimal inventory, enabling analysis of the constructed absolutely continuous strategy.",
+          "limitations": "The results depend on quadratic tracking costs, absolutely continuous regularized strategies, deterministic finite-variation resilience and depth, and coefficient assumptions excluding price manipulation. The random terminal inventory must satisfy the reachability condition $\\int_0^T \\frac{dE[\\Xi_t^2]}{T-t}<\\infty$. Sharpness of $O(\\sqrt{\\varepsilon})$ is shown in the paper only for a constant-coefficient, deterministic-terminal benchmark; stochastic-coefficient extensions, calibration, and out-of-sample execution performance are not examined.",
+          "reason": "The work is directly relevant to electronic execution and market microstructure, providing explicit non-asymptotic guarantees for replacing singular transient-impact optima with implementable smooth strategies. Its treatment of stochastic terminal inventory and its same-order guarantee for an explicit strategy are particularly useful, although conclusions remain strongly model-dependent and are not empirical.",
+          "tags": [
+            "optimal execution",
+            "Obizhaeva–Wang model",
+            "transient price impact",
+            "stochastic tracking",
+            "regularization",
+            "stochastic terminal constraint",
+            "market microstructure",
+            "Hilbert-space method",
+            "convergence rate"
+          ]
+        }
+      }
+    },
+    "2608.29473": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "環境災害リスク、資本蓄積、汚染を含む確率的成長モデルに対して、marked Hawkes process に基づく確率制御の枠組みを構築する研究です。",
+        "mainResult": "著者らは、subcritical な Markovian Hawkes 過程を用いた制御系について、well-posedness と nonexplosion を示し、自己励起の大きさが小さい場合に Hawkes 型の価値関数が Poisson 型の価値関数へ収束することを証明したと報告しています。",
+        "practicalApplication": "災害が連鎖的に発生しやすい環境リスクや成長政策の分析には応用可能ですが、電子執行、market microstructure、金利モデル、イールドカーブ分析への直接的な応用は抽象からは確認できません。",
+        "methodology": "Poisson point process に基づく既存の成長モデルを marked Hawkes process に拡張し、自己励起成分を状態変数に追加した制御問題を定式化しています。Hamilton-Jacobi-Bellman characterization、Hawkes excitation process の定量評価、小さな自己励起スケーリングによる極限解析を用いています。",
+        "limitations": "抽象では、最適政策の具体的な形、数値例、実データによる検証、経済的な効果の大きさは示されていません。また、結果は subcritical な Markovian Hawkes specification と小さな自己励起という条件に依存します。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "確率制御と Hawkes 過程に関する理論的貢献はありますが、対象サイトの主要分野である電子取引、market microstructure、interest-rate models、yield curves、rates には直接該当しないためです。",
+        "tags": [
+          "stochastic control",
+          "Hawkes process",
+          "jump-diffusion",
+          "environmental risk",
+          "Poisson approximation"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper develops a stochastic-control framework for growth models involving environmental disaster risk, capital accumulation, and pollution, using a marked Hawkes process.",
+          "mainResult": "The authors report proving well-posedness and nonexplosion for the controlled dynamics driven by a subcritical Markovian Hawkes process, and convergence of the Hawkes value function to its Poisson counterpart when the self-excitation magnitude is small.",
+          "practicalApplication": "The framework may support analysis of environmental risks and growth policies when disasters are clustered, but the abstract provides no direct application to electronic execution, market microstructure, interest-rate models, yield-curve analysis, or rates.",
+          "methodology": "The study extends an existing Poisson point-process growth model to a marked Hawkes process and augments the state with the self-excitation component. It uses a Hamilton-Jacobi-Bellman characterization, quantitative estimates for the excitation process, and asymptotic analysis under small self-excitation scaling.",
+          "limitations": "The abstract does not provide explicit optimal policies, numerical examples, empirical validation, or the economic magnitude of the effects. The results also depend on a subcritical Markovian Hawkes specification and a small-self-excitation regime.",
+          "reason": "Although the paper offers a theoretical contribution to stochastic control and Hawkes processes, it is not directly relevant to the site's core areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "stochastic control",
+            "Hawkes process",
+            "jump-diffusion",
+            "environmental risk",
+            "Poisson approximation"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2608.29786": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "信用リスクにおける潜在状態と借り手別デフォルト確率を推定する手法を提案する研究であり、電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、または金利市場を主題としていません。",
+        "mainResult": "有限ガウス混合モデルと潜在状態のEM推定を用いて、観測スコアから潜在状態の事後分布を復元し、プロファイル別デフォルト確率を平均して借り手別のデフォルト確率を算出します。シミュレーションでは、構造パラメータ、事後信念、借り手別デフォルト確率の回復を、通常の誤差指標と情報幾何学的ダイバージェンスで評価したと報告されています。",
+        "practicalApplication": "信用審査やデフォルト予測における潜在的な信用プロファイルの推定へ応用できる可能性がありますが、対象サイトの専門領域への直接的な応用は限定的です。",
+        "methodology": "信用状態を潜在次元として表現し、観測スコアを有限ガウス混合モデルで記述します。観測スコアとデフォルトの組から、混合構造と状態別デフォルト確率をjoint EMで推定し、デフォルト実現前のスコアだけを用いて事後分布を計算します。制御されたシミュレーションで推定精度を検証します。",
+        "limitations": "要旨では実データでの検証、モデル選択、識別性、分布仮定への頑健性、推定誤差の不確実性、実務上の規制・運用面が示されていません。結果は主として制御されたシミュレーションに基づくため、実際の信用ポートフォリオへの一般化には限界があります。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "信用リスク分析としては関連性がありますが、電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、金利研究のスコープには実質的に該当しません。",
+        "tags": [
+          "credit risk",
+          "latent-state model",
+          "EM algorithm",
+          "Gaussian mixture model",
+          "posterior probability",
+          "information geometry"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a method for estimating latent states and borrower-level default probabilities in credit risk. It is not primarily about electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using a finite Gaussian mixture model and latent-state EM estimation, the paper recovers posterior distributions of latent states from observed scores and computes borrower-level default probabilities by averaging profile-specific default probabilities. A simulation reportedly evaluates recovery of structural parameters, posterior beliefs, and borrower-level default probabilities using conventional error measures and information-geometric divergences.",
+          "practicalApplication": "The method could potentially support estimation of latent credit profiles in credit assessment and default prediction, but its direct application to the site's target domains is limited.",
+          "methodology": "Credit states are represented as latent dimensions, and observed scores are modeled with a finite Gaussian mixture. A joint EM procedure estimates the mixture structure and state-specific default probabilities from score-default pairs, after which posterior distributions are computed using scores alone, before default realization. A controlled simulation evaluates estimation accuracy.",
+          "limitations": "The abstract does not describe validation on real data, model selection, identifiability, robustness to distributional assumptions, uncertainty from estimation, or regulatory and operational considerations. Because the results are based mainly on controlled simulation, generalization to real credit portfolios is limited.",
+          "reason": "Although relevant to credit-risk analysis, the paper does not materially address electronic trading, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "credit risk",
+            "latent-state model",
+            "EM algorithm",
+            "Gaussian mixture model",
+            "posterior probability",
+            "information geometry"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2608.29818": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "英国GB Balancing Mechanismにおける電池の限界的な入札・オファー価格形成への関与を、2023～2025年の50,684決済期間についてユニット単位で分析した研究です。",
+        "mainResult": "電池の限界性シェアは、bid側で0.8%から36.2%、offer側で3.2%から26.9%へ上昇し、従来のコンバインドサイクルガスや揚水発電を置き換えました。追加の100 MWの有効容量は、四半期のbid側・offer側限界性シェアをそれぞれ0.55、0.48ポイント押し上げました。電池のアクション価格は、同じ価格ラダーから抽出した数量一致の非電池代替よりおよそ£9～10/MWh有利でした。",
+        "practicalApplication": "系統運用者、電池事業者、規制当局が、蓄電池の市場価格形成への影響、入札設計、容量評価、収益機会を分析する際の実証的な基礎になり得ます。特に、通常時の需給調整価格が蓄電池により内生化する可能性を示します。",
+        "methodology": "2023～2025年の50,684件の30分決済期間について、GB Balancing Mechanismの適格なbid・offerスタックの価格順位上の端を再構築し、個別ユニットへ帰属させています。long-systemのbid-active状態とshort-systemのoffer-active状態を分離し、同順位のco-marginalな約定を保持しています。容量正規化指標、ユニット四半期固定効果、数量一致比較を用いています。",
+        "limitations": "要旨だけでは、データ構築、価格差の統計的不確実性、固定効果推定の識別仮定、電池以外の交絡要因、結果の他市場への一般化可能性を評価できません。100 MWとの関連は因果効果とは限らず、個別電池がprice-takingであることも観測期間とモデルに依存します。また、分析対象はGB Balancing Mechanismであり、前日・日中市場や長期的な投資反応を直接扱っていません。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子的な需給調整市場における価格形成と蓄電池の限界性をユニット単位で定量化しており、market microstructureと電力市場設計に直接関連します。因果解釈と再現性の詳細確認は必要ですが、実務上の関連性と新規性は高いと判断します。",
+        "tags": [
+          "GB Balancing Mechanism",
+          "battery storage",
+          "imbalance price",
+          "price formation",
+          "marginality",
+          "market microstructure",
+          "electricity markets"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study analyzes unit-level battery participation in marginal bid and offer price formation in the GB Balancing Mechanism over 50,684 settlement periods from 2023 to 2025.",
+          "mainResult": "Battery marginality increased from 0.8% to 36.2% on the bid side and from 3.2% to 26.9% on the offer side, displacing combined-cycle gas and pumped storage. An additional 100 MW of active capacity was associated with increases of 0.55 and 0.48 percentage points in quarterly bid- and offer-side marginal shares, respectively. Battery actions were approximately £9–10/MWh more favourable than volume-matched non-battery alternatives from the same ladder.",
+          "practicalApplication": "The findings can support system operators, battery firms, and regulators in evaluating storage impacts on price formation, bidding design, capacity assessment, and revenue opportunities. They indicate that routine balancing prices may be becoming endogenous to battery participation.",
+          "methodology": "For 50,684 half-hourly settlement periods from 2023 to 2025, the study reconstructs the price-ranked edge of the eligible bid and offer stacks in the GB Balancing Mechanism and attributes it to individual units. It separates long-system bid-active and short-system offer-active conditions and retains co-marginal ties. The analysis uses capacity-normalized measures, unit-quarter fixed effects, and volume-matched comparisons.",
+          "limitations": "The abstract does not provide enough detail to assess data construction, statistical uncertainty around price differences, identifying assumptions in the fixed-effects estimates, other confounders, or generalizability to other markets. The association with 100 MW need not be causal, and the finding that individual batteries remain price-taking may depend on the sample period and model. The study focuses on the GB Balancing Mechanism and does not directly examine day-ahead, intraday, or longer-term investment responses.",
+          "reason": "The paper directly studies price formation and battery marginality in an electronic balancing market, making it highly relevant to market microstructure and electricity-market design. Causal interpretation and reproducibility require further detail, but its practical relevance and empirical novelty are substantial.",
+          "tags": [
+            "GB Balancing Mechanism",
+            "battery storage",
+            "imbalance price",
+            "price formation",
+            "marginality",
+            "market microstructure",
+            "electricity markets"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本稿は、2023年から2025年のGB Balancing Mechanismにおける50,684の半時間Settlement Periodを対象に、NIVで区分したbid側・offer側の適格energy-action stackの価格端を、BMU単位で限界行動の代理変数として再構築する。著者らの集計では、battery storageの限界シェアはbid側で0.8%から36.2%、offer側で3.2%から26.9%へ上昇した。",
+        "mainResult": "著者らは、batteryが通常時の価格形成に広く参加し、bid側では主にCCGT、offer側では主にpumped storageの限界シェア低下と対応したと報告する。2025年にはbatteryの行動価格が同一期間・同一側のvolume-matched非battery代替より平均約£9から£10/MWh有利だった一方、short-systemの高価格上位5%ではbatteryの比率が全体シェア比で12.9 percentage points低い。したがって、batteryの台頭は価格分布の中心部で顕著であり、極端なshort-system価格ではCCGTとpumped storageがなお重要だという結論である。",
+        "practicalApplication": "GB電力のbalancing cost、storage入札、duration投資、ならびにreal-time electricity marketの監視に有用である。電子市場の観点では、bidとofferを統合せず、unit-level attribution、co-marginal tie、同一時点の残余ladderを分けて扱う設計は、約定データから価格形成を分析する際の実務的な枠組みとなる。",
+        "methodology": "ElexonのISPStack、System Price、NIV、BOD、BMU metadataを結合し、CADL、SO、STOR等を除外した。short systemでは適格offerの最高final price、long systemでは適格bidの最低final priceを限界候補として選び、同価格のBMUには合計1となるtie weightを配分した。battery BMU-quarter panelには二元固定効果モデル$$S_{i,t}=\\beta(K_i\\times A_{i,t})+\\alpha_i+\\gamma_t+\\epsilon_{i,t}$$を推定し、さらにBODから同期間の未使用非battery volumeを用いるfixed-ladder replacement VWAP比較を行った。",
+        "limitations": "最重要の制約は、選んだ価格端が公式System Price算定やNESO dispatchの完全な再現ではなく、限界価格設定者のproxyにとどまる点である。PAR、replacement pricing、de minimis、arbitrage removal、Reserve Scarcity Price floorを完全には再構築していない。固定ladder比較も位置、ramping、duration、state of charge、ancillary-service commitment、acceptance orderingを観測できず、consumer savingや因果的なdispatch反実仮想を示さない。固定効果のcapacity係数は因果効果ではなく、storage durationもcapacity正規化に含まれない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電力市場に固有の研究であり金利・債券への直接的な適用性は低い。しかし、リアルタイムのbid/offer stack、限界価格帰属、同一時点の代替流動性という分析は、electronic executionおよびmarket microstructureの読者に有益である。結論は価格端proxyへの依存が大きいため、batteryが公式に価格を「設定した」との強い解釈ではなく、透明な観測データに基づく記述的証拠として読むべきである。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "電力バランシング市場",
+          "Balancing Mechanism",
+          "battery storage",
+          "限界価格形成",
+          "bid-offer stack",
+          "固定効果",
+          "英国電力市場"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper studies 50,684 half-hourly Settlement Periods in the GB Balancing Mechanism from 2023 to 2025. It reconstructs the price edge of the eligible energy-action stack, separated into bid and offer sides by NIV, as a proxy for marginal actions at the BMU level. In the authors' aggregation, battery storage's marginal share rose from 0.8% to 36.2% on the bid side and from 3.2% to 26.9% on the offer side.",
+          "mainResult": "The authors report that batteries became broadly involved in routine price formation, corresponding mainly to declining CCGT marginal share on the bid side and declining pumped-storage share on the offer side. By 2025, battery action prices were on average about £9 to £10/MWh more favourable than volume-matched non-battery alternatives from the same period and side, while batteries were under-represented by 12.9 percentage points in the highest-priced 5% of short-system periods relative to their overall share. Thus, the paper concludes that battery growth is most evident near the centre of the price distribution, while CCGT and pumped storage remain important in extreme short-system prices.",
+          "practicalApplication": "The study is useful for monitoring GB balancing costs, storage bidding, duration investment, and real-time electricity markets. From an electronic-markets perspective, its separation of bids and offers, unit-level attribution, co-marginal ties, and same-period residual ladders provides a practical framework for analysing price formation from execution data.",
+          "methodology": "The authors combine Elexon's ISPStack, System Price, NIV, BOD, and BMU metadata, excluding CADL, SO, STOR, and related actions. They select the highest final-price eligible offer in short systems and the lowest final-price eligible bid in long systems as marginal candidates, allocating tie weights that sum to one across BMUs at the same price. For a battery BMU-quarter panel, they estimate the two-way fixed-effects model $$S_{i,t}=\\beta(K_i\\times A_{i,t})+\\alpha_i+\\gamma_t+\\epsilon_{i,t}$$ and conduct a fixed-ladder replacement VWAP comparison using unused non-battery volume from BOD in the same period.",
+          "limitations": "The central limitation is that the selected price edge is a proxy for the marginal price-setting unit, rather than a full reconstruction of official System Price calculation or NESO dispatch. The analysis does not fully reproduce PAR, replacement pricing, de minimis rules, arbitrage removal, or the Reserve Scarcity Price floor. The fixed-ladder comparison also cannot observe location, ramping, duration, state of charge, ancillary-service commitments, or acceptance ordering, and it does not establish consumer savings or a causal dispatch counterfactual. The fixed-effects capacity coefficient is an association rather than a causal effect, and capacity normalisation does not include storage duration.",
+          "reason": "This is electricity-market-specific research with limited direct applicability to rates or fixed income. However, its analysis of real-time bid/offer stacks, marginal-price attribution, and contemporaneous substitute liquidity is useful for readers interested in electronic execution and market microstructure. Because its conclusions depend materially on a price-edge proxy, the strong claim that batteries officially “set” prices should be read as descriptive evidence based on transparent observed data, not as a complete settlement reconstruction.",
+          "tags": [
+            "market microstructure",
+            "electricity balancing market",
+            "Balancing Mechanism",
+            "battery storage",
+            "marginal price formation",
+            "bid-offer stack",
+            "fixed effects",
+            "Great Britain electricity market"
+          ]
+        }
+      }
+    },
+    "2608.29843": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "AI推論サービスの品質差を調整した価格指数を、公開価格とベンチマーク評価から構築する研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場を直接扱っていません。",
+        "mainResult": "要旨によれば、通常のmatched-model法ではAI推論価格が年率0.10 log points低下した一方、品質調整後は年率0.73低下し、価格低下の87%が従来指標から見えないと報告しています。ただし、タスク完了当たりの買い手価格は低下せず、推論モデルのtoken消費増加により売り手価格と買い手価格が乖離したとされています。",
+        "practicalApplication": "AIサービス市場の物価測定、競争・集中度、生産性分析には応用可能ですが、本サイトの対象である電子執行や金利関連市場への直接的な実務応用は限定的です。",
+        "methodology": "3,208モデル、86プロバイダーによる21,024件の公示価格と4,605件のベンチマーク結果を結合し、ベンチマークの応答パターンから潜在品質指数を推定するhedonic型の品質調整価格指数を構築しています。汚染フラグ付きベンチマークを除外する事前登録のvalidity auditも実施したとされています。",
+        "limitations": "評価ベンチマークから推定した潜在品質が実際の顧客価値を十分に表すかは要旨だけでは検証できません。公示価格が実取引価格を代表するか、モデル・プロバイダー間の比較可能性、将来時点の再現性も不明です。また、報告値は要旨上の結果であり、推定仕様や統計的不確実性の詳細は示されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "AIサービスの価格指数と経済統計に関する研究であり、対象分野との実質的な関連性がありません。q-fin.ECの分類だけでは本サイトのスコープに含める根拠にならないため、対象外と判定します。",
+        "tags": [
+          "AIサービス価格",
+          "品質調整価格指数",
+          "経済統計",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper constructs quality-adjusted price indices for AI inference services using public prices and benchmark evaluations. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, AI inference prices fell by 0.10 log points per year under matched-model methods, versus 0.73 per year after quality adjustment, implying that 87% of the decline is missed by conventional measures. However, the buyer’s price per completed task stopped falling, as increased token consumption by reasoning models offset lower token prices, creating a divergence between seller and buyer prices.",
+          "practicalApplication": "The method could be applied to inflation measurement, competition and concentration analysis, and productivity measurement for AI services. Its direct practical relevance to electronic execution and rates-related markets is limited.",
+          "methodology": "The study combines 21,024 posted-price observations covering 3,208 models and 86 providers with 4,605 benchmark scores, then estimates a latent quality index from benchmark response patterns to construct a hedonic quality-adjusted price index. It also reports a preregistered validity audit excluding contamination-flagged benchmarks.",
+          "limitations": "The abstract does not establish whether benchmark-derived latent quality adequately represents customers’ realized value. It is also unclear whether posted prices represent transaction prices, whether models and providers are fully comparable, and whether the results remain reproducible over time. The reported estimates are abstract-level claims without details on specification or statistical uncertainty.",
+          "reason": "This is research on AI-service price indices and economic measurement, with no material connection to the site’s target areas. The q-fin.EC category alone does not justify inclusion, so the paper is classified as out of scope.",
+          "tags": [
+            "AI service prices",
+            "quality-adjusted price index",
+            "economic measurement",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2608.30321": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "AMMの流動性提供者が負担するLoss-versus-Rebalancing（LVR）を、基準価格がジャンプ拡散過程に従う場合のブロック時間との関係から分析する研究です。",
+        "mainResult": "論文は、定積AMMのLVR率を拡散チャネルとジャンプチャネルに分解し、ジャンプチャネルはブロック時間に依存しないと報告しています。対称なジャンプ分布ではLVR率が正の下限を持つため、ブロック時間をゼロに近づけても損失は消えず、ブロック時間で削減可能なのは一部に限られます。提示された較正では、Ethereumの12秒スロットでLVR率が年間471 bp、ジャンプ由来の下限が125 bpとなり、Solanaの400 msスロットではジャンプチャネルが支配的です。",
+        "practicalApplication": "AMMやブロックチェーンのコンセンサス設計で、ブロック時間短縮がLP損失をどの程度削減できるかを評価する枠組みを提供します。LP側のLVRとブロックごとのコンセンサス費用を比較する場合、最適ブロック時間はおよそ8秒と報告されていますが、これはLP側の寄与に関する結果です。",
+        "methodology": "基準価格を幾何ブラウン運動ではなくジャンプ拡散過程としてモデル化し、定積AMMのLVR率を拡散成分とジャンプ成分に分解しています。拡散成分には$F(\\gamma/(\\sigma\\sqrt{\\Delta t}))$、ジャンプ成分には$\\lambda V G(\\gamma;m,\\delta^2)$を用い、両者の相互作用を有界な剰余項として扱っています。対称なジャンプ分布について下限を導出し、EthereumおよびSolanaのスロット時間に較正したうえで、コンセンサス費用を差し引いたLP側の最適化を行っています。",
+        "limitations": "要旨で示される分析は定積AMM、特定のジャンプ拡散モデル、対称ジャンプ分布に依存しています。較正値や関数$F$および$G$の具体的な推定方法は要旨から確認できません。また、LVRはブロック時間の厚生分析における一要素にすぎず、トレーダー厚生、ネットワーク性能、セキュリティ、手数料収入などを含む全体の設計問題を解決するものではありません。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "AMMのLP損失、価格ジャンプ、ブロック時間設計を直接結びつけ、短いブロック時間がLVRを完全には解消しないという実務上重要な含意を示しています。電子取引そのものではありませんが、暗号資産市場のマーケットマイクロストラクチャーと流動性設計に明確に関連します。",
+        "tags": [
+          "AMM",
+          "Loss-versus-Rebalancing",
+          "LVR",
+          "market microstructure",
+          "liquidity providers",
+          "jump-diffusion",
+          "block time",
+          "Ethereum",
+          "Solana"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper analyzes Loss-versus-Rebalancing (LVR) borne by automated-market-maker liquidity providers as a function of block time when the reference price follows a jump-diffusion process.",
+          "mainResult": "The paper reports that the LVR rate of a constant-product AMM decomposes into a diffusion channel and a jump channel, with the jump channel independent of block time. For symmetric jump distributions, the LVR rate has a positive lower bound, so losses do not disappear as block time approaches zero and only part of the loss can be reduced through block-time changes. In the stated calibration, the rate is 471 bp per year at Ethereum's 12-second slot, versus a jump-channel floor of 125 bp, while the jump channel already dominates at Solana's 400 ms slot.",
+          "practicalApplication": "The framework can be used in AMM and blockchain-consensus design to assess how much LP loss can be reduced by shortening block times. After comparing LP-side LVR with per-block consensus costs, the paper reports an optimal block time near 8 seconds, but this result concerns only the LP-side contribution.",
+          "methodology": "The reference price is modeled as a jump-diffusion rather than geometric Brownian motion, and the constant-product AMM LVR rate is decomposed into diffusion and jump components. The diffusion component uses $F(\\gamma/(\\sigma\\sqrt{\\Delta t}))$, while the jump component uses $\\lambda V G(\\gamma;m,\\delta^2)$; their interaction is treated as an explicitly bounded remainder. A lower bound is derived for symmetric jump distributions, followed by calibration to Ethereum and Solana slot times and LP-side optimization net of consensus costs.",
+          "limitations": "The analysis described in the abstract depends on a constant-product AMM, a specific jump-diffusion model, and symmetric jump distributions. The abstract does not provide the detailed estimation procedures for the calibration values or for $F$ and $G$. In addition, LVR is only one component of block-time welfare and does not resolve the broader design problem involving trader welfare, network performance, security, or fee revenue.",
+          "reason": "The paper directly links AMM LP losses, price jumps, and block-time design, yielding an important practical implication that short block times cannot eliminate LVR. Although it is not about electronic trading in the narrow sense, it is clearly relevant to crypto-market microstructure and liquidity design.",
+          "tags": [
+            "AMM",
+            "Loss-versus-Rebalancing",
+            "LVR",
+            "market microstructure",
+            "liquidity providers",
+            "jump-diffusion",
+            "block time",
+            "Ethereum",
+            "Solana"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本稿は、constant-product AMMのLPが負担するLoss-versus-Rebalancing（LVR）を、参照価格が有限活動のjump-diffusionに従う場合へ拡張する。著者は、手数料と離散ブロックを含む近似的な分離式において、ブロック時間に依存する拡散由来のLVRと、ブロック時間に依存しないジャンプ由来の項を分ける。対称ジャンプ分布など追加条件の下では、ジャンプ項が厳密な正の下限になると主張する。",
+        "mainResult": "ゼロ手数料・連続裁定のCPMMでは、LVR率は$$\\ell=\\frac{\\sigma^2}{8}V+\\frac{\\lambda}{2}V\\mathbb{E}\\left[\\left(e^{J/2}-1\\right)^2\\right]$$と導かれる。手数料$\\gamma$と平均ブロック時間$\\Delta t$を導入すると、著者は二次損失 surrogate に基づき$$\\ell(\\Delta t)=\\frac{\\sigma^2}{8}V F\\left(\\frac{\\gamma}{\\sigma\\sqrt{\\Delta t}}\\right)+\\lambda V G_\\nu(\\gamma)+E(\\Delta t)$$を提示する。ここで$F(\\kappa)=\\left(1+\\sqrt{2}\\kappa\\right)^{-1}$、$G_\\nu(\\gamma)=\\frac18\\mathbb{E}\\left[(|J|-\\gamma)^2\\mathbf{1}_{\\{|J|>\\gamma\\}}\\right]$である。対称性とジャンプ集約仮定の下で、著者は$\\ell(\\Delta t)\\geq\\lambda V G_\\nu(\\gamma)>0$というジャンプ床を証明する。分離目的$\\ell_0(\\Delta t)+c/\\Delta t$では、最適ブロック時間はジャンプ・パラメータに依存せず、$\\eta/(1+\\eta)^2=V\\gamma^2/(8c)$および$\\Delta t_{\\rm opt}=2\\gamma^2/(\\sigma^2\\eta^2)$で特徴付けられる。",
+        "practicalApplication": "AMM設計者・チェーン設計者は、短いブロック時間が削減できるのは主に拡散起源の裁定損失であり、大きな価格ジャンプによるLP損失をブロック高速化だけでは除去できない、という設計上の切り分けに利用できる。著者のETH/USDT仮想フルレンジLP校正では、$12$秒で$471$ bp/yr、短時間極限のジャンプ床が$125$ bp/yrと報告され、発行額をconsensus costのproxyとするLP限定の目的では最適値が約$8.4$秒となる。ジャンプ床へのレバーとしては、ブロック時間より手数料とジャンプ・サイズの比$\\gamma/\\delta$、batch auction、LVR rebate機構が示唆される。",
+        "methodology": "CPMMの価値関数$V(P)=2\\sqrt{LP}$にItô--Lévy公式を適用し、連続裁定時の拡散・ジャンプLVRを導出する。次に、外部価格をMerton型compound-Poisson jump-diffusion、ブロック到着をPoisson process、裁定者を無制約・リスク中立・連続観測可能と仮定する。手数料帯域内へ価格をresetするmispricing過程の定常分布を用い、$\\lambda=0$で既知の閉形式とジャンプ一件の二次近似を組み合わせる。分離残差$E(\\Delta t)$には、対称ジャンプ分布および数値的に確認したmixing conditionの下で上下界を与える。数値例はBinance ETH/USDTの$5$分足、2020年1月から2026年6月の$2,373$日を使い、bipower variationとLee--Mykland jump testで$\\sigma$、$\\lambda$、$\\delta$を推定したと報告している。",
+        "limitations": "結論の中心であるジャンプ・パラメータ不変性は厳密なLVR率ではなく、$\\Delta t$非依存のジャンプ項を持つ分離率$\\ell_0$についての結果である。著者自身も、厳密な残差$E(\\Delta t)$にはジャンプ・パラメータとブロック時間の相互作用が残り、最適値の不変性は近似的・校正依存であると認める。厳密なジャンプ床には対称ジャンプ分布と集約仮定が必要で、非対称ジャンプでは同じ証明は成立しない。さらに、full-range CPMM、有限活動ジャンプ、Poisson block arrival、無限資本・ゼロ遅延の裁定者、外部価格の連続観測を仮定しており、concentrated liquidity、実際のblock schedule、競争的MEV・latencyには直接対応しない。consensus costは観測されたEthereum issuanceを資源費用のproxyとしてpool TVL比で配賦しており、補助金、MEV、手数料収入、native-token保有者への希薄化を十分に表現しない。目的関数もLP-LVRとconsensus costに限定され、finality、oracle freshness、censorship resistance、MEV配分などを含む社会厚生の最適化ではない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "AMMのadverse selectionとblock cadenceを結ぶLVR研究として、電子取引・market microstructureに実質的に関連する。特に、価格ジャンプを入れることで「より短いブロックは常にLP損失を減らす」というGBMベースの直観を限定し、block-time依存成分と非依存成分を分離した点は有用である。ただし、主張の一部は二次surrogateと分離近似に依存し、厳密な床にも対称性など強い条件があるため、プロトコル設計の一般的結論としてではなく、明示的な仮定の下のモデル結果として扱うべきである。",
+        "tags": [
+          "AMM",
+          "CPMM",
+          "loss-versus-rebalancing",
+          "LVR",
+          "arbitrage",
+          "jump-diffusion",
+          "block time",
+          "DeFi",
+          "market microstructure",
+          "liquidity provision"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper extends Loss-versus-Rebalancing (LVR) borne by liquidity providers in constant-product AMMs to reference prices following a finite-activity jump-diffusion. The author separates, in an approximate formula with fees and discrete blocks, a diffusion-driven LVR component that depends on block time from a jump-driven component that does not. Under additional conditions including symmetric jump laws, the paper claims that the jump component is an exact positive lower bound.",
+          "mainResult": "For a CPMM with zero fees and continuous arbitrage, the paper derives the LVR rate $$\\ell=\\frac{\\sigma^2}{8}V+\\frac{\\lambda}{2}V\\mathbb{E}\\left[\\left(e^{J/2}-1\\right)^2\\right].$$ With a fee $\\gamma$ and mean block time $\\Delta t$, the author proposes, using a quadratic-loss surrogate, $$\\ell(\\Delta t)=\\frac{\\sigma^2}{8}V F\\left(\\frac{\\gamma}{\\sigma\\sqrt{\\Delta t}}\\right)+\\lambda V G_\\nu(\\gamma)+E(\\Delta t),$$ where $F(\\kappa)=\\left(1+\\sqrt{2}\\kappa\\right)^{-1}$ and $G_\\nu(\\gamma)=\\frac18\\mathbb{E}\\left[(|J|-\\gamma)^2\\mathbf{1}_{\\{|J|>\\gamma\\}}\\right]$. Under symmetry and a jump-aggregation assumption, the paper proves the jump floor $\\ell(\\Delta t)\\geq\\lambda V G_\\nu(\\gamma)>0$. For the separated objective $\\ell_0(\\Delta t)+c/\\Delta t$, the optimal block time is independent of jump parameters and is characterized by $\\eta/(1+\\eta)^2=V\\gamma^2/(8c)$ and $\\Delta t_{\\rm opt}=2\\gamma^2/(\\sigma^2\\eta^2)$.",
+          "practicalApplication": "AMM and blockchain designers can use the proposed decomposition to distinguish the arbitrage loss that shorter blocks can reduce from jump-related LP loss that block-speed improvements cannot remove. In the author's hypothetical ETH/USDT full-range LP calibration, the reported rate is $471$ bp/yr at $12$ seconds, versus a $125$ bp/yr jump floor in the short-block limit; an LP-only objective using token issuance as a consensus-cost proxy produces an optimum near $8.4$ seconds. The paper suggests that the remaining levers against the jump floor are the fee-to-jump-size ratio $\\gamma/\\delta$, batch auctions, and LVR-rebate mechanisms, rather than block time alone.",
+          "methodology": "The paper applies the Itô--Lévy formula to the CPMM value function $V(P)=2\\sqrt{LP}$ to derive continuous-arbitrage diffusion and jump LVR. It then assumes a Merton-style compound-Poisson jump-diffusion for the external price, Poisson block arrivals, and an unconstrained, risk-neutral arbitrageur with continuous price observation. It combines the known closed-form stationary distribution for the no-jump case with a quadratic approximation for single-jump loss. The separated remainder $E(\\Delta t)$ receives upper and lower bounds under symmetric jumps and a mixing condition checked numerically by the author. The numerical illustration reportedly estimates $\\sigma$, $\\lambda$, and $\\delta$ from Binance ETH/USDT five-minute closes over January 2020--June 2026, using bipower variation and the Lee--Mykland jump test.",
+          "limitations": "The key invariance to jump parameters applies exactly to the separated rate $\\ell_0$, not to the exact LVR rate: the exact remainder $E(\\Delta t)$ retains jump-parameter and block-time interactions, which the author acknowledges. The exact jump floor also requires symmetric jump laws and an aggregation assumption; the same proof does not carry over to asymmetric jumps. The model assumes a full-range CPMM, finite-activity jumps, Poisson block arrivals, and an unlimited-capital, zero-latency arbitrageur with continuous external-price observation, limiting direct applicability to concentrated liquidity, actual block schedules, and competitive MEV and latency. Consensus cost is proxied by observed Ethereum issuance and allocated by pool TVL share, which may not reflect subsidies, MEV, fee funding, or dilution borne by native-token holders. Finally, the objective includes only LP LVR and consensus cost, not a complete welfare treatment of finality, oracle freshness, censorship resistance, or MEV allocation.",
+          "reason": "The paper is materially relevant to electronic trading and market microstructure through AMM adverse selection and block-cadence design. Its main contribution is useful because incorporating price jumps qualifies the GBM-based intuition that shorter blocks always reduce LP losses, separating schedule-sensitive and schedule-insensitive channels. However, several claims depend on a quadratic surrogate and a separated approximation, while the exact floor needs strong conditions such as jump symmetry. It should therefore be presented as a model result under explicit assumptions rather than a general protocol-design conclusion.",
+          "tags": [
+            "AMM",
+            "CPMM",
+            "loss-versus-rebalancing",
+            "LVR",
+            "arbitrage",
+            "jump-diffusion",
+            "block time",
+            "DeFi",
+            "market microstructure",
+            "liquidity provision"
+          ]
+        }
+      }
+    },
+    "2608.30522": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "関税脅威が家計のインフレ率・失業率期待に与える影響を、LLMベースのマルチエージェント実験で分析した研究です。",
+        "mainResult": "300世帯を持続的なLLMエージェントとして構成し、ソーシャルメディア情報に反応させた結果、即時性、税率の目立ちやすさ、表現の進展、複雑性、物語、発信者の身元が期待とその分散に影響したと報告しています。また、中央銀行の説明は信念を協調させ得るものの、平均期待への効果は内容に依存しました。",
+        "practicalApplication": "政策コミュニケーションのメッセージ設計や仮想実験の探索には応用可能ですが、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ分析への直接的な応用は示されていません。",
+        "methodology": "Michigan Surveys of Consumersの300世帯をLLMエージェント化し、数か月間のソーシャルメディア情報への反応をシミュレーションしました。実データとの較正後、メッセージ特性と中央銀行説明の実験を行い、自由記述から作用経路を分析しています。",
+        "limitations": "結果はシミュレーション上のエージェントに基づき、実際の人間の行動を代替するものではありません。実データとの整合は一部の分布的・人口統計的パターンに限られ、要約からはモデル仕様、識別戦略、再現性、金融市場や金利への波及も確認できません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "金融政策コミュニケーションとマクロ期待には関連しますが、対象サイトの中核である電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、または直接的な金利研究には該当しないためです。",
+        "tags": [
+          "マクロ経済期待",
+          "政策コミュニケーション",
+          "マルチエージェントシステム",
+          "大規模言語モデル",
+          "インフレ期待",
+          "関税"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes how tariff threats affect household inflation and unemployment expectations using a large-language-model-based multi-agent experiment.",
+          "mainResult": "The authors represent 300 households as persistent LLM agents exposed to social-media information for several simulated months. They report that immediacy, rate salience, semantic progression, complexity, narrative, and sender identity affect expectations and their dispersion. Central-bank explanations can also coordinate beliefs, but their effects on average expectations depend on message content.",
+          "practicalApplication": "The framework may support exploratory policy-communication message design and hypothetical experiments, but the abstract does not show direct applications to electronic trading, market microstructure, interest-rate models, or yield-curve analysis.",
+          "methodology": "The study converts 300 households from the Michigan Surveys of Consumers into LLM agents and simulates their responses to social-media information. After calibration against human data, it conducts experiments on message characteristics and central-bank explanations, using open-ended responses to examine proposed mechanisms.",
+          "limitations": "The results are based on simulated agents and are not a substitute for human behavior. The reported validation covers only some distributional and demographic patterns, while the abstract does not establish the model specification, identification strategy, reproducibility, or transmission to financial markets and interest rates.",
+          "reason": "The study is relevant to monetary-policy communication and macroeconomic expectations, but it does not materially address the site's core areas of electronic execution, market microstructure, interest-rate models, yield curves, or direct rates research.",
+          "tags": [
+            "macroeconomic expectations",
+            "policy communication",
+            "multi-agent system",
+            "large language models",
+            "inflation expectations",
+            "tariffs"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2608.30558": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "離散時間市場で、動的取引資産に加えて静的オプションを利用できる場合の裁定機会、到達可能ポジションの閉性、資産価格評価の基本定理、効用最大化を理論的に検討する論文です。",
+        "mainResult": "要旨によれば、確率変数の「small cones」という概念を導入し、到達可能ポジションが確率収束の下で閉じるための十分条件を示します。また、この市場設定における資産価格評価の基本定理を証明し、無限次元のsmall conesの経済的に意味のある例を提示します。",
+        "practicalApplication": "静的オプションを含む市場での無裁定性や効用最大化の数学的基盤を整理する可能性があります。ただし、電子執行、注文フロー、マーケットマイクロストラクチャー、金利・イールドカーブ分析への直接的な応用は要旨から確認できません。",
+        "methodology": "離散時間の確率モデルにおいて、動的に取引される有限個の資産と静的オプションを組み合わせ、確率変数のsmall cones、確率収束に関する閉性、資産価格評価の基本定理、および効用最大化を抽象的に分析します。",
+        "limitations": "要旨だけでは、十分条件の正確な仮定、定理の形式、効用関数や市場モデルの詳細、例の具体性、数値的検証は判断できません。また、対象分野の中心である電子取引、マイクロストラクチャー、金利モデル、イールドカーブとの直接的関係は示されていません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "資産価格評価と静的・動的取引の一般理論としては関連性がありますが、本サイトの主要対象である電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、または金利市場への明確な貢献は要旨に現れていないため、対象外と判定します。",
+        "tags": [
+          "arbitrage theory",
+          "static options",
+          "dynamic trading",
+          "fundamental theorem of asset pricing",
+          "utility maximization",
+          "金融数学"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper theoretically studies arbitrage, closure of attainable positions, the fundamental theorem of asset pricing, and utility maximization in discrete-time markets that combine dynamically traded assets with statically chosen options.",
+          "mainResult": "According to the abstract, the paper introduces the concept of small cones of random variables and gives a sufficient condition under which attainable positions are closed under convergence in probability. It also proves a fundamental theorem of asset pricing in this setting and presents economically meaningful examples of infinite-dimensional small cones.",
+          "practicalApplication": "The work may provide a mathematical foundation for no-arbitrage analysis and utility maximization in markets containing static options. However, the abstract does not indicate direct applications to electronic execution, order flow, market microstructure, interest-rate or yield-curve analysis.",
+          "methodology": "The paper abstractly analyzes a discrete-time stochastic market with finitely many dynamically traded assets and statically selected options, using small cones of random variables, closure under convergence in probability, a fundamental theorem of asset pricing, and utility maximization.",
+          "limitations": "The abstract does not specify the exact assumptions behind the sufficient condition, the precise theorem statements, the utility functions or market details, the nature of the examples, or any numerical validation. It also does not establish a direct connection to electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "reason": "Although the paper is relevant to general financial mathematics and the theory of static and dynamic trading, the abstract does not show a clear contribution to electronic trading, market microstructure, interest-rate models, yield curves, or rates markets. It is therefore classified as out of scope.",
+          "tags": [
+            "arbitrage theory",
+            "static options",
+            "dynamic trading",
+            "fundamental theorem of asset pricing",
+            "utility maximization",
+            "financial mathematics"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2608.30749": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "信用ポートフォリオの稀な損失を効率的に評価するため、COS法と交差エントロピー型importance samplingを組み合わせたISCOSを提案している。電子取引、market microstructure、金利モデル、yield curve、ratesを主題とする研究ではない。",
+        "mainResult": "GaussianおよびGaussian--inverse-Gamma型の提案分布を導出し、有限COS近似誤差が較正パラメータへ伝播する仕組みを分析した。Gaussian copulaとStudent-$t$ copulaの信用ポートフォリオによる数値実験では、手法の効率性を示したと報告している。",
+        "practicalApplication": "信用ポートフォリオのrare-event loss estimationやリスク配分計算の高速化に応用できる可能性がある。ただし、本サイトの対象である電子執行、market microstructure、金利・イールドカーブ実務への直接的な適用性は低い。",
+        "methodology": "COS法による分布近似とcross-entropy importance-sampling calibrationを組み合わせ、GaussianおよびGaussian--inverse-Gamma proposalを構成する。有限COS近似誤差の推定パラメータへの影響を解析し、Gaussian copulaおよびStudent-$t$ copulaの信用ポートフォリオで数値検証している。",
+        "limitations": "抄録からは、効率性の具体的な改善幅、ベースライン手法、計算条件、誤差保証の範囲、実データでの検証結果が確認できない。また、信用ポートフォリオ以外の金融リスクや金利関連タスクへの有効性は示されていない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "信用リスクの数値計算法としては関連性があるが、指定された電子取引、market microstructure、interest-rate models、yield curves、ratesの研究スコープから外れているため。",
+        "tags": [
+          "credit portfolio risk",
+          "rare-event simulation",
+          "importance sampling",
+          "COS method",
+          "cross-entropy calibration"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper proposes ISCOS, which combines the COS method with cross-entropy importance sampling to evaluate rare losses in credit portfolios. It is not focused on electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "mainResult": "It derives Gaussian and Gaussian--inverse-Gamma proposal distributions and analyzes how finite-COS approximation errors propagate to the calibrated parameters. Numerical experiments on Gaussian-copula and Student-$t$-copula credit portfolios report improved efficiency.",
+          "practicalApplication": "The method may accelerate rare-event loss estimation and risk-allocation calculations for credit portfolios. However, its direct applicability to electronic execution, market microstructure, and interest-rate or yield-curve practice is low.",
+          "methodology": "The study combines COS-based distribution approximation with cross-entropy importance-sampling calibration and constructs Gaussian and Gaussian--inverse-Gamma proposals. It analyzes the effect of finite-COS approximation errors on fitted parameters and conducts numerical tests using Gaussian-copula and Student-$t$-copula credit portfolios.",
+          "limitations": "The abstract does not provide the magnitude of the efficiency improvement, benchmark methods, computational settings, the scope of error guarantees, or validation on real data. It also does not establish effectiveness beyond credit portfolios or for rates-related tasks.",
+          "reason": "Although it is relevant as a numerical method for credit risk, it falls outside the specified scope of electronic trading, market microstructure, interest-rate models, yield curves, and rates.",
+          "tags": [
+            "credit portfolio risk",
+            "rare-event simulation",
+            "importance sampling",
+            "COS method",
+            "cross-entropy calibration"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2608.30867": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "ニューラルネットワークでベンチマーク格子を変形し、与えられたオプション価格から再結合二項木を直接較正する手法を提案している。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を主題としていないため、対象範囲外である。",
+        "mainResult": "要旨によれば、提案手法は再価格誤差と許容性ペナルティを組み合わせた最適化により、裁定機会のない完全市場モデルを構築する。合成データとSPX市場データで高い再価格精度を示し、他のニューラル較正手法と比較して競争力があると報告されている。",
+        "practicalApplication": "較正済みの格子を通常の価格付けだけでなく、早期行使型契約の評価や複製戦略の導出に直接利用できる可能性がある。アメリカン・オプション価格を用いた直接較正も可能性として示されているが、要旨では実証結果として確立されていない。",
+        "methodology": "ニューラルネットワークでベンチマーク格子を変形し、連続的なオプション価格関数や局所ボラティリティ曲面を中間推定しない。較正は再価格誤差、許容性ペナルティ、任意の空間正則化項を含むペナルティ付き最適化として定式化される。",
+        "limitations": "評価は要旨で述べられた合成データとSPXデータに限られ、較正の安定性、外挿性能、計算コスト、実市場でのロバスト性、ペナルティ設計への依存は確認できない。また、完全性や裁定機会の不存在は提案モデルの構成上の主張であり、実データ上の市場仮定が満たされることを意味しない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "オプション価格付けとニューラル較正には関連するが、対象サイトの中心である電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場を扱っていないため。",
+        "tags": [
+          "neural calibration",
+          "binomial tree",
+          "option pricing",
+          "local volatility",
+          "American options"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper proposes directly calibrating a recombining binomial tree from given option prices by deforming a benchmark lattice with a neural network. It is outside scope because it does not focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, the method constructs an arbitrage-free complete-market model through penalized optimization combining repricing error with an admissibility penalty. Experiments on synthetic data and SPX market data reportedly achieve accurate repricing and are competitive with other neural calibration methods.",
+          "practicalApplication": "The calibrated lattice could be used directly for standard pricing, early-exercise contract valuation, and deriving replicating strategies. Direct calibration to American option prices is presented as a possibility, but is not established as an experimental result in the abstract.",
+          "methodology": "A neural network deforms a benchmark lattice without first estimating a continuous option-pricing function or local-volatility surface. Calibration is formulated as penalized optimization involving repricing error, an admissibility penalty, and an optional spatial-regularization term.",
+          "limitations": "The abstract reports evaluation only on synthetic data and SPX data, so calibration stability, extrapolation, computational cost, robustness in live markets, and dependence on penalty design cannot be assessed. The claims of completeness and absence of arbitrage are structural properties of the proposed model and do not imply that the model's market assumptions hold in real data.",
+          "reason": "Although the work is relevant to option pricing and neural calibration, it does not address the site's core areas of electronic execution, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "neural calibration",
+            "binomial tree",
+            "option pricing",
+            "local volatility",
+            "American options"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2608.30999": {
+      "status": "awaiting_pdf",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "匿名の取引・気配データからsynthetic metaorder reconstructionを行い、LMF order-splitting theoryとの整合性を検証した研究です。JSEの大型239銘柄について、2023年から2025年までのデータを用いて再構成パラメータをgrid searchしています。",
+        "mainResult": "metaorder impactのstylised factsを最小化する設定は対象となる集計特性を再現したものの、LMF relationはうまく再現しませんでした。一方、LMF discrepancyを最小化する設定ではLMF relationを再現できましたが、これは構成上の結果であり、銘柄別のexecutionやdecayの適合が弱くなりました。したがって、集計的なimpact特性だけではLMF整合的なorder splittingを識別できず、匿名データから得られる結果はLMF theoryの直接的な検証ではなく、再構成モデル内でのcompatibilityを示します。",
+        "practicalApplication": "trader identifierを含まないpublic dataを用いたmetaorder分析や、market-impact研究の再現性向上に応用可能です。ただし、実際のexecution設計やLMF theoryの検証に用いるには、再構成手法のモデル依存性と市場間での頑健性を追加確認する必要があります。",
+        "methodology": "JSEの時系列transaction and quote dataを対象に、metaorder reconstruction parametersをgrid searchしました。各設定をmetaorder impactのstylised factsおよびLMF relationとの誤差で評価し、impact重視とLMF重視の結果を比較しています。",
+        "limitations": "abstractで示される対象はJSEの大型239銘柄と単一市場に限られます。匿名データからのmetaorder再構成に依存するため、真のorder splittingを直接観測していません。LMFを目的関数に含めた結果は独立検証ではなく、再構成クラスへの適合性にとどまります。また、データ以外の詳細な再構成仕様、統計的有意性、他市場での外部検証はabstractから確認できません。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子取引とmarket microstructureに直接関係し、公開データからmetaorderとmarket impactを識別する際の重要な方法論的限界を明確に示しています。特に、stylised factsの再現と理論の独立検証を区別している点に研究上の価値があります。",
+        "tags": [
+          "market microstructure",
+          "metaorder",
+          "market impact",
+          "order splitting",
+          "LMF theory",
+          "public data",
+          "JSE",
+          "synthetic reconstruction",
+          "stylised facts"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study uses synthetic metaorder reconstruction from anonymous transaction and quote data to assess consistency with LMF order-splitting theory. It applies a grid search over reconstruction parameters to 239 large JSE stocks using data from 2023 to 2025.",
+          "mainResult": "Configurations minimising metaorder impact stylised-fact errors reproduced the target aggregate properties but performed poorly on the LMF relation. Configurations minimising the LMF discrepancy recovered that relation, but this was achieved by construction and came with weaker stock-level execution and decay fits. Thus, aggregate impact stylised facts alone cannot identify LMF-consistent order splitting, and the anonymous-data results indicate compatibility within the reconstruction model rather than direct validation of the LMF theory.",
+          "practicalApplication": "The approach may support metaorder analysis using public data without trader identifiers and improve the reproducibility of market-impact research. However, applying it to execution design or validating LMF theory requires further testing of reconstruction-model dependence and robustness across markets.",
+          "methodology": "The authors apply a grid search over metaorder reconstruction parameters to JSE transaction and quote time series. Each configuration is evaluated using errors against metaorder impact stylised facts and the LMF relation, with impact-focused and LMF-focused selections compared.",
+          "limitations": "The abstract covers only 239 large stocks in the JSE and a single market. It relies on reconstructing metaorders from anonymous data rather than directly observing true order splitting. Results targeting the LMF relation are not independent tests, but compatibility within the reconstruction class. The abstract does not provide the full reconstruction specification, statistical significance, or external validation in other markets.",
+          "reason": "The paper is directly relevant to electronic trading and market microstructure and highlights an important methodological limitation in identifying metaorders and market impact from public data. Its explicit distinction between reproducing stylised facts and independently validating a theory is particularly valuable.",
+          "tags": [
+            "market microstructure",
+            "metaorder",
+            "market impact",
+            "order splitting",
+            "LMF theory",
+            "public data",
+            "JSE",
+            "synthetic reconstruction",
+            "stylised facts"
+          ]
+        }
+      },
       "finalAnalysis": null
     }
+  },
+  "candidateFingerprints": {
+    "2608.29025": "63c6f50c0b7a12ef7ac64114cad99c009c38dea7601cf071e197e25ffbe118b8",
+    "2608.29423": "c7d5c2863f381a1ade161b825f443854b1765e0407ec6e8f04f3856d27118c11",
+    "2608.29468": "a1bc6c08fc0907880f13b647130f283bb336f95119b1e11f6bb7cbbe9b5f38e2",
+    "2608.29473": "74966352898ecfb211ef3a4bccd07594a61a5c493e53231ac47d1b73a4e10d30",
+    "2608.29786": "63c491e083b906eb783046ccb51368cf23c010c8286a0ffac16cd752a98c4865",
+    "2608.29818": "cbffc8751bc12b5392fa99574a674b9f2ce8df65fbb4aa8be5214a9bbdb800de",
+    "2608.29843": "3ac34176b7bd3b0f63ae407b72470e5d4862f16e91a6a1dc31200d3323660a21",
+    "2608.30321": "28b3ed29a1e6908e6f3ba6724f2e58b6b6e3bafc37803869a320068987d75439",
+    "2608.30522": "831e6fd19aea9bfc2747de90a85aaec478e469aa64ef32b30276d1cf4aace235",
+    "2608.30558": "0db6504ad8ddc9966c5fdce333d5a9634e71f697ec3e42772bc7dd2fbdad2ae6",
+    "2608.30749": "8b3cbc1c9419e365a3a929c87a9ad9c1820bfd703b0fa7b93a878cd78839f275",
+    "2608.30867": "7287fe93b556efe923b96b14c5f9b4ad334b22a16cc5b7897aab3543e09a19ec",
+    "2608.30999": "faf65279159461380b437f9a19ec857eddba0916946fb6f99e95c7e1e38faeb9",
+    "2608.31041": "f5a816dd69328d4fd627d8eb7997b0a95481ec30dad4cddc1919271778e58962"
   }
 }

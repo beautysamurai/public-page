@@ -196,7 +196,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m unittest discover -s tests -v
-          node --test tests/test_model_math.cjs tests/test_archive_ui.cjs
+          node --test tests/test_model_math.cjs tests/test_archive_ui.cjs tests/test_tex_math.cjs
           python scripts/import_scheduler_history.py --check
           git diff --check
 
@@ -892,7 +892,7 @@ jobs:
         run: |
           set -euo pipefail
           python -m unittest discover -s tests -v
-          node --test tests/test_model_math.cjs tests/test_archive_ui.cjs
+          node --test tests/test_model_math.cjs tests/test_archive_ui.cjs tests/test_tex_math.cjs
           python scripts/import_scheduler_history.py --check
           git diff --check
           python - <<'PY'

@@ -7,23 +7,41 @@
   "use strict";
 
   var MATHML_NS = "http://www.w3.org/1998/Math/MathML";
-  var SYMBOLS = {
-    sum: "∑", prod: "∏", int: "∫", partial: "∂", nabla: "∇",
-    infty: "∞", cdot: "⋅", times: "×", pm: "±", mp: "∓",
-    le: "≤", leq: "≤", ge: "≥", geq: "≥", neq: "≠",
+  var OPERATORS = {
+    sum: "∑", prod: "∏", int: "∫", cdot: "⋅", times: "×", pm: "±", mp: "∓",
+    le: "≤", leq: "≤", ge: "≥", geq: "≥", neq: "≠", lt: "<", gt: ">",
     approx: "≈", sim: "∼", to: "→", rightarrow: "→", leftarrow: "←",
+    in: "∈", notin: "∉", subset: "⊂", subseteq: "⊆", cup: "∪", cap: "∩"
+  };
+  // Identifiers must be mi, not mo: operator spacing separates Greek variables
+  // from adjacent factors and even inserts gaps inside function arguments.
+  var IDENTIFIERS = {
+    partial: "∂", nabla: "∇", infty: "∞", ell: "ℓ",
     alpha: "α", beta: "β", gamma: "γ", delta: "δ", epsilon: "ϵ",
-    theta: "θ", kappa: "κ", lambda: "λ", mu: "μ", nu: "ν",
-    pi: "π", rho: "ρ", sigma: "σ", tau: "τ", phi: "φ", omega: "ω",
+    varepsilon: "ε", zeta: "ζ", eta: "η", theta: "θ", vartheta: "ϑ", iota: "ι",
+    kappa: "κ", lambda: "λ", mu: "μ", nu: "ν", xi: "ξ", omicron: "ο",
+    pi: "π", varpi: "ϖ", rho: "ρ", varrho: "ϱ", sigma: "σ", varsigma: "ς",
+    tau: "τ", upsilon: "υ", phi: "φ", varphi: "ϕ", chi: "χ", psi: "ψ", omega: "ω",
     Gamma: "Γ", Delta: "Δ", Theta: "Θ", Lambda: "Λ", Pi: "Π",
-    Sigma: "Σ", Phi: "Φ", Omega: "Ω"
+    Xi: "Ξ", Sigma: "Σ", Upsilon: "Υ", Phi: "Φ", Psi: "Ψ", Omega: "Ω"
   };
   var ACCENTS = { bar: "¯", overline: "¯", hat: "^", tilde: "˜" };
-  var DELIMITERS = { "{": "{", "}": "}", langle: "⟨", rangle: "⟩", vert: "|" };
+  var DELIMITERS = {
+    "{": "{", "}": "}", "(": "(", ")": ")", "[": "[", "]": "]",
+    langle: "⟨", rangle: "⟩", vert: "|", lvert: "|", rvert: "|",
+    "|": "‖", Vert: "‖", lVert: "‖", rVert: "‖", ".": ""
+  };
+
+  function upright(node) {
+    if (node.type === "mi") node.variant = "normal";
+    (node.children || []).forEach(upright);
+    return node;
+  }
 
   function Parser(source) {
     this.source = source;
     this.index = 0;
+    this.depth = 0;
   }
 
   Parser.prototype.peek = function () { return this.source.charAt(this.index); };
@@ -39,10 +57,12 @@
     return this.source.slice(start, this.index);
   };
   Parser.prototype.group = function () {
+    if (++this.depth > 64) throw new Error("TeX nesting limit");
     this.skipSpace();
     if (this.take() !== "{") throw new Error("expected TeX group");
     var value = this.expression("}");
     if (this.take() !== "}") throw new Error("unclosed TeX group");
+    this.depth -= 1;
     return value;
   };
   Parser.prototype.textGroup = function () {
@@ -57,12 +77,12 @@
   };
   Parser.prototype.script = function () {
     this.skipSpace();
-    return this.peek() === "{" ? this.group() : this.atom();
+    return this.peek() === "{" ? this.group() : this.atom(false, true);
   };
-  Parser.prototype.atom = function () {
+  Parser.prototype.atom = function (withScripts, singleToken) {
     this.skipSpace();
     var character = this.peek();
-    if (!character) throw new Error("missing TeX atom");
+    if (!character || /[}_^]/.test(character)) throw new Error("missing TeX atom");
     var node;
     if (character === "{") {
       node = this.group();
@@ -72,49 +92,68 @@
         node = { type: "mfrac", children: [this.group(), this.group()] };
       } else if (command === "sqrt") {
         node = { type: "msqrt", children: [this.group()] };
-      } else if (command === "text" || command === "mathrm" || command === "operatorname") {
+      } else if (command === "text" || command === "operatorname") {
         node = this.textGroup();
-      } else if (ACCENTS[command]) {
+        if (command === "operatorname") node.type = "mo";
+      } else if (command === "mathrm") {
+        node = upright(this.group());
+      } else if (command === "rm") {
+        node = upright(this.expression("}"));
+      } else if (typeof ACCENTS[command] === "string") {
         node = {
           type: "mover",
-          children: [this.peek() === "{" ? this.group() : this.atom(), { type: "mo", text: ACCENTS[command] }]
+          children: [this.script(), { type: "mo", text: ACCENTS[command] }]
         };
       } else if (command === "left" || command === "right") {
         this.skipSpace();
-        var delimiter = this.peek() === "\\" ? this.command() : this.take();
-        node = { type: "mo", text: DELIMITERS[delimiter] || delimiter };
+        var escaped = this.peek() === "\\";
+        var delimiter = escaped ? this.command() : this.take();
+        if (typeof DELIMITERS[delimiter] !== "string") throw new Error("unsupported delimiter");
+        node = { type: "mo", text: !escaped && delimiter === "|" ? "|" : DELIMITERS[delimiter], stretchy: true };
       } else if (command === "," || command === ";" || command === ":" || command === "quad" || command === "qquad") {
         node = { type: "mspace", width: command === "qquad" ? "2em" : command === "quad" ? "1em" : ".25em" };
       } else if (command === "!") {
         node = { type: "mspace", width: "-.15em" };
-      } else if (SYMBOLS[command]) {
-        node = { type: "mo", text: SYMBOLS[command] };
-      } else if (DELIMITERS[command]) {
+      } else if (typeof IDENTIFIERS[command] === "string") {
+        node = { type: "mi", text: IDENTIFIERS[command] };
+      } else if (typeof OPERATORS[command] === "string") {
+        node = { type: "mo", text: OPERATORS[command] };
+      } else if (typeof DELIMITERS[command] === "string") {
         node = { type: "mo", text: DELIMITERS[command] };
       } else {
         throw new Error("unsupported TeX command");
       }
-    } else if (/[0-9.]/.test(character)) {
+    } else if (/[0-9]/.test(character)) {
       var numberStart = this.index;
-      while (/[0-9.]/.test(this.peek())) this.index += 1;
+      this.index += 1;
+      if (!singleToken) while (/[0-9.]/.test(this.peek())) this.index += 1;
       node = { type: "mn", text: this.source.slice(numberStart, this.index) };
-    } else if (/[A-Za-z]/.test(character)) {
+    } else if (/[A-Za-z\u0370-\u03ff]/.test(character)) {
       node = { type: "mi", text: this.take() };
     } else {
       var operator = this.take();
       if (operator === "-") operator = "−";
       if (operator === "*") operator = "∗";
+      // Older public-text sanitization used angle quotation marks in TeX.
+      if (operator === "›") operator = ">";
+      if (operator === "‹") operator = "<";
       node = { type: "mo", text: operator };
     }
 
+    if (withScripts === false) return node;
     var subscript = null;
     var superscript = null;
     this.skipSpace();
     while (this.peek() === "_" || this.peek() === "^") {
       var marker = this.take();
       var value = this.script();
-      if (marker === "_") subscript = value;
-      else superscript = value;
+      if (marker === "_") {
+        if (subscript) throw new Error("duplicate subscript");
+        subscript = value;
+      } else {
+        if (superscript) throw new Error("duplicate superscript");
+        superscript = value;
+      }
       this.skipSpace();
     }
     if (subscript && superscript) return { type: "msubsup", children: [node, subscript, superscript] };
@@ -133,7 +172,7 @@
   };
 
   function parse(source) {
-    if (typeof source !== "string" || !source.trim() || source.length > 2000 || /[\u0000-\u001f<>$]/.test(source)) return null;
+    if (typeof source !== "string" || !source.trim() || source.length > 2000 || /[\u0000-\u0008\u000b\u000c\u000e-\u001f$]/.test(source)) return null;
     try {
       var parser = new Parser(source.trim());
       var result = parser.expression("");
@@ -147,6 +186,16 @@
     var element = documentRef.createElementNS(MATHML_NS, node.type);
     if (node.text !== undefined) element.textContent = node.text;
     if (node.width) element.setAttribute("width", node.width);
+    if (node.variant) element.setAttribute("mathvariant", node.variant);
+    if (node.type === "mo" && /^[()[\]{}|‖⟨⟩]$/.test(node.text)) {
+      // Explicit fence spacing also handles a parenthesis in an infix position
+      // (G(0), adjacent factors), consistently across native MathML engines.
+      element.setAttribute("lspace", "0em");
+      element.setAttribute("rspace", "0em");
+      element.setAttribute("fence", "true");
+      // Ordinary TeX parentheses retain text size; only left/right stretch.
+      element.setAttribute("stretchy", node.stretchy ? "true" : "false");
+    }
     (node.children || []).forEach(function (child) {
       element.appendChild(mathNode(documentRef, child));
     });

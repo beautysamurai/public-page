@@ -451,7 +451,7 @@ class PersistenceAndCheckTests(unittest.TestCase):
                 latest,
                 archive,
             )
-            self.assertEqual(len(changed), 4)
+            self.assertEqual(len(changed), 5)
             self.assertEqual(
                 importer.persist_artifacts(
                     artifacts,
@@ -584,8 +584,31 @@ class PersistenceAndCheckTests(unittest.TestCase):
                 latest,
                 archive,
             )
-            self.assertEqual(len(mismatches), 4)
+            self.assertEqual(len(mismatches), 5)
             self.assertFalse((root / "missing").exists())
+
+    def test_paper_catalogue_preserves_all_appearances_ratings_and_tags(self):
+        artifacts = self._artifacts()
+        catalogue = decode_json(artifacts.papers)
+        self.assertEqual(catalogue["schemaVersion"], 1)
+        self.assertEqual(len(catalogue["editions"]), len(artifacts.archives))
+        for compact, (_name, content) in zip(catalogue["editions"], artifacts.archives, strict=True):
+            original = decode_json(content)
+            self.assertEqual(compact["editionId"], original["editionId"])
+            self.assertEqual(compact["date"], original["editionDate"])
+            self.assertEqual(compact["kind"], original["editionKind"])
+            self.assertEqual(compact["periodEnd"], original["periodEnd"])
+            self.assertEqual(len(compact["papers"]), len(original["papers"]))
+            for paper, source in zip(compact["papers"], original["papers"], strict=True):
+                self.assertEqual(set(paper), {"arxivId", "title", "authors", "topics", "schedulerRating", "schedulerRatingScale"})
+                for key, value in paper.items():
+                    self.assertEqual(value, source[key])
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            importer.persist_artifacts(artifacts, root / "latest.json", root / "archive")
+            self.assertEqual((root / "papers.json").read_bytes(), artifacts.papers)
+            (root / "papers.json").write_bytes(b"stale")
+            self.assertIn(root / "papers.json", importer.check_artifacts(artifacts, root / "latest.json", root / "archive"))
 
 
 if __name__ == "__main__":

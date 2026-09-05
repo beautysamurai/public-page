@@ -51,6 +51,22 @@ provides optional Web and X searches built from its public title and
 version-free arXiv identifier; these
 links make no third-party request until clicked.
 
+Choose **論文から探す · 評価 / タグ / Find papers** in the archive to search
+papers across all saved editions, filter by minimum rating and topic tag, and
+sort by rating or review date. Date and review-type filters also apply in this
+view; leaving dates blank searches all time. Versioned appearances of the same
+arXiv paper are grouped into one card. Its rating and tags come from the newest
+matching edition, with links to the individual reviews. Missing ratings are not
+treated as zero. Scores on older scales are converted to 10 only for comparison;
+the original rating is shown and the stored reviews are never re-scored.
+
+The offline importer regenerates the compact `site/data/papers.json` catalogue
+alongside the existing archive index. Browsing fetches this single static file
+only when the paper view is opened; no OpenAI calls or new research are involved.
+The existing publication, validation, synchronization and Pages flows include it.
+Review TeX is rendered into native MathML without third-party scripts or unsafe
+HTML insertion; unsupported commands remain visible as literal fallback text.
+
 ## Install and configure
 
 Requirements:

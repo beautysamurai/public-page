@@ -86,6 +86,7 @@ function Assert-AllowedChangedPaths {
     $allowedExact = @(
         "content/chatgpt_scheduler_history.json",
         "site/data/latest.json",
+        "site/data/papers.json",
         "site/data/i18n/en.json"
     )
     foreach ($path in $Paths) {
@@ -382,6 +383,7 @@ try {
         "add", "--",
         "content/chatgpt_scheduler_history.json",
         "site/data/latest.json",
+        "site/data/papers.json",
         "site/data/archive",
         "site/data/i18n/en.json"
     ) | Out-Null

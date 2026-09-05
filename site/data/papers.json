@@ -1,0 +1,556 @@
+{
+  "schemaVersion": 1,
+  "editions": [
+    {
+      "editionId": "2026-09-04-daily-openai-01",
+      "date": "2026-09-04",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.03115v1",
+          "title": "Mean-field equilibrium of heterogeneous agents under market impact",
+          "authors": [
+            "Joseph Leclère",
+            "Mathieu Rosenbaum"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-31-daily-openai-01",
+      "date": "2026-08-31",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2608.28399v1",
+          "title": "RetailAgent: Structured Adverse Timing in Self-Conditioned Multimodal LLM Trading Agents",
+          "authors": [
+            "Yupeng Zhang",
+            "Liuyuan Jiang",
+            "Hongyi Huang",
+            "Bingheng Li",
+            "Lisha Chen"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-28-daily-openai-01",
+      "date": "2026-08-28",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2608.27076v1",
+          "title": "Tabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal Generation",
+          "authors": [
+            "Joshua Le Grice"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-28-daily-chatgpt-01",
+      "date": "2026-08-28",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2608.25844v1",
+          "title": "Output-Only Identification and Spectral Monitoring of Coupled Feedback Networks with Known Time-Varying Actuation",
+          "authors": [
+            "Jihwan Woo"
+          ],
+          "topics": [
+            "Market microstructure",
+            "Model validation",
+            "Mathematical finance"
+          ],
+          "schedulerRating": 6.5,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-27-daily-chatgpt-01",
+      "date": "2026-08-27",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2608.24206v1",
+          "title": "Capital allocation on decentralized lending platforms",
+          "authors": [
+            "Bastien Baude",
+            "Vincent Danos",
+            "Hamza El Khalloufi"
+          ],
+          "topics": [
+            "Interest-rate models",
+            "Mathematical finance",
+            "Model validation"
+          ],
+          "schedulerRating": 6.5,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.23915v1",
+          "title": "Equilibrium in closed constant-function market maker economies",
+          "authors": [
+            "Muqiao Huang",
+            "Ruodu Wang",
+            "Yiyun Wang"
+          ],
+          "topics": [
+            "Market making",
+            "Mathematical finance",
+            "Market microstructure"
+          ],
+          "schedulerRating": 5.5,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-26-daily-chatgpt-01",
+      "date": "2026-08-26",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2511.02016v2",
+          "title": "ABIDES-MARL: A Multi-Agent Reinforcement Learning Environment for Optimal Execution with Endogenous Liquidity",
+          "authors": [
+            "Patrick Cheridito",
+            "Jean-Loup Dupret",
+            "Zhexin Wu"
+          ],
+          "topics": [
+            "Electronic trading",
+            "Reinforcement learning",
+            "Limit order books"
+          ],
+          "schedulerRating": 9,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.21888v1",
+          "title": "Short-horizon mean reversion in cryptocurrency markets: a matched cross-market measurement",
+          "authors": [
+            "Nadav A. Kitron",
+            "Jonathan M. Wengrowicz"
+          ],
+          "topics": [
+            "Market microstructure",
+            "Electronic trading",
+            "Limit order books"
+          ],
+          "schedulerRating": 8.5,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.22768v1",
+          "title": "The Loop-Gain Matrix: Coupled Rebalancing Feedback and the Blind Spots of Scalar Stability Monitoring",
+          "authors": [
+            "Jihwan Woo"
+          ],
+          "topics": [
+            "Market microstructure",
+            "Model validation",
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.23053v1",
+          "title": "tse_tick: A Python Library for Parsing and Querying Nikkei NEEDS Tick Data from the Tokyo Stock Exchange",
+          "authors": [
+            "Kazumi Li",
+            "Masataka Hayashi",
+            "Teruo Nakatsuma",
+            "Peter Romero"
+          ],
+          "topics": [
+            "Market microstructure",
+            "Electronic trading",
+            "Limit order books"
+          ],
+          "schedulerRating": 6.5,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-25-daily-chatgpt-01",
+      "date": "2026-08-25",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2608.20589v1",
+          "title": "Calibrating Inelastic Markets to Options: The Lean Marketron and the Generalized Langevin Equation",
+          "authors": [
+            "Andrey Itkin"
+          ],
+          "topics": [
+            "Market microstructure",
+            "Mathematical finance",
+            "Model validation"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.20842v1",
+          "title": "Rethinking Synthetic Scenario Realism: Compatibility, Not Fidelity, Drives Hedging Performance",
+          "authors": [
+            "Ryuji Hashimoto",
+            "Masanori Hirano",
+            "Ryota Ozaki",
+            "Kentaro Imajo"
+          ],
+          "topics": [
+            "Dynamic hedging",
+            "Machine learning",
+            "Generative models"
+          ],
+          "schedulerRating": 6.5,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.20982v1",
+          "title": "Surrender runs",
+          "authors": [
+            "Andreas Löffler",
+            "Stefan Steins"
+          ],
+          "topics": [
+            "Interest-rate models",
+            "Mathematical finance",
+            "Model validation"
+          ],
+          "schedulerRating": 5,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-24-daily-chatgpt-01",
+      "date": "2026-08-24",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2608.19227v1",
+          "title": "M3: A State-Event Generative Foundation Model for Market Microstructure Dynamics",
+          "authors": [
+            "Yanzhi Zhang",
+            "Yu Ma",
+            "Yilin Cheng",
+            "Jian Li",
+            "Yitong Duan"
+          ],
+          "topics": [
+            "Electronic trading",
+            "Market simulation",
+            "Generative models"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.19389v1",
+          "title": "Concentrated Liquidity Provision: a Reinforcement Learning Perspective",
+          "authors": [
+            "Georgios Chionas",
+            "Charalampos Kleitsikas",
+            "Stefanos Leonardos",
+            "Leandro Sánchez-Betancourt",
+            "Carmine Ventre"
+          ],
+          "topics": [
+            "Market making",
+            "Reinforcement learning",
+            "Concentrated liquidity"
+          ],
+          "schedulerRating": 5.5,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.19394v1",
+          "title": "Deep-MKV-TS: Path-Dependent McKean--Vlasov Control for Financial Time Series Generation",
+          "authors": [
+            "Samer El Boustany",
+            "Théo Basseras",
+            "Samy Mekkaoui",
+            "Alexandre Alouadi",
+            "Yadh Hafsi",
+            "Huyên Pham"
+          ],
+          "topics": [
+            "Mathematical finance",
+            "Machine learning",
+            "Generative models"
+          ],
+          "schedulerRating": 6.5,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-23-weekly-chatgpt-01",
+      "date": "2026-08-23",
+      "kind": "weekly",
+      "periodEnd": "2026-08-21",
+      "papers": [
+        {
+          "arxivId": "2608.18195v1",
+          "title": "Multi-Level Market Making with Reinforcement Learning",
+          "authors": [
+            "Patrick Cheridito",
+            "Moritz Weiss"
+          ],
+          "topics": [
+            "Market making",
+            "Reinforcement learning",
+            "Limit order books"
+          ],
+          "schedulerRating": 8.5,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.19227v1",
+          "title": "M3: A State-Event Generative Foundation Model for Market Microstructure Dynamics",
+          "authors": [
+            "Yanzhi Zhang",
+            "Yu Ma",
+            "Yilin Cheng",
+            "Jian Li",
+            "Yitong Duan"
+          ],
+          "topics": [
+            "Electronic trading",
+            "Market simulation",
+            "Generative models"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.18120v1",
+          "title": "Tradable Itô Signatures: A Model-Free, Interpretable Framework for Dynamic Hedging",
+          "authors": [
+            "Xin Guo",
+            "Binnan Wang",
+            "Ruixun Zhang"
+          ],
+          "topics": [
+            "Dynamic hedging",
+            "Mathematical finance",
+            "Machine learning"
+          ],
+          "schedulerRating": 7.5,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.19389v1",
+          "title": "Concentrated Liquidity Provision: a Reinforcement Learning Perspective",
+          "authors": [
+            "Georgios Chionas",
+            "Charalampos Kleitsikas",
+            "Stefanos Leonardos",
+            "Leandro Sánchez-Betancourt",
+            "Carmine Ventre"
+          ],
+          "topics": [
+            "Market making",
+            "Reinforcement learning",
+            "Concentrated liquidity"
+          ],
+          "schedulerRating": 5.5,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.07690v1",
+          "title": "On a Simple Relationship Between Order Imbalance, Skew and Width in Over-The-Counter Trading",
+          "authors": [
+            "Peter Cotton"
+          ],
+          "topics": [
+            "OTC trading",
+            "RFQ",
+            "Market making"
+          ],
+          "schedulerRating": 9,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-22-daily-chatgpt-01",
+      "date": "2026-08-22",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2608.19227v1",
+          "title": "M3: A State-Event Generative Foundation Model for Market Microstructure Dynamics",
+          "authors": [
+            "Yanzhi Zhang",
+            "Yu Ma",
+            "Yilin Cheng",
+            "Jian Li",
+            "Yitong Duan"
+          ],
+          "topics": [
+            "Electronic trading",
+            "Market simulation",
+            "Generative models"
+          ],
+          "schedulerRating": 5,
+          "schedulerRatingScale": 5
+        },
+        {
+          "arxivId": "2608.19389v1",
+          "title": "Concentrated Liquidity Provision: a Reinforcement Learning Perspective",
+          "authors": [
+            "Georgios Chionas",
+            "Charalampos Kleitsikas",
+            "Stefanos Leonardos",
+            "Leandro Sánchez-Betancourt",
+            "Carmine Ventre"
+          ],
+          "topics": [
+            "Market making",
+            "Reinforcement learning",
+            "Concentrated liquidity"
+          ],
+          "schedulerRating": 3,
+          "schedulerRatingScale": 5
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-21-daily-chatgpt-01",
+      "date": "2026-08-21",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": []
+    },
+    {
+      "editionId": "2026-08-20-daily-chatgpt-01",
+      "date": "2026-08-20",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2604.00346v2",
+          "title": "Forecasting duration in high-frequency financial data using a self-exciting flexible residual point process",
+          "authors": [
+            "Kyungsub Lee"
+          ],
+          "topics": [
+            "Electronic trading",
+            "Point processes",
+            "Market microstructure"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 5
+        }
+      ]
+    },
+    {
+      "editionId": "2026-08-19-daily-chatgpt-01",
+      "date": "2026-08-19",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": []
+    },
+    {
+      "editionId": "2026-08-18-daily-chatgpt-01",
+      "date": "2026-08-18",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": []
+    },
+    {
+      "editionId": "2026-08-17-daily-chatgpt-01",
+      "date": "2026-08-17",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": []
+    },
+    {
+      "editionId": "2026-08-15-daily-chatgpt-01",
+      "date": "2026-08-15",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2608.13096v1",
+          "title": "FlowLOB: Efficient and Controllable Limit Order Book Generation with Flow Matching",
+          "authors": [
+            "Zhuohan Wang",
+            "Andreea Bacalum",
+            "Ollie Olby",
+            "Carmine Ventre",
+            "Namid Stillman"
+          ],
+          "topics": [
+            "Electronic trading",
+            "Market microstructure",
+            "Generative models"
+          ],
+          "schedulerRating": 5,
+          "schedulerRatingScale": 5
+        },
+        {
+          "arxivId": "2608.12016v1",
+          "title": "Term structure shapes in the Hull-White model with Svensson-parameterized initial yield curves",
+          "authors": [
+            "Felix Sachse"
+          ],
+          "topics": [
+            "Interest-rate models",
+            "Yield curves",
+            "Model validation"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 5
+        },
+        {
+          "arxivId": "2608.07690v1",
+          "title": "On a Simple Relationship Between Order Imbalance, Skew and Width in Over-The-Counter Trading",
+          "authors": [
+            "Peter Cotton"
+          ],
+          "topics": [
+            "OTC trading",
+            "RFQ",
+            "Market making"
+          ],
+          "schedulerRating": 5,
+          "schedulerRatingScale": 5
+        }
+      ]
+    }
+  ]
+}

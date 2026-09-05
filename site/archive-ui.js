@@ -78,6 +78,86 @@
     return typeof value === "string" ? value.trim().replace(/v\d+$/i, "") : "";
   }
 
+  function normaliseTag(value) {
+    return typeof value === "string" ? value.replace(/\s+/g, " ").trim().toLowerCase().slice(0, 120) : "";
+  }
+
+  function ratingOutOfTen(paper) {
+    var value = paper && paper.schedulerRating;
+    var scale = paper && paper.schedulerRatingScale;
+    if (typeof value !== "number" || typeof scale !== "number" ||
+        !Number.isFinite(value) || !Number.isFinite(scale) || scale <= 0 || scale > 100 ||
+        value < 0 || value > scale) return null;
+    return value / scale * 10;
+  }
+
+  function normaliseMinRating(value) {
+    if (value === null || value === "" || value === undefined) return "";
+    var number = Number(value);
+    return Number.isInteger(number) && number >= 0 && number <= 10 ? String(number) : "";
+  }
+
+  function normalisePaperSort(value) {
+    return value === "date" ? "date" : "rating";
+  }
+
+  function collectPapers(editions, filters) {
+    var grouped = new Map();
+    // The catalogue is generated newest-edition-first. Filter editions before
+    // deduplicating, so score, tags and provenance refer to the same review.
+    filterReports(editions, filters).forEach(function (edition) {
+      (Array.isArray(edition.papers) ? edition.papers : []).forEach(function (paper) {
+        var id = versionlessArxivId(paper.arxivId).toLowerCase();
+        if (!id) return;
+        var entry = grouped.get(id);
+        if (!entry) {
+          entry = { paper: paper, rating: ratingOutOfTen(paper), reviews: [] };
+          grouped.set(id, entry);
+        }
+        entry.reviews.push({
+          editionId: edition.editionId, date: edition.date, kind: normaliseReportKind(edition.kind),
+          rating: ratingOutOfTen(paper)
+        });
+      });
+    });
+    return Array.from(grouped.values());
+  }
+
+  function paperTags(entries) {
+    var tags = new Map();
+    entries.forEach(function (entry) {
+      var counted = new Set();
+      (entry.paper.topics || []).forEach(function (label) {
+        var key = normaliseTag(label);
+        if (!key || counted.has(key)) return;
+        counted.add(key);
+        var item = tags.get(key) || { key: key, label: label, count: 0 };
+        item.count += 1;
+        tags.set(key, item);
+      });
+    });
+    return Array.from(tags.values()).sort(function (a, b) { return a.label.localeCompare(b.label); });
+  }
+
+  function filterPapers(entries, filters) {
+    var options = filters || {};
+    var min = normaliseMinRating(options.minRating);
+    var tag = normaliseTag(options.tag);
+    var query = typeof options.query === "string" ? options.query.trim().toLowerCase() : "";
+    var sort = normalisePaperSort(options.sort);
+    return entries.filter(function (entry) {
+      if (min !== "" && (entry.rating === null || entry.rating < Number(min))) return false;
+      if (tag && !(entry.paper.topics || []).some(function (label) { return normaliseTag(label) === tag; })) return false;
+      var text = [entry.paper.title, entry.paper.arxivId].concat(entry.paper.authors || [], entry.paper.topics || []);
+      return !query || text.join(" ").toLowerCase().indexOf(query) !== -1;
+    }).sort(function (a, b) {
+      var ratingOrder = (b.rating === null ? -1 : b.rating) - (a.rating === null ? -1 : a.rating);
+      var dateOrder = b.reviews[0].date.localeCompare(a.reviews[0].date);
+      return (sort === "date" ? dateOrder || ratingOrder : ratingOrder || dateOrder) ||
+        a.paper.arxivId.localeCompare(b.paper.arxivId);
+    });
+  }
+
   function paperSearchQuery(paper) {
     var source = paper && typeof paper === "object" ? paper : {};
     var title = typeof source.title === "string"
@@ -106,11 +186,18 @@
 
   return Object.freeze({
     countKinds: countKinds,
+    collectPapers: collectPapers,
+    filterPapers: filterPapers,
     filterReports: filterReports,
     normaliseDate: normaliseDate,
     normaliseKind: normaliseKind,
+    normaliseMinRating: normaliseMinRating,
+    normalisePaperSort: normalisePaperSort,
     normaliseRange: normaliseRange,
+    normaliseTag: normaliseTag,
+    paperTags: paperTags,
     paperSearchQuery: paperSearchQuery,
+    ratingOutOfTen: ratingOutOfTen,
     reportFilterDate: reportFilterDate,
     versionlessArxivId: versionlessArxivId,
     webSearchUrl: webSearchUrl,

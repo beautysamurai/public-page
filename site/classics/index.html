@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'self'; font-src 'self'; object-src 'none'; media-src 'none'; frame-src 'none'; worker-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+    <meta name="referrer" content="no-referrer">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#0b1d2a">
+    <meta name="description" content="電子取引・市場マイクロストラクチャー・金利モデルの定番論文と書籍。読む理由と正規の入手先をまとめた読書案内。">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+    <meta property="og:title" content="定番論文・書籍 — Rates &amp; Execution">
+    <meta property="og:description" content="電子取引・市場マイクロストラクチャー・金利モデルの定番論文と書籍。">
+    <meta property="og:url" content="https://beautysamurai.github.io/public-page/classics/">
+    <title>定番論文・書籍 — Rates &amp; Execution</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../classics.css">
+    <script src="../i18n.js" defer></script>
+    <script src="../static-page.js" defer></script>
+    <script src="../classics.js" defer></script>
+  </head>
+  <body data-page-title-key="classics.pageTitle" data-description-key="classics.description">
+    <a class="skip-link" href="#main-content" data-i18n="classics.skip">定番論文・書籍へ移動</a>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="../" data-preserve-language><span class="brand-copy"><strong>Rates &amp; Execution</strong></span></a>
+        <nav class="primary-nav" aria-label="メインナビゲーション" data-i18n-aria-label="nav.aria">
+          <a href="../#digest" data-i18n="nav.latest" data-preserve-language>最新号</a>
+          <a href="../#archive" data-i18n="nav.archive" data-preserve-language>アーカイブ</a>
+          <a href="./" aria-current="page" data-i18n="nav.classics" data-preserve-language>定番論文・書籍</a>
+          <a href="../#method" data-i18n="nav.method" data-preserve-language>選定方法</a>
+          <a href="../theory/" data-i18n="nav.theory" data-preserve-language>理論解説</a>
+        </nav>
+        <div class="header-tools"><div class="language-toggle" role="group" aria-label="表示言語" data-i18n-aria-label="language.aria">
+          <button type="button" data-language="ja" aria-pressed="true" lang="ja">日本語</button>
+          <button type="button" data-language="en" aria-pressed="false" lang="en">English</button>
+        </div></div>
+      </div>
+    </header>
+    <main class="classics-main shell" id="main-content">
+      <div class="classics-heading">
+        <p class="section-kicker" lang="en">Foundations &amp; references</p>
+        <h1 data-i18n="classics.title">定番論文・書籍</h1>
+        <p data-i18n="classics.intro">最新研究を読むための土台を、原典と体系的な書籍から。日次・週次・月次レビューとは別の、長く参照する読書棚です。</p>
+      </div>
+      <details class="classics-filters" id="classics-filters">
+        <summary data-i18n="classics.filters">検索・絞り込み · 論文 / 書籍 / 分野 / 入手方法</summary>
+        <div class="classics-fields">
+          <label for="classics-search"><span data-i18n="classics.search">タイトル・著者・キーワード</span><input id="classics-search" type="search" maxlength="180"></label>
+          <label for="classics-kind"><span data-i18n="classics.kind">種類</span><select id="classics-kind"><option value="" data-i18n="classics.all">すべて</option><option value="paper" data-i18n="classics.paper">論文</option><option value="book" data-i18n="classics.book">書籍</option></select></label>
+          <label for="classics-topic"><span data-i18n="classics.topic">分野</span><select id="classics-topic"><option value="" data-i18n="classics.all">すべて</option></select></label>
+          <label for="classics-access"><span data-i18n="classics.access">入手方法</span><select id="classics-access"><option value="" data-i18n="classics.all">すべて</option><option value="free" data-i18n="classics.free">無料全文あり</option><option value="publisher" data-i18n="classics.publisherOnly">出版社・図書館で確認</option></select></label>
+        </div>
+        <button type="button" id="classics-clear" data-i18n="classics.clear">条件をクリア</button>
+      </details>
+      <div class="classics-results-heading">
+        <p id="classics-status" role="status" aria-live="polite" data-i18n="classics.loading">読書棚を読み込み中…</p>
+        <button type="button" id="classics-retry" hidden data-i18n="classics.retry">再読み込み</button>
+      </div>
+      <div id="classics-list" class="classics-list" aria-busy="true"></div>
+      <noscript><p>一覧の表示にはJavaScriptを有効にしてください。 / Enable JavaScript to view the reading list.</p></noscript>
+      <aside class="classics-policy" aria-labelledby="classics-policy-title">
+        <h2 id="classics-policy-title" data-i18n="classics.policyTitle">この棚の選び方</h2>
+        <p data-i18n="classics.policy">情報の非対称性、最適執行、在庫管理、期間構造など、後続研究を理解する基礎となる原典と体系書を編集選定しています。網羅的なリストや被引用数ランキングではなく、掲載順は学習の入口を意識したものです。読む理由・実務との接点は当サイトの読書案内です。</p>
+        <p data-i18n="classics.rights">無料全文は著者・大学等の正規公開先にのみリンクします。著者稿と出版版は異なる場合があります。有料の論文・書籍は転載せず、出版社で購入・購読・図書館アクセスを確認できます。価格やアクセス条件はリンク先でご確認ください。</p>
+        <p id="classics-verified" class="classics-meta"></p>
+      </aside>
+    </main>
+    <footer class="site-footer"><div class="shell"><a href="../" data-preserve-language data-i18n="classics.back">最新レビューへ戻る</a></div></footer>
+  </body>
+</html>

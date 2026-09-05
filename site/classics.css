@@ -1,0 +1,36 @@
+.classics-main { padding-block: 2rem 4rem; }
+.classics-heading { max-width: 52rem; margin-bottom: 1.5rem; }
+.classics-heading .section-kicker { margin-top: 0; }
+.classics-heading h1 { margin: .5rem 0; font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; }
+.classics-heading p { line-height: 1.8; }
+.classics-filters { border: 1px solid var(--line); background: var(--paper-bright); }
+.classics-filters summary { padding: 1rem; cursor: pointer; font-weight: 600; }
+.classics-fields { display: grid; grid-template-columns: 2fr 1fr 1.3fr 1.5fr; gap: 1rem; padding: 1rem; border-top: 1px solid var(--line); }
+.classics-fields label { display: grid; gap: .4rem; min-width: 0; font-size: .875rem; }
+.classics-fields input, .classics-fields select { min-width: 0; width: 100%; min-height: 2.75rem; border: 1px solid var(--line); padding: .5rem; color: var(--ink); background: var(--paper-bright); font-size: 1rem; }
+.classics-filters button, #classics-retry { padding: .6rem 1rem; border: 1px solid var(--line); background: var(--paper-bright); cursor: pointer; font-size: .875rem; }
+.classics-filters button { margin: 0 1rem 1rem; }
+.classics-results-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem; padding-block: .5rem; }
+#classics-status { font-size: .875rem; }
+.classics-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+.classic-card { min-width: 0; padding: 1.5rem; border: 1px solid var(--line); border-top: 3px solid var(--mint-dark); background: var(--paper-bright); scroll-margin-top: 8rem; }
+.classic-card[data-kind="book"] { border-top-color: var(--rust); }
+.classic-meta, .classic-tags { display: flex; flex-wrap: wrap; gap: .4rem .8rem; margin: 0 0 .6rem; font-size: .875rem; color: var(--ink-soft); }
+.classic-card h2 { font: 500 1.5rem/1.35 var(--serif); margin: .5rem 0; overflow-wrap: anywhere; }
+.classic-authors { font-size: .875rem; color: var(--ink-soft); margin-block: .5rem 1rem; }
+.classic-tags span { padding: .15rem .45rem; border: 1px solid var(--line); }
+.classic-why { line-height: 1.8; margin-bottom: 1rem; }
+.classic-notes { border-top: 1px solid var(--line); padding-top: .75rem; }
+.classic-notes summary { cursor: pointer; font-size: .875rem; font-weight: 600; }
+.classic-notes dl { margin-bottom: 0; }
+.classic-notes dt { font-size: .875rem; font-weight: 700; margin-top: .75rem; }
+.classic-notes dd { margin: .25rem 0 .75rem; line-height: 1.8; }
+.classic-links { display: flex; flex-wrap: wrap; gap: .6rem 1rem; margin-top: 1rem; }
+.classic-links a { padding-block: .4rem; font-size: .875rem; text-underline-offset: 4px; }
+.classic-links a:first-child { font-weight: 700; }
+.classic-access { font-size: .875rem; color: var(--ink-soft); margin-bottom: 0; }
+.classics-policy { max-width: 54rem; margin-top: 2.5rem; border-top: 1px solid var(--line); padding-top: 1rem; line-height: 1.8; }
+.classics-policy h2 { font-size: 1.125rem; }
+.classics-meta { font-size: .875rem; color: var(--ink-soft); }
+@media (max-width: 900px) { .classics-fields { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 650px) { .classics-list, .classics-fields { grid-template-columns: minmax(0, 1fr); } .classic-card { padding: 1.1rem; } }

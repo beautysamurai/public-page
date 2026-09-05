@@ -20,6 +20,10 @@ test("Pages build publishes only public settings, narrows CSP, rejects secrets, 
     assert.ok(html.includes("connect-src 'self' https://abcdefgh.supabase.co;"));
     assert.ok(html.includes("script-src 'self';")); assert.ok(!html.includes("https://*.supabase.co"));
     assert.ok(fs.existsSync(path.join(output, "vendor/supabase.js")));
+    for (const file of ["classics/index.html", "classics.js", "classics.css", "data/classics.json"]) {
+      assert.equal(fs.readFileSync(path.join(output, file), "utf8"), fs.readFileSync(path.join(root, "site", file), "utf8"), file);
+    }
+    assert.ok(fs.readFileSync(path.join(output, "classics/index.html"), "utf8").includes("connect-src 'self';"));
     assert.ok(!fs.existsSync(path.join(output, ".env")));
     result = build({ SUPABASE_URL: "https://abcdefgh.supabase.co", SUPABASE_PUBLISHABLE_KEY: "sb_secret_" + "x".repeat(25) });
     assert.notEqual(result.status, 0); assert.ok(!result.stderr.includes("sb_secret_" + "x".repeat(25)));

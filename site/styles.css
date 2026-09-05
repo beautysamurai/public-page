@@ -114,7 +114,7 @@ button { color: inherit; }
   font-style: italic;
 }
 
-.primary-nav { display: flex; align-items: center; gap: 24px; }
+.primary-nav { display: flex; align-items: center; flex-wrap: wrap; min-width: 0; gap: 4px 24px; }
 
 .primary-nav a {
   padding-block: 8px;
@@ -1092,7 +1092,7 @@ button { color: inherit; }
 @media (max-width: 960px) {
   :root { --shell: min(100% - 40px, 820px); }
   .header-inner { gap: 20px; }
-  .primary-nav { gap: 18px; }
+  .primary-nav { gap: 4px 18px; }
   .header-tools { gap: 10px; }
   .header-status { max-width: 140px; line-height: 1.3; text-align: right; }
   .digest-toolbar, .lens-grid, .archive-grid { grid-template-columns: 1fr; }
@@ -1112,7 +1112,7 @@ button { color: inherit; }
   .header-tools { flex-direction: column; align-items: flex-end; gap: 5px; }
   .language-toggle button { padding: 3px 6px; font-size: .62rem; }
   .header-status { max-width: 150px; font-size: .56rem; line-height: 1.25; text-align: right; }
-  .primary-nav { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; gap: 22px; border-top: 1px solid var(--line); padding-top: 7px; }
+  .primary-nav { grid-column: 1 / -1; grid-row: 2; justify-content: flex-start; gap: 4px 22px; border-top: 1px solid var(--line); padding-top: 7px; }
   .primary-nav a { padding-block: 2px; }
   .hero { padding: 38px 0 34px; }
   .eyebrow-row { align-items: start; flex-direction: column; gap: 8px; margin-bottom: 16px; }

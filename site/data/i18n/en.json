@@ -389,6 +389,23 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-09-04-daily-openai-01",
+      "message": "The arXiv update was confirmed and the qualifying papers were assessed.",
+      "sourceText": "## September 4, 2026 — Daily review\n\nThe arXiv update was confirmed and the qualifying papers were assessed.\n\n## 1. Mean-field equilibrium of heterogeneous agents under market impact\n\n**[arXiv:2609.03115v1](https://arxiv.org/abs/2609.03115v1) — Joseph Leclère, Mathieu Rosenbaum**\n\n**Importance: 8/10 — Recommended · market impact**\n\nThe paper proposes a linear mean-field model in which a continuum of agents with heterogeneous forecast horizons takes positions based on a common signal and anticipated market impact. It characterizes Gaussian–Volterra equilibria through a fixed-point equation and derives conditions under which impact feedback can cancel the direct transmission of a predictable rough signal into prices.\n\nThe authors specify a Brownian-driven Volterra signal, propagator-style impact, and a horizon distribution $\\nu$, then aggregate a conditional forecast rule across the population. They derive a kernel fixed point using stochastic Fubini and Itô isometry. An Abel pseudoinverse and Neumann-series/contraction argument construct solutions in a decaying function space. Gamma smoothing asymptotics and Gaussian–Volterra Hölder regularity establish local regularity results. Under a normalized identification with a Hawkes propagator, the cancellation condition corresponds to $\\|h\\|_1=\\alpha$. The aggregate-position kernel satisfies $({\\rm Id}-\\alpha D_\\nu I)\\phi_\\alpha=D_\\nu K$. Existence and uniqueness hold under explicit contraction conditions within a selected class of decaying solutions. The direct term in the signal-driven price kernel is $A(\\alpha,G(0))K$, and it disappears when $G(0)(1-\\alpha)=1$. For a fractional-type signal and Gamma-distributed horizons, after this cancellation, $\\xi›1/2-H$ makes price regularity compatible with Brownian motion under the paper's local Hölder criterion. Moreover, under an additional uniform tail condition in a boundary scaling regime, $S^\\alpha$ converges in $L^2$ to the residual martingale $M$.\n\nFor execution and market-making models, the framework jointly organizes calibration of population concentration at short horizons, the instantaneous impact component, and the extent to which anticipated impact enters forecasts. In particular, $G(0)(1-\\alpha)=1$ and the near-zero shape of the horizon distribution can serve as design or diagnostic conditions for preventing rough predictable order-flow or signal components from making prices excessively rough. However, the paper provides no procedure for estimation or empirical validation. The results depend on a linear representative-agent specification that identifies positions with forecast strength. Existence and uniqueness are guaranteed not over all admissible solutions, but in a selected decaying Banach space and under contraction conditions; the Gamma analysis additionally assumes a Gamma-regular solution. The uniform polynomial-tail condition needed for the boundary limit is not automatic, and the paper verifies it only for benchmarks such as the Ornstein–Uhlenbeck case. The Hawkes connection is an interpretation based on identifying dimensionless propagators, not an empirical identification. Transaction costs, risk aversion, strategic agent interaction, discrete order flow, and empirical calibration are outside the model.\n\nThis is a theoretically useful study because it explicitly connects market impact, persistent order flow, roughness, and price efficiency through a mean-field equilibrium with heterogeneous horizons. It is relevant to execution and market-microstructure readers, but its claims are conditional mathematical results without direct empirical or implementation support.",
+      "papers": [
+        {
+          "arxivId": "2609.03115v1",
+          "schedulerLabel": "Recommended · Importance 8/10",
+          "schedulerSummary": "The paper proposes a linear mean-field model in which a continuum of agents with heterogeneous forecast horizons takes positions based on a common signal and anticipated market impact. It characterizes Gaussian–Volterra equilibria through a fixed-point equation and derives conditions under which impact feedback can cancel the direct transmission of a predictable rough signal into prices.",
+          "ratings": [
+            {
+              "label": "Importance"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1074,6 +1074,50 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-09-04-daily-openai-01",
+      "editionDate": "2026-09-04",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-05T01:11:09Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-04",
+      "observedBatchDate": "2026-09-04",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月4日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n## 1. Mean-field equilibrium of heterogeneous agents under market impact\n\n**[arXiv:2609.03115v1](https://arxiv.org/abs/2609.03115v1) — Joseph Leclère, Mathieu Rosenbaum**\n\n**重要度: 8/10 — 推奨・market impact**\n\n異質な予測 horizon を持つ連続体の agents が、共通信号と予想 market impact に基づきポジションを取る線形 mean-field model を提案する。Gaussian–Volterra 型の equilibrium を固定点方程式として特徴付け、impact feedback が予測可能な rough signal の価格への直接伝達を相殺し得る条件を導く。\n\nBrownian motion により駆動される Volterra signal、propagator 型 impact、horizon 分布 $\\nu$ を設定し、conditional forecast rule を population aggregate する。確率 Fubini と Itô isometry により kernel fixed point を導出する。Abel pseudoinverse と Neumann-series/contraction argument で減衰関数空間の解を構成し、Gamma 分布の smoothing asymptotics と Gaussian–Volterra の Hölder regularity を用いて局所正則性を分析する。Hawkes propagator との正規化上の対応では、相殺条件が $\\|h\\|_1=\\alpha$ に対応すると示す。 aggregate-position kernel は $({\\rm Id}-\\alpha D_\\nu I)\\phi_\\alpha=D_\\nu K$ を満たす。選択した減衰解のクラスでは明示的 contraction 条件の下で存在・一意性が得られる。signal-driven price kernel の直接項は $A(\\alpha,G(0))K$ であり、$G(0)(1-\\alpha)=1$ のとき消える。fractional-type signal と Gamma horizon では、この相殺後に $\\xi›1/2-H$ なら、論文の局所 Hölder 基準で価格は Brownian motion と整合的な正則性を持つ。さらに、追加の一様 tail 条件を置いた境界スケーリングでは $S^\\alpha$ は $L^2$ で残差 martingale $M$ に収束する。\n\nexecution・market-making のモデルでは、短期 horizon への人口集中、impact の瞬時成分、及び impact を予測へ織り込む度合いを jointly calibrate する枠組みを与える。特に、rough な予測可能 order-flow/signal 成分があっても価格を過度に rough にしないための設計・診断条件として、$G(0)(1-\\alpha)=1$ と horizon 分布のゼロ近傍形状を利用できる。ただし、実データでの推定・検証手順は提示されない。 結果は線形で、position を forecast 強度そのものとみなす代表的 agent 設定に依存する。存在・一意性は全 admissible 解ではなく選択された減衰 Banach space と contraction 条件で保証され、Gamma 節では Gamma-regular solution を追加仮定する。境界極限の一様 polynomial-tail 条件は自動的には成り立たず、本文で検証されるのは Ornstein–Uhlenbeck benchmark 等に限られる。Hawkes との関係は dimensionless propagator の同一視に基づく解釈であり、実証的な同定ではない。取引コスト、risk aversion、戦略的な agent interaction、離散 order flow、empirical calibration は扱わない。\n\nmarket impact、persistent order flow、roughness と price efficiency の整合性を、異質 horizon の mean-field equilibrium として明確に結び付ける理論研究である。execution/market-microstructure 読者に有用だが、主張は条件付きの数学的結果であり、実証・実装への直接的な裏付けはない。",
+      "papers": [
+        {
+          "arxivId": "2609.03115v1",
+          "title": "Mean-field equilibrium of heterogeneous agents under market impact",
+          "authors": [
+            "Joseph Leclère",
+            "Mathieu Rosenbaum"
+          ],
+          "submittedDate": "2026-09-02",
+          "updatedDate": "2026-09-02",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.03115v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.03115v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 8/10",
+          "schedulerSummary": "異質な予測 horizon を持つ連続体の agents が、共通信号と予想 market impact に基づきポジションを取る線形 mean-field model を提案する。Gaussian–Volterra 型の equilibrium を固定点方程式として特徴付け、impact feedback が予測可能な rough signal の価格への直接伝達を相殺し得る条件を導く。",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

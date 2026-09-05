@@ -89,10 +89,10 @@ test("filtering preserves focus, language, URL state, collapsed preference, and 
   assert.equal(p.document.querySelectorAll(".classic-card").length, 17);
   assert.equal(new URL(p.window.location.href).searchParams.get("kind"), null);
   assert.equal(new URL(p.window.location.href).searchParams.get("lang"), "en");
-  p.window.history.pushState(null, "", "?lang=en&topic=rates&access=free");
+  p.window.history.pushState(null, "", "?lang=en&topic=market-making&access=free");
   p.window.dispatchEvent(new p.window.PopStateEvent("popstate"));
-  assert.equal(p.document.querySelectorAll(".classic-card").length, 1);
-  assert.equal(p.document.querySelector(".classic-card").id, "hagan-smile-risk-2002");
+  assert.equal(p.document.querySelectorAll(".classic-card").length, 2);
+  assert.equal(p.document.querySelector(".classic-card").id, "glosten-milgrom-1985");
 });
 
 test("invalid URL options fall back to visible All options and unknown search stays text", async (t) => {

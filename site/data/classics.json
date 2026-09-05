@@ -153,8 +153,8 @@
       "why": {"ja": "ボラティリティ・スマイルの動きとヘッジをモデル化するSABRの出発点。スワップションのスマイル近似の背景を知る原典です。", "en": "The starting point for SABR's modeling of volatility smiles and hedging, providing the background to widely used swaption smile approximations."},
       "use": {"ja": "スマイル近似とキャリブレーションの理解に。近似の適用範囲、翼・長期満期、負金利への対応は別途検証します。", "en": "Understand smile approximations and calibration. Check approximation limits, wings, long maturities, and treatment of negative rates separately."},
       "prerequisite": {"ja": "Black型価格式、インプライド・ボラティリティ、確率微分方程式。", "en": "Black-style pricing, implied volatility, and stochastic differential equations."},
-      "sourceUrl": "https://www.wilmott.com/managing-smile-risk/", "freeUrl": "https://lesniewski.us/papers/published/ManagingSmileRisk.pdf",
-      "accessNote": {"ja": "著者公開PDFへのリンク。原論文は2002年で、出版社紹介ページの2017年は再掲日です。", "en": "Links to the author's public PDF. The original paper is from 2002; the publisher page's 2017 date is a repost."}
+      "sourceUrl": "https://www.wilmott.com/managing-smile-risk/", "freeUrl": null,
+      "accessNote": {"ja": "出版社で入手条件を確認。著者公開PDFは接続を確認できなかったため未登録。原論文は2002年で、紹介ページの2017年は再掲日です。", "en": "Check publisher access. The author's PDF is not linked because its availability could not be confirmed. Original paper: 2002; publisher repost: 2017."}
     },
     {
       "id": "brigo-mercurio-2006", "kind": "book", "year": 2006,

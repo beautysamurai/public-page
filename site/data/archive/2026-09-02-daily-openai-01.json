@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-09-02-daily-openai-01",
+  "editionDate": "2026-09-02",
+  "editionKind": "daily",
+  "sourceKind": "openai-responses-api",
+  "sourceLabel": "OpenAI Responses API · automated research pipeline",
+  "importedAt": "2026-09-05T14:59:33Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXivの更新を確認し、対象論文を評価しました。",
+  "expectedBatchDate": "2026-09-02",
+  "observedBatchDate": "2026-09-02",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年9月2日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n## 1. Illiquidity at Risk\n\n**[arXiv:2609.00943v1](https://arxiv.org/abs/2609.00943v1) — Demetrio Lacava, Paolo Santucci de Magistris**\n\n**重要度: 10/10 — 推奨・Illiquidity-at-Risk**\n\n高頻度データ由来の realized Amihud を対象に、極端な流動性枯渇の上側尾部閾値を Illiquidity-at-Risk（IlliQaR）として定義する。S&P 500 と米国大型株25銘柄で、HAR、MEM、非対称MEM、およびジャンプを含むMEM-Jを比較し、流動性の持続性・非対称性・不連続な悪化を検証する研究である。\n\nIlliQaRは、条件付き超過確率が$p$となる realized illiquidity の閾値として定義される。日次の realized Amihud を高頻度リターンに基づく realized volatility と出来高の比で測定し、Gaussian HAR、Gamma誤差のMEM/AMEM/HAR-MEM、Poisson到来とGamma型ジャンプサイズを組み込むMEM-Jを最尤推定する。S&P 500は2005年から2021年、個別株は2012年から2024年の標本で、QLIKEとModel Confidence Setによる予測比較、Berkowitz検定による密度・尾部カバレッジ評価、IlliQaR違反を被説明変数とするLogit分析を行う。 論文の報告では、S&P 500 の1日先予測では G-AMEM-HAR-J が MCS の唯一の優良モデルとなり、ジャンプを含む仕様は連続モデルより尾部カバレッジで概して優位だった。一方、5日先と22日先では、それぞれ AMEM-HAR と HAR が優良集合に入り、ジャンプの予測上の寄与は低下した。価格ジャンプに頑健な bipower variation を分子に使うと、ジャンプMEMのIlliQaRカバレッジはさらに改善したと報告されている。個別株でもジャンプ仕様の優位性は多くの銘柄で観察されるが、銘柄・信頼水準ごとの差は大きい。\n\n執行アルゴリズム、マーケットメイク、流動性調整済みポジション管理では、短期の取引コスト急増・約定リスクの警戒指標としてIlliQaRを利用できる。実装上は、5分足等から作る realized Amihud、ジャンプを含む条件付き分布、価格ジャンプを除去した指標を併用し、日次の発注サイズ、参加率、執行延期、リスク制限を調整する用途が考えられる。 結果は米国株式市場、特定期間、realized Amihudという価格変動対出来高型の流動性代理指標に依存し、bid-ask spread、板の深さ、注文キャンセル、実際のマーケットインパクトを直接測定していない。S&P 500の標準realized Amihudによるアウト・オブ・サンプルBerkowitz検定では、ジャンプ仕様も多くの分位点で棄却されており、完全な尾部較正を示してはいない。個別株でもジャンプモデルのカバレッジは一様でなく、MSFT、KO、VZ、MMMなどでは不十分なケースがある。さらに、論文内で不確実性とリスク回避のどちらが主因かに関する記述は、結論と一部のLogit結果で整合的でない。因果関係や、指数が個別株ストレスの先行指標であるという解釈は、提示された記述統計・回帰だけでは限定的にしか支持されない。\n\n電子執行と市場流動性リスクに直接関係し、非負・歪度・厚い右裾を持つ流動性系列へ条件付きジャンプ分布を導入する実務的な枠組みを示す点で有用である。ただし、アウト・オブ・サンプル尾部検定の不合格が残るため、完成したリスクモデルとしてではなく、流動性ストレス監視の候補モデルとして読むべきである。\n\n## 2. Adaptive singular-point method for pricing and hedging surrenderable equity-linked contracts\n\n**[arXiv:2609.01323v1](https://arxiv.org/abs/2609.01323v1) — Andrea Molent, Marcellino Gaudenzi**\n\n**重要度: 8/10 — 推奨・CIR++**\n\nHeston確率ボラティリティとCIR++確率金利を相関付きで組み込み、死亡保障・満期保証・年次拠出・Bermudan解約権を持つ株式連動型保険を評価・ヘッジする決定論的動的計画法を提案する。非再結合な積立ファンド次元を固定格子ではなく適応的な区分三次関数で保持し、分散・金利因子のみを再結合格子で離散化する。\n\nリスク中立下で株価・ファンドをHeston型、分散と短期金利因子をCIR型とし、$r_t=X_t+\\phi(t)$のCIR++シフトで初期割引曲線に合わせる。分散・金利はbinomialまたはモーメント整合adaptive-trinomial再結合格子で表し、相関を局所結合で導入する。各因子ノードで価値をファンドの区分三次補間として保存し、拠出を$F\\mapsto F+D$の平行移動、解約を$U_i=\\max\\{C_i,R_i\\}$のobstacleとして後退再帰に組み込む。ノットは子ノットの逆像、payoff kink、解約境界から生成し、連続的な誤差証明付きpruningで圧縮する。価格はMonte Carloとcross-fitted LSMC、Deltaはpathwise Monte Carloと比較する。 著者らは、厳密なbinomial格子とadaptive-trinomial格子について金融状態過程と有限回Bermudan価値の弱収束を主張し、表現誤差・境界誤差が消失すれば適応的評価も収束すると示す。正則なファンド領域ではDelta整合性を与える。数値例では、$N=480$ のproduction trinomialによる解約なし年払保険料は$111.644323$で、独立Monte Carlo基準値$111.658673$に近い。解約可能契約では$P_{MX}›P_{GB}›P_{FB}›P_{NS}$という順序が得られ、分散・金利リスクまで合わせる静的ヘッジは、モデル整合的Deltaのみのヘッジに対して報告RMSEを約$80.4\\%$削減した。\n\n長期unit-linked保険、variable annuity、保証付き積立商品の価格算定、解約境界の分析、感応度計算、及び株式・ボラティリティ・金利エクスポージャーを用いるヘッジ設計に利用可能である。特に、定期拠出によりファンド状態が非再結合となる契約で、全状態空間の固定ファンド格子を回避したい場合に有用である。 理論上のBermudan収束は有限個の行使日に限られ、連続行使のAmerican問題は対象外である。production adaptive-trinomialは$\\lambda_V=1$で片側stencilを取り得るため、著者ら自身がグローバル一次弱収束率を主張していない。Richardsonの二次精度も、strictかつunprunedなbinomial遷移と十分滑らかな価値関数に条件付く。実際の満期保証の$\\max$ payoffとBermudan obstacleにはkinkがあり、完全な二次定理は未証明である。LSMC比較の信頼区間は保留標本の標本誤差のみで、回帰近似・時間離散化バイアスを含まない。ヘッジ実験も1年保有・静的・無摩擦で死亡リスクを分散可能とみなす診断であり、実運用のALMや行動的解約率の検証ではない。数値結果は単一中心キャリブレーションと報告された実装設定への依存がある。\n\n金利モデルの観点では、CIR++による曲線整合、株式・ボラティリティ・金利の相関、長期保証負債の価格・Greek・ヘッジを一体で扱う点が実務的に有益である。ファンド次元を適応関数として持つ設計と、pruningの連続誤差証明は技術的にも興味深い。一方、対象は保険数理・数値確率制御が中心であり、電子取引や市場マイクロストラクチャへの直接的関連はない。また主要な高次精度主張には滑らかさ等の強い条件があり、非滑らかな実契約への保証範囲を限定して読む必要がある。",
+  "papers": [
+    {
+      "arxivId": "2609.00943v1",
+      "title": "Illiquidity at Risk",
+      "authors": [
+        "Demetrio Lacava",
+        "Paolo Santucci de Magistris"
+      ],
+      "submittedDate": "2026-09-01",
+      "updatedDate": "2026-09-01",
+      "topics": [
+        "Market microstructure"
+      ],
+      "absUrl": "https://arxiv.org/abs/2609.00943v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.00943v1",
+      "schedulerRank": 1,
+      "schedulerRating": 10,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・重要度 10/10",
+      "schedulerSummary": "高頻度データ由来の realized Amihud を対象に、極端な流動性枯渇の上側尾部閾値を Illiquidity-at-Risk（IlliQaR）として定義する。S&P 500 と米国大型株25銘柄で、HAR、MEM、非対称MEM、およびジャンプを含むMEM-Jを比較し、流動性の持続性・非対称性・不連続な悪化を検証する研究である。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 10,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2609.01323v1",
+      "title": "Adaptive singular-point method for pricing and hedging surrenderable equity-linked contracts",
+      "authors": [
+        "Andrea Molent",
+        "Marcellino Gaudenzi"
+      ],
+      "submittedDate": "2026-09-01",
+      "updatedDate": "2026-09-01",
+      "topics": [
+        "Interest-rate models"
+      ],
+      "absUrl": "https://arxiv.org/abs/2609.01323v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.01323v1",
+      "schedulerRank": 2,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・重要度 8/10",
+      "schedulerSummary": "Heston確率ボラティリティとCIR++確率金利を相関付きで組み込み、死亡保障・満期保証・年次拠出・Bermudan解約権を持つ株式連動型保険を評価・ヘッジする決定論的動的計画法を提案する。非再結合な積立ファンド次元を固定格子ではなく適応的な区分三次関数で保持し、分散・金利因子のみを再結合格子で離散化する。",
+      "ratings": [
+        {
+          "label": "重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    }
+  ]
+}

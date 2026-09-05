@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-09-04",
+  "generatedAt": "2026-09-05T01:11:09Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-09-04 was confirmed with 1 relevant paper(s).",
+  "expectedBatchDate": "2026-09-04",
+  "observedBatchDate": "2026-09-04",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2609.03115v1",
+        "title": "Mean-field equilibrium of heterogeneous agents under market impact",
+        "authors": [
+          "Joseph Leclère",
+          "Mathieu Rosenbaum"
+        ],
+        "submittedDate": "2026-09-02",
+        "updatedDate": "2026-09-02",
+        "categories": [
+          "math.PR",
+          "q-fin.MF",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "異質な予測 horizon を持つ連続体の agents が、共通信号と予想 market impact に基づきポジションを取る線形 mean-field model を提案する。Gaussian–Volterra 型の equilibrium を固定点方程式として特徴付け、impact feedback が予測可能な rough signal の価格への直接伝達を相殺し得る条件を導く。",
+        "mainResult": "aggregate-position kernel は $({\\rm Id}-\\alpha D_\\nu I)\\phi_\\alpha=D_\\nu K$ を満たす。選択した減衰解のクラスでは明示的 contraction 条件の下で存在・一意性が得られる。signal-driven price kernel の直接項は $A(\\alpha,G(0))K$ であり、$G(0)(1-\\alpha)=1$ のとき消える。fractional-type signal と Gamma horizon では、この相殺後に $\\xi>1/2-H$ なら、論文の局所 Hölder 基準で価格は Brownian motion と整合的な正則性を持つ。さらに、追加の一様 tail 条件を置いた境界スケーリングでは $S^\\alpha$ は $L^2$ で残差 martingale $M$ に収束する。",
+        "practicalApplication": "execution・market-making のモデルでは、短期 horizon への人口集中、impact の瞬時成分、及び impact を予測へ織り込む度合いを jointly calibrate する枠組みを与える。特に、rough な予測可能 order-flow/signal 成分があっても価格を過度に rough にしないための設計・診断条件として、$G(0)(1-\\alpha)=1$ と horizon 分布のゼロ近傍形状を利用できる。ただし、実データでの推定・検証手順は提示されない。",
+        "methodology": "Brownian motion により駆動される Volterra signal、propagator 型 impact、horizon 分布 $\\nu$ を設定し、conditional forecast rule を population aggregate する。確率 Fubini と Itô isometry により kernel fixed point を導出する。Abel pseudoinverse と Neumann-series/contraction argument で減衰関数空間の解を構成し、Gamma 分布の smoothing asymptotics と Gaussian–Volterra の Hölder regularity を用いて局所正則性を分析する。Hawkes propagator との正規化上の対応では、相殺条件が $\\|h\\|_1=\\alpha$ に対応すると示す。",
+        "limitations": "結果は線形で、position を forecast 強度そのものとみなす代表的 agent 設定に依存する。存在・一意性は全 admissible 解ではなく選択された減衰 Banach space と contraction 条件で保証され、Gamma 節では Gamma-regular solution を追加仮定する。境界極限の一様 polynomial-tail 条件は自動的には成り立たず、本文で検証されるのは Ornstein–Uhlenbeck benchmark 等に限られる。Hawkes との関係は dimensionless propagator の同一視に基づく解釈であり、実証的な同定ではない。取引コスト、risk aversion、戦略的な agent interaction、離散 order flow、empirical calibration は扱わない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "market impact、persistent order flow、roughness と price efficiency の整合性を、異質 horizon の mean-field equilibrium として明確に結び付ける理論研究である。execution/market-microstructure 読者に有用だが、主張は条件付きの数学的結果であり、実証・実装への直接的な裏付けはない。",
+        "tags": [
+          "market impact",
+          "mean-field equilibrium",
+          "heterogeneous horizons",
+          "Volterra processes",
+          "rough signals",
+          "Hölder regularity",
+          "propagator model",
+          "Hawkes processes"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper proposes a linear mean-field model in which a continuum of agents with heterogeneous forecast horizons takes positions based on a common signal and anticipated market impact. It characterizes Gaussian–Volterra equilibria through a fixed-point equation and derives conditions under which impact feedback can cancel the direct transmission of a predictable rough signal into prices.",
+          "mainResult": "The aggregate-position kernel satisfies $({\\rm Id}-\\alpha D_\\nu I)\\phi_\\alpha=D_\\nu K$. Existence and uniqueness hold under explicit contraction conditions within a selected class of decaying solutions. The direct term in the signal-driven price kernel is $A(\\alpha,G(0))K$, and it disappears when $G(0)(1-\\alpha)=1$. For a fractional-type signal and Gamma-distributed horizons, after this cancellation, $\\xi>1/2-H$ makes price regularity compatible with Brownian motion under the paper's local Hölder criterion. Moreover, under an additional uniform tail condition in a boundary scaling regime, $S^\\alpha$ converges in $L^2$ to the residual martingale $M$.",
+          "practicalApplication": "For execution and market-making models, the framework jointly organizes calibration of population concentration at short horizons, the instantaneous impact component, and the extent to which anticipated impact enters forecasts. In particular, $G(0)(1-\\alpha)=1$ and the near-zero shape of the horizon distribution can serve as design or diagnostic conditions for preventing rough predictable order-flow or signal components from making prices excessively rough. However, the paper provides no procedure for estimation or empirical validation.",
+          "methodology": "The authors specify a Brownian-driven Volterra signal, propagator-style impact, and a horizon distribution $\\nu$, then aggregate a conditional forecast rule across the population. They derive a kernel fixed point using stochastic Fubini and Itô isometry. An Abel pseudoinverse and Neumann-series/contraction argument construct solutions in a decaying function space. Gamma smoothing asymptotics and Gaussian–Volterra Hölder regularity establish local regularity results. Under a normalized identification with a Hawkes propagator, the cancellation condition corresponds to $\\|h\\|_1=\\alpha$.",
+          "limitations": "The results depend on a linear representative-agent specification that identifies positions with forecast strength. Existence and uniqueness are guaranteed not over all admissible solutions, but in a selected decaying Banach space and under contraction conditions; the Gamma analysis additionally assumes a Gamma-regular solution. The uniform polynomial-tail condition needed for the boundary limit is not automatic, and the paper verifies it only for benchmarks such as the Ornstein–Uhlenbeck case. The Hawkes connection is an interpretation based on identifying dimensionless propagators, not an empirical identification. Transaction costs, risk aversion, strategic agent interaction, discrete order flow, and empirical calibration are outside the model.",
+          "reason": "This is a theoretically useful study because it explicitly connects market impact, persistent order flow, roughness, and price efficiency through a mean-field equilibrium with heterogeneous horizons. It is relevant to execution and market-microstructure readers, but its claims are conditional mathematical results without direct empirical or implementation support.",
+          "tags": [
+            "market impact",
+            "mean-field equilibrium",
+            "heterogeneous horizons",
+            "Volterra processes",
+            "rough signals",
+            "Hölder regularity",
+            "propagator model",
+            "Hawkes processes"
+          ]
+        }
+      }
+    }
+  ]
+}

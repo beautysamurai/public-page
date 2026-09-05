@@ -1,0 +1,294 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-04",
+  "fingerprint": "32896d3a32e2bc8a853b73a024f6f5fdb6c3c4d777cdf9573da3bdd72c70d5ac",
+  "candidateFingerprints": {
+    "2609.02900": "185338bfc660c798118bbc2af7ce74739f29dff6ce470da81ed3e53ea6327cee",
+    "2609.03106": "48097a5814e1856a23650f374fc7b7bc907fc0f369d873e2dca6751ffa49311f",
+    "2609.03115": "702457ad48a3b84eb1191bb7fd6d9f58949763087bea1f393a79cd3bc6dd4613",
+    "2609.03552": "5e2e5801107127002866aff5fe7d2e6384e419f40b605b6f902644796848c6e9",
+    "2609.03741": "73ad5551d4b1073ecf2867a12c4b934075577f1b5a62e8e2c6a0344b6e2659ec",
+    "2609.04087": "4a235596b79519053f929e22b9c4a99eaeb2ff3878db41807b71ba73c3d850e4"
+  },
+  "results": {
+    "2609.02900": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本稿は、価格履歴が短い企業について、LLMが企業のリスク特性をノイズを伴って測定するという理論に基づき、レジーム条件付きの株式ベータを推定する枠組みを提案する。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていない。",
+        "mainResult": "抽象で報告されている主結果は、明示的な仮定の下で、LLM特徴量とレジーム推定を用いた条件付き因子ローディング関数の識別と一致性を証明したことである。さらに、開示ノイズとレジーム誤分類に対応する下限を示し、テキスト推定量とローリングウィンドウ推定量の適応的な凸結合が、各構成要素より悪化せず、価格履歴が短い場合などにテキスト側へ重みを移すと主張する。",
+        "practicalApplication": "新規上場企業、S-1提出企業、またはレジーム転換直後の企業について、株式ベータや資本コストの初期推定を補助する可能性がある。ただし、実証評価は未実施であり、電子執行や金利商品の実務への直接的な適用性は低い。",
+        "methodology": "潜在的な企業リスク特性と推定レジームに依存するFama–French五因子モデルを、LLMをノイズのある測定チャネルとして定式化する。チャネル、レジーム検出器、レジーム内サンプルに関する仮定の下で識別・一致性を解析し、推定誤差の下限と適応的な凸結合推定量を理論的に導く。実証研究は事前登録済みの設計段階にある。",
+        "limitations": "主張は抽象で示された仮定に依存し、LLMによる開示解釈の誤差、レジーム検出の誤分類、モデル仕様、開示インセンティブ指標の妥当性が実務上の制約となる。実証結果はまだ提示されておらず、適応的推定量が実際に優位か、理論上の下限が現実的かは確認できない。また、対象は株式ベータであり、本サイトの主要対象である金利・イールドカーブ・執行市場との関連性は限定的である。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "理論的には金融リスク推定とLLM測定誤差に関する新規性がある可能性があるが、対象は株式のレジーム条件付きベータであり、本サイトの対象領域には直接該当しない。加えて、抽象時点では実証結果が未報告である。",
+        "tags": [
+          "asset pricing",
+          "stock beta",
+          "LLM",
+          "measurement error",
+          "regime switching",
+          "Fama-French five-factor model"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a framework for estimating regime-conditioned equity betas for firms with short price histories, modeling an LLM as a noisy measurement channel for latent firm risk characteristics. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "The abstract reports identification and consistency of the conditional factor-loading function under explicit assumptions on the measurement channel, regime detector, and within-regime sampling. It also claims a lower bound capturing disclosure noise and regime misclassification, and an adaptive convex combination of text-based and rolling-window estimators that is no worse than either component and shifts weight toward text when price history is short or affected by a regime break.",
+          "practicalApplication": "The method could support initial estimates of equity betas or cost of capital for recent IPOs, S-1 filers, or firms just after a regime transition. However, no empirical evaluation has yet been reported, and its direct applicability to electronic execution or rates products is low.",
+          "methodology": "The paper formulates a piecewise-stationary Fama–French five-factor model in which loadings depend on latent firm risk characteristics and an inferred regime, while treating the LLM as a noisy measurement channel. Under assumptions on the channel, regime detector, and within-regime sample, it derives identification, consistency, an estimation lower bound, and an adaptive convex-combination estimator. The empirical study is currently only preregistered in design.",
+          "limitations": "The claims depend on the stated assumptions, while LLM interpretation error, regime-detection misclassification, model specification, and the validity of the disclosure-incentive measure may constrain practical use. No empirical results are available yet, so the real-world advantage of the adaptive estimator and the realism of the theoretical lower bound remain unverified. The focus is equity beta estimation, with limited relevance to the site's core topics of rates, yield curves, and execution markets.",
+          "reason": "The work may offer theoretical novelty for financial-risk estimation and LLM measurement error, but it focuses on regime-conditioned equity betas rather than the site's target areas. In addition, empirical results are not yet reported in the abstract.",
+          "tags": [
+            "asset pricing",
+            "stock beta",
+            "LLM",
+            "measurement error",
+            "regime switching",
+            "Fama-French five-factor model"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.03106": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、保険料率算定における表形式データ向け機械学習モデルのスケーリング則を分析するものであり、電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "自動車保険データでは、すべてのモデル族がデータ量の増加で改善しましたが、データスケーリング指数には大きな差がありました。TabMは標準的なMLPや純粋な教師あり表形式Transformerより強いデータスケーリングを示し、Transformerのパラメータ増加だけでは改善が限定的でした。",
+        "practicalApplication": "保険料率算定におけるデータ量やモデル構成に応じたモデル選択には有用な示唆がありますが、本サイトの対象分野における実務的な適用性は直接的ではありません。",
+        "methodology": "実際の自動車保険ポートフォリオについて、複数のモデル族を異なる訓練データ比率と乱数シードで学習し、Poisson予測のout-of-sample devianceを評価しています。",
+        "limitations": "抄録からは、単一の自動車保険ポートフォリオに基づく結果であること、データセットや実験設定の詳細、統計的有意性、他の保険種目やデータ環境への一般化可能性が不明です。また、対象は保険数理の機械学習であり、対象分野との直接的な関連性がありません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "保険料率算定と表形式機械学習に関する研究で、指定された電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、金利研究の範囲には実質的に含まれません。",
+        "tags": [
+          "actuarial ratemaking",
+          "tabular machine learning",
+          "scaling laws",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes scaling laws for machine-learning models on tabular data in actuarial ratemaking. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "On motor-insurance data, all model families improved as the amount of training data increased, but their data-scaling exponents differed substantially. TabM showed stronger data scaling than standard MLPs and purely supervised tabular Transformers, while simply increasing Transformer parameters produced limited gains.",
+          "practicalApplication": "The findings offer useful guidance for model selection in actuarial ratemaking according to data availability and model architecture, but their practical applicability to this site's target domains is not direct.",
+          "methodology": "Using a real-world motor-insurance portfolio, the study trains several model families on different fractions of the training data and across multiple random seeds, evaluating out-of-sample Poisson deviance for count predictions.",
+          "limitations": "The abstract indicates that the results are based on a single motor-insurance portfolio, while details of the dataset and experimental setup, statistical significance, and generalizability to other insurance lines or data environments are unclear. The study concerns actuarial machine learning and has no direct connection to the target domains.",
+          "reason": "This is a study of actuarial ratemaking and tabular machine learning, which falls materially outside the specified scope of electronic trading, market microstructure, interest-rate models, yield curves, and rates research.",
+          "tags": [
+            "actuarial ratemaking",
+            "tabular machine learning",
+            "scaling laws",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.03115": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "異質な投資期間を持つエージェントが、共通の予測可能シグナルと集計ポジションによる市場インパクトを通じて価格へ与える影響を、線形 mean-field モデルで分析する理論研究である。",
+        "mainResult": "Gaussian-Volterra 枠組みで、集計ポジションを決める線形 fixed-point 方程式の均衡について、明示的条件の下で存在性と一意性を示す。均衡では共通信号の価格への直接伝播が相殺され、エージェントが市場インパクトを完全に織り込む極限では、適切にスケールされた均衡の観測価格がマルチンゲール成分へ収束する。さらに、fractional 型シグナルと Gamma 分布の投資期間について、Brownian motion と整合的な局所正則性を持つ条件を特定する。",
+        "practicalApplication": "市場インパクトを考慮した集団的な執行・ポジション形成、予測シグナルの価格への伝播、および価格の局所的な粗さを理論的に評価する枠組みとして利用できる可能性がある。ただし、実装可能な取引戦略や校正手法を直接提供する研究ではない。",
+        "methodology": "異質な投資期間を持つエージェントの条件付き将来シグナル予測と、予想される集計市場インパクトの一部に基づくポジション決定を定式化する。Gaussian-Volterra 過程、線形 mean-field 相互作用、線形 fixed-point 方程式を用いて均衡の存在・一意性、完全なインパクト織り込みの極限、および局所 Hölder 正則性を解析する。",
+        "limitations": "抽象的な線形モデルと Gaussian-Volterra シグナルに依存しており、非線形な市場インパクト、流動性制約、取引コスト、戦略的な異質性、離散的な注文執行、実データによる検証は要約から確認できない。極限結果も特定のスケーリングと明示的条件の下での理論結果であり、現実市場への外的妥当性は未検証である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "市場インパクトと異質な投資期間を統合し、予測可能シグナルが均衡価格で相殺され得る条件を示す点で、market microstructure の理論研究として関連性と新規性が高い。一方、実証分析や直接的な電子執行への応用は限定的であるため、最高評価ではなく重要度4とした。",
+        "tags": [
+          "market impact",
+          "mean-field equilibrium",
+          "heterogeneous agents",
+          "Gaussian-Volterra processes",
+          "price formation",
+          "fractional signals",
+          "Hölder regularity"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This theoretical study analyzes how agents with heterogeneous horizons affect prices through a common predictable signal and market impact generated by aggregate positions, using a linear mean-field model.",
+          "mainResult": "Within a Gaussian-Volterra framework, it establishes existence and uniqueness of equilibrium for a linear fixed-point equation governing aggregate positions under explicit conditions. At equilibrium, direct transmission of the common signal to prices is canceled. In the limit where agents fully account for market impact, the observed price converges to its martingale component along suitably scaled equilibria. For fractional-type signals and Gamma-distributed horizons, the study also identifies conditions yielding local regularity compatible with that of Brownian motion.",
+          "practicalApplication": "The framework could support theoretical analysis of collective position formation and execution under market impact, the transmission of predictable signals into prices, and the local roughness of prices. However, it does not directly provide implementable trading strategies or calibration procedures.",
+          "methodology": "The model specifies positions based on conditional forecasts of future signal increments and a fraction of anticipated aggregate market impact over heterogeneous horizons. It uses Gaussian-Volterra processes, linear mean-field interaction, and a linear fixed-point equation to analyze equilibrium existence and uniqueness, the full-impact-accounting limit, and local Hölder regularity.",
+          "limitations": "The analysis relies on an abstract linear model and Gaussian-Volterra signals. The abstract does not establish treatment of nonlinear market impact, liquidity constraints, strategic heterogeneity, transaction costs, discrete order execution, or empirical validation. The limiting results hold under particular scalings and explicit theoretical conditions, so their external validity for real markets remains untested.",
+          "reason": "It is highly relevant and potentially important for market-microstructure theory because it integrates market impact with heterogeneous horizons and identifies conditions under which predictable signals can be canceled in equilibrium prices. Its importance is rated 4 rather than 5 because empirical analysis and direct electronic-execution applications appear limited.",
+          "tags": [
+            "market impact",
+            "mean-field equilibrium",
+            "heterogeneous agents",
+            "Gaussian-Volterra processes",
+            "price formation",
+            "fractional signals",
+            "Hölder regularity"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "異質な予測 horizon を持つ連続体の agents が、共通信号と予想 market impact に基づきポジションを取る線形 mean-field model を提案する。Gaussian–Volterra 型の equilibrium を固定点方程式として特徴付け、impact feedback が予測可能な rough signal の価格への直接伝達を相殺し得る条件を導く。",
+        "mainResult": "aggregate-position kernel は $({\\rm Id}-\\alpha D_\\nu I)\\phi_\\alpha=D_\\nu K$ を満たす。選択した減衰解のクラスでは明示的 contraction 条件の下で存在・一意性が得られる。signal-driven price kernel の直接項は $A(\\alpha,G(0))K$ であり、$G(0)(1-\\alpha)=1$ のとき消える。fractional-type signal と Gamma horizon では、この相殺後に $\\xi>1/2-H$ なら、論文の局所 Hölder 基準で価格は Brownian motion と整合的な正則性を持つ。さらに、追加の一様 tail 条件を置いた境界スケーリングでは $S^\\alpha$ は $L^2$ で残差 martingale $M$ に収束する。",
+        "practicalApplication": "execution・market-making のモデルでは、短期 horizon への人口集中、impact の瞬時成分、及び impact を予測へ織り込む度合いを jointly calibrate する枠組みを与える。特に、rough な予測可能 order-flow/signal 成分があっても価格を過度に rough にしないための設計・診断条件として、$G(0)(1-\\alpha)=1$ と horizon 分布のゼロ近傍形状を利用できる。ただし、実データでの推定・検証手順は提示されない。",
+        "methodology": "Brownian motion により駆動される Volterra signal、propagator 型 impact、horizon 分布 $\\nu$ を設定し、conditional forecast rule を population aggregate する。確率 Fubini と Itô isometry により kernel fixed point を導出する。Abel pseudoinverse と Neumann-series/contraction argument で減衰関数空間の解を構成し、Gamma 分布の smoothing asymptotics と Gaussian–Volterra の Hölder regularity を用いて局所正則性を分析する。Hawkes propagator との正規化上の対応では、相殺条件が $\\|h\\|_1=\\alpha$ に対応すると示す。",
+        "limitations": "結果は線形で、position を forecast 強度そのものとみなす代表的 agent 設定に依存する。存在・一意性は全 admissible 解ではなく選択された減衰 Banach space と contraction 条件で保証され、Gamma 節では Gamma-regular solution を追加仮定する。境界極限の一様 polynomial-tail 条件は自動的には成り立たず、本文で検証されるのは Ornstein–Uhlenbeck benchmark 等に限られる。Hawkes との関係は dimensionless propagator の同一視に基づく解釈であり、実証的な同定ではない。取引コスト、risk aversion、戦略的な agent interaction、離散 order flow、empirical calibration は扱わない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "market impact、persistent order flow、roughness と price efficiency の整合性を、異質 horizon の mean-field equilibrium として明確に結び付ける理論研究である。execution/market-microstructure 読者に有用だが、主張は条件付きの数学的結果であり、実証・実装への直接的な裏付けはない。",
+        "tags": [
+          "market impact",
+          "mean-field equilibrium",
+          "heterogeneous horizons",
+          "Volterra processes",
+          "rough signals",
+          "Hölder regularity",
+          "propagator model",
+          "Hawkes processes"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper proposes a linear mean-field model in which a continuum of agents with heterogeneous forecast horizons takes positions based on a common signal and anticipated market impact. It characterizes Gaussian–Volterra equilibria through a fixed-point equation and derives conditions under which impact feedback can cancel the direct transmission of a predictable rough signal into prices.",
+          "mainResult": "The aggregate-position kernel satisfies $({\\rm Id}-\\alpha D_\\nu I)\\phi_\\alpha=D_\\nu K$. Existence and uniqueness hold under explicit contraction conditions within a selected class of decaying solutions. The direct term in the signal-driven price kernel is $A(\\alpha,G(0))K$, and it disappears when $G(0)(1-\\alpha)=1$. For a fractional-type signal and Gamma-distributed horizons, after this cancellation, $\\xi>1/2-H$ makes price regularity compatible with Brownian motion under the paper's local Hölder criterion. Moreover, under an additional uniform tail condition in a boundary scaling regime, $S^\\alpha$ converges in $L^2$ to the residual martingale $M$.",
+          "practicalApplication": "For execution and market-making models, the framework jointly organizes calibration of population concentration at short horizons, the instantaneous impact component, and the extent to which anticipated impact enters forecasts. In particular, $G(0)(1-\\alpha)=1$ and the near-zero shape of the horizon distribution can serve as design or diagnostic conditions for preventing rough predictable order-flow or signal components from making prices excessively rough. However, the paper provides no procedure for estimation or empirical validation.",
+          "methodology": "The authors specify a Brownian-driven Volterra signal, propagator-style impact, and a horizon distribution $\\nu$, then aggregate a conditional forecast rule across the population. They derive a kernel fixed point using stochastic Fubini and Itô isometry. An Abel pseudoinverse and Neumann-series/contraction argument construct solutions in a decaying function space. Gamma smoothing asymptotics and Gaussian–Volterra Hölder regularity establish local regularity results. Under a normalized identification with a Hawkes propagator, the cancellation condition corresponds to $\\|h\\|_1=\\alpha$.",
+          "limitations": "The results depend on a linear representative-agent specification that identifies positions with forecast strength. Existence and uniqueness are guaranteed not over all admissible solutions, but in a selected decaying Banach space and under contraction conditions; the Gamma analysis additionally assumes a Gamma-regular solution. The uniform polynomial-tail condition needed for the boundary limit is not automatic, and the paper verifies it only for benchmarks such as the Ornstein–Uhlenbeck case. The Hawkes connection is an interpretation based on identifying dimensionless propagators, not an empirical identification. Transaction costs, risk aversion, strategic agent interaction, discrete order flow, and empirical calibration are outside the model.",
+          "reason": "This is a theoretically useful study because it explicitly connects market impact, persistent order flow, roughness, and price efficiency through a mean-field equilibrium with heterogeneous horizons. It is relevant to execution and market-microstructure readers, but its claims are conditional mathematical results without direct empirical or implementation support.",
+          "tags": [
+            "market impact",
+            "mean-field equilibrium",
+            "heterogeneous horizons",
+            "Volterra processes",
+            "rough signals",
+            "Hölder regularity",
+            "propagator model",
+            "Hawkes processes"
+          ]
+        }
+      }
+    },
+    "2609.03552": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、情報理論に基づくEntropy Factor Model（EFM）を用いて、対象ベンチマークを複製するポートフォリオの頑健性を高める手法を提案する。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を主題としていない。",
+        "mainResult": "要旨によれば、5つの数値実験において、EFMはOLSと比較して年率換算 turnover と手数料控除後リターンで一貫して優れた結果を示した。また、COVID-19下落局面や個別データの大幅な破損に対して、問題のある資産への配分を抑制することで、頑健性を示したと報告されている。",
+        "practicalApplication": "限定された資産集合によるベンチマーク複製、マルチアセット合成、ストレステスト向けのポートフォリオ構築に応用できる可能性がある。ただし、本サイトの対象である執行や市場構造への直接的な応用は要旨から確認できない。",
+        "methodology": "二段階の手法で、第一段階ではFermi–Dirac型のエントロピー最小化により、対象ファクターに対する資産リターンのパラメータを経験的なデータ境界内で推定する。第二段階では、同じエントロピー原理により複製ポートフォリオのウェイトを決定する。OLSをベンチマークとして、5つの数値実験で比較している。",
+        "limitations": "評価は要旨で示された5つの数値実験に基づくため、データ期間、取引コストの設定、統計的有意性、再現可能性、実運用での流動性制約は確認できない。EFMの優位性は著者らの報告であり、一般的に確立した事実とはいえない。また、金利市場や電子執行との関連は示されていない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "ポートフォリオ複製とロバスト最適化に関する研究としては関連性があるが、対象サイトの主要分野である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場には直接該当しないため。",
+        "tags": [
+          "portfolio replication",
+          "robust portfolio optimization",
+          "information theory",
+          "entropy",
+          "factor model",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes an information-theoretic Entropic Factor Model (EFM) to improve the robustness of portfolios that replicate a target benchmark. It does not focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, across five numerical experiments, EFM consistently outperformed OLS in annualized turnover and net-of-fees returns. It also reportedly showed robustness during the COVID-19 downturn and under severe idiosyncratic data corruption by reducing allocations to compromised assets.",
+          "practicalApplication": "The method may be applicable to benchmark replication with a restricted asset universe, multi-asset synthesis, and portfolio construction under stress tests. However, the abstract does not establish a direct application to execution or market structure, which are the primary focuses of this site.",
+          "methodology": "The method has two stages. First, Fermi–Dirac-type entropy minimization estimates asset-return parameters relative to target factors within empirical data bounds. Second, the same entropic principle determines the weights of the replicating portfolio. The method is compared with OLS in five numerical experiments.",
+          "limitations": "The evaluation is based on five numerical experiments described only in the abstract, so the data periods, transaction-cost assumptions, statistical significance, reproducibility, and real-world liquidity constraints cannot be assessed. The claimed EFM advantage is reported by the authors and is not an established fact. The abstract also provides no demonstrated connection to rates markets or electronic execution.",
+          "reason": "Although the paper is relevant to portfolio replication and robust optimization, it does not materially address the site's core areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "portfolio replication",
+            "robust portfolio optimization",
+            "information theory",
+            "entropy",
+            "factor model",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.03741": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、Gaussianモデルにおける頑健ポートフォリオの信頼集合再構築と、研究供給を内生化した均衡の臨界性を分析する。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を主題としていない。",
+        "mainResult": "要旨によれば、fresh reconstructionによる評価器の置換をfunctional Bregman divergenceとして表現し、研究供給のフィードバックを含むcapacity-constrained equilibriumをスカラー方程式に還元する。感応度は $\\omega_{\\mathcal O,h,I}/(1-\\mathfrak g_I^P)$ と因数分解され、timing lawがsubcriticalならcompletion-time情報が乗数を制約する一方、臨界点に達すると有限な一様上限は存在しない。",
+        "practicalApplication": "頑健ポートフォリオ設計、モデル更新プロトコル、研究資源配分、情報のprovenance管理に応用可能と考えられる。ただし、対象分野の電子執行、注文板、金利リスク管理への直接的な応用は要旨から確認できない。",
+        "methodology": "Gaussian benchmark、CARA効用、within-vintage rectangular構造、strictly causalなvalidation network、capacity constraintを組み合わせ、optimized robust valueの曲率と研究供給のフィードバックを解析する理論モデルである。",
+        "limitations": "評価は要旨に基づくため、定理の仮定、均衡の存在・一意性、実証データによる検証、パラメータ校正、非Gaussian環境での頑健性は確認できない。また、結果はsmooth equilibrium stateおよびactive cellなどの条件に依存する。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "頑健ポートフォリオと研究均衡に関する理論研究であり、指定サイトの主要対象である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究との関連が限定的である。",
+        "tags": [
+          "robust portfolios",
+          "Bayesian recalibration",
+          "Gaussian model",
+          "research equilibrium",
+          "criticality",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes confidence-set reconstruction for robust portfolios in a Gaussian model and the criticality of an equilibrium with endogenous research supply. It does not primarily concern electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, evaluator replacement under fresh reconstruction is represented as a functional Bregman divergence, and a capacity-constrained equilibrium with research-supply feedback is reduced to a scalar equation. Sensitivity factors as $\\omega_{\\mathcal O,h,I}/(1-\\mathfrak g_I^P)$; completion-time information constrains the multiplier when timing laws are subcritical, whereas no finite uniform bound exists when the timing set reaches the pole.",
+          "practicalApplication": "The framework may apply to robust portfolio design, model-update protocols, research-resource allocation, and information-provenance management. However, the abstract does not establish direct applications to electronic execution, order books, interest-rate risk management, or yield-curve markets.",
+          "methodology": "The paper combines a Gaussian benchmark, CARA utility, within-vintage rectangular structure, a strictly causal validation network, and a capacity constraint to analyze optimized robust-value curvature and feedback from research supply.",
+          "limitations": "This assessment is based only on the abstract, so the assumptions of the theorems, equilibrium existence and uniqueness, empirical validation, parameter calibration, and robustness outside the Gaussian setting cannot be assessed. The results also depend on conditions such as a smooth equilibrium state and an active cell.",
+          "reason": "This is a theoretical study of robust portfolios and research equilibrium, with limited relevance to the site's core areas of electronic trading, market microstructure, interest-rate models, yield curves, and rates research.",
+          "tags": [
+            "robust portfolios",
+            "Bayesian recalibration",
+            "Gaussian model",
+            "research equilibrium",
+            "criticality",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.04087": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "SPXとVIXの複数満期スマイルを、Markovian stitchingに依存せず同時に較正する大域的枠組みを提案する研究です。",
+        "mainResult": "著者らは、各月の局所的な$(S_i,V_i,S_{i+1})$分布を保つSPX-Markov化が可能である一方、Markov化によって過去履歴への依存が失われ、同一の月次較正から異なるマルチ期間価格が得られうると報告しています。有限状態の数値例では、提案するaugmented-Bregman mirror descentが、制約不整合を含む設定で、cyclic row projectionより所定周辺分布の誤差を約$25$倍小さくしました。平滑化したSPX・VIXサーフェスでは、報告された計算範囲で最大スマイル誤差を$0.70$ボラティリティ・ポイント未満に保ちつつ、条件付き診断を改善しています。",
+        "practicalApplication": "SPX・VIXの共同スマイル較正、マルチ期間派生商品の価格付け、非Markov依存を含むシナリオ生成への応用可能性があります。ただし、本サイトの主対象である電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利商品の研究ではありません。",
+        "methodology": "大域的な実現可能性とblock-preserving SPX-Markovizationの関係を理論的に分析し、相対エントロピーによるMarkov参照下の補完を議論しています。有限離散化ではaugmented-Bregman mirror descentを用い、観測クオートのモーメント適合、マルチンゲール残差、分散残差を同時に管理しています。",
+        "limitations": "評価は抽象的な有限状態例、制御された不適合アフィン系、平滑化されたSPX・VIXサーフェスに基づく数値実験です。実市場での取引コスト、流動性、モデルリスク、推定誤差、計算規模への頑健性や、実際のマルチ期間商品のアウト・オブ・サンプル性能は要旨から確認できません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "マルチ資産・ボラティリティ派生商品の較正としては技術的に興味深いものの、対象がSPX・VIXであり、指定された電子取引、マーケット・マイクロストラクチャー、金利・イールドカーブ領域には直接該当しないためです。",
+        "tags": [
+          "SPX",
+          "VIX",
+          "smile calibration",
+          "Markovization",
+          "non-Markov dependence",
+          "martingale transport",
+          "mirror descent"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a global framework for jointly calibrating multi-maturity SPX and VIX smiles without relying on Markovian stitching.",
+          "mainResult": "The authors report that a block-preserving SPX-Markovization can retain each monthly $(S_i,V_i,S_{i+1})$ law, while losing dependence on earlier history and therefore allowing identical monthly calibrations to produce different multi-period prices. In finite-state numerical examples, the proposed augmented-Bregman mirror descent kept prescribed marginal errors about $25$ times tighter than cyclic row projection in an infeasible affine system. On smoothed SPX and VIX surfaces, the reported sweep kept the worst fitted-smile error below $0.70$ volatility points while materially improving conditional diagnostics.",
+          "practicalApplication": "Potential applications include joint SPX-VIX smile calibration, pricing of multi-period derivatives, and scenario generation with non-Markov dependence. However, the work is not focused on electronic execution, market microstructure, interest-rate models, yield curves, or rates products, which are the primary scope of this site.",
+          "methodology": "The paper theoretically analyzes global feasibility and block-preserving SPX-Markovization, and discusses relative-entropy completion under a Markov reference. For finite discretizations, it uses augmented-Bregman mirror descent to fit observable quote moments while controlling martingale and dispersion residuals.",
+          "limitations": "The evaluation consists of an abstract finite-state example, a controlled infeasible affine system, and numerical experiments on smoothed SPX and VIX surfaces. Robustness to market frictions, liquidity, model and estimation risk, computational scaling, and out-of-sample performance for actual multi-period products cannot be assessed from the abstract.",
+          "reason": "Although technically interesting as a calibration study for multi-asset volatility derivatives, it concerns SPX and VIX rather than the site's core areas of electronic trading, market microstructure, interest-rate and yield-curve modeling, or rates products.",
+          "tags": [
+            "SPX",
+            "VIX",
+            "smile calibration",
+            "Markovization",
+            "non-Markov dependence",
+            "martingale transport",
+            "mirror descent"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  }
+}

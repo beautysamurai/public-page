@@ -37,8 +37,14 @@ concurrency:
 
 jobs:
   research:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    outputs:
+      merge_ready: ${{ steps.merge_candidate.outputs.ready }}
+      pull_request: ${{ steps.review_pr.outputs.number }}
+      validated_head: ${{ steps.merge_candidate.outputs.head }}
+      validated_base: ${{ steps.merge_candidate.outputs.base }}
     env:
       AUTOMATION_BRANCH: automation/openai-arxiv-research
     steps:
@@ -143,6 +149,7 @@ jobs:
             scripts/research_publication.py
             scripts/import_scheduler_history.py
             scripts/validate_public_bundle.py
+            scripts/merge_research_pr.py
           )
           if ! git diff --quiet origin/main HEAD -- "${executable_paths[@]}"; then
             echo "::error::The persistent automation branch changes executable code or configuration."
@@ -1031,22 +1038,56 @@ jobs:
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
       - name: Open or update the review pull request
-        if: always() && (steps.period_marker_commit.outputs.changed == 'true' || steps.research_commit.outputs.changed == 'true' || steps.publication_commit.outputs.changed == 'true')
+        id: review_pr
+        if: always() && (steps.period_marker_commit.outputs.changed == 'true' || steps.research_commit.outputs.changed == 'true' || steps.publication_commit.outputs.changed == 'true' || steps.publication_commit.outcome == 'success')
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
+          if git diff --quiet origin/main HEAD; then
+            echo "No unmerged research changes."
+            exit 0
+          fi
+          # Also persist a merge of newer main when report bytes did not change.
+          git push origin "HEAD:$AUTOMATION_BRANCH"
           existing="$(gh pr list --base main --head "$AUTOMATION_BRANCH" --state open --json number --jq '.[0].number // empty')"
           if [[ -z "$existing" ]]; then
             gh pr create \
               --base main \
               --head "$AUTOMATION_BRANCH" \
               --title "research: automated arXiv review" \
-              --body "Automated daily arXiv screening plus scheduled weekly and monthly synthesis. arXiv/OpenAI failures remain incomplete and are not published. Completed reports are reconciled into the static archive; review the generated prose and ratings before merge."
+              --body "Automated daily arXiv screening plus scheduled weekly and monthly synthesis. arXiv/OpenAI failures remain incomplete and are not published. After all generation, publication, and privacy checks pass, a separate job verifies this exact data-only head, merges it, and starts Pages deployment. Code changes and failed validation are never auto-merged."
+            existing="$(gh pr list --base main --head "$AUTOMATION_BRANCH" --state open --json number --jq '.[0].number // empty')"
           else
             echo "Updated existing review PR #$existing."
           fi
+          [[ "$existing" =~ ^[1-9][0-9]*$ ]]
+          echo "number=$existing" >> "$GITHUB_OUTPUT"
+
+      - name: Record the fully validated merge candidate
+        id: merge_candidate
+        if: success() && steps.review_pr.outputs.number != ''
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -n "$(git status --porcelain --untracked-files=all)" ]]; then
+            echo "::error::Refusing to merge a tree with uncommitted output."
+            exit 1
+          fi
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          tracked = subprocess.check_output(["git", "ls-files", "-z", "*.json"])
+          for name in tracked.decode("utf-8").split("\0"):
+              if name:
+                  json.loads(Path(name).read_text(encoding="utf-8"))
+          PY
+          echo "head=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "base=$(git rev-parse origin/main)" >> "$GITHUB_OUTPUT"
+          echo "ready=true" >> "$GITHUB_OUTPUT"
 
       - name: Report incomplete daily research
         if: always() && steps.plan.outputs.mode == 'daily' && (steps.research.outputs.status == 'UPDATE_NOT_CONFIRMED' || steps.research.outputs.status == 'UPDATER_OFFLINE')
@@ -1061,3 +1102,41 @@ jobs:
         run: |
           echo "::error::One or more weekly/monthly targets remain pending for automatic retry."
           exit 1
+
+  merge-and-publish:
+    needs: research
+    # Expected arXiv/period incompleteness is reported AFTER validation. Safe
+    # retry state may still merge; a validation failure never emits merge_ready.
+    if: always() && !cancelled() && github.ref == 'refs/heads/main' && needs.research.outputs.merge_ready == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    steps:
+      - name: Check out trusted merge code
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Merge validated research and dispatch Pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ needs.research.outputs.pull_request }}
+          VALIDATED_HEAD: ${{ needs.research.outputs.validated_head }}
+          VALIDATED_BASE: ${{ needs.research.outputs.validated_base }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/merge_research_pr.py \
+            --repository "$GITHUB_REPOSITORY" \
+            --pr "$PR_NUMBER" \
+            --head-sha "$VALIDATED_HEAD" \
+            --base-sha "$VALIDATED_BASE"

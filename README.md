@@ -12,8 +12,9 @@ strict bilingual JSON and Markdown reports, keeps incomplete batches pending,
 and reuses completed daily reports for weekly and monthly reviews.
 
 Research automation and Pages deployment remain separate. Automation writes to
-a fixed review branch and opens or updates a pull request. Only a reviewed merge
-to `main` starts the existing GitHub Pages deployment.
+a fixed review branch and opens or updates a pull request. After generation,
+publication, and privacy validation pass, an isolated job merges that exact
+data-only PR into `main` and starts the existing GitHub Pages deployment.
 
 ## Architecture
 
@@ -27,7 +28,7 @@ official arXiv new-list pages + validated export metadata
   -> content/chatgpt_scheduler_history.json + English overlay
   -> deterministic site/data generation
   -> review pull request
-  -> merge to main
+  -> automatic merge of the validated data-only head to main
   -> existing GitHub Pages workflow
 ~~~
 
@@ -311,7 +312,16 @@ and monthly runs share one queue so none is replaced by a later scheduled run.
 2. Add the repository secret `OPENAI_API_KEY`.
 3. Under **Settings → Actions → General**, allow Actions and enable
    **Allow GitHub Actions to create and approve pull requests**.
-4. Run the workflow once manually and review the pull request it creates.
+4. Run the workflow once manually on `main` and confirm the **merge-and-publish**
+   job and subsequent **Deploy GitHub Pages** run succeed.
+
+No additional PAT or GitHub App secret is required. The separate merge job uses
+the short-lived `GITHUB_TOKEN` with `contents: write`, `pull-requests: write`, and
+`actions: write`; it receives no OpenAI key. The repository's **Allow auto-merge**
+toggle is not needed: this job performs a normal, SHA-checked merge after the
+trusted workflow's own validation, without bypassing repository rules. If you
+later require a human approval or additional PR checks in branch rules, those
+requirements will block automatic merging until they are satisfied.
 
 Manual dispatch supports `daily`, `weekly`, and `monthly`. For recovery,
 an optional explicit period end may be supplied: it must be a Friday for a
@@ -342,17 +352,38 @@ Reusing the durable branch lets an unconfirmed daily batch resume on the next
 run without repeating completed model calls. Every run reconciles all durable
 completed daily, weekly, and monthly reports into public editions, so an
 interruption after the research push is repaired later. Incomplete
-JSON/Markdown remains visible on the review branch but is never appended to the
+JSON/Markdown remains visible in repository research state but is never appended to the
 public archive.
 
 The workflow runs the complete Python and Node test suite before paid research,
 validates and pushes safe research state before attempting publication, then
 validates generated public data again. It never pushes `main` directly. It
-opens or updates one review pull request; approval and merge remain manual.
+opens or updates one review pull request. Automatic merging is limited to
+`github-actions[bot]` PRs from this repository's fixed automation branch into
+`main`, containing only regular non-executable research/publication data files.
+The validated head and base must still match; changed code, conflicts, a moved
+base/head, or any failed validation leave the PR unmerged. Ordinary code PRs
+remain outside this automation. Merge commits preserve the durable branch's
+ancestry, so do not squash or delete that branch as part of the scheduled flow.
 
-Merging the review pull request triggers the unchanged **Deploy GitHub Pages**
-workflow. The Pages job uploads only **site/** and never receives the OpenAI
-key.
+Expected arXiv/period incompleteness still marks the research job failed, but
+only after all output checks have passed and a validated candidate has been
+recorded. The separate merge job can persist that safe retry state and any
+completed editions; it never publishes an incomplete edition as complete.
+
+GitHub may show approval-required duplicate PR checks for a PR created with
+`GITHUB_TOKEN`. The automatic path uses the tests and privacy checks inside the
+trusted scheduled/manual research workflow, so those duplicate checks do not
+need manual approval unless repository rules explicitly require them. See
+[GitHub's token event behavior](https://docs.github.com/en/actions/concepts/security/github_token).
+
+Because a `GITHUB_TOKEN` merge does not trigger a `push` workflow, the merge job
+explicitly dispatches the unchanged **Deploy GitHub Pages** workflow on `main`.
+Pages independently validates the repository, uploads only **site/**, and never
+receives the OpenAI key. Human merges still deploy through the existing `push`
+trigger. If merge succeeds but dispatch fails, rerunning **merge-and-publish**
+verifies the existing merge and retries dispatch without merging twice or
+calling OpenAI.
 
 ## Privacy and security boundary
 

@@ -21,8 +21,14 @@ should be acknowledged and assessed before public disclosure whenever possible.
 - arXiv and OpenAI processing can run locally or in the dedicated scheduled
   research workflow. That workflow has no pull-request trigger, receives the
   OpenAI key only from Actions secrets, and writes to a fixed review branch.
-- The research workflow never pushes `main`. A human-reviewed merge remains the
-  boundary before generated prose and ratings reach GitHub Pages.
+- The research workflow never pushes `main` directly. After all output tests,
+  scope checks, and privacy scans pass, an isolated job may merge the exact
+  validated bot-owned, same-repository data-only PR. It rechecks the base/head,
+  file modes, and paths, and uses the normal merge API without a rules bypass.
+  Code PRs remain outside automatic merging. Expected incomplete research may
+  persist safe retry state, but incomplete editions are not published.
+- The merge job receives no OpenAI key. Its additional `actions: write` grant
+  is used to dispatch the existing Pages workflow after a bot-token merge.
 - The validation workflow has read-only repository access.
 - The Pages workflow has read-only repository access while verifying and
   building. Only its deployment job receives **pages: write** and

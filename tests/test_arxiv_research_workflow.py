@@ -156,6 +156,37 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
             self.position("Report incomplete daily research"),
         )
 
+    def test_merge_candidate_requires_all_generation_and_validation_to_succeed(self) -> None:
+        candidate = self.step("Record the fully validated merge candidate")
+        self.assertIn("if: success() && steps.review_pr.outputs.number != ''", candidate)
+        self.assertIn("git status --porcelain --untracked-files=all", candidate)
+        self.assertIn("json.loads", candidate)
+        self.assertIn("git rev-parse HEAD", candidate)
+        self.assertIn("git rev-parse origin/main", candidate)
+        self.assertLess(self.position("Commit generated publication"), self.position("Record the fully validated merge candidate"))
+        self.assertLess(self.position("Record the fully validated merge candidate"), self.position("Report incomplete daily research"))
+        self.assertIn("scripts/merge_research_pr.py", self.step("Verify the automation branch is data-only"))
+
+    def test_existing_validated_pr_can_merge_without_new_generated_changes(self) -> None:
+        pull_request = self.step("Open or update the review pull request")
+        self.assertIn("steps.publication_commit.outcome == 'success'", pull_request)
+        self.assertIn("git diff --quiet origin/main HEAD", pull_request)
+        self.assertIn('git push origin "HEAD:$AUTOMATION_BRANCH"', pull_request)
+        self.assertIn('echo "number=$existing"', pull_request)
+
+    def test_merge_is_isolated_from_research_secrets_and_requires_a_validated_candidate(self) -> None:
+        merge_job = self.workflow.split("\n  merge-and-publish:\n", 1)[1]
+        self.assertIn("needs: research", merge_job)
+        self.assertIn("always() && !cancelled()", merge_job)
+        self.assertIn("github.ref == 'refs/heads/main'", merge_job)
+        self.assertIn("needs.research.outputs.merge_ready == 'true'", merge_job)
+        self.assertIn("ref: ${{ github.sha }}", merge_job)
+        self.assertIn("actions: write", merge_job)
+        self.assertNotIn("OPENAI_API_KEY", merge_job)
+        self.assertNotIn("research_pipeline.py", merge_job)
+        self.assertIn("--head-sha", merge_job)
+        self.assertIn("--base-sha", merge_job)
+
 
 if __name__ == "__main__":
     unittest.main()

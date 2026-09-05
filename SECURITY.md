@@ -57,6 +57,26 @@ If a credential is committed, assume it is compromised: revoke or rotate it
 first, then remove it from the current tree and Git history. Adding the path to
 **.gitignore** afterward is not sufficient.
 
+## Personal-library authorization
+
+Apply `supabase/migrations/202609050001_personal_library.sql` before enabling
+the browser configuration. Both tables require authenticated ownership on all
+CRUD paths, enforced by PostgreSQL RLS, not by hidden UI controls. Never disable
+RLS to make a client request succeed. Do not grant anonymous access. The owner
+ID comes from the authenticated session and database `auth.uid()`; never from a
+shared URL. Changing ownership is forbidden by UPDATE WITH CHECK.
+
+Only a hosted project URL and `sb_publishable_…` key enter the Pages build.
+The build rejects other key types, insecure URLs and arbitrary hosts. Keep
+secret/service-role keys and SMTP passwords solely in Supabase administration.
+Personal-library actions never need `OPENAI_API_KEY`. New dependencies are
+pinned by the lockfile; the SDK is built locally and loaded only for sign-in or
+restoring a prior session. Deploying no configuration leaves public reading intact.
+
+Tests exercise ownership policies on a local PostgreSQL engine with simulated
+Supabase auth claims. This does not replace verifying two real users in the
+configured Supabase project after setup, including negative cross-user requests.
+
 ## Dependency and content considerations
 
 Keep GitHub Actions pinned to trusted publishers and review version changes.

@@ -4,12 +4,48 @@
 
 This repository produces a public static digest from sanitized scheduled-task
 reviews, automated Responses API reviews, and public arXiv metadata. It does not
-need user accounts, form submissions, or a server-side database. The dedicated
+require an account for public reading. An optional personal library uses
+Supabase Auth and its database, separately from public research. The dedicated
 research workflow queries arXiv and OpenAI on a schedule; the separate Pages
-workflow only validates files and deploys **site/**.
+workflow validates files and builds **site/** into **.local/site/** for deployment.
 
 External sites linked from the digest, including arXiv, Google Search, and X,
 operate under their own privacy policies.
+
+## Optional personal library
+
+Anonymous reading makes no Supabase request. Choosing email sign-in sends the
+email address and confirmation code to the configured Supabase project. The
+project's email provider delivers the code. Supabase also receives ordinary
+connection metadata such as IP address and browser information; the provider's
+logs and retention settings apply. Returning signed-in visitors contact
+Supabase to restore their login and load their library.
+
+Bookmarks store the version-free arXiv ID. Presets store the chosen name and
+search filters (including any keyword typed by the user). These records stay
+in Supabase, not GitHub, the public archive, or the OpenAI research pipeline.
+Ownership policies restrict users to their own records. The project operator
+and privileged database administrators can still access them; this is not
+end-to-end encryption. Do not save confidential work information in keywords.
+
+The browser stores a Supabase login session in localStorage, scoped to this
+project and site path. Personal records are only held in page memory. Pages
+under the same GitHub Pages origin remain in the same browser security boundary;
+do not host untrusted scripts under that origin. Sign out on shared devices.
+Use public reading without signing in to avoid this optional data collection.
+
+Bookmarks and presets remain until removed by the user or project operator.
+Use the star again to remove a bookmark, Delete for a preset, or Download saved
+library for a local JSON copy (keep that download private). The project owner
+can delete the Auth user in Supabase to cascade-delete their library. This does
+not erase pre-existing provider logs or backups; configure and document those
+retention periods before opening public registration. Logging out removes this
+browser's session, not the cloud library or logins on other devices.
+
+The official Supabase SDK is bundled and served from the same origin, not a
+remote CDN. Only the exact configured project HTTPS origin is added to the
+homepage's connection policy. Public URL/publishable key values are intentionally
+visible; service-role/secret keys must never be used by this site.
 
 ## What becomes public
 

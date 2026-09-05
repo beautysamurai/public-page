@@ -1,0 +1,347 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-03",
+  "fingerprint": "2c71b965fdef46aa9772172de4d9207d2792714b0f4811cae5e56aafb6e00d14",
+  "candidateFingerprints": {
+    "2609.02013": "967782cd5ff064b7cc826a8915faa6358e4fea125c638f0fbca6bf48880178e3",
+    "2609.02014": "b7683a8861f74716f94c510900261ee39b37d0f24025ced7f853e2b3ebe43262",
+    "2609.02381": "f80069720fa34dad05e0351e502a95e9350cc99590a8db691d3a4e72f4beb5bb",
+    "2609.02447": "25bd18f9bbb09fd99952eb919604bb75b6a45b08b84d71c1c6c210e572061ee2",
+    "2609.02580": "1d5e49ec90af6caa325c612d50f704a8714f4c704ab1fba3f3fba1fb9ee8ec2b",
+    "2609.02797": "b439dbc2bbd7ed05fb4d161a69c7e506bee2bd4d0fe9e6cd1d9979ea66087601"
+  },
+  "results": {
+    "2609.02013": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、直接給付によって極度の貧困を削減する費用を、統計的学習の枠組みで推計したものであり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を扱っていません。",
+        "mainResult": "34か国の家計消費調査を用い、貧困率を13%から1%へ下げる年間費用を名目ベースで約$211\\ \\mathrm{billion}$と推計しています。これは貧困ギャップを集計した削減費用の4.0倍ですが、ユニバーサル・ベーシック・インカム費用の19%に相当し、世界全体では極度の貧困をおおむね終結させる費用が世界GDPの0.28%と示唆されています。",
+        "practicalApplication": "貧困対策における給付対象者の選定や財政規模の評価には応用可能ですが、本サイトの対象である金融市場分析や金利実務への直接的な応用はありません。",
+        "methodology": "世界の貧困層の76%を含む34か国の全国代表性を持つ家計消費調査を用い、現実の制度が直面する情報制約を維持した統計的学習として直接給付による貧困最小化を推計しています。",
+        "limitations": "提示された要旨だけでは、推計モデル、給付対象者の識別精度、行動反応、行政費用、資金調達、国別結果の不確実性、世界への外挿方法の詳細は確認できません。また、費用推計は要旨に記載された前提に依存します。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "貧困政策と統計的学習に関する研究であり、指定された電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利分野には実質的に該当しません。",
+        "tags": [
+          "poverty policy",
+          "direct transfers",
+          "statistical learning",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study estimates the cost of reducing extreme poverty through direct transfers using a statistical-learning framework. It does not address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using household consumption surveys from 34 countries, the study estimates that reducing the poverty rate from 13% to 1% would cost approximately $211\\ \\mathrm{billion}$ per year in nominal terms. This is 4.0 times the cost implied by aggregating the poverty gap, but 19% of the cost of universal basic income. The global extrapolation suggests a cost of 0.28% of global GDP to approximately end extreme poverty.",
+          "practicalApplication": "The estimates may inform targeting and fiscal planning for anti-poverty transfers, but they have no direct application to the financial-market and interest-rate topics covered by this site.",
+          "methodology": "The authors use nationally representative household consumption surveys from 34 countries covering 76% of the world's poor, framing poverty minimization through direct transfers as statistical learning under the information constraints faced by real-world programs.",
+          "limitations": "The abstract does not provide details on the estimation model, targeting accuracy, behavioral responses, administrative costs, financing, country-level uncertainty, or the method used for global extrapolation. The cost estimates therefore depend on assumptions that cannot be assessed from the abstract alone.",
+          "reason": "The paper concerns poverty policy and statistical learning and is not materially related to electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "poverty policy",
+            "direct transfers",
+            "statistical learning",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.02014": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "動的リスク尺度の下で、バスケットオプションの高次元な深層ヘッジを研究する論文です。時間整合性、条件付き elicitability、scoring function の選択、静的リスク尺度による precommitment 型手法との比較を扱います。",
+        "mainResult": "要旨によれば、複雑な状態空間を持つ高次元バスケットオプションでも、時間整合的な deep hedging が実行可能であることを示しています。また、scoring function の選択がヘッジエージェントの学習に影響し、静的リスク尺度に基づく手法との違いを検討しています。",
+        "practicalApplication": "動的なリスク管理目標に対応するデリバティブ・ヘッジ戦略の設計や、複雑な状態変数を含むポートフォリオの機械学習ベースのリスク最適化に応用できる可能性があります。ただし、電子取引、market microstructure、金利モデル、yield curve 分析への直接的な応用は要旨から確認できません。",
+        "methodology": "条件付き elicitability を持つ spectral risk measures を用いて最適化目的を表現し、高次元バスケットオプションの time-consistent hedging を deep hedging で学習します。さらに scoring function の影響を分析し、static risk measures による precommitment 型 deep hedging と比較します。",
+        "limitations": "要旨だけでは、データ、価格モデル、取引コスト、評価指標、ベンチマークの詳細や、実市場での頑健性は確認できません。また、結果は主に実行可能性と手法間の比較に関する主張であり、電子執行や金利市場への有効性を示すものではありません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "深層ヘッジと動的リスク尺度には関連しますが、対象サイトの中心分野である電子取引、market microstructure、interest-rate models、yield curves、rates には直接該当しません。",
+        "tags": [
+          "deep hedging",
+          "dynamic risk measures",
+          "time consistency",
+          "spectral risk measures",
+          "basket options",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies high-dimensional deep hedging for basket options under dynamic risk measures. It addresses time consistency, conditional elicitability, the choice of scoring function, and comparisons with precommitment approaches based on static risk measures.",
+          "mainResult": "According to the abstract, time-consistent deep hedging is feasible for high-dimensional basket options with complex state spaces. The paper also reports that the choice of scoring function affects training of the hedging agent and compares the approach with deep hedging based on static risk measures.",
+          "practicalApplication": "The approach may support the design of derivative-hedging strategies under dynamic risk-management objectives and machine-learning-based risk optimization for portfolios with complex state variables. However, the abstract does not establish direct applications to electronic trading, market microstructure, interest-rate models, yield-curve analysis, or rates markets.",
+          "methodology": "The authors use conditionally elicitable spectral risk measures to represent the optimization objective and train time-consistent hedging strategies with deep hedging for high-dimensional basket options. They analyze the effect of the scoring function and compare the results with precommitment-style deep hedging based on static risk measures.",
+          "limitations": "The abstract does not provide details on the data, pricing model, transaction costs, evaluation metrics, benchmark specifications, or robustness in live markets. The reported contribution concerns feasibility and methodological comparison rather than effectiveness in electronic execution or interest-rate markets.",
+          "reason": "Although the paper is relevant to deep hedging and dynamic risk measures, it is not directly within the site's core areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "deep hedging",
+            "dynamic risk measures",
+            "time consistency",
+            "spectral risk measures",
+            "basket options",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.02381": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "レヴィジャンプ過程を含む投機的資産バブルの数理モデルについて、非局所自由境界PIDEの粘性超解バリアの存在条件を解析する研究です。電子取引、マーケット・マイクロストラクチャ、金利モデル、またはイールドカーブが主題ではありません。",
+        "mainResult": "割引率と平均回帰の合計がジャンプ拡散の尺度を上回る場合、非負で線形成長の粘性超解が全期間で存在すると報告しています。下回る場合は有限期間でのみ存在し、臨界時点 $T_{\\mathrm{crit}}$ を超えるとそのような超解は存在しないと示しています。等号の場合には、追加の空間的 no-crossing 条件の下で滑らかな超解による全期間存在を示しています。",
+        "practicalApplication": "資産バブルやレヴィジャンプを含む自由境界問題の可解性を判定する理論的な基準として利用できます。ただし、取引執行、価格形成、金利カーブ推定、または実務的なリスク管理への直接的な手法は abstract からは示されていません。",
+        "methodology": "放物型 obstacle PIDE に対して viscosity supersolution を構成し、局所ドリフトの安定化効果と大ジャンプの非局所効果を比較しています。線形成長 $O(|g|)$ の関数クラス、asymptotic slope envelope、有限期間の臨界閾値、および臨界ケースの smooth supersolution construction を用いています。",
+        "limitations": "abstract では、PIDEの完全な仮定、パラメータの推定方法、数値検証、実データとの比較、または結果のモデル誤差への頑健性が明らかではありません。したがって、存在条件は特定の数学的設定に依存し、金融市場での予測性能や実装可能性を直接意味しません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "金融数学には関連しますが、対象は資産バブルの非局所自由境界PIDEであり、本サイトの中心領域である電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、または金利実務には直接該当しません。",
+        "tags": [
+          "out_of_scope",
+          "非局所PIDE",
+          "自由境界問題",
+          "粘性解",
+          "レヴィジャンプ",
+          "資産バブル"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes existence conditions for viscosity supersolution barriers in a non-local free-boundary PIDE used to model speculative asset bubbles with Lévy jump processes. Its main subject is not electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "The abstract reports global existence of non-negative, linear-growth viscosity supersolutions when the combined discount-rate and mean-reversion term exceeds the jump-dispersion scale. When it is smaller, existence holds only over finite horizons, and no such supersolution exists beyond a critical time $T_{\\mathrm{crit}}$. At equality, global existence is established through a smooth supersolution under an additional spatial no-crossing condition.",
+          "practicalApplication": "The results can provide theoretical solvability criteria for free-boundary problems involving asset bubbles and Lévy jumps. However, the abstract does not present a direct method for execution, price formation, yield-curve estimation, or practical risk management.",
+          "methodology": "The authors construct viscosity supersolutions for a parabolic obstacle PIDE and compare the stabilizing local drift with the non-local effect of large jumps. They use a linear-growth class $O(|g|)$, an asymptotic slope envelope, a finite-horizon critical threshold, and a smooth supersolution construction for the critical case.",
+          "limitations": "The abstract does not specify the full PIDE assumptions, parameter-estimation procedure, numerical validation, empirical comparison, or robustness to model error. The existence conditions therefore depend on the particular mathematical setup and do not directly imply forecasting performance or implementability in financial markets.",
+          "reason": "Although relevant to mathematical finance, the paper concerns a non-local free-boundary PIDE for asset bubbles and is not directly within the site's core areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates practice.",
+          "tags": [
+            "out_of_scope",
+            "non-local PIDE",
+            "free-boundary problem",
+            "viscosity solution",
+            "Lévy jumps",
+            "asset bubbles"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.02447": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "非線形一時的価格インパクトモデルにおいて、非線形性と記憶カーネルを適用する順序が価格操作の可否を決めることを分類した理論研究です。",
+        "mainResult": "抽象によれば、取引速度に非線形法則を先に適用する場合、すべての有限区分的定数ラウンドトリップで非負コストとなるには、非線形法則は実質的にアフィン、非ゼロの畳み込みカーネルでは線形でなければなりません。特に、インパクト $\\operatorname{sgn}(x)|x|^{\\delta}$ と記憶カーネル $t^{-\\gamma}$ の組合せは $\\delta=1$ の場合に限り操作を排除し、平方根インパクトはすべての $\\gamma\\in(0,1)$ で操作可能と報告されています。逆に、記憶状態の後に単調な readout を適用する場合、安全性はカーネルの complete positivity と同値であり、平方根インパクトとべき乗記憶の組合せは操作を許さないとされています。",
+        "practicalApplication": "市場インパクトモデルの設計、アルゴリズム取引コストの検証、較正済みモデルの価格操作リスク診断に利用できます。特に、凹型インパクトを記憶効果の前に置く構造を避け、記憶後の readout とカーネルの positivity を検査する設計指針を与えます。ただし、実データでの性能評価や実装上の推奨パラメータまでは示していません。",
+        "methodology": "有限区分的定数ラウンドトリップ、zero-volume chattering pump、薄い baseline trades、遠隔の相殺ブロックを用いて、round-trip safety と all-input safety を解析しています。さらに、べき乗カーネル、二モード Prony カーネル、一次の時間非斉次 memory、安定な fully actuated 行列 memory について、剛性、complete positivity、摩擦、二ブロック位相、switching complexity を理論的に分類しています。",
+        "limitations": "評価は提供された抽象に基づくもので、本文の証明詳細、仮定の厳密な範囲、ノイズ、離散時間、価格形成の他要因、流動性制約、手数料、執行遅延、実市場での外部検証は確認できません。結果は主に特定の連続時間インパクト構造とラウンドトリップ安全性の定義に依存します。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "価格操作の不存在条件は電子執行と市場マイクロストラクチャーに直接関係し、平方根インパクトとべき乗記憶という実務上重要な組合せに対して、インパクトと memory の順序が決定的であるという明確な理論結果を提示しています。抽象段階でも専門サイトの主要テーマとの関連性と新規性が高いため、推奨します。",
+        "tags": [
+          "price manipulation",
+          "transient impact",
+          "market microstructure",
+          "execution",
+          "nonlinear impact",
+          "memory kernels",
+          "complete positivity",
+          "square-root impact",
+          "Volterra kernels",
+          "round-trip safety"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This theoretical study classifies price manipulation in transient nonlinear price-impact models according to the order in which the nonlinearity and memory kernel are applied.",
+          "mainResult": "According to the abstract, when a nonlinear law is applied to the trading rate before memory, nonnegative cost for every finite piecewise-constant round trip requires the law to be effectively affine, and linear for every nonzero convolution kernel. In particular, the combination of impact $\\operatorname{sgn}(x)|x|^{\\delta}$ and memory kernel $t^{-\\gamma}$ is manipulation-free only when $\\delta=1$; square-root impact is reported to be manipulable for every $\\gamma\\in(0,1)$. Conversely, when a monotone readout is applied after the memory state, safety is equivalent to complete positivity of the kernel, and square-root impact with power-law memory is manipulation-free.",
+          "practicalApplication": "The results can support the design of market-impact models, validation of algorithmic-trading execution costs, and diagnostics for manipulation risk in calibrated models. They suggest avoiding architectures that place concave impact before memory and checking readout ordering and kernel positivity. The abstract does not, however, provide empirical performance tests or implementation-level parameter recommendations.",
+          "methodology": "The study analyzes finite piecewise-constant round trips, a zero-volume chattering pump, thin baseline trades, and a remote compensating block to characterize round-trip and all-input safety. It theoretically classifies rigidity, complete positivity, friction, the two-block phase, and switching complexity for power-law kernels, two-mode Prony kernels, first-order time-inhomogeneous memory, and stable fully actuated matrix memory.",
+          "limitations": "This assessment is based only on the supplied abstract; the detailed proofs, exact scope of assumptions, noise, discrete-time effects, other price-formation mechanisms, liquidity constraints, fees, execution latency, and empirical validation cannot be assessed. The conclusions depend on the specified continuous-time impact structures and definitions of round-trip safety.",
+          "reason": "The absence of price manipulation is directly relevant to electronic execution and market microstructure. The paper reports a clear theoretical result that the ordering of impact nonlinearity and memory is decisive for practically important square-root-impact and power-law-memory models. Its relevance and apparent novelty are high even at the abstract-screening stage.",
+          "tags": [
+            "price manipulation",
+            "transient impact",
+            "market microstructure",
+            "execution",
+            "nonlinear impact",
+            "memory kernels",
+            "complete positivity",
+            "square-root impact",
+            "Volterra kernels",
+            "round-trip safety"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本稿は、非線形 transient impact model における price manipulation の不在条件を、非線形性を memory kernel の前に置くか後に置くかで分類する理論研究である。主張の中心は、rate-inside 型では非ゼロの可積分 Volterra kernel に対する round-trip 安全性が impact law の affine 性を強制し、state-outside 型では全単調 readout に対する安全性が kernel の complete positivity と同値になる、という点である。",
+        "mainResult": "著者の定理によれば、power-law memory $G(t)=t^{-\\gamma}$、$0<\\gamma<1$ の rate-inside model では、$f(x)=\\operatorname{sgn}(x)|x|^{\\delta}$ が manipulation-free となるのは $\\delta=1$ のみであり、square-root impact を含む $\\delta\\ne1$ は有限個の piecewise-constant block による manipulation を許す。他方、同じ非線形 readout を memory state の後に適用する state-outside model では、power-law kernel が completely positive であるため、単調 readout に対して安全だと主張する。",
+        "practicalApplication": "execution model の設計・検証では、concave instantaneous impact を rate に直接適用する propagator specification を no-manipulation 条件だけで採用すべきでないことを示唆する。実務上は、impact state を resilience kernel で形成してから concave readout を適用する architecture、または spread と temporary cost を含む friction を明示的に導入する際の理論的な判定枠組みとなり得る。Prony kernel、time-varying resilience、matrix memory に対する条件は、数値実装可能な model diagnostics の候補でもある。",
+        "methodology": "有限個の定数 block からなる round trip を admissible control とし、rate-inside 側では zero-volume chattering pump と thin baseline trade を用いて非線形性から負コスト戦略を構成する。state-outside 側では Volterra resolvent、complementary kernel、Bregman divergence を用いた storage-dissipation identity により complete positivity の必要十分性を導く。さらに remote compensating block で round-trip safety と all-input safety を比較し、Prony 系では inverse-kernel の residue 条件および有限 cut linear program による unsafe certificate を提示する。",
+        "limitations": "これは単一著者による arXiv v1 preprint であり、掲載誌での査読、独立再現、引用文献や既存結果との整合性は本資料だけでは確認できない。結論は frictionless impact cost、causal Volterra memory、有限 piecewise-constant control、ならびに多くの定理で全単調 readout class という強い仮定に依存する。実データでの calibration、discrete market rules、stochastic order flow、risk、latency、order-book constraints を直接検証してはいない。計算証明の一部は ancillary supplement に依存すると記載されるが、その内容は本資料に含まれない。著者自身が生成 AI による実質的な研究・証明・原稿作成支援を開示しており、広範な新規主張は特に慎重な数理レビューを要する。",
+        "importance": 4,
+        "recommended": false,
+        "reason": "市場 impact と optimal execution に直接関係する非常に野心的な分類であり、rate-inside power-law model の広い no-manipulation 主張を覆すなら重要である。ただし、既存の open problem を解決するとする多数の強い定理を単一の未査読 preprint が提示しており、補題・境界条件・引用・計算補助資料を独立に検証するまでは、実務モデルの変更根拠として推奨できない。",
+        "tags": [
+          "market impact",
+          "price manipulation",
+          "transient impact",
+          "propagator model",
+          "nonlinear impact",
+          "power-law kernel",
+          "square-root impact",
+          "complete positivity",
+          "optimal execution",
+          "Prony kernel"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper is a theoretical study that classifies no-price-manipulation conditions in nonlinear transient-impact models according to whether the nonlinearity is placed before or after the memory kernel. Its central claim is that, for rate-inside models, round-trip safety with a nonzero integrable Volterra kernel forces the impact law to be affine, whereas, for state-outside models, safety for all monotone readouts is equivalent to complete positivity of the kernel.",
+          "mainResult": "According to the paper's theorems, in a rate-inside model with power-law memory $G(t)=t^{-\\gamma}$ and $0<\\gamma<1$, the law $f(x)=\\operatorname{sgn}(x)|x|^{\\delta}$ is manipulation-free only when $\\delta=1$; thus $\\delta\\ne1$, including square-root impact, admits manipulation through a finite piecewise-constant block strategy. Conversely, applying the same nonlinear readout after the memory state in a state-outside model is claimed to be safe for monotone readouts because the power-law kernel is completely positive.",
+          "practicalApplication": "For execution-model design and validation, the paper suggests that a propagator specification applying concave instantaneous impact directly to trading rate should not be adopted on the basis of a no-manipulation condition alone. In practice, it may motivate an architecture that first forms an impact state through a resilience kernel and then applies a concave readout, or explicitly introduces frictions such as spreads and temporary costs. Its conditions for Prony kernels, time-varying resilience, and matrix memory may also provide candidate diagnostics for numerical models.",
+          "methodology": "The analysis defines admissible controls as round trips with finitely many constant blocks. On the rate-inside side, it constructs negative-cost strategies from a zero-volume chattering pump and thin baseline trades. On the state-outside side, it derives necessity and sufficiency of complete positivity using Volterra resolvents, complementary kernels, and a storage-dissipation identity based on Bregman divergences. It further compares round-trip and all-input safety using remote compensating blocks, and presents inverse-kernel residue conditions and finite cut linear programs as unsafe certificates for Prony systems.",
+          "limitations": "This is a single-author arXiv v1 preprint. Peer review, independent replication, and consistency of its citations and claimed extensions of prior results cannot be verified from the supplied material alone. Its conclusions depend on frictionless impact cost, causal Volterra memory, finite piecewise-constant controls, and, in many results, the strong quantifier over all monotone readouts. It does not directly test empirical calibration, discrete market rules, stochastic order flow, risk, latency, or order-book constraints. Some computational certificates are stated to depend on an ancillary supplement that is not included here. The author also discloses substantive generative-AI assistance in research, proof development, computation, and drafting; the broad new claims therefore require especially careful independent mathematical review.",
+          "reason": "The work is highly ambitious and directly relevant to market impact and optimal execution; it would be important if its broad no-manipulation classification, especially for rate-inside power-law models, is correct. However, it is a single unreviewed preprint making many strong claims about previously open problems. Its lemmas, boundary cases, citations, and computational supplement should be independently verified before it is used as a basis for changing practical models.",
+          "tags": [
+            "market impact",
+            "price manipulation",
+            "transient impact",
+            "propagator model",
+            "nonlinear impact",
+            "power-law kernel",
+            "square-root impact",
+            "complete positivity",
+            "optimal execution",
+            "Prony kernel"
+          ]
+        }
+      }
+    },
+    "2609.02580": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本研究は、LLMエージェントを参加者とするdouble auctionで、市場の均衡収束、資源配分効率、取引判断の異質性を評価する。人間参加者を用いた既存の経済実験をLLMに置き換えて比較している。",
+        "mainResult": "LLMエージェントの市場では、人間参加者の市場と比べて均衡への収束が遅い、または生じず、資源配分の効率性が低かった。モデル系列や市場での役割によって取引行動にも大きな異質性があり、取引を実行する判断は、価格を段階的に調整し続ける判断から、緊急性を重視する判断への変化と関連していた。",
+        "practicalApplication": "電子取引市場にLLMを導入する際の市場設計、agent compatibility、取引エージェントの評価に利用できる可能性がある。公開されるtesting frameworkは、異なるモデルや市場ルールの比較評価に役立つ可能性がある。ただし、実運用の取引戦略や規制判断へ直接適用できる証拠ではない。",
+        "methodology": "人間参加者を用いた既存の経済実験を再現し、LLMエージェントをdouble auctionに参加させて、均衡への収束と配分効率を評価した。さらに、個々の取引判断をモデル系列と市場上の役割別に分析し、エージェントのChain-of-Thought（CoT）トレースをlexical analysisした。",
+        "limitations": "提示されたabstractだけでは、使用したLLM、実験規模、プロンプト、オークションルール、統計的検定、比較対象となる人間実験の再現性が不明である。したがって、結果のモデル一般性、プロンプトや設定への頑健性、実際の金融市場への外的妥当性は判断できない。また、CoTトレースの語彙的特徴は、内部の意思決定過程を直接示すとは限らない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "double auctionにおけるLLMエージェントの収束性と配分効率を扱っており、market microstructureおよび電子取引エージェントの評価に直接関連する。現時点ではabstract段階で実験詳細と金融市場への妥当性が不明なため、重要度は中程度とする。",
+        "tags": [
+          "double auction",
+          "market microstructure",
+          "LLM agents",
+          "market efficiency",
+          "equilibrium convergence",
+          "algorithmic trading",
+          "agent evaluation"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study evaluates equilibrium convergence, allocative efficiency, and trading-decision heterogeneity in a double auction populated by LLM agents. It replaces human participants in established economic experiments with LLMs for comparison.",
+          "mainResult": "Markets populated by LLM agents converged more slowly or failed to converge to equilibrium relative to markets with human participants, resulting in less efficient resource allocations. Trading behavior also varied substantially across model families and market roles, and the decision to execute a trade was associated with a shift from incremental price adjustment toward urgency-oriented reasoning.",
+          "practicalApplication": "The findings may support market design, agent compatibility assessment, and evaluation of LLM-based trading agents before deployment in electronic markets. The publicly released testing framework may help compare different models and market rules. However, the abstract does not provide evidence sufficient for direct use in live trading strategies or regulatory decisions.",
+          "methodology": "The authors replicated established economic experiments by placing LLM agents in a double auction and evaluating convergence toward equilibrium and allocation efficiency. They also analyzed individual trading decisions across model families and market roles, and performed lexical analysis of the agents' Chain-of-Thought (CoT) traces.",
+          "limitations": "The abstract does not specify the LLMs used, sample sizes, prompts, auction rules, statistical tests, or the reproducibility of the human-experiment comparison. Therefore, generality across models, robustness to prompts and experimental settings, and external validity for real financial markets cannot be assessed. Lexical features of CoT traces also do not necessarily reveal the agents' underlying decision processes.",
+          "reason": "The paper is directly relevant to market microstructure and the evaluation of electronic-trading agents because it studies convergence and allocation efficiency in a double auction with LLM participants. Since the abstract omits important experimental details and evidence for financial-market validity, its importance is rated as moderate.",
+          "tags": [
+            "double auction",
+            "market microstructure",
+            "LLM agents",
+            "market efficiency",
+            "equilibrium convergence",
+            "algorithmic trading",
+            "agent evaluation"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "LLMエージェントを連続ダブルオークションに参加させ、Smith型の人間実験と比較した研究である。3モデル群の10反復では、いずれも競争均衡価格$2.00$・均衡数量$6$への完全収束を示さず、人間ベンチマークより価格分散が大きく、配分効率も完全には達しなかった。",
+        "mainResult": "GPT Smallのみ価格分散がラウンドを通じて$27.6$から$11.7$へ低下し、効率が$0.79$から$0.91$へ上昇したが、最終ラウンドでも人間ベンチマークの分散$3.5$を大きく上回った。GPT Largeはスプレッドをほぼゼロまで待つ小刻みな改善に偏り、平均取引数は$2.2$から$3.8$、効率は$0.36$から$0.67$にとどまった。著者らは、LLMの利幅追求と取引完了のトレードオフが市場全体の収束・効率を左右すると報告する。",
+        "practicalApplication": "電子市場でLLMを自律的な発注主体として導入・評価する際、単体の収益性や会話能力だけでなく、約定率、スプレッド横断行動、価格分散、取引量、実現余剰を人間および理論ベンチマークと比較する検証枠組みとして有用である。また、高価格や$0.01$刻みのアンダーカットを直ちに協調行動と解釈せず、非協調LLM市場自体の収束性を先に確認すべきことを示唆する。",
+        "methodology": "買い手・売り手各11名に$0.75$から$3.25$の私的予約価格を$0.25$刻みで割り当て、競争均衡を$(p^\\star,q^\\star)=(2.00,6)$とする対称的CDAを設計した。各実験は5ラウンド、各ラウンド最大$300$回のランダム選択機会で構成され、改善注文のみを板に残し、クロス注文は既存最良気配で即時約定する。GPT Large、GPT Small、Gemini Largeをデフォルト設定・temperature $1$で各10シード反復し、取引数、平均取引価格、均衡価格周りの価格分散$\\alpha=100\\cdot\\sigma_0/P_0$、配分効率を集計した。加えて、Gemini Largeの公開されたreasoning traceについて、クロス注文と小刻み改善の語彙を加重log-odds比で比較した。",
+        "limitations": "結果は特定時点の3モデル、各条件10反復、5ラウンド、対称的な単一財・固定的予約価格・最大$300$反復という簡略化された環境に限られる。モデル設定はデフォルトかつtemperature $1$であり、プロンプト、API挙動、モデル更新、反復上限、情報設計に感応的でありうる。人間比較はSmith (1962) の集計ベンチマークで、同一実装下の同時対照実験ではない。モデル規模の因果効果は識別しておらず、GPT Smallの優位を一般化できない。reasoning trace分析はGemini Largeのみで、語彙と行動の関連を示すにとどまり、内部意思決定の因果的証拠ではない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "市場マイクロストラクチャの基本制度であるCDAについて、LLM注文行動を価格収束、取引量、余剰効率という明確な指標で人間実験と比較する点は、AIエージェントの電子執行・市場設計上の検証に直接関連する。一方、短い実験地平、限定的なモデル数・反復数、歴史的な人間ベンチマークとの比較のため、実運用市場への外挿や一般的なLLM能力比較の根拠としては限定的である。",
+        "tags": [
+          "LLM agents",
+          "continuous double auction",
+          "market microstructure",
+          "price discovery",
+          "allocative efficiency",
+          "order book",
+          "spread crossing",
+          "experimental economics",
+          "market design",
+          "electronic trading"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study places LLM agents in continuous double auctions and compares them with Smith-style human experiments. Across 10 repetitions for three model populations, none achieved full convergence to the competitive equilibrium price of $2.00$ and quantity of $6$; price dispersion exceeded the human benchmark and allocative efficiency never became complete.",
+          "mainResult": "Only GPT Small showed a round-by-round decline in price dispersion, from $27.6$ to $11.7$, and an increase in efficiency from $0.79$ to $0.91$, but its final-round dispersion still substantially exceeded the human benchmark of $3.5$. GPT Large favored small quote improvements and generally waited for the spread to approach zero; its mean trade count was only $2.2$ to $3.8$ and efficiency ranged from $0.36$ to $0.67$. The authors report that an LLM-specific trade-off between rent extraction and transaction completion materially shapes aggregate convergence and efficiency.",
+          "practicalApplication": "For evaluating or deploying LLMs as autonomous order-submission agents in electronic markets, the framework is useful for testing fill rates, spread-crossing behavior, price dispersion, volume, and realized surplus against human and theoretical benchmarks, rather than assessing only standalone profitability or language ability. It also suggests that supracompetitive prices or $0.01$ undercutting should not automatically be treated as collusion before establishing whether a non-cooperative LLM market itself converges.",
+          "methodology": "The authors construct a symmetric CDA with 11 buyers and 11 sellers, assigning private reservation prices from $0.75$ to $3.25$ in $0.25$ increments and implying $(p^\\star,q^\\star)=(2.00,6)$. Each experiment has five rounds and up to $300$ randomly allocated action opportunities per round. Only quote-improving orders rest in the book, and crossing orders execute immediately at the standing best quote. GPT Large, GPT Small, and Gemini Large are run under default settings with temperature $1$, with 10 seed-based repetitions per condition. The analysis aggregates trade count, mean transaction price, equilibrium-centered price dispersion $\\alpha=100\\cdot\\sigma_0/P_0$, and allocative efficiency. It additionally compares Gemini Large's exposed reasoning traces for spread-crossing and incremental-improvement actions using weighted log-odds lexical analysis.",
+          "limitations": "The evidence is limited to three point-in-time models, 10 repetitions per condition, five rounds, and a simplified symmetric single-good environment with fixed reservation values and a $300$-iteration cap. Results may depend on prompts, API behavior, future model changes, default settings including temperature $1$, the iteration limit, and the information design. The human comparison uses aggregate results from Smith (1962), rather than a contemporaneous human control under the identical implementation. The design does not identify a causal effect of model scale, so GPT Small's relative advantage cannot be generalized. The reasoning-trace analysis covers only Gemini Large and establishes lexical associations, not causal evidence about internal decision processes.",
+          "reason": "The paper is directly relevant to validation of AI agents for electronic execution and market design because it evaluates LLM order behavior in a foundational CDA using clear measures of price convergence, volume, and surplus efficiency against a human experimental benchmark. However, its short horizon, small set of models and repetitions, and historical rather than matched human benchmark substantially limit extrapolation to live markets or broad conclusions about LLM capability.",
+          "tags": [
+            "LLM agents",
+            "continuous double auction",
+            "market microstructure",
+            "price discovery",
+            "allocative efficiency",
+            "order book",
+            "spread crossing",
+            "experimental economics",
+            "market design",
+            "electronic trading"
+          ]
+        }
+      }
+    },
+    "2609.02797": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、言語モデルが生成する確率予測の整合性を、de Finetti の Dutch-book 定理に基づいて評価する。株式リターンから生成した事象について予測を elicitation し、線形計画法でモデルに対する裁定利益の最大値を計算する。",
+        "mainResult": "言語モデルの予測には相当な incoherence が観察され、事象間の論理的関係が複雑になるほど不整合性が増加した。また、無関係な文脈情報によって不整合性が桁違いに増幅される場合があった。",
+        "practicalApplication": "金融予測や意思決定支援に言語モデルを利用する際、確率予測の整合性を outcome labels なしで診断する評価手法として応用できる可能性がある。ただし、電子執行、market microstructure、金利モデル、イールドカーブ分析への直接的な手法や実証結果は示されていない。",
+        "methodology": "言語モデルから複数事象の確率予測を取得し、de Finetti に基づく Dutch-book 構成を用いて、予測に対して裁定者が保証できる最大利益を線形計画法で求める。評価対象の事象は株式リターンデータから生成され、結果ラベルを必要としない。",
+        "limitations": "提示された abstract だけでは、使用した言語モデル、プロンプト、株式データ、事象生成手順、サンプル数、統計的有意性、比較対象となる予測手法の詳細が不明である。また、Dutch-book 上の不整合性が実際の予測精度や取引収益性にどう結び付くかは示されていない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "確率予測の整合性という点で金融に関連する要素はあるが、主題は言語モデルの評価であり、本サイトの主要領域である電子取引、market microstructure、interest-rate models、yield curves、rates に materially relevant ではない。",
+        "tags": [
+          "language models",
+          "probabilistic forecasts",
+          "Dutch books",
+          "forecast coherence",
+          "linear programming",
+          "stock returns"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper evaluates the coherence of probabilistic forecasts generated by language models using a procedure based on de Finetti’s Dutch-book theorem. It elicits forecasts for events generated from stock-return data and uses linear programming to calculate the maximum arbitrage profit against the model.",
+          "mainResult": "The authors report substantial incoherence in language-model forecasts. Incoherence increases when events have richer logical relationships, and irrelevant contextual details can increase it by an order of magnitude.",
+          "practicalApplication": "The method could potentially diagnose the coherence of probabilistic forecasts used in financial prediction or decision support without requiring outcome labels. However, the abstract provides no direct method or empirical result concerning electronic execution, market microstructure, interest-rate models, yield-curve analysis, or rates.",
+          "methodology": "The authors elicit probabilities for multiple events from language models and use a de Finetti-based Dutch-book construction to compute the maximum profit that an arbitrageur can guarantee against those forecasts via linear programming. The events are generated from stock-return data, and the procedure does not require observed outcome labels.",
+          "limitations": "The abstract does not specify the language models, prompts, stock-return data, event-generation procedure, sample sizes, statistical significance, or benchmark forecasting methods. It also does not establish how Dutch-book incoherence translates into actual forecast accuracy or trading profitability.",
+          "reason": "Although the study has a financial component through stock-return-based events, its main subject is language-model evaluation rather than electronic trading, market microstructure, interest-rate models, yield curves, or rates, so it is not materially within the site’s scope.",
+          "tags": [
+            "language models",
+            "probabilistic forecasts",
+            "Dutch books",
+            "forecast coherence",
+            "linear programming",
+            "stock returns"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-09-03",
+  "generatedAt": "2026-09-05T15:03:39Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "Recovered carried arXiv batch 2026-09-03 from the bounded past-week listing with 2 relevant paper(s).",
+  "expectedBatchDate": "2026-09-03",
+  "observedBatchDate": "2026-09-03",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2609.02447v1",
+        "title": "Price manipulation in nonlinear transient impact models: rigidity before memory and complete positivity after memory",
+        "authors": [
+          "Minhyeok Lee"
+        ],
+        "submittedDate": "2026-09-02",
+        "updatedDate": "2026-09-02",
+        "categories": [
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本稿は、非線形 transient impact model における price manipulation の不在条件を、非線形性を memory kernel の前に置くか後に置くかで分類する理論研究である。主張の中心は、rate-inside 型では非ゼロの可積分 Volterra kernel に対する round-trip 安全性が impact law の affine 性を強制し、state-outside 型では全単調 readout に対する安全性が kernel の complete positivity と同値になる、という点である。",
+        "mainResult": "著者の定理によれば、power-law memory $G(t)=t^{-\\gamma}$、$0<\\gamma<1$ の rate-inside model では、$f(x)=\\operatorname{sgn}(x)|x|^{\\delta}$ が manipulation-free となるのは $\\delta=1$ のみであり、square-root impact を含む $\\delta\\ne1$ は有限個の piecewise-constant block による manipulation を許す。他方、同じ非線形 readout を memory state の後に適用する state-outside model では、power-law kernel が completely positive であるため、単調 readout に対して安全だと主張する。",
+        "practicalApplication": "execution model の設計・検証では、concave instantaneous impact を rate に直接適用する propagator specification を no-manipulation 条件だけで採用すべきでないことを示唆する。実務上は、impact state を resilience kernel で形成してから concave readout を適用する architecture、または spread と temporary cost を含む friction を明示的に導入する際の理論的な判定枠組みとなり得る。Prony kernel、time-varying resilience、matrix memory に対する条件は、数値実装可能な model diagnostics の候補でもある。",
+        "methodology": "有限個の定数 block からなる round trip を admissible control とし、rate-inside 側では zero-volume chattering pump と thin baseline trade を用いて非線形性から負コスト戦略を構成する。state-outside 側では Volterra resolvent、complementary kernel、Bregman divergence を用いた storage-dissipation identity により complete positivity の必要十分性を導く。さらに remote compensating block で round-trip safety と all-input safety を比較し、Prony 系では inverse-kernel の residue 条件および有限 cut linear program による unsafe certificate を提示する。",
+        "limitations": "これは単一著者による arXiv v1 preprint であり、掲載誌での査読、独立再現、引用文献や既存結果との整合性は本資料だけでは確認できない。結論は frictionless impact cost、causal Volterra memory、有限 piecewise-constant control、ならびに多くの定理で全単調 readout class という強い仮定に依存する。実データでの calibration、discrete market rules、stochastic order flow、risk、latency、order-book constraints を直接検証してはいない。計算証明の一部は ancillary supplement に依存すると記載されるが、その内容は本資料に含まれない。著者自身が生成 AI による実質的な研究・証明・原稿作成支援を開示しており、広範な新規主張は特に慎重な数理レビューを要する。",
+        "importance": 4,
+        "recommended": false,
+        "reason": "市場 impact と optimal execution に直接関係する非常に野心的な分類であり、rate-inside power-law model の広い no-manipulation 主張を覆すなら重要である。ただし、既存の open problem を解決するとする多数の強い定理を単一の未査読 preprint が提示しており、補題・境界条件・引用・計算補助資料を独立に検証するまでは、実務モデルの変更根拠として推奨できない。",
+        "tags": [
+          "market impact",
+          "price manipulation",
+          "transient impact",
+          "propagator model",
+          "nonlinear impact",
+          "power-law kernel",
+          "square-root impact",
+          "complete positivity",
+          "optimal execution",
+          "Prony kernel"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper is a theoretical study that classifies no-price-manipulation conditions in nonlinear transient-impact models according to whether the nonlinearity is placed before or after the memory kernel. Its central claim is that, for rate-inside models, round-trip safety with a nonzero integrable Volterra kernel forces the impact law to be affine, whereas, for state-outside models, safety for all monotone readouts is equivalent to complete positivity of the kernel.",
+          "mainResult": "According to the paper's theorems, in a rate-inside model with power-law memory $G(t)=t^{-\\gamma}$ and $0<\\gamma<1$, the law $f(x)=\\operatorname{sgn}(x)|x|^{\\delta}$ is manipulation-free only when $\\delta=1$; thus $\\delta\\ne1$, including square-root impact, admits manipulation through a finite piecewise-constant block strategy. Conversely, applying the same nonlinear readout after the memory state in a state-outside model is claimed to be safe for monotone readouts because the power-law kernel is completely positive.",
+          "practicalApplication": "For execution-model design and validation, the paper suggests that a propagator specification applying concave instantaneous impact directly to trading rate should not be adopted on the basis of a no-manipulation condition alone. In practice, it may motivate an architecture that first forms an impact state through a resilience kernel and then applies a concave readout, or explicitly introduces frictions such as spreads and temporary costs. Its conditions for Prony kernels, time-varying resilience, and matrix memory may also provide candidate diagnostics for numerical models.",
+          "methodology": "The analysis defines admissible controls as round trips with finitely many constant blocks. On the rate-inside side, it constructs negative-cost strategies from a zero-volume chattering pump and thin baseline trades. On the state-outside side, it derives necessity and sufficiency of complete positivity using Volterra resolvents, complementary kernels, and a storage-dissipation identity based on Bregman divergences. It further compares round-trip and all-input safety using remote compensating blocks, and presents inverse-kernel residue conditions and finite cut linear programs as unsafe certificates for Prony systems.",
+          "limitations": "This is a single-author arXiv v1 preprint. Peer review, independent replication, and consistency of its citations and claimed extensions of prior results cannot be verified from the supplied material alone. Its conclusions depend on frictionless impact cost, causal Volterra memory, finite piecewise-constant controls, and, in many results, the strong quantifier over all monotone readouts. It does not directly test empirical calibration, discrete market rules, stochastic order flow, risk, latency, or order-book constraints. Some computational certificates are stated to depend on an ancillary supplement that is not included here. The author also discloses substantive generative-AI assistance in research, proof development, computation, and drafting; the broad new claims therefore require especially careful independent mathematical review.",
+          "reason": "The work is highly ambitious and directly relevant to market impact and optimal execution; it would be important if its broad no-manipulation classification, especially for rate-inside power-law models, is correct. However, it is a single unreviewed preprint making many strong claims about previously open problems. Its lemmas, boundary cases, citations, and computational supplement should be independently verified before it is used as a basis for changing practical models.",
+          "tags": [
+            "market impact",
+            "price manipulation",
+            "transient impact",
+            "propagator model",
+            "nonlinear impact",
+            "power-law kernel",
+            "square-root impact",
+            "complete positivity",
+            "optimal execution",
+            "Prony kernel"
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.02580v1",
+        "title": "Competitive Market Behavior of LLMs",
+        "authors": [
+          "Pawel Struski",
+          "Jakub Swistak",
+          "Inez Okulska",
+          "Przemyslaw Biecek"
+        ],
+        "submittedDate": "2026-09-02",
+        "updatedDate": "2026-09-02",
+        "categories": [
+          "cs.AI",
+          "cs.MA",
+          "econ.GN"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "LLMエージェントを連続ダブルオークションに参加させ、Smith型の人間実験と比較した研究である。3モデル群の10反復では、いずれも競争均衡価格$2.00$・均衡数量$6$への完全収束を示さず、人間ベンチマークより価格分散が大きく、配分効率も完全には達しなかった。",
+        "mainResult": "GPT Smallのみ価格分散がラウンドを通じて$27.6$から$11.7$へ低下し、効率が$0.79$から$0.91$へ上昇したが、最終ラウンドでも人間ベンチマークの分散$3.5$を大きく上回った。GPT Largeはスプレッドをほぼゼロまで待つ小刻みな改善に偏り、平均取引数は$2.2$から$3.8$、効率は$0.36$から$0.67$にとどまった。著者らは、LLMの利幅追求と取引完了のトレードオフが市場全体の収束・効率を左右すると報告する。",
+        "practicalApplication": "電子市場でLLMを自律的な発注主体として導入・評価する際、単体の収益性や会話能力だけでなく、約定率、スプレッド横断行動、価格分散、取引量、実現余剰を人間および理論ベンチマークと比較する検証枠組みとして有用である。また、高価格や$0.01$刻みのアンダーカットを直ちに協調行動と解釈せず、非協調LLM市場自体の収束性を先に確認すべきことを示唆する。",
+        "methodology": "買い手・売り手各11名に$0.75$から$3.25$の私的予約価格を$0.25$刻みで割り当て、競争均衡を$(p^\\star,q^\\star)=(2.00,6)$とする対称的CDAを設計した。各実験は5ラウンド、各ラウンド最大$300$回のランダム選択機会で構成され、改善注文のみを板に残し、クロス注文は既存最良気配で即時約定する。GPT Large、GPT Small、Gemini Largeをデフォルト設定・temperature $1$で各10シード反復し、取引数、平均取引価格、均衡価格周りの価格分散$\\alpha=100\\cdot\\sigma_0/P_0$、配分効率を集計した。加えて、Gemini Largeの公開されたreasoning traceについて、クロス注文と小刻み改善の語彙を加重log-odds比で比較した。",
+        "limitations": "結果は特定時点の3モデル、各条件10反復、5ラウンド、対称的な単一財・固定的予約価格・最大$300$反復という簡略化された環境に限られる。モデル設定はデフォルトかつtemperature $1$であり、プロンプト、API挙動、モデル更新、反復上限、情報設計に感応的でありうる。人間比較はSmith (1962) の集計ベンチマークで、同一実装下の同時対照実験ではない。モデル規模の因果効果は識別しておらず、GPT Smallの優位を一般化できない。reasoning trace分析はGemini Largeのみで、語彙と行動の関連を示すにとどまり、内部意思決定の因果的証拠ではない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "市場マイクロストラクチャの基本制度であるCDAについて、LLM注文行動を価格収束、取引量、余剰効率という明確な指標で人間実験と比較する点は、AIエージェントの電子執行・市場設計上の検証に直接関連する。一方、短い実験地平、限定的なモデル数・反復数、歴史的な人間ベンチマークとの比較のため、実運用市場への外挿や一般的なLLM能力比較の根拠としては限定的である。",
+        "tags": [
+          "LLM agents",
+          "continuous double auction",
+          "market microstructure",
+          "price discovery",
+          "allocative efficiency",
+          "order book",
+          "spread crossing",
+          "experimental economics",
+          "market design",
+          "electronic trading"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study places LLM agents in continuous double auctions and compares them with Smith-style human experiments. Across 10 repetitions for three model populations, none achieved full convergence to the competitive equilibrium price of $2.00$ and quantity of $6$; price dispersion exceeded the human benchmark and allocative efficiency never became complete.",
+          "mainResult": "Only GPT Small showed a round-by-round decline in price dispersion, from $27.6$ to $11.7$, and an increase in efficiency from $0.79$ to $0.91$, but its final-round dispersion still substantially exceeded the human benchmark of $3.5$. GPT Large favored small quote improvements and generally waited for the spread to approach zero; its mean trade count was only $2.2$ to $3.8$ and efficiency ranged from $0.36$ to $0.67$. The authors report that an LLM-specific trade-off between rent extraction and transaction completion materially shapes aggregate convergence and efficiency.",
+          "practicalApplication": "For evaluating or deploying LLMs as autonomous order-submission agents in electronic markets, the framework is useful for testing fill rates, spread-crossing behavior, price dispersion, volume, and realized surplus against human and theoretical benchmarks, rather than assessing only standalone profitability or language ability. It also suggests that supracompetitive prices or $0.01$ undercutting should not automatically be treated as collusion before establishing whether a non-cooperative LLM market itself converges.",
+          "methodology": "The authors construct a symmetric CDA with 11 buyers and 11 sellers, assigning private reservation prices from $0.75$ to $3.25$ in $0.25$ increments and implying $(p^\\star,q^\\star)=(2.00,6)$. Each experiment has five rounds and up to $300$ randomly allocated action opportunities per round. Only quote-improving orders rest in the book, and crossing orders execute immediately at the standing best quote. GPT Large, GPT Small, and Gemini Large are run under default settings with temperature $1$, with 10 seed-based repetitions per condition. The analysis aggregates trade count, mean transaction price, equilibrium-centered price dispersion $\\alpha=100\\cdot\\sigma_0/P_0$, and allocative efficiency. It additionally compares Gemini Large's exposed reasoning traces for spread-crossing and incremental-improvement actions using weighted log-odds lexical analysis.",
+          "limitations": "The evidence is limited to three point-in-time models, 10 repetitions per condition, five rounds, and a simplified symmetric single-good environment with fixed reservation values and a $300$-iteration cap. Results may depend on prompts, API behavior, future model changes, default settings including temperature $1$, the iteration limit, and the information design. The human comparison uses aggregate results from Smith (1962), rather than a contemporaneous human control under the identical implementation. The design does not identify a causal effect of model scale, so GPT Small's relative advantage cannot be generalized. The reasoning-trace analysis covers only Gemini Large and establishes lexical associations, not causal evidence about internal decision processes.",
+          "reason": "The paper is directly relevant to validation of AI agents for electronic execution and market design because it evaluates LLM order behavior in a foundational CDA using clear measures of price convergence, volume, and surplus efficiency against a human experimental benchmark. However, its short horizon, small set of models and repetitions, and historical rather than matched human benchmark substantially limit extrapolation to live markets or broad conclusions about LLM capability.",
+          "tags": [
+            "LLM agents",
+            "continuous double auction",
+            "market microstructure",
+            "price discovery",
+            "allocative efficiency",
+            "order book",
+            "spread crossing",
+            "experimental economics",
+            "market design",
+            "electronic trading"
+          ]
+        }
+      }
+    }
+  ]
+}

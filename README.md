@@ -287,6 +287,13 @@ application, methodology, limitations, importance 1–5, recommendation, reason,
 and tags in Japanese and English. Paper identity, authors, dates, categories,
 and links always come from validated arXiv metadata, not model output. Responses
 are requested with storage disabled and validated locally again before use.
+If the Responses API explicitly rejects a PDF URL download, the adapter can
+fetch the same canonical arXiv PDF (maximum 20 MiB, PDF signature checked) and
+send it inline using the documented `file_data` input. It does not save PDF
+bytes to the repository, change models, or replace full-text analysis with an
+abstract. Authentication, rate-limit, generic server errors, and ambiguous
+timeouts do not trigger this extra request. Logs expose only HTTP status and a
+fixed error category, never raw API error bodies, keys, or file contents.
 The API boundary follows OpenAI's [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs)
 and [file inputs](https://developers.openai.com/api/docs/guides/file-inputs)
 contracts.

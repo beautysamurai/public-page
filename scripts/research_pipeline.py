@@ -14,6 +14,7 @@ are never allowed to redefine the task or output schema.
 from __future__ import annotations
 
 import argparse
+import base64
 import calendar
 import hashlib
 import html
@@ -1116,6 +1117,35 @@ def _synthesis_prompt_bytes(
     )
 
 
+def _file_url_download_error(exc: Exception) -> bool:
+    """Inspect SDK errors without ever emitting their potentially private body."""
+    if getattr(exc, "status_code", None) not in {400, 422}:
+        return False
+    body = getattr(exc, "body", None)
+    if not isinstance(body, Mapping):
+        return False
+    error = body.get("error", body)
+    if not isinstance(error, Mapping):
+        return False
+    message = str(error.get("message", "")).lower()
+    return ("download" in message or "fetch" in message) and (
+        "file" in message or "url" in message or "https://arxiv.org/pdf/" in message
+    )
+
+
+def fetch_pdf_for_inline_input(arxiv_id: str, *, timeout: float) -> bytes:
+    url = f"https://arxiv.org/pdf/{arxiv_id}"
+    digest.validate_arxiv_url(url, "pdf", arxiv_id)
+    request = urllib.request.Request(url, headers={"Accept": "application/pdf", "User-Agent": USER_AGENT})
+    limit = 20 * 1024 * 1024
+    with urllib.request.urlopen(request, timeout=timeout) as response:
+        digest.validate_arxiv_url(response.geturl(), "pdf", arxiv_id)
+        body = response.read(limit + 1)
+    if not body.startswith(b"%PDF-") or len(body) > limit:
+        raise UpdaterOfflineError("PDF fallback is invalid or exceeds the safe size limit")
+    return body
+
+
 class ResponsesAnalyzer:
     """Thin Responses API adapter with no import-time OpenAI dependency."""
 
@@ -1195,6 +1225,10 @@ class ResponsesAnalyzer:
         except (StructuredOutputError, KeyboardInterrupt, SystemExit):
             raise
         except Exception as exc:
+            status = getattr(exc, "status_code", None)
+            safe_status = status if isinstance(status, int) and 400 <= status <= 599 else "unavailable"
+            category = "file_url_download" if _file_url_download_error(exc) else "request_failed"
+            print(f"Responses API failure: status={safe_status}; category={category}", file=sys.stderr)
             raise UpdaterOfflineError("Responses API request failed") from exc
         try:
             return json.loads(self._response_text(response))
@@ -1228,21 +1262,29 @@ class ResponsesAnalyzer:
         prompt = _PDF_PROMPT_PREFIX + json.dumps(
             metadata_from_entry(candidate.entry), ensure_ascii=False
         )
-        value = self._request(
-            model=self.config.full_model,
-            reasoning_effort=self.config.full_reasoning_effort,
-            name="full_paper_research_analysis",
-            schema=ANALYSIS_SCHEMA,
-            input_content=[
-                {
-                    "type": "input_file",
-                    "file_url": f"https://arxiv.org/pdf/{arxiv_id}",
-                    "detail": self.config.pdf_detail,
-                },
-                {"type": "input_text", "text": prompt},
-            ],
-            max_output_tokens=PDF_MAX_OUTPUT_TOKENS,
-        )
+        file_input = {"type": "input_file", "file_url": f"https://arxiv.org/pdf/{arxiv_id}", "detail": self.config.pdf_detail}
+        def request_file(payload: Mapping[str, Any]) -> Any:
+            return self._request(
+                model=self.config.full_model,
+                reasoning_effort=self.config.full_reasoning_effort,
+                name="full_paper_research_analysis",
+                schema=ANALYSIS_SCHEMA,
+                input_content=[payload, {"type": "input_text", "text": prompt}],
+                max_output_tokens=PDF_MAX_OUTPUT_TOKENS,
+            )
+        try:
+            value = request_file(file_input)
+        except UpdaterOfflineError as exc:
+            if not _file_url_download_error(exc.__cause__):
+                raise
+            # Only a rejected URL download takes this path, never an ambiguous
+            # timeout or failed analysis. Preserve model, schema and full PDF.
+            body = fetch_pdf_for_inline_input(arxiv_id, timeout=self.config.timeout)
+            value = request_file({
+                "type": "input_file", "filename": "paper.pdf",
+                "file_data": "data:application/pdf;base64," + base64.b64encode(body).decode("ascii"),
+                "detail": self.config.pdf_detail,
+            })
         return validate_analysis(value)
 
     def synthesize(

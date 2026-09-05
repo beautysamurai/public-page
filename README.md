@@ -289,8 +289,10 @@ and links always come from validated arXiv metadata, not model output. Responses
 are requested with storage disabled and validated locally again before use.
 If the Responses API explicitly rejects a PDF URL download, the adapter can
 fetch the same canonical arXiv PDF (maximum 20 MiB, PDF signature checked) and
-send it inline using the documented `file_data` input. It does not save PDF
-bytes to the repository, change models, or replace full-text analysis with an
+send it inline using the documented `file_data` input. A transport failure can
+try the same version at the official `export.arxiv.org` host, with the same
+strict URL/version validation. It does not save PDF bytes to the repository,
+change models, or replace full-text analysis with an
 abstract. Authentication, rate-limit, generic server errors, and ambiguous
 timeouts do not trigger this extra request. Logs expose only HTTP status and a
 fixed error category, never raw API error bodies, keys, or file contents.

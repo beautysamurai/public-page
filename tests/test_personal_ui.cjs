@@ -4,7 +4,7 @@ const fs = require("node:fs"), path = require("node:path");
 const { JSDOM } = require("jsdom");
 const { fakeClient, tick, deferred } = require("./helpers/personal_fake.cjs");
 const site = path.join(__dirname, "../site");
-async function setup(configured, restore = false, query = "?archive-view=papers") {
+async function setup(configured, restore = false, query = "?archive-view=papers", reportGate = null) {
   const dom = new JSDOM(fs.readFileSync(path.join(site, "index.html"), "utf8"), {
     url: "https://example.test/public-page/" + query, runScripts: "outside-only"
   });
@@ -15,6 +15,7 @@ async function setup(configured, restore = false, query = "?archive-view=papers"
   w.fetch = async url => {
     const relative = new URL(url).pathname.replace(/^\/public-page\//, "");
     if (!relative.startsWith("data/")) throw new Error("Unexpected request");
+    if (relative === "data/latest.json" && reportGate) await reportGate;
     return { ok: true, json: async () => JSON.parse(fs.readFileSync(path.join(site, relative), "utf8")) };
   };
   w.RatesCreateSupabaseClient = () => { creates++; return client; };
@@ -167,6 +168,22 @@ test("explicit links open only the requested disclosure and current-issue naviga
       assert.equal(page.w.document.activeElement, page.id("paper-list"));
       assert.equal(page.id(id).open, false);
     } finally { page.dom.window.close(); }
+  }
+});
+
+test("late initial report loading cannot scroll away from explicitly opened top tools", async () => {
+  for (const target of ["research-filters", "personal-library"]) {
+    const gate = deferred(), page = await setup(true, false, "?archive-view=papers#archive", gate.promise);
+    try {
+      if (target === "research-filters") page.id("archive-edit-filters").click();
+      else page.w.document.querySelector("#archive-paper-list [data-bookmark-id]").click();
+      assert.equal(page.id(target).open, true);
+      assert.equal(page.w.location.hash, "#" + target);
+      const scrollCount = page.scrolls.length;
+      gate.resolve(); await tick(); await tick();
+      assert.equal(page.scrolls.length, scrollCount, "old #archive navigation must not be restored");
+      assert.equal(page.w.document.activeElement, page.id(target === "research-filters" ? "research-filters-summary" : "personal-email"));
+    } finally { gate.resolve(); page.dom.window.close(); }
   }
 });
 

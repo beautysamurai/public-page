@@ -1246,6 +1246,11 @@
   }
 
   function openResearchFilters() {
+    var url = new URL(window.location.href);
+    if (url.hash !== "#research-filters") {
+      url.hash = "research-filters";
+      window.history.pushState(null, "", url.href);
+    }
     elements.researchFilters.open = true;
     var summary = byId("research-filters-summary");
     summary.scrollIntoView({ block: "start", behavior: "smooth" });

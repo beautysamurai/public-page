@@ -26,6 +26,11 @@
     function ready() { return snapshot.phase === "ready" && !!snapshot.user; }
     function saved(id) { return snapshot.bookmarks.includes(lib.paperId(id)); }
     function openPanel() {
+      var url = new URL(window.location.href);
+      if (url.hash !== "#personal-library") {
+        url.hash = "personal-library";
+        window.history.pushState(null, "", url.href);
+      }
       panel.open = true;
       panel.scrollIntoView({ block: "start", behavior: "smooth" });
       var target = snapshot.user ? byId("personal-refresh") : config ? email : panel.querySelector("summary");

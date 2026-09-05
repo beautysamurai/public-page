@@ -26,6 +26,11 @@ on:
         description: "Optional recovery date (Friday for weekly, month-end for monthly)"
         required: false
         type: string
+      recover_pending:
+        description: "Daily only: recover one oldest pending past-week batch (manual opt-in)"
+        required: false
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -56,6 +61,7 @@ jobs:
           SCHEDULE_EXPRESSION: ${{ github.event.schedule || '' }}
           REQUESTED_MODE: ${{ inputs.run_mode || '' }}
           REQUESTED_PERIOD_END: ${{ inputs.period_end || '' }}
+          REQUESTED_RECOVERY: ${{ inputs.recover_pending && 'true' || 'false' }}
         shell: bash
         run: |
           set -euo pipefail
@@ -69,6 +75,9 @@ jobs:
           schedule = os.environ["SCHEDULE_EXPRESSION"]
           requested_mode = os.environ["REQUESTED_MODE"].strip()
           requested_period_end = os.environ["REQUESTED_PERIOD_END"].strip()
+          requested_recovery = os.environ.get("REQUESTED_RECOVERY", "false")
+          if requested_recovery not in {"true", "false"}:
+              raise SystemExit("invalid recovery flag")
 
           if event_name == "workflow_dispatch":
               mode = requested_mode or "daily"
@@ -83,6 +92,8 @@ jobs:
 
           if mode not in {"daily", "weekly", "monthly"}:
               raise SystemExit(f"unexpected review mode: {mode!r}")
+          if requested_recovery == "true" and (event_name != "workflow_dispatch" or mode != "daily"):
+              raise SystemExit("historical recovery requires an explicit manual daily run")
 
           today_jst = datetime.now(ZoneInfo("Asia/Tokyo")).date()
           period_end = ""
@@ -113,6 +124,7 @@ jobs:
           with open(os.environ["GITHUB_OUTPUT"], "a", encoding="utf-8") as output:
               output.write(f"mode={mode}\n")
               output.write(f"period_end={period_end}\n")
+              output.write(f"recover_pending={requested_recovery}\n")
           print(f"planned {mode} review" + (f" ending {period_end}" if period_end else ""))
           PY
       - name: Check out repository history
@@ -644,10 +656,15 @@ jobs:
         id: research
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          RECOVER_PENDING: ${{ steps.plan.outputs.recover_pending }}
         shell: bash
         run: |
           set -euo pipefail
           generated_at="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          recovery_args=()
+          if [[ "$RECOVER_PENDING" == "true" ]]; then
+            recovery_args+=(--recover-pending)
+          fi
           python scripts/research_pipeline.py \
             --config config/research.json \
             --env-file /dev/null \
@@ -656,6 +673,7 @@ jobs:
             --state research/state.json \
             --published-history content/chatgpt_scheduler_history.json \
             --output-dir research/daily \
+            "${recovery_args[@]}" \
             > "$RUNNER_TEMP/daily-report.json"
 
           daily_report_date="$(python -c 'import json,sys; print(json.load(open(sys.argv[1], encoding="utf-8"))["reportDate"])' "$RUNNER_TEMP/daily-report.json")"

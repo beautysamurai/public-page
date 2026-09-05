@@ -63,7 +63,17 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
         self.assertIn('echo "report_path=$report_path"', daily)
         self.assertIn('echo "publishable=$publishable"', daily)
         self.assertIn("--published-history content/chatgpt_scheduler_history.json", daily)
-        self.assertNotIn("--recover-pending", daily)
+        self.assertIn('recovery_args=()', daily)
+        self.assertIn('if [[ "$RECOVER_PENDING" == "true" ]]; then', daily)
+        self.assertIn('recovery_args+=(--recover-pending)', daily)
+        self.assertIn('"${recovery_args[@]}"', daily)
+
+    def test_historical_recovery_is_manual_daily_opt_in(self) -> None:
+        planner = self.step("Plan review mode")
+        self.assertIn('requested_recovery = os.environ.get("REQUESTED_RECOVERY", "false")', planner)
+        self.assertIn('event_name != "workflow_dispatch" or mode != "daily"', planner)
+        self.assertIn('historical recovery requires an explicit manual daily run', planner)
+        self.assertIn('default: false\n        type: boolean', self.workflow)
 
     def test_research_is_scanned_and_pushed_before_publication(self) -> None:
         expected_order = [

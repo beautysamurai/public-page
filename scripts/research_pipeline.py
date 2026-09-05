@@ -1136,12 +1136,24 @@ def _file_url_download_error(exc: Exception) -> bool:
 def fetch_pdf_for_inline_input(arxiv_id: str, *, timeout: float) -> bytes:
     url = f"https://arxiv.org/pdf/{arxiv_id}"
     digest.validate_arxiv_url(url, "pdf", arxiv_id)
-    request = urllib.request.Request(url, headers={"Accept": "application/pdf", "User-Agent": USER_AGENT})
     limit = 20 * 1024 * 1024
-    with urllib.request.urlopen(request, timeout=timeout) as response:
-        print(f"PDF fallback response: canonical_url={response.geturl() == url}", file=sys.stderr)
-        digest.validate_arxiv_url(response.geturl(), "pdf", arxiv_id)
-        body = response.read(limit + 1)
+    endpoints = (url, url.replace("https://arxiv.org/", "https://export.arxiv.org/", 1))
+    for index, endpoint in enumerate(endpoints):
+        request = urllib.request.Request(endpoint, headers={"Accept": "application/pdf", "User-Agent": USER_AGENT})
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                final_url = response.geturl()
+                if final_url.startswith("https://export.arxiv.org/"):
+                    final_url = final_url.replace("https://export.arxiv.org/", "https://arxiv.org/", 1)
+                digest.validate_arxiv_url(final_url, "pdf", arxiv_id)
+                body = response.read(limit + 1)
+            break
+        except (urllib.error.URLError, TimeoutError, OSError, http.client.HTTPException) as exc:
+            status = getattr(exc, "code", None)
+            safe_status = status if isinstance(status, int) and 400 <= status <= 599 else "unavailable"
+            print(f"PDF fallback download failed: endpoint={index + 1}; status={safe_status}", file=sys.stderr)
+            if index == len(endpoints) - 1:
+                raise
     if not body.startswith(b"%PDF-") or len(body) > limit:
         raise UpdaterOfflineError("PDF fallback is invalid or exceeds the safe size limit")
     print(f"PDF fallback verified: bytes={len(body)}", file=sys.stderr)

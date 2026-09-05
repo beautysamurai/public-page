@@ -128,10 +128,28 @@
         <div class="shell archive-grid">
           <div class="archive-sticky">
             <p class="section-kicker" data-i18n="archive.kicker">過去の号</p><h2 id="archive-title" data-i18n="archive.title">アーカイブ</h2>
-            <p data-i18n="archive.body">過去の日次スクリーニングと週次・月次レビューを閲覧できます。各号は日付時点のスナップショットであり、継続的に改訂されるフィードではありません。</p>
+            <p data-i18n="archive.body">号を日付でたどるほか、全期間の論文を評価・タグから探せます。保存済みレビューを使うため、追加の再評価は行いません。</p>
           </div>
           <div>
             <div class="archive-controls" data-i18n-aria-label="archive.filterAria" aria-label="アーカイブを絞り込む">
+              <div class="archive-view-options" role="group" data-i18n-aria-label="archive.viewLabel" aria-label="探し方">
+                <button type="button" data-archive-view="editions" aria-pressed="true" data-i18n="archive.viewEditions">号から探す</button>
+                <button type="button" data-archive-view="papers" aria-pressed="false" data-i18n="archive.viewPapers">論文から探す · 評価 / タグ</button>
+              </div>
+              <div class="archive-paper-controls" id="archive-paper-controls" hidden>
+                <div class="archive-paper-fields">
+                  <label for="archive-rating"><span data-i18n="archive.ratingLabel">評価（10点満点）</span><select id="archive-rating">
+                    <option value="" data-i18n="archive.ratingAll">すべての評価</option>
+                  </select></label>
+                  <label for="archive-tag"><span data-i18n="archive.tagLabel">タグ</span><select id="archive-tag"><option value="" data-i18n="archive.tagAll">すべてのタグ</option></select></label>
+                  <label for="archive-sort"><span data-i18n="archive.sortLabel">並び順</span><select id="archive-sort">
+                    <option value="rating" data-i18n="archive.sortRating">評価の高い順</option>
+                    <option value="date" data-i18n="archive.sortDate">レビューの新しい順</option>
+                  </select></label>
+                  <label for="archive-search"><span data-i18n="archive.searchLabel">論文を検索</span><input id="archive-search" type="search" maxlength="180" data-i18n-placeholder="archive.searchPlaceholder" placeholder="タイトル・著者・arXiv ID"></label>
+                </div>
+                <p class="archive-date-help" data-i18n="archive.paperHelp">日付未指定なら全期間を検索。同じ論文は1件にまとめ、選択期間・種別内の最新レビューの評価とタグを使います。旧5点評価は10点に換算して比較します（再評価はしません）。</p>
+              </div>
               <div class="archive-kind-control">
                 <span class="archive-control-label" id="archive-kind-label" data-i18n="archive.kindLabel">レビュー種別</span>
                 <div class="archive-kind-options" role="group" aria-labelledby="archive-kind-label">
@@ -157,6 +175,10 @@
             </div>
             <div class="archive-list" id="archive-list" role="list"><p class="archive-loading" data-i18n="archive.loading">アーカイブを読み込んでいます…</p></div>
             <button class="button button-secondary" id="archive-more" type="button" hidden data-i18n="archive.more">さらに過去の号を表示</button>
+            <div id="archive-paper-status" class="archive-empty" role="status" hidden></div>
+            <button class="archive-clear" id="archive-paper-retry" type="button" hidden data-i18n="archive.retry">もう一度読み込む</button>
+            <ol class="archive-paper-list" id="archive-paper-list" data-i18n-aria-label="archive.paperListLabel" aria-label="アーカイブの論文" hidden></ol>
+            <button class="button button-secondary" id="archive-paper-more" type="button" hidden data-i18n="archive.paperMore">さらに論文を表示</button>
           </div>
         </div>
       </section>

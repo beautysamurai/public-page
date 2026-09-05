@@ -183,6 +183,7 @@ class GeneratedArtifacts:
     latest: bytes
     index: bytes
     archives: tuple[tuple[str, bytes], ...]
+    papers: bytes
 
 
 def _is_int(value: object) -> bool:
@@ -769,6 +770,27 @@ def generate_artifacts(history: Mapping[str, Any]) -> GeneratedArtifacts:
         latest=latest,
         index=_json_bytes(index),
         archives=archives,
+        # A lightweight cross-edition catalogue, not a new analysis. Preserve
+        # every stored rating and tag; leave long narratives in their archives.
+        papers=_json_bytes({
+            "schemaVersion": 1,
+            "editions": [
+                {
+                    "editionId": edition["editionId"],
+                    "date": edition["editionDate"],
+                    "kind": edition["editionKind"],
+                    "periodEnd": edition["periodEnd"],
+                    "papers": [
+                        {field: paper[field] for field in (
+                            "arxivId", "title", "authors", "topics",
+                            "schedulerRating", "schedulerRatingScale",
+                        )}
+                        for paper in edition["papers"]
+                    ],
+                }
+                for edition in ordered
+            ],
+        }),
     )
 
 
@@ -782,6 +804,7 @@ def _artifact_paths(
         for name, content in artifacts.archives
     ]
     result.append((archive_dir / "index.json", artifacts.index, False))
+    result.append((output.with_name("papers.json"), artifacts.papers, False))
     result.append((output, artifacts.latest, False))
     resolved = [path.resolve(strict=False) for path, _content, _immutable in result]
     if len(resolved) != len(set(resolved)):

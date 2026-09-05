@@ -27,8 +27,10 @@
     function saved(id) { return snapshot.bookmarks.includes(lib.paperId(id)); }
     function openPanel() {
       panel.open = true;
-      panel.scrollIntoView({ block: "center", behavior: "smooth" });
-      (snapshot.user ? byId("personal-refresh") : email).focus({ preventScroll: true });
+      panel.scrollIntoView({ block: "start", behavior: "smooth" });
+      var target = snapshot.user ? byId("personal-refresh") : config ? email : panel.querySelector("summary");
+      if (target.disabled) target = panel.querySelector("summary");
+      target.focus({ preventScroll: true });
     }
     function updateButton(button) {
       var isSaved = ready() && saved(button.dataset.bookmarkId);

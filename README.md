@@ -71,8 +71,18 @@ HTML insertion; unsupported commands remain visible as literal fallback text.
 
 ### Optional personal bookmarks and search presets (Supabase)
 
-Public research remains on GitHub Pages and needs no login. **マイライブラリ /
-My library** adds email-code login, bookmarks shared across a paper's versions,
+Public research remains on GitHub Pages and needs no login. Immediately below
+the header, **検索・フィルター / Search & filters** and **マイライブラリ /
+My library** are separate disclosures, both closed on normal page load (including
+returning signed-in visitors). Expand only the one you need. The filter panel
+includes archive date/rating/tag controls and the separate current-issue search.
+**検索結果を見る / View search results** moves to the archive, while **検索条件を変更 /
+Edit search filters** opens the top filter panel again. Opening a saved bookmark
+list or applying a preset also moves to its results. Collapsing the panels does
+not reset conditions or log you out. Direct `#research-filters` and
+`#personal-library` links open only the explicitly targeted panel.
+
+My library adds email-code login, bookmarks shared across a paper's versions,
 and named filter presets. Stars appear in both the issue and archive paper cards.
 **全期間のブックマークを表示 / Show bookmarks across all dates** starts across
 all review types/dates; rating, tag and keyword filters can then be combined.

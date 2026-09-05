@@ -5,6 +5,7 @@
   var archiveUi = window.RatesArchiveUi;
   if (!archiveUi) throw new Error("Archive UI helpers are unavailable.");
   var initialParams = new URLSearchParams(window.location.search);
+  var initialHash = window.location.hash;
   var initialArchiveRange = archiveUi.normaliseRange(
     initialParams.get("archive-from"),
     initialParams.get("archive-to")
@@ -1614,7 +1615,7 @@
       ? fetchJson(new URL("./data/i18n/en.json", document.baseURI)).then(normaliseTranslations).catch(function () { return null; })
       : Promise.resolve(new Map());
     var archivePromise = loadArchiveIndex();
-    if (state.archiveView === "papers") loadPaperCatalogue();
+    var cataloguePromise = state.archiveView === "papers" ? loadPaperCatalogue() : Promise.resolve();
     var archived = false;
     var reportPromise;
 
@@ -1659,6 +1660,14 @@
       }
     } catch (_error) {
       showLoadFailure(archived);
+    }
+    await Promise.all([archivePromise, cataloguePromise]);
+    // Native fragment navigation happens before the asynchronous review text
+    // has its final height. Restore shared section links after layout settles.
+    // Do not override navigation to another section while loading.
+    if (window.location.hash === initialHash && /^#(?:archive|digest|method|page-title)$/.test(initialHash)) {
+      var section = byId(initialHash.slice(1));
+      if (section) section.scrollIntoView({ block: "start", behavior: "instant" });
     }
   }
 

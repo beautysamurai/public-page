@@ -296,6 +296,10 @@ change models, or replace full-text analysis with an
 abstract. Authentication, rate-limit, generic server errors, and ambiguous
 timeouts do not trigger this extra request. Logs expose only HTTP status and a
 fixed error category, never raw API error bodies, keys, or file contents.
+If both PDF hosts return 404, an explicit withdrawal notice on the exact
+version's official abstract page records a `withdrawn` checkpoint decision.
+The daily report names excluded withdrawn IDs and continues other candidates;
+ordinary 404s or unavailable abstract pages still leave the review pending.
 The API boundary follows OpenAI's [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs)
 and [file inputs](https://developers.openai.com/api/docs/guides/file-inputs)
 contracts.

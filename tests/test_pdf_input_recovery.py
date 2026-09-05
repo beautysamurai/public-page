@@ -2,14 +2,51 @@ import base64
 import contextlib
 import io
 import unittest
+import tempfile
+import json
+from pathlib import Path
 from types import SimpleNamespace
 from unittest import mock
 
 from scripts import research_pipeline as p
-from tests.test_research_pipeline import config, entry, analysis, RecordingResponses
+from tests.test_research_pipeline import config, entry, analysis, RecordingResponses, CHECKED_AT, listing_html
 
 
 class PdfInputRecoveryTests(unittest.TestCase):
+    def test_withdrawal_requires_official_notice_and_is_not_retried(self):
+        response = mock.MagicMock()
+        response.__enter__.return_value = response
+        response.geturl.return_value = "https://arxiv.org/abs/2608.12345v1"
+        for body, expected in [(b'<span class="error" style="border: 2px solid grey">This paper has been withdrawn by Author</span>', True), (b'<blockquote>This paper has been withdrawn by Author</blockquote>', False), (b'Not found', False)]:
+            response.read.return_value = body
+            with mock.patch.object(p.urllib.request, "urlopen", return_value=response):
+                self.assertEqual(p._is_withdrawn("2608.12345v1", timeout=2), expected)
+        error = p.urllib.error.HTTPError("url", 404, "missing", {}, None)
+        for withdrawn in (True, False):
+            with mock.patch.object(p.urllib.request, "urlopen", side_effect=error), mock.patch.object(p, "_is_withdrawn", return_value=withdrawn):
+                with self.assertRaises(p.PaperWithdrawn if withdrawn else p.urllib.error.HTTPError):
+                    p.fetch_pdf_for_inline_input("2608.12345v1", timeout=2)
+        operation = mock.Mock(side_effect=p.PaperWithdrawn("2608.12345v1"))
+        with self.assertRaises(p.PaperWithdrawn):
+            p._retry(operation, 3, lambda _: None)
+        operation.assert_called_once()
+
+    def test_withdrawn_candidate_is_checkpointed_and_other_papers_continue(self):
+        analyzer = SimpleNamespace(
+            analyze_abstract=mock.Mock(return_value=analysis(importance=4)),
+            analyze_pdf=mock.Mock(side_effect=[p.PaperWithdrawn("2608.12345v1"), analysis(importance=4)]),
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            report = p.run_daily(config(), state_path=root / "state.json", output_dir=root / "daily",
+                checked_at=CHECKED_AT, list_fetcher=lambda _: listing_html(new=("2608.12345", "2608.12346")),
+                metadata_fetcher=lambda ids: {key: entry(key) for key in ids}, analyzer=analyzer)
+            self.assertEqual(report["status"], p.UPDATE_CONFIRMED)
+            self.assertEqual(len(report["papers"]), 1)
+            self.assertIn("withdrawn", report["message"])
+            checkpoint = json.loads((root / "checkpoints/2026-08-28.json").read_text(encoding="utf-8"))
+            self.assertEqual(checkpoint["results"]["2608.12345"]["status"], "withdrawn")
+
     def candidate(self):
         return p.PaperCandidate(entry("2608.12345"), ("new",), ("q-fin.TR",))
 

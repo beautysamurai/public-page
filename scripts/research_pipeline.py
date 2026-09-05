@@ -1139,10 +1139,12 @@ def fetch_pdf_for_inline_input(arxiv_id: str, *, timeout: float) -> bytes:
     request = urllib.request.Request(url, headers={"Accept": "application/pdf", "User-Agent": USER_AGENT})
     limit = 20 * 1024 * 1024
     with urllib.request.urlopen(request, timeout=timeout) as response:
+        print(f"PDF fallback response: canonical_url={response.geturl() == url}", file=sys.stderr)
         digest.validate_arxiv_url(response.geturl(), "pdf", arxiv_id)
         body = response.read(limit + 1)
     if not body.startswith(b"%PDF-") or len(body) > limit:
         raise UpdaterOfflineError("PDF fallback is invalid or exceeds the safe size limit")
+    print(f"PDF fallback verified: bytes={len(body)}", file=sys.stderr)
     return body
 
 
@@ -2501,7 +2503,8 @@ def run_daily(
     except (urllib.error.URLError, TimeoutError, OSError, http.client.HTTPException):
         status = UPDATER_OFFLINE
         message = "arXiv could not be reached; the review remains pending."
-    except (ListingParseError, digest.FeedParseError, StructuredOutputError, StateError, HistoryImportError):
+    except (ListingParseError, digest.FeedParseError, StructuredOutputError, StateError, HistoryImportError) as exc:
+        print(f"Research validation stopped: {type(exc).__name__}", file=sys.stderr)
         status = UPDATE_NOT_CONFIRMED
         message = "The arXiv batch or structured analysis could not be validated; the review remains pending."
 

@@ -17,6 +17,7 @@ ARCHIVE_UI_PATH = ROOT / "site" / "archive-ui.js"
 STATIC_PAGE_APP_PATH = ROOT / "site" / "static-page.js"
 STYLES_PATH = ROOT / "site" / "styles.css"
 THEORY_INDEX_PATH = ROOT / "site" / "theory" / "index.html"
+CLASSICS_INDEX_PATH = ROOT / "site" / "classics" / "index.html"
 HJB_INDEX_PATH = ROOT / "site" / "theory" / "hjb" / "index.html"
 BS_INDEX_PATH = ROOT / "site" / "theory" / "black-scholes" / "index.html"
 SABR_INDEX_PATH = ROOT / "site" / "theory" / "sabr" / "index.html"
@@ -198,7 +199,7 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         self.assertGreater(len(self.ja_keys), 100)
         referenced = set()
         simulator_sources = [path.read_text(encoding="utf-8") for path in SIMULATOR_PATHS]
-        for source in (self.index, self.theory_index, *simulator_sources):
+        for source in (self.index, self.theory_index, CLASSICS_INDEX_PATH.read_text(encoding="utf-8"), *simulator_sources):
             referenced.update(
                 re.findall(
                     r'data-i18n(?:-placeholder|-aria-label|-rich)?="([A-Za-z0-9_.]+)"',

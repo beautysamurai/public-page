@@ -67,6 +67,33 @@ The existing publication, validation, synchronization and Pages flows include it
 Review TeX is rendered into native MathML without third-party scripts or unsafe
 HTML insertion; unsupported commands remain visible as literal fallback text.
 
+## Classic papers and books
+
+The separate **定番論文・書籍 / Papers & books** route at `classics/` is an
+editorially curated reading shelf, not another dated research edition. It starts
+with 17 foundational papers and books on microstructure, execution, market
+making, rates, yield curves, and mathematical finance. Header navigation on the
+research and theory pages links to it. Search/type/topic/access controls are
+collapsed by default and are shareable through `q`, `kind`, `topic`, `access`,
+and `lang` query parameters.
+
+Maintain the bilingual records in `site/data/classics.json`. Each record has a
+stable slug `id`, `kind` (`paper` or `book`), exact title/authors/year, topic IDs,
+optional bilingual `edition`, and bilingual `why`, `use`, `prerequisite`, and
+`accessNote`. `sourceUrl` points to the publisher, academic society, or official
+author record. Set `freeUrl` only for verified legitimate **complete** texts;
+otherwise use JSON `null`. Excerpts, previews, or public abstracts are not free
+full texts. Keep edition years and manuscript versions explicit. `verifiedOn`
+is the bibliography/source review date, not a citation-count retrieval date.
+
+Selection and reading guidance are editorial judgments, not citation rankings
+or new model-generated scores. The catalogue does not call OpenAI, download
+PDFs, copy paid books, modify Supabase tables/bookmarks, or enter daily/weekly/
+monthly aggregation. Future additions only need a reviewed catalogue edit;
+the existing Pages build copies the route and JSON unchanged. Tests validate
+records, safe links, bilingual text, URL filters, failure/retry, and separation
+from the generated archive.
+
 ## Install and configure
 
 ### Optional personal bookmarks and search presets (Supabase)

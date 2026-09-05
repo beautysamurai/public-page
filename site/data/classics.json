@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "verifiedOn": "2026-09-05",
+  "items": [
+    {
+      "id": "harris-trading-exchanges", "kind": "book", "year": 2002,
+      "edition": {"ja": "2003年表記も流通", "en": "Also cited as 2003"},
+      "title": "Trading and Exchanges: Market Microstructure for Practitioners",
+      "authors": ["Larry Harris"], "topics": ["microstructure", "execution"],
+      "why": {"ja": "市場参加者、注文方法、取引ルールが流動性とコストをどう変えるかを俯瞰する基礎書。数理モデルに入る前の一冊です。", "en": "An accessible foundation on how participants, orders, and trading rules shape liquidity and costs. A useful entry point before mathematical models."},
+      "use": {"ja": "注文仕様や優先順位の理解、執行担当者との共通言語、取引コスト分析の背景知識に。電子市場の現在の仕様は別途確認してください。", "en": "Background for order types, priority rules, execution discussions, and transaction-cost analysis. Check current venue rules separately."},
+      "prerequisite": {"ja": "指値・成行などの基本用語。高度な確率解析は不要です。", "en": "Basic limit- and market-order terminology; no advanced stochastic calculus required."},
+      "sourceUrl": "https://academic.oup.com/book/52292", "freeUrl": null,
+      "accessNote": {"ja": "購入・図書館等で確認。刊行日はOUPの2002年表記を採用。", "en": "Check purchase or library access. Year follows OUP's 2002 publication record."}
+    },
+    {
+      "id": "hull-derivatives-11", "kind": "book", "year": 2022,
+      "edition": {"ja": "第11版 · 刊行2021 / ©2022", "en": "11th edition · Published 2021 / ©2022"},
+      "title": "Options, Futures, and Other Derivatives", "authors": ["John C. Hull"], "topics": ["foundations", "rates", "volatility"],
+      "why": {"ja": "デリバティブの商品、価格評価、リスク管理を広く見渡す体系書。専門論文に入る前に商品知識と用語を整理できます。", "en": "A broad reference on derivatives, valuation, and risk management, useful for consolidating product knowledge before specialized papers."},
+      "use": {"ja": "オプション・先物・スワップの仕組みと基本的なリスク指標の参照に。ここでは第11版を紹介し、最新版とは区別します。", "en": "A reference for options, futures, swaps, and basic risk measures. This entry specifically covers edition 11, not a claim about the latest edition."},
+      "prerequisite": {"ja": "基礎的な金融知識、確率・統計、微積分。", "en": "Basic finance, probability, statistics, and calculus."},
+      "sourceUrl": "https://www.pearson.com/en-us/subject-catalog/p/options-futures-and-other-derivatives/P200000005938/9780136939917", "freeUrl": null,
+      "accessNote": {"ja": "出版社で購入・レンタル等を確認。書籍全体の無料公開ではありません。", "en": "Check publisher purchase or rental options; the complete book is not offered free here."}
+    },
+    {
+      "id": "shreve-finance-ii-2004", "kind": "book", "year": 2004,
+      "edition": {"ja": "第1版", "en": "1st edition"},
+      "title": "Stochastic Calculus for Finance II: Continuous-Time Models", "authors": ["Steven E. Shreve"], "topics": ["foundations", "rates"],
+      "why": {"ja": "モデルの式を支える確率解析とリスク中立評価を順序立てて学ぶ教科書。論文の測度変換やマルチンゲールで立ち止まったときの基礎固めに。", "en": "A systematic foundation in stochastic calculus and risk-neutral valuation, useful when martingales or measure changes become obstacles in papers."},
+      "use": {"ja": "Brownian motion、伊藤積分、測度変換から連続時間の価格評価を理解するための参照書。", "en": "A reference connecting Brownian motion, Ito integration, and changes of measure to continuous-time valuation."},
+      "prerequisite": {"ja": "微積分と、微積分を用いた確率論。", "en": "Calculus and calculus-based probability."},
+      "sourceUrl": "https://link.springer.com/book/9780387401010", "freeUrl": null,
+      "accessNote": {"ja": "購入・機関契約・図書館等で確認。", "en": "Check purchase, institutional subscription, or library access."}
+    },
+    {
+      "id": "glosten-milgrom-1985", "kind": "paper", "year": 1985,
+      "title": "Bid, ask and transaction prices in a specialist market with heterogeneously informed traders",
+      "authors": ["Lawrence R. Glosten", "Paul R. Milgrom"], "topics": ["microstructure", "market-making"],
+      "why": {"ja": "リスク中立のディーラーにもスプレッドが必要になる理由を、情報格差から理解する原典。逆選択を考える最初の一歩です。", "en": "A foundational explanation of why even risk-neutral dealers need a spread when traders have different information: an entry point to adverse selection."},
+      "use": {"ja": "逆選択コスト、約定後の価格変化、気配の広がりを考える共通言語。現代の注文板の全機能を再現するモデルではありません。", "en": "A common language for adverse-selection costs, post-trade price moves, and spreads, rather than a complete model of modern order books."},
+      "prerequisite": {"ja": "ベイズ則、条件付き期待値。", "en": "Bayes' rule and conditional expectation."},
+      "sourceUrl": "https://www.sciencedirect.com/science/article/pii/0304405X85900443",
+      "freeUrl": "https://business.columbia.edu/sites/default/files-efs/pubfiles/1538/bid.pdf",
+      "accessNote": {"ja": "無料全文：著者のColumbia大学公開PDF。", "en": "Free full text hosted by the author's Columbia University."}
+    },
+    {
+      "id": "kyle-1985", "kind": "paper", "year": 1985,
+      "title": "Continuous Auctions and Insider Trading", "authors": ["Albert S. Kyle"], "topics": ["microstructure", "execution"],
+      "why": {"ja": "注文フローから情報が価格へ織り込まれる仕組みと、市場の厚みを結ぶ古典。価格インパクトの理論的な出発点です。", "en": "A classic linking information in order flow to price formation and market depth, providing a theoretical starting point for price impact."},
+      "use": {"ja": "注文量と価格変化、情報を持つ参加者の分割売買を考える基準モデル。推定した係数をそのまま普遍的な執行コストと解釈しないことが重要です。", "en": "A baseline for order flow, price moves, and informed trade splitting. Estimated coefficients should not be treated as universal execution costs."},
+      "prerequisite": {"ja": "条件付き期待値、正規分布、最適化。連続時間部分はBrownian motion。", "en": "Conditional expectation, Gaussian distributions, optimization, and Brownian motion for the continuous-time part."},
+      "sourceUrl": "https://www.econometricsociety.org/publications/econometrica/browse/1985/11/01/continuous-auctions-and-insider-trading", "freeUrl": null,
+      "accessNote": {"ja": "学会の書誌・要旨から全文のアクセス条件を確認。無料全文は未登録です。", "en": "Check full-text access from the society's publication record. No verified free full-text link is listed."}
+    },
+    {
+      "id": "ohara-1995", "kind": "book", "year": 1995,
+      "title": "Market Microstructure Theory", "authors": ["Maureen O'Hara"], "topics": ["microstructure", "market-making"],
+      "why": {"ja": "在庫、情報、戦略的売買のモデルを一つの理論体系として整理する定番書。個別の原論文を位置付けるために役立ちます。", "en": "A reference organizing inventory, information, and strategic-trading models into a coherent theory, helping place individual papers in context."},
+      "use": {"ja": "気配や流動性の変化を説明するとき、どの仮定とメカニズムが必要かを見分ける。", "en": "Identify which assumptions and mechanisms are needed to explain quotes and liquidity."},
+      "prerequisite": {"ja": "ミクロ経済学、確率、最適化。", "en": "Microeconomics, probability, and optimization."},
+      "sourceUrl": "https://www.wiley-vch.de/en/?isbn=978-1-55786-443-7&option=com_eshop&view=product", "freeUrl": null,
+      "accessNote": {"ja": "出版社で購入・図書館等の利用方法を確認。", "en": "Check publisher purchase or library options."}
+    },
+    {
+      "id": "hasbrouck-2007", "kind": "book", "year": 2007,
+      "title": "Empirical Market Microstructure: The Institutions, Economics, and Econometrics of Securities Trading",
+      "authors": ["Joel Hasbrouck"], "topics": ["microstructure", "execution"],
+      "why": {"ja": "価格・注文フローのデータから流動性と情報の効果を推定するための体系書。理論モデルから実証分析へ進む橋渡しです。", "en": "A bridge from theoretical models to empirical estimation of liquidity and information effects using prices and order flow."},
+      "use": {"ja": "取引コスト測定、VARによる価格と注文の分析、市場間の価格発見の比較。データの時刻・取引方向の定義に注意します。", "en": "Transaction-cost measurement, VAR analysis of prices and trades, and cross-market price discovery; timestamp and trade-sign conventions matter."},
+      "prerequisite": {"ja": "回帰分析、時系列分析、線形代数。", "en": "Regression, time-series analysis, and linear algebra."},
+      "sourceUrl": "https://academic.oup.com/book/52241", "freeUrl": null,
+      "accessNote": {"ja": "購入・機関契約・図書館等で確認。補助資料の公開と書籍全文の無料公開は別です。", "en": "Check purchase or library access. Public companion materials do not imply the full book is free."}
+    },
+    {
+      "id": "almgren-chriss-2001", "kind": "paper", "year": 2001,
+      "title": "Optimal execution of portfolio transactions", "authors": ["Robert Almgren", "Neil Chriss"], "topics": ["execution"],
+      "why": {"ja": "速く執行する価格インパクトと、待つ間の価格変動リスクのトレードオフを捉える最適執行の基礎論文。", "en": "A foundational execution paper balancing the market impact of fast trading against price risk while waiting."},
+      "use": {"ja": "分割執行スケジュールの基準、リスク許容度の感応度分析、執行コスト比較。インパクト関数や出来高制約は対象市場に合わせて検証します。", "en": "A baseline for execution schedules, risk-aversion sensitivity, and cost comparisons. Validate impact functions and volume constraints for the target market."},
+      "prerequisite": {"ja": "期待値・分散、二次最適化、差分方程式。", "en": "Expectation and variance, quadratic optimization, and difference equations."},
+      "sourceUrl": "https://www.risk.net/journal-risk/2161150/optimal-execution-portfolio-transactions", "freeUrl": null,
+      "accessNote": {"ja": "出版社で全文の利用条件を確認。刊行年2001（Winter 2000/2001）。", "en": "Check full-text access with the publisher. Publication year 2001 (Winter 2000/2001)."}
+    },
+    {
+      "id": "avellaneda-stoikov-2008", "kind": "paper", "year": 2008,
+      "title": "High-frequency trading in a limit order book",
+      "authors": ["Marco Avellaneda", "Sasha Stoikov"], "topics": ["market-making", "microstructure"],
+      "why": {"ja": "在庫リスクと約定機会を同時に考え、bid・askを選ぶモデルの原典。クオートの在庫スキューを数理的に理解する入口です。", "en": "A foundational inventory-based quoting model balancing price risk against fill opportunities; a starting point for understanding inventory skew."},
+      "use": {"ja": "予約価格・スプレッドの設計を学ぶ基準モデル。実装ではtick、手数料、キュー順位、逆選択を別途扱う必要があります。", "en": "A baseline for reservation prices and spreads. Production use must also address ticks, fees, queue priority, and adverse selection."},
+      "prerequisite": {"ja": "Brownian motion、Poisson過程、期待効用、HJBの基礎。", "en": "Brownian motion, Poisson processes, expected utility, and basic HJB equations."},
+      "sourceUrl": "https://www.tandfonline.com/doi/abs/10.1080/14697680701381228",
+      "freeUrl": "https://math.nyu.edu/inmemoriam/avellaneda/HighFrequencyTrading.pdf",
+      "accessNote": {"ja": "無料全文：著者のNYU公開PDF。", "en": "Free full text hosted on the author's NYU site."}
+    },
+    {
+      "id": "cont-stoikov-talreja-2010", "kind": "paper", "year": 2010,
+      "title": "A Stochastic Model for Order Book Dynamics", "authors": ["Rama Cont", "Sasha Stoikov", "Rishi Talreja"], "topics": ["microstructure", "market-making"],
+      "why": {"ja": "注文の到着・取消・約定を確率過程として扱い、板の状態から次の出来事を計算する基礎モデル。", "en": "A foundational stochastic order-book model using order arrivals, cancellations, and executions to compute probabilities conditional on the book state."},
+      "use": {"ja": "指値約定や価格変化の確率、板シミュレーターの基準に。論文の東証株式データの結果を金利市場へそのまま移さないことが重要です。", "en": "A baseline for fill probabilities, price moves, and order-book simulation. Results on Tokyo equities should not be transferred unchanged to rates markets."},
+      "prerequisite": {"ja": "連続時間マルコフ連鎖、Poisson過程、行列計算。", "en": "Continuous-time Markov chains, Poisson processes, and matrix algebra."},
+      "sourceUrl": "https://pubsonline.informs.org/doi/abs/10.1287/opre.1090.0780", "freeUrl": null,
+      "accessNote": {"ja": "出版社で購読・機関アクセス等を確認。無料全文は未登録です。", "en": "Check publisher subscription or institutional access. No verified free full-text link is listed."}
+    },
+    {
+      "id": "cartea-jaimungal-penalva-2015", "kind": "book", "year": 2015,
+      "title": "Algorithmic and High-Frequency Trading", "authors": ["Álvaro Cartea", "Sebastian Jaimungal", "José Penalva"], "topics": ["execution", "market-making", "microstructure"],
+      "why": {"ja": "執行・マーケットメイク・注文フローの問題を確率制御でつなぐ大学院向け教科書。個々の論文を実装につなげる整理に役立ちます。", "en": "A graduate text connecting execution, market making, and order flow through stochastic control, useful for organizing papers into implementable models."},
+      "use": {"ja": "HJBから売買ルールを導き、データとシミュレーションで検討するための体系的な参照書。", "en": "A systematic reference for deriving policies from HJB equations and examining them with data and simulation."},
+      "prerequisite": {"ja": "確率微分方程式、動的計画法。前半は市場制度の入門にも使えます。", "en": "Stochastic differential equations and dynamic programming. Early chapters also introduce market structure."},
+      "sourceUrl": "https://sebastian.statistics.utoronto.ca/books/algo-and-hf-trading/", "freeUrl": null,
+      "accessNote": {"ja": "著者公式ページからCambridgeの書籍情報へ。無料試読は書籍全体の無料公開ではありません。", "en": "The author's official page links to Cambridge's book information. A free excerpt is not the full book."}
+    },
+    {
+      "id": "nelson-siegel-1987", "kind": "paper", "year": 1987,
+      "title": "Parsimonious Modeling of Yield Curves", "authors": ["Charles R. Nelson", "Andrew F. Siegel"], "topics": ["yield-curves", "rates"],
+      "why": {"ja": "少数のパラメータで利回り曲線の多様な形を表すNelson–Siegel曲線の原典。カーブの形と因子を結び付ける入口です。", "en": "The original Nelson–Siegel yield-curve paper, an entry point to representing varied curve shapes with a small number of parameters."},
+      "use": {"ja": "カーブのフィッティング、形状比較、推定結果の解釈。良いフィットだけで無裁定や因子の安定性が保証されるわけではありません。", "en": "Curve fitting, shape comparison, and parameter interpretation. A good fit does not by itself guarantee no-arbitrage or stable factors."},
+      "prerequisite": {"ja": "債券利回り、最小二乗法、指数関数。", "en": "Bond yields, least squares, and exponential functions."},
+      "sourceUrl": "https://www.jstor.org/stable/2352957", "freeUrl": null,
+      "accessNote": {"ja": "1987年刊行版。JSTORで全文の利用条件を確認。", "en": "The 1987 published version. Check full-text access on JSTOR."}
+    },
+    {
+      "id": "vasicek-1977", "kind": "paper", "year": 1977,
+      "title": "An equilibrium characterization of the term structure", "authors": ["Oldrich Vasicek"], "topics": ["rates", "yield-curves"],
+      "why": {"ja": "短期金利の確率過程から債券価格を導く考え方を学ぶ古典。金利モデルと期間構造の関係を原論文で押さえます。", "en": "A classic deriving bond prices from short-rate dynamics, grounding the connection between rate models and the term structure."},
+      "use": {"ja": "平均回帰型短期金利モデルの理解と実装の基準に。単一因子・一定パラメータという簡略化を意識して使います。", "en": "A baseline for understanding and implementing mean-reverting short rates, with attention to its single-factor, constant-parameter simplifications."},
+      "prerequisite": {"ja": "債券の割引計算、微積分、伊藤の補題。", "en": "Bond discounting, calculus, and Ito's lemma."},
+      "sourceUrl": "https://www.sciencedirect.com/science/article/pii/0304405X77900162", "freeUrl": null,
+      "accessNote": {"ja": "出版社で全文の利用条件を確認。無料全文は未登録です。", "en": "Check full-text access with the publisher. No verified free full-text link is listed."}
+    },
+    {
+      "id": "cox-ingersoll-ross-1985", "kind": "paper", "year": 1985,
+      "title": "A Theory of the Term Structure of Interest Rates", "authors": ["John C. Cox", "Jonathan E. Ingersoll, Jr.", "Stephen A. Ross"], "topics": ["rates", "yield-curves"],
+      "why": {"ja": "金利と債券価格を、投資機会やリスク回避などの経済的要因につなげるCIRモデルの原典。Vasicekと並べて読むと仮定の違いが明確になります。", "en": "The original CIR model connects rates and bond prices to investment opportunities and risk aversion. Reading it alongside Vasicek clarifies their different assumptions."},
+      "use": {"ja": "平方根拡散による短期金利と債券価格の理解に。ゼロ境界の扱いと、負金利を許さない仕様に注意します。", "en": "Study square-root short-rate dynamics and bond prices, paying attention to zero-boundary behavior and the exclusion of negative rates."},
+      "prerequisite": {"ja": "確率微分方程式、効用最大化、債券価格の基礎。", "en": "Stochastic differential equations, utility maximization, and bond-pricing basics."},
+      "sourceUrl": "https://www.jstor.org/stable/1911242", "freeUrl": null,
+      "accessNote": {"ja": "JSTORで購読・図書館等の全文アクセスを確認。", "en": "Check JSTOR subscription or library full-text access."}
+    },
+    {
+      "id": "heath-jarrow-morton-1992", "kind": "paper", "year": 1992,
+      "title": "Bond Pricing and the Term Structure of Interest Rates: A New Methodology for Contingent Claims Valuation",
+      "authors": ["David Heath", "Robert Jarrow", "Andrew Morton"], "topics": ["rates", "yield-curves"],
+      "why": {"ja": "フォワード金利曲線全体の動きと無裁定条件を結び付けるHJMの原論文。短期金利モデルから曲線全体へ視野を広げます。", "en": "The original HJM paper links dynamics of the entire forward-rate curve to no-arbitrage, broadening the view beyond short-rate models."},
+      "use": {"ja": "多因子金利シミュレーションや金利デリバティブ評価の理解に。離散化後にも理論上の制約をどう保つかが重要です。", "en": "A foundation for multifactor rate simulation and derivatives valuation, including the challenge of preserving theoretical constraints after discretization."},
+      "prerequisite": {"ja": "マルチンゲール、測度変換、確率微分方程式。", "en": "Martingales, changes of measure, and stochastic differential equations."},
+      "sourceUrl": "https://www.jstor.org/stable/2951677", "freeUrl": null,
+      "accessNote": {"ja": "JSTORで購読・図書館等の全文アクセスを確認。", "en": "Check JSTOR subscription or library full-text access."}
+    },
+    {
+      "id": "hagan-smile-risk-2002", "kind": "paper", "year": 2002,
+      "title": "Managing Smile Risk", "authors": ["Patrick S. Hagan", "Deep Kumar", "Andrew S. Lesniewski", "Diana E. Woodward"], "topics": ["volatility", "rates"],
+      "why": {"ja": "ボラティリティ・スマイルの動きとヘッジをモデル化するSABRの出発点。スワップションのスマイル近似の背景を知る原典です。", "en": "The starting point for SABR's modeling of volatility smiles and hedging, providing the background to widely used swaption smile approximations."},
+      "use": {"ja": "スマイル近似とキャリブレーションの理解に。近似の適用範囲、翼・長期満期、負金利への対応は別途検証します。", "en": "Understand smile approximations and calibration. Check approximation limits, wings, long maturities, and treatment of negative rates separately."},
+      "prerequisite": {"ja": "Black型価格式、インプライド・ボラティリティ、確率微分方程式。", "en": "Black-style pricing, implied volatility, and stochastic differential equations."},
+      "sourceUrl": "https://www.wilmott.com/managing-smile-risk/", "freeUrl": "https://lesniewski.us/papers/published/ManagingSmileRisk.pdf",
+      "accessNote": {"ja": "著者公開PDFへのリンク。原論文は2002年で、出版社紹介ページの2017年は再掲日です。", "en": "Links to the author's public PDF. The original paper is from 2002; the publisher page's 2017 date is a repost."}
+    },
+    {
+      "id": "brigo-mercurio-2006", "kind": "book", "year": 2006,
+      "edition": {"ja": "第2版", "en": "2nd edition"},
+      "title": "Interest Rate Models - Theory and Practice: With Smile, Inflation and Credit", "authors": ["Damiano Brigo", "Fabio Mercurio"], "topics": ["rates", "yield-curves", "volatility"],
+      "why": {"ja": "短期金利、HJM、市場モデル、スマイルを一つの体系として整理する金利モデルの参照書。原論文を横断して比較するために役立ちます。", "en": "A rates reference spanning short-rate models, HJM, market models, and smiles, useful for comparing approaches across original papers."},
+      "use": {"ja": "モデル選択、キャリブレーション、価格評価の理論的な参照に。2006年の版であり、その後の担保・複数カーブ・RFR慣行は別途補ってください。", "en": "A theoretical reference for model selection, calibration, and valuation. Supplement this 2006 edition with subsequent collateral, multicurve, and RFR conventions."},
+      "prerequisite": {"ja": "確率解析、無裁定価格評価、測度変換。", "en": "Stochastic calculus, no-arbitrage valuation, and changes of measure."},
+      "sourceUrl": "https://link.springer.com/book/10.1007/978-3-540-34604-3", "freeUrl": null,
+      "accessNote": {"ja": "購入・機関契約・図書館等で確認。刊行年は第2版ハードカバーの2006年。", "en": "Check purchase or library access. The year is the second-edition hardcover publication, 2006."}
+    }
+  ]
+}

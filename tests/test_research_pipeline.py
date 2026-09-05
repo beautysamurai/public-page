@@ -997,6 +997,7 @@ class DailyWorkflowTests(unittest.TestCase):
             pipeline.save_state(state_path, state)
             report = pipeline.run_daily(
                 config(),
+                recover_pending=True,
                 state_path=state_path,
                 output_dir=root / "daily",
                 checked_at=CHECKED_AT,
@@ -1050,6 +1051,7 @@ class DailyWorkflowTests(unittest.TestCase):
             pipeline.save_state(state_path, state)
             report = pipeline.run_daily(
                 config(no_announcement_dates=(date(2026, 8, 26),)),
+                recover_pending=True,
                 state_path=state_path,
                 output_dir=root / "daily",
                 checked_at=CHECKED_AT,
@@ -1086,6 +1088,7 @@ class DailyWorkflowTests(unittest.TestCase):
             pipeline.save_state(state_path, state)
             report = pipeline.run_daily(
                 config(),
+                recover_pending=True,
                 state_path=state_path,
                 output_dir=root / "daily",
                 checked_at=CHECKED_AT,

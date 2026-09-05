@@ -146,14 +146,26 @@ replaced only by the later completed result for that date.
 Validated abstract and PDF stages are atomically checkpointed under
 **.local/research/checkpoints/**. If the 30-minute default soft deadline or a
 remote failure interrupts a busy batch, the report remains incomplete and the
-next run resumes at the unfinished stage instead of repeating completed API
-calls. Each Responses attempt has a separate 120-second default timeout and SDK
+another run of that same latest batch resumes at the unfinished stage instead
+of repeating completed API calls. Once a newer batch is expected, scheduled
+daily runs move on to it. Each Responses attempt has a separate 120-second default timeout and SDK
 retries are disabled; the pipeline's explicit retry policy is the only retry
 layer. The daily budget plus the longest configured request timeout must leave
-at least ten minutes inside the 90-minute Actions limit. A model, prompt,
-schema, PDF setting, metadata, abstract, or candidate-set change invalidates the
-corresponding checkpoint before reuse. A malformed matching checkpoint is
-replaced with a clean one instead of permanently blocking that batch.
+at least ten minutes inside the 90-minute Actions limit. Checkpoints keep
+per-paper input fingerprints. A model/settings change or the addition of a new
+candidate does not discard already validated analyses. If an analyzed paper's
+source changes, or a checkpoint is malformed/incompatible, it is preserved and
+the attempt stops without silently paying to analyze it again. Valid legacy
+checkpoints can migrate only when their original whole-batch fingerprint matches.
+
+Completed checkpoints are retained as the record of screened-out as well as
+selected papers. Daily runs exclude paper IDs already present in older reports,
+older checkpoint decisions (including old unfinished PDF stages), or the
+validated public history supplied by `--published-history`. Matching is by base
+arXiv ID, so later cross-listings/revisions do not trigger a daily re-evaluation.
+A completed daily JSON is reused before any network/API call, even if state is
+stale. Ratings and review prose are not regenerated. Publication reconciliation
+only checks/repairs deterministic saved artifacts; it does not call OpenAI.
 
 Daily states have distinct meanings:
 
@@ -169,11 +181,14 @@ Daily states have distinct meanings:
   remains pending.
 
 Thus, an empty successful screen is never inferred from an arXiv or OpenAI
-failure. If a scheduled weekday run was missed, or the new-list page advances
-past a pending date, the pipeline first recovers the earliest unprocessed date
-from arXiv's bounded past-week listing. It then queues the next missed
-announcement date. If the pending date is no longer recoverable, state remains
-incomplete rather than falsely advancing completion.
+failure. The default daily target is the latest expected announcement batch,
+not the oldest unfinished date. Old incomplete JSON/checkpoints are left intact
+and never marked complete just because a newer review succeeded. Their missing
+coverage remains visible in weekly/monthly reports. Historical recovery requires
+an explicit local `daily --recover-pending` request (within arXiv's bounded
+past-week coverage); the scheduled workflow never enables it. After a new batch
+is completed, `lastCompletedBatchDate` records that latest completion, not a
+claim that every intervening date was reviewed.
 
 The checked-in launchers provide locking and local logs:
 
@@ -348,8 +363,10 @@ therefore leaves a durable target for the next same-kind scheduled run. The
 marker is removed only after a validated terminal aggregate report has been
 persisted; an incomplete review keeps its marker and remains queued.
 
-Reusing the durable branch lets an unconfirmed daily batch resume on the next
-run without repeating completed model calls. Every run reconciles all durable
+Reusing the durable branch lets the current daily batch resume without repeating
+completed model calls. An older pending batch cannot block a newer batch, and
+the workflow's public-history ID filter excludes past papers before metadata or
+model calls. Every run reconciles all durable
 completed daily, weekly, and monthly reports into public editions, so an
 interruption after the research push is repaired later. Incomplete
 JSON/Markdown remains visible in repository research state but is never appended to the

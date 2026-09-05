@@ -62,6 +62,8 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
         self.assertIn("UPDATE_NOT_CONFIRMED|UPDATER_OFFLINE", daily)
         self.assertIn('echo "report_path=$report_path"', daily)
         self.assertIn('echo "publishable=$publishable"', daily)
+        self.assertIn("--published-history content/chatgpt_scheduler_history.json", daily)
+        self.assertNotIn("--recover-pending", daily)
 
     def test_research_is_scanned_and_pushed_before_publication(self) -> None:
         expected_order = [

@@ -20,6 +20,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 94px; }
+.review-target { scroll-margin-top: 1rem; }
 
 body {
   margin: 0;

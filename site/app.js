@@ -808,6 +808,7 @@
         ? linkWeeklySourceText(report.sourceText, report.papers)
         : report.sourceText;
       elements.sourceDocument.appendChild(renderMarkdownLite(sourceText));
+      anchorSourceReviews(report.papers);
     }
   }
 
@@ -937,6 +938,10 @@
 
   function renderPaper(paper) {
     var item = createNode("li", "paper-card");
+    var anchor = reviewAnchor(paper.arxivId);
+    // Older imported prose may not expose an identifiable section. Its paper
+    // card still provides a direct destination, never the edition's top.
+    if (anchor && !elements.sourceDocument.contains(byId(anchor))) markReviewTarget(item, anchor);
     var number = paper.schedulerRank === null ? paper.index + 1 : paper.schedulerRank;
     var rank = displayScore(number).padStart(2, "0");
     var index = createNode("span", "paper-index", rank);
@@ -1288,12 +1293,74 @@
     applyArchiveFilterChange();
   }
 
-  function archiveHref(editionId) {
+  function reviewAnchor(arxivId) {
+    var id = validArxivId(arxivId);
+    return id ? "review-" + archiveUi.versionlessArxivId(id).toLowerCase().replace(/\//g, "-") : "";
+  }
+
+  function markReviewTarget(node, anchor) {
+    node.id = anchor;
+    node.tabIndex = -1;
+    node.classList.add("review-target");
+  }
+
+  function anchorSourceReviews(papers) {
+    var headings = Array.from(elements.sourceDocument.querySelectorAll(".source-heading"));
+    function titleKey(value) {
+      return value.replace(/^\s*\d+[.)]\s*/, "").replace(/\s+/g, " ").trim().toLowerCase();
+    }
+    papers.forEach(function (paper) {
+      var anchor = reviewAnchor(paper.arxivId);
+      if (!anchor || byId(anchor)) return;
+      var title = titleKey(paper.title);
+      var heading = headings.find(function (node) {
+        var label = titleKey(node.textContent);
+        return !node.id && label.length >= 24 && (label === title || title.indexOf(label + " ") === 0);
+      });
+      if (!heading) {
+        heading = headings.find(function (node) {
+          if (node.id) return false;
+          // Match a linked heading or its immediately following identity line,
+          // not arbitrary citations further into another paper's review.
+          var blocks = [node, node.nextElementSibling].filter(Boolean);
+          return blocks.some(function (block) {
+            if (block !== node && block.matches(".source-heading")) return false;
+            return Array.from(block.querySelectorAll("a.source-arxiv-link")).some(function (link) {
+              return reviewAnchor(idFromArxivUrl(link.href)) === anchor;
+            });
+          });
+        });
+      }
+      if (heading) markReviewTarget(heading, anchor);
+    });
+  }
+
+  function navigateToReview() {
+    if (!/^#review-[a-z0-9.-]+$/.test(window.location.hash)) return false;
+    var anchor = window.location.hash.slice(1);
+    var target = byId(anchor);
+    if (!target && state.report && state.report.papers.some(function (paper) { return reviewAnchor(paper.arxivId) === anchor; })) {
+      state.filter = "all";
+      state.query = "";
+      elements.search.value = "";
+      renderFilters(state.report.papers);
+      renderPapers();
+      target = byId(anchor);
+    }
+    if (!target || !target.classList.contains("review-target")) return false;
+    elements.researchFilters.open = false;
+    byId("personal-library").open = false;
+    target.focus({ preventScroll: true });
+    target.scrollIntoView({ block: "start", behavior: "instant" });
+    return true;
+  }
+
+  function archiveHref(editionId, arxivId) {
     var url = new URL(window.location.href);
     url.searchParams.set("edition", editionId);
     if (state.language === "en") url.searchParams.set("lang", "en");
     else url.searchParams.delete("lang");
-    url.hash = "digest";
+    url.hash = reviewAnchor(arxivId) || "digest";
     return url.href;
   }
 
@@ -1353,7 +1420,7 @@
     item.appendChild(top);
     var heading = createNode("h3", "archive-paper-title");
     var title = createNode("a", "", paper.title);
-    title.href = archiveHref(review.editionId);
+    title.href = archiveHref(review.editionId, paper.arxivId);
     heading.appendChild(title);
     item.appendChild(heading);
     item.appendChild(createNode("p", "archive-paper-authors", paper.authors.join(", ")));
@@ -1374,7 +1441,7 @@
     var bookmark = personal && personal.bookmarkButton(paper.arxivId);
     if (bookmark) actions.appendChild(bookmark);
     var read = createNode("a", "paper-link", t("archive.openReview") + " →");
-    read.href = archiveHref(review.editionId);
+    read.href = archiveHref(review.editionId, paper.arxivId);
     actions.appendChild(read);
     [
       [paper.absUrl, t("paper.abstractLink")],
@@ -1395,7 +1462,7 @@
         var label = formatDate(appearance.date, true) + " · " + kindLabel(appearance.kind) + " · " +
           (appearance.rating === null ? t("archive.unrated") : displayScore(appearance.rating) + "/10");
         var link = createNode("a", "", label);
-        link.href = archiveHref(appearance.editionId);
+        link.href = archiveHref(appearance.editionId, paper.arxivId);
         row.appendChild(link);
         appearances.appendChild(row);
       });
@@ -1624,6 +1691,7 @@
     }
     openLinkedTools();
     window.addEventListener("hashchange", openLinkedTools);
+    window.addEventListener("hashchange", navigateToReview);
 
     document.querySelectorAll("[data-language]").forEach(function (button) {
       button.lang = button.dataset.language;
@@ -1757,7 +1825,7 @@
     // Native fragment navigation happens before the asynchronous review text
     // has its final height. Restore shared section links after layout settles.
     // Do not override navigation to another section while loading.
-    if (window.location.hash === initialHash && /^#(?:archive|digest|method|page-title|paper-list|research-tools|research-filters|personal-library)$/.test(initialHash)) {
+    if (!navigateToReview() && window.location.hash === initialHash && /^#(?:archive|digest|method|page-title|paper-list|research-tools|research-filters|personal-library)$/.test(initialHash)) {
       var section = byId(initialHash.slice(1));
       if (section) section.scrollIntoView({ block: "start", behavior: "instant" });
     }

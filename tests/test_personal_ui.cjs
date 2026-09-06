@@ -15,7 +15,7 @@ async function setup(configured, restore = false, query = "?archive-view=papers"
   w.fetch = async url => {
     const relative = new URL(url).pathname.replace(/^\/public-page\//, "");
     if (!relative.startsWith("data/")) throw new Error("Unexpected request");
-    if (relative === "data/latest.json" && reportGate) await reportGate;
+    if ((relative === "data/latest.json" || /^data\/archive\/(?!index\.json)/.test(relative)) && reportGate) await reportGate;
     return { ok: true, json: async () => {
       const value = JSON.parse(fs.readFileSync(path.join(site, relative), "utf8"));
       return transform ? transform(value, relative) : value;
@@ -55,6 +55,100 @@ test("paper cards separate actual API metadata and label historical usage as unr
       assert.ok(notes.every(n => n.children.length === 0), "metadata stays plain text, not HTML");
     } finally { page.dom.window.close(); }
   }
+});
+
+test("paper titles, review buttons and other appearances link to the paper and preserve filters/language", async () => {
+  const page = await setup(false, false, "?lang=en&archive-view=papers&archive-rating=6");
+  try {
+    const cards = [...page.id("archive-paper-list").children];
+    assert.ok(cards.length > 0);
+    for (const card of cards) {
+      const id = card.querySelector("[data-bookmark-id]").dataset.bookmarkId;
+      const links = [card.querySelector(".archive-paper-title a"), card.querySelector(".paper-actions a.paper-link"),
+        ...card.querySelectorAll(".archive-paper-reviews a")];
+      for (const link of links) {
+        const url = new URL(link.href);
+        assert.equal(url.hash, "#review-" + id.replace(/\//g, "-"));
+        assert.ok(url.searchParams.get("edition"));
+        assert.equal(url.searchParams.get("lang"), "en");
+        assert.equal(url.searchParams.get("archive-rating"), "6");
+      }
+    }
+  } finally { page.dom.window.close(); }
+});
+
+test("all archived papers have unique direct targets, preferring the review text", async () => {
+  const catalogue = JSON.parse(fs.readFileSync(path.join(site, "data/papers.json"), "utf8"));
+  for (const edition of catalogue.editions.filter(e => e.papers.length)) {
+    const last = edition.papers.at(-1);
+    const anchor = id => "review-" + id.replace(/v\d+$/i, "").toLowerCase().replace(/\//g, "-");
+    const page = await setup(false, false, "?edition=" + edition.editionId + "#" + anchor(last.arxivId));
+    try {
+      for (const paper of edition.papers) {
+        const target = page.id(anchor(paper.arxivId));
+        assert.ok(target, edition.editionId + " / " + paper.arxivId);
+        assert.ok(target.classList.contains("review-target"));
+        assert.ok(page.id("source-document").contains(target) || page.id("paper-list").contains(target));
+        if (edition.editionId.includes("openai")) {
+          assert.ok(page.id("source-document").contains(target), "API review opens its full review section");
+          assert.ok(target.textContent.includes(paper.title));
+        }
+      }
+      const ids = [...page.w.document.querySelectorAll("[id]")].map(n => n.id);
+      assert.equal(new Set(ids).size, ids.length);
+      assert.equal(page.scrolls.at(-1), anchor(last.arxivId));
+      assert.equal(page.w.document.activeElement, page.id(anchor(last.arxivId)));
+      assert.equal(page.id("research-filters").open, false);
+    } finally { page.dom.window.close(); }
+  }
+});
+
+test("English review targets wait for text, and hash navigation reaches another paper", async () => {
+  const gate = deferred();
+  const page = await setup(false, false, "?edition=2026-09-01-daily-openai-01&lang=en#review-2608.29423", gate.promise);
+  try {
+    assert.equal(page.id("review-2608.29423"), null);
+    gate.resolve(); await tick(); await tick();
+    assert.equal(page.scrolls.at(-1), "review-2608.29423");
+    assert.ok(page.id("source-document").contains(page.id("review-2608.29423")));
+    assert.equal(page.id("source-document").lang, "en");
+    page.w.location.hash = "review-2608.30321"; await tick();
+    assert.equal(page.scrolls.at(-1), "review-2608.30321");
+    assert.equal(page.w.document.activeElement, page.id("review-2608.30321"));
+  } finally { gate.resolve(); page.dom.window.close(); }
+});
+
+test("late paper links cannot override subsequent navigation to tools", async () => {
+  const gate = deferred();
+  const page = await setup(true, false, "?edition=2026-09-01-daily-openai-01#review-2608.29423", gate.promise);
+  try {
+    page.id("archive-edit-filters").click();
+    const priorScrolls = page.scrolls.length;
+    gate.resolve(); await tick(); await tick();
+    assert.equal(page.scrolls.length, priorScrolls);
+    assert.equal(page.w.document.activeElement, page.id("research-filters-summary"));
+  } finally { gate.resolve(); page.dom.window.close(); }
+});
+
+test("unmatched legacy prose falls back to its card and restores a filtered-out target", async () => {
+  const page = await setup(false, false, "?edition=2026-09-01-daily-openai-01#review-2608.29423", null,
+    (value, relative) => {
+      if (relative.endsWith("2026-09-01-daily-openai-01.json")) value.sourceText = "## Legacy summary\n\nNo identifiable paper heading.";
+      return value;
+    });
+  try {
+    assert.ok(page.id("paper-list").contains(page.id("review-2608.29423")));
+    assert.equal(page.scrolls.at(-1), "review-2608.29423");
+    page.id("paper-search").value = "no matching title";
+    page.id("paper-search").dispatchEvent(new page.w.Event("input"));
+    assert.equal(page.id("review-2608.30321"), null);
+    page.w.location.hash = "review-2608.30321"; await tick();
+    assert.equal(page.scrolls.at(-1), "review-2608.30321");
+    assert.equal(page.id("paper-search").value, "");
+    const scrollCount = page.scrolls.length;
+    page.w.location.hash = "review-missing"; await tick();
+    assert.equal(page.scrolls.length, scrollCount, "unknown paper never redirects to an unrelated review");
+  } finally { page.dom.window.close(); }
 });
 
 test("unconfigured and configured anonymous reading both remain available without auth requests", async () => {

@@ -986,9 +986,14 @@
     if (paper.schedulerSummary) {
       var summary = createNode("div", "scheduler-summary");
       summary.appendChild(createNode("span", "scheduler-summary-label", t("paper.scheduledReview")));
+      var summaryParts = paper.schedulerSummary.split(/\n\n(?=(?:一次判定|論文解析|週次統合|月次統合|screen|paper|weekly|monthly):)/);
       var summaryText = createNode("p", "");
-      appendInline(summaryText, paper.schedulerSummary);
+      appendInline(summaryText, summaryParts[0]);
       summary.appendChild(summaryText);
+      var researchNote = summaryParts.slice(1).join("\n\n") || (state.language === "en"
+        ? "Model / effort / tokens: not recorded."
+        : "モデル・effort・トークン数：未記録。");
+      summary.appendChild(createNode("p", "research-run-note", researchNote));
       main.appendChild(summary);
     }
 

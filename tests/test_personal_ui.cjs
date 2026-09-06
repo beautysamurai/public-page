@@ -4,7 +4,7 @@ const fs = require("node:fs"), path = require("node:path");
 const { JSDOM } = require("jsdom");
 const { fakeClient, tick, deferred } = require("./helpers/personal_fake.cjs");
 const site = path.join(__dirname, "../site");
-async function setup(configured, restore = false, query = "?archive-view=papers", reportGate = null) {
+async function setup(configured, restore = false, query = "?archive-view=papers", reportGate = null, transform = null) {
   const dom = new JSDOM(fs.readFileSync(path.join(site, "index.html"), "utf8"), {
     url: "https://example.test/public-page/" + query, runScripts: "outside-only"
   });
@@ -16,7 +16,10 @@ async function setup(configured, restore = false, query = "?archive-view=papers"
     const relative = new URL(url).pathname.replace(/^\/public-page\//, "");
     if (!relative.startsWith("data/")) throw new Error("Unexpected request");
     if (relative === "data/latest.json" && reportGate) await reportGate;
-    return { ok: true, json: async () => JSON.parse(fs.readFileSync(path.join(site, relative), "utf8")) };
+    return { ok: true, json: async () => {
+      const value = JSON.parse(fs.readFileSync(path.join(site, relative), "utf8"));
+      return transform ? transform(value, relative) : value;
+    } };
   };
   w.RatesCreateSupabaseClient = () => { creates++; return client; };
   w.RatesPersonalConfig = configured ? { url: "https://abcdefgh.supabase.co", publishableKey: "sb_publishable_" + "x".repeat(25) } : null;
@@ -31,6 +34,28 @@ async function setup(configured, restore = false, query = "?archive-view=papers"
   return { dom, w, client, scrolls, creates: () => creates, id: id => w.document.getElementById(id),
     submit: id => w.document.getElementById(id).dispatchEvent(new w.Event("submit", { bubbles: true, cancelable: true })) };
 }
+
+test("paper cards separate actual API metadata and label historical usage as unrecorded", async () => {
+  for (const recorded of [false, true]) {
+    const page = await setup(false, false, "?edition=2026-09-01-daily-openai-01", null, (value, relative) => {
+      if (recorded && relative.endsWith("2026-09-01-daily-openai-01.json")) {
+        value.papers[0].schedulerSummary += "\n\n論文解析: gpt-5.6-sol / medium · トークン 入力 1,000 / 出力 300（うち推論 100） · 全51ページ（50ページ超）：abstractとIntroductionのみ。全文未解析";
+      }
+      return value;
+    });
+    try {
+      const notes = [...page.w.document.querySelectorAll(".research-run-note")];
+      assert.ok(notes.length > 0);
+      if (recorded) {
+        assert.ok(notes.some(n => n.textContent.includes("gpt-5.6-sol / medium")));
+        assert.ok(notes.some(n => n.textContent.includes("全文未解析")));
+      } else {
+        assert.ok(notes.every(n => n.textContent.includes("未記録")));
+      }
+      assert.ok(notes.every(n => n.children.length === 0), "metadata stays plain text, not HTML");
+    } finally { page.dom.window.close(); }
+  }
+});
 
 test("unconfigured and configured anonymous reading both remain available without auth requests", async () => {
   for (const configured of [false, true]) {

@@ -157,6 +157,8 @@ jobs:
             requirements.txt
             config/research.json
             scripts/research_language.py
+            scripts/research_pdf.py
+            scripts/research_usage.py
             scripts/research_pipeline.py
             scripts/research_publication.py
             scripts/import_scheduler_history.py

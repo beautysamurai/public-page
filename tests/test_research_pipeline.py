@@ -340,13 +340,14 @@ class RecordingResponses:
 
 
 class ResponsesAdapterTests(unittest.TestCase):
-    def test_abstract_and_pdf_use_strict_schema_store_false_and_file_url(self):
+    def test_abstract_and_pdf_use_strict_schema_store_false_and_inspected_inline_pdf(self):
         responses = RecordingResponses([analysis(importance=4), analysis(importance=5)])
         adapter = pipeline.ResponsesAnalyzer(config(), SimpleNamespace(responses=responses))
         candidate = pipeline.PaperCandidate(entry("2608.12345"), ("new",), ("q-fin.TR",))
 
         adapter.analyze_abstract(candidate)
-        adapter.analyze_pdf(candidate)
+        with mock.patch.object(pipeline, "fetch_pdf_for_inline_input", return_value=b"%PDF-fixture"), mock.patch.object(pipeline, "inspect_pdf", return_value=(20, None)):
+            adapter.analyze_pdf(candidate)
 
         abstract_call, pdf_call = responses.calls
         for call in responses.calls:
@@ -364,7 +365,8 @@ class ResponsesAdapterTests(unittest.TestCase):
             file_input,
             {
                 "type": "input_file",
-                "file_url": "https://arxiv.org/pdf/2608.12345v1",
+                "filename": "paper.pdf",
+                "file_data": "data:application/pdf;base64,JVBERi1maXh0dXJl",
                 "detail": "low",
             },
         )

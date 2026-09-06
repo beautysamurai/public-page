@@ -229,7 +229,7 @@ class InterfaceLocaleContractTests(unittest.TestCase):
         )
         self.assertIn('url.searchParams.set("edition", editionId)', self.app)
         self.assertIn('window.location.assign(languageUrl(language).href)', self.app)
-        self.assertIn('url.hash = "digest"', self.app)
+        self.assertIn('url.hash = reviewAnchor(arxivId) || "digest"', self.app)
         self.assertIn('data-i18n="nav.theory" data-preserve-language', self.index)
         self.assertIn(
             'document.querySelectorAll("[data-preserve-language]")', self.app

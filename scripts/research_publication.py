@@ -47,6 +47,7 @@ from validate_public_bundle import (
     validate_bundle,
     validate_translation,
 )
+import research_usage
 
 
 REPORT_SCHEMA_VERSION = 2
@@ -519,7 +520,9 @@ def _validate_analysis(
 
 def _validate_paper(value: object, index: int) -> dict[str, Any]:
     context = f"research report papers[{index}]"
-    paper = _require_exact_keys(value, PAPER_FIELDS, context)
+    fields = PAPER_FIELDS | {"usage"} if isinstance(value, Mapping) and "usage" in value else PAPER_FIELDS
+    paper = _require_exact_keys(value, fields, context)
+    usage = _validated_usage(paper)
     metadata = _require_exact_keys(
         paper["metadata"], METADATA_FIELDS, f"{context}.metadata"
     )
@@ -571,13 +574,25 @@ def _validate_paper(value: object, index: int) -> dict[str, Any]:
         "finalAnalysis": _validate_analysis(
             paper["finalAnalysis"], f"{context}.finalAnalysis"
         ),
+        **usage,
     }
+
+
+def _validated_usage(value):
+    if "usage" not in value:
+        return {}
+    try:
+        return {"usage": research_usage.validate(value["usage"])}
+    except ValueError as exc:
+        raise ResearchReportSchemaError("Invalid research usage metadata") from exc
 
 
 def validate_research_report(value: object) -> dict[str, Any]:
     """Validate and normalize one completed pipeline report."""
 
-    report = _require_exact_keys(value, REPORT_FIELDS, "research report")
+    fields = REPORT_FIELDS | {"usage"} if isinstance(value, Mapping) and "usage" in value else REPORT_FIELDS
+    report = _require_exact_keys(value, fields, "research report")
+    usage = _validated_usage(report)
     schema_version = report["schemaVersion"]
     if type(schema_version) is not int or schema_version != REPORT_SCHEMA_VERSION:
         raise ResearchReportSchemaError(
@@ -692,6 +707,7 @@ def validate_research_report(value: object) -> dict[str, Any]:
         "periodStart": period_start,
         "periodEnd": period_end,
         "papers": papers,
+        **usage,
     }
 
 
@@ -771,6 +787,7 @@ def _render_source_text(
         heading = f"## {_ja_date(report_date)} — {JA_KIND_LABELS[kind]}"
         status_message = JA_STATUS_MESSAGES[public_status]
     parts = [heading, "", status_message]
+    parts.extend(["", _markdown_text(research_usage.overview(report.get("usage"), english=english)), ""])
 
     papers = report["papers"]
     if not papers:
@@ -816,6 +833,8 @@ def _render_source_text(
                 ),
                 "",
                 _markdown_text(localized["summary"]),
+                "",
+                _markdown_text(research_usage.describe(paper.get("usage"), english=english)),
                 "",
                 (
                     f"{_markdown_text(localized['methodology'])} "
@@ -873,7 +892,7 @@ def adapt_research_report(value: object) -> AdaptedPublication:
                 "schedulerLabel": (
                     f"{recommended_ja}・重要度 {public_importance}/10"
                 ),
-                "schedulerSummary": analysis["summary"],
+                "schedulerSummary": analysis["summary"] + ("\n\n" + research_usage.describe(paper["usage"]) if paper.get("usage") else ""),
                 "ratings": [
                     {
                         "label": "重要度",
@@ -889,7 +908,7 @@ def adapt_research_report(value: object) -> AdaptedPublication:
                 "schedulerLabel": (
                     f"{recommended_en} · Importance {public_importance}/10"
                 ),
-                "schedulerSummary": english_analysis["summary"],
+                "schedulerSummary": english_analysis["summary"] + ("\n\n" + research_usage.describe(paper["usage"], english=True) if paper.get("usage") else ""),
                 "ratings": [{"label": "Importance"}],
             }
         )

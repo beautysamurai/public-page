@@ -1321,3 +1321,13 @@ button { color: inherit; }
 @media (max-width: 540px) {
   .research-tools .archive-paper-fields { grid-template-columns: minmax(0, 1fr); }
 }
+/* API metadata is plain text, separate from mathematical research prose. */
+.research-run-note {
+  white-space: pre-line;
+  font-family: system-ui, sans-serif;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+  border-inline-start: 2px solid currentColor;
+  padding-inline-start: 0.75rem;
+}

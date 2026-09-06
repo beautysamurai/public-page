@@ -1,0 +1,35 @@
+name: Check research model access (read-only)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - name: Verify configured model access without generating research
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          python - <<'PY'
+          import json
+          from openai import OpenAI
+          config = json.load(open('config/research.json', encoding='utf-8'))
+          client = OpenAI(timeout=30, max_retries=0)
+          for model in sorted({config[k] for k in ('screenModel', 'fullModel', 'weeklyModel', 'monthlyModel')}):
+              try:
+                  result = client.models.retrieve(model)
+              except Exception as exc:
+                  status = getattr(exc, 'status_code', None)
+                  print(f'Model access failed: {model}; HTTP {status if isinstance(status, int) else "unavailable"}')
+                  raise SystemExit(1)
+              if result.id != model:
+                  raise SystemExit('Unexpected model identity')
+              print(f'Model accessible: {model}')
+          PY

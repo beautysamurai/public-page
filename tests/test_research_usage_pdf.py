@@ -144,7 +144,47 @@ class ResearchUsagePdfTests(unittest.TestCase):
                 checkpoint = json.loads((root / "checkpoints/2026-08-28.json").read_text(encoding="utf-8"))
                 self.assertEqual(failed["status"], p.UPDATE_NOT_CONFIRMED)
                 self.assertEqual(len(checkpoint["usage"]), 2)
+                self.assertEqual(failed["usage"], checkpoint["usage"])
+                failed_adapter = p.ResponsesAnalyzer(config(), SimpleNamespace(responses=SimpleNamespace(
+                    create=mock.Mock(return_value=self.response(output_text="invalid JSON")))))
+                failed_again = p.run_daily(config(), **args, analyzer=failed_adapter)
+                self.assertEqual(failed_again["status"], p.UPDATE_NOT_CONFIRMED)
+                self.assertEqual(len(failed_again["usage"]), 3)
+                persisted = json.loads((root / "daily/2026-08-28.json").read_text(encoding="utf-8"))
+                self.assertEqual(persisted["usage"], failed_again["usage"])
+                self.assertEqual((root / "daily/2026-08-28.md").read_text(encoding="utf-8"),
+                                 p.report_to_markdown(failed_again))
+                self.assertIn("合計 2,600", p.report_to_markdown(failed_again))
                 adapter2 = p.ResponsesAnalyzer(config(), SimpleNamespace(responses=SimpleNamespace(create=mock.Mock(return_value=self.response()))))
                 completed = p.run_daily(config(), **args, analyzer=adapter2)
-            self.assertEqual(len(completed["usage"]), 3)
+            self.assertEqual(len(completed["usage"]), 4)
             self.assertEqual(completed["status"], p.UPDATE_CONFIRMED)
+
+    def test_synthesis_preserves_abstract_only_and_unknown_legacy_coverage(self):
+        c = usage.record(self.response(model="gpt-5.6-luna"), model="gpt-5.6-luna", effort="low",
+                         stage="screen", paper_ids=["2608.12345v1"], scope="abstract", pages=None)
+        paper = {"metadata": p.metadata_from_entry(entry("2608.12345")), "finalAnalysis": analysis(importance=2), "usage": [c, c]}
+        self.assertEqual(p._source_coverage(paper), [{"scope": "abstract", "pdfPages": None}])
+        for kind in (p.WEEKLY, p.MONTHLY):
+            prompt = p._synthesis_prompt([paper], kind, CHECKED_AT.date(), CHECKED_AT.date())
+            self.assertIn('"sourceCoverage":[{"scope":"abstract","pdfPages":null}]', prompt)
+            self.assertIn("abstract means only the abstract", prompt)
+        paper.pop("usage")
+        self.assertEqual(p._source_coverage(paper), [{"scope": "unknown", "pdfPages": None}])
+        self.assertIn('"scope":"unknown"', p._synthesis_prompt([paper], p.WEEKLY, CHECKED_AT.date(), CHECKED_AT.date()))
+
+    def test_pending_usage_enrichment_does_not_replace_completed_or_conflicting_usage(self):
+        c = usage.record(self.response(), model="gpt-5.6-sol", effort="medium", stage="paper",
+                         paper_ids=["2608.12345v1"], scope="full_text", pages=20)
+        report = p._report(report_kind=p.DAILY, report_date=CHECKED_AT.date(), generated_at=CHECKED_AT,
+                           status=p.UPDATE_NOT_CONFIRMED, message="Pending.", expected_batch_date=CHECKED_AT.date(),
+                           observed_batch_date=CHECKED_AT.date(), period_start=None, period_end=None, papers=[])
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            p.persist_report(report, root)
+            enriched = p.persist_report({**report, "usage": [c]}, root)
+            self.assertEqual(enriched["usage"], [c])
+            conflicting = {**report, "usage": [{**c, "effort": "high"}, c]}
+            self.assertEqual(p.persist_report(conflicting, root), enriched)
+            completed = p.persist_report({**enriched, "status": p.NO_RELEVANT_PAPERS}, root)
+            self.assertEqual(p.persist_report({**completed, "usage": [c, c]}, root), completed)

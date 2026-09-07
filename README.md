@@ -653,11 +653,26 @@ only after all output checks have passed and a validated candidate has been
 recorded. The separate merge job can persist that safe retry state and any
 completed editions; it never publishes an incomplete edition as complete.
 
-GitHub may show approval-required duplicate PR checks for a PR created with
-`GITHUB_TOKEN`. The automatic path uses the tests and privacy checks inside the
-trusted scheduled/manual research workflow, so those duplicate checks do not
-need manual approval unless repository rules explicitly require them. See
-[GitHub's token event behavior](https://docs.github.com/en/actions/concepts/security/github_token).
+GitHub creates approval-required `pull_request` runs when `GITHUB_TOKEN` opens
+or updates a PR. Leaving those duplicate runs unapproved can produce an
+approval-expired failure even after research, merge and publication succeeded.
+Generated research commits therefore include `[skip ci]`, including period
+retry markers and merges of newer `main` into the durable branch. An older
+pending head receives one empty metadata commit if needed, without rewriting
+history or including staged output left by a failed step. This suppresses only
+the duplicate `push`/`pull_request` workflows; it does not approve workflows,
+weaken fork protections, change ordinary code PR validation, or skip the trusted
+scheduled/manual research job's tests, publication checks and privacy scan.
+The independent Pages validation still runs through explicit dispatch.
+
+No additional PAT/App secret or repository permission change is needed. Existing
+approval-expired runs remain historical failures; the fix applies to subsequent
+automated heads. Do not rerun paid research just to clear an old duplicate check.
+Repository rules are never bypassed: if you later make the duplicate PR checks
+required, this opt-out will leave the PR blocked. Revisit the check design before
+enabling that requirement (for example, use a dedicated GitHub App to trigger
+normal PR CI). See [GitHub's token event behavior](https://docs.github.com/en/actions/concepts/security/github_token)
+and [commit-based workflow skipping](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/skip-workflow-runs).
 
 Because a `GITHUB_TOKEN` merge does not trigger a `push` workflow, the merge job
 explicitly dispatches the unchanged **Deploy GitHub Pages** workflow on `main`.

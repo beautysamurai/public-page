@@ -142,7 +142,7 @@ jobs:
           if git ls-remote --exit-code --heads origin "$AUTOMATION_BRANCH" >/dev/null 2>&1; then
             git fetch origin "$AUTOMATION_BRANCH"
             git checkout -B "$AUTOMATION_BRANCH" FETCH_HEAD
-            git merge --no-edit origin/main
+            git merge --no-edit -m "research: sync main into durable branch [skip ci]" origin/main
           else
             git checkout -b "$AUTOMATION_BRANCH" origin/main
           fi
@@ -550,7 +550,7 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git commit -m "research: queue period review retries"
+          git commit -m "research: queue period review retries [skip ci]"
           git push origin "HEAD:$AUTOMATION_BRANCH"
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
@@ -843,7 +843,7 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git commit -m "research: persist automated arXiv state"
+          git commit -m "research: persist automated arXiv state [skip ci]"
           git push origin "HEAD:$AUTOMATION_BRANCH"
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
@@ -1054,7 +1054,7 @@ jobs:
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          git commit -m "content: publish automated arXiv review"
+          git commit -m "content: publish automated arXiv review [skip ci]"
           git push origin "HEAD:$AUTOMATION_BRANCH"
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
@@ -1070,6 +1070,16 @@ jobs:
             echo "No unmerged research changes."
             exit 0
           fi
+          # Legacy pending heads may predate the duplicate-CI opt-out. Append
+          # only metadata; do not amend durable history or commit staged output
+          # left by an earlier failed step. All merge validation stays mandatory.
+          if [[ "$(git log -1 --format=%B)" != *"[skip ci]"* ]]; then
+            if ! git diff --cached --quiet; then
+              echo "::error::Refusing to mark a research head with uncommitted staged output."
+              exit 1
+            fi
+            git commit --allow-empty -m "research: preserve automated review state [skip ci]"
+          fi
           # Also persist a merge of newer main when report bytes did not change.
           git push origin "HEAD:$AUTOMATION_BRANCH"
           existing="$(gh pr list --base main --head "$AUTOMATION_BRANCH" --state open --json number --jq '.[0].number // empty')"
@@ -1078,7 +1088,7 @@ jobs:
               --base main \
               --head "$AUTOMATION_BRANCH" \
               --title "research: automated arXiv review" \
-              --body "Automated daily arXiv screening plus scheduled weekly and monthly synthesis. arXiv/OpenAI failures remain incomplete and are not published. After all generation, publication, and privacy checks pass, a separate job verifies this exact data-only head, merges it, and starts Pages deployment. Code changes and failed validation are never auto-merged."
+              --body "Automated daily arXiv screening plus scheduled weekly and monthly synthesis. arXiv/OpenAI failures remain incomplete and are not published. After all generation, publication, and privacy checks pass, a separate job verifies this exact data-only head, merges it, and starts Pages deployment. Code changes and failed validation are never auto-merged. Duplicate push/PR checks are intentionally not started for generated commits; validation remains in the research job and the independently dispatched Pages workflow."
             existing="$(gh pr list --base main --head "$AUTOMATION_BRANCH" --state open --json number --jq '.[0].number // empty')"
           else
             echo "Updated existing review PR #$existing."

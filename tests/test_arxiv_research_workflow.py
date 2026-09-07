@@ -1,5 +1,11 @@
 from __future__ import annotations
 
+import os
+import re
+import shutil
+import subprocess
+import tempfile
+import textwrap
 import unittest
 from pathlib import Path
 
@@ -50,8 +56,88 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
         )
         self.assertLess(
             continuation.index("git config user.name"),
-            continuation.index("git merge --no-edit origin/main"),
+            continuation.index("git merge --no-edit"),
         )
+
+    def test_generated_commits_opt_out_of_duplicate_ci_only(self) -> None:
+        commits = re.findall(r'^\s+git commit .*$', self.workflow, re.MULTILINE)
+        self.assertEqual(len(commits), 4)
+        self.assertTrue(all('[skip ci]' in command for command in commits))
+        self.assertNotIn('--amend', self.workflow)
+        self.assertIn('[skip ci]', self.step('Continue the durable automation branch'))
+        triggers = self.workflow.split('\npermissions:', 1)[0]
+        self.assertIn('  schedule:', triggers)
+        self.assertIn('  workflow_dispatch:', triggers)
+        self.assertNotIn('  pull_request:', triggers)
+        validation = (ROOT / '.github/workflows/validate.yml').read_text(encoding='utf-8')
+        self.assertIn('  pull_request:\n', validation)
+        self.assertNotIn('paths-ignore:', validation)
+        self.assertNotIn('pull_request_target:', validation)
+        self.assertNotIn('[skip ci]', validation)
+        self.assertIn('actions/workflows/pages.yml/dispatches', (ROOT / 'scripts/merge_research_pr.py').read_text(encoding='utf-8'))
+
+    def legacy_marker_script(self) -> str:
+        step = self.step('Open or update the review pull request')
+        start = step.index('          # Legacy pending heads')
+        end = step.index('          # Also persist', start)
+        self.assertLess(step.index('git diff --quiet origin/main HEAD'), start)
+        self.assertLess(end, step.index('git push origin'))
+        return 'set -euo pipefail\n' + textwrap.dedent(step[start:end])
+
+    def local_git_fixture(self) -> tuple[Path, str]:
+        git_exe = shutil.which('git')
+        if not git_exe:
+            self.skipTest('Git is needed for the isolated workflow fixture')
+        bash = str(Path(git_exe).resolve().parents[1] / 'bin/bash.exe') if os.name == 'nt' else shutil.which('bash')
+        if not bash or not Path(bash).is_file():
+            self.skipTest('Bash is needed to execute the actual workflow snippet')
+        directory = Path(self.enterContext(tempfile.TemporaryDirectory()))
+        self.fixture_git(directory, 'init', '-b', 'main')
+        self.fixture_git(directory, 'config', 'user.name', 'Workflow Test')
+        self.fixture_git(directory, 'config', 'user.email', 'test@example.test')
+        self.fixture_git(directory, 'config', 'commit.gpgsign', 'false')
+        self.fixture_git(directory, 'commit', '--allow-empty', '-m', 'Existing research state')
+        return directory, bash
+
+    def fixture_git(self, directory: Path, *args: str) -> str:
+        return subprocess.check_output(['git', '-C', str(directory), *args], stderr=subprocess.PIPE).decode('utf-8').strip()
+
+    def test_legacy_head_gets_one_empty_commit_without_rewriting_history(self) -> None:
+        directory, bash = self.local_git_fixture()
+        previous = self.fixture_git(directory, 'rev-parse', 'HEAD')
+        tree = self.fixture_git(directory, 'rev-parse', 'HEAD^{tree}')
+        for _ in range(2):
+            subprocess.run([bash, '-c', self.legacy_marker_script()], cwd=directory, check=True, capture_output=True)
+            self.assertEqual(self.fixture_git(directory, 'rev-parse', 'HEAD^'), previous)
+            self.assertEqual(self.fixture_git(directory, 'rev-parse', 'HEAD^{tree}'), tree)
+            self.assertIn('[skip ci]', self.fixture_git(directory, 'log', '-1', '--format=%B'))
+
+    def test_legacy_marker_cannot_commit_leftover_staged_output(self) -> None:
+        directory, bash = self.local_git_fixture()
+        previous = self.fixture_git(directory, 'rev-parse', 'HEAD')
+        (directory / 'unvalidated.json').write_text('{}', encoding='utf-8')
+        self.fixture_git(directory, 'add', 'unvalidated.json')
+        result = subprocess.run([bash, '-c', self.legacy_marker_script()], cwd=directory, capture_output=True)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn(b'uncommitted staged output', result.stdout)
+        self.assertEqual(self.fixture_git(directory, 'rev-parse', 'HEAD'), previous)
+        self.assertEqual(self.fixture_git(directory, 'diff', '--cached', '--name-only'), 'unvalidated.json')
+
+    def test_merge_only_head_keeps_ancestry_and_duplicate_ci_marker(self) -> None:
+        directory, bash = self.local_git_fixture()
+        self.fixture_git(directory, 'checkout', '-b', 'automation/openai-arxiv-research')
+        self.fixture_git(directory, 'commit', '--allow-empty', '-m', 'Pending research')
+        research = self.fixture_git(directory, 'rev-parse', 'HEAD')
+        self.fixture_git(directory, 'checkout', 'main')
+        self.fixture_git(directory, 'commit', '--allow-empty', '-m', 'New main change')
+        main = self.fixture_git(directory, 'rev-parse', 'HEAD')
+        self.fixture_git(directory, 'update-ref', 'refs/remotes/origin/main', main)
+        self.fixture_git(directory, 'checkout', 'automation/openai-arxiv-research')
+        command = next(line.strip() for line in self.step('Continue the durable automation branch').splitlines() if line.strip().startswith('git merge '))
+        subprocess.run([bash, '-c', command], cwd=directory, check=True, capture_output=True)
+        self.assertEqual(self.fixture_git(directory, 'rev-parse', 'HEAD^1'), research)
+        self.assertEqual(self.fixture_git(directory, 'rev-parse', 'HEAD^2'), main)
+        self.assertIn('[skip ci]', self.fixture_git(directory, 'log', '-1', '--format=%B'))
 
     def test_daily_run_only_generates_research_and_classifies_completion(self) -> None:
         daily = self.step("Run daily research")

@@ -1278,6 +1278,9 @@ button { color: inherit; }
 .personal-library { margin-bottom: 1.5rem; padding: 1rem 1.25rem; border: 1px solid #b8c7c2; border-radius: .5rem; background: #f1f5f2; }
 .personal-library summary { cursor: pointer; font-size: 1rem; font-weight: 700; }
 .personal-help { font-size: .875rem; line-height: 1.7; color: #425b60; margin: .8rem 0; }
+.personal-github-login { margin: 1rem 0; }
+#personal-github { background: #174842; color: white; font-size: 1rem; }
+#personal-email-option > summary { font-size: .875rem; font-weight: 400; }
 .personal-identity { overflow-wrap: anywhere; font-size: .9375rem; }
 .personal-form, .personal-actions { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; margin: 1rem 0; }
 .personal-form label { flex: 1 1 14rem; display: grid; gap: .4rem; font-size: .875rem; }

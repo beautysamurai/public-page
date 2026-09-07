@@ -15,6 +15,17 @@ function fakeClient() {
       async getSession() { return client.sessionResult || { data: { session: client.user ? { user: client.user } : null } }; },
       async signOut() { if (client.logoutResult) return client.logoutResult; client.emit(null); return { error: null }; },
       async signInWithOtp(args) { client.requestedEmail = args.email; return { error: null }; },
+      async signInWithOAuth(args) {
+        client.oauthArgs = args;
+        return client.oauthResult || { data: { flowId: "test-flow-12345",
+          url: "https://abcdefgh.supabase.co/auth/v1/authorize?provider=github&code_challenge=challenge&code_challenge_method=s256" }, error: null };
+      },
+      async exchangeCodeForSession(code, options) {
+        client.exchanges = (client.exchanges || []).concat([{ code, options }]);
+        if (client.exchangeResult) return client.exchangeResult;
+        client.emit({ id: "user-a", email: "a@example.test" });
+        return { data: { session: { user: client.user } }, error: null };
+      },
       async verifyOtp(args) { client.verified = args; client.emit({ id: "user-a", email: args.email }); return { data: {} }; }
     },
     from(table) {

@@ -109,7 +109,7 @@ list or applying a preset also moves to its results. Collapsing the panels does
 not reset conditions or log you out. Direct `#research-filters` and
 `#personal-library` links open only the explicitly targeted panel.
 
-My library adds email-code login, bookmarks shared across a paper's versions,
+My library adds GitHub login (with optional email-code login), bookmarks shared across a paper's versions,
 and named filter presets. Stars appear in both the issue and archive paper cards.
 **全期間のブックマークを表示 / Show bookmarks across all dates** starts across
 all review types/dates; rating, tag and keyword filters can then be combined.
@@ -118,7 +118,9 @@ future papers. Applying a preset preserves the page language; deleting a preset
 does not delete its papers or reviews. Names are not unique: saving creates a new
 preset, avoiding silent overwrites of a similarly named preset on another device.
 
-The only local persistence is the Supabase login session. Personal records live
+The Supabase login session is persisted locally. A short-lived, same-tab OAuth
+record also retains the selected review/filter URL and PKCE flow ID in
+`sessionStorage` while GitHub sign-in is in progress. Personal records live
 in Supabase with per-user RLS policies; they are never published to GitHub or
 sent to OpenAI. Sync occurs after sign-in, after each write, when returning to
 the visible page (throttled to 30 seconds), or via **同期する / Sync now**. It is
@@ -138,14 +140,16 @@ accepted server operation. Other device sessions remain logged in after logout.
    `research_bookmarks` and `research_presets`, user foreign keys, size checks,
    grants and ownership policies together. Do not disable RLS. It deliberately
    fails if applied a second time; future schema changes need new migrations.
-3. Enable the Email provider and allow new signups in Authentication. Configure
-   BOTH the **Confirm signup** and **Magic Link / OTP** email templates to show
-   the code, for example `Your Rates & Execution code: {{ .Token }}`. Existing
-   and new users can use different templates. This site accepts 6–10 digits and
-   calls `verifyOtp` with `type: "email"`; it does not consume magic-link tokens
-   or credentials from a URL. Set the Site URL to
-   `https://beautysamurai.github.io/public-page/`.
-4. Configure **custom SMTP** before offering sign-in to general visitors.
+3. Configure **GitHub sign-in** using the steps below. Allow new signups if new
+   readers should be able to save a library. Set the Site URL to
+   `https://beautysamurai.github.io/public-page/`. GitHub login does not require
+   a custom email sender, email-template edits, or a purchased domain.
+4. **Optional email-code login only:** enable the Email provider and configure
+   **custom SMTP** to unlock template editing and send to general visitors.
+   Set BOTH **Confirm signup** and **Magic Link / OTP** bodies to include
+   `Your Rates & Execution code: {{ .Token }}`. This site accepts 6–10 digits and
+   calls `verifyOtp` with `type: "email"`; it never consumes email magic links
+   or bearer tokens from a URL. Email login is a secondary, collapsed option.
    Supabase's built-in sender is for testing, sends only to your organization
    team's addresses, and has a low rate limit (currently two emails/hour).
    SMTP credentials stay in Supabase, never GitHub/browser configuration. Your
@@ -158,6 +162,52 @@ accepted server operation. Other device sessions remain logged in after logout.
    `sb_secret_` key, legacy `service_role` JWT, database password, or OpenAI key.
    This implementation intentionally accepts only the hosted `*.supabase.co`
    project URL and modern publishable keys. See [key types](https://supabase.com/docs/guides/getting-started/api-keys).
+
+##### GitHub sign-in: one-time owner setup
+
+1. In Supabase open **Authentication → Sign In / Providers → GitHub** and
+   copy the displayed **Callback URL**. It has the shape
+   `https://YOUR_PROJECT_REF.supabase.co/auth/v1/callback`.
+2. Open [GitHub OAuth Apps](https://github.com/settings/developers), select
+   **New OAuth App**, and use:
+   - Application name: `Rates & Execution`
+   - Homepage URL: `https://beautysamurai.github.io/public-page/`
+   - Authorization callback URL: the **Supabase Callback URL copied in step 1**,
+     NOT the GitHub Pages URL.
+   - Leave Device Flow disabled.
+3. Register the app. Copy its **Client ID**, generate a **Client secret**, then
+   paste both into the Supabase GitHub provider settings and enable/save it.
+   The Client secret belongs ONLY in Supabase's provider settings. Never paste
+   it into chat, `.env`, GitHub Actions variables, browser code, or this repository.
+4. In Supabase **Authentication → URL Configuration**, set **Site URL** and add
+   this exact entry to **Redirect URLs**: `https://beautysamurai.github.io/public-page/`.
+   Do not use an unrestricted wildcard. Optional local testing needs a separate
+   exact entry, for example `http://127.0.0.1:8765/`. The GitHub app callback from
+   step 1 stays the Supabase URL even when the site is tested locally.
+5. Open the published site, expand **My library**, and select **Sign in with GitHub**.
+   Complete authorization and return in the **same tab/browser**. The original
+   review, language and archive filters are restored; the library syncs using
+   the existing `auth.uid()` ownership policies. Try another device with the same
+   GitHub account to verify synchronization. No new SQL migration is needed.
+
+The site requests only `user:email` (no repository/write scopes). GitHub's profile
+and verified email are shared with Supabase for authentication. This uses S256
+PKCE with automatic URL session detection disabled: only a code associated with
+this tab's pending flow is exchanged, exactly once, using the SDK's `flowId`.
+Callback codes, errors and legacy token fragments are scrubbed before archive
+and language links are built. Redirects always return to this site's root; only
+allowlisted same-site view state is restored. Ordinary anonymous reading makes
+no Supabase requests. Cancelling, opening the callback in another browser,
+expired codes, disabled storage or a disabled GitHub provider require restarting
+sign-in; raw provider errors and credentials are never rendered or logged.
+
+Existing libraries are not deleted or copied. Supabase can automatically link
+the GitHub identity to an existing user when verified email addresses match.
+If they differ, it can be a separate account: sign into the original account
+before attempting any migration; do not manually change `user_id` or disable RLS.
+See [GitHub setup](https://supabase.com/docs/guides/auth/social-login/auth-github),
+[PKCE](https://supabase.com/docs/guides/auth/sessions/pkce-flow), and
+[identity linking](https://supabase.com/docs/guides/auth/auth-identity-linking).
 
 #### 2. Local preview
 

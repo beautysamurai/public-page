@@ -4,7 +4,7 @@ const fs = require("node:fs"), path = require("node:path");
 const { JSDOM } = require("jsdom");
 const { fakeClient, tick, deferred } = require("./helpers/personal_fake.cjs");
 const site = path.join(__dirname, "../site");
-async function setup(configured, restore = false, query = "?archive-view=papers", reportGate = null, transform = null) {
+async function setup(configured, restore = false, query = "?archive-view=papers", reportGate = null, transform = null, prepare = null) {
   const dom = new JSDOM(fs.readFileSync(path.join(site, "index.html"), "utf8"), {
     url: "https://example.test/public-page/" + query, runScripts: "outside-only"
   });
@@ -21,13 +21,14 @@ async function setup(configured, restore = false, query = "?archive-view=papers"
       return transform ? transform(value, relative) : value;
     } };
   };
-  w.RatesCreateSupabaseClient = () => { creates++; return client; };
+  w.RatesCreateSupabaseClient = (_url, _key, options) => { creates++; client.options = options; return client; };
   w.RatesPersonalConfig = configured ? { url: "https://abcdefgh.supabase.co", publishableKey: "sb_publishable_" + "x".repeat(25) } : null;
   if (restore) {
     w.localStorage.setItem("rates-personal:abcdefgh.supabase.co:/public-page/", "fake-login");
     client.user = { id: "user-a", email: "a@example.test" };
   }
-  for (const name of ["i18n.js", "archive-ui.js", "tex-math.js", "personal-library.js", "personal-ui.js", "app.js"]) {
+  if (prepare) prepare(w, client);
+  for (const name of ["i18n.js", "archive-ui.js", "tex-math.js", "personal-library.js", "personal-oauth.js", "personal-ui.js", "app.js"]) {
     w.eval(fs.readFileSync(path.join(site, name), "utf8"));
   }
   await tick(); await tick();
@@ -53,6 +54,88 @@ test("paper cards separate actual API metadata and label historical usage as unr
         assert.ok(notes.every(n => n.textContent.includes("未記録")));
       }
       assert.ok(notes.every(n => n.children.length === 0), "metadata stays plain text, not HTML");
+    } finally { page.dom.window.close(); }
+  }
+});
+
+const githubPendingKey = "rates-personal:abcdefgh.supabase.co:/public-page/:github-pending";
+function seedGithub(w, changes = {}) {
+  w.sessionStorage.setItem(githubPendingKey, JSON.stringify({ flowId: "test-flow-12345", createdAt: Date.now(),
+    returnTo: "https://example.test/public-page/?edition=2026-09-01-daily-openai-01&lang=en&archive-view=papers&archive-rating=8#review-2608.29423", ...changes }));
+}
+
+test("GitHub is primary, email stays optional, and normal reading makes no auth request", async () => {
+  const page = await setup(true);
+  try {
+    assert.equal(page.creates(), 0);
+    assert.equal(page.id("personal-github-login").hidden, false);
+    assert.equal(page.id("personal-email-option").open, false);
+    assert.ok(page.id("personal-email-option").contains(page.id("personal-login")));
+    assert.equal(page.id("personal-library").open, false);
+    assert.ok(page.id("personal-github").textContent.includes("GitHub"));
+  } finally { page.dom.window.close(); }
+});
+
+test("GitHub callback exchanges exactly once, restores review/filter/language and syncs only its user", async () => {
+  const page = await setup(true, false, "?code=one-time-code-123", null, null, (w, client) => {
+    seedGithub(w);
+    client.tables.research_bookmarks = [{ user_id: "user-a", paper_id: "2608.29423" }, { user_id: "user-b", paper_id: "2608.30321" }];
+  });
+  try {
+    await tick();
+    assert.deepEqual(page.client.exchanges.map(e => e.code), ["one-time-code-123"]);
+    assert.equal(page.client.exchanges[0].options.flowId, "test-flow-12345");
+    assert.equal(page.client.options.auth.flowType, "pkce");
+    assert.equal(page.client.options.auth.detectSessionInUrl, false);
+    assert.equal(page.id("personal-account").hidden, false);
+    assert.equal(page.id("personal-github-login").hidden, true);
+    assert.equal(page.id("personal-library").open, false);
+    assert.equal(page.scrolls.at(-1), "review-2608.29423");
+    assert.equal(new URL(page.w.location.href).searchParams.get("lang"), "en");
+    assert.equal(new URL(page.w.location.href).searchParams.get("archive-rating"), "8");
+    assert.equal(page.w.sessionStorage.getItem(githubPendingKey), null);
+    assert.equal(page.w.RatesPersonalOAuth.takeCallback(), null);
+    for (const link of page.w.document.querySelectorAll("a[href]")) assert.ok(!link.href.includes("one-time-code"));
+    assert.ok(!page.w.document.body.textContent.includes("one-time-code"));
+    assert.ok(page.client.queries.every(q => q.filters.user_id === "user-a"));
+    page.id("personal-signout").click(); await tick();
+    assert.equal(page.id("personal-account").hidden, true);
+    assert.equal(page.id("personal-github-login").hidden, false);
+  } finally { page.dom.window.close(); }
+});
+
+test("unsolicited, expired, cancelled and implicit-token callbacks fail closed and scrub the URL", async () => {
+  for (const [query, pending] of [
+    ["?code=unknown-code-123", null],
+    ["?code=expired-code-123", { createdAt: Date.now() - 11 * 60 * 1000 }],
+    ["?error=access_denied&error_description=untrusted-secret", {}],
+    ["#access_token=untrusted-secret&refresh_token=untrusted-secret", {}]
+  ]) {
+    const page = await setup(true, false, query, null, null, w => { if (pending) seedGithub(w, pending); });
+    try {
+      assert.equal(page.creates(), 0, "no exchange or remote auth for an invalid callback");
+      assert.equal(page.id("personal-account").hidden, true);
+      assert.equal(page.id("personal-library").open, true);
+      assert.ok(page.id("personal-message").textContent.length > 0);
+      assert.ok(!page.w.location.href.includes("code="));
+      assert.ok(!page.w.location.href.includes("untrusted-secret"));
+      assert.ok(!page.w.document.body.textContent.includes("untrusted-secret"));
+    } finally { page.dom.window.close(); }
+  }
+});
+
+test("provider failure is sanitized, and a late callback cannot replace an existing account", async () => {
+  for (const restored of [false, true]) {
+    const page = await setup(true, restored, "?code=callback-code-123", null, null, (w, client) => {
+      seedGithub(w);
+      client.exchangeResult = { error: new Error("sensitive-provider-response") };
+    });
+    try {
+      assert.equal((page.client.exchanges || []).length, restored ? 0 : 1);
+      assert.ok(!page.w.document.body.textContent.includes("sensitive-provider-response"));
+      assert.ok(page.id("personal-message").textContent.includes("GitHub"));
+      assert.equal(page.id("personal-account").hidden, !restored);
+      assert.equal(page.id("personal-github").disabled, false);
     } finally { page.dom.window.close(); }
   }
 });
@@ -163,7 +246,7 @@ test("unconfigured and configured anonymous reading both remain available withou
       const button = page.w.document.querySelector("[data-bookmark-id]");
       button.click(); assert.equal(page.id("personal-library").open, true);
       assert.equal(page.scrolls.at(-1), "personal-library");
-      assert.equal(page.w.document.activeElement, configured ? page.id("personal-email") : page.id("personal-library").querySelector("summary"));
+      assert.equal(page.w.document.activeElement, configured ? page.id("personal-github") : page.id("personal-library").querySelector("summary"));
       assert.equal(page.client.writes.length, 0);
       page.id("archive-saved-only").checked = true;
       page.id("archive-saved-only").dispatchEvent(new page.w.Event("change"));
@@ -301,7 +384,7 @@ test("late initial report loading cannot scroll away from explicitly opened top 
       const scrollCount = page.scrolls.length;
       gate.resolve(); await tick(); await tick();
       assert.equal(page.scrolls.length, scrollCount, "old #archive navigation must not be restored");
-      assert.equal(page.w.document.activeElement, page.id(target === "research-filters" ? "research-filters-summary" : "personal-email"));
+      assert.equal(page.w.document.activeElement, page.id(target === "research-filters" ? "research-filters-summary" : "personal-github"));
     } finally { gate.resolve(); page.dom.window.close(); }
   }
 });

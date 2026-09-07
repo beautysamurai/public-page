@@ -4,7 +4,8 @@
     var lib = window.RatesPersonalLibrary, t = hooks.t;
     var byId = function (id) { return document.getElementById(id); };
     var panel = byId("personal-library"), login = byId("personal-login"), account = byId("personal-account");
-    var email = byId("personal-email"), token = byId("personal-token");
+    var email = byId("personal-email"), token = byId("personal-token"), github = byId("personal-github");
+    var oauth = window.RatesPersonalOAuth, oauthCallback = oauth.takeCallback();
     var message = byId("personal-message"), status = byId("personal-status"), presets = byId("personal-presets");
     var config = null, configInvalid = false, store = null, client = null, initPromise = null;
     var authBusy = false, authGeneration = 0, pendingEmail = "", messageKey = "", resendAt = 0;
@@ -13,7 +14,7 @@
     try {
       if (window.RatesPersonalConfig) {
         config = lib.validateConfig(window.RatesPersonalConfig);
-        storageKey = "rates-personal:" + new URL(config.url).hostname + ":" + window.location.pathname;
+        storageKey = oauth.storageKey;
       }
     } catch (_error) { configInvalid = true; }
 
@@ -33,7 +34,7 @@
       }
       panel.open = true;
       panel.scrollIntoView({ block: "start", behavior: "smooth" });
-      var target = snapshot.user ? byId("personal-refresh") : config ? email : panel.querySelector("summary");
+      var target = snapshot.user ? byId("personal-refresh") : config ? github : panel.querySelector("summary");
       if (target.disabled) target = panel.querySelector("summary");
       target.focus({ preventScroll: true });
     }
@@ -46,6 +47,9 @@
     }
     function render() {
       login.hidden = !!snapshot.user || !config;
+      byId("personal-github-login").hidden = !!snapshot.user || !config;
+      byId("personal-email-option").hidden = !!snapshot.user || !config;
+      github.disabled = authBusy;
       byId("personal-code-form").hidden = !!snapshot.user || !config || !pendingEmail;
       account.hidden = !snapshot.user;
       byId("personal-not-configured").hidden = !!config;
@@ -104,7 +108,8 @@
           document.head.appendChild(script);
         });
         client = window.RatesCreateSupabaseClient(config.url, config.publishableKey, {
-          auth: { storageKey: storageKey, persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },
+          auth: { storageKey: storageKey, persistSession: true, autoRefreshToken: true,
+            flowType: "pkce", detectSessionInUrl: false },
           global: { fetch: function (input, options) {
             var request = Object.assign({}, options);
             var timeout = AbortSignal.timeout(20000);
@@ -125,6 +130,38 @@
       try { await operation(); }
       catch (_error) { if (generation === authGeneration && snapshot.user && snapshot.user.id === user) messageKey = "personal.saveFailed"; }
       render();
+    }
+    github.addEventListener("click", async function () {
+      if (authBusy || snapshot.user || !config) return;
+      var generation = authGeneration;
+      authBusy = true; messageKey = "personal.githubStarting"; render();
+      try {
+        await ensureClient();
+        if (snapshot.user || generation !== authGeneration) return;
+        var destination = await oauth.begin(client);
+        if (snapshot.user || generation !== authGeneration) { oauth.clearPending(); return; }
+        window.location.assign(destination);
+      } catch (_error) { if (generation === authGeneration) messageKey = "personal.githubFailed"; }
+      finally { authBusy = false; render(); }
+    });
+    async function finishGithub() {
+      var returnHash = window.location.hash;
+      authBusy = true; messageKey = "personal.githubCompleting"; render();
+      try {
+        if (oauthCallback.error || !config) throw new Error("Missing or expired sign-in intent.");
+        var generation = authGeneration;
+        await ensureClient();
+        // Another tab may have signed in while this callback was loading. Do
+        // not exchange a late code over an already selected account.
+        if (snapshot.user || generation !== authGeneration) throw new Error("Account changed during sign-in.");
+        var result = await client.auth.exchangeCodeForSession(oauthCallback.code, { flowId: oauthCallback.flowId });
+        if (result.error || !result.data || !result.data.session) throw new Error("GitHub sign-in was not confirmed.");
+        messageKey = "";
+      } catch (_error) {
+        messageKey = "personal.githubReturnFailed";
+        if (window.location.hash === returnHash) openPanel();
+      }
+      finally { oauthCallback = null; authBusy = false; render(); }
     }
     login.addEventListener("submit", async function (event) {
       event.preventDefault();
@@ -162,6 +199,7 @@
     });
     byId("personal-refresh").addEventListener("click", function () { messageKey = ""; if (store) store.refresh(); });
     byId("personal-signout").addEventListener("click", async function () {
+      oauth.clearPending();
       authGeneration += 1; authBusy = true;
       try { await store.signOut(); }
       catch (_error) { messageKey = "personal.signoutLocal"; }
@@ -191,7 +229,10 @@
     });
     // No external request for anonymous readers. Restore only a previously
     // chosen login; focus refreshes pick up edits made on a different device.
-    try { if (config && window.localStorage.getItem(storageKey)) ensureClient().catch(function () { messageKey = "personal.authFailed"; render(); }); }
+    try {
+      if (oauthCallback) finishGithub();
+      else if (config && window.localStorage.getItem(storageKey)) ensureClient().catch(function () { messageKey = "personal.sessionFailed"; render(); });
+    }
     catch (_error) { /* Login can still work without persistent browser storage. */ }
     var lastRefresh = 0;
     document.addEventListener("visibilitychange", function () {

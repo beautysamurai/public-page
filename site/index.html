@@ -28,6 +28,7 @@
     <script src="./tex-math.js" defer></script>
     <script src="./personal-config.js" defer></script>
     <script src="./personal-library.js" defer></script>
+    <script src="./personal-oauth.js" defer></script>
     <script src="./personal-ui.js" defer></script>
     <script src="./app.js" defer></script>
   </head>
@@ -114,16 +115,23 @@
           </details>
             <details class="personal-library" id="personal-library">
               <summary data-i18n="personal.title">マイライブラリ · 登録 / ログイン</summary>
-              <p class="personal-help" data-i18n="personal.intro">同じメールアドレスでログインすると、別の端末でも保存内容を使えます。閲覧だけならログイン不要です。</p>
+              <p class="personal-help" data-i18n="personal.intro">同じアカウントでログインすると、別の端末でも保存内容を使えます。閲覧だけならログイン不要です。</p>
               <p id="personal-not-configured" data-i18n="personal.notConfigured">個人同期は準備中です。公開リサーチと検索はそのまま利用できます。</p>
-              <form id="personal-login" class="personal-form" hidden>
-                <label for="personal-email"><span data-i18n="personal.email">メールアドレス</span><input id="personal-email" type="email" autocomplete="email" maxlength="254" required></label>
-                <button id="personal-send" type="submit" data-i18n="personal.send">確認コードを送信</button>
-              </form>
-              <form id="personal-code-form" class="personal-form" hidden>
-                <label for="personal-token"><span data-i18n="personal.code">メールに届いた確認コード</span><input id="personal-token" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" maxlength="10" required disabled></label>
-                <button id="personal-verify" type="submit" disabled data-i18n="personal.verify">ログイン</button>
-              </form>
+              <div id="personal-github-login" class="personal-github-login" hidden>
+                <button id="personal-github" type="button" data-i18n="personal.github">GitHubでログイン</button>
+                <p class="personal-help" data-i18n="personal.githubHelp">メールの確認コードは不要です。GitHubで認証して、このページに戻ります。</p>
+              </div>
+              <details id="personal-email-option" hidden>
+                <summary data-i18n="personal.emailOption">メールでログイン（メール送信設定が必要）</summary>
+                <form id="personal-login" class="personal-form" hidden>
+                  <label for="personal-email"><span data-i18n="personal.email">メールアドレス</span><input id="personal-email" type="email" autocomplete="email" maxlength="254" required></label>
+                  <button id="personal-send" type="submit" data-i18n="personal.send">確認コードを送信</button>
+                </form>
+                <form id="personal-code-form" class="personal-form" hidden>
+                  <label for="personal-token"><span data-i18n="personal.code">メールに届いた確認コード</span><input id="personal-token" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6,10}" maxlength="10" required disabled></label>
+                  <button id="personal-verify" type="submit" disabled data-i18n="personal.verify">ログイン</button>
+                </form>
+              </details>
               <div id="personal-account" hidden>
                 <p id="personal-identity" class="personal-identity"></p>
                 <div class="personal-actions">
@@ -141,7 +149,7 @@
               </div>
               <p id="personal-status" class="personal-help" role="status" aria-live="polite"></p>
               <p id="personal-message" class="personal-message" role="status" aria-live="polite"></p>
-              <p class="personal-help" data-i18n="personal.privacy">ログイン時にメールアドレス、保存した論文ID・検索条件をSupabaseに送信します。ログイン状態はこのブラウザーに保存されます。共用端末では利用後にログアウトしてください。</p>
+              <p class="personal-help" data-i18n="personal.privacy">GitHubログインでは、プロフィールと確認済みメールをSupabaseに連携します。リポジトリへのアクセス権限は要求しません。保存した論文ID・検索条件はSupabaseでアカウントごとに管理します。ログイン状態はこのブラウザーに保存されます。共用端末では利用後にログアウトしてください。</p>
             </details>
         </div>
       </section>

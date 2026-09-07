@@ -14,12 +14,24 @@ operate under their own privacy policies.
 
 ## Optional personal library
 
-Anonymous reading makes no Supabase request. Choosing email sign-in sends the
-email address and confirmation code to the configured Supabase project. The
-project's email provider delivers the code. Supabase also receives ordinary
-connection metadata such as IP address and browser information; the provider's
-logs and retention settings apply. Returning signed-in visitors contact
-Supabase to restore their login and load their library.
+Anonymous reading makes no Supabase authentication/database request and does
+not start GitHub OAuth. Choosing **Sign in with GitHub** navigates through the
+configured Supabase project to GitHub for authorization, then back to this site.
+GitHub handles the account login and consent and shares the GitHub account
+identifier, profile information and email information with Supabase, which uses
+a verified email for authentication. The site requests `user:email`, not
+repository access or write scopes; it does not receive the GitHub password.
+GitHub and Supabase receive ordinary connection metadata, such as IP address and
+browser information, during this flow. Their own cookies, logs and retention
+practices apply; see [GitHub's privacy statement](https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement)
+and [Supabase's privacy policy](https://supabase.com/privacy).
+
+Optional email-code sign-in instead sends the email address and confirmation
+code to the configured Supabase project; its email provider delivers the code.
+That flow also involves the providers' connection metadata and logs. Returning
+signed-in visitors contact Supabase to restore their login and load their
+library. Supabase may link a GitHub identity to an existing account with the
+same verified email; a different email may create a separate library.
 
 Bookmarks store the version-free arXiv ID. Presets store the chosen name and
 search filters (including any keyword typed by the user). These records stay
@@ -28,11 +40,22 @@ Ownership policies restrict users to their own records. The project operator
 and privileged database administrators can still access them; this is not
 end-to-end encryption. Do not save confidential work information in keywords.
 
-The browser stores a Supabase login session in localStorage, scoped to this
-project and site path. Personal records are only held in page memory. Pages
-under the same GitHub Pages origin remain in the same browser security boundary;
-do not host untrusted scripts under that origin. Sign out on shared devices.
-Use public reading without signing in to avoid this optional data collection.
+The browser stores a Supabase login session (which can include provider tokens
+and account metadata) in localStorage, scoped to this project and site path.
+The SDK also manages PKCE verifier data there. During GitHub sign-in, this tab's
+sessionStorage holds a flow ID, start time and an allowlisted same-site return
+URL, including the selected review, language and archive filters/search words.
+This return state is not sent to GitHub; the provider redirect uses the site
+root. The pending record is only accepted for ten minutes and is removed when
+the callback is processed, on local logout or when the tab is closed. Callback
+codes and token/error URL fields are removed before share/filter links are
+built; raw credentials and provider errors are not displayed or logged by the
+site. A callback code is exchanged only for a pending flow started in this tab.
+
+Personal records are only held in page memory. Pages under the same GitHub Pages
+origin remain in the same browser security boundary; do not host untrusted
+scripts under that origin. Sign out on shared devices. Use public reading
+without signing in to avoid this optional authentication data collection.
 
 Bookmarks and presets remain until removed by the user or project operator.
 Use the star again to remove a bookmark, Delete for a preset, or Download saved
@@ -40,12 +63,17 @@ library for a local JSON copy (keep that download private). The project owner
 can delete the Auth user in Supabase to cascade-delete their library. This does
 not erase pre-existing provider logs or backups; configure and document those
 retention periods before opening public registration. Logging out removes this
-browser's session, not the cloud library or logins on other devices.
+browser's session, not the cloud library or logins on other devices. Site logout
+and Supabase account deletion do not delete your GitHub account or revoke the
+GitHub OAuth App grant. That authorization can be revoked separately in GitHub's
+account application settings; revoking it does not delete the Supabase library.
 
 The official Supabase SDK is bundled and served from the same origin, not a
 remote CDN. Only the exact configured project HTTPS origin is added to the
 homepage's connection policy. Public URL/publishable key values are intentionally
-visible; service-role/secret keys must never be used by this site.
+visible; service-role/secret keys must never be used by this site. The GitHub
+OAuth Client secret belongs only in Supabase's provider configuration, never
+in browser code, public configuration, GitHub Actions variables or this repo.
 
 ## What becomes public
 

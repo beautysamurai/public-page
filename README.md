@@ -254,12 +254,14 @@ claims. Tests cover anonymous access denial, A/B user separation, ownership
 reassignment denial, own CRUD, cascade deletion, failed requests and late
 responses after logout. Tests make no real Supabase/OpenAI requests.
 
-After setup, separately verify real email delivery for a new user and a returning
-user; save on device A, sign in as the same user on device B and sync; then sign
+After setup, separately verify GitHub authorization for a new user and a
+returning user (and email delivery if offering email login); save on device A,
+sign in as the same user on device B and sync; then sign
 in as a different user and verify an empty independent library. Also test
 cross-user API reads/writes using those users' own sessions (never a service-role
 key). A hosted two-user end-to-end check cannot be completed without your project
-and working email delivery. Review [PRIVACY.md](PRIVACY.md) before public signup;
+and a configured GitHub provider or working email delivery. Review
+[PRIVACY.md](PRIVACY.md) before public signup;
 configure provider-log/backup retention and a user deletion contact/process.
 
 To export, use **保存内容をダウンロード / Download saved library**. Remove

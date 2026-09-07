@@ -697,6 +697,26 @@ analytics, tracking, accounts, or runtime secret.
 Read [PRIVACY.md](PRIVACY.md) before publishing and
 [SECURITY.md](SECURITY.md) before changing integrations or credentials.
 
+## Butterfly brand assets
+
+The site uses a butterfly motif inspired by a 5Y / 10Y / 15Y rates butterfly.
+Mint outer exposures and an ivory center represent illustrative, normalized
+key-rate DV01 weights of **+1 / -2 / +1**. These add to zero for a parallel yield
+shift; they are not notional weights or a claim of neutrality to all risks.
+
+- [Square application logo](site/assets/rates-butterfly-icon-v1.png): 1254 x 1254 PNG,
+  losslessly compressed below 1,000,000 bytes. Used in page headers and favicons.
+- [Horizontal wordmark](site/assets/rates-butterfly-wordmark-v1.png): 1774 x 887 PNG,
+  including the maturity and DV01 legend. Used in the main and theory footers.
+
+To set the GitHub OAuth Application logo, open the app under GitHub
+**Settings > Developer settings > OAuth Apps**, then upload the square PNG in its logo
+settings and review the circular crop before saving. This is a separate owner
+action; publishing the site does not change the OAuth app settings. See
+[GitHub's badge requirements](https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/creating-a-custom-badge-for-your-oauth-app).
+Both assets are bundled locally by the existing Pages build; no image CDN,
+third-party browser request, authentication setting or social preview is added.
+
 ## License
 
 The project code is available under the [MIT License](LICENSE). arXiv paper

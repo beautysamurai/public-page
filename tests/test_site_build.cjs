@@ -20,6 +20,9 @@ test("Pages build publishes only public settings, narrows CSP, rejects secrets, 
     assert.ok(html.includes("connect-src 'self' https://abcdefgh.supabase.co;"));
     assert.ok(html.includes("script-src 'self';")); assert.ok(!html.includes("https://*.supabase.co"));
     assert.ok(fs.existsSync(path.join(output, "vendor/supabase.js")));
+    for (const file of ["assets/rates-butterfly-icon-v1.png", "assets/rates-butterfly-wordmark-v1.png"]) {
+      assert.deepEqual(fs.readFileSync(path.join(output, file)), fs.readFileSync(path.join(root, "site", file)), file);
+    }
     for (const file of ["classics/index.html", "classics.js", "classics.css", "data/classics.json"]) {
       assert.equal(fs.readFileSync(path.join(output, file), "utf8"), fs.readFileSync(path.join(root, "site", file), "utf8"), file);
     }

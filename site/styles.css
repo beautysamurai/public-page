@@ -75,26 +75,21 @@ button { color: inherit; }
 }
 
 .brand, .footer-brand { display: inline-flex; align-items: center; gap: 12px; }
-.brand { width: max-content; text-decoration: none; }
+.brand { width: max-content; max-width: 100%; min-width: 0; text-decoration: none; }
 
-.brand-mark {
-  width: 36px;
-  height: 31px;
-  display: inline-flex;
-  align-items: end;
-  gap: 3px;
-  padding: 5px;
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  display: block;
+  flex: 0 0 auto;
+  object-fit: contain;
+  border-radius: 9px;
   background: var(--ink);
-  transform: skewX(-7deg);
 }
 
-.brand-mark i { width: 5px; display: block; background: var(--mint); }
-.brand-mark i:nth-child(1) { height: 35%; }
-.brand-mark i:nth-child(2) { height: 70%; }
-.brand-mark i:nth-child(3) { height: 51%; }
-.brand-mark i:nth-child(4) { height: 100%; background: var(--acid); }
-
-.brand-copy { display: grid; line-height: 1.05; }
+.brand-copy { display: grid; min-width: 0; line-height: 1.05; }
+.brand-wordmark { display: block; width: 100%; height: auto; }
+.footer-brand-lockup { min-width: 0; max-width: 360px; flex-direction: column; align-items: flex-start; gap: 0; }
 
 .brand-copy strong {
   font-size: .9rem;
@@ -1068,7 +1063,6 @@ button { color: inherit; }
 
 .site-footer { padding: 42px 0; color: rgba(255, 255, 255, .64); background: #07161f; }
 .footer-grid { display: grid; grid-template-columns: 1fr 1.4fr auto; align-items: center; gap: 40px; }
-.brand-mark-light { background: rgba(255, 255, 255, .08); }
 .footer-brand > div { display: grid; line-height: 1.05; }
 .footer-brand strong { color: var(--white); }
 .footer-brand small { color: rgba(255, 255, 255, .45); }
@@ -1108,7 +1102,9 @@ button { color: inherit; }
 @media (max-width: 680px) {
   :root { --shell: calc(100% - 28px); }
   html { scroll-padding-top: 110px; }
-  .header-inner { min-height: 0; grid-template-columns: 1fr auto; gap: 10px 16px; padding-block: 11px; }
+  .header-inner { min-height: 0; grid-template-columns: minmax(0, 1fr) auto; gap: 10px 16px; padding-block: 11px; }
+  .brand { gap: 8px; }
+  .brand-logo { width: 32px; height: 32px; border-radius: 7px; }
   .brand-copy strong { font-size: .82rem; }
   .header-tools { flex-direction: column; align-items: flex-end; gap: 5px; }
   .language-toggle button { padding: 3px 6px; font-size: .62rem; }

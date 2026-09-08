@@ -772,6 +772,48 @@ def _en_date(value: str) -> str:
     return f"{ENGLISH_MONTHS[parsed.month - 1]} {parsed.day}, {parsed.year}"
 
 
+def _usage_table(calls: object, *, english: bool, aggregate: bool = False) -> str:
+    """Format recorded usage without changing immutable card summaries."""
+    if calls is None:
+        return research_usage.describe(None, english=english)
+    research_usage.validate(calls)
+    if not calls:
+        return "No API calls recorded." if english else "API呼び出しの記録なし。"
+    labels = ["Stage", "Model / effort", "Calls", "Input", "Output (reasoning)", "Estimated cost (USD)", "Source / scope"] if english else ["段階", "モデル / effort", "回数", "入力", "出力（うち推論）", "推定費用（USD）", "解析範囲"]
+    groups = {}
+    for index, call in enumerate(calls):
+        key = (call["stage"], call["model"], call["requestedModel"], call["effort"]) if aggregate else index
+        groups.setdefault(key, []).append(call)
+    lines = ["| " + " | ".join(labels) + " |", "| " + " | ".join(["---"] * len(labels)) + " |"]
+    for values in groups.values():
+        c = values[0]
+        def total(field, *, cost=False):
+            known = [v[field] for v in values if v[field] is not None]
+            if not known:
+                return "Not recorded" if english else "未記録"
+            result = f"{sum(known):.4f}" if cost else f"{sum(known):,}"
+            return result + (" + ?" if len(known) < len(values) else "")
+        stage = c["stage"] if english else {"screen": "一次判定", "paper": "論文解析", "weekly": "週次統合", "monthly": "月次統合"}[c["stage"]]
+        model = c["model"] or c["requestedModel"] + (" (requested)" if english else "（指定値・実績未記録）")
+        scopes = []
+        for v in values:
+            scope = {
+                "abstract": "Abstract" if english else "Abstractのみ",
+                "full_text": f"Full PDF · {v['pdfPages']} pages" if english else f"PDF全文・{v['pdfPages']}ページ",
+                "abstract_introduction": f"{v['pdfPages']} pages (>50): abstract + Introduction only; full text not analyzed" if english else f"全{v['pdfPages']}ページ（50ページ超）：abstractとIntroductionのみ・全文未解析",
+                "stored_reviews": f"Stored reviews · shared across {len(v['paperIds'])} papers, not per-paper usage" if english else f"保存済みレビュー・{len(v['paperIds'])}論文の共有処理（論文単独の使用量ではありません）",
+            }[v["sourceScope"]]
+            if v["outcome"] != "completed":
+                scope += " · Unconfirmed attempt" if english else "・未完了の試行"
+            if scope not in scopes:
+                scopes.append(scope)
+        row = [stage, f"{model} / {c['effort']}", str(len(values)), total("inputTokens"),
+               f"{total('outputTokens')} ({total('reasoningTokens')})", total("estimatedCostUsd", cost=True), " / ".join(scopes)]
+        lines.append("| " + " | ".join(_markdown_text(cell) for cell in row) + " |")
+    lines.extend(["", "Reported retries are included. Unknown is not zero. Reasoning is included in output; costs are estimates, not billing records." if english else "記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。"])
+    return "\n".join(lines)
+
+
 def _render_source_text(
     report: Mapping[str, Any],
     *,
@@ -787,7 +829,8 @@ def _render_source_text(
         heading = f"## {_ja_date(report_date)} — {JA_KIND_LABELS[kind]}"
         status_message = JA_STATUS_MESSAGES[public_status]
     parts = [heading, "", status_message]
-    parts.extend(["", _markdown_text(research_usage.overview(report.get("usage"), english=english)), ""])
+    parts.extend(["", "### Usage for this edition" if english else "### この号の利用状況", "",
+                  _usage_table(report.get("usage"), english=english, aggregate=True), ""])
 
     papers = report["papers"]
     if not papers:
@@ -815,7 +858,7 @@ def _render_source_text(
             else ("推奨" if recommended else "非推奨")
         )
         authors = ", ".join(_markdown_text(author) for author in metadata["authors"])
-        topic = _markdown_text(localized["tags"][0])
+        topic = " / ".join(_markdown_text(" ".join(tag.splitlines())) for tag in localized["tags"])
         parts.extend(
             [
                 "",
@@ -826,27 +869,29 @@ def _render_source_text(
                     f"(https://arxiv.org/abs/{metadata['arxivId']}) — {authors}**"
                 ),
                 "",
-                (
-                    f"**Importance: {public_importance}/10 — {recommendation} · {topic}**"
-                    if english
-                    else f"**重要度: {public_importance}/10 — {recommendation}・{topic}**"
-                ),
+                "### Overview" if english else "### 概要",
                 "",
                 _markdown_text(localized["summary"]),
                 "",
-                _markdown_text(research_usage.describe(paper.get("usage"), english=english)),
+                "### Assessment" if english else "### 判定結果",
                 "",
-                (
-                    f"{_markdown_text(localized['methodology'])} "
-                    f"{_markdown_text(localized['mainResult'])}"
-                ),
+                "| Importance | Recommendation | Tags |" if english else "| 重要度 | 推奨判定 | タグ |",
+                "| --- | --- | --- |",
+                f"| {public_importance}/10 | {recommendation} | {topic} |",
                 "",
-                (
-                    f"{_markdown_text(localized['practicalApplication'])} "
-                    f"{_markdown_text(localized['limitations'])}"
-                ),
+                _usage_table(paper.get("usage"), english=english),
                 "",
-                _markdown_text(localized["reason"]),
+                "### Takeaways" if english else "### まとめ",
+                "",
+                f"**{'Main result' if english else '主な結果'}:** {_markdown_text(localized['mainResult'])}",
+                "",
+                f"**{'Methodology' if english else '手法'}:** {_markdown_text(localized['methodology'])}",
+                "",
+                f"**{'Practical application' if english else '実務への応用'}:** {_markdown_text(localized['practicalApplication'])}",
+                "",
+                f"**{'Limitations' if english else '限界・注意点'}:** {_markdown_text(localized['limitations'])}",
+                "",
+                f"**{'Why read it' if english else '読むべき理由'}:** {_markdown_text(localized['reason'])}",
             ]
         )
     return "\n".join(parts)

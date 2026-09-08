@@ -58,6 +58,44 @@ test("paper cards separate actual API metadata and label historical usage as unr
   }
 });
 
+test("daily and weekly paper reviews have three clear sections and safe assessment tables in both languages", async () => {
+  for (const [edition, count] of [["2026-09-07-daily-openai-01", 2], ["2026-09-04-weekly-openai-01", 12]]) {
+    for (const language of ["ja", "en"]) {
+      const page = await setup(false, false, "?edition=" + edition + "&lang=" + language);
+      try {
+        const doc = page.id("source-document");
+        const parts = [...doc.querySelectorAll(".source-review-part")].map(node => node.textContent);
+        const expected = language === "ja" ? ["概要", "判定結果", "まとめ"] : ["Overview", "Assessment", "Takeaways"];
+        assert.deepEqual(parts, Array.from({ length: count }, () => expected).flat());
+        const tables = [...doc.querySelectorAll("table.source-table")];
+        assert.ok(tables.length >= count + 1);
+        assert.ok(tables.every(table => table.caption && table.querySelectorAll('th[scope="col"]').length >= 2));
+        assert.ok(tables.every(table => table.querySelectorAll("math, .source-tex-fallback").length === 0), "model/cost metadata is not interpreted as math");
+        assert.ok([...doc.querySelectorAll(".source-table-scroll")].every(node => node.tabIndex === 0 && node.getAttribute("aria-label")));
+        assert.ok(doc.textContent.includes("USD"));
+        assert.ok(![...doc.querySelectorAll(".source-tex-fallback")].some(node => /\\(?:otimes|succeq|top)/.test(node.textContent)));
+        assert.equal(doc.querySelectorAll(".review-target").length, count, "deep paper links are preserved");
+        if (count === 12) assert.match(doc.textContent, language === "ja" ? /12論文の共有処理/ : /shared across 12 papers/);
+      } finally { page.dom.window.close(); }
+    }
+  }
+});
+
+test("source tables handle escaped pipes and hostile content using text-only DOM nodes", async () => {
+  const page = await setup(false, false, "?edition=2026-09-07-daily-openai-01", null, (value, relative) => {
+    if (relative.endsWith("2026-09-07-daily-openai-01.json")) value.sourceText = "### 判定結果\n\n| Item | Value |\n| --- | --- |\n| safe \\| tag | <img src=x onerror=alert(1)> text |\n| [bad](javascript:alert) | USD 0.0123 |\n\n### まとめ\n\nRemaining prose.";
+    return value;
+  });
+  try {
+    const doc = page.id("source-document");
+    assert.equal(doc.querySelectorAll("table").length, 1);
+    assert.equal(doc.querySelectorAll("tbody tr").length, 2);
+    assert.equal(doc.querySelector("td").textContent, "safe | tag");
+    assert.equal(doc.querySelectorAll("img,script,iframe,a[href^='javascript:']").length, 0);
+    assert.match(doc.textContent, /Remaining prose/);
+  } finally { page.dom.window.close(); }
+});
+
 const githubPendingKey = "rates-personal:abcdefgh.supabase.co:/public-page/:github-pending";
 function seedGithub(w, changes = {}) {
   w.sessionStorage.setItem(githubPendingKey, JSON.stringify({ flowId: "test-flow-12345", createdAt: Date.now(),

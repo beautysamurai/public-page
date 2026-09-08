@@ -397,6 +397,13 @@ estimate when usage is complete and the model price is known. Rates are dated
 response IDs, or raw error messages enter public usage metadata.
 
 Each paper section shows its model/effort/tokens, including a conspicuous
+three-part layout: **Overview / Assessment / Takeaways** (概要 / 判定結果 / まとめ).
+Assessment tables separate ratings/recommendations from recorded model usage.
+Costs use a USD-labelled column so currency cannot be mistaken for TeX delimiters.
+Tables remain keyboard-scrollable on narrow screens. The publication adapter can
+refresh these presentation fields from stored research JSON without paid model
+calls or changes to identities, ratings, summaries, timestamps, or raw research.
+Each paper's usage also includes a conspicuous
 50-page limitation where applicable. The report overview includes screening of
 excluded candidates. Weekly/monthly usage is shared by a bounded chunk and is
 labelled as such, not falsely allocated to individual papers. Source daily

@@ -6,8 +6,8 @@ const { JSDOM } = require('jsdom');
 
 const site = path.join(__dirname, '..', 'site');
 const origin = 'https://beautysamurai.github.io';
-const icon = '/public-page/assets/rates-butterfly-icon-v1.png';
-const wordmark = '/public-page/assets/rates-butterfly-wordmark-v1.png';
+const icon = '/public-page/assets/rates-butterfly-icon-v2.png';
+const wordmark = '/public-page/assets/rates-butterfly-wordmark-v2.png';
 const pages = ['index.html', 'classics/index.html', 'theory/index.html',
   'theory/black-scholes/index.html', 'theory/sabr/index.html',
   'theory/zabr/index.html', 'theory/hjb/index.html', '404.html'];
@@ -51,7 +51,8 @@ test('footer lockups include readable alternative text, reserved proportions and
     const document = documentFor(file, origin + '/public-page/' + file);
     const image = document.querySelector('.site-footer .brand-wordmark');
     assert.equal(image.src, origin + wordmark);
-    assert.match(image.alt, /Rates & Execution.*5Y.*10Y.*15Y.*DV01.*\+1.*−2.*\+1/);
+    assert.equal(image.alt, 'Rates & Execution');
+    assert.doesNotMatch(document.querySelector('.footer-brand-lockup').textContent, /DV01|\b(?:5Y|10Y|15Y)\b/);
     assert.equal(Number(image.getAttribute('width')) / Number(image.getAttribute('height')), 2);
     assert.equal(image.getAttribute('loading'), 'lazy');
     assert.ok(document.querySelector('.site-footer [data-i18n="footer.subtitle"]'));
@@ -60,7 +61,7 @@ test('footer lockups include readable alternative text, reserved proportions and
 });
 
 test('the upload icon is square and safely under one million bytes; wordmark is a wide PNG', () => {
-  for (const [name, ratio] of [['rates-butterfly-icon-v1.png', 1], ['rates-butterfly-wordmark-v1.png', 2]]) {
+  for (const [name, ratio] of [['rates-butterfly-icon-v2.png', 1], ['rates-butterfly-wordmark-v2.png', 2]]) {
     const bytes = fs.readFileSync(path.join(site, 'assets', name));
     assert.equal(bytes.subarray(0, 8).toString('hex'), '89504e470d0a1a0a');
     const width = bytes.readUInt32BE(16), height = bytes.readUInt32BE(20);

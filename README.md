@@ -699,15 +699,16 @@ Read [PRIVACY.md](PRIVACY.md) before publishing and
 
 ## Butterfly brand assets
 
-The site uses a butterfly motif inspired by a 5Y / 10Y / 15Y rates butterfly.
-Mint outer exposures and an ivory center represent illustrative, normalized
-key-rate DV01 weights of **+1 / -2 / +1**. These add to zero for a parallel yield
-shift; they are not notional weights or a claim of neutrality to all risks.
+The site uses a butterfly motif inspired by a rates butterfly. Green wings and
+two upward outer bars represent long exposure; a contrasting red downward
+center represents short exposure. The direction of the bars reinforces the
+color distinction. This is a brand motif, not a calibrated risk chart.
 
-- [Square application logo](site/assets/rates-butterfly-icon-v1.png): 1254 x 1254 PNG,
-  losslessly compressed below 1,000,000 bytes. Used in page headers and favicons.
-- [Horizontal wordmark](site/assets/rates-butterfly-wordmark-v1.png): 1774 x 887 PNG,
-  including the maturity and DV01 legend. Used in the main and theory footers.
+- [Square application logo](site/assets/rates-butterfly-icon-v2.png): a text-free
+  PNG below 1,000,000 bytes. Used in page headers and favicons.
+- [Horizontal wordmark](site/assets/rates-butterfly-wordmark-v2.png): the butterfly
+  and the name only, with no risk labels, maturities, numbers or legend.
+  Used in the main and theory footers.
 
 To set the GitHub OAuth Application logo, open the app under GitHub
 **Settings > Developer settings > OAuth Apps**, then upload the square PNG in its logo

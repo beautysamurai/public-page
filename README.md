@@ -341,6 +341,8 @@ than outages.
 Daily runs also retry **one existing pending weekly/monthly period** once its
 required daily batches are complete (at most two synthesis chunks per daily
 retry). Larger periods stay queued for the normal scheduled/manual period run.
+Daily-triggered period retries disable whole-request retries and cap each call
+at 300 seconds, reserving time to persist the daily result before the job limit.
 The regular weekly/monthly schedules are unchanged. Missing daily coverage is
 checked before paid synthesis, and completed daily/period reports are reused
 without reevaluation. Only a mistaken empty `NO_NEW_BATCH_EXPECTED` placeholder

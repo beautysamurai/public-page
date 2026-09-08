@@ -129,6 +129,8 @@ class PeriodRetryTests(unittest.TestCase):
             with patch.object(p, "run_aggregate", side_effect=p.StructuredOutputError("bad output")) as run:
                 self.assertTrue(recovery.retry_one(root, CFG, NOW))
             self.assertEqual(run.call_count, 1)
+            self.assertEqual(run.call_args.args[0].retries, 0)
+            self.assertLessEqual(run.call_args.args[0].openai_timeout, 300)
             self.assertTrue((root / "research/pending-periods/weekly/2026-09-04.json").exists())
 
     def test_status_does_not_publish_drafts_or_provider_errors(self):

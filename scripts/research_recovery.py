@@ -6,6 +6,7 @@ import calendar
 import json
 import os
 import sys
+from dataclasses import replace
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
@@ -84,7 +85,11 @@ def retry_one(root: Path, config: pipeline.PipelineConfig, now: datetime) -> boo
         print(f"retrying ready period: {kind} {end}")
         try:
             report = pipeline.run_aggregate(
-                config, report_kind=kind, period_start=start, period_end=end,
+                # A daily run must leave time to persist its own completed data.
+                # Two chunks, each with one initial request + at most two draft
+                # repairs, fit within 30 minutes at the maximum 300s timeout.
+                replace(config, retries=0, openai_timeout=min(config.openai_timeout, 300)),
+                report_kind=kind, period_start=start, period_end=end,
                 daily_dir=root / "research/daily", output_dir=root / f"research/reviews/{kind}",
                 generated_at=now,
             )

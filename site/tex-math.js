@@ -11,12 +11,13 @@
     sum: "∑", prod: "∏", int: "∫", cdot: "⋅", times: "×", pm: "±", mp: "∓",
     le: "≤", leq: "≤", ge: "≥", geq: "≥", neq: "≠", lt: "<", gt: ">",
     approx: "≈", sim: "∼", to: "→", rightarrow: "→", leftarrow: "←",
+    otimes: "⊗", succeq: "≽", preceq: "≼",
     in: "∈", notin: "∉", subset: "⊂", subseteq: "⊆", cup: "∪", cap: "∩"
   };
   // Identifiers must be mi, not mo: operator spacing separates Greek variables
   // from adjacent factors and even inserts gaps inside function arguments.
   var IDENTIFIERS = {
-    partial: "∂", nabla: "∇", infty: "∞", ell: "ℓ",
+    partial: "∂", nabla: "∇", infty: "∞", ell: "ℓ", top: "⊤",
     alpha: "α", beta: "β", gamma: "γ", delta: "δ", epsilon: "ϵ",
     varepsilon: "ε", zeta: "ζ", eta: "η", theta: "θ", vartheta: "ϑ", iota: "ι",
     kappa: "κ", lambda: "λ", mu: "μ", nu: "ν", xi: "ξ", omicron: "ο",

@@ -625,16 +625,70 @@
     parent.appendChild(pre);
   }
 
+  function sourceTableCells(line) {
+    if (!/^\|.*\|$/.test(line.trim())) return null;
+    var cells = line.trim().slice(1, -1).split(/(?<!\\)\|/).map(function (cell) { return cell.trim().replace(/\\\|/g, "|"); });
+    return cells.length >= 2 && cells.length <= 12 ? cells : null;
+  }
+
+  function sourceTableHeader(lines, position) {
+    var cells = sourceTableCells(lines[position] || "");
+    var separator = sourceTableCells(lines[position + 1] || "");
+    return cells && separator && cells.length === separator.length && separator.every(function (cell) { return /^:?-{3,}:?$/.test(cell); }) ? cells : null;
+  }
+
   function renderMarkdownLite(value) {
     var fragment = document.createDocumentFragment();
     var lines = cleanMultiline(value).split("\n");
     var index = 0;
+    var tableLabel = state.language === "en" ? "Assessment" : "判定結果";
 
     while (index < lines.length) {
       var raw = lines[index];
       var trimmed = raw.trim();
       if (!trimmed) {
         index += 1;
+        continue;
+      }
+
+      var headers = sourceTableHeader(lines, index);
+      if (headers) {
+        var wrapper = createNode("div", "source-table-scroll");
+        wrapper.tabIndex = 0;
+        wrapper.setAttribute("role", "region");
+        wrapper.setAttribute("aria-label", tableLabel);
+        var table = createNode("table", "source-table");
+        table.appendChild(createNode("caption", "source-table-caption", tableLabel));
+        var thead = document.createElement("thead");
+        var headerRow = document.createElement("tr");
+        headers.forEach(function (label) {
+          var th = document.createElement("th");
+          th.scope = "col";
+          appendInline(th, label);
+          headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+        var tbody = document.createElement("tbody");
+        index += 2;
+        var rowCount = 0;
+        while (index < lines.length && rowCount < 100) {
+          var cells = sourceTableCells(lines[index]);
+          if (!cells || cells.length !== headers.length) break;
+          var row = document.createElement("tr");
+          cells.forEach(function (value) {
+            var td = document.createElement("td");
+            if (/^[\d,. ()+?\/]+$/.test(value)) td.className = "source-table-number";
+            appendInline(td, value);
+            row.appendChild(td);
+          });
+          tbody.appendChild(row);
+          index += 1;
+          rowCount += 1;
+        }
+        table.appendChild(tbody);
+        wrapper.appendChild(table);
+        fragment.appendChild(wrapper);
         continue;
       }
 
@@ -674,6 +728,8 @@
       if (heading) {
         var headingNode = createNode("h" + Math.min(6, heading[1].length + 2), "source-heading source-heading-" + heading[1].length);
         appendInline(headingNode, heading[2]);
+        tableLabel = stripRawHtml(heading[2]);
+        if (heading[1].length === 3 && /^(概要|判定結果|まとめ|Overview|Assessment|Takeaways)$/.test(heading[2])) headingNode.classList.add("source-review-part");
         fragment.appendChild(headingNode);
         index += 1;
         continue;
@@ -725,6 +781,7 @@
         var candidateTrimmed = candidate.trim();
         if (
           !candidateTrimmed ||
+          sourceTableHeader(lines, index) ||
           /^\x60{3}/.test(candidateTrimmed) ||
           candidateTrimmed === "$$" ||
           candidateTrimmed === "\\[" ||

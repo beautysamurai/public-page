@@ -167,7 +167,7 @@ class ResearchReportAdapterTests(unittest.TestCase):
         self.assertNotIn("### 要約", source["sourceText"])
         self.assertNotIn("### 分類", source["sourceText"])
         self.assertIn(
-            "**重要度: 8/10 — 推奨・電子取引**", source["sourceText"]
+            "| 8/10 | 推奨 | 電子取引 / market microstructure |", source["sourceText"]
         )
         self.assertIn("Robust Signals \\*Across\\* Regimes", source["sourceText"])
         self.assertIn(
@@ -176,7 +176,7 @@ class ResearchReportAdapterTests(unittest.TestCase):
         )
         self.assertNotIn("### Summary", english["sourceText"])
         self.assertIn(
-            "**Importance: 8/10 — Recommended · Electronic trading**",
+            "| 8/10 | Recommended | Electronic trading / Market microstructure |",
             english["sourceText"],
         )
         self.assertEqual(

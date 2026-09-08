@@ -160,6 +160,7 @@ jobs:
             scripts/research_pdf.py
             scripts/research_usage.py
             scripts/research_pipeline.py
+            scripts/research_recovery.py
             scripts/research_publication.py
             scripts/import_scheduler_history.py
             scripts/validate_public_bundle.py
@@ -708,6 +709,14 @@ jobs:
             echo "publishable=$publishable"
           } >> "$GITHUB_OUTPUT"
 
+      - name: Retry one ready pending period
+        if: steps.plan.outputs.mode == 'daily'
+        id: daily_pending_aggregate
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        shell: bash
+        run: python scripts/research_recovery.py retry
+
       - name: Validate generated research boundary
         shell: bash
         run: |
@@ -906,6 +915,9 @@ jobs:
           python scripts/research_publication.py \
             --daily-report-dir research/daily \
             --regenerate-site
+
+      - name: Publish research update status
+        run: python scripts/research_recovery.py status
 
       - name: Validate generated publication and change scope
         shell: bash
@@ -1128,7 +1140,7 @@ jobs:
           exit 1
 
       - name: Report period review failures
-        if: always() && steps.aggregate.outputs.failed == 'true'
+        if: always() && (steps.aggregate.outputs.failed == 'true' || steps.daily_pending_aggregate.outputs.failed == 'true')
         shell: bash
         run: |
           echo "::error::One or more weekly/monthly targets remain pending for automatic retry."

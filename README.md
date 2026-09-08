@@ -328,11 +328,32 @@ has a matching `OPENAI_*_REASONING_EFFORT` override shown in `.env.example`.
 `OPENAI_SYNTHESIS_MODEL` remains a backward-compatible fallback when neither
 period-specific override is set.
 
-`noAnnouncementDates` contains the official arXiv no-announcement dates for
-the current calendar year. Refresh this small list from arXiv's
+`noAnnouncementDates` contains the official arXiv deferred **Eastern US
+announcement dates**, not the dates printed on the paper listings. The 20:00
+`America/New_York` announcement produces the following day's listing; DST is
+handled explicitly. For example, the 2026-09-07 holiday suppresses the Sep 8
+listing, not the real Sep 7 batch. Friday/Saturday holidays do not cancel an
+extra weekday batch. Refresh this small list from arXiv's
 [availability schedule](https://info.arxiv.org/help/availability.html) when a
 new year's schedule is published; these dates are treated like weekends rather
 than outages.
+
+Daily runs also retry **one existing pending weekly/monthly period** once its
+required daily batches are complete (at most two synthesis chunks per daily
+retry). Larger periods stay queued for the normal scheduled/manual period run.
+The regular weekly/monthly schedules are unchanged. Missing daily coverage is
+checked before paid synthesis, and completed daily/period reports are reused
+without reevaluation. Only a mistaken empty `NO_NEW_BATCH_EXPECTED` placeholder
+can be replaced by the actual confirmed batch for that same date.
+
+The homepage reads `site/data/research-status.json` separately from completed
+editions, so updater failures and pending periods remain visible without
+publishing them as finished reviews. `python scripts/research_recovery.py status`
+refreshes that public, credential-free status feed. Historical false pending
+records on non-batch days remain as audit evidence but cannot block recovery.
+Synthesis language errors trigger a single-draft correction (maximum two per
+chunk), preserving valid papers, ratings and recorded API usage. Exhausted
+corrections leave the period pending instead of restarting the whole chunk.
 
 The model contract contains classification, summary, main result, practical
 application, methodology, limitations, importance 1–5, recommendation, reason,

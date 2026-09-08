@@ -32,6 +32,7 @@
     <script src="./personal-oauth.js" defer></script>
     <script src="./personal-ui.js" defer></script>
     <script src="./app.js" defer></script>
+    <script src="./research-status.js" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#digest" data-i18n="skip">最新のリサーチ号へ移動</a>
@@ -55,6 +56,7 @@
       </div>
     </header>
     <main>
+      <aside class="shell research-update-status" id="research-update-status" role="status" aria-live="polite" hidden></aside>
       <section class="research-tools" id="research-tools" aria-label="検索とマイライブラリ" data-i18n-aria-label="tools.label">
         <div class="shell research-tools-grid">
           <details class="research-filters" id="research-filters">

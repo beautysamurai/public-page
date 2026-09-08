@@ -78,7 +78,11 @@ class ArxivPeriodWorkflowTests(unittest.TestCase):
         self.assertNotIn("arxiv.org", aggregate)
 
     def test_daily_and_period_api_keys_are_scoped_to_paid_steps(self) -> None:
-        self.assertEqual(self.workflow.count("OPENAI_API_KEY:"), 2)
+        self.assertEqual(self.workflow.count("OPENAI_API_KEY:"), 3)
+        retry = self.step("Retry one ready pending period")
+        self.assertIn("if: steps.plan.outputs.mode == 'daily'", retry)
+        self.assertIn("python scripts/research_recovery.py retry", retry)
+        self.assertIn("steps.daily_pending_aggregate.outputs.failed", self.step("Report period review failures"))
         self.assertIn(
             "if: steps.plan.outputs.mode == 'daily'",
             self.step("Run daily research"),

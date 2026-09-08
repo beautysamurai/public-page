@@ -1052,7 +1052,7 @@ class DailyWorkflowTests(unittest.TestCase):
             state_path = root / "state.json"
             pipeline.save_state(state_path, state)
             report = pipeline.run_daily(
-                config(no_announcement_dates=(date(2026, 8, 26),)),
+                config(no_announcement_dates=(date(2026, 8, 25),)),
                 recover_pending=True,
                 state_path=state_path,
                 output_dir=root / "daily",
@@ -1188,7 +1188,7 @@ class AggregateTests(unittest.TestCase):
             status=status,
             message="Daily status.",
             expected_batch_date=report_date,
-            observed_batch_date=(report_date if status == pipeline.UPDATE_CONFIRMED else None),
+            observed_batch_date=(report_date if status in {pipeline.UPDATE_CONFIRMED, pipeline.NO_RELEVANT_PAPERS} else None),
             period_start=None,
             period_end=None,
             papers=papers,
@@ -1286,7 +1286,7 @@ class AggregateTests(unittest.TestCase):
     def test_absent_weekend_and_configured_holiday_do_not_make_coverage_incomplete(self):
         period_start = date(2026, 8, 24)
         period_end = date(2026, 8, 30)
-        holiday = date(2026, 8, 26)
+        holiday = date(2026, 8, 25)  # Eastern evening suppresses the Aug 26 listing.
         stored_dates = (
             date(2026, 8, 24),
             date(2026, 8, 25),
@@ -1319,7 +1319,7 @@ class AggregateTests(unittest.TestCase):
             self.assertEqual(report["status"], pipeline.NO_RELEVANT_PAPERS)
             self.assertNotIn("Coverage is incomplete", report["message"])
 
-    def test_explicit_stored_weekend_failure_still_marks_coverage_incomplete(self):
+    def test_legacy_failure_on_non_batch_day_does_not_block_complete_coverage(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             daily_dir = root / "daily"
@@ -1348,11 +1348,7 @@ class AggregateTests(unittest.TestCase):
                 sleep_fn=lambda _delay: None,
             )
 
-            self.assertEqual(report["status"], pipeline.UPDATE_NOT_CONFIRMED)
-            self.assertIn(
-                "1 of 2 stored daily report(s) were unconfirmed or offline",
-                report["message"],
-            )
+            self.assertEqual(report["status"], pipeline.NO_RELEVANT_PAPERS)
 
 
 class ConfigAndCliTests(unittest.TestCase):
@@ -1443,10 +1439,10 @@ class ConfigAndCliTests(unittest.TestCase):
 
     def test_configured_no_announcement_date_rolls_back_expected_batch(self):
         holiday = date(2026, 8, 31)
-        checked_at = datetime(2026, 8, 31, 12, 0, tzinfo=UTC)
+        checked_at = datetime(2026, 9, 1, 12, 0, tzinfo=UTC)
         self.assertEqual(
             pipeline.expected_batch_date(checked_at, (holiday,)),
-            date(2026, 8, 28),
+            date(2026, 8, 31),
         )
         with tempfile.TemporaryDirectory() as directory:
             config_path = Path(directory) / "research.json"

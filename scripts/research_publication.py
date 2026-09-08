@@ -1031,6 +1031,23 @@ def _edition_by_id(
     return None
 
 
+def _is_calendar_placeholder_correction(existing: Mapping[str, Any], incoming: Mapping[str, Any]) -> bool:
+    """Replace only a managed empty no-batch notice with its confirmed batch."""
+    day = incoming["editionDate"]
+    return (
+        existing["sourceKind"] == incoming["sourceKind"] == SOURCE_KIND
+        and existing["editionId"] == incoming["editionId"]
+        and existing["editionDate"] == day
+        and existing["editionKind"] == incoming["editionKind"] == "daily"
+        and existing["status"] == "NO_NEW_BATCH_EXPECTED"
+        and not existing["papers"]
+        and isinstance(existing["expectedBatchDate"], str)
+        and existing["expectedBatchDate"] < day
+        and incoming["status"] in {"UPDATE_CONFIRMED", "NO_RELEVANT_PAPERS"}
+        and incoming["expectedBatchDate"] == incoming["observedBatchDate"] == day
+    )
+
+
 def _managed_edition_anchor(edition: Mapping[str, Any]) -> dict[str, Any]:
     """Return identity/provenance fields that a presentation refresh cannot alter."""
 
@@ -1100,7 +1117,8 @@ def _managed_archive_refresh_ids(
             ResearchPublicationError,
         ):
             continue
-        if _managed_edition_anchor(existing) == _managed_edition_anchor(expected):
+        if (_managed_edition_anchor(existing) == _managed_edition_anchor(expected)
+                or _is_calendar_placeholder_correction(existing, expected)):
             refresh_ids.add(expected["editionId"])
     return refresh_ids
 
@@ -1187,7 +1205,7 @@ def publish_research_report(
                 changed=False,
                 generated_paths=generated_paths,
             )
-        if (
+        if not _is_calendar_placeholder_correction(source_existing, publication.source_edition) and (
             source_existing["sourceKind"] != SOURCE_KIND
             or _managed_edition_anchor(source_existing)
             != _managed_edition_anchor(publication.source_edition)
@@ -1395,7 +1413,7 @@ def reconcile_daily_reports(
         ):
             existing_ids.append(edition_id)
             continue
-        if (
+        if not _is_calendar_placeholder_correction(source_existing, adapted.source_edition) and (
             source_existing["sourceKind"] != SOURCE_KIND
             or _managed_edition_anchor(source_existing)
             != _managed_edition_anchor(adapted.source_edition)

@@ -1331,3 +1331,6 @@ button { color: inherit; }
   border-inline-start: 2px solid currentColor;
   padding-inline-start: 0.75rem;
 }
+/* Operational status is independent from immutable completed review editions. */
+.research-update-status { margin-top: 1rem; margin-bottom: 1rem; border-left: 3px solid currentColor; padding-left: 1rem; font-size: 0.9375rem; }
+.research-update-status p { margin: 0.35rem 0; }

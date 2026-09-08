@@ -1,0 +1,456 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-07",
+  "fingerprint": "c3dbdeabc5f27ba9bf84f4c4ad93912ca371fee5300e9cab470f04ff11dd6b23",
+  "candidateFingerprints": {
+    "2609.04569": "f1a80048f93e5b1a5b41e2764e9d77c86392e33e84bd480443dbd10ccd2e22fe",
+    "2609.04712": "25270eefb5e34433f8c681c0e2179196bc3ea72a4d5136cf64eab291408482c2",
+    "2609.04917": "7df47015aa89e56c60456ab7dba007b28b4ba7812e28b17009f91d8c813a92ad",
+    "2609.05047": "ba6878f2578ec8e8d7c7be8f2a88945b0ffdbe37cea3a587c1a657c805ab5b29",
+    "2609.05115": "b4d9cb9eaf22d07a0038ad841f3fdab1dac72add96341c1e34ec5da336380797"
+  },
+  "results": {
+    "2609.04569": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、Bitcoinの実現ボラティリティを単一量子ビットのparameterized quantum circuitでモデル化し、生成系列のmultifractal特性を分析するものです。電子取引、market microstructure、金利モデル、またはyield curveを直接扱っていないため、本サイトの主要対象からは外れます。",
+        "mainResult": "抽象によれば、予測リターン系列は $h(2)\\approx 0.5$ のほぼランダムな動態を示し、経験系列と予測系列の双方に、random shuffling後も一部残るmultifractalityが観測されました。また、実現ボラティリティの増分系列は $h(2)\\approx 0.05$--$0.1$ の強いanti-persistenceを示し、rough volatility仮説と整合的でした。",
+        "practicalApplication": "量子回路を用いた暗号資産ボラティリティ系列の生成・特徴分析への応用可能性はありますが、抽象には予測精度、取引収益性、リスク管理上の優位性、または古典的モデルとの定量比較は報告されていません。",
+        "methodology": "5分間隔のBitcoin価格から日次realized volatilityを構成し、単一量子ビットのparameterized quantum circuitを学習させ、最適化回路から長い合成系列を生成しています。その後、Multifractal Detrended Fluctuation Analysisにより、一般化Hurst指数 $h(q)$、singularity spectrum $f(\\alpha)$、multifractal scaling exponent $\\tau(q)$を推定しています。",
+        "limitations": "評価対象はBitcoinの単一データ系列と単一量子ビット回路に限定されます。抽象だけでは、サンプル期間、学習・検証方法、ベンチマーク、統計的有意性、量子ハードウェア上での実装、計算コスト、予測のアウトオブサンプル性能が確認できません。また、multifractal特性の再現は実用的な予測性能を必ずしも意味しません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "量子機械学習と暗号資産ボラティリティの研究としては興味深いものの、本サイトの対象である電子執行、market microstructure、interest-rate models、yield curves、ratesには直接該当しません。さらに、抽象段階では実務的な予測・取引上の有効性も示されていません。",
+        "tags": [
+          "Bitcoin",
+          "realized volatility",
+          "quantum circuit learning",
+          "multifractality",
+          "rough volatility",
+          "Hurst exponent"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study models Bitcoin realized volatility with a single-qubit parameterized quantum circuit and analyzes the multifractal properties of generated series. It does not directly address electronic trading, market microstructure, interest-rate models, or yield curves, and is therefore outside the site's primary scope.",
+          "mainResult": "According to the abstract, the predicted return series shows near-random dynamics with $h(2)\\approx 0.5$, while both predicted and empirical return series exhibit multifractality that partially remains after random shuffling. The realized-volatility increment series shows strong anti-persistence with $h(2)\\approx 0.05$--$0.1$, consistent with the rough-volatility hypothesis.",
+          "practicalApplication": "The approach may be applicable to generating and characterizing cryptocurrency volatility series with quantum circuits, but the abstract reports no forecasting accuracy, trading profitability, risk-management advantage, or quantitative comparison with classical models.",
+          "methodology": "Daily realized volatility is constructed from five-minute Bitcoin prices. A single-qubit parameterized quantum circuit is trained, and a long synthetic series is generated from the optimized circuit. Multifractal Detrended Fluctuation Analysis is then used to estimate the generalized Hurst exponent $h(q)$, singularity spectrum $f(\\alpha)$, and multifractal scaling exponent $\\tau(q)$.",
+          "limitations": "The evaluation is limited to one Bitcoin series and a single-qubit circuit. The abstract does not specify the sample period, training and validation design, benchmarks, statistical significance, implementation on quantum hardware, computational cost, or out-of-sample forecasting performance. Reproducing multifractal properties does not necessarily imply useful predictive performance.",
+          "reason": "Although the study is interesting as research on quantum machine learning and cryptocurrency volatility, it does not directly fit the site's focus on electronic execution, market microstructure, interest-rate models, yield curves, or rates. Its abstract also does not establish practical forecasting or trading value.",
+          "tags": [
+            "Bitcoin",
+            "realized volatility",
+            "quantum circuit learning",
+            "multifractality",
+            "rough volatility",
+            "Hurst exponent"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.04712": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本稿は、複数商品の取引間に生じる cross-impact と、時間とともに減衰する transient impact を同時に扱う、凸二次形式の取引コストモデルを提案する。",
+        "mainResult": "各期間のボラティリティ、出来高、相関の予測から構成した半正定値行列で銘柄間の取引を結合し、power-law decay kernel で期間間を結合することで、流動性が計画期間中に変動しても price manipulation が生じないコストモデルを得たと報告している。原油先物のカレンダースプレッド取引に関する実証例も示している。",
+        "practicalApplication": "相対価値取引やスプレッド取引の執行最適化において、関連銘柄への波及効果とポジション解消時の影響回復を取引コスト推定へ組み込める可能性がある。特に、数ベーシスポイント程度のエッジを持つコモディティおよびマクロ戦略の執行計画に有用と考えられる。",
+        "methodology": "取引銘柄間の cross-impact を、ボラティリティ、出来高、相関の予測に基づく半正定値行列で表現する。さらに、power-law decay kernel により時間方向の transient impact を表現し、両者を凸二次コストとして統合する。原油先物のカレンダースプレッド取引を対象にモデルを実証している。",
+        "limitations": "提供された情報は要旨のみであり、データ期間、予測手法、パラメータ推定、ベンチマーク、改善幅、取引コストやモデル誤差への頑健性は確認できない。price manipulation が生じないという性質の条件や証明の詳細、他の商品・市場・執行制約への適用可能性も要旨からは評価できない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "cross-impact と transient impact を凸最適化可能な形で統合し、相対価値取引の実際的な執行コスト推定に結び付けているため、電子取引と市場マイクロストラクチャーの読者に関連性が高い。実証結果の詳細が不明なため、重要度は高いが最上位にはしない。",
+        "tags": [
+          "cross-impact",
+          "transient impact",
+          "transaction costs",
+          "convex optimization",
+          "execution",
+          "relative-value trading",
+          "commodity futures",
+          "calendar spreads",
+          "price manipulation"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper proposes a convex quadratic transaction-cost model that jointly captures cross-impact between trades in multiple contracts and transient impact that decays over time.",
+          "mainResult": "It couples trades across contracts through a positive semidefinite matrix constructed from volatility, volume, and correlation forecasts, and couples trades across periods with a power-law decay kernel. The paper reports that the resulting model avoids price manipulation even when liquidity varies over the planning horizon, and demonstrates it empirically on calendar-spread trading in crude-oil futures.",
+          "practicalApplication": "The model could incorporate spillovers to related contracts and the recovery of impact during position unwinding into execution-cost estimates for relative-value and spread trading. It may be particularly useful for execution planning in commodity and macro strategies whose edges are only a few basis points.",
+          "methodology": "Cross-impact across contracts is represented by a positive semidefinite matrix based on forecasts of volatility, volume, and correlation. Transient impact over time is represented with a power-law decay kernel, and the two effects are integrated into a convex quadratic cost. The model is demonstrated on crude-oil-futures calendar-spread trading.",
+          "limitations": "Only the abstract is provided, so the data period, forecasting methods, parameter estimation, benchmarks, magnitude of improvements, and robustness to transaction-cost or model-estimation error cannot be assessed. The conditions and proof details behind the absence of price manipulation, as well as applicability to other assets, markets, and execution constraints, are also unclear from the abstract.",
+          "reason": "The paper integrates cross-impact and transient impact in a form suitable for convex optimization and connects the model to practical execution-cost estimation for relative-value trading. It is highly relevant to electronic trading and market microstructure, but the lack of detailed empirical results supports a rating below the highest level.",
+          "tags": [
+            "cross-impact",
+            "transient impact",
+            "transaction costs",
+            "convex optimization",
+            "execution",
+            "relative-value trading",
+            "commodity futures",
+            "calendar spreads",
+            "price manipulation"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "関連先物間のcross-impactと時系列上のtransient impactを同時に表す、凸二次の取引コストモデルを提案する。各期の正半定値impact matrixをpower-law decay kernelで結合し、流動性が時間変動しても価格操作を許さない構成を示す。WTIカレンダースプレッドの事例では、分離型コストモデルより相対価値取引のimpactを低く評価し、より積極的なポジションを生成したと報告している。",
+        "mainResult": "power-law kernelから構成した時間行列$G$が正半定値であるため、全期間のコスト行列$A=B(G\\otimes I_n)B$も$A\\succeq 0$となり、任意の取引列$u$について$u^\\top A u\\geq 0$が成立する。したがって、モデル上は負コストのround tripが排除される。2004～2011年のWTI事例では、月平均net P&Lがgross limit比で提案モデル3.1 bp、self-impactモデル2.3 bp、分離型baseline 0.4 bpだったと報告されている。",
+        "practicalApplication": "商品・金利・マクロ市場のcalendar spreadやcurve tradeについて、相関するlegsのimpact相殺、entryからexitまで残るimpact、予定された流動性変化を含めて、複数日の建玉と解消を凸最適化できる。特にindex roll、満期、指標発表、settlement windowのように流動性が予測可能な局面に適する。",
+        "methodology": "各期のself-impactを予測volatilityとvolumeから設定し、return correlationをimpact correlationのproxyとして正半定値行列$\\Lambda_t$を構成する。時間方向には$k(h)=(1+h/\\tau)^{-\\beta}$を用い、対称結合$\\Lambda_t^{1/2}\\Lambda_s^{1/2}$によって凸性を保証する。実証ではWTI期近・期先の2限月を対象に、期待収益、impact、bid/ask spread、CVaR制約を含むmulti-period optimizationを月初に解き、3種類のコスト仕様を比較した。",
+        "limitations": "単一銘柄impactを線形とし、実証的に知られるsquare-root lawを再現していない。取引所の限月別volumeを利用できないためvolume推移をシミュレーションし、impact scaleも推定せず$\\ell_i=1$と置いている。return correlationをcross-impactのproxyとし、日次settlement dataだけを使うため、order bookや実約定に基づく検証ではない。さらに提案モデル自身をsimulated impact costの評価器にも用いており比較に循環性があるほか、単一市場・2004～2011年の96か月に限定され、統計的不確実性やout-of-sample性能は十分に示されていない。対称結合はno-manipulationを保証する設計上の近似であり、真の因果的impact dynamicsを推定したものではない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "cross-impact、transient impact、時間変動する流動性を一つの計算可能な凸モデルに統合し、no-price-manipulationを数学的に保証する点は、multi-asset executionとrelative-value portfolio constructionに直接有用である。一方、実証はシミュレーション依存で、提案モデルを評価器にも使っているため、報告されたP&L改善を実運用上の優位性と解釈するには追加検証が必要である。",
+        "tags": [
+          "クロスインパクト",
+          "一時的価格インパクト",
+          "凸最適化",
+          "市場マイクロストラクチャー",
+          "マルチ期間執行",
+          "相対価値取引",
+          "WTI先物",
+          "カレンダースプレッド",
+          "価格操作排除",
+          "取引コスト"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper proposes a convex quadratic transaction-cost model that jointly represents cross-impact among related futures and transient impact over time. It couples positive semidefinite period-level impact matrices through a power-law decay kernel and shows that the construction excludes price manipulation even when liquidity varies over time. In a WTI calendar-spread study, the authors report that it assigns lower impact to relative-value trades and produces larger positions than separable cost models.",
+          "mainResult": "Because the temporal matrix $G$ generated by the power-law kernel is positive semidefinite, the full-horizon cost matrix $A=B(G\\otimes I_n)B$ also satisfies $A\\succeq 0$, implying $u^\\top A u\\geq 0$ for every trade sequence $u$. The model therefore excludes negative-cost round trips. In the 2004–2011 WTI study, the reported average monthly net P&L as a fraction of the gross limit is 3.1 bp for the proposed model, 2.3 bp for the self-impact model, and 0.4 bp for the separable baseline.",
+          "practicalApplication": "The framework supports convex optimization of multi-day entry and exit schedules for calendar spreads and curve trades in commodity, rates, and macro markets, accounting for impact netting across correlated legs, residual impact between entry and exit, and scheduled liquidity changes. It is particularly relevant around index rolls, expiries, economic announcements, and settlement windows.",
+          "methodology": "The authors set period-level self-impact from forecast volatility and volume, use return correlation as a proxy for impact correlation, and construct a positive semidefinite matrix $\\Lambda_t$. They use the temporal kernel $k(h)=(1+h/\\tau)^{-\\beta}$ and guarantee convexity through the symmetric coupling $\\Lambda_t^{1/2}\\Lambda_s^{1/2}$. The empirical study applies multi-period optimization with expected return, impact, bid/ask spread, and CVaR constraints to nearby and deferred WTI contracts, solving once before each month and comparing three cost specifications.",
+          "limitations": "Single-asset impact is linear and does not reproduce the empirically documented square-root law. Contract-level exchange volume is unavailable, so the volume path is simulated, while the impact scale is not estimated and is fixed at $\\ell_i=1$. Return correlation is used as a proxy for cross-impact, and the analysis relies on daily settlement data rather than order-book or execution data. The proposed model is also used to calculate simulated impact costs, creating circularity in the comparison; the study is limited to one market and 96 months from 2004–2011, with limited evidence on statistical uncertainty or out-of-sample performance. The symmetric coupling is a design approximation that guarantees no manipulation rather than an estimate of the true causal impact dynamics.",
+          "reason": "The integration of cross-impact, transient impact, and time-varying liquidity into one tractable convex model, together with a mathematical no-price-manipulation guarantee, is directly useful for multi-asset execution and relative-value portfolio construction. However, the empirical analysis depends heavily on simulation and uses the proposed model as an evaluator, so further validation is required before treating the reported P&L improvement as evidence of live-trading superiority.",
+          "tags": [
+            "cross-impact",
+            "transient price impact",
+            "convex optimization",
+            "market microstructure",
+            "multi-period execution",
+            "relative-value trading",
+            "WTI futures",
+            "calendar spread",
+            "no price manipulation",
+            "transaction costs"
+          ]
+        }
+      }
+    },
+    "2609.04917": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "mixed",
+        "summary": "上場株式、ETF、中央集権型暗号資産、パーペチュアル、オンチェーン市場におけるAI投資研究を批判的にレビューし、予測から執行後収益までの証拠を整理した論文です。",
+        "mainResult": "公開研究では、予測、テキスト処理、ポートフォリオ設計、ワークフロー統合など上流工程の進展は確認される一方、コスト控除後で持続的かつクロスレジームなネットアルファを生む汎用AIアーキテクチャは示されていないと報告しています。データ汚染、ルックアヘッド、選択の反復、弱いベンチマーク、実装コスト、取引所の仕組み、容量制約が収益性の主張を損なう可能性も指摘しています。",
+        "practicalApplication": "AI戦略の評価では、ポイントインタイムデータ、意思決定に整合した目的関数、ポートフォリオと執行の一体評価、管理された適応、前向き検証、権限に見合うガバナンスを重視するためのチェックリストとして利用できます。暗号資産では、現物、パーペチュアル、分散型市場のキャッシュフローと執行を分けて評価する示唆があります。",
+        "methodology": "2026年8月31日までに公開された研究を対象とするcritical state-of-the-art reviewで、情報、シグナル、ポジション、注文執行、コスト控除後のリスク調整収益というalpha-translation chainで証拠を整理しています。機械学習、時系列foundation model、金融言語モデル、強化学習、agentを横断的に検討しています。",
+        "limitations": "抽象からは検索方法、採択基準、研究数、個別研究の定量的統合は確認できません。レビュー対象は公開証拠に限られ、主張の比較可能性や市場・戦略別の詳細な効果量も不明です。また、論文自身が利益を保証するものではないと明記しています。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "電子取引、執行可能性、取引コスト、容量、暗号資産市場のvenue mechanicsを扱うため本サイトの対象に関連します。ただし、金利・イールドカーブではなく、AI投資全般を扱う広範なレビューであり、電子執行や市場マイクロ構造への直接的な新規結果は限定的です。",
+        "tags": [
+          "AI投資",
+          "機械学習",
+          "アルファ評価",
+          "電子執行",
+          "取引コスト",
+          "容量制約",
+          "暗号資産市場",
+          "バックテスト",
+          "市場マイクロ構造",
+          "前向き検証"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "This paper critically reviews AI investment research in listed equities, ETFs, centralized crypto assets, perpetuals, and on-chain markets, organizing evidence from prediction through post-execution returns.",
+          "mainResult": "The public literature shows progress in upstream tasks such as prediction, text processing, portfolio design, and workflow integration, but it does not demonstrate a general AI architecture that produces persistent, cross-regime net alpha after costs. The paper also notes that data contamination, look-ahead bias, repeated selection, weak benchmarks, implementation costs, venue mechanics, and capacity constraints can undermine profitability claims.",
+          "practicalApplication": "The review can serve as a checklist for evaluating AI strategies, emphasizing point-in-time data, decision-aligned objectives, joint portfolio and execution evaluation, controlled adaptation, prospective testing, and authority-matched governance. For crypto, it suggests evaluating spot, perpetual, and decentralized markets separately with attention to their cash flows and execution.",
+          "methodology": "The paper is a critical state-of-the-art review of publicly available research through 31 August 2026. It organizes evidence using an alpha-translation chain from information to signal, position, executable order, and cost-adjusted risk-adjusted return, covering machine learning, time-series foundation models, financial language models, reinforcement learning, and agents.",
+          "limitations": "The abstract does not specify the search procedure, inclusion criteria, number of studies, or quantitative synthesis. The review is limited to public evidence, and the comparability and market- or strategy-specific effect sizes are unclear. The authors also explicitly state that their conditions do not guarantee profit.",
+          "reason": "The paper is relevant to this site because it discusses electronic execution, feasibility, transaction costs, capacity, and venue mechanics in crypto markets. However, it is a broad review of AI investing rather than a study focused on rates, yield curves, or a specific new result in execution or market microstructure.",
+          "tags": [
+            "AI investing",
+            "machine learning",
+            "alpha evaluation",
+            "electronic execution",
+            "transaction costs",
+            "capacity constraints",
+            "crypto markets",
+            "backtesting",
+            "market microstructure",
+            "prospective testing"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "株式・ETF・中央集権型crypto spot、perpetual futures、DEXを対象に、ML、time-series foundation model、金融LLM、RL、agentの投資利用を批判的に整理したレビューである。予測やテキスト処理、portfolio設計、workflow統合では進歩が報告される一方、取引費用、capacity、時点整合性、リスク調整を満たす持続的なnet alphaの公開証拠は乏しいと結論づける。",
+        "mainResult": "著者らが調査した公開研究の範囲では、特定のAI architectureがregime横断的かつcapacity-awareな持続的net alphaを一般に生むとは確認できない。好成績のhistorical backtestは存在するが、look-ahead bias、LLMのmemorization、multiple testing、signal decay、market impact、funding、liquidation、gas、MEVなどにより、予測性能から実現収益への変換が崩れ得ると報告する。",
+        "practicalApplication": "実務では、データとmodel checkpointのpoint-in-time管理、signal・portfolio・executionの共同評価、規模別capacity curve、実行可能価格によるcost modeling、事前確定したforward testを導入すべきである。株式、spot、perpetual、DEXでP&Lと執行リスクを分離し、注文権限を持つagentには銘柄・notional・leverage制限、price collar、reconciliation、外部kill switchを設ける必要がある。",
+        "methodology": "2026年8月31日までの研究と一次的な公式資料を対象にしたcritical state-of-the-art reviewであり、systematic reviewやmeta-analysisではない。証拠を、temporality、selection control、portfolio mapping、implementation realism、risk/benchmark、external validity、operational provenanceの7次元で評価し、point-in-time情報からsignal、position、order/fill、費用控除後収益、持続性へ至るalpha-translation chainで比較する。",
+        "limitations": "網羅的なdatabase検索、重複した独立screening、事前登録protocol、全研究へのformal risk-of-bias scoring、定量的なeffect poolingは行っていない。対象研究の市場、期間、benchmark、cost modelが不均一で、cryptoとaudited live-capitalの証拠は特に薄い。公式product資料は機能の存在しか示さず、引用されたpreprintや著者実施benchmarkも独立検証ではないため、本稿の結論は公開情報に限定される。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子執行とmarket microstructureの観点から、AIの予測精度を収益性と同一視せず、spread、impact、latency、borrow、funding、liquidation、gas、MEV、capacityまで監査する統一的な枠組みが有用である。新規の実証推定や特定戦略の性能証明ではないが、AI trading研究を評価・設計するための実務的なチェックリストとして推奨できる。金利モデルやyield curveへの直接的な貢献はない。",
+        "tags": [
+          "AI投資",
+          "algorithmic trading",
+          "market microstructure",
+          "trade execution",
+          "machine learning",
+          "large language models",
+          "reinforcement learning",
+          "AI agents",
+          "portfolio construction",
+          "transaction costs",
+          "capacity",
+          "crypto markets"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "This critical review covers the use of ML, time-series foundation models, financial LLMs, RL, and agents across equities, ETFs, centralized crypto spot, perpetual futures, and DEXs. It reports progress in prediction, text processing, portfolio design, and workflow integration, but concludes that public evidence for persistent net alpha after costs, capacity constraints, temporal validation, and risk adjustment remains limited.",
+          "mainResult": "Within the public research examined by the authors, no particular AI architecture is shown to generate persistent, cross-regime, capacity-aware net alpha in general. Although strong historical backtests exist, the paper reports that translation from predictive performance to realized returns can fail because of look-ahead bias, LLM memorization, multiple testing, signal decay, market impact, funding, liquidation, gas, and MEV.",
+          "practicalApplication": "Practitioners should use point-in-time data and model checkpoints, jointly evaluate signals, portfolios, and execution, report capacity curves by scale, model costs using executable prices, and conduct precommitted forward tests. P&L and execution risks should be separated across equities, spot, perpetuals, and DEXs, while order-capable agents require instrument, notional, and leverage limits, price collars, reconciliation, and an external kill switch.",
+          "methodology": "The paper is a critical state-of-the-art review of research and primary official material available through 31 August 2026, rather than a systematic review or meta-analysis. It evaluates evidence across seven dimensions—temporality, selection control, portfolio mapping, implementation realism, risk and benchmark specification, external validity, and operational provenance—and compares studies through an alpha-translation chain from point-in-time information to signals, positions, orders and fills, net returns, and persistence.",
+          "limitations": "The review does not provide an exhaustive database search, duplicate independent screening, a preregistered protocol, formal risk-of-bias scores for every study, or quantitative effect pooling. The underlying studies use heterogeneous markets, periods, benchmarks, and cost models, while evidence for crypto and audited live-capital performance is especially sparse. Official product materials establish only capability, and cited preprints or author-run benchmarks are not independent validation, so the conclusions are limited to the public record.",
+          "reason": "The paper provides a useful framework for electronic execution and market-microstructure analysis by refusing to equate AI predictive accuracy with profitability and by auditing spreads, impact, latency, borrow, funding, liquidation, gas, MEV, and capacity. It does not offer new empirical estimates or prove the performance of a specific strategy, but it is recommended as a practical checklist for evaluating and designing AI trading research. It makes no direct contribution to interest-rate models or yield curves.",
+          "tags": [
+            "AI investing",
+            "algorithmic trading",
+            "market microstructure",
+            "trade execution",
+            "machine learning",
+            "large language models",
+            "reinforcement learning",
+            "AI agents",
+            "portfolio construction",
+            "transaction costs",
+            "capacity",
+            "crypto markets"
+          ]
+        }
+      }
+    },
+    "2609.05047": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "Hestonモデルと、同じ欧州オプション価格に較正した一次元local-volatilityモデルを比較し、満期ごとのintegrated varianceの厳密なconvex-order関係を示す研究です。金利、yield curve、電子取引、または市場マイクロ構造を主題としていません。",
+        "mainResult": "要旨によれば、固定満期 $T>0$ ごとに、$\\rho=-1$ のHestonモデルのintegrated variance $I_T^{\\mathrm H}$ とlocal-volatilityモデルの $I_T^{\\mathrm{LV}}$ は $I_T^{\\mathrm H}\\prec_{\\mathrm{cx}} I_T^{\\mathrm{LV}}$ を満たします。これにより、Gatheralが予想したconvex-order不等式に対するHestonモデルの反例を提示しています。",
+        "practicalApplication": "オプションモデルの理論検証、モデルリスク評価、同一vanilla価格から得られるvariance分布の比較には示唆があります。ただし、本サイトの対象であるratesや電子執行への直接的な応用は要旨から確認できません。",
+        "methodology": "同一の欧州オプション価格に較正した、$\\rho=-1$ のHestonモデルと一次元local-volatilityモデルを比較し、各満期のintegrated varianceについてconvex orderを解析しています。",
+        "limitations": "評価は要旨に基づくため、証明の詳細、仮定、convex orderの成立条件、数値検証の有無、実データへの適用範囲は確認できません。また、対象は主として株式・オプションの確率ボラティリティ研究であり、金利研究との関連は示されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "オプション・確率ボラティリティ理論としては明確な結果を含みますが、対象サイトの電子取引、market microstructure、interest-rate models、yield curves、ratesというスコープには直接該当しません。",
+        "tags": [
+          "Heston model",
+          "local volatility",
+          "integrated variance",
+          "convex order",
+          "option pricing"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper compares the Heston model with $\\rho=-1$ to a one-dimensional local-volatility model calibrated to the same European option prices, establishing a strict convex-order relation for integrated variance at each maturity. It does not focus on interest rates, yield curves, electronic trading, or market microstructure.",
+          "mainResult": "According to the abstract, for every fixed maturity $T>0$, the integrated variances of the Heston model, $I_T^{\\mathrm H}$, and the local-volatility model, $I_T^{\\mathrm{LV}}$, satisfy $I_T^{\\mathrm H}\\prec_{\\mathrm{cx}} I_T^{\\mathrm{LV}}$. This provides a Heston-model counterexample to the convex-order inequality conjectured by Gatheral.",
+          "practicalApplication": "The result may inform theoretical validation of option models, model-risk assessment, and comparisons of variance distributions generated by models matching the same vanilla prices. However, no direct application to rates or electronic execution is evident from the abstract.",
+          "methodology": "The paper compares a Heston model with $\\rho=-1$ and a one-dimensional local-volatility model calibrated to identical European option prices, analyzing the convex order of their integrated variances for each maturity.",
+          "limitations": "Because the assessment is based only on the abstract, the proof details, assumptions, conditions for the convex-order result, presence of numerical tests, and empirical applicability cannot be assessed. The topic is primarily equity-option and stochastic-volatility theory, with no stated connection to interest-rate research.",
+          "reason": "Although the paper presents a clear theoretical result in option and stochastic-volatility modeling, it does not materially fit the site's scope of electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "Heston model",
+            "local volatility",
+            "integrated variance",
+            "convex order",
+            "option pricing"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.05115": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、生成者が自分で作ったアイデアを他者のアイデアより低い品質でも選びやすい「Creative Endowment Effect」を検証する心理学・組織行動研究である。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていない。",
+        "mainResult": "同じアイデアを評価する参加者ペアを用いたインセンティブ整合的な実験で、自分のアイデアから選ぶ場合は、他者のアイデアから選ぶ場合よりも、低品質のアイデアを多く提出した。効果は二つの領域にまたがる三つのタスクで再現され、効果を知らせる情報介入では解消されなかった一方、数か月後に再評価すると選択性が高まったと報告されている。",
+        "practicalApplication": "企業やチームのアイデア選定では、提案者本人に任せず、独立した評価者や時間を置いた再評価を導入する示唆がある。ただし、対象分野への直接的な実務応用はない。",
+        "methodology": "二人一組の参加者が同一のアイデアを評価し、高品質なアイデアだけを提出することで報酬を得るインセンティブ付きパラダイムを使用した。三つのタスクと二つの領域で、自己生成アイデアと他者生成アイデアの選択を比較し、情報介入および数か月後の再評価も検討した。",
+        "limitations": "提供された抄録からは、サンプルサイズ、参加者属性、品質評価の詳細、効果量、統計的有意性、追跡調査の脱落率が確認できない。また、実験結果の一般化可能性や、金融市場の意思決定への適用可能性は示されていない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "研究テーマと結果は創造性の選択バイアスに関するものだが、本サイトの対象である電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究には実質的に該当しないため。",
+        "tags": [
+          "創造性研究",
+          "アイデア選択",
+          "心理学",
+          "組織行動",
+          "スコープ外"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines the “Creative Endowment Effect,” whereby creators are more likely to select lower-quality ideas they generated themselves than ideas generated by others. It is a psychology and organizational-behavior study and does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "In an incentive-compatible experiment in which pairs of participants reviewed the same ideas and were rewarded for submitting only high-quality ideas, participants submitted more lower-quality ideas when selecting from their own ideas than when selecting from another person’s ideas. The effect was replicated across three tasks in two domains and was not eliminated by an informational intervention, whereas revisiting ideas several months later increased selectivity.",
+          "practicalApplication": "The findings suggest that organizations could use independent evaluators or delayed reassessment when selecting ideas, rather than relying solely on the original proposer. However, there is no direct practical application to the scope of this site.",
+          "methodology": "The study used an incentive-compatible paradigm in which pairs of participants evaluated the same ideas and received rewards for submitting only high-quality ideas. It compared selections from self-generated and other-generated ideas across three tasks and two domains, and also examined an informational intervention and reassessment after several months.",
+          "limitations": "The abstract does not report the sample size, participant characteristics, details of the quality measures, effect sizes, statistical significance, or attrition in the follow-up study. It also does not establish generalizability or applicability to financial-market decision-making.",
+          "reason": "The paper concerns bias in creative-idea selection, but it is not materially related to electronic execution, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "creativity research",
+            "idea selection",
+            "psychology",
+            "organizational behavior",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 873,
+      "outputTokens": 1211,
+      "reasoningTokens": 142,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2084,
+      "estimatedCostUsd": 0.001628,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.04569v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 848,
+      "outputTokens": 1106,
+      "reasoningTokens": 82,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1954,
+      "estimatedCostUsd": 0.001497,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.04712v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 9358,
+      "outputTokens": 2050,
+      "reasoningTokens": 368,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 9355,
+      "totalTokens": 11408,
+      "estimatedCostUsd": 0.087787,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 14,
+      "paperIds": [
+        "2609.04712v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 924,
+      "outputTokens": 1190,
+      "reasoningTokens": 84,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2114,
+      "estimatedCostUsd": 0.001613,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.04917v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 25963,
+      "outputTokens": 1558,
+      "reasoningTokens": 153,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 25960,
+      "totalTokens": 27521,
+      "estimatedCostUsd": 0.160972,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 32,
+      "paperIds": [
+        "2609.04917v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 690,
+      "outputTokens": 958,
+      "reasoningTokens": 63,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1648,
+      "estimatedCostUsd": 0.001288,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.05047v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 785,
+      "outputTokens": 1004,
+      "reasoningTokens": 50,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1789,
+      "estimatedCostUsd": 0.001362,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.05115v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

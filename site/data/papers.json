@@ -6,7 +6,34 @@
       "date": "2026-09-07",
       "kind": "daily",
       "periodEnd": null,
-      "papers": []
+      "papers": [
+        {
+          "arxivId": "2609.04712v1",
+          "title": "Convex Modeling of Price Cross-Impact over Time",
+          "authors": [
+            "Vincent Yinjun-Wang",
+            "Madeleine Udell"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.04917v1",
+          "title": "Artificial Intelligence in Equity and Crypto Markets: Progress, Profitability Evidence, and the Limits of Automated Investing",
+          "authors": [
+            "Linsen Zhu",
+            "Mengqing Cai"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
     },
     {
       "editionId": "2026-09-06-daily-openai-01",
@@ -21,6 +48,177 @@
       "kind": "daily",
       "periodEnd": null,
       "papers": []
+    },
+    {
+      "editionId": "2026-09-04-weekly-openai-01",
+      "date": "2026-09-04",
+      "kind": "weekly",
+      "periodEnd": "2026-09-04",
+      "papers": [
+        {
+          "arxivId": "2608.29025v1",
+          "title": "Deep Hedging Under Realistic Market Frictions: A Regime-Conditional Empirical Study of Dynamic Option Hedging on Bitcoin Options",
+          "authors": [
+            "Sheryan Kumar"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.29423v1",
+          "title": "Improving Swaption Calibration in Factor HJM Stochastic Volatility Models: A First-Order Correction to Frozen Swap-Rate Loadings",
+          "authors": [
+            "Bram Brongers"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.29468v1",
+          "title": "The Convergence Rate of Stochastic Tracking with Application to Optimal Execution",
+          "authors": [
+            "Marcel Nutz",
+            "Moritz Voss"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.00943v1",
+          "title": "Illiquidity at Risk",
+          "authors": [
+            "Demetrio Lacava",
+            "Paolo Santucci de Magistris"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.29818v1",
+          "title": "Decarbonising price formation: unit-level evidence on battery storage and the imbalance price in the GB Balancing Mechanism",
+          "authors": [
+            "Robert Dalton",
+            "Aidan O'Sullivan"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.01323v1",
+          "title": "Adaptive singular-point method for pricing and hedging surrenderable equity-linked contracts",
+          "authors": [
+            "Andrea Molent",
+            "Marcellino Gaudenzi"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.02447v1",
+          "title": "Price manipulation in nonlinear transient impact models: rigidity before memory and complete positivity after memory",
+          "authors": [
+            "Minhyeok Lee"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.03115v1",
+          "title": "Mean-field equilibrium of heterogeneous agents under market impact",
+          "authors": [
+            "Joseph Leclère",
+            "Mathieu Rosenbaum"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.28399v1",
+          "title": "RetailAgent: Structured Adverse Timing in Self-Conditioned Multimodal LLM Trading Agents",
+          "authors": [
+            "Yupeng Zhang",
+            "Liuyuan Jiang",
+            "Hongyi Huang",
+            "Bingheng Li",
+            "Lisha Chen"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.30321v1",
+          "title": "Optimal Block Time for AMM Liquidity Providers under Jump-Diffusion Prices",
+          "authors": [
+            "Nils Bundi"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2608.31041v1",
+          "title": "Agentic Quantitative Trading: A Survey of Workflows, Systems, and Evaluation",
+          "authors": [
+            "Fengrui Hua",
+            "Hengyi Yang",
+            "Xinlei Hao",
+            "Haohan Zhang",
+            "Bokai Cao",
+            "Yiyan Qi",
+            "Jia Li",
+            "Jian Guo"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.02580v1",
+          "title": "Competitive Market Behavior of LLMs",
+          "authors": [
+            "Pawel Struski",
+            "Jakub Swistak",
+            "Inez Okulska",
+            "Przemyslaw Biecek"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        }
+      ]
     },
     {
       "editionId": "2026-09-04-daily-openai-01",

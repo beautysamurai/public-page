@@ -1482,15 +1482,418 @@
       "editionKind": "daily",
       "sourceKind": "openai-responses-api",
       "sourceLabel": "OpenAI Responses API · automated research pipeline",
-      "importedAt": "2026-09-07T12:57:13Z",
-      "status": "NO_NEW_BATCH_EXPECTED",
-      "message": "通常の公開スケジュール上、新しいarXivバッチは予定されていません。",
-      "expectedBatchDate": "2026-09-04",
-      "observedBatchDate": "2026-09-04",
+      "importedAt": "2026-09-08T12:56:52Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-07",
+      "observedBatchDate": "2026-09-07",
       "periodStart": null,
       "periodEnd": null,
-      "sourceText": "## 2026年9月7日 — 日次レビュー\n\n通常の公開スケジュール上、新しいarXivバッチは予定されていません。\n\nモデル・effort・トークン数：未記録。\n\n\n**推薦論文: なし**",
-      "papers": []
+      "sourceText": "## 2026年9月7日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\nscreen: gpt-5.6-luna / low · 5 calls · トークン 入力 4,120 / 出力 5,469 / 合計 9,589\npaper: gpt-5.6-sol / medium · 2 calls · トークン 入力 35,321 / 出力 3,608 / 合計 38,929\n記録できた再試行分を含みます。未記録は0ではありません。推論トークンは出力に含まれます。\n\n\n## 1. Convex Modeling of Price Cross-Impact over Time\n\n**[arXiv:2609.04712v1](https://arxiv.org/abs/2609.04712v1) — Vincent Yinjun-Wang, Madeleine Udell**\n\n**重要度: 8/10 — 推奨・クロスインパクト**\n\n関連先物間のcross-impactと時系列上のtransient impactを同時に表す、凸二次の取引コストモデルを提案する。各期の正半定値impact matrixをpower-law decay kernelで結合し、流動性が時間変動しても価格操作を許さない構成を示す。WTIカレンダースプレッドの事例では、分離型コストモデルより相対価値取引のimpactを低く評価し、より積極的なポジションを生成したと報告している。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 848 / 出力 1,106（うち推論 82） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 9,358 / 出力 2,050（うち推論 368） · PDF 14 pages · 推定 $0.0878\n\n各期のself-impactを予測volatilityとvolumeから設定し、return correlationをimpact correlationのproxyとして正半定値行列$\\Lambda_t$を構成する。時間方向には$k(h)=(1+h/\\tau)^{-\\beta}$を用い、対称結合$\\Lambda_t^{1/2}\\Lambda_s^{1/2}$によって凸性を保証する。実証ではWTI期近・期先の2限月を対象に、期待収益、impact、bid/ask spread、CVaR制約を含むmulti-period optimizationを月初に解き、3種類のコスト仕様を比較した。 power-law kernelから構成した時間行列$G$が正半定値であるため、全期間のコスト行列$A=B(G\\otimes I_n)B$も$A\\succeq 0$となり、任意の取引列$u$について$u^\\top A u\\geq 0$が成立する。したがって、モデル上は負コストのround tripが排除される。2004～2011年のWTI事例では、月平均net P&Lがgross limit比で提案モデル3.1 bp、self-impactモデル2.3 bp、分離型baseline 0.4 bpだったと報告されている。\n\n商品・金利・マクロ市場のcalendar spreadやcurve tradeについて、相関するlegsのimpact相殺、entryからexitまで残るimpact、予定された流動性変化を含めて、複数日の建玉と解消を凸最適化できる。特にindex roll、満期、指標発表、settlement windowのように流動性が予測可能な局面に適する。 単一銘柄impactを線形とし、実証的に知られるsquare-root lawを再現していない。取引所の限月別volumeを利用できないためvolume推移をシミュレーションし、impact scaleも推定せず$\\ell_i=1$と置いている。return correlationをcross-impactのproxyとし、日次settlement dataだけを使うため、order bookや実約定に基づく検証ではない。さらに提案モデル自身をsimulated impact costの評価器にも用いており比較に循環性があるほか、単一市場・2004～2011年の96か月に限定され、統計的不確実性やout-of-sample性能は十分に示されていない。対称結合はno-manipulationを保証する設計上の近似であり、真の因果的impact dynamicsを推定したものではない。\n\ncross-impact、transient impact、時間変動する流動性を一つの計算可能な凸モデルに統合し、no-price-manipulationを数学的に保証する点は、multi-asset executionとrelative-value portfolio constructionに直接有用である。一方、実証はシミュレーション依存で、提案モデルを評価器にも使っているため、報告されたP&L改善を実運用上の優位性と解釈するには追加検証が必要である。\n\n## 2. Artificial Intelligence in Equity and Crypto Markets: Progress, Profitability Evidence, and the Limits of Automated Investing\n\n**[arXiv:2609.04917v1](https://arxiv.org/abs/2609.04917v1) — Linsen Zhu, Mengqing Cai**\n\n**重要度: 8/10 — 推奨・AI投資**\n\n株式・ETF・中央集権型crypto spot、perpetual futures、DEXを対象に、ML、time-series foundation model、金融LLM、RL、agentの投資利用を批判的に整理したレビューである。予測やテキスト処理、portfolio設計、workflow統合では進歩が報告される一方、取引費用、capacity、時点整合性、リスク調整を満たす持続的なnet alphaの公開証拠は乏しいと結論づける。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 924 / 出力 1,190（うち推論 84） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 25,963 / 出力 1,558（うち推論 153） · PDF 32 pages · 推定 $0.1610\n\n2026年8月31日までの研究と一次的な公式資料を対象にしたcritical state-of-the-art reviewであり、systematic reviewやmeta-analysisではない。証拠を、temporality、selection control、portfolio mapping、implementation realism、risk/benchmark、external validity、operational provenanceの7次元で評価し、point-in-time情報からsignal、position、order/fill、費用控除後収益、持続性へ至るalpha-translation chainで比較する。 著者らが調査した公開研究の範囲では、特定のAI architectureがregime横断的かつcapacity-awareな持続的net alphaを一般に生むとは確認できない。好成績のhistorical backtestは存在するが、look-ahead bias、LLMのmemorization、multiple testing、signal decay、market impact、funding、liquidation、gas、MEVなどにより、予測性能から実現収益への変換が崩れ得ると報告する。\n\n実務では、データとmodel checkpointのpoint-in-time管理、signal・portfolio・executionの共同評価、規模別capacity curve、実行可能価格によるcost modeling、事前確定したforward testを導入すべきである。株式、spot、perpetual、DEXでP&Lと執行リスクを分離し、注文権限を持つagentには銘柄・notional・leverage制限、price collar、reconciliation、外部kill switchを設ける必要がある。 網羅的なdatabase検索、重複した独立screening、事前登録protocol、全研究へのformal risk-of-bias scoring、定量的なeffect poolingは行っていない。対象研究の市場、期間、benchmark、cost modelが不均一で、cryptoとaudited live-capitalの証拠は特に薄い。公式product資料は機能の存在しか示さず、引用されたpreprintや著者実施benchmarkも独立検証ではないため、本稿の結論は公開情報に限定される。\n\n電子執行とmarket microstructureの観点から、AIの予測精度を収益性と同一視せず、spread、impact、latency、borrow、funding、liquidation、gas、MEV、capacityまで監査する統一的な枠組みが有用である。新規の実証推定や特定戦略の性能証明ではないが、AI trading研究を評価・設計するための実務的なチェックリストとして推奨できる。金利モデルやyield curveへの直接的な貢献はない。",
+      "papers": [
+        {
+          "arxivId": "2609.04712v1",
+          "title": "Convex Modeling of Price Cross-Impact over Time",
+          "authors": [
+            "Vincent Yinjun-Wang",
+            "Madeleine Udell"
+          ],
+          "submittedDate": "2026-09-04",
+          "updatedDate": "2026-09-04",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.04712v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.04712v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 8/10",
+          "schedulerSummary": "関連先物間のcross-impactと時系列上のtransient impactを同時に表す、凸二次の取引コストモデルを提案する。各期の正半定値impact matrixをpower-law decay kernelで結合し、流動性が時間変動しても価格操作を許さない構成を示す。WTIカレンダースプレッドの事例では、分離型コストモデルより相対価値取引のimpactを低く評価し、より積極的なポジションを生成したと報告している。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 848 / 出力 1,106（うち推論 82） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 9,358 / 出力 2,050（うち推論 368） · PDF 14 pages · 推定 $0.0878",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.04917v1",
+          "title": "Artificial Intelligence in Equity and Crypto Markets: Progress, Profitability Evidence, and the Limits of Automated Investing",
+          "authors": [
+            "Linsen Zhu",
+            "Mengqing Cai"
+          ],
+          "submittedDate": "2026-09-04",
+          "updatedDate": "2026-09-04",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.04917v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.04917v1",
+          "schedulerRank": 2,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 8/10",
+          "schedulerSummary": "株式・ETF・中央集権型crypto spot、perpetual futures、DEXを対象に、ML、time-series foundation model、金融LLM、RL、agentの投資利用を批判的に整理したレビューである。予測やテキスト処理、portfolio設計、workflow統合では進歩が報告される一方、取引費用、capacity、時点整合性、リスク調整を満たす持続的なnet alphaの公開証拠は乏しいと結論づける。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 924 / 出力 1,190（うち推論 84） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 25,963 / 出力 1,558（うち推論 153） · PDF 32 pages · 推定 $0.1610",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-09-04-weekly-openai-01",
+      "editionDate": "2026-09-04",
+      "editionKind": "weekly",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-08T12:59:16Z",
+      "status": "WEEKLY_REVIEW",
+      "message": "対象期間の週次レビューを生成しました。",
+      "expectedBatchDate": null,
+      "observedBatchDate": null,
+      "periodStart": "2026-08-29",
+      "periodEnd": "2026-09-04",
+      "sourceText": "## 2026年9月4日 — 週次レビュー\n\n対象期間の週次レビューを生成しました。\n\nweekly: gpt-6-astra / medium · 1 calls · トークン 入力 23,080 / 出力 12,585 / 合計 35,665\n記録できた再試行分を含みます。未記録は0ではありません。推論トークンは出力に含まれます。\n\n\n## 1. Deep Hedging Under Realistic Market Frictions: A Regime-Conditional Empirical Study of Dynamic Option Hedging on Bitcoin Options\n\n**[arXiv:2608.29025v1](https://arxiv.org/abs/2608.29025v1) — Sheryan Kumar**\n\n**重要度: 10/10 — 推奨・深層ヘッジ**\n\nDeribitのBTCオプションについて、固定取引コストの下で古典的ヘッジとCVaR学習の深層ヘッジを比較する。期間内では、複雑な学習手法を摩擦対応ベンチマークと比較する重要性を示す実証ケースである。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177\n\n2020年から2024年の月初61日分のhourly snapshotを契約・日単位の最大24ステップのepisodeに分割する。古典3手法と深層3仕様を往復$5$ bpのコストで比較し、テスト16日をブロックとするブートストラップで検定する。 保存レビューでは、Whalley–Wilmottのno-trade bandがBS deltaより平均コストを$1.79$ドル低減し、差の$95\\%$信頼区間は$[-2.21,-1.39]$ドルだった。平均P&Lと$95\\%$ CVaRも最良だったが、BS・Lelandに対するP&L優位は有意でない。深層ヘッジの3仕様は全測定指標で古典手法を下回ったと報告される。\n\nニューラルヘッジの導入前に、同一コスト条件でno-trade bandと比較すべきことを示唆する。連続出力へのturnover penaltyだけでなく、明示的な取引閾値やgatingを検証する動機となる。 今回は保存レビューのみを統合し、元レビューの解析範囲は不明である。全文解析済みとは確認できない。テストの実効独立標本は16日で、band係数$\\lambda=60$は目視選択されている。固定コストは時変流動性やimpactを含まず、単一市場・限定レジーム・深層3仕様から一般的な優劣は結論できない。\n\n執行頻度と摩擦を明示的に扱う点で、期間内の実務向け優先候補である。ただし、深層ヘッジ全般の否定ではなく、独立再較正と連続履歴での追試を要するケーススタディとして推奨する。\n\n## 2. Improving Swaption Calibration in Factor HJM Stochastic Volatility Models: A First-Order Correction to Frozen Swap-Rate Loadings\n\n**[arXiv:2608.29423v1](https://arxiv.org/abs/2608.29423v1) — Bram Brongers**\n\n**重要度: 10/10 — 推奨・金利モデル**\n\nfactor HJM確率ボラティリティ・モデルのfrozen swap-rate loadingを一次補正し、追加の較正パラメータなしでswaption価格とパラメータ回収を改善する研究である。期間内では金利デリバティブ較正に最も直接的な文献となる。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177\n\n期待状態パス周りでloadingを一次線形化し、transformの摂動をaffine-state basisへ閉じる。ODE、有限差分PDE、spectral法、QMC微分などを相互比較し、非線形モデルの合成価格に対するfit・holdout較正で検証する。 保存レビューによると、凍結annuity driftを維持した一次変分は中心化金利状態についてaffineとなり、scalar Cheyetteでは一次元volatility PDEまたはE1 ODEで評価できる。合成価格のModerate設定では、held-out RMSEが$0.3169$から$0.0118$ normal-volatility bpに低下したと報告される。\n\n既存のFourier pricerを拡張し、loading凍結が確率ボラティリティ・パラメータへ転嫁する較正バイアスを抑える候補となる。採用判断にはquote単位の残差と、PDE・ODE間の数値安定性を確認する必要がある。 今回は保存レビューのみを統合した。元レビューの解析範囲は不明であり、全文解析済みとは確認できない。証拠は主にone-factor Cheyetteの合成実験で、市場cubeやmultifactorでの安定性は未検証である。凍結driftと一次打切りは残り、stress条件では価格残差が閾値を超え、広いvolatility分布ではE1表現が不安定になったと報告される。\n\n金利モデル較正への直接性と、近似誤差をパラメータ回収まで追う設計から優先推薦する。市場データ上の改善や本番性能が実証済みという意味ではない。\n\n## 3. The Convergence Rate of Stochastic Tracking with Application to Optimal Execution\n\n**[arXiv:2608.29468v1](https://arxiv.org/abs/2608.29468v1) — Marcel Nutz, Moritz Voss**\n\n**重要度: 10/10 — 推奨・最適執行**\n\n確率的ターゲットを絶対連続な制御で追跡する誤差を評価し、ランダムな満期在庫を持つtransient-impact執行へ応用する理論研究である。特異な最適戦略を滑らかな方策へ置換する費用を定量化する。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177\n\n指数追跡とterminal bridgeを構成して非漸近的上界を導き、下界と比較する。執行問題はHilbert空間上の直交射影として表し、過剰impact costを最適在庫への$L^2$追跡誤差で支配する。 保存レビューによると、時間並進モジュラスが$\\omega_\\xi(h)=O(h^\\alpha)$なら、初期乖離を除く追跡値は$O(\\kappa^{\\alpha/2})$と評価される。執行では$V(\\varepsilon)-V(0)=O(\\sqrt{\\varepsilon})$を示し、定数係数・決定論的満期在庫でこの次数の鋭さを確認する。\n\n非正則化Obizhaeva–Wang最適在庫を時定数$\\sqrt{\\varepsilon}$の指数フィルタで追跡し、満期近くでterminal bridgeへ切り替える明示的方策が候補となる。最終注文量を逐次学習するcentral risk book型執行に関連する。 今回は保存レビューのみを統合し、元レビューの解析範囲は不明である。全文解析済みとは確認できない。二次費用、決定論的で有限変動のresilience・depth、価格操作排除条件、満期在庫の到達可能性に依存する。一般的な確率係数や実市場での性能は未検証であり、鋭さの執行例も限定されたbenchmarkである。\n\n期間内の執行理論では優先推薦する。明示的な滑らかな方策にも最適値と同次数の保証を与える点が有用だが、その保証はモデル内の費用に限られる。\n\n## 4. Illiquidity at Risk\n\n**[arXiv:2609.00943v1](https://arxiv.org/abs/2609.00943v1) — Demetrio Lacava, Paolo Santucci de Magistris**\n\n**重要度: 10/10 — 推奨・Illiquidity-at-Risk**\n\n高頻度データ由来のrealized Amihudの上側尾部をIlliquidity-at-Riskとして予測する研究である。米国株でジャンプ付き条件付き分布を評価し、短期の流動性ストレス監視につなげる。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177\n\nrealized volatility対出来高の比にHAR、MEM、非対称MEM、Poisson到来とGamma型ジャンプを持つMEM-Jを当てはめる。S&P 500と大型株25銘柄を対象に、QLIKE、Model Confidence Set、Berkowitz検定で予測と尾部を比較する。 保存レビューによると、S&P 500の1日先予測ではG-AMEM-HAR-JがModel Confidence Setの唯一の優良モデルとなった。5日先・22日先ではジャンプの寄与が弱まり、価格ジャンプに頑健なbipower variationを使うと尾部カバレッジが改善したと報告される。\n\n日次の注文サイズ、参加率、執行延期、流動性リスク制限を調整する警戒指標の候補となる。ただし、実際のspreadやimpactの予測へ接続できるかは別途検証が必要である。 今回は保存レビューのみを統合し、元レビューの解析範囲は不明である。全文解析済みとは確認できない。realized Amihudは流動性代理指標であり、板の深さや実impactを直接測らない。標準指標のアウト・オブ・サンプル尾部検定ではジャンプ仕様にも棄却が残り、個別株の性能も不均一である。ストレス要因や先行性の因果解釈は限定的である。\n\n執行リスクに近い対象を条件付き尾部分布で扱うため、期間内の実証研究として優先推薦する。完成したリスクモデルではなく、追加較正を要する監視モデル候補として読むべきである。\n\n## 5. Decarbonising price formation: unit-level evidence on battery storage and the imbalance price in the GB Balancing Mechanism\n\n**[arXiv:2608.29818v1](https://arxiv.org/abs/2608.29818v1) — Robert Dalton, Aidan O'Sullivan**\n\n**重要度: 8/10 — 推奨・市場マイクロストラクチャー**\n\nGB Balancing Mechanismのbid・offer stackから限界行動の代理指標を再構築し、battery storageの価格形成への参加を記述する。金利市場への直接性は低いが、実取引データによる価格帰属分析として関連する。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177\n\nElexonのstack、System Price、NIV、BOD、BMU情報を結合し、適格offerの最高価格またはbidの最低価格を限界候補とする。BMU-quarter固定効果分析と、未使用非battery volumeによるfixed-ladder replacement VWAP比較を行う。 保存レビューでは、2023年から2025年にbatteryの限界シェア代理値がbid側で$0.8\\%$から$36.2\\%$、offer側で$3.2\\%$から$26.9\\%$へ上昇した。2025年の同時点代替比較では平均約9〜10ポンド/MWh有利だった一方、short-systemの高価格上位$5\\%$ではbatteryの参加が相対的に少ないと報告される。\n\nstorage入札やbalancing costの監視に利用できる。bid・offerの分離、同値限界行動への重み配分、同時点の代替流動性との比較は、価格形成分析の設計として参考になる。 今回は保存レビューのみを統合した。元レビューの解析範囲は不明であり、全文解析済みとは確認できない。価格端は公式System Priceやdispatchの完全再現ではない。代替ladder比較は位置、ramping、蓄電状態、duration、受入順序などを捉えず、消費者節約額や因果的な反実仮想を示さない。\n\n期間内の実証microstructure研究として、単位設備レベルの価格帰属と残余流動性の分析を評価する。batteryが公式価格を設定したとの強い解釈を避け、記述的研究として推奨する。\n\n## 6. Adaptive singular-point method for pricing and hedging surrenderable equity-linked contracts\n\n**[arXiv:2609.01323v1](https://arxiv.org/abs/2609.01323v1) — Andrea Molent, Marcellino Gaudenzi**\n\n**重要度: 8/10 — 推奨・CIR++**\n\n相関付きHeston・CIR++モデルで、定期拠出とBermudan解約権を持つ株式連動型保険を評価する。積立ファンド次元を適応的な区分三次関数として保持し、長期保証負債の価格と感応度を計算する。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177\n\nCIR++の$r_t=X_t+\\phi(t)$で初期割引曲線へ整合させ、分散・金利を相関付き再結合格子で離散化する。ファンド方向は区分三次補間と誤差証明付きpruningで圧縮し、後退動的計画法をMonte Carlo・LSMCと比較する。 保存レビューでは、有限回Bermudan価値の収束と正則領域のDelta整合性が報告される。解約なしの年払保険料は$N=480$で$111.644323$となり、Monte Carlo基準値$111.658673$に近い。株式・分散・金利を合わせた静的ヘッジは、DeltaのみのヘッジよりRMSEを約$80.4\\%$削減したとされる。\n\n長期unit-linked保険や保証付き積立商品の価格、解約境界、金利・株式感応度を同時に計算する候補となる。定期拠出で非再結合となるファンド状態の固定格子を避けたい場合に有用である。 今回は保存レビューのみを統合した。元レビューの解析範囲は不明であり、全文解析済みとは確認できない。収束は有限行使日の問題であり、高次精度には滑らかさ等の条件が必要となる。production trinomialの大域一次収束率や非滑らかな契約の完全な二次保証は示されていない。ヘッジ結果は単一較正下の1年・静的・無摩擦診断で、実際のALMや行動的解約を検証しない。\n\n電子執行への直接性はないが、曲線整合的な確率金利と長期負債評価を接続する専門文献として推奨する。数値精度の保証範囲と実契約の非滑らかさを区別する必要がある。\n\n## 7. Price manipulation in nonlinear transient impact models: rigidity before memory and complete positivity after memory\n\n**[arXiv:2609.02447v1](https://arxiv.org/abs/2609.02447v1) — Minhyeok Lee**\n\n**重要度: 8/10 — 非推奨・市場インパクト**\n\n非線形transient impactについて、非線形性をmemoryの前後どちらに置くかで価格操作不在条件を分類する理論研究である。主張の範囲が広く、実務採用より先に独立した数理検証が必要となる。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177\n\n有限piecewise-constant round tripから負費用戦略を構成する一方、Volterra resolventとBregman divergenceによるstorage-dissipation identityで安全性を分析する。Prony kernelについて計算可能なunsafe certificateも提示するとされる。 保存レビューによると、rate-inside型ではround-trip安全性がimpact lawのaffine性を強制すると著者は主張する。特に$G(t)=t^{-\\gamma}$、$0‹\\gamma‹1$では、$f(x)=\\operatorname{sgn}(x)|x|^\\delta$が安全なのは$\\delta=1$のみとする。state-outside型では、すべての単調readoutに対する安全性とkernelのcomplete positivityの同値性を主張する。\n\nconcave impactを取引速度へ直接適用する仕様と、memory stateへ適用する仕様を区別するモデル監査の論点を提供する。主張を確認するまでは、既存モデルの変更根拠ではなく検証課題として扱うべきである。 今回は保存レビューのみを統合し、元レビューの解析範囲は不明である。全文解析済みとは確認できず、証明・境界条件・補助資料も独立検証していない。frictionless費用、Volterra memory、制御クラス、すべての単調readoutに対する量化などの仮定に依存する。実市場のspread、離散注文、遅延、risk、板制約における妥当性は示されていない。\n\n正しければimpactモデル設計への重要な含意があるため追跡対象とする。ただし、広範な分類定理を保存レビューだけで評価できないため、現段階では実務向け推薦を保留する。\n\n## 8. Mean-field equilibrium of heterogeneous agents under market impact\n\n**[arXiv:2609.03115v1](https://arxiv.org/abs/2609.03115v1) — Joseph Leclère, Mathieu Rosenbaum**\n\n**重要度: 8/10 — 推奨・市場インパクト**\n\n異質な予測horizonを持つエージェントの線形mean-fieldモデルで、共通信号と予想impactの相互作用を分析する。roughな予測可能信号が価格へ直接伝わる成分を、impact feedbackが相殺する条件を示す。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177\n\nBrownian駆動のVolterra信号とpropagator impactに対する条件付き予測を人口集計し、kernel固定点へ帰着する。確率Fubini、Itô isometry、contraction法、Gamma分布の平滑化漸近を用いて解と価格正則性を分析する。 保存レビューによると、選択した減衰解空間ではcontraction条件下で均衡の存在・一意性が得られる。$G(0)(1-\\alpha)=1$で直接信号項が消え、fractional型信号とGamma horizonでは$\\xi›\\frac{1}{2}-H$の下で局所Hölder正則性がBrownian motionと整合する。追加の一様tail条件下では境界極限で残差martingaleへの$L^2$収束も示す。\n\nimpactの瞬時成分、予想impactの織込み、短期horizonへの人口集中を一体で点検する理論的診断枠組みとなる。価格正則性との整合性を調べる用途はあるが、実データ較正手順が提供されたわけではない。 今回は保存レビューのみを統合し、元レビューの解析範囲は不明である。全文解析済みとは確認できない。線形の予測強度・ポジション対応に依存し、一意性は選択した関数空間内に限られる。Gamma正則性と境界極限のtail条件は追加仮定である。Hawkesとの対応は実証的同定ではなく、取引コスト、risk aversion、戦略的相互作用、離散注文も扱わない。\n\n期間内のimpact理論を、異質horizonと価格正則性の観点から補完する文献として推奨する。Brownian motionと整合的な局所正則性を、市場効率性全般の実証と混同すべきではない。\n\n## 9. RetailAgent: Structured Adverse Timing in Self-Conditioned Multimodal LLM Trading Agents\n\n**[arXiv:2608.28399v1](https://arxiv.org/abs/2608.28399v1) — Yupeng Zhang, Liuyuan Jiang, Hongyi Huang, Bingheng Li, Lisha Chen**\n\n**重要度: 6/10 — 推奨・LLM取引エージェント**\n\n匿名化したCSI-500銘柄の日中価格上で、LLMのlong/flat判断を保有率調整済みタイミングで監査する研究である。収益戦略の提案よりも、自己生成メモリーや入力形式に伴う行動の偏りが主題となる。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177\n\n固定された過去価格上で二値ポジションを選択させ、$A=\\sum_t(p_t-\\bar{p})r_t$を評価する。入力形式、時間間隔、モデル、状態情報を比較し、日付クラスタ・ブートストラップと保有率保存シャッフルを対照に用いる。 保存レビューによると、Qwen3.5の10分テキスト条件で平均タイミングalphaは$-45.7$ bp/stock-day、$95\\%$信頼区間は$[-49.4,-41.8]$だった。行動シャッフルで負値が縮小し、一部のメモリー条件では切替頻度の低下とタイミング悪化が報告されている。\n\nLLM売買システムの評価では、集計収益に加えて保有率調整済みタイミング、行動の持続性、メモリー依存性を検査する用途がある。負のタイミングから、実行可能な反転戦略の利益を直ちに推論すべきではない。 今回は保存レビューのみを統合した。元レビューの解析範囲は不明であり、全文解析済みとは確認できない。両アクションを含む軌跡への選別、条件間の標本差、chart・encoder復元入力の先読み懸念がある。取引コスト、impact、遅延、価格へのフィードバックは未検証で、再現設定にも未確定部分が残る。\n\n期間内のLLM取引研究では、個別エージェントの行動監査を担う補助的な推奨文献である。実運用alphaの証拠ではなく、評価設計と失敗要因の点検に価値がある。\n\n## 10. Optimal Block Time for AMM Liquidity Providers under Jump-Diffusion Prices\n\n**[arXiv:2608.30321v1](https://arxiv.org/abs/2608.30321v1) — Nils Bundi**\n\n**重要度: 6/10 — 推奨・AMM**\n\njump-diffusion価格下のconstant-product AMMについて、LPのLVRを拡散成分とジャンプ成分に分解する。ブロック高速化の効果と限界を、近似的な分離目的関数で分析する研究である。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177\n\nCPMM価値へItô–Lévy公式を適用し、有限活動ジャンプ、Poissonブロック到着、手数料帯域を組み込む。二次損失surrogateと定常mispricing分析を用い、Binance ETH/USDTの5分足から推定したパラメータで例示する。 保存レビューによると、分離近似ではジャンプ成分がブロック時間に依存せず、consensus costを加えた目的の最適ブロック時間もジャンプ・パラメータに依存しない。対称性と集約仮定の下で正のジャンプ床を主張し、仮想ETH/USDT較正では12秒時のLVRが471 bp/年、短時間極限の床が125 bp/年と報告する。\n\nブロック短縮で削減できる拡散由来の損失と、手数料や市場設計で対処すべきジャンプ損失を区別する枠組みとなる。報告された約8.4秒の最適値は、一般的なチェーン設計推奨値ではない。 今回は保存レビューのみを統合し、元レビューの解析範囲は不明である。全文解析済みとは確認できない。最適値の不変性は分離近似に限られ、厳密な残差にはジャンプとブロック時間の相互作用が残る。ジャンプ床には追加仮定が必要で、full-range CPMM、無制約・ゼロ遅延裁定者、発行額によるconsensus cost代理も実市場への適用を制約する。\n\nAMMのadverse selectionとブロック設計を結ぶ条件付きモデルとして推奨する。厳密な結果、surrogate上の結果、較正例を区別して読む必要がある。\n\n## 11. Agentic Quantitative Trading: A Survey of Workflows, Systems, and Evaluation\n\n**[arXiv:2608.31041v1](https://arxiv.org/abs/2608.31041v1) — Fengrui Hua, Hengyi Yang, Xinlei Hao, Haohan Zhang, Bokai Cao, Yiyan Qi, Jia Li, Jian Guo**\n\n**重要度: 6/10 — 推奨・agentic trading**\n\nLLMベースのagentic tradingを、factor miningから注文執行・リスク管理までのworkflowとシステム設計で整理するサーベイである。期間内のLLM行動実験を位置付ける研究地図として役立つ。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177\n\n主に2025年から2026年のLLM agent文献を対象に、20システムを5つのworkflow段階と3つの設計次元で分類し、15 benchmarkを4類型で比較する。 保存レビューでは、対象20システムすべてがsignal discoveryを中核機能とする一方、5段階すべてを部分的に扱うものは4件、中核機能として扱うものは2件だった。live評価、leakage、slippageなどを含む引用研究は、予測精度やbacktest収益だけでは運用成果を保証しないと整理されている。\n\nLLMの情報統合・研究支援と、検証可能なportfolio optimizer、執行アルゴリズム、hard risk gateを分離する設計レビューに使える。評価項目には時点整合性、コスト、流動性、リスク制約を含めるべきである。 今回は保存レビューのみを統合した。元レビューの解析範囲は不明であり、全文解析済みとは確認できない。文献の選定・符号化に依存するサーベイで、集計は研究全体の母集団を表さない。個別手法の再現性、実執行可能性、impact、容量を統一条件で再検証したものではない。\n\n電子取引システムの全体像を把握する導入文献として推奨する。新たなexecution alphaの実証ではなく、設計上の抜けと評価不足を見つける用途が中心である。\n\n## 12. Competitive Market Behavior of LLMs\n\n**[arXiv:2609.02580v1](https://arxiv.org/abs/2609.02580v1) — Pawel Struski, Jakub Swistak, Inez Okulska, Przemyslaw Biecek**\n\n**重要度: 6/10 — 推奨・LLMエージェント**\n\nLLMエージェントを連続ダブルオークションに参加させ、価格収束と配分効率を歴史的な人間実験benchmarkと比較する。個別判断だけでなく、市場全体としてのLLM注文行動を評価する研究である。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177\n\n買い手・売り手各11名の対称的CDAを構成し、均衡を$(p^\\star,q^\\star)=(2.00,6)$とする。3モデルを各10反復・5ラウンドで比較し、改善注文とクロス注文のルールを固定する。公開reasoning traceの語彙と行動の関連も分析する。 保存レビューでは、3モデル群はいずれも完全な競争均衡収束を達成しなかった。GPT Smallは価格分散が$27.6$から$11.7$へ低下し、効率が$0.79$から$0.91$へ上昇したが、人間benchmarkの分散$3.5$には及ばない。GPT Largeは小刻みな気配改善に偏り、取引数と効率が低かったと報告される。\n\nLLM発注主体の評価に、約定率、spread crossing、価格分散、取引量、実現余剰を加える枠組みとなる。非収束や小刻みな値下げを、直ちに協調行動の証拠と解釈しないためにも有用である。 今回は保存レビューのみを統合した。元レビューの解析範囲は不明であり、全文解析済みとは確認できない。モデル数・反復数・期間が限られ、固定予約価格の簡略市場である。人間比較は同時対照ではなく歴史的集計値で、モデル規模の因果効果も識別しない。trace分析は内部意思決定の因果証拠ではない。\n\nRetailAgentの個別タイミング監査を、市場レベルの価格発見・余剰評価で補完する文献として推奨する。結果を現実市場やLLM全般の能力順位へ外挿することは避けるべきである。",
+      "papers": [
+        {
+          "arxivId": "2608.29025v1",
+          "title": "Deep Hedging Under Realistic Market Frictions: A Regime-Conditional Empirical Study of Dynamic Option Hedging on Bitcoin Options",
+          "authors": [
+            "Sheryan Kumar"
+          ],
+          "submittedDate": "2026-08-29",
+          "updatedDate": "2026-08-29",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.29025v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.29025v1",
+          "schedulerRank": 1,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 10/10",
+          "schedulerSummary": "DeribitのBTCオプションについて、固定取引コストの下で古典的ヘッジとCVaR学習の深層ヘッジを比較する。期間内では、複雑な学習手法を摩擦対応ベンチマークと比較する重要性を示す実証ケースである。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.29423v1",
+          "title": "Improving Swaption Calibration in Factor HJM Stochastic Volatility Models: A First-Order Correction to Frozen Swap-Rate Loadings",
+          "authors": [
+            "Bram Brongers"
+          ],
+          "submittedDate": "2026-08-29",
+          "updatedDate": "2026-08-29",
+          "topics": [
+            "Interest-rate models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.29423v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.29423v1",
+          "schedulerRank": 2,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 10/10",
+          "schedulerSummary": "factor HJM確率ボラティリティ・モデルのfrozen swap-rate loadingを一次補正し、追加の較正パラメータなしでswaption価格とパラメータ回収を改善する研究である。期間内では金利デリバティブ較正に最も直接的な文献となる。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.29468v1",
+          "title": "The Convergence Rate of Stochastic Tracking with Application to Optimal Execution",
+          "authors": [
+            "Marcel Nutz",
+            "Moritz Voss"
+          ],
+          "submittedDate": "2026-08-29",
+          "updatedDate": "2026-08-29",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.29468v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.29468v1",
+          "schedulerRank": 3,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 10/10",
+          "schedulerSummary": "確率的ターゲットを絶対連続な制御で追跡する誤差を評価し、ランダムな満期在庫を持つtransient-impact執行へ応用する理論研究である。特異な最適戦略を滑らかな方策へ置換する費用を定量化する。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.00943v1",
+          "title": "Illiquidity at Risk",
+          "authors": [
+            "Demetrio Lacava",
+            "Paolo Santucci de Magistris"
+          ],
+          "submittedDate": "2026-09-01",
+          "updatedDate": "2026-09-01",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.00943v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.00943v1",
+          "schedulerRank": 4,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 10/10",
+          "schedulerSummary": "高頻度データ由来のrealized Amihudの上側尾部をIlliquidity-at-Riskとして予測する研究である。米国株でジャンプ付き条件付き分布を評価し、短期の流動性ストレス監視につなげる。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.29818v1",
+          "title": "Decarbonising price formation: unit-level evidence on battery storage and the imbalance price in the GB Balancing Mechanism",
+          "authors": [
+            "Robert Dalton",
+            "Aidan O'Sullivan"
+          ],
+          "submittedDate": "2026-08-30",
+          "updatedDate": "2026-08-30",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.29818v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.29818v1",
+          "schedulerRank": 5,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 8/10",
+          "schedulerSummary": "GB Balancing Mechanismのbid・offer stackから限界行動の代理指標を再構築し、battery storageの価格形成への参加を記述する。金利市場への直接性は低いが、実取引データによる価格帰属分析として関連する。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.01323v1",
+          "title": "Adaptive singular-point method for pricing and hedging surrenderable equity-linked contracts",
+          "authors": [
+            "Andrea Molent",
+            "Marcellino Gaudenzi"
+          ],
+          "submittedDate": "2026-09-01",
+          "updatedDate": "2026-09-01",
+          "topics": [
+            "Interest-rate models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.01323v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.01323v1",
+          "schedulerRank": 6,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 8/10",
+          "schedulerSummary": "相関付きHeston・CIR++モデルで、定期拠出とBermudan解約権を持つ株式連動型保険を評価する。積立ファンド次元を適応的な区分三次関数として保持し、長期保証負債の価格と感応度を計算する。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.02447v1",
+          "title": "Price manipulation in nonlinear transient impact models: rigidity before memory and complete positivity after memory",
+          "authors": [
+            "Minhyeok Lee"
+          ],
+          "submittedDate": "2026-09-02",
+          "updatedDate": "2026-09-02",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.02447v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.02447v1",
+          "schedulerRank": 7,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・重要度 8/10",
+          "schedulerSummary": "非線形transient impactについて、非線形性をmemoryの前後どちらに置くかで価格操作不在条件を分類する理論研究である。主張の範囲が広く、実務採用より先に独立した数理検証が必要となる。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.03115v1",
+          "title": "Mean-field equilibrium of heterogeneous agents under market impact",
+          "authors": [
+            "Joseph Leclère",
+            "Mathieu Rosenbaum"
+          ],
+          "submittedDate": "2026-09-02",
+          "updatedDate": "2026-09-02",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.03115v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.03115v1",
+          "schedulerRank": 8,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 8/10",
+          "schedulerSummary": "異質な予測horizonを持つエージェントの線形mean-fieldモデルで、共通信号と予想impactの相互作用を分析する。roughな予測可能信号が価格へ直接伝わる成分を、impact feedbackが相殺する条件を示す。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.28399v1",
+          "title": "RetailAgent: Structured Adverse Timing in Self-Conditioned Multimodal LLM Trading Agents",
+          "authors": [
+            "Yupeng Zhang",
+            "Liuyuan Jiang",
+            "Hongyi Huang",
+            "Bingheng Li",
+            "Lisha Chen"
+          ],
+          "submittedDate": "2026-08-28",
+          "updatedDate": "2026-08-28",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.28399v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.28399v1",
+          "schedulerRank": 9,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 6/10",
+          "schedulerSummary": "匿名化したCSI-500銘柄の日中価格上で、LLMのlong/flat判断を保有率調整済みタイミングで監査する研究である。収益戦略の提案よりも、自己生成メモリーや入力形式に伴う行動の偏りが主題となる。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.30321v1",
+          "title": "Optimal Block Time for AMM Liquidity Providers under Jump-Diffusion Prices",
+          "authors": [
+            "Nils Bundi"
+          ],
+          "submittedDate": "2026-08-31",
+          "updatedDate": "2026-08-31",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.30321v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.30321v1",
+          "schedulerRank": 10,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 6/10",
+          "schedulerSummary": "jump-diffusion価格下のconstant-product AMMについて、LPのLVRを拡散成分とジャンプ成分に分解する。ブロック高速化の効果と限界を、近似的な分離目的関数で分析する研究である。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.31041v1",
+          "title": "Agentic Quantitative Trading: A Survey of Workflows, Systems, and Evaluation",
+          "authors": [
+            "Fengrui Hua",
+            "Hengyi Yang",
+            "Xinlei Hao",
+            "Haohan Zhang",
+            "Bokai Cao",
+            "Yiyan Qi",
+            "Jia Li",
+            "Jian Guo"
+          ],
+          "submittedDate": "2026-08-31",
+          "updatedDate": "2026-08-31",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.31041v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.31041v1",
+          "schedulerRank": 11,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 6/10",
+          "schedulerSummary": "LLMベースのagentic tradingを、factor miningから注文執行・リスク管理までのworkflowとシステム設計で整理するサーベイである。期間内のLLM行動実験を位置付ける研究地図として役立つ。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.02580v1",
+          "title": "Competitive Market Behavior of LLMs",
+          "authors": [
+            "Pawel Struski",
+            "Jakub Swistak",
+            "Inez Okulska",
+            "Przemyslaw Biecek"
+          ],
+          "submittedDate": "2026-09-02",
+          "updatedDate": "2026-09-02",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.02580v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.02580v1",
+          "schedulerRank": 12,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・重要度 6/10",
+          "schedulerSummary": "LLMエージェントを連続ダブルオークションに参加させ、価格収束と配分効率を歴史的な人間実験benchmarkと比較する。個別判断だけでなく、市場全体としてのLLM注文行動を評価する研究である。\n\n週次統合: gpt-6-astra / medium · トークン 入力 23,080 / 出力 12,585（うち推論 99） · 保存済み日次レビュー使用／12論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.9177",
+          "ratings": [
+            {
+              "label": "重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

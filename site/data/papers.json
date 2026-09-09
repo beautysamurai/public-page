@@ -2,6 +2,79 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-09-09-daily-openai-01",
+      "date": "2026-09-09",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.05433v1",
+          "title": "Perpetual Futures for Stocks: The SpaceX Pre-IPO Market",
+          "authors": [
+            "Aditya Gupta",
+            "Nick Polson"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.06137v1",
+          "title": "Unbiased Monte Carlo Greeks for Discontinuous Payoffs",
+          "authors": [
+            "Evgeny Lakshtanov"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.06085v1",
+          "title": "Explainable Deep Learning for Price-Trade Dynamics: From Black-Box Forecasts to Effective Parametric Models",
+          "authors": [
+            "Manuel Naviglio",
+            "Fabrizio Lillo"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.07989v1",
+          "title": "Regimes in the Order Flow",
+          "authors": [
+            "Ramzi Jebali"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.08881v1",
+          "title": "The Double-Edged Sword of Short-Selling Bans",
+          "authors": [
+            "Pasquale Della Corte",
+            "Robert Kosowski",
+            "Dimitris Papadimitriou",
+            "Nikolaos P. Rapanos"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-09-07-daily-openai-01",
       "date": "2026-09-07",
       "kind": "daily",

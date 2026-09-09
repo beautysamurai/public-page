@@ -1,0 +1,1291 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-09-09",
+  "generatedAt": "2026-09-09T11:44:56Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-09-09 was confirmed with 5 relevant paper(s).",
+  "expectedBatchDate": "2026-09-09",
+  "observedBatchDate": "2026-09-09",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2609.05433v1",
+        "title": "Perpetual Futures for Stocks: The SpaceX Pre-IPO Market",
+        "authors": [
+          "Aditya Gupta",
+          "Nick Polson"
+        ],
+        "submittedDate": "2026-06-22",
+        "updatedDate": "2026-06-22",
+        "categories": [
+          "q-fin.PR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "本稿は、Shiller型とcrypto型のperpetual futuresを、benchmark flowをfunding rateで割り引く統一的な無裁定価格式として整理する。さらに、random-time representation、funding capによるbasis band、latent valueのfiltering、market segmentationを論じ、SpaceXのpre-IPO perpetualが公募価格より上場後の市場価格に近かったと報告する。",
+        "mainResult": "中心的な理論結果は、settlementが$d\\Sigma_t=(a_t-b_tF_t)dt$なら、適切なtransversality条件の下で価格が$F_t=E_t^Q[\\int_t^\\infty e^{-\\int_t^s b_u du}a_s ds]$となることである。peg型では価格をfunding clockの最初の到着時刻$\\tau$における期待spot $F_t=E_t^Q[S_\\tau]$と表現し、basisはstochastic volatilityそのものではなくrisk-neutral carryを通じて生じると主張する。実証面では、約$180ドルのpre-IPO価格が$135ドルの公募価格より約$185ドルのsecondary clearing priceに近かったと報告している。",
+        "practicalApplication": "私企業株やwhen-issued equity向けperpetualのfunding設計、soft referenceに対するbasis監視、funding capと裁定能力を踏まえたrisk limit設定に応用できる。上場後にはfunding rateをstock-borrow feeのproxyとして比較し、lockup解除前後のbasis縮小をsegmentation仮説の検証に利用できる。",
+        "methodology": "一般的な連続時間settlementからrisk-neutral pricingを導き、Cox clockによるtime change、確率的volatility付きspot dynamics、Kalman filtering、Doob martingale、Robbins–Monro型学習則、二市場参加者のsegmented equilibriumを組み合わせる。SpaceX事例はvenue・報道由来の少数の価格、出来高、open interestを用いた記述的case studyであり、generative Bayesian computationは推定案として提示されるだけで実行されていない。",
+        "limitations": "SpaceXの結論は単一事例と少数時点の価格比較に依存し、統計的forecast test、代替benchmark、取引コスト調整、再現可能なデータ構築がない。公募価格とsecondary clearing priceは形成目的が異なるため、予測精度の単純比較には注意が必要である。private-market referenceは取引可能なspotではなく、無裁定pegを直接保証しない。segmentation、risk premium、discovery、bubbleの分解は識別されず、本文の数値解釈にとどまる。stopping、integrability、market completenessなど一部の技術条件も十分に検討されておらず、Proposition 6の表記と後続のmean-variance導出には整合性が不明瞭な箇所がある。また、表紙の日付とarXiv metadataの日付が一致せず、市場データは論文内の二次情報だけでは独立検証できない。",
+        "importance": 5,
+        "recommended": false,
+        "reason": "perpetual pricingをdiscounting、random clock、filtering、segmentationとして統一する視点は興味深く、本サイトのmarket microstructureとelectronic derivativesの対象に合う。一方、主要なSpaceX主張は厳密な実証分析ではなく記述的比較であり、提案された推定法も未実装であるため、現段階では理論的working paperとして読むのが適切で、強い実務結論を支持するには不十分である。",
+        "tags": [
+          "永久先物",
+          "資金調達率",
+          "プレIPO株式",
+          "価格発見",
+          "市場分断",
+          "ベーシス",
+          "確率的時間変更",
+          "非線形フィルタリング",
+          "無裁定価格付け",
+          "SpaceX"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper unifies Shiller-style and crypto-style perpetual futures as no-arbitrage claims whose benchmark flows are discounted at the funding rate. It also studies a random-time representation, a basis band induced by funding caps, filtering of latent value, and market segmentation, and reports that the SpaceX pre-IPO perpetual was closer to the post-listing market price than the offering price was.",
+          "mainResult": "The central theoretical result is that, when settlement is $d\\Sigma_t=(a_t-b_tF_t)dt$, the price under suitable transversality conditions is $F_t=E_t^Q[\\int_t^\\infty e^{-\\int_t^s b_u du}a_s ds]$. For a peg contract, the price is represented as expected spot at the first arrival time $\\tau$ of a funding clock, $F_t=E_t^Q[S_\\tau]$, and the paper argues that the basis arises through risk-neutral carry rather than stochastic volatility itself. Empirically, it reports that the roughly $180 pre-IPO price was closer to a roughly $185 secondary clearing price than the $135 offering price was.",
+          "practicalApplication": "The framework can inform funding design for private-company and when-issued equity perpetuals, monitoring of basis against a soft reference, and risk limits that account for funding caps and limited arbitrage capacity. After listing, practitioners could compare the funding rate with stock-borrow fees and use basis compression around lockup expiration to test the segmentation hypothesis.",
+          "methodology": "The paper derives risk-neutral pricing from a general continuous-time settlement rule and combines a Cox-clock time change, spot dynamics with stochastic volatility, Kalman filtering, Doob martingales, a Robbins–Monro-style learning rule, and a segmented equilibrium with two investor classes. The SpaceX application is a descriptive case study using a small number of price, volume, and open-interest observations from venues and media reports. Generative Bayesian computation is proposed as an estimation method but is not implemented.",
+          "limitations": "The SpaceX conclusion relies on one case and a comparison of prices at only a few dates, without a statistical forecast test, alternative benchmarks, transaction-cost adjustment, or reproducible data construction. The offering price and secondary clearing price serve different purposes, so a direct comparison of forecast accuracy requires caution. The private-market reference is not a tradable spot and cannot directly support an arbitrage-enforced peg. The decomposition into segmentation, risk premium, discovery, and bubble components is not identified and remains a numerical interpretation. Some technical conditions involving stopping, integrability, and market completeness receive limited treatment, while the notation in Proposition 6 is not clearly consistent with the subsequent mean-variance derivation. The title-page date also differs from the arXiv metadata date, and the market data cannot be independently verified from the paper's secondary sources alone.",
+          "reason": "The attempt to interpret perpetual pricing through discounting, random clocks, filtering, and segmentation is interesting and relevant to market microstructure and electronic derivatives. However, the main SpaceX claim is a descriptive comparison rather than a rigorous empirical analysis, and the proposed estimation method is not implemented. The paper is therefore best read as a theoretical working paper and does not yet support strong practical conclusions.",
+          "tags": [
+            "perpetual futures",
+            "funding rate",
+            "pre-IPO equity",
+            "price discovery",
+            "market segmentation",
+            "basis",
+            "stochastic time change",
+            "nonlinear filtering",
+            "no-arbitrage pricing",
+            "SpaceX"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 850,
+          "outputTokens": 1278,
+          "reasoningTokens": 124,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2128,
+          "estimatedCostUsd": 0.001704,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.05433v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 12129,
+          "outputTokens": 2064,
+          "reasoningTokens": 421,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 12126,
+          "totalTokens": 14193,
+          "estimatedCostUsd": 0.101922,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 14,
+          "paperIds": [
+            "2609.05433v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.06137v1",
+        "title": "Unbiased Monte Carlo Greeks for Discontinuous Payoffs",
+        "authors": [
+          "Evgeny Lakshtanov"
+        ],
+        "submittedDate": "2026-09-05",
+        "updatedDate": "2026-09-05",
+        "categories": [
+          "q-fin.CP",
+          "q-fin.PR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "不連続 payoff を持つ Monte Carlo pricingについて、通常の pathwise AADに境界補正を加えてGreekを推定する手法を提案する。各indicator境界を正規乱数空間でNewton法により探索し、境界密度、境界感応度、payoff jumpを用いて補正する。GBM、Heston、Hull–Whiteの数値例を報告している。",
+        "mainResult": "論文は、期待値の微分をpathwise項と各不連続面上の境界項の和に分解でき、smoothingなしで不偏なGreekが得られると主張する。報告されたbenchmarkでは解析値またはbump-and-revalueとの差が概ね$0.1\\%$から$4\\%$で、必要path数も大幅に少ないとしている。ただし単一indicatorの定理では、滑らかな$P$に対して$\\Delta P=P(Z^*+\\epsilon v)-P(Z^*-\\epsilon v)$と定義しており、極限が$0$になるため、本来必要なpayoff全体のjumpと整合しない。",
+        "practicalApplication": "barrier、digital、autocallable、LMMやHull–Whiteを含む金利・hybrid商品で、AADが見落とす境界感応度を補う用途が想定される。既存pricing kernelを境界の両側でreplayできる実装では導入しやすいが、active indicatorごとに複数回のNewton反復、reverse AD、forward replayが必要となる。",
+        "methodology": "正規乱数を境界法線方向と直交方向に分解し、一次元積分へLeibniz則と陰関数定理を適用して境界項を導く。実装では固定方向に沿ってNewton法で境界rootを求め、両側のpricing replayからjumpを計算する。QuantLibとAADCを用い、GBM barrier、Heston autocallable、GBM–Hull–White barrierで解析値またはbump-and-revalueと比較している。",
+        "limitations": "単一indicatorの式にはjumpの定義と符号に内部的不整合があり、記載された証明のままでは主要な不偏性主張を確立できない。固定方向が全境界で正の横断性を持つこと、一つの直線上にrootが一つだけ存在することは一般には保証されず、pairwise transversalityだけでも十分ではない。実装は原点で計算した固定法線を使うため、定理の仮定との隔たりもある。benchmarkは少数の商品と単一設定に限られ、標準誤差、信頼区間、反復実験、実行時間、Newton失敗率、screening biasの定量評価が示されていない。AADC依存の性能主張も独立検証されていない。",
+        "importance": 5,
+        "recommended": false,
+        "reason": "不連続payoffのAAD Greekという実務上重要な問題を扱い、金利・hybrid modelにも応用可能な着想は有用である。しかし中心定理のjump定義と証明に重大な不整合があり、一般的な幾何条件や数値的な不偏性も十分に検証されていないため、現状では信頼できる実装根拠として推奨しにくい。",
+        "tags": [
+          "Monte Carlo Greeks",
+          "不連続payoff",
+          "AAD",
+          "境界補正",
+          "barrier option",
+          "autocallable",
+          "Hull–White model",
+          "Heston model",
+          "Newton法",
+          "bump-and-revalue"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper proposes augmenting standard pathwise AAD with boundary corrections to estimate Monte Carlo Greeks for discontinuous payoffs. Each indicator boundary is located in Gaussian random-number space using Newton root-finding, and the correction uses the boundary density, boundary sensitivity, and payoff jump. Numerical examples are reported for GBM, Heston, and Hull–White models.",
+          "mainResult": "The paper claims that the derivative of an expectation can be decomposed into a pathwise term plus boundary terms for all discontinuity surfaces, producing unbiased Greeks without smoothing. Its benchmarks report discrepancies of approximately $0.1\\%$ to $4\\%$ relative to analytic or bump-and-revalue references and claim substantially lower path requirements. However, the single-indicator theorem defines $\\Delta P=P(Z^*+\\epsilon v)-P(Z^*-\\epsilon v)$ for smooth $P$, whose limit is $0$, making it inconsistent with the required jump of the complete payoff.",
+          "practicalApplication": "The intended use is to recover boundary sensitivities missed by AAD for barriers, digitals, autocallables, and rates or hybrid products involving models such as LMM and Hull–White. It may be convenient where an existing pricing kernel can be replayed on both sides of a boundary, but each active indicator can require several Newton iterations, reverse-AD passes, and forward replays.",
+          "methodology": "The Gaussian random vector is decomposed into a boundary-normal direction and its orthogonal complement, after which the Leibniz rule and implicit function theorem are applied to a one-dimensional integral to derive a boundary term. The implementation finds boundary roots along fixed directions with Newton's method and evaluates jumps through pricing replays on both sides. QuantLib and AADC experiments compare the method with analytic or bump-and-revalue references for a GBM barrier, a Heston autocallable, and a GBM–Hull–White barrier.",
+          "limitations": "The single-indicator formula contains internal inconsistencies in its jump definition and sign argument, so the proof as written does not establish the central unbiasedness claim. A fixed direction need not cross every boundary with positive orientation, and a line need not have a unique root; pairwise transversality alone is insufficient to guarantee these properties. The implementation uses a fixed normal computed at the origin, creating another gap from the theorem's assumptions. Benchmarks cover only a few products and single configurations, with no standard errors, confidence intervals, repeated trials, runtimes, Newton failure rates, or quantitative assessment of screening bias. AADC-dependent performance claims are not independently validated.",
+          "reason": "The paper addresses an important practical problem in AAD Greeks for discontinuous payoffs, and the proposed idea could be useful for rates and hybrid models. Nevertheless, major inconsistencies in the central theorem's jump definition and proof, together with insufficient validation of the geometric assumptions and numerical unbiasedness, make it unsuitable as a reliable implementation reference in its current form.",
+          "tags": [
+            "Monte Carlo Greeks",
+            "discontinuous payoffs",
+            "AAD",
+            "boundary correction",
+            "barrier options",
+            "autocallables",
+            "Hull–White model",
+            "Heston model",
+            "Newton method",
+            "bump-and-revalue"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 900,
+          "outputTokens": 1449,
+          "reasoningTokens": 142,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2349,
+          "estimatedCostUsd": 0.001919,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.06137v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 4422,
+          "outputTokens": 2091,
+          "reasoningTokens": 577,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 4419,
+          "totalTokens": 6513,
+          "estimatedCostUsd": 0.063927,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 5,
+          "paperIds": [
+            "2609.06137v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.06085v1",
+        "title": "Explainable Deep Learning for Price-Trade Dynamics: From Black-Box Forecasts to Effective Parametric Models",
+        "authors": [
+          "Manuel Naviglio",
+          "Fabrizio Lillo"
+        ],
+        "submittedDate": "2026-09-05",
+        "updatedDate": "2026-09-05",
+        "categories": [
+          "cs.AI",
+          "physics.data-an",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本稿は、高頻度のリターンと符号付き出来高を用い、deep neural networkとSHAPにより価格・取引の非線形関係を抽出し、解釈可能なパラメトリックモデルへ圧縮する研究である。著者らは、非線形モデルがlinear VARより高い予測性能を示すと主張する。ただし本レビューは51ページの論文全体ではなく、提供されたabstractとIntroductionだけに基づく限定評価であり、証明、実験、付録は確認していない。",
+        "mainResult": "著者らによれば、直近lagの寄与が支配的で、符号付き出来高は符号を維持する飽和的効果を示し、過去リターンはorder flowの効果を減衰または反転させるstate variableとして働く。これを反映したSHAP-inspired nonlinear parametric modelは、linear VARを上回り、neural networkに近い予測性能を保つと主張されている。ただしabstractとIntroductionのみの限定レビューであり、性能指標、統計的有意性、証明、実験設計、付録を確認していないため、これらの結果を独立には検証できない。",
+        "practicalApplication": "短期リターン・order flow予測、optimal execution、market-impact推定、取引コスト分析、algorithmic trading、現実的な市場シミュレーションへの応用が想定される。特に、black-boxモデルから解釈可能な非線形応答を抽出する手順は、執行モデルの診断や簡素化に有用となり得る。",
+        "methodology": "高頻度リターンと符号付き出来高のlagを入力とするdeep feed-forward networkを学習し、linear VARと比較する。Shapley-based explainabilityで予測を特徴量別に分解し、model-implied responseとデータのconditional averageを比較する。その後、飽和的な符号付き出来高効果と、過去リターンおよび直前order flowの符号に依存する補正を組み込んだ簡潔な非線形モデルを構築し、multi-lagへ拡張する。",
+        "limitations": "最大の制約は、51ページの全文が提供されず、abstractとIntroductionしか確認できない点である。したがって、データセット、銘柄数、標本期間、sampling、前処理、train-test分割、hyperparameter、予測指標、統計的有意性、取引コスト、頑健性検証、SHAPの実装・仮定、証明、実験、付録を評価できない。著者らが述べるlarge-tickとsmall-tick銘柄間の安定性、VAR超過性能、neural networkとの同等性、conditional averageとの整合性も独立検証していない。また、予測上の説明可能性が因果的な価格形成メカニズムを確立するとは限らない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "market microstructureとelectronic executionに直接関連し、deep learningを予測器ではなく構造発見装置として用いて解釈可能なモデルへ移行する着想は実務・研究の双方で有望である。一方、現段階の推奨は概念的関連性に基づく条件付きのものであり、定量的主張の評価には全文確認が必要である。",
+        "tags": [
+          "市場マイクロストラクチャ",
+          "電子取引",
+          "高頻度データ",
+          "符号付き出来高",
+          "価格インパクト",
+          "order flow",
+          "deep learning",
+          "SHAP",
+          "説明可能AI",
+          "vector autoregression",
+          "非線形時系列",
+          "optimal execution"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper studies how to extract nonlinear price–trade relationships from high-frequency returns and signed volume using a deep neural network and SHAP, then compress them into an interpretable parametric model. The authors claim that the nonlinear models forecast better than a linear VAR. This is a limited review based only on the supplied abstract and Introduction, not the full 51-page paper; proofs, experiments, and appendices were not checked.",
+          "mainResult": "According to the authors, contributions from the most recent lags dominate, signed volume has a sign-preserving and saturating effect, and lagged returns act as state variables that attenuate or reverse the order-flow effect. They claim that a SHAP-inspired nonlinear parametric model reflecting these patterns outperforms a linear VAR while retaining predictive performance comparable to the neural network. This review is limited to the abstract and Introduction, so the performance metrics, statistical significance, proofs, experimental design, and appendices were not checked, and the results cannot be independently verified.",
+          "practicalApplication": "Potential applications include short-horizon return and order-flow forecasting, optimal execution, market-impact estimation, transaction-cost analysis, algorithmic trading, and realistic market simulation. In particular, the procedure for extracting interpretable nonlinear responses from a black-box model may help diagnose and simplify execution models.",
+          "methodology": "The study trains a deep feed-forward network using lags of high-frequency returns and signed volume and compares it with a linear VAR. Shapley-based explainability decomposes predictions into feature-level contributions, while model-implied responses are compared with conditional averages from the data. The authors then construct a parsimonious nonlinear model combining a saturating signed-volume effect with a correction depending on lagged returns and the sign of prior order flow, and extend it to multiple lags.",
+          "limitations": "The principal limitation is that the full 51-page paper was not supplied; only the abstract and Introduction were available. Consequently, the dataset, number of assets, sample period, sampling scheme, preprocessing, train–test split, hyperparameters, forecast metrics, statistical significance, transaction costs, robustness checks, SHAP implementation and assumptions, proofs, experiments, and appendices cannot be assessed. The claimed stability across large- and small-tick stocks, improvement over VAR, comparability with the neural network, and agreement with conditional averages were not independently verified. Moreover, predictive explainability does not necessarily establish a causal price-formation mechanism.",
+          "reason": "The study is directly relevant to market microstructure and electronic execution, and its idea of using deep learning as a structural-discovery device before constructing an interpretable model is promising for both research and practice. The recommendation is nevertheless conditional on conceptual relevance; evaluating the quantitative claims requires the full paper.",
+          "tags": [
+            "market microstructure",
+            "electronic trading",
+            "high-frequency data",
+            "signed volume",
+            "price impact",
+            "order flow",
+            "deep learning",
+            "SHAP",
+            "explainable AI",
+            "vector autoregression",
+            "nonlinear time series",
+            "optimal execution"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 943,
+          "outputTokens": 1134,
+          "reasoningTokens": 48,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2077,
+          "estimatedCostUsd": 0.001549,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.06085v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 2479,
+          "outputTokens": 1767,
+          "reasoningTokens": 260,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 2476,
+          "totalTokens": 4246,
+          "estimatedCostUsd": 0.047732,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 51,
+          "paperIds": [
+            "2609.06085v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.07989v1",
+        "title": "Regimes in the Order Flow",
+        "authors": [
+          "Ramzi Jebali"
+        ],
+        "submittedDate": "2026-09-07",
+        "updatedDate": "2026-09-07",
+        "categories": [
+          "q-fin.CP",
+          "q-fin.MF",
+          "q-fin.ST",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本稿は、NASDAQ上場株のsigned order flowに対し、Bayesian Online Changepoint Detection（BOCPD）とその拡張を用いてレジーム転換をオンライン検出する研究である。著者は、一定hazardによる幾何分布的なレジーム期間がorder flowのlong memoryと整合しにくいという問題を扱うとしている。ただし、59ページの論文のうち提供されたのはabstractとIntroductionのみであり、実証結果、証明、実験、付録は確認していない。",
+        "mainResult": "提供範囲には本稿固有の定量的な結果が記載されていない。著者は、一定hazardの標準BOCPD、明示的な期間分布を用いるrun-length-dependent hazard、ならびに多変量BOCPDMSをNASDAQ order flowへ適用し、segmentation、予測精度、確率的calibrationを評価すると述べている。ただしabstractとIntroductionのみの限定レビューであり、著者の主張する実験結果、証明、付録は確認できない。",
+        "practicalApplication": "リアルタイムのorder-flow regime検出は、execution algorithmにおける注文分割の推定、短期order-flow予測、市場インパクト管理、異常局面のrisk monitoringに応用できる可能性がある。ただし、提供範囲から実運用上の改善幅や計算負荷は判断できない。",
+        "methodology": "著者は、Adams–MacKay型BOCPDを基準とし、hidden semi-Markov modelに基づくrun-length-dependent hazardへ拡張して、Pareto分布とlog-normal分布のレジーム期間をNASDAQ order flowでcalibrationするとしている。さらに、model universe、Bayesian vector autoregression、online hyperparameter learningを組み合わせるBOCPDMSを用い、synthetic dataと実データ上でsegmentation品質、point forecast、probabilistic calibrationを評価する構成である。",
+        "limitations": "最大の制約は、59ページの全文ではなくabstractとIntroductionしか提供されていない点である。そのため、データ期間、銘柄選択、trade-sign推定、ベンチマーク、評価指標の実装、統計的有意性、頑健性、計算量、証明、実験結果、付録を検証していない。また、Introductionは研究計画を示すが、本稿固有の結果や失敗例を提示していないため、有効性に関する著者の主張を独立に評価できない。",
+        "importance": 4,
+        "recommended": false,
+        "reason": "order flowのlong memory、online changepoint detection、executionへの接続は本サイトとの関連性が高い。一方、限定された提供資料には本稿固有の結果がなく、性能、頑健性、実装可能性を評価できないため、現時点では全面的な推薦はしない。",
+        "tags": [
+          "注文フロー",
+          "市場マイクロストラクチャー",
+          "オンライン変化点検出",
+          "BOCPD",
+          "レジーム検出",
+          "long memory",
+          "hazard rate",
+          "hidden semi-Markov model",
+          "NASDAQ",
+          "execution algorithm"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper studies online regime-shift detection in the signed order flow of NASDAQ-listed equities using Bayesian Online Changepoint Detection (BOCPD) and its extensions. The author states that it addresses the tension between the geometric regime durations implied by a constant hazard and the long memory of order flow. However, only the abstract and Introduction of the 59-page paper were supplied; the empirical results, proofs, experiments, and appendices were not checked.",
+          "mainResult": "The supplied sections report no paper-specific quantitative results. The author states that the study applies standard constant-hazard BOCPD, a run-length-dependent hazard based on explicit duration distributions, and multivariate BOCPDMS to NASDAQ order flow, evaluating segmentation, forecast accuracy, and probabilistic calibration. This is a limited review based only on the abstract and Introduction, so the claimed experimental results, proofs, and appendices could not be checked.",
+          "practicalApplication": "Real-time order-flow regime detection could potentially support order-splitting inference, short-horizon order-flow forecasting, market-impact management, and risk monitoring for execution algorithms. The supplied material does not permit an assessment of the magnitude of operational improvements or computational costs.",
+          "methodology": "The author uses Adams–MacKay BOCPD as the baseline and states that it is extended with a run-length-dependent hazard derived from a hidden semi-Markov model. Pareto and log-normal regime-duration distributions are to be calibrated on NASDAQ order flow. The study also uses BOCPDMS, combining a model universe, Bayesian vector autoregressions, and online hyperparameter learning, and evaluates segmentation quality, point forecasts, and probabilistic calibration on synthetic and real data.",
+          "limitations": "The primary limitation is that only the abstract and Introduction were supplied rather than the full 59-page paper. Consequently, the data period, security selection, trade-sign inference, benchmarks, metric implementation, statistical significance, robustness, computational complexity, proofs, experiments, and appendices were not examined. The Introduction describes the research program but provides no paper-specific findings or failure cases, preventing an independent assessment of the author's effectiveness claims.",
+          "reason": "The connection among order-flow long memory, online changepoint detection, and execution is highly relevant to the site. However, the limited supplied material contains no paper-specific results, so performance, robustness, and implementation feasibility cannot be assessed; a full recommendation is therefore not warranted at this stage.",
+          "tags": [
+            "order flow",
+            "market microstructure",
+            "online changepoint detection",
+            "BOCPD",
+            "regime detection",
+            "long memory",
+            "hazard rate",
+            "hidden semi-Markov model",
+            "NASDAQ",
+            "execution algorithm"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 702,
+          "outputTokens": 875,
+          "reasoningTokens": 67,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1577,
+          "estimatedCostUsd": 0.00119,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.07989v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 1583,
+          "outputTokens": 1591,
+          "reasoningTokens": 300,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 1580,
+          "totalTokens": 3174,
+          "estimatedCostUsd": 0.039732,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 59,
+          "paperIds": [
+            "2609.07989v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.08881v1",
+        "title": "The Double-Edged Sword of Short-Selling Bans",
+        "authors": [
+          "Pasquale Della Corte",
+          "Robert Kosowski",
+          "Dimitris Papadimitriou",
+          "Nikolaos P. Rapanos"
+        ],
+        "submittedDate": "2026-09-08",
+        "updatedDate": "2026-09-08",
+        "categories": [
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "空売り禁止の規制判断を内生化した理論モデルと、2020年の欧州における国別規制差を用いた実証研究である。著者らは、禁止措置が流動性を悪化させ、平均リターンを支えない一方、大幅な価格下落を抑えたと報告する。本レビューは77ページの論文のうち要旨とIntroductionのみを対象としており、証明、推定結果、頑健性検証、付録は確認していない。",
+        "mainResult": "著者らによれば、空売り禁止によりbid-ask spreadは約13 basis points拡大し、maximum drawdownの絶対値は非規制銘柄対比で約310 basis points縮小した。流動性悪化は機関投資家保有比率の高い銘柄で大きく、左裾リスクの抑制は同比率の低い銘柄で強いと主張される。ただし、これは要旨とIntroductionに記載された著者の主張のみであり、証明、回帰表、統計的推論、追加分析は確認していない。",
+        "practicalApplication": "規制当局は一律の空売り禁止ではなく、機関投資家保有比率など市場参加者の情報性を考慮し、流動性コストと極端な下落の抑制効果を比較する政策設計に活用できる可能性がある。執行担当者やmarket makerにとっては、禁止対象銘柄、とりわけ機関投資家保有比率の高い銘柄でspread拡大を見込むリスク管理上の示唆となる。",
+        "methodology": "Diamond and Verrecchia型の単一期間モデルを拡張し、informed investors、noise investors、競争的market makers、および急落回避を目的に禁止措置を選ぶregulatorを導入する。実証では2020年3月の欧州における一部国の一時的禁止を準自然実験として、規制国銘柄と非規制国銘柄を前後各1か月のdifference-in-differencesで比較する。内生性への対応として、著者らはsovereign CDS spreadsとFinancial Stress Indexを操作変数に用いたと説明している。",
+        "limitations": "本レビューには77ページの全文、表、図、数式展開、Section 2以降、Internet Appendixが提供されておらず、要旨とIntroductionだけを使用した。このため、モデルの仮定と証明、標本構成、変数定義、parallel trends、操作変数の妥当性、標準誤差、経済的・統計的有意性、matchingやplaceboなどの頑健性検証を確認できない。規制導入と時期は市場環境に対して内生的であり得るうえ、機関投資家保有比率が情報を持つ株主の比率を十分に表すかにも測定上の懸念がある。結果はCOVID-19期の欧州市場と短期間の規制に基づく著者の報告であり、他の市場や平常時への外的妥当性は不明である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "空売り規制の流動性コストとtail-risk抑制効果を同一の枠組みで扱い、その異質性を株主構成と結び付ける点はmarket microstructureと規制設計に直接関連する。ただし、限定資料では識別戦略や定量結果を独立に評価できないため、現段階の推奨は全文確認を前提とする。",
+        "tags": [
+          "空売り禁止",
+          "市場流動性",
+          "bid-ask spread",
+          "maximum drawdown",
+          "機関投資家保有比率",
+          "difference-in-differences",
+          "操作変数",
+          "市場規制",
+          "COVID-19",
+          "欧州株式市場"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study combines a theoretical model that endogenizes the regulator’s short-selling-ban decision with empirical evidence from cross-country variation in European restrictions during 2020. The authors report that bans impaired liquidity and did not support average returns, while limiting large price declines. This review uses only the abstract and Introduction of the 77-page paper; proofs, estimates, robustness tests, and appendices were not examined.",
+          "mainResult": "According to the authors, short-selling bans widened bid-ask spreads by about 13 basis points and reduced the absolute maximum drawdown by about 310 basis points relative to stocks not subject to bans. They claim that liquidity deterioration was larger for stocks with high institutional ownership, whereas left-tail protection was stronger for stocks with low institutional ownership. These are solely the authors’ claims reported in the abstract and Introduction; proofs, regression tables, statistical inference, and additional analyses were not examined.",
+          "practicalApplication": "Regulators may be able to use the findings to design targeted rather than uniform short-selling restrictions, accounting for participant informativeness through measures such as institutional ownership and balancing liquidity costs against protection from extreme declines. For execution teams and market makers, the study suggests allowing for wider spreads in restricted stocks, particularly those with high institutional ownership.",
+          "methodology": "The authors extend a Diamond-and-Verrecchia-style single-period model with informed investors, noise investors, competitive market makers, and a regulator that chooses whether to impose a ban to avert a sharp decline. Empirically, they treat the March 2020 temporary bans in selected European countries as a quasi-natural experiment and compare stocks in banning and non-banning countries using a difference-in-differences design with one-month pre- and post-intervention windows. To address endogeneity, they state that sovereign CDS spreads and a Financial Stress Index are used as instruments.",
+          "limitations": "The 77-page full paper, tables, figures, mathematical derivations, sections after the Introduction, and Internet Appendix were not supplied; this review relies only on the abstract and Introduction. Consequently, the model assumptions and proofs, sample construction, variable definitions, parallel trends, instrument validity, standard errors, economic and statistical significance, and claimed matching and placebo robustness checks could not be assessed. Ban adoption and timing may be endogenous to market conditions, and institutional ownership may be an imperfect proxy for the share of informed stockholders. The results are author-reported findings from European markets during COVID-19 and short regulatory windows, so external validity for other markets or normal periods is unclear.",
+          "reason": "The joint treatment of the liquidity cost and tail-risk benefit of short-selling bans, together with heterogeneity by shareholder composition, is directly relevant to market microstructure and regulatory design. However, the identification strategy and quantitative results cannot be independently assessed from the limited source, so the recommendation is conditional on reviewing the full paper.",
+          "tags": [
+            "short-selling bans",
+            "market liquidity",
+            "bid-ask spread",
+            "maximum drawdown",
+            "institutional ownership",
+            "difference-in-differences",
+            "instrumental variables",
+            "market regulation",
+            "COVID-19",
+            "European equity markets"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 747,
+          "outputTokens": 965,
+          "reasoningTokens": 94,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1712,
+          "estimatedCostUsd": 0.001307,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.08881v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 747,
+          "outputTokens": 862,
+          "reasoningTokens": 69,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1609,
+          "estimatedCostUsd": 0.001184,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.08881v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 4203,
+          "outputTokens": 1698,
+          "reasoningTokens": 110,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 4200,
+          "totalTokens": 5901,
+          "estimatedCostUsd": 0.054972,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 77,
+          "paperIds": [
+            "2609.08881v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 850,
+      "outputTokens": 1278,
+      "reasoningTokens": 124,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2128,
+      "estimatedCostUsd": 0.001704,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.05433v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 12129,
+      "outputTokens": 2064,
+      "reasoningTokens": 421,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 12126,
+      "totalTokens": 14193,
+      "estimatedCostUsd": 0.101922,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 14,
+      "paperIds": [
+        "2609.05433v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 836,
+      "outputTokens": 1059,
+      "reasoningTokens": 80,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1895,
+      "estimatedCostUsd": 0.001438,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.05434v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 885,
+      "outputTokens": 1081,
+      "reasoningTokens": 67,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1966,
+      "estimatedCostUsd": 0.001474,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.05440v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 858,
+      "outputTokens": 1086,
+      "reasoningTokens": 102,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1944,
+      "estimatedCostUsd": 0.001475,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.05491v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 744,
+      "outputTokens": 755,
+      "reasoningTokens": 27,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1499,
+      "estimatedCostUsd": 0.001055,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.05804v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 943,
+      "outputTokens": 1134,
+      "reasoningTokens": 48,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2077,
+      "estimatedCostUsd": 0.001549,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.06085v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 2479,
+      "outputTokens": 1767,
+      "reasoningTokens": 260,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 2476,
+      "totalTokens": 4246,
+      "estimatedCostUsd": 0.047732,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 51,
+      "paperIds": [
+        "2609.06085v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 652,
+      "outputTokens": 758,
+      "reasoningTokens": 90,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1410,
+      "estimatedCostUsd": 0.00104,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.06118v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 875,
+      "outputTokens": 1032,
+      "reasoningTokens": 44,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1907,
+      "estimatedCostUsd": 0.001413,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.06123v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 900,
+      "outputTokens": 1449,
+      "reasoningTokens": 142,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2349,
+      "estimatedCostUsd": 0.001919,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.06137v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 4422,
+      "outputTokens": 2091,
+      "reasoningTokens": 577,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 4419,
+      "totalTokens": 6513,
+      "estimatedCostUsd": 0.063927,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 5,
+      "paperIds": [
+        "2609.06137v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 798,
+      "outputTokens": 910,
+      "reasoningTokens": 106,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1708,
+      "estimatedCostUsd": 0.001252,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.06277v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 845,
+      "outputTokens": 927,
+      "reasoningTokens": 47,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1772,
+      "estimatedCostUsd": 0.001281,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.06308v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 916,
+      "outputTokens": 1130,
+      "reasoningTokens": 75,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2046,
+      "estimatedCostUsd": 0.001539,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.06739v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 845,
+      "outputTokens": 984,
+      "reasoningTokens": 35,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1829,
+      "estimatedCostUsd": 0.00135,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.07011v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 855,
+      "outputTokens": 1261,
+      "reasoningTokens": 74,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2116,
+      "estimatedCostUsd": 0.001684,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.07169v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 824,
+      "outputTokens": 1107,
+      "reasoningTokens": 80,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1931,
+      "estimatedCostUsd": 0.001493,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.07351v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 728,
+      "outputTokens": 778,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1506,
+      "estimatedCostUsd": 0.001079,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.07358v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 849,
+      "outputTokens": 1105,
+      "reasoningTokens": 52,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1954,
+      "estimatedCostUsd": 0.001496,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.07486v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 791,
+      "outputTokens": 835,
+      "reasoningTokens": 32,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1626,
+      "estimatedCostUsd": 0.00116,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.07731v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 784,
+      "outputTokens": 967,
+      "reasoningTokens": 55,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1751,
+      "estimatedCostUsd": 0.001317,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.07902v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 702,
+      "outputTokens": 875,
+      "reasoningTokens": 67,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1577,
+      "estimatedCostUsd": 0.00119,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.07989v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 1583,
+      "outputTokens": 1591,
+      "reasoningTokens": 300,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 1580,
+      "totalTokens": 3174,
+      "estimatedCostUsd": 0.039732,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 59,
+      "paperIds": [
+        "2609.07989v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 851,
+      "outputTokens": 1127,
+      "reasoningTokens": 71,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1978,
+      "estimatedCostUsd": 0.001523,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.08166v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 759,
+      "outputTokens": 1082,
+      "reasoningTokens": 44,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1841,
+      "estimatedCostUsd": 0.00145,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.08198v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 898,
+      "outputTokens": 1016,
+      "reasoningTokens": 47,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1914,
+      "estimatedCostUsd": 0.001399,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.08485v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 830,
+      "outputTokens": 1062,
+      "reasoningTokens": 97,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1892,
+      "estimatedCostUsd": 0.00144,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.08541v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 830,
+      "outputTokens": 1123,
+      "reasoningTokens": 90,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1953,
+      "estimatedCostUsd": 0.001514,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.08541v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 829,
+      "outputTokens": 1009,
+      "reasoningTokens": 59,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1838,
+      "estimatedCostUsd": 0.001377,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.08581v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 975,
+      "outputTokens": 1314,
+      "reasoningTokens": 116,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2289,
+      "estimatedCostUsd": 0.001772,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.08605v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 747,
+      "outputTokens": 965,
+      "reasoningTokens": 94,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1712,
+      "estimatedCostUsd": 0.001307,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.08881v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 747,
+      "outputTokens": 862,
+      "reasoningTokens": 69,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1609,
+      "estimatedCostUsd": 0.001184,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.08881v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 4203,
+      "outputTokens": 1698,
+      "reasoningTokens": 110,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 4200,
+      "totalTokens": 5901,
+      "estimatedCostUsd": 0.054972,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 77,
+      "paperIds": [
+        "2609.08881v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 881,
+      "outputTokens": 986,
+      "reasoningTokens": 73,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1867,
+      "estimatedCostUsd": 0.001359,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.08929v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 706,
+      "outputTokens": 865,
+      "reasoningTokens": 87,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1571,
+      "estimatedCostUsd": 0.001179,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.08959v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 892,
+      "outputTokens": 1010,
+      "reasoningTokens": 44,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1902,
+      "estimatedCostUsd": 0.00139,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09046v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

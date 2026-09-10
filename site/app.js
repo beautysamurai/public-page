@@ -57,7 +57,7 @@
     editionSource: byId("edition-source"),
     filters: byId("topic-filters"),
     freshnessShort: byId("freshness-short"),
-    headerStatus: byId("header-status"),
+    editionStatus: byId("edition-status"),
     lensVisual: byId("lens-visual"),
     loading: byId("loading-state"),
     noResults: byId("no-results"),
@@ -876,13 +876,13 @@
     var checked = archived
       ? t("status.snapshot")
       : relativeTime(activityAt, report.schemaVersion >= 2 ? t("time.imported") : t("time.checked"));
-    elements.headerStatus.dataset.state = freshness.state;
-    elements.headerStatus.lastElementChild.textContent = freshness.label + " · " + checked;
+    elements.editionStatus.dataset.state = freshness.state;
+    elements.editionStatus.lastElementChild.textContent = freshness.label + " · " + checked;
     elements.freshnessShort.textContent = freshness.short;
     elements.updateNote.dataset.state = freshness.state;
 
     var message = report.message || report.statusMessage || freshness.label + ".";
-    elements.updateNote.textContent = message + (archived ? "" : (state.language === "ja" ? " · " + checked : " " + checked.charAt(0).toUpperCase() + checked.slice(1) + "."));
+    elements.updateNote.textContent = message;
     return freshness;
   }
   function renderFilters(papers) {
@@ -1695,8 +1695,8 @@
     elements.paperCount.textContent = "0";
     elements.topicCount.textContent = "0";
     elements.freshnessShort.textContent = t("load.offlineShort");
-    elements.headerStatus.dataset.state = "offline";
-    elements.headerStatus.lastElementChild.textContent = t("load.editionUnavailable");
+    elements.editionStatus.dataset.state = "offline";
+    elements.editionStatus.lastElementChild.textContent = t("load.editionUnavailable");
     elements.updateNote.dataset.state = "offline";
     elements.updateNote.textContent = archived ? t("load.archivedMessage") : t("load.latestMessage");
     showNotice(

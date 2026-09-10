@@ -34,7 +34,7 @@
     <script src="./app.js" defer></script>
     <script src="./research-status.js" defer></script>
   </head>
-  <body>
+  <body class="research-page">
     <a class="skip-link" href="#digest" data-i18n="skip">最新のリサーチ号へ移動</a>
     <header class="site-header">
       <div class="shell header-inner">
@@ -49,14 +49,10 @@
             <button type="button" data-language="ja" aria-pressed="true" lang="ja">日本語</button>
             <button type="button" data-language="en" aria-pressed="false" lang="en">English</button>
           </div>
-          <div class="header-status" id="header-status" aria-live="polite">
-            <span class="status-pulse" aria-hidden="true"></span><span data-i18n="header.checking">号を確認中</span>
-          </div>
         </div>
       </div>
     </header>
     <main>
-      <aside class="shell research-update-status" id="research-update-status" role="status" aria-live="polite" hidden></aside>
       <section class="research-tools" id="research-tools" aria-label="検索とマイライブラリ" data-i18n-aria-label="tools.label">
         <div class="shell research-tools-grid">
           <details class="research-filters" id="research-filters">
@@ -162,7 +158,7 @@
             <p class="eyebrow" data-i18n="hero.kicker">定期配信の arXiv リサーチ</p>
             <span class="edition-date" id="edition-date">—</span>
           </div>
-          <h1 id="page-title" data-i18n="hero.title">金利・電子市場のためのリサーチ。</h1>
+          <h1 id="page-title" data-i18n="hero.title">金利・電子市場のリサーチ</h1>
           <p class="hero-intro" data-i18n="hero.intro">電子取引、債券、マーケット・マイクロストラクチャー、クオンツ手法を対象に、日次スクリーニングと週次レビューを掲載します。</p>
           <div class="hero-summary">
             <a class="hero-link" href="#digest"><span data-i18n="hero.link">最新号を読む</span> <span aria-hidden="true">↓</span></a>
@@ -174,11 +170,20 @@
           </div>
         </div>
       </section>
+      <aside class="shell research-status-panel" aria-labelledby="research-status-title">
+        <div class="research-status-heading">
+          <h2 id="research-status-title" data-i18n="status.panelTitle">更新・配信状況</h2>
+          <div class="edition-status" id="edition-status" aria-live="polite">
+            <span class="status-pulse" aria-hidden="true"></span><span data-i18n="header.checking">号を確認中</span>
+          </div>
+        </div>
+        <p class="update-note" id="update-note" aria-live="polite" data-i18n="digest.loading">最新号を読み込んでいます…</p>
+        <div class="research-update-status" id="research-update-status" role="status" aria-live="polite" hidden></div>
+      </aside>
       <section class="digest-section" id="digest" aria-labelledby="digest-title">
         <div class="shell">
           <div class="section-heading digest-heading">
             <div><p class="section-kicker" data-i18n="digest.kicker">最新スクリーニング</p><h2 id="digest-title" data-i18n="digest.title">今回のリサーチ概要</h2></div>
-            <p class="update-note" id="update-note" aria-live="polite" data-i18n="digest.loading">最新号を読み込んでいます…</p>
           </div>
           <div class="edition-context" id="edition-context" hidden>
             <div class="edition-context-labels">

@@ -875,9 +875,17 @@ def _render_source_text(
                 "",
                 "### Assessment" if english else "### 判定結果",
                 "",
-                "| Importance | Recommendation | Tags |" if english else "| 重要度 | 推奨判定 | タグ |",
+                "| Topic importance | Use recommendation | Tags |" if english else "| テーマ重要度 | 利用推奨 | タグ |",
                 "| --- | --- | --- |",
                 f"| {public_importance}/10 | {recommendation} | {topic} |",
+                "",
+                (
+                    "Topic importance measures the significance of the subject, not the paper's correctness or readiness for use. The use recommendation also considers the evidence and limitations."
+                    if english else
+                    "テーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。"
+                ),
+                "",
+                f"**{'Assessment rationale' if english else '判定理由'}:** {_markdown_text(localized['reason'])}",
                 "",
                 _usage_table(paper.get("usage"), english=english),
                 "",
@@ -890,8 +898,6 @@ def _render_source_text(
                 f"**{'Practical application' if english else '実務への応用'}:** {_markdown_text(localized['practicalApplication'])}",
                 "",
                 f"**{'Limitations' if english else '限界・注意点'}:** {_markdown_text(localized['limitations'])}",
-                "",
-                f"**{'Why read it' if english else '読むべき理由'}:** {_markdown_text(localized['reason'])}",
             ]
         )
     return "\n".join(parts)
@@ -935,12 +941,12 @@ def adapt_research_report(value: object) -> AdaptedPublication:
                 "schedulerRating": public_importance,
                 "schedulerRatingScale": 10,
                 "schedulerLabel": (
-                    f"{recommended_ja}・重要度 {public_importance}/10"
+                    f"{recommended_ja}・テーマ重要度 {public_importance}/10"
                 ),
                 "schedulerSummary": analysis["summary"] + ("\n\n" + research_usage.describe(paper["usage"]) if paper.get("usage") else ""),
                 "ratings": [
                     {
-                        "label": "重要度",
+                        "label": "テーマ重要度",
                         "value": public_importance,
                         "scale": 10,
                     }
@@ -951,10 +957,10 @@ def adapt_research_report(value: object) -> AdaptedPublication:
             {
                 "arxivId": arxiv_id,
                 "schedulerLabel": (
-                    f"{recommended_en} · Importance {public_importance}/10"
+                    f"{recommended_en} · Topic importance {public_importance}/10"
                 ),
                 "schedulerSummary": english_analysis["summary"] + ("\n\n" + research_usage.describe(paper["usage"], english=True) if paper.get("usage") else ""),
-                "ratings": [{"label": "Importance"}],
+                "ratings": [{"label": "Topic importance"}],
             }
         )
 

@@ -49,6 +49,17 @@ function flatten(node) {
   return [node].concat((node.children || []).flatMap(flatten));
 }
 
+test("escaped percentages render as MathML instead of exposed TeX", () => {
+  for (const source of [String.raw`0.1\%`, String.raw`4\%`]) {
+    const rendered = texMath.render(source, false, documentStub());
+    assert.ok(rendered);
+    assert.equal(rendered.attributes.display, "inline");
+    const nodes = flatten(rendered);
+    assert.ok(nodes.some(node => node.name === "mo" && node.textContent === "%"));
+    assert.ok(nodes.every(node => !node.textContent.includes("\\")));
+  }
+});
+
 test("Greek variables are identifiers without operator spacing", () => {
   const nodes = flatten(texMath.parse(String.raw`A(\alpha,G(0))K+\xi+\nu+\Psi`));
   for (const symbol of ["α", "ξ", "ν", "Ψ"]) {

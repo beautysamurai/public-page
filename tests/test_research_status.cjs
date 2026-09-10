@@ -20,9 +20,15 @@ test("incomplete updates and period retries remain visible independently of comp
   assert.equal(notice.hidden, false);
   assert.match(notice.textContent, /新着ゼロではありません/);
   assert.match(notice.textContent, /週次 2026-09-04/);
+  assert.match(notice.querySelector("summary").textContent, /未完了のレビュー：1件/);
+  assert.equal(notice.querySelector("details").open, false);
+  assert.match(notice.querySelector("details").previousElementSibling.textContent, /新着ゼロではありません/);
+  notice.querySelector("details").open = true;
   dom.window.document.documentElement.lang = "en";
   await new Promise((resolve) => setImmediate(resolve));
   assert.match(notice.textContent, /not zero new papers/);
+  assert.match(notice.querySelector("summary").textContent, /Pending reviews: 1/);
+  assert.equal(notice.querySelector("details").open, true);
   dom.window.close();
 });
 

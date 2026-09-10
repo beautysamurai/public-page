@@ -97,6 +97,46 @@ test("source tables handle escaped pipes and hostile content using text-only DOM
 });
 
 const githubPendingKey = "rates-personal:abcdefgh.supabase.co:/public-page/:github-pending";
+
+test("reported high-importance negative review explains its separate verdict and renders percentages", async () => {
+  for (const language of ["ja", "en"]) {
+    const page = await setup(false, false, "?edition=2026-09-09-daily-openai-01&lang=" + language);
+    try {
+      const source = page.id("source-document");
+      const paper = page.id("review-2609.06137");
+      assert.ok(paper);
+      const nodes = [];
+      for (let n = paper.nextElementSibling; n && !n.classList.contains("review-target"); n = n.nextElementSibling) nodes.push(n);
+      const text = nodes.map(n => n.textContent).join("\n");
+      assert.match(text, /10\/10/);
+      assert.match(text, language === "ja" ? /非推奨/ : /Not recommended/);
+      assert.match(text, language === "ja" ? /テーマ重要度/ : /Topic importance/);
+      assert.match(text, language === "ja" ? /正確性や採用推奨度の点数ではありません/ : /not the paper's correctness/);
+      const rationale = language === "ja" ? "判定理由" : "Assessment rationale";
+      assert.ok(text.indexOf(rationale) < text.indexOf(language === "ja" ? "まとめ" : "Takeaways"));
+      assert.ok(nodes.some(n => /重大な不整合|major inconsistencies/i.test(n.textContent)));
+      assert.ok([...source.querySelectorAll("math")].some(n => n.textContent === "0.1%"));
+      assert.ok([...source.querySelectorAll("math")].some(n => n.textContent === "4%"));
+      assert.ok(![...source.querySelectorAll(".source-tex-fallback")].some(n => n.textContent.includes("\\%")));
+    } finally { page.dom.window.close(); }
+  }
+});
+
+test("status lives in one body panel, outside navigation and review headings", async () => {
+  const page = await setup(false);
+  try {
+    const doc = page.w.document;
+    const panel = doc.querySelector(".research-status-panel");
+    assert.ok(panel.contains(page.id("edition-status")));
+    assert.ok(panel.contains(page.id("update-note")));
+    assert.ok(panel.contains(page.id("research-update-status")));
+    assert.equal(doc.querySelector(".site-header [aria-live], .digest-heading .update-note"), null);
+    assert.equal(doc.querySelectorAll("#update-note").length, 1);
+    assert.equal(page.id("research-filters").open, false);
+    assert.equal(page.id("personal-library").open, false);
+    assert.ok(!page.id("page-title").textContent.includes("ための"));
+  } finally { page.dom.window.close(); }
+});
 function seedGithub(w, changes = {}) {
   w.sessionStorage.setItem(githubPendingKey, JSON.stringify({ flowId: "test-flow-12345", createdAt: Date.now(),
     returnTo: "https://example.test/public-page/?edition=2026-09-01-daily-openai-01&lang=en&archive-view=papers&archive-rating=8#review-2608.29423", ...changes }));

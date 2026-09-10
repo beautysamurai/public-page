@@ -11,6 +11,22 @@ from test_research_publication import completed_report
 
 
 class ResearchLayoutTests(unittest.TestCase):
+    def test_importance_is_distinct_from_recommendation_without_changing_verdict(self):
+        report = json.loads((ROOT / "research/daily/2026-09-09.json").read_text(encoding="utf-8"))
+        before = copy.deepcopy(report)
+        adapted = publication.adapt_research_report(report)
+        paper = next(p for p in adapted.source_edition["papers"] if p["arxivId"] == "2609.06137v1")
+        self.assertEqual(paper["schedulerRating"], 10)
+        self.assertEqual(paper["schedulerLabel"], "非推奨・テーマ重要度 10/10")
+        for english in (False, True):
+            edition = adapted.english_edition if english else adapted.source_edition
+            text = edition["sourceText"]
+            label = "Assessment rationale" if english else "判定理由"
+            end = "### Takeaways" if english else "### まとめ"
+            self.assertLess(text.index(label), text.index(end))
+            self.assertIn("not the paper's correctness" if english else "正確性や採用推奨度の点数ではありません", text)
+        self.assertEqual(report, before)
+
     def test_three_parts_preserve_all_narratives_and_public_identity(self):
         report = completed_report()
         before = copy.deepcopy(report)

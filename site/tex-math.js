@@ -115,6 +115,8 @@
         node = { type: "mspace", width: command === "qquad" ? "2em" : command === "quad" ? "1em" : ".25em" };
       } else if (command === "!") {
         node = { type: "mspace", width: "-.15em" };
+      } else if (command === "%") {
+        node = { type: "mo", text: "%" };
       } else if (typeof IDENTIFIERS[command] === "string") {
         node = { type: "mi", text: IDENTIFIERS[command] };
       } else if (typeof OPERATORS[command] === "string") {

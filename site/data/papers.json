@@ -2,6 +2,39 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-09-11-daily-openai-01",
+      "date": "2026-09-11",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.10543v1",
+          "title": "The Privacy Subsidy in Market Microstructure",
+          "authors": [
+            "Yuki Nakamura"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.11614v1",
+          "title": "Deep Learning of Robust Market Making under Regime-Switching Order Flow",
+          "authors": [
+            "Felipe Moret",
+            "Fabrizio Lillo"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-09-09-daily-openai-01",
       "date": "2026-09-09",
       "kind": "daily",

@@ -1,0 +1,513 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-11",
+  "fingerprint": "ae6ac88716f6b2e74375def14057910f2754af1a819944e10d6ef242bbf05c03",
+  "candidateFingerprints": {
+    "2609.10543": "f452d4dc85ba28bcbbbd8bc4391788b69bc5953e4f813878d0b473cc4696f323",
+    "2609.10587": "16ef3bb7e430b8d80bb40b6ed17fd71acd9ec449e404fd1fd07add19b45265fe",
+    "2609.11575": "7608b367e6206594c21469b2753614b21cff836689a149f481e86b47eac2699c",
+    "2609.11586": "137905e4efc90cbbb8df8c62a395649867dd05b7cd1f69d4e063a83af9360502",
+    "2609.11614": "2699d1760ef05492357d448954a6e5e9d419a5637d579e2ffdd9f4b255e8c721",
+    "2609.11905": "82bb8099c76ddce3805469f498a0006bcd9eb377cb0cad2c590b006b29fa8ae8"
+  },
+  "results": {
+    "2609.10543": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "プライバシー保護された取引所が注文フローを粗視化して価格形成する場合に生じる「privacy subsidy」を、複数の代表的な市場マイクロストラクチャー・モデルで分析する研究です。",
+        "mainResult": "粗視化されたシグナルだけで情報効率的な事後平均価格を設定するマーケットメーカーは、決済に用いられる完全な注文フローに対して、トレーダーへ閉形式で表される厚生移転を必ず譲渡すると報告しています。粗視化シグナルに限定されたルールでは、効率性とゼロ利潤を同時に満たせないという不可能性を示し、Kyle、Glosten--Milgrom、Kyle--Backの各モデルで補助金を特徴づけています。手数料導入後の回収不能な死荷重はノイズ尺度の4次で、総補助金は2次であるため、先導次数では厚生中立となるとしています。",
+        "practicalApplication": "プライバシー保護型取引所の設計、注文フローの開示粒度、マーケットメーカー手数料、取引量と価格インパクトの評価に応用可能です。差分プライバシーの便益と取引による死荷重を組み合わせ、内点となるノイズ水準を設計する枠組みも示唆します。",
+        "methodology": "一般的な情報の粗視化に関する理論的な不可能性を示した後、単期間Kyleモデルのガウス型フロー・ノイズ、二値方向チャネルを持つGlosten--Milgromモデル、ブラウン運動チャネルを持つ連続時間Kyle--Backモデルを解析しています。補助金とLoss-Versus-Rebalancingの構造対応、および手数料導入後の死荷重の漸近次数を導出しています。",
+        "limitations": "評価は抽象的な理論モデルと、明示された配分上の取引価値に依存しています。実際の市場での推定、制度制約、複数資産、戦略的なマーケットメーカーやトレーダー、モデル誤特定への頑健性は要約から確認できません。結論は現時点では要旨に報告された理論結果として扱うべきです。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "市場マイクロストラクチャーに直接関係し、プライバシー、価格形成、マーケットメーカー収益、手数料設計を統一的に扱っています。電子取引や市場設計に有用な理論的示唆がある一方、実証的検証は要旨から確認できないため、最高評価ではなく重要度4とします。",
+        "tags": [
+          "market microstructure",
+          "privacy-preserving markets",
+          "order flow",
+          "market making",
+          "Kyle model",
+          "Glosten-Milgrom",
+          "Kyle-Back",
+          "price impact",
+          "Loss-Versus-Rebalancing",
+          "differential privacy",
+          "welfare",
+          "交易手数料"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper analyzes the “privacy subsidy” that arises when a privacy-preserving exchange forms prices using a coarsened view of order flow, using several canonical market microstructure models.",
+          "mainResult": "The paper reports that a market maker using only a coarsened signal to set informationally efficient posterior-mean prices necessarily grants traders a closed-form welfare transfer relative to the full flow used for settlement. It proves that rules restricted to the coarse signal cannot be both efficient and zero-profit, and characterizes the subsidy in the Kyle, Glosten--Milgrom, and Kyle--Back models. After fee recovery, the irrecoverable deadweight is fourth-order in the noise scale while the gross subsidy is second-order, implying welfare neutrality to leading order.",
+          "practicalApplication": "The framework may be applied to the design of privacy-preserving exchanges, the granularity of order-flow disclosure, market-maker fees, and the evaluation of trading volume and price impact. It also suggests a way to choose an interior noise level by balancing differential-privacy benefits against trading-related deadweight.",
+          "methodology": "The paper first establishes a theoretical impossibility result for general information coarsening, then analyzes Gaussian flow noise in a single-period Kyle model, a binary direction channel in the Glosten--Milgrom model, and a Brownian channel in the continuous-time Kyle--Back model. It derives the structural correspondence between the subsidy and Loss-Versus-Rebalancing and the asymptotic order of deadweight after fees are imposed.",
+          "limitations": "The analysis relies on abstract theoretical models and on an explicitly specified allocative value of trade. The abstract does not establish empirical performance, institutional constraints, multi-asset effects, strategic behavior by market makers or traders, or robustness to model misspecification. The conclusions should therefore be treated as theoretical results reported in the abstract.",
+          "reason": "The paper is directly relevant to market microstructure and unifies privacy, price formation, market-maker revenue, and fee design. It offers useful theoretical implications for electronic trading and market design, but no empirical validation is apparent from the abstract, so it merits importance 4 rather than the highest rating.",
+          "tags": [
+            "market microstructure",
+            "privacy-preserving markets",
+            "order flow",
+            "market making",
+            "Kyle model",
+            "Glosten-Milgrom",
+            "Kyle-Back",
+            "price impact",
+            "Loss-Versus-Rebalancing",
+            "differential privacy",
+            "welfare",
+            "trading fees"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "価格決定者が粗視化された注文フロー信号で posterior-mean pricing を行い、より細かな実フローを決済するときの期待損失を「privacy subsidy」と定義する理論研究である。単一期間 Kyle、Glosten–Milgrom、連続時間 Kyle–Back に適用し、手数料による回収、取引量減少に伴う死荷重、内生的な privacy noise の選択まで分析する。ただし一般不可能性定理には、残差共分散がゼロであることと決済フローの信号可測性を同一視する重大な論理的不備がある。",
+        "mainResult": "論文は、単一価格の場合の maker 利益を $\\Pi_M=-\\operatorname{Cov}(v-\\mathbb{E}[v\\mid S],y-\\mathbb{E}[y\\mid S])$ と表し、Kyle では subsidy が $\\lambda\\sigma_\\varepsilon^2$、Glosten–Milgrom では $\\mu\\eta\\Delta$、Kyle–Back では $\\sigma_v\\sigma_\\varepsilon^2/\\sqrt{\\sigma_u^2+\\sigma_\\varepsilon^2}$ になると報告する。さらに、小さい privacy noise の下では gross subsidy と break-even fee が $O(\\sigma_\\varepsilon^2)$、手数料による死荷重が $O(\\sigma_\\varepsilon^4)$ になると主張する。一方、一般モデルで共分散がゼロとなることから $y$ が $S$ に関して可測であるとは導けないため、「厳密な粗視化なら効率的価格とゼロ利益が必ず両立不能」という中心命題は追加の識別・正の共分散条件なしには成立しない。",
+        "practicalApplication": "真の注文量を決済しながら、DP noise を加えた集計フローだけで価格を更新する取引所について、LP の損失補填手数料を推計する設計ベンチマークとして利用できる。特に Kyle の式は privacy noise、通常の noise flow、価値不確実性から fee floor を計算する簡便な近似を与える。ただし価格対象と決済対象が同一の batch auction や通常の CFMM には適用できず、提示された BTC/USDT 数値も実証推定ではなく仮想的 calibration である。",
+        "methodology": "条件付き期待値の直交性を用いた共分散分解を出発点とし、Gaussian linear Kyle、binary symmetric channel を組み込んだ Glosten–Milgrom、Kalman filtering と HJB/Riccati を用いる Kyle–Back の閉形式均衡を導出する。続いて volume-proportional fee、線形需要または CARA hedger による Harberger triangle、Gaussian differential privacy の便益を組み合わせ、最適 noise scale を求める。分析は全編理論モデルと象徴計算に基づき、実データによる推定・検定は行っていない。",
+        "limitations": "最大の問題は、$\\operatorname{Cov}(v-\\mathbb{E}[v\\mid S],y-\\mathbb{E}[y\\mid S])=0$ が $y$ の $S$-可測性と同値だとする記述が一般には偽である点である。例えば価値残差とフロー残差が直交すれば、厳密な粗視化でも maker 利益はゼロになり得るため、一般不可能性は正の残差共分散を独立の仮定として置いた場合に限られる。Glosten–Milgrom では noisy direction だけを観測する maker が true direction に対応する side で約定させる実装が十分に説明されず、情報集合と executed price の整合性が不明瞭である。連続時間均衡は線形制御の特異な HJB を情報予算制約で閉じており、標準的な最適性・許容可能性の厳密な検証が不足する。fee と welfare の結果は price impact を固定した小ノイズの部分均衡で、完全な fee-volume-equilibrium は未解決である。さらに暗号実装費、在庫リスク、競争、複数 insider、内生的またはフロー相関 noise、逐次 Glosten–Milgrom、実証検証を扱っていない。",
+        "importance": 4,
+        "recommended": false,
+        "reason": "価格信号と決済フローの不一致を明示的な損益として捉える着想と、複数の代表的 microstructure model を統一しようとする構成には研究上の価値がある。しかし中心となる一般定理の必要十分条件が成立せず、いくつかの実装・連続時間均衡にも未解決の整合性問題がある。したがって現状では確立した一般結果として推奨できず、正の残差共分散を明示した限定命題への修正と各モデルの再検証が必要である。",
+        "tags": [
+          "市場マイクロ構造",
+          "プライバシー保護取引所",
+          "Kyleモデル",
+          "Glosten–Milgrom",
+          "Kyle–Back",
+          "差分プライバシー",
+          "マーケットメーカー損益",
+          "取引手数料",
+          "Loss-Versus-Rebalancing"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This theoretical paper defines the “privacy subsidy” as the expected loss incurred when a price setter uses posterior-mean pricing based on a coarsened order-flow signal while settling finer true flow. It applies the idea to single-period Kyle, Glosten–Milgrom, and continuous-time Kyle–Back models, and then studies fee recovery, volume-distortion deadweight loss, and endogenous privacy-noise choice. However, the general impossibility theorem contains a major logical flaw by treating zero residual covariance as equivalent to measurability of settled flow with respect to the signal.",
+          "mainResult": "The paper reports that, under single-price execution, maker profit is $\\Pi_M=-\\operatorname{Cov}(v-\\mathbb{E}[v\\mid S],y-\\mathbb{E}[y\\mid S])$, with subsidies of $\\lambda\\sigma_\\varepsilon^2$ in Kyle, $\\mu\\eta\\Delta$ in Glosten–Milgrom, and $\\sigma_v\\sigma_\\varepsilon^2/\\sqrt{\\sigma_u^2+\\sigma_\\varepsilon^2}$ in Kyle–Back. It further claims that, for small privacy noise, the gross subsidy and break-even fee are $O(\\sigma_\\varepsilon^2)$ while fee-induced deadweight loss is $O(\\sigma_\\varepsilon^4)$. However, zero covariance does not imply that $y$ is measurable with respect to $S$ in a general model, so the central claim that strict coarsening necessarily makes efficient pricing and zero profit incompatible does not hold without additional identification or positive-covariance conditions.",
+          "practicalApplication": "The framework can serve as a design benchmark for estimating liquidity-provider compensation fees at venues that settle true order quantities while updating prices only from DP-noised aggregate flow. In particular, the Kyle formula provides a simple approximation for a fee floor based on privacy noise, ordinary noise flow, and value uncertainty. It does not apply to batch auctions or standard CFMMs where priced and settled flow coincide, and the reported BTC/USDT figures are hypothetical calibrations rather than empirical estimates.",
+          "methodology": "The paper begins with a covariance decomposition based on the orthogonality of conditional-expectation residuals. It then derives closed-form equilibria for a Gaussian linear Kyle model, a Glosten–Milgrom model with a binary symmetric channel, and a Kyle–Back model using Kalman filtering and HJB/Riccati arguments. It combines a volume-proportional fee with linear demand or CARA hedgers to obtain a Harberger triangle, and adds a Gaussian differential-privacy benefit to solve for an optimal noise scale. The analysis is entirely theoretical and supported by symbolic calculations, with no estimation or testing on market data.",
+          "limitations": "The principal problem is the generally false assertion that $\\operatorname{Cov}(v-\\mathbb{E}[v\\mid S],y-\\mathbb{E}[y\\mid S])=0$ is equivalent to measurability of $y$ with respect to $S$. Value and flow residuals can be orthogonal under strict coarsening, allowing zero maker profit; the general impossibility therefore holds only when positive residual covariance is imposed separately. In the Glosten–Milgrom model, implementation is insufficiently explained because a maker observing only noisy direction nevertheless executes on the side associated with true direction, leaving the information set and executed price unclear. The continuous-time equilibrium closes a singular linear-control HJB through an information-budget constraint without a sufficiently rigorous verification of optimality and admissibility. The fee and welfare results are small-noise partial-equilibrium approximations that hold price impact fixed, and the full fee-volume equilibrium remains unsolved. The paper also omits cryptographic implementation costs, inventory risk, competition, multiple insiders, endogenous or flow-correlated noise, sequential Glosten–Milgrom dynamics, and empirical validation.",
+          "reason": "The idea of treating the mismatch between the pricing signal and settled flow as an explicit P&L object is valuable, as is the attempt to unify several canonical microstructure models. Nevertheless, the necessary-and-sufficient condition in the central general theorem is invalid, and unresolved consistency issues remain in the implementation and continuous-time equilibrium. The paper is therefore not recommended as an established general result in its current form; it requires revision to a conditional theorem with explicit positive residual covariance and renewed verification of each model.",
+          "tags": [
+            "market microstructure",
+            "privacy-preserving exchanges",
+            "Kyle model",
+            "Glosten–Milgrom",
+            "Kyle–Back",
+            "differential privacy",
+            "market-maker P&L",
+            "trading fees",
+            "Loss-Versus-Rebalancing"
+          ]
+        }
+      }
+    },
+    "2609.10587": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "大規模な株式リターン・パネルにおける下方テール損失の平均的な深刻度を説明・価格付けする Expected Shortfall Factor Model（ESFM）を提案する研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を主題としていません。",
+        "mainResult": "論文の報告によれば、ESFMは平均因子および分位点因子では捉えられない共通の損失深刻度因子を抽出します。ESFMエクスポージャーで排序したポートフォリオのhigh-minus-lowリターンは年率8.0%--11.7%、Fama--French五因子アルファは10.3%--15.0%であり、既存因子を条件付けても有意性が残り、最大Sharpe比も改善します。",
+        "practicalApplication": "株式の下方リスク分析、因子ポートフォリオ構築、Expected Shortfallに基づくリスクプレミアム評価への応用可能性があります。ただし、本サイトの対象である執行、注文・取引メカニズム、金利・イールドカーブ分析への直接的な応用は抽象からは示されていません。",
+        "methodology": "観測されたリスク・エクスポージャーと潜在共通因子を組み合わせ、二段階の直交化推定を行います。第一段階の分位点推定誤差がES係数推定に一次の影響を与えない設計で、非漸近誤差境界、有限標本Gaussian近似、潜在因子数の一貫選択を理論的に示し、株式パネルで実証分析を行っています。",
+        "limitations": "抽象からは、データ期間、取引コスト、アウト・オブ・サンプル性能、因果解釈、国・資産クラス間の頑健性、リターン予測の経済的持続性は確認できません。報告された高いアルファがデータマイニング、リスク補償、流動性制約、または実装可能性の問題をどの程度反映するかも不明です。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "下方テールリスクと株式因子価格付けとしては関連性がありますが、指定された電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究の中心範囲には該当しません。",
+        "tags": [
+          "expected shortfall",
+          "tail risk",
+          "factor models",
+          "asset pricing",
+          "equity returns",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes an Expected Shortfall Factor Model (ESFM) to explain and price common variation in the average severity of lower-tail losses in large panels of equity returns. It is not primarily about electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, ESFM extracts common loss-severity factors not captured by mean and quantile factors. High-minus-low portfolios sorted by ESFM exposure earn annualized returns of 8.0%--11.7%, with Fama--French five-factor alphas of 10.3%--15.0%. The results remain statistically significant after conditioning on existing factors, and adding ESFM improves the maximum attainable Sharpe ratio.",
+          "practicalApplication": "Potential applications include downside-risk analysis for equities, factor portfolio construction, and evaluating risk premia based on Expected Shortfall. However, the abstract does not establish direct applications to execution, order and trading mechanisms, or interest-rate and yield-curve analysis, which are the site’s primary scope.",
+          "methodology": "The model combines observed risk exposures with latent common factors and uses an orthogonalized two-step estimation procedure. The design makes first-stage quantile-estimation error have no first-order effect on ES coefficient estimates. The paper derives nonasymptotic error bounds, a finite-sample Gaussian approximation, and consistent latent-factor-number selection, followed by an empirical study of an equity panel.",
+          "limitations": "The abstract does not specify the sample period, transaction costs, out-of-sample performance, causal interpretation, cross-country or cross-asset robustness, or the economic persistence of the return predictability. It is also unclear how much of the reported alphas reflects data mining, risk compensation, liquidity constraints, or implementation frictions.",
+          "reason": "The study is relevant to downside-tail risk and equity factor pricing, but it does not materially address the specified core areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "expected shortfall",
+            "tail risk",
+            "factor models",
+            "asset pricing",
+            "equity returns",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.11575": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "高次元金融時系列の極値の同時分布を、市場情報に基づくネットワークで推定・予測評価する研究です。電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブを主題としていません。",
+        "mainResult": "時間依存のHüsler–Reissモデルに市場情報を反映した隣接行列を導入し、JEAM仕様がS&P 100の3セクターにおける1分足株式リターンのアウトオブサンプル・ログスコアで最良の結果を示したと報告しています。改善幅は下側テールで12.5–13.6%、上側テールで11.4–14.9%です。",
+        "practicalApplication": "株式リターンの極端な同時変動のリスク評価、テール予測、ストレス分析に応用できる可能性があります。ただし、電子取引の執行判断や注文フロー分析への直接的な応用は、要旨からは示されていません。",
+        "methodology": "極値の疎性と、局所的な極値が周辺分布全体での極値とは限らない問題に対し、時間依存Hüsler–Reissモデルを使用しています。個別の極端さと過去の同時極値のパターンを組み合わせたJoint Extremes Adjacency Matrix（JEAM）を含む、二値および重み付きの隣接行列仕様を比較しています。",
+        "limitations": "要旨では、比較対象モデル、サンプル期間、学習・評価分割、統計的有意性、取引コストを考慮した実現可能性が明示されていません。対象もS&P 100の3セクターの1分足リターンに限られており、他の資産、市場環境、より直接的なマイクロストラクチャーデータへの一般化は確認できません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "極値リスクモデリングとしては有用な可能性がありますが、本サイトの主要対象である電子執行、マーケット・マイクロストラクチャー、金利・イールドカーブ研究との直接的な適合性が低いためです。1分足データの利用だけではマイクロストラクチャー研究とは判断できません。",
+        "tags": [
+          "金融極値",
+          "高次元時系列",
+          "Hüsler–Reissモデル",
+          "ネットワークモデル",
+          "テール予測",
+          "リスクモデリング"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study estimates and evaluates forecasts of the joint distribution of extremes in high-dimensional financial time series using market-informed networks. Its primary focus is not electronic execution, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "The paper introduces market-informed adjacency matrices into a time-dependent Hüsler–Reiss model and reports that the JEAM specification achieves the best out-of-sample log scores for one-minute stock returns across three S&P 100 sectors. The reported improvements are 12.5–13.6% in the lower tail and 11.4–14.9% in the upper tail.",
+          "practicalApplication": "The approach may support risk assessment, tail forecasting, and stress analysis for extreme joint movements in equity returns. However, the abstract does not indicate a direct application to electronic execution decisions or order-flow analysis.",
+          "methodology": "To address sparse extremes and the distinction between locally extreme observations and extremes relative to the full marginal distribution, the authors use a time-dependent Hüsler–Reiss model. They compare binary and weighted adjacency specifications, including the Joint Extremes Adjacency Matrix (JEAM), which combines individual extremeness with historical patterns of joint extreme movements.",
+          "limitations": "The abstract does not specify the benchmark models, sample period, train-test design, statistical significance, or feasibility after transaction costs. The analysis is limited to one-minute returns from three S&P 100 sectors, so generalization to other assets, market regimes, or more direct microstructure data is unverified.",
+          "reason": "Although the work may be useful for extreme-risk modeling, it has limited direct fit with the site's core topics of electronic execution, market microstructure, interest-rate modeling, and yield curves. The use of one-minute data alone does not make it a microstructure study.",
+          "tags": [
+            "financial extremes",
+            "high-dimensional time series",
+            "Hüsler–Reiss model",
+            "network models",
+            "tail forecasting",
+            "risk modeling"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.11586": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "局所ボラティリティモデルにおける短期満期のskew stickiness ratioを分析した理論研究です。",
+        "mainResult": "一般の時間依存局所ボラティリティ関数の下で、skew stickiness ratioが短期満期に2へ収束することを証明したと報告しています。また、空間微分に関する一様楕円性と2階以上の大域的有界性を仮定せずに、implied volatility skewのone-half ruleを強化しています。",
+        "practicalApplication": "短期オプションのskew挙動や局所ボラティリティモデルの理論的妥当性を評価する際の基礎的知見になり得ます。ただし、電子執行、market microstructure、yield curve、rates、またはinterest-rate modelへの直接的な応用は抽象から確認できません。",
+        "methodology": "一般の時間依存局所ボラティリティモデルを対象に、first-order Watanabe expansionを用いて短期漸近結果を厳密に導出しています。",
+        "limitations": "抽象からは具体的なモデル条件、収束の定義、証明の詳細、実証検証、数値的な近似精度は確認できません。また、主な対象は株式等のオプションskewに関する理論であり、本サイトの重点領域との直接的関連性は限定的です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "局所ボラティリティとimplied volatility skewに関する理論的貢献ですが、本サイトが対象とする電子取引、market microstructure、interest-rate models、yield curves、ratesには直接該当しないためです。",
+        "tags": [
+          "local volatility",
+          "implied volatility skew",
+          "short maturity",
+          "Watanabe expansion",
+          "option pricing"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This is a theoretical study of the short-maturity skew stickiness ratio under local volatility models.",
+          "mainResult": "The paper reports a proof that the skew stickiness ratio converges to 2 at short maturity for a general time-dependent local volatility function. It also strengthens the one-half rule for the implied volatility skew by removing uniform ellipticity and global boundedness assumptions on spatial derivatives of order two or higher.",
+          "practicalApplication": "The result may provide foundational insight for evaluating short-dated option-skew behavior and the theoretical validity of local volatility models. However, the abstract does not establish a direct application to electronic execution, market microstructure, yield curves, rates, or interest-rate models.",
+          "methodology": "The study considers general time-dependent local volatility models and derives the short-maturity asymptotic results rigorously using a first-order Watanabe expansion.",
+          "limitations": "The abstract does not specify the detailed model conditions, the definition of convergence, proof details, empirical validation, or numerical approximation accuracy. Moreover, the main subject is option skew theory rather than the site's core research areas.",
+          "reason": "Although the paper offers a theoretical contribution on local volatility and implied volatility skew, it does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "local volatility",
+            "implied volatility skew",
+            "short maturity",
+            "Watanabe expansion",
+            "option pricing"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.11614": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本論文は、レジーム転換する注文フローに対する深層強化学習型マーケットメイキング戦略を、ゼロ・インテリジェンスのリミットオーダーブックで評価している。",
+        "mainResult": "抽象によれば、Rainbow型の分布型DQNを用いるRLMMは、定常的な設定でGLFTをリスク・リターンの観測範囲全体にわたり上回った。また、フローの非対称性に対してGLFTより頑健だったが、持続的な方向性インバランスでは在庫飽和による大幅ドローダウンが残った。変化点フィルターとキュー調整済みのクオート・エクスポージャー不均衡を状態に加えることで収益性が回復し、シナリオ・バンディットによる再重み付けでストレス条件下の成績がさらに改善した。",
+        "practicalApplication": "注文フローのレジーム変化を検知し、クオートや在庫制御を適応的に変更する電子マーケットメイキング設計に応用できる可能性がある。特に、持続的な方向性フローに対するリスク管理やシナリオ重み付けの設計に示唆を与える。",
+        "methodology": "Rainbow-style distributional DQNのC51を用いたRLMMを構築し、ゼロ・インテリジェンスのリミットオーダーブックで校正・検証した。GLFTと比較し、定常環境、フロー非対称性、ランダムな持続性、方向性相関を含むストレスシナリオで評価した。追加状態としてBayesian online change-point filterとqueue-adjusted quote-exposure imbalanceを導入し、最後にシナリオ・バンディットで低収益シナリオの重みを調整した。",
+        "limitations": "評価対象はゼロ・インテリジェンスのシミュレーション市場であり、実市場の参加者戦略、約定優先順位、手数料、レイテンシー、モデルリスクを十分に反映しない可能性がある。抽象からはデータ規模、ハイパーパラメータ、統計的有意性、実市場での外部検証、RLMMの計算・運用コストを確認できない。また、報告結果は著者の実験条件に依存する。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "レジーム転換する注文フロー、在庫リスク、適応的マーケットメイキングを直接扱っており、電子取引とマーケットマイクロストラクチャーの読者に関連性が高い。シミュレーション中心で実運用への一般化には制約があるが、手法上の新規性と実務的示唆は十分にある。",
+        "tags": [
+          "market making",
+          "deep reinforcement learning",
+          "limit order book",
+          "regime switching",
+          "order-flow imbalance",
+          "inventory risk",
+          "change-point detection",
+          "distributional DQN"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This paper evaluates a deep reinforcement-learning market-making strategy under regime-switching order flow in a zero-intelligence limit order book.",
+          "mainResult": "According to the abstract, the Rainbow-style distributional DQN-based RLMM outperforms GLFT across the observed risk-return frontier in the stationary setting and is more robust to flow asymmetry. However, it still experiences large drawdowns from inventory saturation under persistent directional imbalance. Adding a change-point filter and queue-adjusted quote-exposure imbalance to the state restores profitability, while scenario reweighting with a bandit further improves performance under random-persistence and correlated-direction stress.",
+          "practicalApplication": "The approach may support electronic market-making designs that detect order-flow regime changes and adapt quoting and inventory controls. It is particularly suggestive for managing persistent directional flow and weighting stress scenarios.",
+          "methodology": "The authors construct a Rainbow-style distributional DQN, specifically C51, calibrate and test the RLMM in a zero-intelligence limit order book, and compare it with GLFT under stationary conditions, flow asymmetry, random persistence, and correlated-direction stress. They add a Bayesian online change-point filter and queue-adjusted quote-exposure imbalance to the state, followed by a scenario-bandit step that reweights low-return scenarios.",
+          "limitations": "The evaluation uses a zero-intelligence simulated market, which may not capture real-market participant strategies, queue priority, fees, latency, and model risk. The abstract does not report the data scale, hyperparameters, statistical significance, real-market validation, or computational and operational costs. The reported results may therefore depend on the authors' experimental conditions.",
+          "reason": "The paper directly addresses regime-switching order flow, inventory risk, and adaptive market making, making it highly relevant to electronic trading and market microstructure. Although its simulation-based evidence limits operational generalization, the methodological novelty and practical implications are substantial.",
+          "tags": [
+            "market making",
+            "deep reinforcement learning",
+            "limit order book",
+            "regime switching",
+            "order-flow imbalance",
+            "inventory risk",
+            "change-point detection",
+            "distributional DQN"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "レジーム転換する方向性注文フロー下の market making を扱い、FIFO queue を追跡する zero-intelligence LOB simulator 上で、GLFT、Rainbow/C51 DQN、レジーム認識型の強化学習方策を比較する。定常フローで学習した方策の inventory saturation を主要な破綻要因とし、Bayesian change-point belief、queue-adjusted quote exposure、scenario-bandit fine-tuning による頑健化を提案する。",
+        "mainResult": "著者らのシミュレーションでは、定常・対称フローにおけるRL方策が観測された全リスク・リターン領域でGLFTを上回った。平均レジーム長60 MO eventsの設定では、非適応方策の平均終端PnLが定常時基準の約$-46\\%$まで低下した一方、レジーム認識型Algorithm Bは約$37\\%$まで回復し、inventory dispersionも基準の$1.89$倍から$0.55$倍へ縮小したと報告される。Algorithm Cはrandom-persistenceおよびcorrelated-direction stressでAlgorithm B比の平均終端PnLを約$16\\%$、$17\\%$改善した。",
+        "practicalApplication": "電子市場のmarket makerが、market-order方向の変化点推定と自身のFIFO queue exposureを状態に組み込み、持続的な片側フローに応じてquote skewを調整する設計に応用できる。scenario reweightingは、平均性能だけでなく不利な注文フロー経路を重点的に再学習するstress-training手法として有用である。",
+        "methodology": "AMZNのLevel-3 dataからSanta Fe型LOBの到着・取消強度を較正し、censored waiting-time estimationとvolatility signature plotでGLFTを設定する。同一のqueue-aware event-driven simulatorとpaired seedsでGLFT、at-best、Rainbow/C51 DQNを比較する。非定常実験では買いMO確率を区分一定とし、Bayesian online change-point filterとqueue-adjusted quote-exposure imbalanceを状態に追加してAlgorithm Bをfine-tuneする。さらに256個のstress scenarioをarmとするbanditで低収益scenarioの標本確率を高め、Algorithm Cを学習する。",
+        "limitations": "結果はすべて較正済みzero-intelligence simulator内のもので、実市場backtestやlive executionによる検証はない。戦略的参加者、方策に対する内生的なorder-flow反応、latency、fees、order sizing、multi-level quotingは扱わず、unit lotを片側最大1注文だけ提示する。レジーム幅は$0.30$、継続時間は指数分布を中心に設定され、heavy tailsやintraday seasonalityなどは未検証である。Algorithm Cの評価は各stress familyで50 episodesと小さく、学習時のscenario generatorと同系統のstressであるため、未知の実市場分布への一般化は示されていない。したがって、観測されたGLFT優位性や収益性はシミュレーション条件付きの報告結果である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "market makingにおける非定常order flow、FIFO queue、inventory saturationを明確に結び付け、分析的benchmarkからregime-aware RL、tail-focused fine-tuningまで一貫して比較しているため、電子執行研究として有用である。一方、実証の中心が単一のzero-intelligence simulatorであるため、実運用上の有効性よりも方法論的な研究として読むべきである。",
+        "tags": [
+          "マーケットメイク",
+          "深層強化学習",
+          "指値注文板",
+          "レジーム転換",
+          "注文フロー不均衡",
+          "FIFOキュー",
+          "在庫リスク",
+          "Bayesian変化点検出",
+          "distributional DQN",
+          "scenario bandit"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper studies market making under regime-switching directional order flow and compares GLFT, a Rainbow/C51 DQN, and regime-aware reinforcement-learning policies in a zero-intelligence LOB simulator with FIFO queue tracking. It identifies inventory saturation as the principal failure mode of policies trained under stationary flow and proposes robustness enhancements based on a Bayesian change-point belief, queue-adjusted quote exposure, and scenario-bandit fine-tuning.",
+          "mainResult": "In the authors' simulations, the RL policy outperformed GLFT across the entire observed risk-return range under stationary symmetric flow. With a mean regime duration of 60 MO events, the non-adaptive policy's mean terminal PnL fell to about $-46\\%$ of the stationary benchmark, while the regime-aware Algorithm B recovered to about $37\\%$ and reduced inventory dispersion from $1.89$ times to $0.55$ times the benchmark. Algorithm C reportedly improved mean terminal PnL over Algorithm B by about $16\\%$ and $17\\%$ under random-persistence and correlated-direction stress, respectively.",
+          "practicalApplication": "An electronic market maker could incorporate change-point estimates of market-order direction and its own FIFO queue exposure into the state, adjusting quote skew in response to persistent one-sided flow. Scenario reweighting can also serve as a stress-training method that focuses learning on adverse order-flow paths rather than average performance alone.",
+          "methodology": "The authors calibrate a Santa Fe LOB from AMZN Level-3 data and configure GLFT using censored waiting-time estimation and a volatility signature plot. GLFT, an at-best policy, and a Rainbow/C51 DQN are compared with paired seeds in the same queue-aware event-driven simulator. For non-stationary experiments, the buy-MO probability is piecewise constant; a Bayesian online change-point filter and queue-adjusted quote-exposure imbalance are added to the state to fine-tune Algorithm B. Algorithm C is then trained with a bandit over 256 stress scenarios that increases the sampling probability of low-return scenarios.",
+          "limitations": "All results come from a calibrated zero-intelligence simulator, without historical-market backtesting or live-execution validation. The model excludes strategic participants, endogenous order-flow responses to the policy, latency, fees, order sizing, and multi-level quoting, and permits only one unit-lot order per side. The regime width is fixed at $0.30$, durations are primarily exponential, and heavy tails and intraday seasonality are not tested. Algorithm C is evaluated on only 50 episodes per stress family, and those stresses come from the same types of scenario generators used in training, so generalization to unknown real-market distributions is not established. Accordingly, the reported superiority over GLFT and profitability are conditional simulation findings.",
+          "reason": "The paper is useful for electronic-execution research because it clearly connects non-stationary order flow, FIFO queues, and inventory saturation, while providing a coherent comparison from analytical benchmarks through regime-aware RL and tail-focused fine-tuning. Because the evidence is centered on a single zero-intelligence simulator, it should be read as a methodological study rather than evidence of production effectiveness.",
+          "tags": [
+            "market making",
+            "deep reinforcement learning",
+            "limit order book",
+            "regime switching",
+            "order-flow imbalance",
+            "FIFO queue",
+            "inventory risk",
+            "Bayesian change-point detection",
+            "distributional DQN",
+            "scenario bandit"
+          ]
+        }
+      }
+    },
+    "2609.11905": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、tempered stable returnsに対するEntropic Value-at-Risk（EVaR）ベースのinverse risk parity（IRP）およびequal risk contribution（ERC）ポートフォリオを構築し、3つの投資ユニバースで評価する研究です。",
+        "mainResult": "抄録によれば、EVaRベースのERCポートフォリオは、3つの投資ユニバースすべてでequal-weightを上回る正のSharpe差を示しました。また、Gaussian returnsではEVaR-deviation IRPおよびERCが従来のvolatilityベースの重みに一致すると報告されています。",
+        "practicalApplication": "非正規で裾の厚いリターンを想定したポートフォリオ配分やリスク寄与分析に利用できる可能性があります。ただし、電子執行、market microstructure、interest-rate models、yield curves、またはratesの実務への直接的な応用は抄録から確認できません。",
+        "methodology": "Multivariate normal tempered stable modelsと、tempered stable componentsを用いるindependent component analysisを組み合わせ、asset-level EVaRおよびEVaR-deviation contributionsを導出します。そのうえでEVaR-based IRPとERCを構築し、3つの投資ユニバースで実証評価しています。",
+        "limitations": "抄録だけでは、データ期間、資産ユニバース、取引コスト、リバランス頻度、推定手法の詳細、統計的有意性、Sharpe差の大きさが不明です。したがって、out-of-sampleでの頑健性や実運用上の優位性は判断できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "リスク配分とポートフォリオ構築に関する研究ですが、対象サイトの主要領域である電子取引、market microstructure、金利モデル、イールドカーブ、ratesには直接該当しないためです。",
+        "tags": [
+          "Entropic Value-at-Risk",
+          "risk parity",
+          "portfolio allocation",
+          "tempered stable returns",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper constructs Entropic Value-at-Risk (EVaR)-based inverse risk parity (IRP) and equal risk contribution (ERC) portfolios for tempered stable returns and evaluates them across three investment universes.",
+          "mainResult": "According to the abstract, EVaR-based ERC portfolios achieve positive Sharpe differences relative to equal weight across all three investment universes. It also reports that, under Gaussian returns, EVaR-deviation IRP and ERC recover conventional volatility-based weights.",
+          "practicalApplication": "The approach may be useful for portfolio allocation and risk-contribution analysis under non-Gaussian, heavy-tailed return assumptions. However, the abstract does not establish a direct application to electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "methodology": "The study combines multivariate normal tempered stable models with independent component analysis using tempered stable components, derives asset-level EVaR and EVaR-deviation contributions, and constructs EVaR-based IRP and ERC portfolios for empirical evaluation in three investment universes.",
+          "limitations": "The abstract does not specify the data periods, asset universes, transaction costs, rebalancing frequency, estimation details, statistical significance, or the magnitude of the Sharpe differences. Therefore, out-of-sample robustness and practical investment superiority cannot be assessed.",
+          "reason": "This is a study of risk allocation and portfolio construction, but it does not directly address the site's core areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "Entropic Value-at-Risk",
+            "risk parity",
+            "portfolio allocation",
+            "tempered stable returns",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 915,
+      "outputTokens": 1284,
+      "reasoningTokens": 61,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2199,
+      "estimatedCostUsd": 0.001724,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.10543v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 34378,
+      "outputTokens": 2726,
+      "reasoningTokens": 464,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 34375,
+      "totalTokens": 37104,
+      "estimatedCostUsd": 0.226407,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 31,
+      "paperIds": [
+        "2609.10543v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 928,
+      "outputTokens": 1185,
+      "reasoningTokens": 91,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2113,
+      "estimatedCostUsd": 0.001608,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.10587v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 816,
+      "outputTokens": 1151,
+      "reasoningTokens": 136,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1967,
+      "estimatedCostUsd": 0.001544,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.11575v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 686,
+      "outputTokens": 822,
+      "reasoningTokens": 95,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1508,
+      "estimatedCostUsd": 0.001124,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.11586v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 883,
+      "outputTokens": 1209,
+      "reasoningTokens": 48,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2092,
+      "estimatedCostUsd": 0.001627,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.11614v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 43003,
+      "outputTokens": 1906,
+      "reasoningTokens": 276,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 43000,
+      "totalTokens": 44909,
+      "estimatedCostUsd": 0.253132,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 40,
+      "paperIds": [
+        "2609.11614v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 751,
+      "outputTokens": 930,
+      "reasoningTokens": 83,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1681,
+      "estimatedCostUsd": 0.001266,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.11905v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

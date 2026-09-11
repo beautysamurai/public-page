@@ -2046,6 +2046,76 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-09-11-daily-openai-01",
+      "editionDate": "2026-09-11",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-11T11:42:53Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-11",
+      "observedBatchDate": "2026-09-11",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月11日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 6 | 4,979 | 6,581 (514) | 0.0089 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 2 | 77,381 | 4,632 (740) | 0.4795 | PDF全文・31ページ / PDF全文・40ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. The Privacy Subsidy in Market Microstructure\n\n**[arXiv:2609.10543v1](https://arxiv.org/abs/2609.10543v1) — Yuki Nakamura**\n\n### 概要\n\n価格決定者が粗視化された注文フロー信号で posterior-mean pricing を行い、より細かな実フローを決済するときの期待損失を「privacy subsidy」と定義する理論研究である。単一期間 Kyle、Glosten–Milgrom、連続時間 Kyle–Back に適用し、手数料による回収、取引量減少に伴う死荷重、内生的な privacy noise の選択まで分析する。ただし一般不可能性定理には、残差共分散がゼロであることと決済フローの信号可測性を同一視する重大な論理的不備がある。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 非推奨 | 市場マイクロ構造 / プライバシー保護取引所 / Kyleモデル / Glosten–Milgrom / Kyle–Back / 差分プライバシー / マーケットメーカー損益 / 取引手数料 / Loss-Versus-Rebalancing |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 価格信号と決済フローの不一致を明示的な損益として捉える着想と、複数の代表的 microstructure model を統一しようとする構成には研究上の価値がある。しかし中心となる一般定理の必要十分条件が成立せず、いくつかの実装・連続時間均衡にも未解決の整合性問題がある。したがって現状では確立した一般結果として推奨できず、正の残差共分散を明示した限定命題への修正と各モデルの再検証が必要である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 915 | 1,284 (61) | 0.0017 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 34,378 | 2,726 (464) | 0.2264 | PDF全文・31ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 論文は、単一価格の場合の maker 利益を $\\Pi_M=-\\operatorname{Cov}(v-\\mathbb{E}[v\\mid S],y-\\mathbb{E}[y\\mid S])$ と表し、Kyle では subsidy が $\\lambda\\sigma_\\varepsilon^2$、Glosten–Milgrom では $\\mu\\eta\\Delta$、Kyle–Back では $\\sigma_v\\sigma_\\varepsilon^2/\\sqrt{\\sigma_u^2+\\sigma_\\varepsilon^2}$ になると報告する。さらに、小さい privacy noise の下では gross subsidy と break-even fee が $O(\\sigma_\\varepsilon^2)$、手数料による死荷重が $O(\\sigma_\\varepsilon^4)$ になると主張する。一方、一般モデルで共分散がゼロとなることから $y$ が $S$ に関して可測であるとは導けないため、「厳密な粗視化なら効率的価格とゼロ利益が必ず両立不能」という中心命題は追加の識別・正の共分散条件なしには成立しない。\n\n**手法:** 条件付き期待値の直交性を用いた共分散分解を出発点とし、Gaussian linear Kyle、binary symmetric channel を組み込んだ Glosten–Milgrom、Kalman filtering と HJB/Riccati を用いる Kyle–Back の閉形式均衡を導出する。続いて volume-proportional fee、線形需要または CARA hedger による Harberger triangle、Gaussian differential privacy の便益を組み合わせ、最適 noise scale を求める。分析は全編理論モデルと象徴計算に基づき、実データによる推定・検定は行っていない。\n\n**実務への応用:** 真の注文量を決済しながら、DP noise を加えた集計フローだけで価格を更新する取引所について、LP の損失補填手数料を推計する設計ベンチマークとして利用できる。特に Kyle の式は privacy noise、通常の noise flow、価値不確実性から fee floor を計算する簡便な近似を与える。ただし価格対象と決済対象が同一の batch auction や通常の CFMM には適用できず、提示された BTC/USDT 数値も実証推定ではなく仮想的 calibration である。\n\n**限界・注意点:** 最大の問題は、$\\operatorname{Cov}(v-\\mathbb{E}[v\\mid S],y-\\mathbb{E}[y\\mid S])=0$ が $y$ の $S$-可測性と同値だとする記述が一般には偽である点である。例えば価値残差とフロー残差が直交すれば、厳密な粗視化でも maker 利益はゼロになり得るため、一般不可能性は正の残差共分散を独立の仮定として置いた場合に限られる。Glosten–Milgrom では noisy direction だけを観測する maker が true direction に対応する side で約定させる実装が十分に説明されず、情報集合と executed price の整合性が不明瞭である。連続時間均衡は線形制御の特異な HJB を情報予算制約で閉じており、標準的な最適性・許容可能性の厳密な検証が不足する。fee と welfare の結果は price impact を固定した小ノイズの部分均衡で、完全な fee-volume-equilibrium は未解決である。さらに暗号実装費、在庫リスク、競争、複数 insider、内生的またはフロー相関 noise、逐次 Glosten–Milgrom、実証検証を扱っていない。\n\n## 2. Deep Learning of Robust Market Making under Regime-Switching Order Flow\n\n**[arXiv:2609.11614v1](https://arxiv.org/abs/2609.11614v1) — Felipe Moret, Fabrizio Lillo**\n\n### 概要\n\nレジーム転換する方向性注文フロー下の market making を扱い、FIFO queue を追跡する zero-intelligence LOB simulator 上で、GLFT、Rainbow/C51 DQN、レジーム認識型の強化学習方策を比較する。定常フローで学習した方策の inventory saturation を主要な破綻要因とし、Bayesian change-point belief、queue-adjusted quote exposure、scenario-bandit fine-tuning による頑健化を提案する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | マーケットメイク / 深層強化学習 / 指値注文板 / レジーム転換 / 注文フロー不均衡 / FIFOキュー / 在庫リスク / Bayesian変化点検出 / distributional DQN / scenario bandit |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** market makingにおける非定常order flow、FIFO queue、inventory saturationを明確に結び付け、分析的benchmarkからregime-aware RL、tail-focused fine-tuningまで一貫して比較しているため、電子執行研究として有用である。一方、実証の中心が単一のzero-intelligence simulatorであるため、実運用上の有効性よりも方法論的な研究として読むべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 883 | 1,209 (48) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 43,003 | 1,906 (276) | 0.2531 | PDF全文・40ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らのシミュレーションでは、定常・対称フローにおけるRL方策が観測された全リスク・リターン領域でGLFTを上回った。平均レジーム長60 MO eventsの設定では、非適応方策の平均終端PnLが定常時基準の約$-46\\%$まで低下した一方、レジーム認識型Algorithm Bは約$37\\%$まで回復し、inventory dispersionも基準の$1.89$倍から$0.55$倍へ縮小したと報告される。Algorithm Cはrandom-persistenceおよびcorrelated-direction stressでAlgorithm B比の平均終端PnLを約$16\\%$、$17\\%$改善した。\n\n**手法:** AMZNのLevel-3 dataからSanta Fe型LOBの到着・取消強度を較正し、censored waiting-time estimationとvolatility signature plotでGLFTを設定する。同一のqueue-aware event-driven simulatorとpaired seedsでGLFT、at-best、Rainbow/C51 DQNを比較する。非定常実験では買いMO確率を区分一定とし、Bayesian online change-point filterとqueue-adjusted quote-exposure imbalanceを状態に追加してAlgorithm Bをfine-tuneする。さらに256個のstress scenarioをarmとするbanditで低収益scenarioの標本確率を高め、Algorithm Cを学習する。\n\n**実務への応用:** 電子市場のmarket makerが、market-order方向の変化点推定と自身のFIFO queue exposureを状態に組み込み、持続的な片側フローに応じてquote skewを調整する設計に応用できる。scenario reweightingは、平均性能だけでなく不利な注文フロー経路を重点的に再学習するstress-training手法として有用である。\n\n**限界・注意点:** 結果はすべて較正済みzero-intelligence simulator内のもので、実市場backtestやlive executionによる検証はない。戦略的参加者、方策に対する内生的なorder-flow反応、latency、fees、order sizing、multi-level quotingは扱わず、unit lotを片側最大1注文だけ提示する。レジーム幅は$0.30$、継続時間は指数分布を中心に設定され、heavy tailsやintraday seasonalityなどは未検証である。Algorithm Cの評価は各stress familyで50 episodesと小さく、学習時のscenario generatorと同系統のstressであるため、未知の実市場分布への一般化は示されていない。したがって、観測されたGLFT優位性や収益性はシミュレーション条件付きの報告結果である。",
+      "papers": [
+        {
+          "arxivId": "2609.10543v1",
+          "title": "The Privacy Subsidy in Market Microstructure",
+          "authors": [
+            "Yuki Nakamura"
+          ],
+          "submittedDate": "2026-06-11",
+          "updatedDate": "2026-06-11",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.10543v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.10543v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 8/10",
+          "schedulerSummary": "価格決定者が粗視化された注文フロー信号で posterior-mean pricing を行い、より細かな実フローを決済するときの期待損失を「privacy subsidy」と定義する理論研究である。単一期間 Kyle、Glosten–Milgrom、連続時間 Kyle–Back に適用し、手数料による回収、取引量減少に伴う死荷重、内生的な privacy noise の選択まで分析する。ただし一般不可能性定理には、残差共分散がゼロであることと決済フローの信号可測性を同一視する重大な論理的不備がある。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 915 / 出力 1,284（うち推論 61） · 推定 $0.0017\n論文解析: gpt-5.6-sol / medium · トークン 入力 34,378 / 出力 2,726（うち推論 464） · PDF 31 pages · 推定 $0.2264",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.11614v1",
+          "title": "Deep Learning of Robust Market Making under Regime-Switching Order Flow",
+          "authors": [
+            "Felipe Moret",
+            "Fabrizio Lillo"
+          ],
+          "submittedDate": "2026-09-10",
+          "updatedDate": "2026-09-10",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.11614v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.11614v1",
+          "schedulerRank": 2,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "レジーム転換する方向性注文フロー下の market making を扱い、FIFO queue を追跡する zero-intelligence LOB simulator 上で、GLFT、Rainbow/C51 DQN、レジーム認識型の強化学習方策を比較する。定常フローで学習した方策の inventory saturation を主要な破綻要因とし、Bayesian change-point belief、queue-adjusted quote exposure、scenario-bandit fine-tuning による頑健化を提案する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 883 / 出力 1,209（うち推論 48） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 43,003 / 出力 1,906（うち推論 276） · PDF 40 pages · 推定 $0.2531",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

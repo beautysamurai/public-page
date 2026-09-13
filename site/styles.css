@@ -935,6 +935,20 @@ button { color: inherit; }
 .method-repo:hover { color: var(--mint); }
 
 .theory-hero .eyebrow { margin-bottom: 18px; }
+.book-library { padding-top: 2rem; scroll-margin-top: 1.5rem; }
+.book-publication { border: 1px solid var(--line); border-top: 3px solid var(--mint-dark); border-radius: .5rem; padding: clamp(1.25rem, 3vw, 2rem); background: var(--paper-bright); }
+.book-publication h2 { margin: .6rem 0 .4rem; font-size: clamp(1.4rem, 2.5vw, 2rem); line-height: 1.35; text-wrap: balance; }
+.book-subtitle { margin: 0; color: var(--ink-soft); }
+.book-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: 1rem; border-block: 1px solid var(--line); padding-block: 1rem; }
+.book-facts dt { color: var(--ink-soft); font-size: .875rem; }
+.book-facts dd { margin: .25rem 0 0; font-size: .9375rem; font-weight: 600; }
+.book-contents { padding-left: 1.25rem; }
+.book-contents li { margin-block: .5rem; }
+.book-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.5rem; margin-block: 1.5rem; }
+.book-actions a { font-size: .9375rem; text-underline-offset: 4px; }
+.book-actions .button { background: var(--ink); color: var(--paper-bright); letter-spacing: 0; }
+.book-note { color: var(--ink-soft); font-size: .875rem; line-height: 1.7; }
+.book-home-link { color: var(--mint-dark); font-size: 1rem; text-underline-offset: 4px; }
 
 .theory-library {
   min-height: 480px;

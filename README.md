@@ -94,6 +94,29 @@ the existing Pages build copies the route and JSON unchanged. Tests validate
 records, safe links, bilingual text, URL filters, failure/retry, and separation
 from the generated archive.
 
+## Site-authored textbook PDF
+
+The **理論解説 / Theory** page has a separate learning-materials section at
+`theory/#decision-theory`, linked from the homepage. It hosts *Decision Theory
+for Rates E-Trading*, an English, 239-page, twelve-chapter integrated edition.
+This is not a classic-paper catalogue entry or an automated arXiv review.
+First publication and last upload: **2026-09-13 (JST)**. Source PDF generation:
+**2026-09-12 (JST)**. The page includes a short contents guide and read/download links.
+
+The public PDF and its version metadata are in `site/documents/`. To replace it,
+run `python scripts/prepare_public_pdf.py SOURCE_PDF site/documents/decision_theory_rates_e_trading.pdf`
+from the repository root. Keep the original outside the public repository. The
+helper strips local-file and unhosted relative links (including their orphaned
+objects), preserves page content streams, internal navigation, and HTTP(S)
+references, and prints the resulting size and SHA-256. Notebooks and reading
+notes are not uploaded with the PDF. The source manuscript is not overwritten.
+
+Update the JSON metadata, date fields in `site/theory/index.html`, and bilingual
+`book.*` copy in `site/i18n.js` together. Preserve `firstPublishedOn`; change
+`lastUploadedOn` only when the PDF is replaced, not on daily research updates or
+an unrelated Pages deployment. Verify page count, PDF links, size/hash, and the
+generated public copy before publishing through the existing Pages workflow.
+
 ## Install and configure
 
 ### Optional personal bookmarks and search presets (Supabase)

@@ -1213,9 +1213,10 @@ def fetch_pdf_for_inline_input(arxiv_id: str, *, timeout: float, opener=None) ->
             print(f"PDF fallback download failed: endpoint={index + 1}; status={safe_status}", file=sys.stderr)
             download_statuses.append(safe_status)
             # Never use a mirror to evade a rate limit or access denial.
-            if safe_status in {401, 403, 429} or (
-                isinstance(exc, urllib.error.HTTPError)
-                and exc.headers and exc.headers.get("Retry-After")
+            if isinstance(exc, urllib.error.HTTPError) and (
+                (exc.code not in RETRYABLE_HTTP_STATUSES and exc.code != 404)
+                or exc.code == 429
+                or (exc.headers and exc.headers.get("Retry-After"))
             ):
                 raise
             if index == len(endpoints) - 1:

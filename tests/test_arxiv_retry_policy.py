@@ -4,7 +4,7 @@ import sys
 import tempfile
 import unittest
 import urllib.error
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from unittest import mock
 
@@ -89,7 +89,8 @@ class ArxivRetryPolicyTests(unittest.TestCase):
             self.assertEqual(opener.call_count, 1)
 
     def test_pdf_rate_limit_or_denial_never_switches_host(self):
-        for code, header in ((429, None), (403, None), (401, None), (503, "120")):
+        for code, header in ((429, None), (400, None), (401, None), (403, None),
+                             (422, None), (451, None), (503, "120")):
             with mock.patch.object(p.urllib.request, "urlopen", side_effect=http_error(code, header)) as opener:
                 with self.assertRaises(urllib.error.HTTPError):
                     p.fetch_pdf_for_inline_input("2609.10001v1", timeout=1)
@@ -119,3 +120,21 @@ class ArxivRetryPolicyTests(unittest.TestCase):
             self.assertEqual(report["status"], p.UPDATE_NOT_CONFIRMED)
             self.assertIn("stage=candidate_validation", report["message"])
             self.assertNotIn("abstract_analysis", report["message"])
+
+    def test_pending_daily_refreshes_diagnostics_but_not_completed_reports(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            old = p.run_daily(config(), state_path=root / "state.json", output_dir=root / "daily",
+                              checked_at=CHECKED_AT, list_fetcher=mock.Mock(side_effect=http_error()))
+            new = p.run_daily(config(), state_path=root / "state.json", output_dir=root / "daily",
+                              checked_at=CHECKED_AT + timedelta(minutes=10),
+                              list_fetcher=lambda _: listing_html(new=("2608.10001",)),
+                              metadata_fetcher=mock.Mock(side_effect=TimeoutError("private")))
+            self.assertNotEqual(new["generatedAt"], old["generatedAt"])
+            self.assertIn("stage=metadata; error=TimeoutError", new["message"])
+            self.assertEqual(new["papers"], old["papers"])
+            self.assertEqual(new.get("usage"), old.get("usage"))
+            self.assertEqual(p.persist_report(old, root / "daily"), new)
+            complete = p.persist_report({**new, "status": p.NO_RELEVANT_PAPERS,
+                                         "observedBatchDate": new["expectedBatchDate"]}, root / "daily")
+            self.assertEqual(p.persist_report({**new, "generatedAt": "2026-08-28T14:00:00Z"}, root / "daily"), complete)

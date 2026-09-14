@@ -2021,7 +2021,8 @@ def persist_report(report: Mapping[str, Any], output_dir: Path) -> dict[str, Any
     id is derived from that date. An unconfirmed/offline placeholder may be
     replaced by a confirmed result for the same date. Unpublished weekly and
     monthly placeholders may also refresh when their coverage or paper set
-    changes. Pending editions may also accumulate newly recorded API usage;
+    changes. Pending daily diagnostics may refresh without changing papers or
+    recorded usage. Pending editions may also accumulate newly recorded API usage;
     other collisions return the already persisted edition unchanged.
     """
 
@@ -2053,6 +2054,15 @@ def persist_report(report: Mapping[str, Any], output_dir: Path) -> dict[str, Any
         )
         existing_usage = existing.get("usage", [])
         incoming_usage = report.get("usage", [])
+        refresh_pending_daily_diagnostic = (
+            existing["reportKind"] == report["reportKind"] == DAILY
+            and existing["status"] in pending
+            and report["status"] in pending
+            and report["generatedAt"] > existing["generatedAt"]
+            and report["expectedBatchDate"] == existing["expectedBatchDate"]
+            and report["papers"] == existing["papers"]
+            and incoming_usage == existing_usage
+        )
         refresh_pending_usage = (
             report["status"] in pending
             and len(incoming_usage) > len(existing_usage)
@@ -2066,6 +2076,7 @@ def persist_report(report: Mapping[str, Any], output_dir: Path) -> dict[str, Any
             and (
                 report["status"] in completed
                 or refresh_pending_aggregate
+                or refresh_pending_daily_diagnostic
                 or refresh_pending_usage
             )
         )

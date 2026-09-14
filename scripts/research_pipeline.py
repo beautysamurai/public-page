@@ -31,6 +31,7 @@ import urllib.parse
 import urllib.request
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping, Protocol, Sequence
@@ -84,6 +85,9 @@ PASTWEEK_URL_TEMPLATE = (
 METADATA_ENDPOINT = "https://export.arxiv.org/api/query"
 USER_AGENT = "rates-execution-research/1.0"
 MAX_PASTWEEK_RECOVERY_DAYS = 7
+ARXIV_REQUEST_INTERVAL_SECONDS = 3.0
+MAX_REMOTE_RETRY_WAIT_SECONDS = 900.0
+RETRYABLE_HTTP_STATUSES = frozenset({408, 425, 429, 500, 502, 503, 504})
 
 UPDATE_CONFIRMED = "UPDATE_CONFIRMED"
 NO_RELEVANT_PAPERS = "NO_RELEVANT_PAPERS"
@@ -1173,10 +1177,10 @@ def _file_url_download_error(exc: Exception) -> bool:
     )
 
 
-def _is_withdrawn(arxiv_id: str, *, timeout: float) -> bool:
+def _is_withdrawn(arxiv_id: str, *, timeout: float, opener=None) -> bool:
     url = f"https://arxiv.org/abs/{arxiv_id}"
     digest.validate_arxiv_url(url, "abs", arxiv_id)
-    with urllib.request.urlopen(url, timeout=timeout) as response:
+    with (opener or urllib.request.urlopen)(url, timeout=timeout) as response:
         digest.validate_arxiv_url(response.geturl(), "abs", arxiv_id)
         body = response.read(MAX_LIST_BYTES + 1)
     if len(body) > MAX_LIST_BYTES:
@@ -1187,7 +1191,7 @@ def _is_withdrawn(arxiv_id: str, *, timeout: float) -> bool:
     ))
 
 
-def fetch_pdf_for_inline_input(arxiv_id: str, *, timeout: float) -> bytes:
+def fetch_pdf_for_inline_input(arxiv_id: str, *, timeout: float, opener=None) -> bytes:
     url = f"https://arxiv.org/pdf/{arxiv_id}"
     digest.validate_arxiv_url(url, "pdf", arxiv_id)
     limit = 20 * 1024 * 1024
@@ -1196,7 +1200,7 @@ def fetch_pdf_for_inline_input(arxiv_id: str, *, timeout: float) -> bytes:
     for index, endpoint in enumerate(endpoints):
         request = urllib.request.Request(endpoint, headers={"Accept": "application/pdf", "User-Agent": USER_AGENT})
         try:
-            with urllib.request.urlopen(request, timeout=timeout) as response:
+            with (opener or urllib.request.urlopen)(request, timeout=timeout) as response:
                 final_url = response.geturl()
                 if final_url.startswith("https://export.arxiv.org/"):
                     final_url = final_url.replace("https://export.arxiv.org/", "https://arxiv.org/", 1)
@@ -1208,8 +1212,14 @@ def fetch_pdf_for_inline_input(arxiv_id: str, *, timeout: float) -> bytes:
             safe_status = status if isinstance(status, int) and 400 <= status <= 599 else "unavailable"
             print(f"PDF fallback download failed: endpoint={index + 1}; status={safe_status}", file=sys.stderr)
             download_statuses.append(safe_status)
+            # Never use a mirror to evade a rate limit or access denial.
+            if safe_status in {401, 403, 429} or (
+                isinstance(exc, urllib.error.HTTPError)
+                and exc.headers and exc.headers.get("Retry-After")
+            ):
+                raise
             if index == len(endpoints) - 1:
-                if download_statuses == [404, 404] and _is_withdrawn(arxiv_id, timeout=timeout):
+                if download_statuses == [404, 404] and _is_withdrawn(arxiv_id, timeout=timeout, opener=opener):
                     raise PaperWithdrawn(arxiv_id) from exc
                 raise
     if not body.startswith(b"%PDF-") or len(body) > limit:
@@ -1225,8 +1235,11 @@ class ResponsesAnalyzer:
         self,
         config: PipelineConfig,
         client: Any | None = None,
+        *,
+        arxiv_opener=None,
     ) -> None:
         self.config = config
+        self.arxiv_opener = arxiv_opener
         self.usage_calls: list[dict[str, Any]] = []
         if client is None:
             try:
@@ -1341,7 +1354,7 @@ class ResponsesAnalyzer:
         digest.validate_arxiv_url(
             f"https://arxiv.org/pdf/{arxiv_id}", "pdf", arxiv_id
         )
-        body = fetch_pdf_for_inline_input(arxiv_id, timeout=self.config.timeout)
+        body = fetch_pdf_for_inline_input(arxiv_id, timeout=self.config.timeout, opener=self.arxiv_opener)
         pages, introduction = inspect_pdf(body)
         prompt = _PDF_PROMPT_PREFIX + json.dumps(
             metadata_from_entry(candidate.entry), ensure_ascii=False
@@ -2088,6 +2101,50 @@ def persist_report(report: Mapping[str, Any], output_dir: Path) -> dict[str, Any
     return json.loads(json.dumps(report, ensure_ascii=False))
 
 
+class ArxivRequestPacer:
+    """Space sequential arXiv requests, including failed requests and PDFs.
+
+    The Actions concurrency group serializes runs. Keep API traffic within
+    https://info.arxiv.org/help/api/tou.html without changing hosts on HTTP 429.
+    """
+
+    def __init__(self, *, sleep_fn=time.sleep, monotonic_fn=time.monotonic, deadline=None):
+        self.sleep_fn = sleep_fn
+        self.monotonic_fn = monotonic_fn
+        self.deadline = deadline
+        self.last_started: float | None = None
+
+    def open(self, request, *, timeout):
+        now = self.monotonic_fn()
+        delay = (max(0.0, ARXIV_REQUEST_INTERVAL_SECONDS - (now - self.last_started))
+                 if self.last_started is not None else 0.0)
+        if self.deadline is not None and now + delay >= self.deadline:
+            raise WorkBudgetExceeded("arXiv request would exceed the safe deadline")
+        if delay:
+            self.sleep_fn(delay)
+        self.last_started = self.monotonic_fn()
+        if self.deadline is not None and self.last_started >= self.deadline:
+            raise WorkBudgetExceeded("arXiv request would exceed the safe deadline")
+        return urllib.request.urlopen(request, timeout=timeout)
+
+
+def _retry_after_seconds(exc: urllib.error.HTTPError, now: datetime) -> float | None:
+    value = exc.headers.get("Retry-After") if exc.headers else None
+    if not isinstance(value, str):
+        return None
+    value = value.strip()
+    if re.fullmatch(r"[0-9]+", value):
+        # Bound parsing as well as waiting for an untrusted remote header.
+        return float(value) if len(value) <= 9 else MAX_REMOTE_RETRY_WAIT_SECONDS + 1
+    try:
+        when = parsedate_to_datetime(value)
+        if when.tzinfo is None:
+            return None
+        return max(0.0, (when - now).total_seconds())
+    except (TypeError, ValueError, OverflowError):
+        return None
+
+
 def _retry(
     operation: Callable[[], Any],
     retries: int,
@@ -2095,6 +2152,7 @@ def _retry(
     *,
     deadline: float | None = None,
     monotonic_fn: Callable[[], float] = time.monotonic,
+    utc_now_fn: Callable[[], datetime] = lambda: datetime.now(timezone.utc),
 ) -> Any:
     last_error: Exception | None = None
     for attempt in range(retries + 1):
@@ -2106,12 +2164,39 @@ def _retry(
             raise
         except Exception as exc:  # Classification happens at the workflow boundary.
             last_error = exc
+            delay = min(0.25 * (2**attempt), 2.0)
+            if isinstance(exc, urllib.error.HTTPError):
+                if exc.code not in RETRYABLE_HTTP_STATUSES:
+                    raise  # Permanent failures must not consume the retry budget.
+                delay = min(30.0 * (2**attempt), 120.0)
+                retry_after = _retry_after_seconds(exc, utc_now_fn())
+                if retry_after is not None:
+                    delay = max(delay, retry_after)
+            elif isinstance(exc, (urllib.error.URLError, TimeoutError, http.client.HTTPException)):
+                delay = min(3.0 * (2**attempt), 30.0)
             if attempt < retries:
-                if deadline is not None and monotonic_fn() >= deadline:
-                    raise WorkBudgetExceeded("daily research soft deadline reached")
-                sleep_fn(min(0.25 * (2**attempt), 2.0))
+                if delay > MAX_REMOTE_RETRY_WAIT_SECONDS or (
+                    deadline is not None and monotonic_fn() + delay >= deadline
+                ):
+                    # Do not shorten Retry-After and send another early request.
+                    raise WorkBudgetExceeded("remote retry cannot fit the safe run budget") from exc
+                if isinstance(exc, (urllib.error.URLError, TimeoutError, http.client.HTTPException)):
+                    status = exc.code if isinstance(exc, urllib.error.HTTPError) else "unavailable"
+                    print(f"Remote retry: status={status}; attempt={attempt + 2}; waitSeconds={delay:.0f}", file=sys.stderr)
+                sleep_fn(delay)
     assert last_error is not None
     raise last_error
+
+
+def _failure_diagnostic(stage: str, exc: Exception) -> str:
+    # Only program-owned labels and numeric HTTP codes. Never publish response
+    # bodies, request URLs, exception text, model drafts or credentials.
+    detail = f"stage={stage}; error={type(exc).__name__}"
+    remote = exc.__cause__ if isinstance(exc, WorkBudgetExceeded) else exc
+    if isinstance(remote, urllib.error.HTTPError) and isinstance(remote.code, int):
+        detail += f"; httpStatus={remote.code}"
+    print(f"Research stopped: {detail}", file=sys.stderr)
+    return f" Diagnostic: {detail}."
 
 
 def _updated_state(
@@ -2394,21 +2479,23 @@ def run_daily(
         )
         return report
 
+    arxiv_pacer = ArxivRequestPacer(sleep_fn=sleep_fn, monotonic_fn=monotonic_fn, deadline=deadline)
     if list_fetcher is None:
         list_fetcher = lambda category: fetch_listing_page(
-            category, timeout=config.timeout
+            category, timeout=config.timeout, opener=arxiv_pacer.open
         )
     if history_fetcher is None:
         history_fetcher = lambda category: fetch_pastweek_listing_page(
-            category, timeout=config.timeout
+            category, timeout=config.timeout, opener=arxiv_pacer.open
         )
     if metadata_fetcher is None:
-        metadata_fetcher = lambda ids: fetch_metadata(ids, timeout=config.timeout)
+        metadata_fetcher = lambda ids: fetch_metadata(ids, timeout=config.timeout, opener=arxiv_pacer.open)
 
     observed: date | None = None
     recovered_pending = False
     next_pending: date | None = None
     checkpoint: dict[str, Any] | None = None
+    stage = "listing"
     try:
         pages: list[ListingPage] = []
         for category in config.categories:
@@ -2457,6 +2544,7 @@ def run_daily(
             if not recover_pending:
                 raise ListingParseError("listing is newer than the expected announcement date")
             latest_observed = observed
+            stage = "pastweek_listing"
             pages = _recover_pending_pages(
                 target=target,
                 latest_observed=latest_observed,
@@ -2475,6 +2563,7 @@ def run_daily(
                 config.no_announcement_dates,
             )
 
+        stage = "stored_history"
         candidate_buckets = _candidate_map(pages)
         reviewed_ids = _previously_reviewed_ids(
             output_dir, checkpoint_dir or state_path.parent / "checkpoints", target,
@@ -2491,6 +2580,7 @@ def run_daily(
             (next(iter(bucket["ids"])) for bucket in candidate_buckets.values()),
             key=str.casefold,
         )
+        stage = "metadata"
         entries = (
             _retry(
                 lambda: metadata_fetcher(requested_ids),
@@ -2516,9 +2606,11 @@ def run_daily(
             )
             for key in sorted(candidate_buckets)
         }
+        stage = "candidate_validation"
         candidate_keys = tuple(candidates)
         checkpoint_path = _checkpoint_path(state_path, target, checkpoint_dir)
         fingerprint = _checkpoint_fingerprint(config, target, candidates)
+        stage = "checkpoint"
         checkpoint = _load_or_create_checkpoint(
             checkpoint_path,
             target=target,
@@ -2535,7 +2627,7 @@ def run_daily(
             nonlocal analyzer
             if analyzer is None:
                 try:
-                    analyzer = ResponsesAnalyzer(config)
+                    analyzer = ResponsesAnalyzer(config, arxiv_opener=arxiv_pacer.open)
                 except (UpdaterOfflineError, KeyboardInterrupt, SystemExit):
                     raise
                 except Exception as exc:
@@ -2559,6 +2651,7 @@ def run_daily(
         for key, candidate in candidates.items():
             result = checkpoint_results.get(key)
             if result is None:
+                stage = "abstract_analysis"
                 screen = _retry(
                     lambda candidate=candidate: tracked_analysis(candidate, "analyze_abstract"),
                     config.retries,
@@ -2594,6 +2687,7 @@ def run_daily(
                 )
 
             if result["status"] == "awaiting_pdf":
+                stage = "paper_analysis"
                 withdrawn = False
                 try:
                     final_analysis = _retry(
@@ -2657,6 +2751,7 @@ def run_daily(
                          if value["status"] == "withdrawn"]
         if withdrawn_ids:
             message += " Excluded officially withdrawn paper(s), without full-text analysis: " + ", ".join(withdrawn_ids) + "."
+        stage = "report_persistence"
         report = _report(
             report_kind=DAILY,
             report_date=target,
@@ -2686,25 +2781,24 @@ def run_daily(
         # Retain the validated decisions (including screened-out papers) so a
         # later cross-list or revision cannot trigger another paid evaluation.
         return report
-    except WorkBudgetExceeded:
+    except WorkBudgetExceeded as exc:
         status = UPDATE_NOT_CONFIRMED
         message = (
-            "The safe run deadline was reached; any validated candidate progress "
+            "The safe run budget was reached or cannot fit the required remote cooldown; any validated candidate progress "
             "was checkpointed and the batch remains pending."
-        )
-    except UpdaterOfflineError:
+        ) + _failure_diagnostic(stage, exc)
+    except UpdaterOfflineError as exc:
         status = UPDATER_OFFLINE
-        message = "A required remote service was unavailable; the review remains pending."
-    except (urllib.error.URLError, TimeoutError, OSError, http.client.HTTPException):
+        message = "A required remote service was unavailable; the review remains pending." + _failure_diagnostic(stage, exc)
+    except (urllib.error.URLError, TimeoutError, OSError, http.client.HTTPException) as exc:
         status = UPDATER_OFFLINE
-        message = "arXiv could not be reached; the review remains pending."
-    except PdfInspectionError:
+        message = "Collection or persistence failed; the review remains pending." + _failure_diagnostic(stage, exc)
+    except PdfInspectionError as exc:
         status = UPDATE_NOT_CONFIRMED
-        message = "PDF page count or Introduction could not be isolated safely; no full PDF was sent. The review remains pending."
+        message = "PDF page count or Introduction could not be isolated safely; no full PDF was sent. The review remains pending." + _failure_diagnostic(stage, exc)
     except (ListingParseError, digest.FeedParseError, StructuredOutputError, StateError, HistoryImportError) as exc:
-        print(f"Research validation stopped: {type(exc).__name__}", file=sys.stderr)
         status = UPDATE_NOT_CONFIRMED
-        message = "The arXiv batch or structured analysis could not be validated; the review remains pending."
+        message = "The arXiv batch or structured analysis could not be validated; the review remains pending." + _failure_diagnostic(stage, exc)
 
     report = _report(
         report_kind=DAILY,

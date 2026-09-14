@@ -109,7 +109,7 @@ class PdfInputRecoveryTests(unittest.TestCase):
         response.__enter__.return_value = response
         response.geturl.return_value = "https://export.arxiv.org/pdf/2608.12345v1"
         response.read.return_value = b"%PDF-1.7\nfixture"
-        error = p.urllib.error.HTTPError("https://arxiv.org/pdf/2608.12345v1", 403, "private sentinel", {}, None)
+        error = p.urllib.error.HTTPError("https://arxiv.org/pdf/2608.12345v1", 502, "private sentinel", {}, None)
         with mock.patch.object(p.urllib.request, "urlopen", side_effect=[error, response]) as opener, contextlib.redirect_stderr(io.StringIO()) as log:
             self.assertTrue(p.fetch_pdf_for_inline_input("2608.12345v1", timeout=12).startswith(b"%PDF-"))
         self.assertEqual(opener.call_args_list[1].args[0].full_url, "https://export.arxiv.org/pdf/2608.12345v1")

@@ -469,6 +469,21 @@ source changes, or a checkpoint is malformed/incompatible, it is preserved and
 the attempt stops without silently paying to analyze it again. Valid legacy
 checkpoints can migrate only when their original whole-batch fingerprint matches.
 
+arXiv collection is sequential with at least three seconds between requests,
+including PDF downloads, following the [arXiv API usage policy](https://info.arxiv.org/help/api/tou.html).
+Transient HTTP failures (including 429 and 503) use 30/60/120-second backoff with
+the configured three retries; a longer `Retry-After` (seconds or HTTP date) is
+honored. A wait above 15 minutes or beyond the remaining run budget stops the
+attempt and leaves the batch pending, rather than sending an early retry.
+Permanent HTTP failures are not retried, and rate limits/access denials never
+trigger a PDF mirror switch. Failed reports/logs include the processing stage
+and HTTP status where available, but no remote response body or credentials.
+These changes do not enable historical re-analysis: scheduled runs still scan
+the latest batch only. Use the manual workflow's `recover_pending=true` to
+resume one oldest incomplete batch still available in arXiv's past-week listing;
+repeat after it completes to recover the next gap. A newly ready pending weekly
+or monthly review is then handled by the existing bounded period retry step.
+
 Completed checkpoints are retained as the record of screened-out as well as
 selected papers. Daily runs exclude paper IDs already present in older reports,
 older checkpoint decisions (including old unfinished PDF stages), or the

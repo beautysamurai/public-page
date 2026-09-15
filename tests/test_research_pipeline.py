@@ -491,7 +491,7 @@ class ResponsesAdapterTests(unittest.TestCase):
 
         fake_openai = SimpleNamespace(OpenAI=failing_client)
         with mock.patch.dict(sys.modules, {"openai": fake_openai}):
-            with self.assertRaises(pipeline.UpdaterOfflineError) as caught:
+            with self.assertRaises(pipeline.RemoteConfigurationError) as caught:
                 pipeline.ResponsesAnalyzer(config())
 
         self.assertEqual(
@@ -1152,11 +1152,12 @@ class DailyWorkflowTests(unittest.TestCase):
                     sleep_fn=lambda _delay: None,
                 )
 
-            self.assertEqual(report["status"], pipeline.UPDATER_OFFLINE)
+            self.assertEqual(report["status"], pipeline.UPDATE_NOT_CONFIRMED)
+            self.assertFalse(pipeline.is_deferred_report(report))
             self.assertEqual(report["papers"], [])
             self.assertNotIn(sensitive_detail, report["message"])
             state = pipeline.load_state(state_path)
-            self.assertEqual(state["lastStatus"], pipeline.UPDATER_OFFLINE)
+            self.assertEqual(state["lastStatus"], pipeline.UPDATE_NOT_CONFIRMED)
             self.assertEqual(state["pendingBatchDate"], "2026-08-28")
             self.assertEqual(state["retryCount"], 1)
             self.assertIsNone(state["lastCompletedBatchDate"])

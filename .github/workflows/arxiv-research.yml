@@ -667,8 +667,7 @@ jobs:
           recovery_args=()
           if [[ "$RECOVER_PENDING" == "true" ]]; then
             recovery_args+=(--recover-pending)
-          fi
-          python scripts/research_pipeline.py \
+            python scripts/research_pipeline.py \
             --config config/research.json \
             --env-file /dev/null \
             daily \
@@ -678,6 +677,11 @@ jobs:
             --output-dir research/daily \
             "${recovery_args[@]}" \
             > "$RUNNER_TEMP/daily-report.json"
+          else
+            # The normal schedule carries incomplete work to the next daily
+            # run, without re-evaluating completed historical papers.
+            python scripts/research_recovery.py daily > "$RUNNER_TEMP/daily-report.json"
+          fi
 
           daily_report_date="$(python -c 'import json,sys; print(json.load(open(sys.argv[1], encoding="utf-8"))["reportDate"])' "$RUNNER_TEMP/daily-report.json")"
           if [[ ! "$daily_report_date" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
@@ -690,6 +694,7 @@ jobs:
             exit 1
           fi
           status="$(python -c 'import json,sys; print(json.load(open(sys.argv[1], encoding="utf-8"))["status"])' "$report_path")"
+          deferred="$(PYTHONPATH=scripts python -c 'import json,sys; from research_pipeline import is_deferred_report; print(str(is_deferred_report(json.load(open(sys.argv[1], encoding="utf-8")))).lower())' "$report_path")"
           case "$status" in
             UPDATE_CONFIRMED|NO_RELEVANT_PAPERS|NO_NEW_BATCH_EXPECTED)
               publishable=true
@@ -706,6 +711,7 @@ jobs:
           {
             echo "report_path=$report_path"
             echo "status=$status"
+            echo "deferred=$deferred"
             echo "publishable=$publishable"
           } >> "$GITHUB_OUTPUT"
 
@@ -1133,11 +1139,18 @@ jobs:
           echo "ready=true" >> "$GITHUB_OUTPUT"
 
       - name: Report incomplete daily research
-        if: always() && steps.plan.outputs.mode == 'daily' && (steps.research.outputs.status == 'UPDATE_NOT_CONFIRMED' || steps.research.outputs.status == 'UPDATER_OFFLINE')
+        if: always() && steps.plan.outputs.mode == 'daily' && (steps.research.outputs.status == 'UPDATE_NOT_CONFIRMED' || steps.research.outputs.status == 'UPDATER_OFFLINE' || steps.research.outputs.carry_failed == 'true')
+        env:
+          DEFERRED: ${{ steps.research.outputs.deferred }}
+          CARRY_FAILED: ${{ steps.research.outputs.carry_failed }}
         shell: bash
         run: |
-          echo "::error::Daily arXiv research remains incomplete and was not published. Durable state was saved for automatic retry."
-          exit 1
+          if [[ "$DEFERRED" == "true" && "$CARRY_FAILED" != "true" ]]; then
+            echo "::warning::Temporary API outage or safe time limit: incomplete research is carried to the next daily run, not published as zero papers."
+          else
+            echo "::error::Research validation or configuration needs attention. Incomplete work is preserved."
+            exit 1
+          fi
 
       - name: Report period review failures
         if: always() && (steps.aggregate.outputs.failed == 'true' || steps.daily_pending_aggregate.outputs.failed == 'true')

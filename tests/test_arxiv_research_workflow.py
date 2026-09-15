@@ -245,10 +245,21 @@ class ArxivResearchWorkflowTests(unittest.TestCase):
         self.assertIn("steps.research.outputs.status == 'UPDATE_NOT_CONFIRMED'", reporter)
         self.assertIn("steps.research.outputs.status == 'UPDATER_OFFLINE'", reporter)
         self.assertIn("exit 1", reporter)
+        self.assertIn('"$DEFERRED" == "true" && "$CARRY_FAILED" != "true"', reporter)
+        self.assertIn("::warning::Temporary API outage", reporter)
+        self.assertIn("research_recovery.py daily", self.step("Run daily research"))
         self.assertLess(
             self.position("Persist research state and report"),
             self.position("Report incomplete daily research"),
         )
+
+    def test_actual_reporter_exit_codes_distinguish_carry_forward_from_failure(self):
+        directory, bash = self.local_git_fixture()
+        reporter = textwrap.dedent(self.step("Report incomplete daily research").split("        run: |\n", 1)[1])
+        for deferred, failed, expected in (("true", "false", 0), ("true", "", 0), ("false", "false", 1), ("true", "true", 1)):
+            env = {**os.environ, "DEFERRED": deferred, "CARRY_FAILED": failed}
+            result = subprocess.run([bash, "-c", reporter], cwd=directory, env=env, capture_output=True)
+            self.assertEqual(result.returncode, expected, result.stdout)
         self.assertLess(
             self.position("Open or update the review pull request"),
             self.position("Report incomplete daily research"),

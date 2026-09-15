@@ -361,6 +361,14 @@ extra weekday batch. Refresh this small list from arXiv's
 new year's schedule is published; these dates are treated like weekends rather
 than outages.
 
+Scheduled daily runs process the latest batch and, after it completes, retry
+**at most one older unfinished daily batch**. A temporary API outage is saved
+as **carried forward**, not a failed job or a zero-paper review. The next daily
+run resumes unfinished stages; completed/screened-out papers are not re-evaluated.
+If the latest API attempt is still unavailable, no additional historical API
+attempt is made in that run. Older batches are attempted at most once per JST
+day. The existing schedule is unchanged; there is no extra frequent polling job.
+
 Daily runs also retry **one existing pending weekly/monthly period** once its
 required daily batches are complete (at most two synthesis chunks per daily
 retry). Larger periods stay queued for the normal scheduled/manual period run.
@@ -451,15 +459,15 @@ python scripts/research_pipeline.py \
 
 This produces matching `YYYY-MM-DD.json` and `YYYY-MM-DD.md` files under
 **.local/research/daily/**. It updates state only after both files are written.
-Re-running the same completed date is byte-stable; an incomplete attempt may be
-replaced only by the later completed result for that date.
+Re-running the same completed date is byte-stable. Incomplete reports can refresh
+their diagnostics and accumulate usage, and are replaced when that batch completes.
 
 Validated abstract and PDF stages are atomically checkpointed under
 **.local/research/checkpoints/**. If the 30-minute default soft deadline or a
 remote failure interrupts a busy batch, the report remains incomplete and the
 another run of that same latest batch resumes at the unfinished stage instead
-of repeating completed API calls. Once a newer batch is expected, scheduled
-daily runs move on to it. Each Responses attempt has a separate 120-second default timeout and SDK
+of repeating completed API calls. Scheduled runs prioritize the newest batch,
+then drain the unfinished queue one older batch at a time. Each Responses attempt has a separate 120-second default timeout and SDK
 retries are disabled; the pipeline's explicit retry policy is the only retry
 layer. The daily budget plus the longest configured request timeout must leave
 at least ten minutes inside the 90-minute Actions limit. Checkpoints keep
@@ -478,11 +486,21 @@ attempt and leaves the batch pending, rather than sending an early retry.
 Permanent HTTP failures are not retried, and rate limits/access denials never
 trigger a PDF mirror switch. Failed reports/logs include the processing stage
 and HTTP status where available, but no remote response body or credentials.
-These changes do not enable historical re-analysis: scheduled runs still scan
-the latest batch only. Use the manual workflow's `recover_pending=true` to
-resume one oldest incomplete batch still available in arXiv's past-week listing;
-repeat after it completes to recover the next gap. A newly ready pending weekly
-or monthly review is then handled by the existing bounded period retry step.
+This does not enable re-analysis of completed history. The normal workflow uses
+`python scripts/research_recovery.py daily` for the latest-plus-carry-forward
+cycle (API key must be in the environment). The low-level
+`research_pipeline.py daily` command remains latest-only by default; the manual
+workflow's `recover_pending=true` still explicitly resumes the oldest pending batch.
+
+Confirmed category listings are stored as bounded, validated identities in
+`research/listings/YYYY-MM-DD.json` **before** metadata or OpenAI calls. Existing
+pending batches still visible in the past-week listing are captured once too.
+Snapshots allow later recovery even after that rolling window expires. Missing
+category/date coverage is never inferred to mean zero papers. Legacy gaps with
+no snapshot outside that window remain visible but cannot block newer recoverable
+work. A changed category configuration or corrupt snapshot requires attention.
+The cycle caps latest processing at 30 minutes and older recovery at 10 minutes;
+source capture is bounded to 5 minutes, leaving room for period retries/publication.
 
 Completed checkpoints are retained as the record of screened-out as well as
 selected papers. Daily runs exclude paper IDs already present in older reports,
@@ -507,21 +525,12 @@ Daily states have distinct meanings:
   remains pending.
 
 Thus, an empty successful screen is never inferred from an arXiv or OpenAI
-failure. The default daily target is the latest expected announcement batch,
-not the oldest unfinished date. Old incomplete JSON/checkpoints are left intact
-and never marked complete just because a newer review succeeded. Their missing
-coverage remains visible in weekly/monthly reports. Historical recovery requires
-an explicit local `daily --recover-pending` request, or a manual GitHub Actions
-daily dispatch with `recover_pending=true` (within arXiv's bounded past-week
-coverage). Each recovery dispatch processes one oldest pending batch and resumes
-its saved stages. Dispatch sequentially and verify the returned report date and
-completion before proceeding to the next date; do not run a normal daily job
-between recovery dispatches because that intentionally resets the pending cursor
-to the newest batch. Stop after the requested dates are complete. The recovery
-flag defaults to false and is rejected for schedules and weekly/monthly runs;
-normal schedules never enable it. After a new batch
-is completed, `lastCompletedBatchDate` records that latest completion, not a
-claim that every intervening date was reviewed.
+failure. Old incomplete JSON/checkpoints and captured listing identities form a
+durable queue; advancing the latest cursor does not erase older gaps. The site
+shows every carried daily date separately from the latest completed batch.
+Manual recovery remains available, but no manual dispatch is needed for normal
+next-day carry-forward. `lastCompletedBatchDate` records the latest completion,
+not a claim that every intervening date was reviewed.
 
 The checked-in launchers provide locking and local logs:
 
@@ -716,10 +725,14 @@ base/head, or any failed validation leave the PR unmerged. Ordinary code PRs
 remain outside this automation. Merge commits preserve the durable branch's
 ancestry, so do not squash or delete that branch as part of the scheduled flow.
 
-Expected arXiv/period incompleteness still marks the research job failed, but
-only after all output checks have passed and a validated candidate has been
-recorded. The separate merge job can persist that safe retry state and any
-completed editions; it never publishes an incomplete edition as complete.
+Temporary arXiv/OpenAI outages, rate limits and safe time-budget stops are
+warnings with next-day carry-forward, not failed research jobs. Pending periods
+retain their retry marker until daily coverage and synthesis complete.
+Authentication/request/billing configuration errors, unsafe data, malformed
+structured output and failed publication checks still fail visibly. This follows
+the distinctions in the [OpenAI error guide](https://developers.openai.com/api/docs/guides/error-codes).
+The separate merge job persists only validated state and completed editions;
+it never publishes an incomplete edition as complete.
 
 GitHub creates approval-required `pull_request` runs when `GITHUB_TOKEN` opens
 or updates a PR. Leaving those duplicate runs unapproved can produce an

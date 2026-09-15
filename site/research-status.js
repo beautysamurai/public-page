@@ -19,6 +19,12 @@
           lines.push(en ? "Daily " + target + ": update not confirmed or processing failed. Pending retry; not zero new papers." : "日次 " + target + "：更新未確認・処理未完了のため再試行待ちです。新着ゼロではありません。");
         }
         var pending = [];
+        if (status.dailyRetryPolicy === "next_daily_run" && Array.isArray(status.pendingDailyBatches)) {
+          var batches = status.pendingDailyBatches.filter(function (day) { return typeof day === "string" && datePattern.test(day); }).slice(0, 100);
+          if (batches.length) lines.push(en
+            ? "Carried daily batches: " + batches.join(", ") + ". Retried in subsequent daily runs; completed papers are not re-evaluated."
+            : "日次の持ち越し：" + batches.join("、") + "。翌日以降の定期実行で順次再試行します（完了済み論文は再評価しません）。");
+        }
         status.pendingPeriods.slice(0, 20).forEach(function (item) {
           if (!["weekly", "monthly"].includes(item.reportKind) || !datePattern.test(item.periodEnd)) return;
           var kind = en ? item.reportKind : item.reportKind === "weekly" ? "週次" : "月次";

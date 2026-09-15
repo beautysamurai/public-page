@@ -85,7 +85,7 @@ class PdfInputRecoveryTests(unittest.TestCase):
                 responses = SimpleNamespace(create=mock.Mock(side_effect=self.error(status, message)))
                 adapter = p.ResponsesAnalyzer(config(), SimpleNamespace(responses=responses))
                 with mock.patch.object(p, "fetch_pdf_for_inline_input", return_value=b"%PDF-fixture") as fetch, mock.patch.object(p, "inspect_pdf", return_value=(20, None)), contextlib.redirect_stderr(io.StringIO()):
-                    with self.assertRaises(p.UpdaterOfflineError):
+                    with self.assertRaises(p.RemoteConfigurationError if status in {400, 401} else p.UpdaterOfflineError):
                         adapter.analyze_pdf(self.candidate())
                 fetch.assert_called_once()
                 self.assertEqual(responses.create.call_count, 1)

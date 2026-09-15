@@ -40,6 +40,18 @@ test("status outage is not silently represented as no new papers", async () => {
   dom.window.close();
 });
 
+test("all carried daily dates stay visible even after the latest batch completes", async () => {
+  const dom = await render({ schemaVersion: 1, daily: { status: "UPDATE_CONFIRMED", lastCompletedBatchDate: "2026-09-15" }, pendingPeriods: [], dailyRetryPolicy: "next_daily_run", pendingDailyBatches: ["2026-09-10", "2026-09-14", "<img src=x>"] });
+  const notice = dom.window.document.getElementById("research-update-status");
+  assert.match(notice.textContent, /日次の持ち越し：2026-09-10、2026-09-14/);
+  assert.match(notice.textContent, /翌日以降の定期実行/);
+  assert.equal(notice.querySelector("img"), null);
+  dom.window.document.documentElement.lang = "en";
+  await new Promise((resolve) => setImmediate(resolve));
+  assert.match(notice.textContent, /Carried daily batches/);
+  dom.window.close();
+});
+
 test("untrusted status values cannot create markup or arbitrary period labels", async () => {
   const dom = await render({ schemaVersion: 1, daily: { pendingBatchDate: '<img src=x onerror="alert(1)">' }, pendingPeriods: [{ reportKind: "<script>", periodEnd: "2026-09-04" }] });
   assert.equal(dom.window.document.querySelector("img,script"), null);

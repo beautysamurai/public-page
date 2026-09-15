@@ -239,6 +239,10 @@ class StructuredOutputError(PipelineError):
     """A model response did not satisfy the local public schema."""
 
 
+class RemoteConfigurationError(StructuredOutputError):
+    """Authentication, billing or request settings need operator attention."""
+
+
 class AnalysisLanguageError(StructuredOutputError):
     """Narrative language is invalid; do not regenerate an entire paid chunk."""
 
@@ -1321,6 +1325,14 @@ class ResponsesAnalyzer:
             safe_status = status if isinstance(status, int) and 400 <= status <= 599 else "unavailable"
             category = "file_url_download" if _file_url_download_error(exc) else "request_failed"
             print(f"Responses API failure: status={safe_status}; category={category}", file=sys.stderr)
+            body = getattr(exc, "body", None)
+            error = body.get("error", body) if isinstance(body, Mapping) else {}
+            billing_code = error.get("code") if isinstance(error, Mapping) else None
+            if (isinstance(status, int) and 400 <= status < 500 and status not in {408, 409, 429}) or (isinstance(billing_code, str) and billing_code in {
+                "insufficient_quota", "credit_balance_exhausted", "organization_spend_limit_exceeded",
+                "project_spend_limit_exceeded", "organization_usage_limit_exceeded",
+            }):
+                raise RemoteConfigurationError("Responses API settings or billing need attention") from exc
             raise UpdaterOfflineError("Responses API request failed") from exc
         finally:
             self.usage_calls.append(research_usage.record(response, model=model, effort=reasoning_effort,
@@ -2172,7 +2184,7 @@ def _retry(
             raise WorkBudgetExceeded("daily research soft deadline reached")
         try:
             return operation()
-        except (KeyboardInterrupt, SystemExit, WorkBudgetExceeded, PaperWithdrawn, PdfInspectionError, SynthesisRepairExhausted):
+        except (KeyboardInterrupt, SystemExit, WorkBudgetExceeded, PaperWithdrawn, PdfInspectionError, SynthesisRepairExhausted, RemoteConfigurationError):
             raise
         except Exception as exc:  # Classification happens at the workflow boundary.
             last_error = exc
@@ -2381,6 +2393,89 @@ def _previously_reviewed_ids(
     return seen
 
 
+def load_listing_snapshot(path: Path, categories: Sequence[str]) -> list[ListingPage]:
+    """Read only bounded, validated listing identities, never HTML or prompts."""
+    if path.parent.is_symlink() or path.is_symlink() or not path.is_file() or path.stat().st_size > MAX_LIST_BYTES:
+        raise StateError("invalid listing snapshot file")
+    def unique_keys(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise StateError("duplicate listing snapshot key")
+            result[key] = value
+        return result
+    try:
+        value = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique_keys)
+        _require_exact_keys(value, ("schemaVersion", "batchDate", "capturedAt", "pages"), "listing snapshot")
+        if type(value["schemaVersion"]) is not int or value["schemaVersion"] != 1:
+            raise StateError("invalid listing snapshot version")
+        batch = _parse_date(value["batchDate"], "batchDate")
+        if path.stem != batch.isoformat():
+            raise StateError("listing snapshot date mismatch")
+        captured = datetime.strptime(value["capturedAt"], "%Y-%m-%dT%H:%M:%SZ")
+        if captured.strftime("%Y-%m-%dT%H:%M:%SZ") != value["capturedAt"] or captured.date() < batch:
+            raise StateError("invalid listing capture date")
+        if not isinstance(value["pages"], list) or len(value["pages"]) != len(categories):
+            raise StateError("listing snapshot category coverage mismatch")
+        pages = []
+        for item, category in zip(value["pages"], sorted(categories)):
+            _require_exact_keys(item, ("category", "items"), "listing page")
+            if item["category"] != category or not isinstance(item["items"], list) or len(item["items"]) > MAX_LIST_IDS:
+                raise StateError("invalid listing snapshot category")
+            entries = []
+            seen = set()
+            for row in item["items"]:
+                _require_exact_keys(row, ("arxivId", "listingType"), "listing item")
+                arxiv_id, kind = row["arxivId"], row["listingType"]
+                if not isinstance(arxiv_id, str) or not digest.ARXIV_ID_RE.fullmatch(arxiv_id) or kind not in LISTING_TYPES:
+                    raise StateError("invalid listing snapshot item")
+                if (arxiv_id, kind) in seen:
+                    raise StateError("duplicate listing snapshot item")
+                seen.add((arxiv_id, kind))
+                entries.append(ListingItem(arxiv_id, kind))
+            pages.append(ListingPage(category, batch, tuple(entries)))
+        return pages
+    except (ValueError, TypeError, KeyError, AttributeError, StructuredOutputError) as exc:
+        raise StateError("malformed listing snapshot") from exc
+
+
+def save_listing_snapshot(directory: Path, pages: Sequence[ListingPage], captured_at: datetime) -> None:
+    if not pages or len({page.batch_date for page in pages}) != 1:
+        raise StateError("listing snapshot requires a confirmed batch")
+    if directory.is_symlink():
+        raise StateError("redirected listing snapshot directory")
+    target = pages[0].batch_date
+    categories = tuple(sorted(page.category for page in pages))
+    if len(set(categories)) != len(categories):
+        raise StateError("duplicate listing snapshot category")
+    path = directory / f"{target}.json"
+    combined = {page.category: set(page.items) for page in pages}
+    if path.exists() or path.is_symlink():
+        previous = load_listing_snapshot(path, categories)
+        for page in previous:
+            combined[page.category].update(page.items)
+        if all(combined[page.category] == set(page.items) for page in previous):
+            return  # Preserve original capture date/bytes when evidence is unchanged.
+    value = {"schemaVersion": 1, "batchDate": str(target), "capturedAt": _format_utc(captured_at),
+             "pages": [{"category": category, "items": [
+                 {"arxivId": item.arxiv_id, "listingType": item.listing_type}
+                 for item in sorted(combined[category], key=lambda item: (item.arxiv_id, item.listing_type))
+             ]} for category in categories]}
+    atomic_write_json(path, value)
+    load_listing_snapshot(path, categories)
+
+
+def is_deferred_report(report: Mapping[str, Any]) -> bool:
+    """Only transient failures/late announcements are a successful carry-forward."""
+    if report["status"] == UPDATER_OFFLINE:
+        return True
+    return report["status"] == UPDATE_NOT_CONFIRMED and (
+        "error=WorkBudgetExceeded" in report["message"]
+        or (report["reportKind"] == DAILY and report["observedBatchDate"] is not None
+            and report["observedBatchDate"] < report["expectedBatchDate"])
+    )
+
+
 def run_daily(
     config: PipelineConfig,
     *,
@@ -2396,6 +2491,7 @@ def run_daily(
     monotonic_fn: Callable[[], float] = time.monotonic,
     recover_pending: bool = False,
     published_history: Path | None = None,
+    target_batch: date | None = None,
 ) -> dict[str, Any]:
     """Review the latest expected batch; historical recovery is explicit opt-in."""
 
@@ -2406,6 +2502,11 @@ def run_daily(
     deadline = monotonic_fn() + config.daily_time_budget
     state = load_state(state_path)
     expected = expected_batch_date(checked_at, config.no_announcement_dates)
+    if target_batch is not None and (
+        not recover_pending or target_batch > expected
+        or not is_scheduled_batch_date(target_batch, config.no_announcement_dates)
+    ):
+        raise StateError("explicit recovery target must be a past or current batch")
     pending = _parse_date(state["pendingBatchDate"], "pendingBatchDate", True)
     if pending is not None and not is_scheduled_batch_date(pending, config.no_announcement_dates):
         pending = None  # Ignore legacy cursors created with the wrong holiday basis.
@@ -2441,6 +2542,9 @@ def run_daily(
     else:
         target = expected
 
+    if target_batch is not None:
+        target = target_batch
+
     # The stored report is authoritative even if a previous state write failed.
     # Repair state BEFORE fetching metadata, constructing a client, or paying to
     # reanalyze papers. Keep the original JSON, timestamps, and ratings intact.
@@ -2461,7 +2565,7 @@ def run_daily(
             state = load_state(state_path)
             last_completed = _parse_date(state["lastCompletedBatchDate"], "lastCompletedBatchDate", True)
 
-    if (not recover_pending or pending is None) and last_completed is not None and last_completed >= expected:
+    if target_batch is None and (not recover_pending or pending is None) and last_completed is not None and last_completed >= expected:
         no_new_report_date = checked_at.astimezone(timezone.utc).date()
         report = _report(
             report_kind=DAILY,
@@ -2510,7 +2614,12 @@ def run_daily(
     stage = "listing"
     try:
         pages: list[ListingPage] = []
-        for category in config.categories:
+        snapshot_path = state_path.parent / "listings" / f"{target}.json"
+        if recover_pending and (snapshot_path.exists() or snapshot_path.is_symlink()):
+            stage = "listing_snapshot"
+            pages = load_listing_snapshot(snapshot_path, config.categories)
+            recovered_pending = target < expected
+        for category in (() if pages else config.categories):
             raw = _retry(
                 lambda category=category: list_fetcher(category),
                 config.retries,
@@ -2575,6 +2684,8 @@ def run_daily(
                 config.no_announcement_dates,
             )
 
+        stage = "listing_snapshot"
+        save_listing_snapshot(state_path.parent / "listings", pages, checked_at)
         stage = "stored_history"
         candidate_buckets = _candidate_map(pages)
         reviewed_ids = _previously_reviewed_ids(
@@ -2803,7 +2914,8 @@ def run_daily(
         status = UPDATER_OFFLINE
         message = "A required remote service was unavailable; the review remains pending." + _failure_diagnostic(stage, exc)
     except (urllib.error.URLError, TimeoutError, OSError, http.client.HTTPException) as exc:
-        status = UPDATER_OFFLINE
+        status = (UPDATE_NOT_CONFIRMED if isinstance(exc, urllib.error.HTTPError)
+                  and exc.code not in RETRYABLE_HTTP_STATUSES else UPDATER_OFFLINE)
         message = "Collection or persistence failed; the review remains pending." + _failure_diagnostic(stage, exc)
     except PdfInspectionError as exc:
         status = UPDATE_NOT_CONFIRMED
@@ -3002,6 +3114,7 @@ def run_aggregate(
         raise ValueError("period_start must not follow period_end")
     generated_at = generated_at or datetime.now(timezone.utc)
     existing_path = output_dir / f"{period_end.isoformat()}.json"
+    existing = None
     if existing_path.exists():
         if existing_path.is_symlink():
             raise StateError("stored aggregate is not a regular file")
@@ -3026,7 +3139,7 @@ def run_aggregate(
         ), output_dir)
 
     papers: list[dict[str, Any]] = []
-    aggregate_usage: list[dict[str, Any]] = []
+    aggregate_usage: list[dict[str, Any]] = list(existing.get("usage", [])) if existing else []
     synthesis_request_count = 0
     if stored_papers:
         chunks = _build_synthesis_chunks(
@@ -3047,13 +3160,25 @@ def run_aggregate(
         source_usage_by_id = {p["metadata"]["arxivId"].casefold(): p.get("usage", []) for p in stored_papers}
         seen: set[str] = set()
         for chunk in chunks:
-            synthesized = _retry(
-                lambda chunk=chunk: analyzer.synthesize(
-                    chunk, report_kind, period_start, period_end
-                ),
-                config.retries,
-                sleep_fn,
-            )
+            try:
+                synthesized = _retry(
+                    lambda chunk=chunk: analyzer.synthesize(
+                        chunk, report_kind, period_start, period_end
+                    ),
+                    config.retries,
+                    sleep_fn,
+                )
+            except UpdaterOfflineError as exc:
+                aggregate_usage.extend(getattr(analyzer, "usage_calls", []))
+                return persist_report(_report(
+                    report_kind=report_kind, report_date=period_end, generated_at=generated_at,
+                    status=UPDATER_OFFLINE,
+                    message="Period API temporarily unavailable; carried to the next daily retry."
+                            + _failure_diagnostic("period_analysis", exc),
+                    expected_batch_date=None, observed_batch_date=None,
+                    period_start=period_start, period_end=period_end, papers=[],
+                    usage=aggregate_usage or None,
+                ), output_dir)
             chunk_usage = list(getattr(analyzer, "usage_calls", []))
             if chunk_usage:
                 aggregate_usage.extend(chunk_usage)

@@ -81,6 +81,34 @@ class CarryForwardTests(unittest.TestCase):
         self.assertEqual(result["latest"]["papers"], [])
         self.assertEqual(len(p.load_listing_snapshot(root / "research/listings/2026-09-15.json", CFG.categories)[0].items), 1)
 
+    def test_latest_owned_ids_are_not_analyzed_again_during_older_recovery(self):
+        for classification in ("market_microstructure", "out_of_scope"):
+            with self.subTest(classification=classification):
+                root = self.root()
+                day = date(2026, 9, 14)
+                pending(root, day)
+                snapshot(root, day, ("2609.10001",))
+                analyzer = FakeAnalyzer()
+                analyzer.analyze_abstract = mock.Mock(return_value=analysis(classification=classification))
+                analyzer.analyze_pdf = mock.Mock(return_value=analysis())
+                fetched = []
+                def metadata(ids):
+                    fetched.extend(ids)
+                    return {key: entry(key + "v2") for key in ids}
+                def run(cfg, **kwargs):
+                    kwargs.pop("published_history", None)  # Public archive is not regenerated between these calls.
+                    return p.run_daily(cfg, **kwargs, analyzer=analyzer, metadata_fetcher=metadata,
+                        list_fetcher=lambda _: listing_html("Tuesday, 15 September 2026", cross=("2609.10001v2",)),
+                        sleep_fn=lambda _: None)
+                result = r.run_daily_cycle(root, CFG, NOW, daily_runner=run,
+                    capture=lambda *_: None, sleep_fn=lambda _: None)
+                self.assertFalse(result["failed"])
+                self.assertEqual(analyzer.analyze_abstract.call_count, 1)
+                self.assertEqual(analyzer.analyze_pdf.call_count, int(classification != "out_of_scope"))
+                self.assertEqual(fetched, ["2609.10001"])
+                self.assertEqual(result["carried"][0]["status"], p.NO_RELEVANT_PAPERS)
+                self.assertIn("Skipped 1", result["carried"][0]["message"])
+
     def test_old_api_outage_keeps_cursor_current_and_next_day_resumes_pdf_only(self):
         root = self.root()
         day = date(2026, 9, 14)

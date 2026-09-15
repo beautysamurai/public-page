@@ -1255,7 +1255,7 @@ class ResponsesAnalyzer:
             except (KeyboardInterrupt, SystemExit):
                 raise
             except Exception as exc:  # pragma: no cover - environment-specific.
-                raise UpdaterOfflineError(
+                raise RemoteConfigurationError(
                     "Responses API client could not be initialized"
                 ) from exc
         self.client = client
@@ -2356,19 +2356,21 @@ def _previously_reviewed_ids(
 ) -> set[str]:
     """Read public, validated IDs only; never resummarize a historical paper."""
     seen: set[str] = set()
+    completed_batches: set[str] = set()
     for path in sorted(output_dir.glob("*.json")):
         if path.is_symlink() or path.stat().st_size > MAX_CHECKPOINT_BYTES:
             raise StateError("stored daily report is unsafe")
         report = _read_persisted_report(path)
         if report["reportKind"] != DAILY or report["reportDate"] != path.stem:
             raise StateError("stored daily report identity mismatch")
-        if path.stem < target.isoformat() and report["status"] in {
+        if path.stem != target.isoformat() and report["status"] in {
             UPDATE_CONFIRMED, NO_RELEVANT_PAPERS,
         }:
+            completed_batches.add(path.stem)
             seen.update(_base_arxiv_id(p["metadata"]["arxivId"]).casefold() for p in report["papers"])
     for path in sorted(checkpoint_dir.glob("*.json")):
-        if path.stem >= target.isoformat():
-            continue  # The current batch resumes its own unfinished stages.
+        if path.stem == target.isoformat() or (path.stem > target.isoformat() and path.stem not in completed_batches):
+            continue  # Reuse the current batch's own stages; later complete batches also own screened-out IDs.
         if path.is_symlink() or path.stat().st_size > MAX_CHECKPOINT_BYTES:
             raise StateError("stored checkpoint is unsafe")
         try:
@@ -2751,10 +2753,10 @@ def run_daily(
             if analyzer is None:
                 try:
                     analyzer = ResponsesAnalyzer(config, arxiv_opener=arxiv_pacer.open)
-                except (UpdaterOfflineError, KeyboardInterrupt, SystemExit):
+                except (RemoteConfigurationError, KeyboardInterrupt, SystemExit):
                     raise
                 except Exception as exc:
-                    raise UpdaterOfflineError(
+                    raise RemoteConfigurationError(
                         "Responses API client could not be initialized"
                     ) from exc
             return analyzer

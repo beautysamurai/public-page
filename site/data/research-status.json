@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "daily": {
     "status": "UPDATER_OFFLINE",
-    "checkedAt": "2026-09-15T12:00:23Z",
+    "checkedAt": "2026-09-15T14:20:09Z",
     "lastCompletedBatchDate": "2026-09-11",
     "pendingBatchDate": "2026-09-15"
   },
@@ -52,5 +52,11 @@
       ],
       "ready": false
     }
-  ]
+  ],
+  "pendingDailyBatches": [
+    "2026-09-10",
+    "2026-09-14",
+    "2026-09-15"
+  ],
+  "dailyRetryPolicy": "next_daily_run"
 }

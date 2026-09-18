@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "daily": {
     "status": "UPDATE_NOT_CONFIRMED",
-    "checkedAt": "2026-09-17T11:59:11Z",
+    "checkedAt": "2026-09-18T11:40:40Z",
     "lastCompletedBatchDate": "2026-09-11",
-    "pendingBatchDate": "2026-09-17"
+    "pendingBatchDate": "2026-09-18"
   },
   "pendingPeriods": [
     {
@@ -58,7 +58,8 @@
     "2026-09-14",
     "2026-09-15",
     "2026-09-16",
-    "2026-09-17"
+    "2026-09-17",
+    "2026-09-18"
   ],
   "dailyRetryPolicy": "next_daily_run"
 }

@@ -1,0 +1,41 @@
+name: Probe arXiv OAI version metadata
+
+on:
+  push:
+    branches:
+      - fix/arxiv-version-probe
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Inspect arXivRaw version fields
+        shell: python
+        run: |
+          import urllib.parse
+          import urllib.request
+          import xml.etree.ElementTree as ET
+
+          arxiv_id = "2609.20224"
+          query = urllib.parse.urlencode({
+              "verb": "GetRecord",
+              "identifier": "oai:arXiv.org:" + arxiv_id,
+              "metadataPrefix": "arXivRaw",
+          })
+          request = urllib.request.Request(
+              "https://oaipmh.arxiv.org/oai?" + query,
+              headers={"User-Agent": "rates-execution-research/1.0"},
+          )
+          with urllib.request.urlopen(request, timeout=25) as response:
+              body = response.read()
+
+          root = ET.fromstring(body)
+          print("root=", root.tag)
+          for element in root.iter():
+              local = element.tag.split("}")[-1]
+              if local.lower() in {"id", "version", "date", "size"}:
+                  print(local, dict(element.attrib), (element.text or "").strip())

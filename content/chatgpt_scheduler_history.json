@@ -2148,6 +2148,103 @@
       "periodEnd": null,
       "sourceText": "## 2026年9月13日 — 日次レビュー\n\n通常の公開スケジュール上、新しいarXivバッチは予定されていません。\n\n### この号の利用状況\n\nモデル・effort・トークン数：未記録。\n\n\n**推薦論文: なし**",
       "papers": []
+    },
+    {
+      "editionId": "2026-09-18-daily-openai-01",
+      "editionDate": "2026-09-18",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-19T02:37:49Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-18",
+      "observedBatchDate": "2026-09-18",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月18日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 13 | 10,850 | 13,498 (758) | 0.0184 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 3 | 24,229 | 6,643 (1,042) | 0.2540 | 全62ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 / PDF全文・16ページ / 全74ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Who Aggregates Information? Screening, Rent, and the Coexistence of CLOB and AMM Prediction Markets\n\n**[arXiv:2609.20017v1](https://arxiv.org/abs/2609.20017v1) — Chengqi Zang, Gabriel P. Andrade, Tomoyuki Nakajima**\n\n### 概要\n\n予測市場でCLOBとLMSR型AMMが併存する理由を、informed flowのscreeningとbehavioral tail demandから説明するmarket microstructure研究である。著者らは、CLOBがtail-demand rentを得る一方、情報取引はLMSRへ向かうと主張する。ただし全62ページのうちabstractとIntroductionのみを用いた限定レビューであり、本文、証明、推定手順、付録は確認していない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 推奨 | 予測市場 / CLOB / LMSR / 自動マーケットメーカー / 市場マイクロストラクチャー / 情報集約 / スクリーニング / tail demand / order routing / 多結果市場 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** CLOB、AMM、adverse selection、order routing、multi-outcome pricingを統一的に扱い、電子取引とmarket microstructureの読者に直接関連する。特に、予測市場のmaker収益をspread captureではなくsettlement時のscreening rentとして捉える視点は興味深い。ただし、利用可能な範囲では中心的主張を独立に評価できないため、推薦は本文と付録を用いた完全レビューを前提とする。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 907 | 1,136 (54) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 4,357 | 1,809 (178) | 0.0580 | 全62ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らの主張では、signal band内の事前CLOB quoteはpick-offされるため、競争的makerはband外でquoteし、informed traderを排除してsettlementまで割安側を保有するscreening rentを得る。LMSRはinformed flowを吸収し、CLOBはbehavioral tail demandから収益を得ることで両市場が補完的に共存する。また、$n \\ge 3$の多結果市場ではbinary CLOBがswitch priceを決めてもimplied beliefの水準は一意に定まらず、LMSRはoutcome simplexを整合的かつ資本効率的に価格付けするとされる。ただしabstractとIntroductionしか提供されておらず、これらの理論結果、証明、実証結果、robustness、付録は検証していない。\n\n**手法:** Introductionの記述によれば、state-contingent tail demandを組み込んだCLOBとLMSRの共存モデルを構築し、binary equilibriumとmulti-outcome pricingを理論分析している。実証面では、Polymarketの取引データについてmakerのsettlement収益、片側ポジション、regime別mispricing、およびmulti-outcome set premiumを調べ、複数のcounterfactual checkを行ったと著者らは報告している。\n\n**実務への応用:** 予測市場のvenue設計では、CLOBを情報集約装置とだけ見なさず、tail demandをscreeningしてrentを得る機構として評価できる。hybrid設計では、AMM depth、order-routing、maker-side contestabilityがCLOB premiumと流動性配分に与える影響を考慮すべきだという示唆がある。多結果市場では、binary bookの寄せ集めより単一のcost-function AMMが表示確率の整合性とcollateral効率を改善し得る。\n\n**限界・注意点:** 本レビューは全62ページの論文に対してabstractとIntroductionのみを参照したLIMITED-SOURCE評価である。モデル仮定、定理の正確な条件、証明、データ構築、識別戦略、統計表、calibration、appendix、再現可能性を確認していない。Introduction自身も、取引レベル標本にAMMが含まれずvenue choiceを直接検証しないこと、regime-dependentなsign reversalが短期binary contractの一種類に基づくことを認めている。したがって、因果解釈、外的妥当性、CLOBとLMSRの実際の共存効果、$n \\ge 3$での主張は未検証の著者主張として扱う必要がある。\n\n## 2. The Year-End Toll: Frictions Embedded in Option-Implied Rates\n\n**[arXiv:2609.20224v1](https://arxiv.org/abs/2609.20224v1) — Useong Shin**\n\n### 概要\n\n本レビューは74ページの全文ではなく、提供されたabstractとIntroductionのみを用いた限定ソース評価であり、証明・実証手順・付録は確認していない。著者は、2012–2025年のSPX・RUTオプションから得るoption-implied rateと外部benchmark rateの差に、満期が将来の12月31日を初めてまたぐ際のyear-end funding frictionが含まれると主張する。したがって、put–call parityによる高精度なdiscount rateの推定だけでは、その金利が経済的にfrictionlessであるとはいえない、というのが論文の中心的主張である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 推奨 | オプション・インプライド金利 / put–call parity / option funding basis / 年末効果 / balance-sheet capacity / box spread / convenience yield / government-bond CIP / SPXオプション / RUTオプション |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** option-implied rateを純粋なrisk-free rateまたはconvenience-yield measureとみなす際の識別上の注意を、明確なyear-end cutoffを使って提示しており、ratesとmarket microstructureの双方に関連する。ただし、結論の信頼性を判断するには全文でデータ処理、推定仕様、統計的有意性、外部再現性を確認する必要があるため、現段階では限定的な推薦とする。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 762 | 1,137 (84) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 2,048 | 2,148 (348) | 0.0532 | 全74ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** abstractとIntroductionにおける著者の報告では、同一取引日の満期間比較で12月31日を初めてまたぐと、非年率換算のoption funding basisがSPXとRUTで約2–3 bp上昇する。著者は、この効果が年率換算のflow premiumよりも固定的なprice wedgeとして振る舞い、おおむね$\\kappa/\\tau$で年率換算され、2010年代半ばに強まったと主張する。また、代替benchmark、regular weeklies、government-bond CIP、独立構築されたoption panelでも整合的な傾向が得られたとしている。ただし全文は提供されておらず、推定表、証明、データ処理、robustness tests、付録を確認していないため、これらの結果を独立に検証していない。\n\n**手法:** 著者は2012–2025年のSPX・RUTオプションについて、put–call parityから推定したdiscount factorと満期を合わせた外部benchmark discount factorの差をoption funding basisとして分析する。Introductionによれば、同一取引日で年末を初めてまたぐ満期の不連続性と全満期cross sectionを推定し、非線形満期構造、quoted liquidity、NFCI、短期funding proxyなどを制御する。Treasury、OIS、DGS、DTB、regular weeklies、calendar controls、dividend adjustments、quarter-end placeboに加え、government-bond CIPと独立option panelによる比較も報告している。\n\n**実務への応用:** option-implied rateとTreasuryまたはOIS rateの差をconvenience yieldとして利用する際、year-endのmargin、collateral、funding、netting、内部limit、intermediary balance-sheet capacityに由来する実装コストを考慮すべきことを示唆する。rates relative-value、box spread、CIP、資金調達比較では、12月31日をまたぐ満期を別扱いし、固定bpの価格wedgeと年率換算効果を区別する実務上の診断に利用できる可能性がある。\n\n**限界・注意点:** 最大の制約は、74ページの全文ではなくabstractとIntroductionしか提供されていない点である。このため、標本構築、option cleaning、discount-factor推定、標準誤差、識別仮定、欠測・選択bias、表・図、証明、robustness tests、付録を確認しておらず、著者の主張を独立検証できない。著者自身も、規制変更の因果効果は識別していないこと、後続する年末crossingは長期満期のデータが薄いこと、12月31日の不連続性はoption-side frictionの完全な分解ではないことを認めている。\n\n## 3. Herding and Liquidity in Order-Book Markets. III. Leverage and the Onset of Endogenous Liquidity Crises under Weak Anchoring\n\n**[arXiv:2609.20192v1](https://arxiv.org/abs/2609.20192v1) — Jan Novotny**\n\n### 概要\n\n単一資産のlimit order book型agent-based modelを用い、resting liquidityのファンダメンタル価値へのアンカー、群集行動、レバレッジ、maintenance marginの相互作用が内生的な流動性危機を生む条件を調べる研究である。論文のシミュレーションでは、アンカーがほぼ失われ、中程度の群集行動と高いレバレッジが重なる狭い領域で、強制売却と注文板枯渇が自己増幅すると報告されている。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 指値注文板 / 市場マイクロストラクチャー / エージェントベースモデル / 内生的流動性危機 / レバレッジ / 証拠金バッファ / 群集行動 / ファンダメンタル・アンカー / 強制デレバレッジ / ボラティリティ・クラスタリング |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** limit order bookの流動性枯渇を、価値アンカー、群集行動、レバレッジ、証拠金制約の共同作用として明示的に整理しており、market microstructure研究との関連性は高い。特に、危機開始をmargin bufferで要約する仮説と、臨界点ではなく確率的crossoverであるという診断は興味深い。一方、結論は未較正のシミュレーションと限定的なparameter sweepに依存するため、実証的事実や普遍的な市場閾値としてではなく、検証可能な機構仮説として読むことを推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 952 | 1,319 (52) | 0.0018 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 17,824 | 2,686 (516) | 0.1428 | PDF全文・16ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者の結果では、レバレッジによる追加的な注文板枯渇は主にアンカー強度が $\\phi \\lesssim 0.15$、群集行動比率が概ね $h=0.15$ から $0.30$ の領域に集中する。危機の開始はレバレッジ単独より、最初のmargin callまでの価格下落余地である $B=(1/\\lambda-m_{maint})/(1-m_{maint})$ によって一次的に整理され、$B$ が小さいほど枯渇率と発火確率が高いと報告される。また、弱いアンカー下ではレバレッジ上昇に伴いreturn tail exponentが約 $6.5$ から $2.3$ へ低下する一方、volatility clusteringは主としてアンカー除去と群集行動に由来し、長期記憶ではなく数ラグの短期記憶にとどまる。発火確率は連続的に上昇し、branching-ratio proxyも $1$ を大幅に下回るため、著者は臨界点ではなく滑らかなsub-critical crossoverと結論づける。\n\n**手法:** 連続ダブルオークション上に、anchored noise traders、chartist herders、資金制約付きmarket makers、margin callを受けるleveraged holdersを配置する。流動性供給の参照価格を $p_t^{ref}=\\phi v+(1-\\phi)m_t$ とし、アンカー強度 $\\phi$、群集行動比率 $h$、レバレッジ $\\lambda$、maintenance margin $m_{maint}$ を変化させる。危機指標は注文板の片側にresting depthがないイベント比率であり、レバレッジ固有の効果は同一の $\\phi$ と $h$ におけるlevered-minus-unlevered差分で識別する。複数seedのparameter sweepにより、Hill tail exponent、absolute-return ACF、発火確率、breach count、Fano-factor型branching proxyを比較し、外生market sellを用いた対照実験も行う。\n\n**実務への応用:** 電子市場のstress testingにおいて、レバレッジだけでなくmaintenance marginと注文流動性の価値アンカーを共同で監視すべきことを示唆する。特に、価格追随型の再提示、トレンド追随注文、強制デレバレッジが同時に強まる状況では、証拠金引き上げがレバレッジ増加と同様に流動性を悪化させ得る。ただし、実市場への閾値設定やexecution policyへの直接利用には追加の較正と実証検証が必要である。\n\n**限界・注意点:** 結果は単一資産の簡略化されたagent-based modelに基づき、実データへの較正やout-of-sample検証はない。主要なmargin-buffer collapseは一つの開始近傍セルでのみ検証され、同じ $B$ でも残差があるため厳密な一次元縮約ではない。セル当たりのseed数は概ね $8$ から $20$ で、枯渇指標は右裾が長くseed依存性が強いため、開始近傍の推定は不確実である。volatility clusteringは短期記憶しか再現せず、branching proxyもHawkes modelの尤度推定ではない。人口規模、資本、ファンダメンタル過程、群集行動期間に対する頑健性も十分に探索されておらず、臨界性の否定や実市場への一般化はモデル内の証拠として解釈すべきである。",
+      "papers": [
+        {
+          "arxivId": "2609.20017v1",
+          "title": "Who Aggregates Information? Screening, Rent, and the Coexistence of CLOB and AMM Prediction Markets",
+          "authors": [
+            "Chengqi Zang",
+            "Gabriel P. Andrade",
+            "Tomoyuki Nakajima"
+          ],
+          "submittedDate": "2026-09-17",
+          "updatedDate": "2026-09-18",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.20017v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.20017v1",
+          "schedulerRank": 1,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 10/10",
+          "schedulerSummary": "予測市場でCLOBとLMSR型AMMが併存する理由を、informed flowのscreeningとbehavioral tail demandから説明するmarket microstructure研究である。著者らは、CLOBがtail-demand rentを得る一方、情報取引はLMSRへ向かうと主張する。ただし全62ページのうちabstractとIntroductionのみを用いた限定レビューであり、本文、証明、推定手順、付録は確認していない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 907 / 出力 1,136（うち推論 54） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 4,357 / 出力 1,809（うち推論 178） · 全62ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0580",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.20224v1",
+          "title": "The Year-End Toll: Frictions Embedded in Option-Implied Rates",
+          "authors": [
+            "Useong Shin"
+          ],
+          "submittedDate": "2026-08-21",
+          "updatedDate": "2026-09-18",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.20224v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.20224v1",
+          "schedulerRank": 2,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 10/10",
+          "schedulerSummary": "本レビューは74ページの全文ではなく、提供されたabstractとIntroductionのみを用いた限定ソース評価であり、証明・実証手順・付録は確認していない。著者は、2012–2025年のSPX・RUTオプションから得るoption-implied rateと外部benchmark rateの差に、満期が将来の12月31日を初めてまたぐ際のyear-end funding frictionが含まれると主張する。したがって、put–call parityによる高精度なdiscount rateの推定だけでは、その金利が経済的にfrictionlessであるとはいえない、というのが論文の中心的主張である。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 762 / 出力 1,137（うち推論 84） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 2,048 / 出力 2,148（うち推論 348） · 全74ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0532",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.20192v1",
+          "title": "Herding and Liquidity in Order-Book Markets. III. Leverage and the Onset of Endogenous Liquidity Crises under Weak Anchoring",
+          "authors": [
+            "Jan Novotny"
+          ],
+          "submittedDate": "2026-07-24",
+          "updatedDate": "2026-09-18",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.20192v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.20192v1",
+          "schedulerRank": 3,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "単一資産のlimit order book型agent-based modelを用い、resting liquidityのファンダメンタル価値へのアンカー、群集行動、レバレッジ、maintenance marginの相互作用が内生的な流動性危機を生む条件を調べる研究である。論文のシミュレーションでは、アンカーがほぼ失われ、中程度の群集行動と高いレバレッジが重なる狭い領域で、強制売却と注文板枯渇が自己増幅すると報告されている。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 952 / 出力 1,319（うち推論 52） · 推定 $0.0018\n論文解析: gpt-5.6-sol / medium · トークン 入力 17,824 / 出力 2,686（うち推論 516） · PDF 16 pages · 推定 $0.1428",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -2,6 +2,52 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-09-18-daily-openai-01",
+      "date": "2026-09-18",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.20017v1",
+          "title": "Who Aggregates Information? Screening, Rent, and the Coexistence of CLOB and AMM Prediction Markets",
+          "authors": [
+            "Chengqi Zang",
+            "Gabriel P. Andrade",
+            "Tomoyuki Nakajima"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.20224v1",
+          "title": "The Year-End Toll: Frictions Embedded in Option-Implied Rates",
+          "authors": [
+            "Useong Shin"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.20192v1",
+          "title": "Herding and Liquidity in Order-Book Markets. III. Leverage and the Onset of Endogenous Liquidity Crises under Weak Anchoring",
+          "authors": [
+            "Jan Novotny"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-09-13-daily-openai-01",
       "date": "2026-09-13",
       "kind": "daily",

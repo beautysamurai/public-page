@@ -1,0 +1,23 @@
+name: Dispatch arXiv daily recovery
+
+on:
+  push:
+    branches:
+      - ops/rerun-arxiv-research
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Dispatch daily research on main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh workflow run arxiv-research.yml             --repo "$GITHUB_REPOSITORY"             --ref main             -f run_mode=daily             -f recover_pending=false

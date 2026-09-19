@@ -96,6 +96,173 @@ class ArxivRetryPolicyTests(unittest.TestCase):
                     p.fetch_pdf_for_inline_input("2609.10001v1", timeout=1)
                 self.assertEqual(opener.call_count, 1)
 
+    def test_metadata_406_falls_back_to_official_oai_records(self):
+        requested = ["2609.20224", "2609.20405"]
+        calls = []
+
+        class FakeResponse:
+            def __init__(self, body):
+                self.body = body
+
+            def read(self, size=-1):
+                return self.body[:size] if size >= 0 else self.body
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return None
+
+        def oai_xml(arxiv_id):
+            return f"""<?xml version="1.0" encoding="UTF-8"?>
+            <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+              <GetRecord>
+                <record>
+                  <header>
+                    <identifier>oai:arXiv.org:{arxiv_id}</identifier>
+                    <datestamp>2026-09-18</datestamp>
+                  </header>
+                  <metadata>
+                    <arXiv xmlns="http://arxiv.org/OAI/arXiv/">
+                      <id>{arxiv_id}</id>
+                      <created>2026-09-18</created>
+                      <updated>2026-09-19</updated>
+                      <authors>
+                        <author><forenames>Researcher</forenames><keyname>One</keyname></author>
+                      </authors>
+                      <title>Recovered metadata {arxiv_id}</title>
+                      <categories>q-fin.TR cs.LG</categories>
+                      <abstract>Market microstructure and rates research.</abstract>
+                    </arXiv>
+                  </metadata>
+                </record>
+              </GetRecord>
+            </OAI-PMH>
+            """.encode("utf-8")
+
+        def raw_xml(arxiv_id, versions):
+            version_xml = "".join(
+                f'<version version="{version}"><date>Fri, 18 Sep 2026 12:00:00 GMT</date><size>100kb</size></version>'
+                for version in versions
+            )
+            return f"""<?xml version="1.0" encoding="UTF-8"?>
+            <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+              <GetRecord>
+                <record>
+                  <header>
+                    <identifier>oai:arXiv.org:{arxiv_id}</identifier>
+                    <datestamp>2026-09-18</datestamp>
+                  </header>
+                  <metadata>
+                    <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/">
+                      <id>{arxiv_id}</id>
+                      {version_xml}
+                    </arXivRaw>
+                  </metadata>
+                </record>
+              </GetRecord>
+            </OAI-PMH>
+            """.encode("utf-8")
+
+        versions = {
+            "2609.20224": ("v1", "v2"),
+            "2609.20405": ("v1",),
+        }
+
+        def opener(request, timeout=0):
+            calls.append((request.full_url, timeout))
+            parsed = urllib.parse.urlparse(request.full_url)
+            if parsed.hostname == "export.arxiv.org":
+                raise http_error(406)
+            self.assertEqual(parsed.hostname, "oaipmh.arxiv.org")
+            query = urllib.parse.parse_qs(parsed.query)
+            identifier = query["identifier"][0]
+            arxiv_id = identifier.removeprefix("oai:arXiv.org:")
+            if query["metadataPrefix"] == ["arXivRaw"]:
+                return FakeResponse(raw_xml(arxiv_id, versions[arxiv_id]))
+            self.assertEqual(query["metadataPrefix"], ["arXiv"])
+            return FakeResponse(oai_xml(arxiv_id))
+
+        fetched = p.fetch_metadata(requested, timeout=7.0, opener=opener)
+
+        self.assertEqual(set(fetched), set(requested))
+        self.assertEqual(len(calls), 1 + 2 * len(requested))
+        self.assertEqual(fetched["2609.20224"].arxiv_id, "2609.20224v2")
+        self.assertEqual(fetched["2609.20405"].arxiv_id, "2609.20405v1")
+        self.assertEqual(
+            fetched["2609.20224"].authors,
+            ("Researcher One",),
+        )
+        self.assertEqual(
+            fetched["2609.20224"].categories,
+            ("cs.LG", "q-fin.TR"),
+        )
+        self.assertEqual(
+            fetched["2609.20224"].submitted_at.date().isoformat(),
+            "2026-09-18",
+        )
+        self.assertEqual(
+            fetched["2609.20224"].updated_at.date().isoformat(),
+            "2026-09-19",
+        )
+
+    def test_metadata_non_406_http_error_does_not_switch_interface(self):
+        calls = []
+
+        def opener(request, timeout=0):
+            calls.append(request.full_url)
+            raise http_error(403)
+
+        with self.assertRaises(urllib.error.HTTPError):
+            p.fetch_metadata(["2609.20224"], timeout=7.0, opener=opener)
+
+        self.assertEqual(len(calls), 1)
+        self.assertIn("export.arxiv.org/api/query", calls[0])
+
+    def test_oai_record_must_match_the_requested_id(self):
+        wrong = b"""<?xml version="1.0" encoding="UTF-8"?>
+        <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+          <GetRecord><record><metadata>
+            <arXiv xmlns="http://arxiv.org/OAI/arXiv/">
+              <id>2609.99999</id>
+              <created>2026-09-18</created>
+              <authors><author><keyname>Researcher</keyname></author></authors>
+              <title>Wrong record</title>
+              <categories>q-fin.TR</categories>
+              <abstract>Wrong paper.</abstract>
+            </arXiv>
+          </metadata></record></GetRecord>
+        </OAI-PMH>"""
+
+        with self.assertRaisesRegex(p.ListingParseError, "does not match"):
+            p._parse_oai_record(wrong, "2609.20224", "v1")
+
+    def test_oai_version_history_must_be_contiguous_and_match_requested_id(self):
+        wrong_id = b"""<?xml version="1.0" encoding="UTF-8"?>
+        <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+          <GetRecord><record><metadata>
+            <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/">
+              <id>2609.99999</id>
+              <version version="v1" />
+            </arXivRaw>
+          </metadata></record></GetRecord>
+        </OAI-PMH>"""
+        with self.assertRaisesRegex(p.ListingParseError, "does not match"):
+            p._parse_oai_latest_version(wrong_id, "2609.20224")
+
+        gap = b"""<?xml version="1.0" encoding="UTF-8"?>
+        <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+          <GetRecord><record><metadata>
+            <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/">
+              <id>2609.20224</id>
+              <version version="v1" />
+              <version version="v3" />
+            </arXivRaw>
+          </metadata></record></GetRecord>
+        </OAI-PMH>"""
+        with self.assertRaisesRegex(p.ListingParseError, "non-contiguous"):
+            p._parse_oai_latest_version(gap, "2609.20224")
+
     def test_metadata_failure_retains_safe_diagnostic_and_pending_date(self):
         with tempfile.TemporaryDirectory() as directory, contextlib.redirect_stderr(io.StringIO()) as log:
             root = Path(directory)

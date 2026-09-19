@@ -1229,24 +1229,40 @@ def fetch_oai_metadata(
     *,
     timeout: float = 25.0,
     opener: Callable[..., Any] = urllib.request.urlopen,
+    retries: int = 0,
+    sleep_fn: Callable[[float], None] = time.sleep,
+    deadline: float | None = None,
+    monotonic_fn: Callable[[], float] = time.monotonic,
 ) -> dict[str, digest.AtomEntry]:
     """Fetch version-pinned metadata through arXiv's official OAI-PMH interface."""
 
     result: dict[str, digest.AtomEntry] = {}
     for arxiv_id in arxiv_ids:
         base_id = _base_arxiv_id(arxiv_id)
-        raw_version = _fetch_oai_payload(
-            base_id,
-            "arXivRaw",
-            timeout=timeout,
-            opener=opener,
+        raw_version = _retry(
+            lambda base_id=base_id: _fetch_oai_payload(
+                base_id,
+                "arXivRaw",
+                timeout=timeout,
+                opener=opener,
+            ),
+            retries,
+            sleep_fn,
+            deadline=deadline,
+            monotonic_fn=monotonic_fn,
         )
         version = _parse_oai_latest_version(raw_version, base_id)
-        raw_metadata = _fetch_oai_payload(
-            base_id,
-            "arXiv",
-            timeout=timeout,
-            opener=opener,
+        raw_metadata = _retry(
+            lambda base_id=base_id: _fetch_oai_payload(
+                base_id,
+                "arXiv",
+                timeout=timeout,
+                opener=opener,
+            ),
+            retries,
+            sleep_fn,
+            deadline=deadline,
+            monotonic_fn=monotonic_fn,
         )
         entry = _parse_oai_record(raw_metadata, base_id, version)
         key = _base_arxiv_id(entry.arxiv_id).casefold()
@@ -1264,6 +1280,10 @@ def fetch_metadata(
     *,
     timeout: float = 25.0,
     opener: Callable[..., Any] = urllib.request.urlopen,
+    retries: int = 0,
+    sleep_fn: Callable[[float], None] = time.sleep,
+    deadline: float | None = None,
+    monotonic_fn: Callable[[], float] = time.monotonic,
 ) -> dict[str, digest.AtomEntry]:
     """Fetch validated metadata, falling back to OAI-PMH on HTTP 406."""
 
@@ -1287,7 +1307,13 @@ def fetch_metadata(
     )
     url = f"{METADATA_ENDPOINT}?{query}"
     try:
-        raw = digest.fetch_atom_xml(url, timeout=timeout, opener=opener)
+        raw = _retry(
+            lambda: digest.fetch_atom_xml(url, timeout=timeout, opener=opener),
+            retries,
+            sleep_fn,
+            deadline=deadline,
+            monotonic_fn=monotonic_fn,
+        )
     except urllib.error.HTTPError as exc:
         # GitHub-hosted runners currently receive HTTP 406 from the legacy
         # search API even for a single valid id. OAI-PMH is an official arXiv
@@ -1295,7 +1321,15 @@ def fetch_metadata(
         # still be returned and validated before analysis can proceed.
         if exc.code != 406:
             raise
-        return fetch_oai_metadata(clean_ids, timeout=timeout, opener=opener)
+        return fetch_oai_metadata(
+            clean_ids,
+            timeout=timeout,
+            opener=opener,
+            retries=retries,
+            sleep_fn=sleep_fn,
+            deadline=deadline,
+            monotonic_fn=monotonic_fn,
+        )
 
     feed = digest.parse_atom_feed(raw)
     result: dict[str, digest.AtomEntry] = {}
@@ -2835,8 +2869,17 @@ def run_daily(
         history_fetcher = lambda category: fetch_pastweek_listing_page(
             category, timeout=config.timeout, opener=arxiv_pacer.open
         )
+    metadata_has_internal_retry = metadata_fetcher is None
     if metadata_fetcher is None:
-        metadata_fetcher = lambda ids: fetch_metadata(ids, timeout=config.timeout, opener=arxiv_pacer.open)
+        metadata_fetcher = lambda ids: fetch_metadata(
+            ids,
+            timeout=config.timeout,
+            opener=arxiv_pacer.open,
+            retries=config.retries,
+            sleep_fn=sleep_fn,
+            deadline=deadline,
+            monotonic_fn=monotonic_fn,
+        )
 
     observed: date | None = None
     recovered_pending = False
@@ -2936,12 +2979,16 @@ def run_daily(
         )
         stage = "metadata"
         entries = (
-            _retry(
-                lambda: metadata_fetcher(requested_ids),
-                config.retries,
-                sleep_fn,
-                deadline=deadline,
-                monotonic_fn=monotonic_fn,
+            (
+                metadata_fetcher(requested_ids)
+                if metadata_has_internal_retry
+                else _retry(
+                    lambda: metadata_fetcher(requested_ids),
+                    config.retries,
+                    sleep_fn,
+                    deadline=deadline,
+                    monotonic_fn=monotonic_fn,
+                )
             )
             if requested_ids
             else {}

@@ -1,0 +1,59 @@
+name: Build clean record-scoped OAI retry branch
+
+on:
+  push:
+    branches:
+      - fix/arxiv-oai-record-retry-builder
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out validated builder branch
+        uses: actions/checkout@v7
+        with:
+          ref: fix/arxiv-oai-record-retry-builder
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Preserve implementation files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/oai-retry/scripts" "$RUNNER_TEMP/oai-retry/tests"
+          cp scripts/research_pipeline.py "$RUNNER_TEMP/oai-retry/scripts/"
+          cp tests/test_arxiv_retry_policy.py "$RUNNER_TEMP/oai-retry/tests/"
+
+      - name: Rebuild review branch from main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout -B fix/arxiv-oai-record-retry origin/main
+          cp "$RUNNER_TEMP/oai-retry/scripts/research_pipeline.py" scripts/research_pipeline.py
+          cp "$RUNNER_TEMP/oai-retry/tests/test_arxiv_retry_policy.py" tests/test_arxiv_retry_policy.py
+
+      - name: Run focused regression tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p "test_arxiv_retry_policy.py" -v
+          git diff --check
+
+      - name: Commit and push clean review branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Public Research Digest"
+          git config user.email "public-research-digest@users.noreply.github.com"
+          git add scripts/research_pipeline.py tests/test_arxiv_retry_policy.py
+          git commit -m "fix: retry arXiv OAI metadata per record"
+          git push --force origin HEAD:fix/arxiv-oai-record-retry

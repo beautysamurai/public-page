@@ -1,0 +1,993 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-18",
+  "fingerprint": "f045c318d9d3bd9fc09b8d315be6904dccd8333960c5bac34399905a92adb748",
+  "candidateFingerprints": {
+    "2609.18949": "c7afeae408d15b3381994679c147f7f78e36f5fb314e8dc2d5482246c4fe308f",
+    "2609.19455": "89f8c4398ffd02e74af2fb282ec3a9416bbdfc9098715699b704b64c67d3b912",
+    "2609.19660": "d211c315cdb73787fdcab0506e3c7e046be797b281b0dab6100e13b3f585e641",
+    "2609.19843": "3fca632e2d09a190198d57528f3efdee798694e2c05a152fdb44c3ff8f45ed81",
+    "2609.19866": "295e1264ade4a805a53242cfc347a13ac2126d8cc482fa29255bb646d27a40c7",
+    "2609.20017": "82dd95f2fef21f5252bd6babc677d3d9e294df6caec75fecdbab7e691b6ac61d",
+    "2609.20192": "c835d1b133c5c220a4451849f3958d4bc3faa6db0c59e263c101d97c3fa6730a",
+    "2609.20224": "bed5d91de373a2c0166a713ec573be23d8f8fccb42ffff389dfcfe3f7f60a5c3",
+    "2609.20282": "050d54e729c6fa2599021e9d576365b926acf53caeac992ec4fdac99ce4d37a8",
+    "2609.20293": "41e2242b5c6d17f21571b26c3d34b7dc8013a5482122fb771fa9db51597dc801",
+    "2609.20405": "5cba40778b09d40752e90f5559da0d5e15b3965ff8ab9838f52a2941fdd3be53",
+    "2609.20462": "6511f6a12f27d4bcff33353a4b3b31cd72e0373ecc892adfb1389ea892283eb8",
+    "2609.20554": "3cc4dad479652f2fe8faac98d74a3bbf1eaac9121f5378ea8ad78eede9f1a511"
+  },
+  "results": {
+    "2609.18949": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "Stablecoinのペッグ逸脱リスクを予測するLLMエージェント向け、コスト認識型ベンチマークを提案する研究です。取引所の価格・出来高と市場コンテキストを用い、7日先の逸脱予測、出力信頼性、遅延、トークン消費、推定推論コストを評価します。",
+        "mainResult": "6種類のLLMエージェント構成とベースラインを評価した結果、エージェントは構造化出力を比較的安定して生成する一方、稀な深刻ストレスや持続的なペッグ逸脱の大半を見逃しました。したがって、プロトコル遵守の信頼性と金融リスク予測の信頼性には差があると報告されています。",
+        "practicalApplication": "暗号資産のリスク監視やLLMエージェントの運用評価に利用できる可能性があります。ただし、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、または金利市場への直接的な応用は限定的です。",
+        "methodology": "漏洩を防いだ過去データのリプレイにより、隠された7日間の予測を評価しています。実験はストレスを多く含む120ケースの検証ブロックと、自然分布に基づく507ケースの評価ブロックからなり、予測品質、ラベルのキャリブレーション、構造化出力の信頼性、遅延、トークン使用量、推定コストを測定します。",
+        "limitations": "要旨からは、使用した具体的な特徴量、ベースラインの詳細、統計的有意性、期間や市場の代表性、実運用での性能、データセットの品質が確認できません。また、稀なストレス事象を多数見逃すため、単独でのリスク管理には不十分です。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "LLMエージェント評価とstablecoinのペッグリスクには関連しますが、本サイトの主要対象である電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利市場を直接扱っていないためです。",
+        "tags": [
+          "stablecoin",
+          "peg-risk",
+          "LLM agents",
+          "benchmarking",
+          "financial risk",
+          "out-of-scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a cost-aware benchmark for LLM agents predicting stablecoin peg deviations. It evaluates seven-day-ahead deviation forecasts, output reliability, latency, token usage, and estimated inference cost using exchange price-volume data and market-context features.",
+          "mainResult": "Across six LLM-backed agent configurations and baselines, the agents reportedly produced structured outputs reliably, but missed most rare severe-stress and sustained-depeg cases. The paper therefore finds a gap between protocol-following reliability and financial-risk forecasting reliability.",
+          "practicalApplication": "The framework may support crypto-asset risk monitoring and operational evaluation of LLM agents. However, its direct application to electronic trading, market microstructure, interest-rate models, yield curves, or rates markets is limited.",
+          "methodology": "The study uses leakage-safe historical replay with a hidden seven-day prediction horizon. It evaluates a 120-case stress-enriched validation block and a 507-case natural-distribution arena block, measuring forecast quality, calibrated-label behavior, structured-output reliability, latency, token consumption, and estimated inference cost.",
+          "limitations": "The abstract does not specify the detailed features, baselines, statistical significance, time periods, market representativeness, or dataset quality. It also reports that rare stress events are frequently missed, making the system unsuitable as a standalone risk-control tool.",
+          "reason": "The work is relevant to LLM-agent evaluation and stablecoin peg risk, but it does not materially address this site's core areas of electronic execution, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "stablecoin",
+            "peg-risk",
+            "LLM agents",
+            "benchmarking",
+            "financial risk",
+            "out-of-scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.19455": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、72の小規模開放経済を対象に、所得水準別の在庫循環と実物・金融ショックへの反応を分析するマクロ経済研究です。先進国では在庫が景気循環に対して強く順循環的である一方、所得水準が低下すると非循環的になり、在庫の変動性と持続性が高まると報告しています。",
+        "mainResult": "長期的な生産性ショックは全所得グループで一時的な在庫積み増しを生じさせ、先進国では調整が滑らかですが、新興国・発展途上国では循環が不規則になります。金融ショックは高所得国で在庫減少後の反発を引き起こす一方、低所得国では遅れて反転しない在庫減少につながるとされています。",
+        "practicalApplication": "在庫循環や金融制約を含むマクロ経済分析、国別の景気変動評価には利用可能性があります。ただし、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または実務的な金利取引・執行への直接的な応用は示されていません。",
+        "methodology": "1993年から2022年までの72の小規模開放経済によるバランスド・パネルを用い、local projectionsによって長期的な生産性ショックと、米国社債利回りと国債利回りのスプレッドから識別した金融ショックに対する在庫の動態反応を推定しています。",
+        "limitations": "抽象情報だけでは、ショック識別の妥当性、推定仕様、異質性の扱い、因果解釈の頑健性、データ品質について評価できません。また、在庫動学を扱うマクロ研究であり、本サイトの対象分野との直接的な関連性が限定的です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "在庫と景気循環に関するマクロ経済的知見は明確ですが、本サイトが対象とする電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場研究には実質的に該当しません。",
+        "tags": [
+          "在庫動学",
+          "景気循環",
+          "金融ショック",
+          "生産性ショック",
+          "小規模開放経済",
+          "マクロ経済学"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper is a macroeconomic study of inventory cycles and responses to real and financial shocks across 72 small open economies at different income levels. It reports that inventories are strongly procyclical in advanced economies, become acyclical at lower income levels, and exhibit greater volatility and persistence as development declines.",
+          "mainResult": "Long-run productivity shocks produce temporary inventory accumulation across all income groups, with smoother adjustment in advanced economies and more irregular cycles in emerging and developing economies. Financial shocks cause an inventory decline followed by a rebound in higher-income economies, but a delayed and unreversed decline in low-income economies.",
+          "practicalApplication": "The findings may be useful for macroeconomic analysis of inventory cycles and financial constraints, as well as country-level business-cycle assessment. However, the abstract does not indicate direct applications to electronic trading, market microstructure, interest-rate models, yield curves, or practical rates trading and execution.",
+          "methodology": "The study uses a balanced panel of 72 small open economies from 1993 to 2022 and estimates inventory responses to long-run productivity shocks and a financial shock identified from the spread between U.S. corporate bond yields and Treasury yields using local projections.",
+          "limitations": "Based on the abstract alone, the validity of shock identification, estimation choices, treatment of heterogeneity, robustness of causal interpretation, and data quality cannot be assessed. The study also concerns macroeconomic inventory dynamics and has limited direct relevance to the site's target fields.",
+          "reason": "The paper provides clear macroeconomic findings on inventories and business cycles, but it is not materially concerned with electronic execution, market microstructure, interest-rate models, yield curves, or rates-market research.",
+          "tags": [
+            "inventory dynamics",
+            "business cycles",
+            "financial shocks",
+            "productivity shocks",
+            "small open economies",
+            "macroeconomics"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.19660": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、米国のSupplemental Nutrition Assistance Program（SNAP）における就労要件の政策効果を分析するものであり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利研究には該当しない。",
+        "mainResult": "要旨によれば、就労要件はSNAP参加を7%減少させた一方、労働供給を増加させず、低所得者を不均衡に制度から排除した。福利厚生分析では、社会的費用が予算節約を上回ると報告されている。",
+        "practicalApplication": "政策評価や社会保障制度の設計には応用可能だが、本サイトの対象である金融市場、電子執行、または金利分析への直接的な実務応用はない。",
+        "methodology": "5州のSNAP行政データと雇用データをリンクし、郡・州ごとに段階的に再導入された就労要件を利用したtriple-differences designを用いている。さらに、結果を解釈するための福利厚生フレームワークを構築している。",
+        "limitations": "要旨だけでは、識別仮定、推定の詳細、対象5州の代表性、効果の異質性、および福利厚生分析に用いたパラメータや行動仮定を確認できない。したがって、報告された因果解釈と他地域への外的妥当性には留保が必要である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "社会政策としては意義がある可能性があるが、本サイトの研究対象分野とは直接関係しないため、掲載対象としては推奨しない。",
+        "tags": [
+          "out_of_scope",
+          "social policy",
+          "SNAP",
+          "labor supply",
+          "welfare analysis"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes the policy effects of work requirements in the U.S. Supplemental Nutrition Assistance Program (SNAP) and is not concerned with electronic trading, market microstructure, interest-rate models, yield curves, or rates research.",
+          "mainResult": "According to the abstract, work requirements reduced SNAP participation by 7% without increasing labor supply and disproportionately screened out low-income individuals. The welfare analysis reports that social costs exceeded budget savings.",
+          "practicalApplication": "The findings may be applicable to policy evaluation and social-program design, but they have no direct practical application to the financial markets, electronic execution, or rates analysis covered by this site.",
+          "methodology": "The authors link administrative SNAP and employment data from five states and exploit the staggered reinstatement of work requirements across counties and states using a triple-differences design. They also develop a welfare framework to interpret the results.",
+          "limitations": "The abstract does not provide the identification assumptions, estimation details, representativeness of the five states, treatment-effect heterogeneity, or the parameters and behavioral assumptions used in the welfare analysis. The causal interpretation and external validity therefore require qualification.",
+          "reason": "Although the study may be important as social-policy research, it is not directly related to the site's research areas and is not recommended for inclusion.",
+          "tags": [
+            "out_of_scope",
+            "social policy",
+            "SNAP",
+            "labor supply",
+            "welfare analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.19843": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "LLMベースのGUIエージェントが、オンライン購買環境における自動的および熟考的なデジタル・ナッジにどの程度影響されるかを、Dual-Process Theoryの観点から検証した研究です。電子取引、マーケット・マイクロストラクチャー、金利・イールドカーブ研究を主題としていません。",
+        "mainResult": "6つの基盤モデルを用いた21,600回のシミュレーションでは、エージェントは自動的なデフォルト・ナッジと熟考的な社会的影響ナッジの双方に影響されました。推論設定は、自動的ナッジへの感受性を低下させる一方、社会的影響ナッジへの感受性を高めるという逆方向の効果を示しました。",
+        "practicalApplication": "主な含意は、自律エージェントが利用するGUIの設計を組織のガバナンス課題として扱うことです。ただし、電子取引や金融市場での執行・価格形成への直接的な応用は、要旨からは示されていません。",
+        "methodology": "オンライン・ショッピング実験で3,600体のエージェントと計21,600回のシミュレーションを実施し、3提供元の6つのフロンティアモデルについて、ナッジの種類と推論設定の影響を比較しました。",
+        "limitations": "要旨からは、具体的なGUI、ナッジ操作、統計手法、効果量、モデルの詳細、再現性の条件が確認できません。また、オンライン購買シミュレーションの結果を金融市場や現実の自律エージェントへ一般化できるかは不明です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "AIエージェントの行動誘導に関する研究としては関連性がありますが、本サイトの対象である電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場には実質的に焦点を置いていません。q-fin.ECの分類だけでは採用対象とは判断できません。",
+        "tags": [
+          "LLM-based GUI agents",
+          "digital nudges",
+          "Dual-Process Theory",
+          "agentic AI",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines the susceptibility of LLM-based GUI agents to automatic and reflective digital nudges in online shopping environments from a Dual-Process Theory perspective. It is not focused on electronic trading, market microstructure, interest-rate or yield-curve research.",
+          "mainResult": "Across 21,600 simulations involving six foundation models, agents were susceptible to both automatic default nudges and reflective social-influence nudges. The reasoning configuration had opposing effects: it reduced susceptibility to automatic nudges while increasing susceptibility to social-influence nudges.",
+          "practicalApplication": "The main implication is that the design of GUIs used by autonomous agents should be treated as an organizational governance concern. However, the abstract does not establish a direct application to electronic trading, execution, or financial-market price formation.",
+          "methodology": "The authors conducted an online-shopping experiment with 3,600 agents and 21,600 simulations, comparing the effects of nudge type and reasoning configuration across six frontier models from three providers.",
+          "limitations": "The abstract does not specify the exact GUIs, nudge manipulations, statistical methods, effect sizes, model details, or reproducibility conditions. It is also unclear whether results from online-shopping simulations generalize to financial markets or real-world autonomous agents.",
+          "reason": "Although the study is relevant to behavioral influence in AI agents, it does not materially address electronic execution, market microstructure, interest-rate models, yield curves, or rates markets. The q-fin.EC category alone is insufficient for inclusion.",
+          "tags": [
+            "LLM-based GUI agents",
+            "digital nudges",
+            "Dual-Process Theory",
+            "agentic AI",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.19866": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、欧州委員会のAI法協議データを用いて、LLMによる自由記述の測定における再現性と構成概念妥当性の違いを検証する。金融市場、電子取引、金利モデル、イールドカーブ、または金利市場を直接扱っていない。",
+        "mainResult": "LLMによる注釈は非常に高い再現性を示した一方、同じ関係者のアンケート回答に基づく名目上の構成概念との一致は限定的だった。乖離はステークホルダー集団や欧州諸国間で異なり、事業者団体では自由記述のAIリスク懸念がアンケートより高かった。",
+        "practicalApplication": "LLMを測定器として利用する際に、再現性だけでなく構成概念妥当性とコミュニケーション文脈の影響を別々に検証するための一般的な示唆を提供する。ただし、金融研究や取引実務への直接的な応用は抽象的である。",
+        "methodology": "欧州委員会のAI法協議における構造化アンケート回答と、同じステークホルダーによる自由記述提出を結合し、LLM注釈とアンケート測定値を比較した。注釈の再現性、両測定値の乖離、ステークホルダー群差、および国別の空間的自己相関を評価している。",
+        "limitations": "提供された抄録 בלבדでは、LLMの具体的なモデル・プロンプト、注釈手順、サンプル構成、測定尺度の詳細、交絡への対処、空間分析の頑健性が不明である。また、結果はAI政策協議という特定の制度的・地域的文脈に依存する可能性がある。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "LLM測定の妥当性に関する方法論的研究としては有益だが、本サイトの対象である電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、または金利市場への実質的な関連性がないため、対象外と判定する。",
+        "tags": [
+          "LLM measurement",
+          "construct validity",
+          "reproducibility",
+          "AI consultation",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper uses European Commission AI Act consultation data to examine the distinction between reproducibility and construct validity in LLM-based measurement of free-text responses. It does not directly address financial markets, electronic trading, interest-rate models, yield curves, or rates.",
+          "mainResult": "LLM annotations showed very high reproducibility, but only limited correspondence with the nominal construct measured through survey responses from the same stakeholders. Divergence varied across stakeholder groups and European countries, with business associations expressing greater AI-risk concern in free-text consultations than in surveys.",
+          "practicalApplication": "The paper offers general guidance for validating LLMs as measurement instruments by assessing construct validity and communication-context effects separately from reproducibility. Its direct applicability to financial research and trading practice is limited.",
+          "methodology": "The authors linked structured survey responses with free-text submissions from the same stakeholders in the European Commission's AI Act consultation and compared LLM-derived measures with survey measures. They evaluated annotation reproducibility, measurement divergence, stakeholder-group differences, and country-level spatial autocorrelation.",
+          "limitations": "The abstract does not specify the LLM models or prompts, annotation procedures, sample composition, measurement scales, controls for confounding, or robustness of the spatial analysis. The findings may also depend on the specific institutional and regional context of the AI policy consultation.",
+          "reason": "Although the paper is methodologically relevant to LLM measurement, it has no material connection to electronic trading, market microstructure, interest-rate models, yield curves, or rates, so it is out of scope for this site.",
+          "tags": [
+            "LLM measurement",
+            "construct validity",
+            "reproducibility",
+            "AI consultation",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.20017": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "予測市場におけるCLOBとLMSR型AMMの共存を、情報選別、行動的なテール需要、決済までのポジション保有という観点から分析する研究です。",
+        "mainResult": "著者らは、CLOBのマーケットメーカーがスプレッドではなく、割安な結果側を決済まで保有することで収益を得ると報告しています。共通シグナル帯の事前ショック気配は情報トレーダーに選択されるため、CLOBは情報フローを選別し、情報取引はLMSRへ流れます。その結果、CLOBとAMMは共存し、複数結果の場合には二値CLOBは切替価格を決めても整合的な信念を特定できない一方、LMSRは結果確率の単体を整合的に価格付けし、担保をより効率的に利用するとされています。",
+        "practicalApplication": "予測市場の venue design、マーケットメーカーの在庫・満期保有戦略、CLOBとAMM間の注文フロー配分、複数結果商品の価格設計を考える際の示唆があります。特に、見かけ上のスプレッド収益と行動的なテール需要から得る決済収益を区別する分析に利用できます。",
+        "methodology": "主要な予測市場CLOBプラットフォームの取引単位データに基づく実証的な観察と、同一イベント上のLMSRおよびCLOBを比較する理論モデルを組み合わせています。モデルでは、情報トレーダー、行動的テール需要、競争的な気配、決済時の保有を明示的に扱っています。",
+        "limitations": "提供された要旨だけでは、実証データの期間、サンプル範囲、推定方法、結果の統計的頑健性、プラットフォーム固有性が確認できません。理論結果は、設定されたテール需要、情報構造、競争条件、決済ルールに依存する可能性があり、伝統的な金融市場や他のAMM設計への一般化は未検証です。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "CLOBとAMMの注文フロー、マーケットメイク収益、情報選別を統合的に扱っており、電子取引と市場マイクロストラクチャーに直接関連します。予測市場という対象の特殊性はあるものの、venue coexistenceと流動性供給の設計に有用な示唆があるため、採用を推奨します。",
+        "tags": [
+          "market microstructure",
+          "electronic trading",
+          "CLOB",
+          "AMM",
+          "prediction markets",
+          "market making",
+          "information screening",
+          "order flow",
+          "venue design"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper analyzes the coexistence of CLOBs and LMSR-style AMMs in prediction markets through information screening, behavioral tail demand, and holding positions through settlement.",
+          "mainResult": "The authors report that CLOB market makers earn returns not from the spread but by carrying the underpriced outcome side to settlement. Because pre-shock quotes within the common-signal band are picked off by informed traders, the CLOB screens informed flow while informed trading is routed to the LMSR. The venues therefore coexist. With multiple outcomes, a binary-book CLOB determines switch prices but does not identify coherent beliefs, whereas the LMSR prices the outcome simplex coherently and uses collateral more efficiently.",
+          "practicalApplication": "The findings may inform prediction-market venue design, market-maker inventory and maturity-holding strategies, order-flow allocation between CLOBs and AMMs, and pricing design for multi-outcome contracts. They are also useful for distinguishing apparent spread income from settlement income generated by behavioral tail demand.",
+          "methodology": "The study combines transaction-level empirical observations from a major prediction-market CLOB platform with a theoretical comparison of an LMSR and a CLOB for the same event. The model explicitly incorporates informed traders, behavioral tail demand, competitive quotes, and holding positions until settlement.",
+          "limitations": "The abstract does not specify the empirical sample period, coverage, estimation methods, statistical robustness, or platform-specificity. The theoretical results may depend on the assumed tail demand, information structure, competition, and settlement rules, and their generalization to traditional financial markets or other AMM designs is untested.",
+          "reason": "The paper directly addresses electronic trading and market microstructure by integrating CLOB and AMM order flow, market-making returns, and information screening. Although the prediction-market setting is specialized, it offers useful implications for venue coexistence and liquidity-supply design, so it is recommended.",
+          "tags": [
+            "market microstructure",
+            "electronic trading",
+            "CLOB",
+            "AMM",
+            "prediction markets",
+            "market making",
+            "information screening",
+            "order flow",
+            "venue design"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "予測市場でCLOBとLMSR型AMMが併存する理由を、informed flowのscreeningとbehavioral tail demandから説明するmarket microstructure研究である。著者らは、CLOBがtail-demand rentを得る一方、情報取引はLMSRへ向かうと主張する。ただし全62ページのうちabstractとIntroductionのみを用いた限定レビューであり、本文、証明、推定手順、付録は確認していない。",
+        "mainResult": "著者らの主張では、signal band内の事前CLOB quoteはpick-offされるため、競争的makerはband外でquoteし、informed traderを排除してsettlementまで割安側を保有するscreening rentを得る。LMSRはinformed flowを吸収し、CLOBはbehavioral tail demandから収益を得ることで両市場が補完的に共存する。また、$n \\ge 3$の多結果市場ではbinary CLOBがswitch priceを決めてもimplied beliefの水準は一意に定まらず、LMSRはoutcome simplexを整合的かつ資本効率的に価格付けするとされる。ただしabstractとIntroductionしか提供されておらず、これらの理論結果、証明、実証結果、robustness、付録は検証していない。",
+        "practicalApplication": "予測市場のvenue設計では、CLOBを情報集約装置とだけ見なさず、tail demandをscreeningしてrentを得る機構として評価できる。hybrid設計では、AMM depth、order-routing、maker-side contestabilityがCLOB premiumと流動性配分に与える影響を考慮すべきだという示唆がある。多結果市場では、binary bookの寄せ集めより単一のcost-function AMMが表示確率の整合性とcollateral効率を改善し得る。",
+        "methodology": "Introductionの記述によれば、state-contingent tail demandを組み込んだCLOBとLMSRの共存モデルを構築し、binary equilibriumとmulti-outcome pricingを理論分析している。実証面では、Polymarketの取引データについてmakerのsettlement収益、片側ポジション、regime別mispricing、およびmulti-outcome set premiumを調べ、複数のcounterfactual checkを行ったと著者らは報告している。",
+        "limitations": "本レビューは全62ページの論文に対してabstractとIntroductionのみを参照したLIMITED-SOURCE評価である。モデル仮定、定理の正確な条件、証明、データ構築、識別戦略、統計表、calibration、appendix、再現可能性を確認していない。Introduction自身も、取引レベル標本にAMMが含まれずvenue choiceを直接検証しないこと、regime-dependentなsign reversalが短期binary contractの一種類に基づくことを認めている。したがって、因果解釈、外的妥当性、CLOBとLMSRの実際の共存効果、$n \\ge 3$での主張は未検証の著者主張として扱う必要がある。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "CLOB、AMM、adverse selection、order routing、multi-outcome pricingを統一的に扱い、電子取引とmarket microstructureの読者に直接関連する。特に、予測市場のmaker収益をspread captureではなくsettlement時のscreening rentとして捉える視点は興味深い。ただし、利用可能な範囲では中心的主張を独立に評価できないため、推薦は本文と付録を用いた完全レビューを前提とする。",
+        "tags": [
+          "予測市場",
+          "CLOB",
+          "LMSR",
+          "自動マーケットメーカー",
+          "市場マイクロストラクチャー",
+          "情報集約",
+          "スクリーニング",
+          "tail demand",
+          "order routing",
+          "多結果市場"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "This market-microstructure paper explains the coexistence of CLOB and LMSR-based AMM prediction markets through informed-flow screening and behavioral tail demand. The authors claim that CLOBs earn tail-demand rents while informed trading routes to the LMSR. This is a limited review based only on the abstract and Introduction of a 62-page paper; the main text, proofs, estimation procedures, and appendices were not examined.",
+          "mainResult": "The authors claim that pre-signal CLOB quotes inside the signal band are picked off, causing competitive makers to quote outside the band, screen out informed traders, and earn screening rents by holding the underpriced side until settlement. The LMSR absorbs informed flow, while the CLOB earns revenue from behavioral tail demand, making the venues complementary. For markets with $n \\ge 3$ outcomes, the authors further claim that binary CLOBs can determine switch prices without uniquely determining the level of implied beliefs, whereas the LMSR prices the outcome simplex coherently and with greater collateral efficiency. Only the abstract and Introduction were supplied, so these theoretical claims, proofs, empirical results, robustness analyses, and appendices were not verified.",
+          "practicalApplication": "Prediction-market designers could evaluate a CLOB not only as an information-aggregation mechanism but also as a mechanism that screens tail demand and earns rent. For hybrid venues, the paper suggests considering how AMM depth, order routing, and maker-side contestability affect CLOB premiums and liquidity allocation. In multi-outcome markets, a single cost-function AMM may offer more coherent displayed probabilities and better collateral efficiency than a collection of binary books.",
+          "methodology": "According to the Introduction, the paper constructs a coexistence model of a CLOB and an LMSR with state-contingent tail demand, then theoretically analyzes binary equilibrium and multi-outcome pricing. Empirically, the authors report examining Polymarket transaction data for makers' settlement profits, one-sided positions, regime-dependent mispricing, and multi-outcome set premiums, together with several counterfactual checks.",
+          "limitations": "This is a LIMITED-SOURCE assessment of a 62-page paper based solely on its abstract and Introduction. The model assumptions, exact theorem conditions, proofs, data construction, identification strategy, statistical tables, calibration, appendices, and reproducibility were not examined. The Introduction itself acknowledges that its transaction-level samples contain no AMM and therefore do not directly test venue choice, and that the regime-dependent sign reversal is documented for one type of short-horizon binary contract. Accordingly, the causal interpretation, external validity, actual coexistence effects of CLOB and LMSR venues, and claims for $n \\ge 3$ outcomes must be treated as unverified author claims.",
+          "reason": "The paper directly concerns electronic trading and market microstructure by jointly studying CLOBs, AMMs, adverse selection, order routing, and multi-outcome pricing. Its interpretation of prediction-market maker profits as settlement-time screening rents rather than spread capture is particularly interesting. However, the central claims cannot be independently assessed from the supplied sections, so the recommendation is conditional on a full review of the main text and appendices.",
+          "tags": [
+            "prediction markets",
+            "CLOB",
+            "LMSR",
+            "automated market maker",
+            "market microstructure",
+            "information aggregation",
+            "screening",
+            "tail demand",
+            "order routing",
+            "multi-outcome markets"
+          ]
+        }
+      }
+    },
+    "2609.20192": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "連続ダブルオークション市場のエージェントベースモデルを用い、ファンダメンタル価値へのアンカリングが弱まると、外生ショックなしでもレバレッジ関連の内生的な流動性危機が生じる条件を分析した研究です。",
+        "mainResult": "アンカリングを弱めると、リターンの裾指数は約6.5から2.3へ低下し、統合ボラティリティ自己相関はおよそ2倍になりました。危機は弱いアンカリングと中程度の群集行動が共存する狭い領域に集中し、レバレッジが高いほど深刻化します。危機の発生はレバレッジ単独ではなく、レバレッジと維持証拠金率で決まるマージン・バッファーに主に依存し、発生は急激な臨界転移ではなく滑らかな亜臨界クロスオーバーでした。",
+        "practicalApplication": "弱い価格アンカー、群集行動、証拠金制約を含む市場のストレステストや、レバレッジ規制・維持証拠金率の設計に対する概念的な示唆があります。特に、レバレッジと維持証拠金率を個別に見るより、強制売却までの価格下落余地であるマージン・バッファーを監視する枠組みを示します。",
+        "methodology": "アンカー付きノイズトレーダー、チャーティスト型群集投資家、資金制約のあるマーケットメーカー、マージンコールを受けるレバレッジ保有者からなる単一の連続ダブルオークション市場をシミュレーションしました。外生ショックを加えず、群集行動を含むレバレッジ市場と含まない市場の板枯渇差分を危機指標として比較し、リターン分布、ボラティリティ自己相関、発火確率、ラン長検定、分岐比率の代理指標を用いて危機の性質を評価しました。",
+        "limitations": "結果は単一のエージェントベース市場モデルとその行動規則・パラメータ設定に依存します。実市場との比較では、ボラティリティのクラスタリングが短期記憶にとどまり、実市場で観察される長期記憶を再現しないと本文要旨自身が述べています。したがって、実際の証拠金規制や市場への定量的な外挿、因果関係の一般化には限界があります。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "オーダーブック、流動性、マーケットメーカー、レバレッジ、マージンコールを統合して内生的な流動性危機を分析しており、market microstructureと金融安定性に直接関連します。マージン・バッファーへの縮約という明確なモデル上の結果もありますが、抽象的なシミュレーション研究であるため重要度は4としました。",
+        "tags": [
+          "market microstructure",
+          "order book",
+          "liquidity crises",
+          "leverage",
+          "margin calls",
+          "agent-based model",
+          "market makers",
+          "herding",
+          "liquidity risk"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study uses an agent-based continuous double-auction market to analyze when weakening fundamental-value anchoring produces endogenous leverage-related liquidity crises without exogenous shocks.",
+          "mainResult": "Weakening the anchor reduced the return-tail exponent from about 6.5 to 2.3 and roughly doubled integrated volatility autocorrelation. Crises were concentrated in a narrow region with weak anchoring and intermediate herding, and became more severe as leverage increased. Crisis onset depended mainly on a margin buffer determined jointly by leverage and the maintenance margin, rather than on leverage alone, and occurred as a smooth sub-critical crossover rather than an abrupt critical transition.",
+          "practicalApplication": "The model offers conceptual implications for stress testing markets with weak price anchoring, herding, and margin constraints, as well as for designing leverage and maintenance-margin rules. In particular, it suggests monitoring the margin buffer—the price decline a holder can absorb before forced liquidation—rather than considering leverage and maintenance margins separately.",
+          "methodology": "The authors simulate a single continuous double-auction market populated by anchored noise traders, chartist herders, funding-constrained market makers, and leveraged holders subject to margin calls. No exogenous shock is injected. Crisis intensity is measured using the matched-herding levered-minus-unlevered book-depletion increment, and the study evaluates return distributions, volatility autocorrelation, ignition probabilities, run-length tests, and a branching-ratio proxy.",
+          "limitations": "The results depend on one agent-based market model and its behavioral rules and parameterization. The abstract states that volatility clustering remains short-memory rather than reproducing the long memory observed in real markets. Therefore, quantitative extrapolation to actual margin regulation or markets, and broad causal generalization, are limited.",
+          "reason": "The paper directly addresses order books, liquidity, market makers, leverage, and margin calls, making it materially relevant to market microstructure and financial stability. Its reduction of crisis onset to a margin-buffer measure is a clear model-based result, but the abstract describes an idealized simulation study, so the importance is rated 4.",
+          "tags": [
+            "market microstructure",
+            "order book",
+            "liquidity crises",
+            "leverage",
+            "margin calls",
+            "agent-based model",
+            "market makers",
+            "herding",
+            "liquidity risk"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "単一資産のlimit order book型agent-based modelを用い、resting liquidityのファンダメンタル価値へのアンカー、群集行動、レバレッジ、maintenance marginの相互作用が内生的な流動性危機を生む条件を調べる研究である。論文のシミュレーションでは、アンカーがほぼ失われ、中程度の群集行動と高いレバレッジが重なる狭い領域で、強制売却と注文板枯渇が自己増幅すると報告されている。",
+        "mainResult": "著者の結果では、レバレッジによる追加的な注文板枯渇は主にアンカー強度が $\\phi \\lesssim 0.15$、群集行動比率が概ね $h=0.15$ から $0.30$ の領域に集中する。危機の開始はレバレッジ単独より、最初のmargin callまでの価格下落余地である $B=(1/\\lambda-m_{maint})/(1-m_{maint})$ によって一次的に整理され、$B$ が小さいほど枯渇率と発火確率が高いと報告される。また、弱いアンカー下ではレバレッジ上昇に伴いreturn tail exponentが約 $6.5$ から $2.3$ へ低下する一方、volatility clusteringは主としてアンカー除去と群集行動に由来し、長期記憶ではなく数ラグの短期記憶にとどまる。発火確率は連続的に上昇し、branching-ratio proxyも $1$ を大幅に下回るため、著者は臨界点ではなく滑らかなsub-critical crossoverと結論づける。",
+        "practicalApplication": "電子市場のstress testingにおいて、レバレッジだけでなくmaintenance marginと注文流動性の価値アンカーを共同で監視すべきことを示唆する。特に、価格追随型の再提示、トレンド追随注文、強制デレバレッジが同時に強まる状況では、証拠金引き上げがレバレッジ増加と同様に流動性を悪化させ得る。ただし、実市場への閾値設定やexecution policyへの直接利用には追加の較正と実証検証が必要である。",
+        "methodology": "連続ダブルオークション上に、anchored noise traders、chartist herders、資金制約付きmarket makers、margin callを受けるleveraged holdersを配置する。流動性供給の参照価格を $p_t^{ref}=\\phi v+(1-\\phi)m_t$ とし、アンカー強度 $\\phi$、群集行動比率 $h$、レバレッジ $\\lambda$、maintenance margin $m_{maint}$ を変化させる。危機指標は注文板の片側にresting depthがないイベント比率であり、レバレッジ固有の効果は同一の $\\phi$ と $h$ におけるlevered-minus-unlevered差分で識別する。複数seedのparameter sweepにより、Hill tail exponent、absolute-return ACF、発火確率、breach count、Fano-factor型branching proxyを比較し、外生market sellを用いた対照実験も行う。",
+        "limitations": "結果は単一資産の簡略化されたagent-based modelに基づき、実データへの較正やout-of-sample検証はない。主要なmargin-buffer collapseは一つの開始近傍セルでのみ検証され、同じ $B$ でも残差があるため厳密な一次元縮約ではない。セル当たりのseed数は概ね $8$ から $20$ で、枯渇指標は右裾が長くseed依存性が強いため、開始近傍の推定は不確実である。volatility clusteringは短期記憶しか再現せず、branching proxyもHawkes modelの尤度推定ではない。人口規模、資本、ファンダメンタル過程、群集行動期間に対する頑健性も十分に探索されておらず、臨界性の否定や実市場への一般化はモデル内の証拠として解釈すべきである。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "limit order bookの流動性枯渇を、価値アンカー、群集行動、レバレッジ、証拠金制約の共同作用として明示的に整理しており、market microstructure研究との関連性は高い。特に、危機開始をmargin bufferで要約する仮説と、臨界点ではなく確率的crossoverであるという診断は興味深い。一方、結論は未較正のシミュレーションと限定的なparameter sweepに依存するため、実証的事実や普遍的な市場閾値としてではなく、検証可能な機構仮説として読むことを推奨する。",
+        "tags": [
+          "指値注文板",
+          "市場マイクロストラクチャー",
+          "エージェントベースモデル",
+          "内生的流動性危機",
+          "レバレッジ",
+          "証拠金バッファ",
+          "群集行動",
+          "ファンダメンタル・アンカー",
+          "強制デレバレッジ",
+          "ボラティリティ・クラスタリング"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "Using a single-asset limit-order-book agent-based model, the paper studies when interactions among fundamental-value anchoring of resting liquidity, herding, leverage, and maintenance margins generate endogenous liquidity crises. In the reported simulations, forced selling and order-book depletion become self-reinforcing within a narrow region where the anchor is almost absent and intermediate herding coincides with high leverage.",
+          "mainResult": "The author reports that incremental order-book depletion attributable to leverage is concentrated mainly where anchor strength is $\\phi \\lesssim 0.15$ and the herding share is approximately $h=0.15$ to $0.30$. Crisis onset is organized to leading order by the price decline available before the first margin call, $B=(1/\\lambda-m_{maint})/(1-m_{maint})$, rather than by leverage alone; smaller $B$ is associated with higher depletion and ignition probability. Under weak anchoring, the return tail exponent reportedly falls from about $6.5$ to $2.3$ as leverage rises, whereas volatility clustering is driven mainly by anchor removal and herding and lasts only a few lags rather than exhibiting long memory. Because ignition probability increases continuously and the branching-ratio proxy remains far below $1$, the author concludes that the onset is a smooth sub-critical crossover rather than a critical point.",
+          "practicalApplication": "The results suggest that electronic-market stress testing should jointly monitor leverage, maintenance margins, and the value anchoring of displayed liquidity. In particular, when price-following quote replenishment, trend-following order flow, and forced deleveraging intensify together, tighter margin requirements may impair liquidity in a manner similar to higher leverage. Direct use for real-market thresholds or execution policies would nevertheless require further calibration and empirical validation.",
+          "methodology": "The continuous double auction contains anchored noise traders, chartist herders, funding-constrained market makers, and leveraged holders subject to margin calls. The liquidity reference price is $p_t^{ref}=\\phi v+(1-\\phi)m_t$, while anchor strength $\\phi$, herding share $h$, leverage $\\lambda$, and maintenance margin $m_{maint}$ are varied. The crisis measure is the fraction of events for which one side of the book has no resting depth, and the leverage-specific effect is identified through the levered-minus-unlevered difference at matched $\\phi$ and $h$. Multi-seed parameter sweeps compare the Hill tail exponent, absolute-return ACF, ignition probability, breach count, and a Fano-factor branching proxy; an exogenous market-sell experiment serves as a control.",
+          "limitations": "The findings come from a simplified single-asset agent-based model without calibration to real data or out-of-sample validation. The principal margin-buffer collapse is tested only at one near-onset cell, and residual dispersion at matched $B$ means that it is not an exact one-dimensional reduction. Cell-level seed counts are generally between $8$ and $20$, while the depletion statistic is strongly right-skewed and seed-sensitive, making near-onset estimates uncertain. The model reproduces only short-memory volatility clustering, and the branching proxy is not a likelihood-based Hawkes-model estimate. Robustness to population size, capital, the fundamental process, and the herding horizon is not mapped sufficiently; consequently, the rejection of criticality and any real-market generalization should be interpreted as model-specific evidence.",
+          "reason": "The paper is highly relevant to market microstructure because it explicitly organizes limit-order-book depletion around the joint effects of value anchoring, herding, leverage, and margin constraints. Its margin-buffer hypothesis for crisis onset and its diagnosis of a probabilistic crossover rather than a critical point are particularly interesting. However, because the conclusions depend on an uncalibrated simulation and limited parameter sweeps, the paper is recommended as a source of testable mechanism hypotheses rather than as evidence of universal empirical thresholds.",
+          "tags": [
+            "limit order book",
+            "market microstructure",
+            "agent-based model",
+            "endogenous liquidity crisis",
+            "leverage",
+            "margin buffer",
+            "herding",
+            "fundamental anchoring",
+            "forced deleveraging",
+            "volatility clustering"
+          ]
+        }
+      }
+    },
+    "2609.20224": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "rates",
+        "summary": "本研究は、オプション価格から推定される割引率や資金調達率が、満期を年末越しにする際の取引・ベンチマーク側の摩擦を含み得ることを検証している。",
+        "mainResult": "SPXおよびRUTオプションの2012年から2025年のデータでは、満期が12月31日を初めて越えると、オプション・ファンディング・ベーシスが年率換算前で2–3 bp上昇した。この効果は固定的な価格ウェッジとして振る舞い、2010年代半ばに強まり、別の契約・ベンチマークでも観察された。さらに、政府債券のCIPでも独立に現れ、独自構築したオプション・パネルでも再現された。",
+        "practicalApplication": "オプションのput-call parityから割引率を推定する際、得られた値を純粋な無摩擦金利と解釈せず、年末の資金調達制約やベンチマーク摩擦を調整する必要性を示す。レート推定、クロス・マーケット裁定、年末の資金調達コスト分析に応用可能である。",
+        "methodology": "2012–2025年のSPX・RUTオプションを用い、満期が12月31日を跨ぐ局面のオプション・ファンディング・ベーシスを比較した。代替契約・ベンチマーク、政府債券CIP、独自構築のオプション・パネルによる再現性も検証している。",
+        "limitations": "抽象からは標本抽出、推定式、統計的有意性、摩擦の具体的な構成要素、因果識別の詳細が確認できない。したがって、観察されたウェッジの経済的原因や他の市場・期間への一般化は確定できない。また、オプション価格からの割引率推定に関する結果であり、無摩擦金利そのものを直接観測したものではない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "金利推定の解釈と年末の市場摩擦に直接関係し、オプション市場と政府債券市場の両方で頑健性を示唆するため、rates分野の読者に有用である。ただし、詳細な識別方法と統計検定が不明なため、最重要評価にはしない。",
+        "tags": [
+          "option-implied rates",
+          "put-call parity",
+          "funding basis",
+          "year-end effects",
+          "market frictions",
+          "CIP",
+          "discount rates"
+        ],
+        "english": {
+          "classification": "rates",
+          "summary": "This study examines whether discount and funding rates inferred from option prices can contain implementation and benchmark-side frictions when maturities cross year-end.",
+          "mainResult": "Using SPX and RUT options from 2012 to 2025, the study reports a 2–3 bp unannualized increase in the option funding basis when maturity first crosses December 31. The effect behaves like a fixed price wedge, strengthens in the mid-2010s, and survives alternative contracts and benchmarks. It also appears independently in government-bond CIP and is reproduced in an independently constructed option panel.",
+          "practicalApplication": "The findings suggest that discount rates inferred from put-call parity should not automatically be interpreted as pure frictionless rates, and should account for year-end funding constraints and benchmark frictions. The result may be useful for rate estimation, cross-market arbitrage analysis, and year-end funding-cost analysis.",
+          "methodology": "The study compares the option funding basis around maturities that cross December 31 using SPX and RUT options from 2012–2025. It also tests robustness across alternative contracts and benchmarks, examines government-bond CIP, and uses an independently constructed option panel for replication.",
+          "limitations": "The abstract does not provide details on sampling, estimation equations, statistical significance, the specific components of the friction, or causal identification. Therefore, the economic source of the wedge and its generalizability to other markets or periods remain uncertain. The results concern rates inferred from option prices and do not directly observe a frictionless risk-free rate.",
+          "reason": "The paper is directly relevant to rates research and informs the interpretation of option-implied discount rates and year-end market frictions, with evidence spanning both options and government bonds. However, the identification strategy and statistical details are unavailable from the abstract, so it is not assigned the highest importance.",
+          "tags": [
+            "option-implied rates",
+            "put-call parity",
+            "funding basis",
+            "year-end effects",
+            "market frictions",
+            "CIP",
+            "discount rates"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "本レビューは74ページの全文ではなく、提供されたabstractとIntroductionのみを用いた限定ソース評価であり、証明・実証手順・付録は確認していない。著者は、2012–2025年のSPX・RUTオプションから得るoption-implied rateと外部benchmark rateの差に、満期が将来の12月31日を初めてまたぐ際のyear-end funding frictionが含まれると主張する。したがって、put–call parityによる高精度なdiscount rateの推定だけでは、その金利が経済的にfrictionlessであるとはいえない、というのが論文の中心的主張である。",
+        "mainResult": "abstractとIntroductionにおける著者の報告では、同一取引日の満期間比較で12月31日を初めてまたぐと、非年率換算のoption funding basisがSPXとRUTで約2–3 bp上昇する。著者は、この効果が年率換算のflow premiumよりも固定的なprice wedgeとして振る舞い、おおむね$\\kappa/\\tau$で年率換算され、2010年代半ばに強まったと主張する。また、代替benchmark、regular weeklies、government-bond CIP、独立構築されたoption panelでも整合的な傾向が得られたとしている。ただし全文は提供されておらず、推定表、証明、データ処理、robustness tests、付録を確認していないため、これらの結果を独立に検証していない。",
+        "practicalApplication": "option-implied rateとTreasuryまたはOIS rateの差をconvenience yieldとして利用する際、year-endのmargin、collateral、funding、netting、内部limit、intermediary balance-sheet capacityに由来する実装コストを考慮すべきことを示唆する。rates relative-value、box spread、CIP、資金調達比較では、12月31日をまたぐ満期を別扱いし、固定bpの価格wedgeと年率換算効果を区別する実務上の診断に利用できる可能性がある。",
+        "methodology": "著者は2012–2025年のSPX・RUTオプションについて、put–call parityから推定したdiscount factorと満期を合わせた外部benchmark discount factorの差をoption funding basisとして分析する。Introductionによれば、同一取引日で年末を初めてまたぐ満期の不連続性と全満期cross sectionを推定し、非線形満期構造、quoted liquidity、NFCI、短期funding proxyなどを制御する。Treasury、OIS、DGS、DTB、regular weeklies、calendar controls、dividend adjustments、quarter-end placeboに加え、government-bond CIPと独立option panelによる比較も報告している。",
+        "limitations": "最大の制約は、74ページの全文ではなくabstractとIntroductionしか提供されていない点である。このため、標本構築、option cleaning、discount-factor推定、標準誤差、識別仮定、欠測・選択bias、表・図、証明、robustness tests、付録を確認しておらず、著者の主張を独立検証できない。著者自身も、規制変更の因果効果は識別していないこと、後続する年末crossingは長期満期のデータが薄いこと、12月31日の不連続性はoption-side frictionの完全な分解ではないことを認めている。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "option-implied rateを純粋なrisk-free rateまたはconvenience-yield measureとみなす際の識別上の注意を、明確なyear-end cutoffを使って提示しており、ratesとmarket microstructureの双方に関連する。ただし、結論の信頼性を判断するには全文でデータ処理、推定仕様、統計的有意性、外部再現性を確認する必要があるため、現段階では限定的な推薦とする。",
+        "tags": [
+          "オプション・インプライド金利",
+          "put–call parity",
+          "option funding basis",
+          "年末効果",
+          "balance-sheet capacity",
+          "box spread",
+          "convenience yield",
+          "government-bond CIP",
+          "SPXオプション",
+          "RUTオプション"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "This is a limited-source assessment based only on the supplied abstract and Introduction, not the full 74-page paper; proofs, empirical procedures, and appendices were not reviewed. The author claims that the spread between option-implied rates and external benchmark rates, estimated from SPX and RUT options over 2012–2025, contains a year-end funding friction when maturity first crosses a future December 31. The paper’s central claim is therefore that precise discount-rate estimation through put–call parity does not by itself establish that the rate is economically frictionless.",
+          "mainResult": "According to the results reported by the author in the abstract and Introduction, the unannualized option funding basis rises by approximately 2–3 bp in both SPX and RUT when maturity first crosses December 31 in same-trade-date comparisons. The author claims that the effect behaves more like a fixed price wedge than an annualized flow premium, annualizing approximately as $\\kappa/\\tau$, and became stronger in the mid-2010s. The author also reports consistent patterns with alternative benchmarks, regular weeklies, government-bond CIP, and an independently constructed option panel. The full paper was not supplied, however, so the estimation tables, proofs, data processing, robustness tests, and appendices were not examined, and these results were not independently verified.",
+          "practicalApplication": "The findings suggest that users interpreting the difference between option-implied rates and Treasury or OIS rates as a convenience yield should account for implementation costs associated with year-end margin, collateral, funding, netting, internal limits, and intermediary balance-sheet capacity. For rates relative-value analysis, box spreads, CIP, and funding comparisons, maturities crossing December 31 may need separate treatment, with a distinction between a fixed-bp price wedge and its annualized effect.",
+          "methodology": "The author analyzes SPX and RUT options from 2012–2025, defining the option funding basis from the difference between a discount factor inferred through put–call parity and a maturity-matched external benchmark discount factor. According to the Introduction, the analysis estimates both the discontinuity for maturities first crossing year-end on the same trade date and the full maturity cross section, controlling for nonlinear maturity structure, quoted liquidity, the NFCI, and a short-term funding proxy. The author also reports checks involving Treasury, OIS, DGS, and DTB benchmarks, regular weeklies, calendar controls, dividend adjustments, quarter-end placebos, government-bond CIP, and an independent option panel.",
+          "limitations": "The primary limitation is that only the abstract and Introduction were supplied, rather than the full 74-page paper. Consequently, the sample construction, option cleaning, discount-factor estimation, standard errors, identification assumptions, missing-data and selection biases, tables, figures, proofs, robustness tests, and appendices were not reviewed, so the author’s claims cannot be independently verified. The author also acknowledges that the causal effect of regulatory changes is not identified, that data support is thin for later year-end crossings at long maturities, and that the December 31 discontinuity does not provide a complete decomposition of option-side frictions.",
+          "reason": "The paper uses a clear year-end cutoff to highlight an identification concern in treating option-implied rates as pure risk-free rates or convenience-yield measures, making it relevant to both rates and market microstructure. It is recommended only provisionally because the full paper is needed to assess data processing, estimation specifications, statistical significance, and external replication.",
+          "tags": [
+            "option-implied rates",
+            "put–call parity",
+            "option funding basis",
+            "year-end effect",
+            "balance-sheet capacity",
+            "box spread",
+            "convenience yield",
+            "government-bond CIP",
+            "SPX options",
+            "RUT options"
+          ]
+        }
+      }
+    },
+    "2609.20282": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、供給安全保障と国内生産・外国供給の目標を達成するための、取引可能な輸入証明書（TIC）の制度設計を分析する貿易政策研究です。電子取引、金融市場のミクロ構造、金利モデル、イールドカーブ、または金利市場を主題としていません。",
+        "mainResult": "要旨によれば、各国に単一の証明書市場を設けることで、異質な供給安全保障目標に対応した厚生最大化配分を分権的に実現でき、証明書価格は経済状況に応じて内生的に調整されます。また、TICは貿易協定からのさまざまな逸脱に対して目標を頑健に保護し、関税・補助金協定よりも少ない情報で運用できると報告されています。",
+        "practicalApplication": "実務上は、供給安全保障、経済的威圧、貿易協定の制度設計に関する政策分析に応用可能です。ただし、本サイトの対象である電子執行や金利市場への直接的な応用は示されていません。",
+        "methodology": "異質な供給安全保障目標を持つ貿易政策の理論モデルを構築し、取引可能な輸入証明書市場が分権的な資源配分を実現する性質を分析しています。さらに、経済的威圧のモデルによって目標を基礎付け、TICと関税・補助金協定を情報要件および協定逸脱への脆弱性の観点から比較しています。",
+        "limitations": "提供された情報は要旨のみであり、定理の条件、均衡の詳細、定量的評価、制度導入コスト、実証的検証の有無は確認できません。したがって、主張の頑健性や現実の政策効果は要旨だけでは評価できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "貿易政策と供給安全保障が中心であり、対象サイトの電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究には実質的に該当しません。キーワードのratesは内容上の関連性を示していません。",
+        "tags": [
+          "trade policy",
+          "supply security",
+          "tradable import certificates",
+          "economic coercion"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies the design of tradable import certificates (TIC) as a trade-policy instrument for achieving domestic production and reliable foreign-supply targets. It does not focus on electronic trading, financial-market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, a single certificate market per country can decentralize the welfare-maximizing allocation under heterogeneous supply-security targets, with certificate prices adjusting endogenously to economic conditions. TIC are also reported to protect targets robustly against various deviations from trade agreements and to require less information than tariff-subsidy agreements.",
+          "practicalApplication": "The framework may be useful for policy analysis concerning supply security, economic coercion, and the design of trade agreements. However, no direct application to electronic execution or interest-rate markets is presented.",
+          "methodology": "The paper develops a theoretical trade-policy model with heterogeneous supply-security targets and analyzes the allocation properties of a tradable import-certificate market. It additionally microfounds the targets through a model of economic coercion and compares TIC with tariff-subsidy agreements in terms of information requirements and vulnerability to deviations.",
+          "limitations": "Only the abstract is available, so the conditions for the theoretical results, equilibrium details, quantitative assessment, implementation costs, and empirical validation cannot be assessed. The robustness and real-world policy effects therefore remain uncertain based on the abstract alone.",
+          "reason": "The paper concerns trade policy and supply security rather than the site's focus areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates research. The keyword hint “rates” does not establish substantive relevance.",
+          "tags": [
+            "trade policy",
+            "supply security",
+            "tradable import certificates",
+            "economic coercion"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.20293": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、rough volatilityにおける記憶とスケーリングの結合を、一般化Langevin方程式（GLE）で分離する確率的ボラティリティ・フレームワークを提案する。金利モデル、イールドカーブ、電子取引、または市場マイクロストラクチャーが主題ではない。",
+        "mainResult": "要旨によれば、GLEはmemory kernel、potential、noise covarianceを用いて、ボラティリティの記憶とスケーリングを独立に扱う。公開データのphysical-measure検証では、memoryless leverage effectとtime-reversal symmetryという二つの制約的ケースが棄却された一方、rough scalingの制約は識別不足のため反証されなかった。",
+        "practicalApplication": "確率的ボラティリティのモデル設計や、記憶効果とvariance skewの分析には応用可能性がある。ただし、要旨ではrisk-neutral constructionとSPX--VIX同時calibrationは将来のcompanion paperに委ねられており、実務的な価格付けやヘッジへの適用結果は示されていない。",
+        "methodology": "非平衡統計力学からGLEを導入し、memory kernel、potential、noise covarianceを用いてモデル化する。公開データに対するphysical-measure testsで、memoryless leverage effectおよびtime-reversal symmetryを検証している。",
+        "limitations": "評価対象は主として確率的ボラティリティであり、対象サイトの金利・イールドカーブ領域への直接的な貢献はない。要旨からはデータ、推定手順、統計検定の詳細を確認できず、risk-neutral validation、SPX--VIX calibration、industry-grade dataでの検証も未実施である。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "rough volatilityと確率的ボラティリティには関連するが、電子取引、market microstructure、interest-rate models、yield curves、ratesを実質的には扱っていないため、対象サイトのスコープ外と判定する。",
+        "tags": [
+          "rough volatility",
+          "generalized Langevin equation",
+          "stochastic volatility",
+          "memory kernel",
+          "volatility skew",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a stochastic-volatility framework based on the generalized Langevin equation (GLE) to decouple memory and scaling in rough volatility. It is not primarily about interest-rate models, yield curves, electronic trading, or market microstructure.",
+          "mainResult": "According to the abstract, the GLE uses a memory kernel, potential, and noise covariance to model volatility memory and scaling separately. Physical-measure tests on public data reject two constrained cases, a memoryless leverage effect and time-reversal symmetry, while the rough-scaling constraint remains unidentified rather than refuted.",
+          "practicalApplication": "The framework may be useful for stochastic-volatility model design and for analyzing memory effects and variance skew. However, the risk-neutral construction and joint SPX--VIX calibration are deferred to a companion paper, so no practical pricing or hedging results are reported.",
+          "methodology": "The paper imports the GLE from non-equilibrium statistical mechanics and models volatility using a memory kernel, potential, and noise covariance. It applies physical-measure tests to public data to assess the memoryless leverage-effect and time-reversal-symmetry restrictions.",
+          "limitations": "The research focuses on stochastic volatility and offers no direct contribution to the site's interest-rate or yield-curve focus. The abstract does not provide details of the data, estimation procedure, or statistical tests. Risk-neutral validation, SPX--VIX calibration, and validation on industry-grade data remain outstanding.",
+          "reason": "Although it is relevant to rough and stochastic volatility, it does not materially address electronic trading, market microstructure, interest-rate models, yield curves, or rates, so it is outside the site's scope.",
+          "tags": [
+            "rough volatility",
+            "generalized Langevin equation",
+            "stochastic volatility",
+            "memory kernel",
+            "volatility skew",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.20405": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "CARA効用を持つ新古典派成長モデルについて、割引率 $\\rho$ が人口成長率 $n$ に近い場合に、任意の精度を達成できる大域的な閉形式近似を導出する研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場の分析を主題としていません。",
+        "mainResult": "要旨によれば、導出した近似を用いて、消費関数が厳密に凹であること、また定常状態へ収束する経路として前倒し型と後倒し型の2種類があり得ることを示します。",
+        "practicalApplication": "マクロ経済の成長経路や消費動学の理論分析には利用可能と考えられますが、対象サイトの電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利実務への直接的な応用は要旨から確認できません。",
+        "methodology": "CARA効用を備えた新古典派成長モデルを設定し、$\\rho$ が $n$ に近い漸近領域で、大域的な閉形式近似を構成しています。要旨には、近似の具体的な導出、誤差評価、数値検証の詳細は記載されていません。",
+        "limitations": "評価は要旨だけに基づいており、近似の適用範囲、誤差保証の形式、モデル仮定の妥当性、数値的頑健性は確認できません。また、金融市場や金利関連の含意は要旨に示されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "研究対象は新古典派成長モデルと消費動学であり、指定された金融リサーチ領域との関連が限定的または間接的なため、スコープ外と判定します。",
+        "tags": [
+          "neoclassical growth model",
+          "CARA utility",
+          "closed-form approximation",
+          "consumption dynamics",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper derives a globally valid closed-form approximation for a neoclassical growth model with CARA utility, achieving arbitrary precision when the discount rate $\\rho$ is close to the population growth rate $n$. It does not primarily address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, the approximation is used to show that the consumption function is strictly concave and that two types of paths, front-loading and back-loading, can converge to the steady state.",
+          "practicalApplication": "The results may support theoretical analysis of macroeconomic growth paths and consumption dynamics, but no direct application to electronic execution, market microstructure, interest-rate models, yield curves, or rates practice is evident from the abstract.",
+          "methodology": "The author formulates a neoclassical growth model with CARA utility and constructs a global closed-form approximation in the asymptotic regime where $\\rho$ is close to $n$. The abstract does not provide details on the derivation, error bounds, or numerical validation.",
+          "limitations": "This assessment is based only on the abstract. The scope of the approximation, the form of its error guarantee, the validity of the modeling assumptions, and numerical robustness cannot be assessed. The abstract also gives no implications for financial markets or interest rates.",
+          "reason": "The paper concerns a neoclassical growth model and consumption dynamics, with only limited or indirect relevance to the specified financial-research domains; it is therefore classified as out of scope.",
+          "tags": [
+            "neoclassical growth model",
+            "CARA utility",
+            "closed-form approximation",
+            "consumption dynamics",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.20462": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "組織内部の仕組みが複数の目的に及ぼす相反する効果を「内部外部性」として捉え、努力の内部相殺による構造的非効率を説明する理論的枠組みを提案する研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "要旨によれば、内部メカニズムが複数のパフォーマンス目標に符号付きの効果を及ぼすと、効果の相殺が生じ、組織活動の一部が失われると論じています。この相殺の割合を「conflict」として測定し、構造的な問題を解消しない限り、努力の再配分や最適化だけでは成果向上が制約されると示しています。",
+        "practicalApplication": "組織のガバナンス、プロセス、技術投資の優先順位付けにおいて、努力の最適配分より先に内部メカニズム間の相反を特定・是正するという一般的な示唆を与えます。ただし、対象分野向けの取引執行、価格形成、流動性管理、金利リスク管理への具体的な応用は要旨から確認できません。",
+        "methodology": "内部メカニズムを、複数のパフォーマンス目標に対して正負の効果を持つプリミティブとしてモデル化し、相反効果から内部 conflict と構造的非効率を定式化します。要旨では、実証データ、推定手法、数値実験の詳細は示されていません。",
+        "limitations": "評価は要旨に基づくため、モデルの仮定、conflict の具体的な測定方法、予測の検証結果、実務での効果量は判断できません。また、主題は一般的な組織設計・ガバナンスであり、対象サイトの専門領域との直接的な関連性がありません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "組織内の構造的非効率を扱う研究としては概念的な関心がありますが、対象サイトが扱う電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場の研究には直接該当しないため、掲載は推奨しません。",
+        "tags": [
+          "組織経済学",
+          "内部外部性",
+          "構造的非効率",
+          "ガバナンス",
+          "スコープ外"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a theoretical framework in which opposing effects of internal organizational mechanisms across multiple objectives create “internal externalities” and structural inefficiency through cancellation of effort. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, when internal mechanisms exert signed effects on multiple performance objectives, these effects can cancel, causing part of organizational activity to be lost. The paper defines this cancellation share as “conflict” and argues that effort reallocation or optimization cannot improve outcomes fully until the structural problem is addressed.",
+          "practicalApplication": "The framework offers general implications for governance, process design, and technology-investment priorities by suggesting that conflicts among internal mechanisms should be identified and remedied before optimizing effort allocation. However, the abstract provides no concrete application to trading execution, price formation, liquidity management, or interest-rate risk management.",
+          "methodology": "The paper models internal mechanisms as primitives with positive or negative effects on multiple performance objectives, then formalizes internal conflict and structural inefficiency arising from opposing effects. The abstract does not describe empirical data, estimation procedures, or numerical experiments.",
+          "limitations": "This assessment is based only on the abstract, so the model assumptions, operational measurement of conflict, validation of the testable predictions, and practical effect sizes cannot be assessed. The subject is general organizational design and governance, with no direct connection to the site's specialist domains.",
+          "reason": "Although the paper may be conceptually relevant to organizational economics, it is not materially related to electronic trading, market microstructure, interest-rate models, yield curves, or rates markets. Inclusion is therefore not recommended.",
+          "tags": [
+            "organizational economics",
+            "internal externalities",
+            "structural inefficiency",
+            "governance",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.20554": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、金融時系列の基盤モデルを用いた株式予測で、予測起点後のデータを学習に利用する look-ahead bias が測定精度と経済価値に与える影響を検証する。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場を主題とはしていない。",
+        "mainResult": "米国学習環境では、予測起点後の vintages は point-in-time（PIT）予測を大きく改訂したが、通常は精度を悪化させた。20個の米国モデルセット・予測期間の組合せのうち18個で、rolling 比較の平均二乗予測誤差が高くなった。制約付き運用ルールでは、PITとの差の年率 certainty-equivalent return の中央値が米国で $-1.77$ percentage points、国際市場で $-2.14$ points だった。",
+        "practicalApplication": "金融予測モデルのバックテストでは、予測起点時点で利用可能だった情報だけで学習・評価する PIT 管理が重要である。モデルの将来データへの露出は情報集合の違反を示すが、それだけで見かけの予測精度や投資価値が過大評価されたとは限らないため、精度と経済価値を別々に検証すべきである。",
+        "methodology": "5系列の金融時系列 foundation models について、米国、グローバル、factor-augmented の学習環境、14株式市場、4予測期間を対象に、年次 vintage を変える rolling 比較と、vintage を固定して対象期間を学習 cutoff の前後へ移動する fixed-vintage 比較を実施した。各予測を、同一の数値履歴と推論手順による origin-aligned PIT benchmark と比較し、平均二乗誤差、certainty-equivalent return、誤差の厳密な二乗分解を評価した。",
+        "limitations": "要旨からは、データ期間、モデル仕様、統計的有意性、取引コスト、実装可能性、運用ルールの詳細が確認できない。対象は主に株式市場の予測であり、結果を金利市場、イールドカーブ、電子執行、または市場マイクロストラクチャーへ一般化できない。グローバル学習と factor-augmented 学習では結果がより混在している。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "look-ahead bias と point-in-time 評価に関する方法論的示唆はあるが、本サイトの対象である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場を直接扱っていないため、対象外と判定する。",
+        "tags": [
+          "out_of_scope",
+          "look-ahead bias",
+          "point-in-time data",
+          "financial forecasting",
+          "foundation models",
+          "equity markets"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper examines how using post-origin training data affects measured accuracy and economic value in equity forecasting with financial time-series foundation models. It is not primarily about electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "In the U.S.-trained environment, post-origin vintages materially revised point-in-time (PIT) forecasts but generally reduced accuracy. Mean squared forecast error was higher in 18 of 20 U.S. model-set-horizon combinations in rolling comparisons. Under the constrained allocation rule, the median annualized certainty-equivalent-return difference relative to PIT was $-1.77$ percentage points in the United States and $-2.14$ points internationally.",
+          "practicalApplication": "Backtests of financial forecasting models should train and evaluate models using only information available at the forecast origin, with explicit PIT data controls. However, exposure to future data indicates an information-set violation and does not by itself prove inflated predictive accuracy or investor value, so statistical accuracy and economic value should be assessed separately.",
+          "methodology": "The authors evaluate five sets of financial time-series foundation models across U.S., global, and factor-augmented training environments, 14 equity markets, and four forecast horizons. They conduct rolling comparisons that vary annual vintages and fixed-vintage comparisons that move target windows across the training cutoff. Each forecast is compared with an origin-aligned PIT benchmark using identical numerical histories and inference protocols. They assess mean squared error, certainty-equivalent returns, and an exact squared-error decomposition.",
+          "limitations": "The abstract does not provide the sample periods, model specifications, statistical significance, transaction costs, implementation details, or full allocation-rule details. The study focuses mainly on equity-market forecasting, so its findings cannot be directly generalized to rates, yield curves, electronic execution, or market microstructure. Results from global and factor-augmented training are more mixed.",
+          "reason": "The paper offers useful methodological evidence on look-ahead bias and PIT evaluation, but it does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets. It is therefore out of scope for this site.",
+          "tags": [
+            "out_of_scope",
+            "look-ahead bias",
+            "point-in-time data",
+            "financial forecasting",
+            "foundation models",
+            "equity markets"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 869,
+      "outputTokens": 1021,
+      "reasoningTokens": 99,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1890,
+      "estimatedCostUsd": 0.001399,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.18949v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 782,
+      "outputTokens": 973,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1755,
+      "estimatedCostUsd": 0.001324,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.19455v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 732,
+      "outputTokens": 808,
+      "reasoningTokens": 66,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1540,
+      "estimatedCostUsd": 0.001116,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.19660v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 921,
+      "outputTokens": 944,
+      "reasoningTokens": 48,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1865,
+      "estimatedCostUsd": 0.001317,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.19843v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 894,
+      "outputTokens": 966,
+      "reasoningTokens": 43,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1860,
+      "estimatedCostUsd": 0.001338,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.19866v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 907,
+      "outputTokens": 1136,
+      "reasoningTokens": 54,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2043,
+      "estimatedCostUsd": 0.001545,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.20017v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 4357,
+      "outputTokens": 1809,
+      "reasoningTokens": 178,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 4354,
+      "totalTokens": 6166,
+      "estimatedCostUsd": 0.057962,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 62,
+      "paperIds": [
+        "2609.20017v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 952,
+      "outputTokens": 1319,
+      "reasoningTokens": 52,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2271,
+      "estimatedCostUsd": 0.001773,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.20192v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 17824,
+      "outputTokens": 2686,
+      "reasoningTokens": 516,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 17821,
+      "totalTokens": 20510,
+      "estimatedCostUsd": 0.142837,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 16,
+      "paperIds": [
+        "2609.20192v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 762,
+      "outputTokens": 1137,
+      "reasoningTokens": 84,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1899,
+      "estimatedCostUsd": 0.001517,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.20224v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 2048,
+      "outputTokens": 2148,
+      "reasoningTokens": 348,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 2045,
+      "totalTokens": 4196,
+      "estimatedCostUsd": 0.053197,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 74,
+      "paperIds": [
+        "2609.20224v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 767,
+      "outputTokens": 1007,
+      "reasoningTokens": 60,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1774,
+      "estimatedCostUsd": 0.001362,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.20282v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 836,
+      "outputTokens": 993,
+      "reasoningTokens": 90,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1829,
+      "estimatedCostUsd": 0.001359,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.20293v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 697,
+      "outputTokens": 902,
+      "reasoningTokens": 56,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1599,
+      "estimatedCostUsd": 0.001222,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.20405v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 803,
+      "outputTokens": 1042,
+      "reasoningTokens": 40,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1845,
+      "estimatedCostUsd": 0.001411,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.20462v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 928,
+      "outputTokens": 1250,
+      "reasoningTokens": 66,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2178,
+      "estimatedCostUsd": 0.001686,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.20554v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

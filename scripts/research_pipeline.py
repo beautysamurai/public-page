@@ -29,6 +29,7 @@ import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
+import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from datetime import date, datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
@@ -83,6 +84,9 @@ PASTWEEK_URL_TEMPLATE = (
     "https://arxiv.org/list/{category}/pastweek?skip=0&show=2000"
 )
 METADATA_ENDPOINT = "https://export.arxiv.org/api/query"
+OAI_METADATA_ENDPOINT = "https://oaipmh.arxiv.org/oai"
+OAI_NS = "{http://www.openarchives.org/OAI/2.0/}"
+ARXIV_OAI_NS = "{http://arxiv.org/OAI/arXiv/}"
 USER_AGENT = "rates-execution-research/1.0"
 MAX_PASTWEEK_RECOVERY_DAYS = 7
 ARXIV_REQUEST_INTERVAL_SECONDS = 3.0
@@ -1040,13 +1044,228 @@ def fetch_pastweek_listing_page(
     return body
 
 
+def _required_oai_text(element: ET.Element, tag: str) -> str:
+    value = element.findtext(f"{ARXIV_OAI_NS}{tag}")
+    text = " ".join((value or "").split())
+    if not text:
+        raise ListingParseError(f"OAI metadata is missing {tag}")
+    return text
+
+
+def _parse_oai_latest_version(raw: bytes | str, requested_id: str) -> str:
+    """Return the latest validated version suffix from one arXivRaw OAI record."""
+
+    if isinstance(raw, str):
+        body = raw.encode("utf-8")
+    elif isinstance(raw, bytes):
+        body = raw
+    else:
+        raise TypeError("OAI version metadata must be bytes or text")
+    if len(body) > MAX_LIST_BYTES:
+        raise ListingParseError("OAI version metadata response exceeds the size limit")
+    lowered = body.lower()
+    if b"<!doctype" in lowered or b"<!entity" in lowered:
+        raise ListingParseError(
+            "DTD and entity declarations are forbidden in OAI version metadata"
+        )
+    try:
+        root = ET.fromstring(body)
+    except ET.ParseError as exc:
+        raise ListingParseError(
+            "OAI version metadata response is not well-formed XML"
+        ) from exc
+    if root.tag != f"{OAI_NS}OAI-PMH":
+        raise ListingParseError(
+            "OAI version metadata response has an unexpected root element"
+        )
+    if root.find(f"{OAI_NS}error") is not None:
+        raise ListingParseError("OAI version metadata record is unavailable")
+    container = root.find(
+        f"{OAI_NS}GetRecord/{OAI_NS}record/{OAI_NS}metadata"
+    )
+    if container is None or len(container) != 1:
+        raise ListingParseError("OAI version metadata has an unexpected record shape")
+    record = list(container)[0]
+
+    base_id = ""
+    versions: list[str] = []
+    for element in record.iter():
+        local = element.tag.rsplit("}", 1)[-1]
+        if local == "id" and not base_id:
+            base_id = " ".join((element.text or "").split())
+        elif local == "version":
+            version = " ".join((element.get("version") or "").split())
+            if not re.fullmatch(r"v[1-9][0-9]*", version):
+                raise ListingParseError("OAI version metadata contains an invalid version")
+            versions.append(version)
+
+    requested_base = _base_arxiv_id(requested_id)
+    if base_id.casefold() != requested_base.casefold():
+        raise ListingParseError(
+            "OAI version metadata id does not match the requested paper"
+        )
+    if not versions or len(versions) != len(set(versions)):
+        raise ListingParseError("OAI version metadata has invalid version history")
+    version_numbers = sorted(int(version[1:]) for version in versions)
+    if version_numbers != list(range(1, version_numbers[-1] + 1)):
+        raise ListingParseError("OAI version metadata has a non-contiguous version history")
+    return f"v{version_numbers[-1]}"
+
+
+def _parse_oai_record(
+    raw: bytes | str, requested_id: str, version: str
+) -> digest.AtomEntry:
+    """Parse one bounded arXiv OAI-PMH record without accepting DTDs/entities."""
+
+    if isinstance(raw, str):
+        body = raw.encode("utf-8")
+    elif isinstance(raw, bytes):
+        body = raw
+    else:
+        raise TypeError("OAI metadata must be bytes or text")
+    if len(body) > MAX_LIST_BYTES:
+        raise ListingParseError("OAI metadata response exceeds the size limit")
+    lowered = body.lower()
+    if b"<!doctype" in lowered or b"<!entity" in lowered:
+        raise ListingParseError("DTD and entity declarations are forbidden in OAI metadata")
+    try:
+        root = ET.fromstring(body)
+    except ET.ParseError as exc:
+        raise ListingParseError("OAI metadata response is not well-formed XML") from exc
+    if root.tag != f"{OAI_NS}OAI-PMH":
+        raise ListingParseError("OAI metadata response has an unexpected root element")
+    if root.find(f"{OAI_NS}error") is not None:
+        raise ListingParseError("OAI metadata record is unavailable")
+    metadata = root.find(
+        f"{OAI_NS}GetRecord/{OAI_NS}record/{OAI_NS}metadata/{ARXIV_OAI_NS}arXiv"
+    )
+    if metadata is None:
+        raise ListingParseError("OAI metadata response has no arXiv record")
+
+    record_id = _required_oai_text(metadata, "id")
+    requested_base = _base_arxiv_id(requested_id)
+    if record_id.casefold() != requested_base.casefold():
+        raise ListingParseError("OAI metadata id does not match the requested paper")
+    if not re.fullmatch(r"v[1-9][0-9]*", version):
+        raise ListingParseError("OAI metadata version is invalid")
+    versioned_id = f"{record_id}{version}"
+    if not digest.ARXIV_ID_RE.fullmatch(versioned_id):
+        raise ListingParseError("OAI metadata produced an invalid versioned arXiv id")
+
+    created = _required_oai_text(metadata, "created")
+    updated = " ".join((metadata.findtext(f"{ARXIV_OAI_NS}updated") or "").split()) or created
+    try:
+        submitted_at = datetime.combine(date.fromisoformat(created), datetime.min.time(), tzinfo=timezone.utc)
+        updated_at = datetime.combine(date.fromisoformat(updated), datetime.min.time(), tzinfo=timezone.utc)
+    except ValueError as exc:
+        raise ListingParseError("OAI metadata contains an invalid date") from exc
+    if updated_at < submitted_at:
+        raise ListingParseError("OAI metadata updated date precedes the created date")
+
+    authors: list[str] = []
+    authors_element = metadata.find(f"{ARXIV_OAI_NS}authors")
+    if authors_element is not None:
+        for author in authors_element.findall(f"{ARXIV_OAI_NS}author"):
+            forenames = " ".join((author.findtext(f"{ARXIV_OAI_NS}forenames") or "").split())
+            keyname = " ".join((author.findtext(f"{ARXIV_OAI_NS}keyname") or "").split())
+            suffix = " ".join((author.findtext(f"{ARXIV_OAI_NS}suffix") or "").split())
+            name = " ".join(part for part in (forenames, keyname, suffix) if part)
+            if name:
+                authors.append(name)
+    if not authors:
+        raise ListingParseError("OAI metadata has no public author name")
+
+    categories = tuple(
+        sorted(
+            set(_required_oai_text(metadata, "categories").split()),
+            key=lambda item: (item.casefold(), item),
+        )
+    )
+    entry = digest.AtomEntry(
+        arxiv_id=versioned_id,
+        title=_required_oai_text(metadata, "title"),
+        authors=tuple(authors),
+        submitted_at=submitted_at,
+        updated_at=updated_at,
+        categories=categories,
+        abstract=_required_oai_text(metadata, "abstract"),
+    )
+    validate_metadata(metadata_from_entry(entry))
+    return entry
+
+
+def _fetch_oai_payload(
+    arxiv_id: str,
+    metadata_prefix: str,
+    *,
+    timeout: float,
+    opener: Callable[..., Any],
+) -> bytes:
+    query = urllib.parse.urlencode(
+        {
+            "verb": "GetRecord",
+            "identifier": f"oai:arXiv.org:{arxiv_id}",
+            "metadataPrefix": metadata_prefix,
+        }
+    )
+    request = urllib.request.Request(
+        f"{OAI_METADATA_ENDPOINT}?{query}",
+        headers={
+            "Accept": "application/xml,text/xml;q=0.9,*/*;q=0.1",
+            "User-Agent": USER_AGENT,
+        },
+    )
+    with opener(request, timeout=timeout) as response:
+        raw = response.read(MAX_LIST_BYTES + 1)
+    if not isinstance(raw, bytes):
+        raise ListingParseError("OAI metadata response was not bytes")
+    if len(raw) > MAX_LIST_BYTES:
+        raise ListingParseError("OAI metadata response exceeds the size limit")
+    return raw
+
+
+def fetch_oai_metadata(
+    arxiv_ids: Sequence[str],
+    *,
+    timeout: float = 25.0,
+    opener: Callable[..., Any] = urllib.request.urlopen,
+) -> dict[str, digest.AtomEntry]:
+    """Fetch version-pinned metadata through arXiv's official OAI-PMH interface."""
+
+    result: dict[str, digest.AtomEntry] = {}
+    for arxiv_id in arxiv_ids:
+        base_id = _base_arxiv_id(arxiv_id)
+        raw_version = _fetch_oai_payload(
+            base_id,
+            "arXivRaw",
+            timeout=timeout,
+            opener=opener,
+        )
+        version = _parse_oai_latest_version(raw_version, base_id)
+        raw_metadata = _fetch_oai_payload(
+            base_id,
+            "arXiv",
+            timeout=timeout,
+            opener=opener,
+        )
+        entry = _parse_oai_record(raw_metadata, base_id, version)
+        key = _base_arxiv_id(entry.arxiv_id).casefold()
+        if key in result:
+            raise ListingParseError("OAI metadata returned a duplicate paper")
+        result[key] = entry
+    requested = {_base_arxiv_id(item).casefold() for item in arxiv_ids}
+    if set(result) != requested:
+        raise ListingParseError("OAI metadata did not contain every requested id")
+    return result
+
+
 def fetch_metadata(
     arxiv_ids: Sequence[str],
     *,
     timeout: float = 25.0,
     opener: Callable[..., Any] = urllib.request.urlopen,
 ) -> dict[str, digest.AtomEntry]:
-    """Fetch validated Atom metadata for a bounded list of arXiv ids."""
+    """Fetch validated metadata, falling back to OAI-PMH on HTTP 406."""
 
     if not arxiv_ids:
         return {}
@@ -1057,7 +1276,7 @@ def fetch_metadata(
         if not digest.ARXIV_ID_RE.fullmatch(arxiv_id):
             raise ListingParseError("invalid metadata arXiv id")
         clean_ids.append(_base_arxiv_id(arxiv_id))
-    # The arXiv API otherwise applies its default page size of 10 even when
+    # The search API otherwise applies its default page size of 10 even when
     # id_list contains more ids, which makes a valid multi-category batch look
     # like an incomplete metadata response.
     query = urllib.parse.urlencode(
@@ -1067,7 +1286,17 @@ def fetch_metadata(
         }
     )
     url = f"{METADATA_ENDPOINT}?{query}"
-    raw = digest.fetch_atom_xml(url, timeout=timeout, opener=opener)
+    try:
+        raw = digest.fetch_atom_xml(url, timeout=timeout, opener=opener)
+    except urllib.error.HTTPError as exc:
+        # GitHub-hosted runners currently receive HTTP 406 from the legacy
+        # search API even for a single valid id. OAI-PMH is an official arXiv
+        # metadata interface and keeps this pipeline fail-closed: every id must
+        # still be returned and validated before analysis can proceed.
+        if exc.code != 406:
+            raise
+        return fetch_oai_metadata(clean_ids, timeout=timeout, opener=opener)
+
     feed = digest.parse_atom_feed(raw)
     result: dict[str, digest.AtomEntry] = {}
     for entry in feed.entries:

@@ -2,6 +2,13 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-09-19-daily-openai-01",
+      "date": "2026-09-19",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": []
+    },
+    {
       "editionId": "2026-09-18-daily-openai-01",
       "date": "2026-09-18",
       "kind": "daily",
@@ -38,6 +45,27 @@
           "title": "Herding and Liquidity in Order-Book Markets. III. Leverage and the Onset of Endogenous Liquidity Crises under Weak Anchoring",
           "authors": [
             "Jan Novotny"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-09-14-daily-openai-01",
+      "date": "2026-09-14",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.12878v1",
+          "title": "The Favorite-Longshot Bias in Prediction Markets: Evidence from Polymarket",
+          "authors": [
+            "Marcos Cardozo",
+            "José Ignacio Rivero-Wildemauwe"
           ],
           "topics": [
             "Market microstructure"

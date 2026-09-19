@@ -38,4 +38,4 @@ jobs:
           for element in root.iter():
               local = element.tag.split("}")[-1]
               if local.lower() in {"id", "version", "date", "size"}:
-                  print(local, dict(element.attrib), (element.text or "").strip())
+                  print(element.tag, dict(element.attrib), (element.text or "").strip())

@@ -1224,6 +1224,30 @@ def _fetch_oai_payload(
     return raw
 
 
+def _fetch_oai_entry(
+    base_id: str,
+    *,
+    timeout: float,
+    opener: Callable[..., Any],
+) -> digest.AtomEntry:
+    """Fetch one version-pinned OAI record as an atomic retry unit."""
+
+    raw_version = _fetch_oai_payload(
+        base_id,
+        "arXivRaw",
+        timeout=timeout,
+        opener=opener,
+    )
+    version = _parse_oai_latest_version(raw_version, base_id)
+    raw_metadata = _fetch_oai_payload(
+        base_id,
+        "arXiv",
+        timeout=timeout,
+        opener=opener,
+    )
+    return _parse_oai_record(raw_metadata, base_id, version)
+
+
 def fetch_oai_metadata(
     arxiv_ids: Sequence[str],
     *,
@@ -1239,10 +1263,12 @@ def fetch_oai_metadata(
     result: dict[str, digest.AtomEntry] = {}
     for arxiv_id in arxiv_ids:
         base_id = _base_arxiv_id(arxiv_id)
-        raw_version = _retry(
-            lambda base_id=base_id: _fetch_oai_payload(
+        # Retry the version history and descriptive metadata as one operation.
+        # If the second request fails, refetch arXivRaw on the next attempt so
+        # the eventual descriptive record cannot be paired with a stale vN.
+        entry = _retry(
+            lambda base_id=base_id: _fetch_oai_entry(
                 base_id,
-                "arXivRaw",
                 timeout=timeout,
                 opener=opener,
             ),
@@ -1251,20 +1277,6 @@ def fetch_oai_metadata(
             deadline=deadline,
             monotonic_fn=monotonic_fn,
         )
-        version = _parse_oai_latest_version(raw_version, base_id)
-        raw_metadata = _retry(
-            lambda base_id=base_id: _fetch_oai_payload(
-                base_id,
-                "arXiv",
-                timeout=timeout,
-                opener=opener,
-            ),
-            retries,
-            sleep_fn,
-            deadline=deadline,
-            monotonic_fn=monotonic_fn,
-        )
-        entry = _parse_oai_record(raw_metadata, base_id, version)
         key = _base_arxiv_id(entry.arxiv_id).casefold()
         if key in result:
             raise ListingParseError("OAI metadata returned a duplicate paper")

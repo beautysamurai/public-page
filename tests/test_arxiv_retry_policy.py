@@ -206,6 +206,97 @@ class ArxivRetryPolicyTests(unittest.TestCase):
             "2026-09-19",
         )
 
+    def test_oai_retry_is_scoped_to_the_failed_getrecord(self):
+        requested = ["2609.20224", "2609.20405"]
+        calls = []
+        sleeps = []
+        attempts = {}
+
+        class FakeResponse:
+            def __init__(self, body):
+                self.body = body
+
+            def read(self, size=-1):
+                return self.body[:size] if size >= 0 else self.body
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return None
+
+        def oai_xml(arxiv_id):
+            return f"""<?xml version="1.0" encoding="UTF-8"?>
+            <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+              <GetRecord><record><metadata>
+                <arXiv xmlns="http://arxiv.org/OAI/arXiv/">
+                  <id>{arxiv_id}</id>
+                  <created>2026-09-18</created>
+                  <authors><author><keyname>Researcher</keyname></author></authors>
+                  <title>Recovered {arxiv_id}</title>
+                  <categories>q-fin.TR</categories>
+                  <abstract>Rates research.</abstract>
+                </arXiv>
+              </metadata></record></GetRecord>
+            </OAI-PMH>""".encode("utf-8")
+
+        def raw_xml(arxiv_id):
+            return f"""<?xml version="1.0" encoding="UTF-8"?>
+            <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+              <GetRecord><record><metadata>
+                <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/">
+                  <id>{arxiv_id}</id>
+                  <version version="v1" />
+                </arXivRaw>
+              </metadata></record></GetRecord>
+            </OAI-PMH>""".encode("utf-8")
+
+        def opener(request, timeout=0):
+            parsed = urllib.parse.urlparse(request.full_url)
+            if parsed.hostname == "export.arxiv.org":
+                calls.append(("search", "all"))
+                raise http_error(406)
+            query = urllib.parse.parse_qs(parsed.query)
+            arxiv_id = query["identifier"][0].removeprefix("oai:arXiv.org:")
+            prefix = query["metadataPrefix"][0]
+            key = (arxiv_id, prefix)
+            attempts[key] = attempts.get(key, 0) + 1
+            calls.append(key)
+            if key == ("2609.20405", "arXivRaw") and attempts[key] == 1:
+                raise http_error(429)
+            return FakeResponse(raw_xml(arxiv_id) if prefix == "arXivRaw" else oai_xml(arxiv_id))
+
+        fetched = p.fetch_metadata(
+            requested,
+            timeout=7.0,
+            opener=opener,
+            retries=1,
+            sleep_fn=sleeps.append,
+        )
+
+        self.assertEqual(set(fetched), set(requested))
+        self.assertEqual(sleeps, [30])
+        self.assertEqual(attempts[("2609.20224", "arXivRaw")], 1)
+        self.assertEqual(attempts[("2609.20224", "arXiv")], 1)
+        self.assertEqual(attempts[("2609.20405", "arXivRaw")], 2)
+        self.assertEqual(attempts[("2609.20405", "arXiv")], 1)
+
+    def test_default_metadata_retry_is_not_wrapped_around_the_whole_batch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with mock.patch.object(p, "fetch_metadata", side_effect=http_error()) as fetch:
+                report = p.run_daily(
+                    config(retries=3),
+                    state_path=root / "state.json",
+                    output_dir=root / "daily",
+                    checked_at=CHECKED_AT,
+                    list_fetcher=lambda _: listing_html(new=("2608.10001",)),
+                    sleep_fn=lambda _delay: None,
+                )
+
+        self.assertEqual(report["status"], p.UPDATER_OFFLINE)
+        fetch.assert_called_once()
+
     def test_metadata_non_406_http_error_does_not_switch_interface(self):
         calls = []
 

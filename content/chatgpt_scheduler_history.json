@@ -2245,6 +2245,66 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-09-14-daily-openai-01",
+      "editionDate": "2026-09-14",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-19T11:23:22Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-14",
+      "observedBatchDate": "2026-09-14",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月14日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 7 | 5,917 | 7,392 (448) | 0.0101 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 2,728 | 1,745 (170) | 0.0485 | 全51ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. The Favorite-Longshot Bias in Prediction Markets: Evidence from Polymarket\n\n**[arXiv:2609.12878v1](https://arxiv.org/abs/2609.12878v1) — Marcos Cardozo, José Ignacio Rivero-Wildemauwe**\n\n### 概要\n\nPolymarketの約5.88億件の取引と248万walletを用い、favorite–longshot bias（FLB）、集計単位による収益率の変化、価格帯別需要の持続性を調べた実証研究である。著者らはaggregate FLBを報告する一方、その大きさや符号はchild market、投資額、parent eventのどれを基準に集計するかで変わると主張する。本レビューは51ページの論文のabstractとIntroductionだけに基づき、本文、証明、実験、付録は提供されておらず検証していない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 予測市場 / Polymarket / favorite–longshot bias / 市場マイクロストラクチャ / 集計バイアス / 投資家行動 / wallet分析 / 取引収益率 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 大規模な取引データを用い、FLBの測定がaggregation choiceに強く依存する点を示すため、prediction-market microstructureと執行評価に関連性が高い。ただし、限定資料レビューであり、結果の信頼性や再現性を評価できないため、現段階では条件付きの推薦である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 872 | 1,288 (84) | 0.0017 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 2,728 | 1,745 (170) | 0.0485 | 全51ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らによれば、10セント未満の購入は投資額加重で1ドル当たり19.35セントを失い、90セント以上の購入は0.83セントを得た。child market等加重ではlongshotが6.30%の損失となる一方、parent event等加重では4.09%の利益へ反転する。CryptoとPoliticsでは二方向のFLBが見られるが、Sportsでは見られないとも報告する。また、過去のlongshot選好が強いwalletは翌月の低価格購入の26.6%を占めるものの、他のwalletと同程度の収益率だったと主張する。ただし、これらはabstractとIntroductionに記載された著者の主張であり、本文の推定、頑健性検証、証明、付録は確認していない。\n\n**手法:** 2022年11月から2026年3月までのPolymarket Users dataset version 1.3を用い、解決済みmarketの購入価格と最終payoffを比較する。longshotとfavoriteについて、child market等加重、投資額によるpooling、parent event内でpoolした後のevent等加重を比較する。過去の購入だけでwalletの価格帯選好を分類し、その後の購入比率と収益率を調べ、カテゴリー、経験、注文方法、手数料、担保共有条件による差も検討するとされる。\n\n**実務への応用:** prediction marketの執行分析やリスク監視では、低価格tokenの平均損失を一律の価格バイアスと解釈せず、child market数、parent event、取引金額、カテゴリー別に分解する必要がある。trader segmentationでは、反復的なlongshot購入だけを損失集中の代理変数とすることにも注意を要する。\n\n**限界・注意点:** 51ページの全文は提供されず、利用可能な資料はabstractとIntroductionのみである。このため、標本構築、return定義、標準誤差、confidence interval、欠損・選択バイアス、wallet分類、頑健性検証、証明、実験、付録を確認できない。walletは個人と一対一ではなく、同一人物が複数walletを使う可能性がある。観察研究であるため因果的説明は特定されず、parent eventの構成や集計加重への感応度も高い。報告値はすべて著者の主張として扱うべきである。",
+      "papers": [
+        {
+          "arxivId": "2609.12878v1",
+          "title": "The Favorite-Longshot Bias in Prediction Markets: Evidence from Polymarket",
+          "authors": [
+            "Marcos Cardozo",
+            "José Ignacio Rivero-Wildemauwe"
+          ],
+          "submittedDate": "2026-09-11",
+          "updatedDate": "2026-09-14",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.12878v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.12878v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "Polymarketの約5.88億件の取引と248万walletを用い、favorite–longshot bias（FLB）、集計単位による収益率の変化、価格帯別需要の持続性を調べた実証研究である。著者らはaggregate FLBを報告する一方、その大きさや符号はchild market、投資額、parent eventのどれを基準に集計するかで変わると主張する。本レビューは51ページの論文のabstractとIntroductionだけに基づき、本文、証明、実験、付録は提供されておらず検証していない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 872 / 出力 1,288（うち推論 84） · 推定 $0.0017\n論文解析: gpt-5.6-sol / medium · トークン 入力 2,728 / 出力 1,745（うち推論 170） · 全51ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0485",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-09-19-daily-openai-01",
+      "editionDate": "2026-09-19",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-19T11:23:22Z",
+      "status": "NO_NEW_BATCH_EXPECTED",
+      "message": "通常の公開スケジュール上、新しいarXivバッチは予定されていません。",
+      "expectedBatchDate": "2026-09-18",
+      "observedBatchDate": "2026-09-18",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月19日 — 日次レビュー\n\n通常の公開スケジュール上、新しいarXivバッチは予定されていません。\n\n### この号の利用状況\n\nモデル・effort・トークン数：未記録。\n\n\n**推薦論文: なし**",
+      "papers": []
     }
   ]
 }

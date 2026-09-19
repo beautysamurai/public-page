@@ -1,0 +1,493 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-14",
+  "fingerprint": "0e927f0172f3e9649401ec4470d2c2fee1c165127a527f9427e0e513c70f0711",
+  "candidateFingerprints": {
+    "2609.11971": "f591d534a6028ae6a1327513f635b1923c5361e542cb5d2560971a82d2de22df",
+    "2609.12387": "28c1bc649f4010c631975d523d06b91538ff1946c779e69623bbce075cfd146e",
+    "2609.12515": "50bf7c5fee8356426d7608ba534a00148a37fafe5ec70f18b687bf59bda4d86f",
+    "2609.12666": "7a8d3b2975fd322e7425484d8767610b18895da96503807ea4c56364a45d6e05",
+    "2609.12878": "624519282a2ea52d1c11ec07d3607aee85aaa83e112189cd55c621422280f9a2",
+    "2609.12976": "d607b66558d434d44e74099b3ddb132080240caae8e4e683e8517aed6c9f5d17",
+    "2609.13068": "34457d34a1f20602d103faa56014d4a392ff3dbe73789b9b7148173cc324dcb2"
+  },
+  "results": {
+    "2609.11971": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本稿は、コスト、二酸化炭素排出量、顧客不満を同時に最小化する企業向けグリーンサプライチェーンの施設配置問題を扱う。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場の研究ではない。",
+        "mainResult": "単一の小規模数値例では、重み付き和による整数線形計画法が8通りの重みについて最適パレート・フロントを証明し、3種類のFPTASが$\\varepsilon=0.15$に対応する近似保証を満たした。FPTASの計算時間はミリ秒、PuLPによる厳密解法はセンチ秒であったと報告されている。",
+        "practicalApplication": "配送センターの開設と顧客区域の割当てに関するサプライチェーン設計には応用可能だが、対象サイトの電子執行・市場構造・金利分析には直接的な実務適用性がない。",
+        "methodology": "問題を容量制約付き施設配置問題として定式化し、重み付き和による厳密整数線形計画法、3種類のFPTAS、2種類のベースライン・ヒューリスティックを、8顧客・5候補配送センターの単一インスタンスで比較している。",
+        "limitations": "評価は単一かつ非常に小規模な数値例に限られ、実データ、規模拡張性、複数のネットワーク構成、近似手法の一般的な性能は検証されていない。したがって、報告された計算時間や保証の実用的優位性を広く一般化できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "最適化およびサプライチェーン設計としては関連性があるが、本サイトの対象である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場には実質的に関係しないため。",
+        "tags": [
+          "out_of_scope",
+          "supply-chain network design",
+          "facility location",
+          "multi-objective optimization",
+          "FPTAS"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies an enterprise green supply-chain facility-location problem that simultaneously minimizes cost, carbon dioxide emissions, and customer dissatisfaction. It is not research on electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "On a single small numerical instance, the weighted-sum integer linear program certified the optimal Pareto front for eight weight combinations, while three FPTAS variants met the stated approximation guarantee for $\\varepsilon=0.15$. The FPTAS methods finished in milliseconds, compared with centiseconds for the exact PuLP-based solver, as reported.",
+          "practicalApplication": "The methods may be applicable to supply-chain decisions concerning distribution-centre openings and customer-zone assignments, but they have no direct practical application to the site's focus on electronic execution, market structure, or interest-rate analysis.",
+          "methodology": "The paper formulates the problem as a capacitated facility-location problem and compares an exact weighted-sum integer linear program, three FPTAS variants, and two baseline heuristics on a single instance with eight customers and five candidate distribution centres.",
+          "limitations": "The evaluation is restricted to one very small numerical instance and does not test real data, scalability, multiple network configurations, or the general performance of the approximation methods. Therefore, the reported runtimes and practical advantages cannot be broadly generalized.",
+          "reason": "Although the paper is relevant to optimization and supply-chain network design, it is materially unrelated to the site's scope of electronic trading, market microstructure, interest-rate models, yield curves, and rates markets.",
+          "tags": [
+            "out_of_scope",
+            "supply-chain network design",
+            "facility location",
+            "multi-objective optimization",
+            "FPTAS"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.12387": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、ロシアへの制裁が制裁参加国の物価とGDPに与えたマクロ経済的影響を推定する研究であり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "129か国の2000年から2024年までのパネルデータを用い、2014年の制裁と2022年の制裁強化を分離して分析した結果、制裁参加国では2022年以降に物価が有意に上昇した一方、1人当たり実質GDPの損失については頑健な証拠が見つからなかったと報告しています。",
+        "practicalApplication": "制裁政策のマクロ経済評価やインフレ影響の分析には利用可能ですが、対象サイトの専門領域である市場執行、価格形成、金利モデリング、またはイールドカーブ分析への直接的な応用は限定的です。",
+        "methodology": "2000年から2024年の129か国によるbalanced panelを用い、heterogeneous exposure to global shocksを考慮したtwo-wave common-correlated-effects imputation designで、2014年と2022年の制裁効果を推定しています。代替counterfactual、reference window、推論手法による頑健性検証も実施しています。",
+        "limitations": "提示されたabstractだけでは、制裁参加国の定義、物価指標、識別仮定、処置効果の大きさ、国別・産業別異質性、潜在的な内生性への対処の詳細を確認できません。また、物価上昇と制裁の因果関係は、要約で示された設計の妥当性に依存します。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "マクロ経済学および国際経済政策としては関連性がありますが、対象サイトの選定分野に対する直接的な貢献がないため、スコープ外と判定します。",
+        "tags": [
+          "sanctions",
+          "macroeconomics",
+          "inflation",
+          "GDP",
+          "causal inference"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper estimates the macroeconomic effects of sanctions on Russia on prices and GDP in sanctioning countries. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using a panel of 129 countries from 2000 to 2024, the authors separate the 2014 sanctions from the 2022 escalation. They report a significant post-2022 increase in prices among sanctioning countries, while finding no robust evidence of losses in GDP per capita.",
+          "practicalApplication": "The study may support macroeconomic assessments of sanctions and their inflationary effects, but its direct application to market execution, price formation, interest-rate modeling, or yield-curve analysis is limited.",
+          "methodology": "The authors use a balanced panel of 129 countries and a two-wave common-correlated-effects imputation design that accounts for heterogeneous exposure to global shocks. They also test robustness across alternative counterfactuals, reference windows, and inference procedures.",
+          "limitations": "The abstract does not provide details on the definition of sanctioning countries, price measures, identification assumptions, treatment-effect magnitudes, country or sector heterogeneity, or the handling of possible endogeneity. The causal interpretation therefore depends on the validity of the reported design.",
+          "reason": "Although the paper is relevant to macroeconomics and international economic policy, it makes no direct contribution to the target domains, so it is classified as out of scope.",
+          "tags": [
+            "sanctions",
+            "macroeconomics",
+            "inflation",
+            "GDP",
+            "causal inference"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.12515": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、複数の物理モデルを混合する posterior-weighted pricing rule が無裁定性を保たない反例を示す。二期間モデルで、単一デリバティブの混合価格が取引期間中に $5/2$ から $2$ へ確実に低下する。",
+        "mainResult": "各物理モデルが strictly positive transition densities を持ち、かつ equivalent martingale measure を備えていても、混合価格は無裁定的とは限らない。デリバティブが取引可能なら、空売りして翌期に決済することで確実な利益が得られる。また、有限状態モデルの付録では recursive consistency の破綻を示す。",
+        "practicalApplication": "posterior-weighted pricing、モデル不確実性下のデリバティブ評価、および無裁定性の検証に対する理論上の注意点を提供する。ただし、電子取引、金利モデル、イールドカーブ、または rates 実務への直接的な応用は抽象からは確認できない。",
+        "methodology": "二期間の反例を構成し、各モデルの遷移密度と equivalent martingale measure の存在を仮定したうえで、混合されたデリバティブ価格の確定的な下落を示す。さらに、有限状態の例により recursive consistency を検討する。",
+        "limitations": "評価は提供された abstract のみに基づく。反例の具体的な確率構造、posterior の定義、価格ルールの詳細、仮定の一般性、実証的妥当性、および取引コストや流動性を含む実務上の影響は確認できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "無裁定価格理論とモデル不確実性には関連するが、本サイトの主要対象である electronic trading、market microstructure、interest-rate models、yield curves、rates には直接焦点を当てていないため。",
+        "tags": [
+          "無裁定性",
+          "モデル不確実性",
+          "posterior-weighted pricing",
+          "equivalent martingale measure",
+          "recursive consistency"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper presents a counterexample showing that a posterior-weighted pricing rule may fail to preserve no-arbitrage when multiple physical models are mixed. In a two-period model, the mixed price of a single derivative deterministically falls from $5/2$ to $2$ between trading dates.",
+          "mainResult": "Even when each physical model has strictly positive transition densities and admits an equivalent martingale measure, the mixed price need not be arbitrage-free. If the derivative is tradable, shorting it and settling one period later produces a certain profit. A finite-state appendix also demonstrates a failure of recursive consistency.",
+          "practicalApplication": "The paper provides a theoretical warning for posterior-weighted pricing, derivative valuation under model uncertainty, and no-arbitrage validation. However, the abstract does not indicate a direct application to electronic trading, interest-rate models, yield curves, or rates practice.",
+          "methodology": "The authors construct a two-period counterexample and show a deterministic decline in the mixed derivative price while assuming the existence of positive transition densities and equivalent martingale measures for each model. They also examine recursive consistency through a finite-state example.",
+          "limitations": "This assessment is based only on the supplied abstract. The concrete probability structures, definition of the posterior, details of the pricing rule, generality of the assumptions, empirical relevance, and practical effects including transaction costs and liquidity cannot be assessed.",
+          "reason": "The paper is relevant to arbitrage pricing theory and model uncertainty, but it does not directly focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates, which are the primary scope areas of this site.",
+          "tags": [
+            "no-arbitrage",
+            "model uncertainty",
+            "posterior-weighted pricing",
+            "equivalent martingale measure",
+            "recursive consistency"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.12666": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、企業価値過程が債務バリアを初めて下回る時刻としてデフォルト時刻を表す構造型信用リスクモデルを、決定論的な時間変更によって市場の生存確率曲線に厳密に較正する方法を提案する。電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を主題としていないため、対象サイトの範囲外である。",
+        "mainResult": "与えられた生存確率曲線 $G(t)=\\Pr(\\tau>t)$ と潜在的な初回通過時刻モデルに対し、時間変更クロック $\\Theta$ を関数反転によって求めることで、モデルの初回通過時刻分布を $G$ に一致させられる広いクラスを示した。また、AT1Pモデルを、定数バリアに向かう時間変更されたドリフト付きブラウン運動の初回通過モデルとして解釈し、その瞬間ボラティリティを目標生存確率曲線に即時に較正できると報告している。",
+        "practicalApplication": "CDSタームストラクチャーに整合する構造型信用リスクモデルの較正を簡素化できる可能性がある。特に、潜在モデルの初回通過分布が解析的または扱いやすい場合、数値最適化を伴わない較正手法として利用できる。ただし、これは信用リスクへの応用であり、対象サイトの主要テーマへの直接的な応用は限定的である。",
+        "methodology": "潜在的なバリア $\\tilde{K}$ と企業価値過程 $\\tilde{S}$ による初回通過時刻モデルを選び、決定論的クロック $\\Theta$ により $K_t=\\tilde{K}_{\\Theta(t)}$ および $S_t=\\tilde{S}_{\\Theta(t)}$ を構成する。潜在モデルの初回通過分布と目標生存確率曲線の関係を反転して、適切なクロックを求める。AT1Pについては、$\\tilde{V}_t=\\mu t+W_t$ と定数バリア $\\tilde{K}_t=k<0$ の表現を用いる。",
+        "limitations": "評価は提供された要旨に基づく。主張は、対象となる生存確率曲線と潜在初回通過モデルが仮定されたクラスに依存し、実証データ、推定誤差、流動性、回収率、信用スプレッド以外の市場変数、あるいはモデルリスクへの検証は要旨から確認できない。また、金利市場やイールドカーブを直接分析していない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "構造型信用リスクモデルの較正としては理論的に興味深いが、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利を中心とするサイトの編集対象には該当しない。",
+        "tags": [
+          "credit risk",
+          "structural default model",
+          "first-passage time",
+          "time change",
+          "survival probability",
+          "AT1P",
+          "CDS calibration"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes an exact calibration method for structural credit-risk models in which default is the first time a firm-value process falls below a debt barrier. A deterministic time change is used to match a market survival-probability curve. It is outside the site's scope because it does not focus on electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "mainResult": "For a given survival-probability curve $G(t)=\\Pr(\\tau>t)$ and a latent first-passage-time model, the paper shows that a time-change clock $\\Theta$ can be obtained by function inversion so that the first-passage-time distribution matches $G$. It also reports that the AT1P model can be interpreted as a time-changed drifted Brownian motion hitting a constant barrier, providing an immediate calibration of its instantaneous volatility to a target survival curve.",
+          "practicalApplication": "The approach could simplify calibration of structural credit-risk models to CDS term structures. When the latent first-passage distribution is analytically tractable or otherwise easy to evaluate, calibration may be performed without numerical optimization. However, the application is primarily to credit risk, with limited direct relevance to the site's core topics.",
+          "methodology": "The authors choose a latent first-passage model with barrier $\\tilde{K}$ and firm-value process $\\tilde{S}$, then construct $K_t=\\tilde{K}_{\\Theta(t)}$ and $S_t=\\tilde{S}_{\\Theta(t)}$ using a deterministic clock $\\Theta$. The clock is obtained by inverting the relationship between the latent first-passage distribution and the target survival curve. For AT1P, the representation uses $\\tilde{V}_t=\\mu t+W_t$ and a constant barrier $\\tilde{K}_t=k<0$.",
+          "limitations": "This assessment is based only on the supplied abstract. The claims depend on the assumed classes of survival curves and latent first-passage models, and the abstract does not establish empirical performance or address estimation error, liquidity, recovery rates, non-credit market variables, or model risk. The paper also does not directly analyze rates or yield curves.",
+          "reason": "The work is theoretically relevant to structural credit-risk model calibration, but it is not materially focused on electronic trading, market microstructure, interest-rate models, yield curves, or rates, which are the site's editorial scope.",
+          "tags": [
+            "credit risk",
+            "structural default model",
+            "first-passage time",
+            "time change",
+            "survival probability",
+            "AT1P",
+            "CDS calibration"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.12878": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "Polymarketの5億8,800万件の取引と248万アカウントを用いて、予測市場におけるfavorite-longshot bias（FLB）と参加者のロングショット需要を分析した研究です。",
+        "mainResult": "10セント未満の契約購入は1ドル当たり19.3セントの損失、90セント以上の購入は0.83セントの利益となり、集計上のFLBが観察されました。ただし、契約を個別に等加重するか、親イベント単位で関連契約をまとめるかによって、ロングショットの収益は1ドル当たりマイナス6.3セントからプラス4.1セントへ変わりました。このパターンはCryptoとPoliticsでは頑健でしたが、Sportsでは確認されませんでした。",
+        "practicalApplication": "予測市場の価格評価、契約設計、イベント単位のリスク集約、トレーダー行動分析に有用な示唆があります。特に、契約単位のリターン評価では関連契約のグルーピング方法が結論を大きく左右するため、分析や市場監視で親イベントを考慮する必要があります。ただし、通常の金融市場における電子執行戦略へ直接適用できる結果かは不明です。",
+        "methodology": "Polymarketの大規模な取引記録を用い、購入時の契約価格帯別に実現リターンを比較しています。契約を等加重する集計と、関連契約を親イベント単位でまとめる集計を対比し、Crypto、Politics、Sportsの市場別差異も調べています。さらに、過去のロングショットまたはfavorite購入傾向でアカウントを分類し、翌月の購入行動と収益を比較しています。",
+        "limitations": "提示された情報は要旨のみであり、標本期間、リターンの定義、取引コスト、流動性、価格形成、契約満期や参加者選択への対処は確認できません。観察された相関から、FLBの因果要因や取引可能な超過収益を確定することはできません。また、Polymarketの結果を他の予測市場、賭 betting市場、または伝統的な金融市場へ一般化できるかは不明です。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "大規模な実取引データを用いて予測市場の価格・注文フローに関連する行動パターンを検証し、契約の集計方法が結果を反転させうることを示すため、market microstructure領域には関連性があります。一方、電子執行、金利モデル、イールドカーブ、または伝統的なrates市場を直接扱う研究ではなく、要旨だけでは実務的な取引可能性も評価しにくいため、重要度は中程度です。",
+        "tags": [
+          "prediction markets",
+          "Polymarket",
+          "favorite-longshot bias",
+          "transaction flows",
+          "trader behavior",
+          "contract aggregation",
+          "market microstructure"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper analyzes the favorite-longshot bias (FLB) and recurrent longshot demand in prediction markets using 588 million Polymarket trades involving 2.48 million accounts.",
+          "mainResult": "Purchases of contracts below 10 cents lost 19.3 cents per dollar, while purchases at or above 90 cents earned 0.83 cents, indicating an aggregate FLB. However, the result depended strongly on aggregation: longshots lost 6.3 cents per dollar when contracts were equally weighted but gained 4.1 cents when related contracts were grouped by parent event. The pattern was robust in Crypto and Politics but absent in Sports.",
+          "practicalApplication": "The findings may inform prediction-market valuation, contract design, event-level risk aggregation, and analysis of trader behavior. Because the method of grouping related contracts can materially change the measured returns, market analysis and surveillance should consider parent events. Direct applicability to electronic execution strategies in conventional financial markets is unclear.",
+          "methodology": "The study uses a large Polymarket transaction dataset and compares realized returns across contract price ranges at purchase. It contrasts equal-weighted contract aggregation with aggregation of related contracts by parent event and examines differences across Crypto, Politics, and Sports. Accounts are also classified according to their historical propensity to buy longshots or favorites, after which their subsequent-month purchase behavior and returns are compared.",
+          "limitations": "Only the abstract is available, so the sample period, return definition, transaction costs, liquidity, price formation, contract expiration, and controls for participant selection cannot be assessed. The observed associations do not establish the causal source of the FLB or demonstrate tradable excess returns. Generalization to other prediction markets, betting markets, or traditional financial markets is also uncertain.",
+          "reason": "The paper is relevant to market microstructure because it uses a very large set of actual transactions to study prediction-market price and order-flow patterns and shows that aggregation choices can reverse the measured result. It does not directly address electronic execution, interest-rate models, yield curves, or traditional rates markets, and the abstract does not establish practical tradability, so its importance is moderate.",
+          "tags": [
+            "prediction markets",
+            "Polymarket",
+            "favorite-longshot bias",
+            "transaction flows",
+            "trader behavior",
+            "contract aggregation",
+            "market microstructure"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "Polymarketの約5.88億件の取引と248万walletを用い、favorite–longshot bias（FLB）、集計単位による収益率の変化、価格帯別需要の持続性を調べた実証研究である。著者らはaggregate FLBを報告する一方、その大きさや符号はchild market、投資額、parent eventのどれを基準に集計するかで変わると主張する。本レビューは51ページの論文のabstractとIntroductionだけに基づき、本文、証明、実験、付録は提供されておらず検証していない。",
+        "mainResult": "著者らによれば、10セント未満の購入は投資額加重で1ドル当たり19.35セントを失い、90セント以上の購入は0.83セントを得た。child market等加重ではlongshotが6.30%の損失となる一方、parent event等加重では4.09%の利益へ反転する。CryptoとPoliticsでは二方向のFLBが見られるが、Sportsでは見られないとも報告する。また、過去のlongshot選好が強いwalletは翌月の低価格購入の26.6%を占めるものの、他のwalletと同程度の収益率だったと主張する。ただし、これらはabstractとIntroductionに記載された著者の主張であり、本文の推定、頑健性検証、証明、付録は確認していない。",
+        "practicalApplication": "prediction marketの執行分析やリスク監視では、低価格tokenの平均損失を一律の価格バイアスと解釈せず、child market数、parent event、取引金額、カテゴリー別に分解する必要がある。trader segmentationでは、反復的なlongshot購入だけを損失集中の代理変数とすることにも注意を要する。",
+        "methodology": "2022年11月から2026年3月までのPolymarket Users dataset version 1.3を用い、解決済みmarketの購入価格と最終payoffを比較する。longshotとfavoriteについて、child market等加重、投資額によるpooling、parent event内でpoolした後のevent等加重を比較する。過去の購入だけでwalletの価格帯選好を分類し、その後の購入比率と収益率を調べ、カテゴリー、経験、注文方法、手数料、担保共有条件による差も検討するとされる。",
+        "limitations": "51ページの全文は提供されず、利用可能な資料はabstractとIntroductionのみである。このため、標本構築、return定義、標準誤差、confidence interval、欠損・選択バイアス、wallet分類、頑健性検証、証明、実験、付録を確認できない。walletは個人と一対一ではなく、同一人物が複数walletを使う可能性がある。観察研究であるため因果的説明は特定されず、parent eventの構成や集計加重への感応度も高い。報告値はすべて著者の主張として扱うべきである。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "大規模な取引データを用い、FLBの測定がaggregation choiceに強く依存する点を示すため、prediction-market microstructureと執行評価に関連性が高い。ただし、限定資料レビューであり、結果の信頼性や再現性を評価できないため、現段階では条件付きの推薦である。",
+        "tags": [
+          "予測市場",
+          "Polymarket",
+          "favorite–longshot bias",
+          "市場マイクロストラクチャ",
+          "集計バイアス",
+          "投資家行動",
+          "wallet分析",
+          "取引収益率"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This empirical study uses approximately 588 million Polymarket trades from 2.48 million wallets to examine the favorite–longshot bias (FLB), variation in returns across aggregation units, and persistence of demand at the price tails. The authors report an aggregate FLB but argue that its magnitude and sign depend on whether observations are aggregated by child market, invested dollars, or parent event. This review is based only on the abstract and Introduction of the 51-page paper; the body, proofs, experiments, and appendices were not supplied or checked.",
+          "mainResult": "According to the authors, purchases below 10 cents lose 19.35 cents per dollar on a dollar-weighted basis, while purchases at or above 90 cents earn 0.83 cents. Longshots lose 6.30% under equal child-market weighting but reverse to a 4.09% gain under equal parent-event weighting. The authors also report a two-sided FLB in Crypto and Politics but not in Sports. Wallets with the strongest past longshot preference reportedly account for 26.6% of next-month low-price purchases yet earn returns similar to those of other wallets. These are author claims stated in the abstract and Introduction; the underlying estimates, robustness checks, proofs, and appendices were not examined.",
+          "practicalApplication": "Execution analysis and risk monitoring in prediction markets should not interpret average losses on low-price tokens as a uniform pricing bias without decomposing results by the number of child markets, parent event, traded dollars, and category. Trader segmentation should also avoid treating recurrent longshot purchases alone as a proxy for concentrated losses.",
+          "methodology": "The study uses version 1.3 of the Polymarket Users dataset, covering November 2022 through March 2026, and compares purchase prices in resolved markets with final payoffs. For longshots and favorites, it compares equal child-market weighting, pooling by invested dollars, and equal parent-event weighting after pooling within each event. Wallet price-tail preferences are classified using only prior purchases, after which subsequent purchase shares and returns are examined. The authors also state that they analyze differences across categories, experience, order methods, reported fees, and collateral-sharing conditions.",
+          "limitations": "The full 51-page paper was not provided; only the abstract and Introduction were available. Consequently, the sample construction, return definitions, standard errors, confidence intervals, missing-data and selection biases, wallet classification, robustness checks, proofs, experiments, and appendices could not be examined. Wallets do not map one-to-one to individuals because one person may control multiple wallets. The observational design does not identify a causal explanation, and the findings are highly sensitive to parent-event construction and aggregation weights. All reported figures should therefore be treated as author claims.",
+          "reason": "The paper is highly relevant to prediction-market microstructure and execution assessment because it argues, using a very large transaction dataset, that measured FLB depends strongly on the aggregation choice. However, this is a limited-source review and cannot assess reliability or reproducibility, so the recommendation is conditional.",
+          "tags": [
+            "prediction markets",
+            "Polymarket",
+            "favorite–longshot bias",
+            "market microstructure",
+            "aggregation bias",
+            "investor behavior",
+            "wallet analysis",
+            "trading returns"
+          ]
+        }
+      }
+    },
+    "2609.12976": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、糖尿病向け自動インスリン投与（AID）の導入が専門医療の利用に与える影響を分析する医療経済学研究であり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を主題としていない。",
+        "mainResult": "イタリアの専門医療施設における1,608人のデータから、AID導入後に糖尿病専門医の受診確率が上昇したと報告している。推定効果は導入1学期後で16.3 percentage points、4学期後で39.3 percentage pointsであり、導入前の受診確率は55.2%だった。",
+        "practicalApplication": "医療政策や医療サービス設計では、患者向け自動化が専門医療を単純に代替するのではなく、受診や検査を補完し得るという示唆を提供する。ただし、本サイトの対象分野への直接的な実務応用はない。",
+        "methodology": "1,608人の観察データを用い、risk-set coarsened exact matchingで181人のAID導入者と比較対象を構成し、staggered event-studyを実施している。導入前トレンドの差には、未導入者のevent-time軌跡を外挿して調整している。",
+        "limitations": "研究対象はイタリアの4つの専門診療所に限られ、無作為化実験ではない。導入後の受診効果は未導入者のトレンドを外挿する仮定に敏感であり、HbA1c検査などの結果はより不精確である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "医療経済学としては自動化と専門職労働の補完関係を検討する研究だが、対象分野の金融市場・金利研究とは実質的に無関係であるため、掲載対象としては推奨しない。",
+        "tags": [
+          "out_of_scope",
+          "healthcare_economics",
+          "technology_adoption",
+          "automated_insulin_delivery",
+          "causal_inference"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This is a health-economics study of how automated insulin delivery (AID) adoption affects professional medical care use, rather than research on electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using data on 1,608 patients from specialist clinics in Italy, the paper reports that AID adoption increased the probability of diabetes-specialist visits. The estimated effect was 16.3 percentage points one semester after adoption and 39.3 percentage points four semesters after adoption, relative to a pre-adoption visit probability of 55.2%.",
+          "practicalApplication": "For health policy and service design, the study suggests that patient-facing automation may complement rather than simply replace specialist care by increasing visits and testing. It has no direct practical application to the site's target research areas.",
+          "methodology": "The authors use observational data and combine risk-set coarsened exact matching, retaining 181 adopters with comparable controls, with a staggered event-study. Differential pre-adoption trends are addressed by extrapolating the untreated trajectory in event time.",
+          "limitations": "The sample is limited to four specialist clinics in Italy, and the design is not randomized. Estimated visit effects are sensitive to the assumption used to extrapolate untreated trends, while results for HbA1c testing and related outcomes are less precise.",
+          "reason": "Although the paper studies automation and the complementarity of professional labor from a health-economics perspective, it is not materially related to financial markets, electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "out_of_scope",
+            "healthcare_economics",
+            "technology_adoption",
+            "automated_insulin_delivery",
+            "causal_inference"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.13068": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、政策ターゲティングにおける二値分類木アルゴリズムを比較し、農村病院の閉鎖リスクを分析する応用計量経済学の論文です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を主題としていません。",
+        "mainResult": "要旨によれば、理論設定では、MDFSが高リスク部分集団を特定する一方、CARTは部分集団を特定しない場合が示されました。農村病院データへの適用では、MDFSが「営利病院」かつ「売掛金回収期間が63日超」の高閉鎖確率グループを抽出し、CARTはこのグループを見逃しました。",
+        "practicalApplication": "政策対象集団の抽出や分類木アルゴリズムの実装に応用可能です。また、Python、R、Stata向けのtargetreeパッケージが提供されます。ただし、本サイトの対象である金融市場分析や電子執行への直接的な応用は、要旨からは確認できません。",
+        "methodology": "CARTとMDFSという二つの分類木手法を理論的に比較し、農村病院の閉鎖データに適用しています。MDFSが高リスク部分集団を識別する理論条件を示し、実証例で両手法の結果を比較しています。",
+        "limitations": "要旨だけでは、理論条件の詳細、標本設計、推定精度、頑健性、63日という閾値の不確実性、政策介入の因果効果は確認できません。また、単一の政策領域への応用であり、金融市場への外的妥当性も評価できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "分類木と政策ターゲティングに関する計量経済学研究であり、指定された電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究の範囲には実質的に該当しません。",
+        "tags": [
+          "policy targeting",
+          "classification trees",
+          "CART",
+          "MDFS",
+          "rural hospital closures",
+          "applied econometrics"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper compares binary classification-tree algorithms for policy targeting and analyzes rural hospital closure risk. It is an applied econometrics paper and does not focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, the authors present a theoretical setting in which MDFS identifies a high-risk subgroup while CART identifies none. In the rural-hospital application, MDFS identifies a subgroup with a high closure probability: for-profit hospitals with more than 63 days in accounts receivable. CART misses this subgroup.",
+          "practicalApplication": "The methods can be applied to identifying policy target groups and implementing classification-tree algorithms. The authors also provide the targetree package for Python, R, and Stata. However, the abstract provides no direct application to financial-market analysis or electronic execution, which are the focus of this site.",
+          "methodology": "The paper theoretically compares CART and MDFS and applies both methods to rural hospital closure data. It derives conditions under which MDFS identifies a high-risk subgroup and compares the empirical results of the two methods.",
+          "limitations": "The abstract does not provide details on the theoretical conditions, sample design, predictive accuracy, robustness, uncertainty around the 63-day threshold, or causal effects of policy intervention. The application concerns a single policy domain, so its external validity for financial markets cannot be assessed.",
+          "reason": "This is an econometrics study of classification trees and policy targeting. It is not materially related to the specified scope of electronic trading, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "policy targeting",
+            "classification trees",
+            "CART",
+            "MDFS",
+            "rural hospital closures",
+            "applied econometrics"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 870,
+      "outputTokens": 946,
+      "reasoningTokens": 58,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1816,
+      "estimatedCostUsd": 0.001309,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.11971v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 764,
+      "outputTokens": 892,
+      "reasoningTokens": 42,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1656,
+      "estimatedCostUsd": 0.001223,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.12387v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 732,
+      "outputTokens": 979,
+      "reasoningTokens": 107,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1711,
+      "estimatedCostUsd": 0.001321,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.12515v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 1027,
+      "outputTokens": 1418,
+      "reasoningTokens": 79,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 1024,
+      "totalTokens": 2445,
+      "estimatedCostUsd": 0.001958,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.12666v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 872,
+      "outputTokens": 1288,
+      "reasoningTokens": 84,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2160,
+      "estimatedCostUsd": 0.00172,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.12878v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 2728,
+      "outputTokens": 1745,
+      "reasoningTokens": 170,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 2725,
+      "totalTokens": 4473,
+      "estimatedCostUsd": 0.048537,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 51,
+      "paperIds": [
+        "2609.12878v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 905,
+      "outputTokens": 932,
+      "reasoningTokens": 42,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1837,
+      "estimatedCostUsd": 0.001299,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.12976v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 747,
+      "outputTokens": 937,
+      "reasoningTokens": 36,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1684,
+      "estimatedCostUsd": 0.001274,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.13068v2"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

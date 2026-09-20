@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-09-17-daily-openai-01",
+  "editionDate": "2026-09-17",
+  "editionKind": "daily",
+  "sourceKind": "openai-responses-api",
+  "sourceLabel": "OpenAI Responses API · automated research pipeline",
+  "importedAt": "2026-09-20T06:54:41Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXivの更新を確認し、対象論文を評価しました。",
+  "expectedBatchDate": "2026-09-17",
+  "observedBatchDate": "2026-09-17",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年9月17日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 18 | 15,239 | 17,962 (1,179) | 0.0246 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 4 | 87,911 | 8,676 (2,369) | 0.6131 | PDF全文・8ページ / PDF全文・29ページ / PDF全文・12ページ / PDF全文・32ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Sniper Cohorts and Algorithmic Filter Rejections in Solana Memecoin Markets: Two-Window Replication of Lifecycle-Stage Population Separation\n\n**[arXiv:2609.18975v1](https://arxiv.org/abs/2609.18975v1) — Arati Uday Kamat**\n\n### 概要\n\nSolana memecoin市場で、bonding curve段階のsniper cohort検出と、主に卒業後のDEX取引を対象とするalgorithmic rejection streamのmint集合を比較した実証研究である。著者は、両ストリームの重複が小さいのは、同一市場でも観測するtoken lifecycle段階が異なるためだと報告する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 推奨 | Solana / memecoin市場 / 市場マイクロストラクチャー / 分散型取引所 / sniper cohort / algorithmic rejection filter / token lifecycle / 集合重複 / market surveillance / 二期間再現 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** pre-graduationとpost-graduationのデータを安易に同一母集団として扱わないという実務上有用な警告を、再現可能な集合比較で示しているため読む価値がある。一方、結果は特定pipelineに依存する記述統計であり、Poisson検定と「構造的分離」の強い解釈には注意が必要である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 951 | 1,177 (89) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 11,339 | 2,316 (853) | 0.1030 | PDF全文・12ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 期間を揃えた集合比較では、v1でcohort $20{,}162$件中$2$件、v2で$623$件中$5$件だけがrejection streamと重複し、cohort基準の重複率はそれぞれ$0.010\\%$と$0.803\\%$だった。これは両期間で$1\\%$未満という記述的結果を支持する。ただし、異なる期間間のcohort重複が$0$であることはtoken turnoverと整合的ではあるものの、それだけで構造的分離を確認する証拠にはならない。\n\n**手法:** 非重複の約$5$週間を二つのwindowに分け、異なるversionのcohort detectorが出力したmint集合と、対応期間のrejection-outcomes集合とのset intersectionを計算した。さらにschema比較、rejection streamのDEX構成、all-time比較、UTC時間帯別の集計を行った。分析は主に記述的な集合比較であり、hourly checkにはカイ二乗統計量$22.26$、補助的議論にはgraduation rateを基準としたPoisson計算を用いている。\n\n**実務への応用:** DEX執行フィルターやmarket surveillanceを設計する際、卒業前のwallet coordination情報と卒業後の価格・流動性・venue情報を別々に扱い、graduation eventをキーに明示的に結合する必要性を示す。単一段階のデータだけでは、cross-stage manipulationや卒業後に顕在化するリスクを見落とし得る。\n\n**限界・注意点:** 両データとpipelineが同一研究者に由来し、観測期間も短く、rejection streamの約$92\\%$がPumpSwapに集中している。重複件数は$v1$で$n=2$、$v2$で$n=5$と極めて小さく、共通の母集団からの無作為標本でもない。特にPoisson比較は、卒業したcohort tokenがrejection streamに同じ確率で入るという未検証の前提を置くため、観測重複がgraduation base rateより有意に低いという主張を十分には支えない。低い重複はpipelineの対象段階とselection ruleから部分的に機械的に生じるため、因果効果や一般的な市場分離には拡張できない。\n\n## 2. SAiFE-gym: Model-based Environments for Automated Market Making with Concentrated Liquidity\n\n**[arXiv:2609.17788v1](https://arxiv.org/abs/2609.17788v1) — Georgios Chionas, Charalampos Kleitsikas, Stefanos Leonardos, Leandro Sánchez-Betancourt, Carmine Ventre**\n\n### 概要\n\n集中流動性型のConstant Product Marketを対象に、流動性供給・注文到着・価格インパクト・gas cost・latencyを組み替え可能なRL環境「SAiFE\\_gym」を提案する。GymnasiumおよびStable Baselines 3に接続し、LPの動的レンジ選択やLTの取引戦略をモデルベースで検証できる。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 自動マーケットメーカー / 集中流動性 / 強化学習 / 市場マイクロストラクチャ / 流動性供給 / domain randomization / ベクトル化シミュレーション / 価格インパクト / blockchain friction / PPO |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** AMMの電子取引・market microstructure研究向けに再利用可能なRL基盤を提供する点は有用であり、特に集中流動性、order flow、price impact、blockchain frictionを同一環境で扱える。ただし、主な価値は新しい経済的発見より研究インフラにあり、実運用上の性能や頑健性を裏付ける実証は限定的である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 839 | 992 (61) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 17,179 | 1,395 (136) | 0.1138 | PDF全文・8ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 主要成果は、AMM microstructureをモジュール化したシミュレーション基盤と、NumPyによる並列trajectory実行である。著者らの単一マシン上のbenchmarkでは、1,000 trajectoriesのrolloutが約$0.05$秒となり、multiprocessingの約$1.6$秒に対して約$30$倍高速だったと報告する。PPO実験では固定パラメータ学習とdomain randomizationを比較したが、後者の改善は多くの評価領域で小さく、決定的な優位性は示されていない。\n\n**手法:** 外部価格にGBM、ABM、OU alphaモデルを用い、流動性、価格乖離、noise tradingを反映する到着強度と、depth依存または1-tick型の価格インパクトを実装する。LPの報酬はmark-to-market PnLまたはrunning inventory penaltyとし、PPOを固定市場パラメータおよびepisode単位のdomain randomizationで学習・Monte Carlo評価する。\n\n**実務への応用:** 集中流動性AMMにおけるLPのレンジ設定・rebalancing頻度・inventory risk・gas costの研究、未知のvolatilityやorder-flow regimeに対するstress test、RL方策と定期rebalancing benchmarkの比較に利用できる。\n\n**限界・注意点:** 結果は校正済み実市場データやlive deploymentではなく、仮定された確率過程によるmodel-based simulationに依存する。外部価格形成、線形到着強度、決定論的latency、固定gas cost、単一agent、限定されたaction spaceなどの単純化があり、sim-to-real妥当性は検証されていない。速度比較も単一の8-core、16GB環境で行われ、PPO評価には信頼区間、統計検定、十分な複数seed比較が示されていない。\n\n## 3. Model-Free Passive Execution via Order-Level Shadowing\n\n**[arXiv:2609.18019v1](https://arxiv.org/abs/2609.18019v1) — Vincent Maciejewski**\n\n### 概要\n\n本稿は、観測した第三者の指値注文と同じ価格・venueに注文を置き、exchange order IDで両注文を関連付ける受動執行法Shadow-PPOVを提案する。追跡対象がcancelされた場合は即時、tradeされた場合は短いgrace window後に自注文を取り消す。中核のplacementは予測モデルを使わないが、実験された実装にはinside price、残数量、価格帯などを参照する安全guardが追加されているため、評価対象は純粋な最小アルゴリズムではない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 受動執行 / Percentage of Volume / order-level shadowing / limit order book / cancel mirroring / queue position / adverse selection / latency sensitivity / market replay / CME ES futures |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** order-level ID trackingとlifecycle mirroringを、再現可能なpassive-placement baselineとして明確に定式化した点は電子執行研究に有用である。年間MBO replay、session-clustered intervals、latency sweepも実務的な情報を与える。一方、zero-impact replay、単一商品、特殊な両建て評価設計、限定的なbaselineにより、執行性能の一般化やbenchmarkとしての妥当性はまだ実証されていないため、方法論的アイデアとして推奨するがproduction superiorityの証拠とは評価しない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 971 | 1,052 (61) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 25,175 | 2,796 (897) | 0.1818 | PDF全文・29ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者のCME ES replayでは、ほぼ同じ実現participationの下で、zero latency時のrelative slippageは受動Shadow-PPOVが$+0.0955 \\pm 0.0130$ ticks/contract、aggressive POVが$+0.0952 \\pm 0.0135$ ticks/contractで、報告上は差がない。全経路のdelayを$0$から$5$ msへ増やすと、受動側は$+0.097$から$+0.150$ ticks、aggressive側は$+0.087$から$+0.296$ ticksへ悪化した。ただしこれはmarket impactを除外したhistorical replayの結果であり、実市場での同等性や優位性を確立するものではない。\n\n**手法:** 2025年のCME ES通常取引時間246 sessionsをorder-by-orderで決定論的にreplayし、各windowで100 contractsの買いと100 contractsの売りを同時に執行した。受動方式はaddを確率的にshadowし、比較方式はtrade printに反応してmarketable orderを送った。arrival midに対するpaired relative slippage、即時crossとの差、VWAP、participation、completion time、post-fill mark-outを測定し、信頼区間はsession単位でclusterした。さらにorder・cancel・feedへ同じdelayを与えるlatency sweepと、未較正のexponential fill-gap modelによるparent-size別participation分散のMonte Carloを行った。\n\n**実務への応用:** 予測型passive placement modelを、同一corpus、parent size、participation、latency条件で比較するための単純なbaselineとして利用できる可能性がある。実運用では低遅延のmarket-by-order feed、venue-scoped order IDの正確な追跡、FIFO queue、cancel処理、および未約定・overfill管理が必要である。multi-venue routingや安定したtarget participationを直接実現する手法ではない。\n\n**限界・注意点:** 最重要の制約は、simulatorが自己注文によるmarket impact、他参加者の反応、historical fillsの置換をモデル化せず、記録済みflowに対して追加的に約定させる点である。対象は単一venueのESのみで、ほぼone-tick spreadの市場であり、提案されたflow-inherited venue selectionは検証されていない。実験は方向性のない同時売買で、通常の一方向parent executionとは異なる。比較対象はnaive aggressive POVだけで、touch posting、passive TWAP/VWAP/POV、予測モデルとの比較やguard ablationはない。中核はmodel-free placementでも、評価実装はinside priceやrecent trade sizeを読むguardを含む。participationは直接制御されず、小口注文について示された安定化則もCMEデータへfitしていないstylized modelに基づく。VWAP比較はworking intervalが方式ごとに異なるため順位付けに使えず、latency表の方式間設定もmatched-participation比較ではない。\n\n## 4. Quadratic G-BSDEs for bond pricing with endogenous short-rate feedback\n\n**[arXiv:2609.19094v1](https://arxiv.org/abs/2609.19094v1) — Jaehyun Kim, Hyungbin Park**\n\n### 概要\n\nボンド価格に依存する内生的な短期金利フィードバックと volatility uncertainty を、対数価格に対する quadratic G-BSDE として定式化する。有限期間の一意な有界評価、無限期間解、満期方向の指数収束、および目標価格・長期利回りを実現する金利係数の逆設計を扱う理論研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | quadratic G-BSDE / 債券価格評価 / 内生的短期金利フィードバック / volatility uncertainty / G-expectation / 無限期間BSDE / 長期利回り / 逆設計 / BMO martingale / horizon stability |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 金利モデルと yield-curve 研究に直接関係し、価格依存型の割引と volatility ambiguity を一つの quadratic G-BSDE 枠組みに統合している点が新規性である。特に有限・無限期間の well-posedness と満期方向の収束評価は理論的価値が高い。一方、モデルは抽象的で、満期間整合性や推定・計算方法を欠くため、実務への即時適用より数理ファイナンス研究者向けとして推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 783 | 1,227 (89) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 34,218 | 2,169 (483) | 0.2145 | PDF全文・32ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 論文は、bounded terminal data、Lipschitz・quadratic growth 条件の下で有限期間 quadratic G-BSDE の存在、一意性、比較、安定性、BMO 評価を報告する。backward variable に strict monotonicity がある場合には一意な有界無限期間解を構成し、有限期間解との差がコンパクトな時間区間上で $C e^{-\\mu(T-s)}$ により抑えられる。応用では、補償対数価格が指定プロファイル $\\phi(X_s)$ に収束し、漸近利回りが所与の $\\lambda$ になるフィードバック係数を構成する。\n\n**手法:** G-expectation と G-Brownian motion を用い、暗黙的な割引期待式を対数変換して quadratic G-BSDE に帰着する。G-BMO、Girsanov 型変換、線形化、比較原理、切断近似、Markovian regularity、viscosity PDE 表現を利用して有限期間理論を構築し、strict monotonicity と有限期間近似から無限期間解と horizon stability を導く。逆設計では G-Itô dynamics を目標価格に一致させ、線形復元項 $\\mu(y-\\phi(x))$ を導入する。\n\n**実務への応用:** volatility ambiguity の下で、ボンド価格を参照して金利を調整するルールの自己整合的評価や、固定満期の価格目標および長期利回り目標から discount-rate coefficients を逆算するための理論的基盤となる。ただし、実務的な政策ルールや取引モデルとして使うには、共通短期金利による満期間整合性、係数制約、推定、数値解法の追加が必要である。\n\n**限界・注意点:** 結果は有界性、Lipschitz continuity、strong ellipticity、quadratic-growth control、無限期間では strict monotonicity という強い仮定に依存する。risk-neutral sublinear expectation と symmetric G-martingale による無裁定条件は外生的に仮定され、一般均衡、厚生最適性、価格形成、市場流動性は扱わない。評価は単一の参照満期を中心とし、共通 money-market account の下で複数満期を同時に整合させる条件は未解決である。$\\lambda$ と volatility-uncertainty set は推定されず、実証分析、calibration、数値実験もない。また、本文には添字・積分区間などの表記上の不整合が散見されるため、技術的実装には原証明の精査が必要である。",
+  "papers": [
+    {
+      "arxivId": "2609.18975v1",
+      "title": "Sniper Cohorts and Algorithmic Filter Rejections in Solana Memecoin Markets: Two-Window Replication of Lifecycle-Stage Population Separation",
+      "authors": [
+        "Arati Uday Kamat"
+      ],
+      "submittedDate": "2026-07-16",
+      "updatedDate": "2026-09-17",
+      "topics": [
+        "Market microstructure"
+      ],
+      "absUrl": "https://arxiv.org/abs/2609.18975v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.18975v1",
+      "schedulerRank": 1,
+      "schedulerRating": 10,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・テーマ重要度 10/10",
+      "schedulerSummary": "Solana memecoin市場で、bonding curve段階のsniper cohort検出と、主に卒業後のDEX取引を対象とするalgorithmic rejection streamのmint集合を比較した実証研究である。著者は、両ストリームの重複が小さいのは、同一市場でも観測するtoken lifecycle段階が異なるためだと報告する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 951 / 出力 1,177（うち推論 89） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 11,339 / 出力 2,316（うち推論 853） · PDF 12 pages · 推定 $0.1030",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 10,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2609.17788v1",
+      "title": "SAiFE-gym: Model-based Environments for Automated Market Making with Concentrated Liquidity",
+      "authors": [
+        "Georgios Chionas",
+        "Charalampos Kleitsikas",
+        "Stefanos Leonardos",
+        "Leandro Sánchez-Betancourt",
+        "Carmine Ventre"
+      ],
+      "submittedDate": "2026-09-15",
+      "updatedDate": "2026-09-17",
+      "topics": [
+        "Cross-disciplinary finance"
+      ],
+      "absUrl": "https://arxiv.org/abs/2609.17788v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.17788v1",
+      "schedulerRank": 2,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・テーマ重要度 8/10",
+      "schedulerSummary": "集中流動性型のConstant Product Marketを対象に、流動性供給・注文到着・価格インパクト・gas cost・latencyを組み替え可能なRL環境「SAiFE_gym」を提案する。GymnasiumおよびStable Baselines 3に接続し、LPの動的レンジ選択やLTの取引戦略をモデルベースで検証できる。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 839 / 出力 992（うち推論 61） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 17,179 / 出力 1,395（うち推論 136） · PDF 8 pages · 推定 $0.1138",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2609.18019v1",
+      "title": "Model-Free Passive Execution via Order-Level Shadowing",
+      "authors": [
+        "Vincent Maciejewski"
+      ],
+      "submittedDate": "2026-09-16",
+      "updatedDate": "2026-09-17",
+      "topics": [
+        "Electronic trading"
+      ],
+      "absUrl": "https://arxiv.org/abs/2609.18019v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.18019v1",
+      "schedulerRank": 3,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・テーマ重要度 8/10",
+      "schedulerSummary": "本稿は、観測した第三者の指値注文と同じ価格・venueに注文を置き、exchange order IDで両注文を関連付ける受動執行法Shadow-PPOVを提案する。追跡対象がcancelされた場合は即時、tradeされた場合は短いgrace window後に自注文を取り消す。中核のplacementは予測モデルを使わないが、実験された実装にはinside price、残数量、価格帯などを参照する安全guardが追加されているため、評価対象は純粋な最小アルゴリズムではない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 971 / 出力 1,052（うち推論 61） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 25,175 / 出力 2,796（うち推論 897） · PDF 29 pages · 推定 $0.1818",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2609.19094v1",
+      "title": "Quadratic G-BSDEs for bond pricing with endogenous short-rate feedback",
+      "authors": [
+        "Jaehyun Kim",
+        "Hyungbin Park"
+      ],
+      "submittedDate": "2026-09-16",
+      "updatedDate": "2026-09-17",
+      "topics": [
+        "Interest-rate models"
+      ],
+      "absUrl": "https://arxiv.org/abs/2609.19094v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.19094v1",
+      "schedulerRank": 4,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・テーマ重要度 8/10",
+      "schedulerSummary": "ボンド価格に依存する内生的な短期金利フィードバックと volatility uncertainty を、対数価格に対する quadratic G-BSDE として定式化する。有限期間の一意な有界評価、無限期間解、満期方向の指数収束、および目標価格・長期利回りを実現する金利係数の逆設計を扱う理論研究である。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 783 / 出力 1,227（うち推論 89） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 34,218 / 出力 2,169（うち推論 483） · PDF 32 pages · 推定 $0.2145",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    }
+  ]
+}

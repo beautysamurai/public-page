@@ -13,6 +13,17 @@
       "title": "Daily research screen"
     },
     {
+      "editionId": "2026-09-18-weekly-openai-01",
+      "date": "2026-09-18",
+      "periodEnd": "2026-09-18",
+      "kind": "weekly",
+      "path": "2026-09-18-weekly-openai-01.json",
+      "status": "WEEKLY_REVIEW",
+      "paperCount": 15,
+      "sourceKind": "openai-responses-api",
+      "title": "Weekly research review"
+    },
+    {
       "editionId": "2026-09-18-daily-openai-01",
       "date": "2026-09-18",
       "periodEnd": null,
@@ -20,6 +31,17 @@
       "path": "2026-09-18-daily-openai-01.json",
       "status": "UPDATE_CONFIRMED",
       "paperCount": 3,
+      "sourceKind": "openai-responses-api",
+      "title": "Daily research screen"
+    },
+    {
+      "editionId": "2026-09-17-daily-openai-01",
+      "date": "2026-09-17",
+      "periodEnd": null,
+      "kind": "daily",
+      "path": "2026-09-17-daily-openai-01.json",
+      "status": "UPDATE_CONFIRMED",
+      "paperCount": 4,
       "sourceKind": "openai-responses-api",
       "title": "Daily research screen"
     },

@@ -2856,6 +2856,555 @@
       "periodEnd": null,
       "sourceText": "## 2026年9月16日 — 日次レビュー\n\narXivの更新を確認しましたが、今回の条件に合う推薦論文はありませんでした。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 6 | 5,392 | 6,107 (337) | 0.0084 | Abstractのみ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n**推薦論文: なし**",
       "papers": []
+    },
+    {
+      "editionId": "2026-09-17-daily-openai-01",
+      "editionDate": "2026-09-17",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-20T06:54:41Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-17",
+      "observedBatchDate": "2026-09-17",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月17日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 18 | 15,239 | 17,962 (1,179) | 0.0246 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 4 | 87,911 | 8,676 (2,369) | 0.6131 | PDF全文・8ページ / PDF全文・29ページ / PDF全文・12ページ / PDF全文・32ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Sniper Cohorts and Algorithmic Filter Rejections in Solana Memecoin Markets: Two-Window Replication of Lifecycle-Stage Population Separation\n\n**[arXiv:2609.18975v1](https://arxiv.org/abs/2609.18975v1) — Arati Uday Kamat**\n\n### 概要\n\nSolana memecoin市場で、bonding curve段階のsniper cohort検出と、主に卒業後のDEX取引を対象とするalgorithmic rejection streamのmint集合を比較した実証研究である。著者は、両ストリームの重複が小さいのは、同一市場でも観測するtoken lifecycle段階が異なるためだと報告する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 推奨 | Solana / memecoin市場 / 市場マイクロストラクチャー / 分散型取引所 / sniper cohort / algorithmic rejection filter / token lifecycle / 集合重複 / market surveillance / 二期間再現 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** pre-graduationとpost-graduationのデータを安易に同一母集団として扱わないという実務上有用な警告を、再現可能な集合比較で示しているため読む価値がある。一方、結果は特定pipelineに依存する記述統計であり、Poisson検定と「構造的分離」の強い解釈には注意が必要である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 951 | 1,177 (89) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 11,339 | 2,316 (853) | 0.1030 | PDF全文・12ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 期間を揃えた集合比較では、v1でcohort $20{,}162$件中$2$件、v2で$623$件中$5$件だけがrejection streamと重複し、cohort基準の重複率はそれぞれ$0.010\\%$と$0.803\\%$だった。これは両期間で$1\\%$未満という記述的結果を支持する。ただし、異なる期間間のcohort重複が$0$であることはtoken turnoverと整合的ではあるものの、それだけで構造的分離を確認する証拠にはならない。\n\n**手法:** 非重複の約$5$週間を二つのwindowに分け、異なるversionのcohort detectorが出力したmint集合と、対応期間のrejection-outcomes集合とのset intersectionを計算した。さらにschema比較、rejection streamのDEX構成、all-time比較、UTC時間帯別の集計を行った。分析は主に記述的な集合比較であり、hourly checkにはカイ二乗統計量$22.26$、補助的議論にはgraduation rateを基準としたPoisson計算を用いている。\n\n**実務への応用:** DEX執行フィルターやmarket surveillanceを設計する際、卒業前のwallet coordination情報と卒業後の価格・流動性・venue情報を別々に扱い、graduation eventをキーに明示的に結合する必要性を示す。単一段階のデータだけでは、cross-stage manipulationや卒業後に顕在化するリスクを見落とし得る。\n\n**限界・注意点:** 両データとpipelineが同一研究者に由来し、観測期間も短く、rejection streamの約$92\\%$がPumpSwapに集中している。重複件数は$v1$で$n=2$、$v2$で$n=5$と極めて小さく、共通の母集団からの無作為標本でもない。特にPoisson比較は、卒業したcohort tokenがrejection streamに同じ確率で入るという未検証の前提を置くため、観測重複がgraduation base rateより有意に低いという主張を十分には支えない。低い重複はpipelineの対象段階とselection ruleから部分的に機械的に生じるため、因果効果や一般的な市場分離には拡張できない。\n\n## 2. SAiFE-gym: Model-based Environments for Automated Market Making with Concentrated Liquidity\n\n**[arXiv:2609.17788v1](https://arxiv.org/abs/2609.17788v1) — Georgios Chionas, Charalampos Kleitsikas, Stefanos Leonardos, Leandro Sánchez-Betancourt, Carmine Ventre**\n\n### 概要\n\n集中流動性型のConstant Product Marketを対象に、流動性供給・注文到着・価格インパクト・gas cost・latencyを組み替え可能なRL環境「SAiFE\\_gym」を提案する。GymnasiumおよびStable Baselines 3に接続し、LPの動的レンジ選択やLTの取引戦略をモデルベースで検証できる。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 自動マーケットメーカー / 集中流動性 / 強化学習 / 市場マイクロストラクチャ / 流動性供給 / domain randomization / ベクトル化シミュレーション / 価格インパクト / blockchain friction / PPO |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** AMMの電子取引・market microstructure研究向けに再利用可能なRL基盤を提供する点は有用であり、特に集中流動性、order flow、price impact、blockchain frictionを同一環境で扱える。ただし、主な価値は新しい経済的発見より研究インフラにあり、実運用上の性能や頑健性を裏付ける実証は限定的である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 839 | 992 (61) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 17,179 | 1,395 (136) | 0.1138 | PDF全文・8ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 主要成果は、AMM microstructureをモジュール化したシミュレーション基盤と、NumPyによる並列trajectory実行である。著者らの単一マシン上のbenchmarkでは、1,000 trajectoriesのrolloutが約$0.05$秒となり、multiprocessingの約$1.6$秒に対して約$30$倍高速だったと報告する。PPO実験では固定パラメータ学習とdomain randomizationを比較したが、後者の改善は多くの評価領域で小さく、決定的な優位性は示されていない。\n\n**手法:** 外部価格にGBM、ABM、OU alphaモデルを用い、流動性、価格乖離、noise tradingを反映する到着強度と、depth依存または1-tick型の価格インパクトを実装する。LPの報酬はmark-to-market PnLまたはrunning inventory penaltyとし、PPOを固定市場パラメータおよびepisode単位のdomain randomizationで学習・Monte Carlo評価する。\n\n**実務への応用:** 集中流動性AMMにおけるLPのレンジ設定・rebalancing頻度・inventory risk・gas costの研究、未知のvolatilityやorder-flow regimeに対するstress test、RL方策と定期rebalancing benchmarkの比較に利用できる。\n\n**限界・注意点:** 結果は校正済み実市場データやlive deploymentではなく、仮定された確率過程によるmodel-based simulationに依存する。外部価格形成、線形到着強度、決定論的latency、固定gas cost、単一agent、限定されたaction spaceなどの単純化があり、sim-to-real妥当性は検証されていない。速度比較も単一の8-core、16GB環境で行われ、PPO評価には信頼区間、統計検定、十分な複数seed比較が示されていない。\n\n## 3. Model-Free Passive Execution via Order-Level Shadowing\n\n**[arXiv:2609.18019v1](https://arxiv.org/abs/2609.18019v1) — Vincent Maciejewski**\n\n### 概要\n\n本稿は、観測した第三者の指値注文と同じ価格・venueに注文を置き、exchange order IDで両注文を関連付ける受動執行法Shadow-PPOVを提案する。追跡対象がcancelされた場合は即時、tradeされた場合は短いgrace window後に自注文を取り消す。中核のplacementは予測モデルを使わないが、実験された実装にはinside price、残数量、価格帯などを参照する安全guardが追加されているため、評価対象は純粋な最小アルゴリズムではない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 受動執行 / Percentage of Volume / order-level shadowing / limit order book / cancel mirroring / queue position / adverse selection / latency sensitivity / market replay / CME ES futures |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** order-level ID trackingとlifecycle mirroringを、再現可能なpassive-placement baselineとして明確に定式化した点は電子執行研究に有用である。年間MBO replay、session-clustered intervals、latency sweepも実務的な情報を与える。一方、zero-impact replay、単一商品、特殊な両建て評価設計、限定的なbaselineにより、執行性能の一般化やbenchmarkとしての妥当性はまだ実証されていないため、方法論的アイデアとして推奨するがproduction superiorityの証拠とは評価しない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 971 | 1,052 (61) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 25,175 | 2,796 (897) | 0.1818 | PDF全文・29ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者のCME ES replayでは、ほぼ同じ実現participationの下で、zero latency時のrelative slippageは受動Shadow-PPOVが$+0.0955 \\pm 0.0130$ ticks/contract、aggressive POVが$+0.0952 \\pm 0.0135$ ticks/contractで、報告上は差がない。全経路のdelayを$0$から$5$ msへ増やすと、受動側は$+0.097$から$+0.150$ ticks、aggressive側は$+0.087$から$+0.296$ ticksへ悪化した。ただしこれはmarket impactを除外したhistorical replayの結果であり、実市場での同等性や優位性を確立するものではない。\n\n**手法:** 2025年のCME ES通常取引時間246 sessionsをorder-by-orderで決定論的にreplayし、各windowで100 contractsの買いと100 contractsの売りを同時に執行した。受動方式はaddを確率的にshadowし、比較方式はtrade printに反応してmarketable orderを送った。arrival midに対するpaired relative slippage、即時crossとの差、VWAP、participation、completion time、post-fill mark-outを測定し、信頼区間はsession単位でclusterした。さらにorder・cancel・feedへ同じdelayを与えるlatency sweepと、未較正のexponential fill-gap modelによるparent-size別participation分散のMonte Carloを行った。\n\n**実務への応用:** 予測型passive placement modelを、同一corpus、parent size、participation、latency条件で比較するための単純なbaselineとして利用できる可能性がある。実運用では低遅延のmarket-by-order feed、venue-scoped order IDの正確な追跡、FIFO queue、cancel処理、および未約定・overfill管理が必要である。multi-venue routingや安定したtarget participationを直接実現する手法ではない。\n\n**限界・注意点:** 最重要の制約は、simulatorが自己注文によるmarket impact、他参加者の反応、historical fillsの置換をモデル化せず、記録済みflowに対して追加的に約定させる点である。対象は単一venueのESのみで、ほぼone-tick spreadの市場であり、提案されたflow-inherited venue selectionは検証されていない。実験は方向性のない同時売買で、通常の一方向parent executionとは異なる。比較対象はnaive aggressive POVだけで、touch posting、passive TWAP/VWAP/POV、予測モデルとの比較やguard ablationはない。中核はmodel-free placementでも、評価実装はinside priceやrecent trade sizeを読むguardを含む。participationは直接制御されず、小口注文について示された安定化則もCMEデータへfitしていないstylized modelに基づく。VWAP比較はworking intervalが方式ごとに異なるため順位付けに使えず、latency表の方式間設定もmatched-participation比較ではない。\n\n## 4. Quadratic G-BSDEs for bond pricing with endogenous short-rate feedback\n\n**[arXiv:2609.19094v1](https://arxiv.org/abs/2609.19094v1) — Jaehyun Kim, Hyungbin Park**\n\n### 概要\n\nボンド価格に依存する内生的な短期金利フィードバックと volatility uncertainty を、対数価格に対する quadratic G-BSDE として定式化する。有限期間の一意な有界評価、無限期間解、満期方向の指数収束、および目標価格・長期利回りを実現する金利係数の逆設計を扱う理論研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | quadratic G-BSDE / 債券価格評価 / 内生的短期金利フィードバック / volatility uncertainty / G-expectation / 無限期間BSDE / 長期利回り / 逆設計 / BMO martingale / horizon stability |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 金利モデルと yield-curve 研究に直接関係し、価格依存型の割引と volatility ambiguity を一つの quadratic G-BSDE 枠組みに統合している点が新規性である。特に有限・無限期間の well-posedness と満期方向の収束評価は理論的価値が高い。一方、モデルは抽象的で、満期間整合性や推定・計算方法を欠くため、実務への即時適用より数理ファイナンス研究者向けとして推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 783 | 1,227 (89) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 34,218 | 2,169 (483) | 0.2145 | PDF全文・32ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 論文は、bounded terminal data、Lipschitz・quadratic growth 条件の下で有限期間 quadratic G-BSDE の存在、一意性、比較、安定性、BMO 評価を報告する。backward variable に strict monotonicity がある場合には一意な有界無限期間解を構成し、有限期間解との差がコンパクトな時間区間上で $C e^{-\\mu(T-s)}$ により抑えられる。応用では、補償対数価格が指定プロファイル $\\phi(X_s)$ に収束し、漸近利回りが所与の $\\lambda$ になるフィードバック係数を構成する。\n\n**手法:** G-expectation と G-Brownian motion を用い、暗黙的な割引期待式を対数変換して quadratic G-BSDE に帰着する。G-BMO、Girsanov 型変換、線形化、比較原理、切断近似、Markovian regularity、viscosity PDE 表現を利用して有限期間理論を構築し、strict monotonicity と有限期間近似から無限期間解と horizon stability を導く。逆設計では G-Itô dynamics を目標価格に一致させ、線形復元項 $\\mu(y-\\phi(x))$ を導入する。\n\n**実務への応用:** volatility ambiguity の下で、ボンド価格を参照して金利を調整するルールの自己整合的評価や、固定満期の価格目標および長期利回り目標から discount-rate coefficients を逆算するための理論的基盤となる。ただし、実務的な政策ルールや取引モデルとして使うには、共通短期金利による満期間整合性、係数制約、推定、数値解法の追加が必要である。\n\n**限界・注意点:** 結果は有界性、Lipschitz continuity、strong ellipticity、quadratic-growth control、無限期間では strict monotonicity という強い仮定に依存する。risk-neutral sublinear expectation と symmetric G-martingale による無裁定条件は外生的に仮定され、一般均衡、厚生最適性、価格形成、市場流動性は扱わない。評価は単一の参照満期を中心とし、共通 money-market account の下で複数満期を同時に整合させる条件は未解決である。$\\lambda$ と volatility-uncertainty set は推定されず、実証分析、calibration、数値実験もない。また、本文には添字・積分区間などの表記上の不整合が散見されるため、技術的実装には原証明の精査が必要である。",
+      "papers": [
+        {
+          "arxivId": "2609.18975v1",
+          "title": "Sniper Cohorts and Algorithmic Filter Rejections in Solana Memecoin Markets: Two-Window Replication of Lifecycle-Stage Population Separation",
+          "authors": [
+            "Arati Uday Kamat"
+          ],
+          "submittedDate": "2026-07-16",
+          "updatedDate": "2026-09-17",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.18975v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.18975v1",
+          "schedulerRank": 1,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 10/10",
+          "schedulerSummary": "Solana memecoin市場で、bonding curve段階のsniper cohort検出と、主に卒業後のDEX取引を対象とするalgorithmic rejection streamのmint集合を比較した実証研究である。著者は、両ストリームの重複が小さいのは、同一市場でも観測するtoken lifecycle段階が異なるためだと報告する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 951 / 出力 1,177（うち推論 89） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 11,339 / 出力 2,316（うち推論 853） · PDF 12 pages · 推定 $0.1030",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.17788v1",
+          "title": "SAiFE-gym: Model-based Environments for Automated Market Making with Concentrated Liquidity",
+          "authors": [
+            "Georgios Chionas",
+            "Charalampos Kleitsikas",
+            "Stefanos Leonardos",
+            "Leandro Sánchez-Betancourt",
+            "Carmine Ventre"
+          ],
+          "submittedDate": "2026-09-15",
+          "updatedDate": "2026-09-17",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.17788v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.17788v1",
+          "schedulerRank": 2,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "集中流動性型のConstant Product Marketを対象に、流動性供給・注文到着・価格インパクト・gas cost・latencyを組み替え可能なRL環境「SAiFE_gym」を提案する。GymnasiumおよびStable Baselines 3に接続し、LPの動的レンジ選択やLTの取引戦略をモデルベースで検証できる。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 839 / 出力 992（うち推論 61） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 17,179 / 出力 1,395（うち推論 136） · PDF 8 pages · 推定 $0.1138",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.18019v1",
+          "title": "Model-Free Passive Execution via Order-Level Shadowing",
+          "authors": [
+            "Vincent Maciejewski"
+          ],
+          "submittedDate": "2026-09-16",
+          "updatedDate": "2026-09-17",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.18019v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.18019v1",
+          "schedulerRank": 3,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "本稿は、観測した第三者の指値注文と同じ価格・venueに注文を置き、exchange order IDで両注文を関連付ける受動執行法Shadow-PPOVを提案する。追跡対象がcancelされた場合は即時、tradeされた場合は短いgrace window後に自注文を取り消す。中核のplacementは予測モデルを使わないが、実験された実装にはinside price、残数量、価格帯などを参照する安全guardが追加されているため、評価対象は純粋な最小アルゴリズムではない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 971 / 出力 1,052（うち推論 61） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 25,175 / 出力 2,796（うち推論 897） · PDF 29 pages · 推定 $0.1818",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.19094v1",
+          "title": "Quadratic G-BSDEs for bond pricing with endogenous short-rate feedback",
+          "authors": [
+            "Jaehyun Kim",
+            "Hyungbin Park"
+          ],
+          "submittedDate": "2026-09-16",
+          "updatedDate": "2026-09-17",
+          "topics": [
+            "Interest-rate models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.19094v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.19094v1",
+          "schedulerRank": 4,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "ボンド価格に依存する内生的な短期金利フィードバックと volatility uncertainty を、対数価格に対する quadratic G-BSDE として定式化する。有限期間の一意な有界評価、無限期間解、満期方向の指数収束、および目標価格・長期利回りを実現する金利係数の逆設計を扱う理論研究である。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 783 / 出力 1,227（うち推論 89） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 34,218 / 出力 2,169（うち推論 483） · PDF 32 pages · 推定 $0.2145",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-09-18-weekly-openai-01",
+      "editionDate": "2026-09-18",
+      "editionKind": "weekly",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-20T07:00:57Z",
+      "status": "WEEKLY_REVIEW",
+      "message": "対象期間の週次レビューを生成しました。",
+      "expectedBatchDate": null,
+      "observedBatchDate": null,
+      "periodStart": "2026-09-12",
+      "periodEnd": "2026-09-18",
+      "sourceText": "## 2026年9月18日 — 週次レビュー\n\n対象期間の週次レビューを生成しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Same Book, Different Fills: Partial Identification of FIFO Execution from Aggregate Order Books\n\n**[arXiv:2609.13597v2](https://arxiv.org/abs/2609.13597v2) — Riya Danait, Yuliana Zamora, Ioana Boier**\n\n### 概要\n\n同じL2板と約定履歴でも、観測できない取消位置によってFIFOの受動約定が変わることを、条件付き部分識別として扱う。今週の執行研究では、backtestのqueue仮定をモデルリスクとして明示する点を最も高く評価する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 推奨 | 電子執行 / 指値注文板 / FIFO / 部分識別 / 取消割当 / バックテストのモデルリスク |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 観測経路を保ったまま隠れたqueue仮定だけを変える設計は、受動執行評価の不確実性を具体的に可視化する。限定的な標本でも、L2 backtestのモデルリスク管理として優先して読む価値が高い。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 986 | 1,411 (82) | 0.0019 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 14,625 | 1,689 (251) | 0.1069 | PDF全文・9ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らの検証では、back取消からfront取消への変更で期限前完了率が1301.Tで8.01ポイント、7911.Tで7.39ポイント上昇し、implementation shortfallはそれぞれ1.010 bps、0.384 bps低下した。aggressive benchmarkは不変だったが、frontとbackは全整合的履歴に対するsharp boundではない。\n\n**手法:** 東証2銘柄の10段L2 snapshotとL1 tradeを照合し、集約経路を固定して取消だけをfront、数量加重random、backへ割り当てる。保存レビューでは、JAX-LOBによる一部streamの整合性確認と、18日のheld-out標本での3種類のshadow policy比較が記録されている。\n\n**実務への応用:** L2執行backtestに複数の取消割当を導入し、約定率、コスト、方策順位の感応度を併記できる。不安定な結果は保守的な方策選択やMBOデータ取得の判断材料になる。\n\n**限界・注意点:** 保存レビューの分析範囲は9ページの全文だが、本統合では原文を再確認していない。結果は2銘柄、限定した履歴再構成規則、有限板深度に条件付けられる。shadow policyはlatency、手数料、rebate、market impactを除外し、完全な識別集合の極値も求めていない。\n\n## 2. The Year-End Toll: Frictions Embedded in Option-Implied Rates\n\n**[arXiv:2609.20224v1](https://arxiv.org/abs/2609.20224v1) — Useong Shin**\n\n### 概要\n\nSPX・RUTのoption-implied rateと外部benchmarkの差に、満期が12月31日を初めてまたぐ際のfunding frictionが含まれると主張する。精密なput–call parity推定と、経済的に摩擦のない金利の識別を区別する点が中心である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 推奨 | オプション・インプライド金利 / put–call parity / 年末効果 / 資金調達摩擦 / box spread / convenience yield |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 本chunkでは金利とmicrostructureの接点として優先度が高く、年末の資金調達摩擦を金利推定から切り分ける問題設定が実務的である。ただし重要度は問題設定への評価であり、結果の信頼性は全文確認まで保留する条件付き推薦である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 762 | 1,137 (84) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 2,048 | 2,148 (348) | 0.0532 | 全74ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** abstractとIntroductionによれば、同一取引日の満期間比較で最初の年末crossingに非年率換算の約2から3 bpのbasis上昇が見られる。著者はこれを固定的なprice wedgeと解釈し、年率換算では概ね$\\kappa/\\tau$として表れると報告する。複数benchmarkなどの確認結果も報告されるが、推定表は未確認である。\n\n**手法:** 2012年から2025年のSPX・RUTオプションについて、put–call parity由来のdiscount factorと満期対応benchmarkの差を分析する。同一取引日の年末crossingと満期cross sectionを用い、流動性やfunding proxyなどを制御したとされる。\n\n**実務への応用:** box spread、rates relative value、convenience yield、資金調達比較では、年末をまたぐ満期を区別し、固定価格wedgeと年率換算効果を分けて診断する用途が考えられる。option-implied rateを無条件に純粋なrisk-free rateとみなさないことが重要である。\n\n**限界・注意点:** 分析範囲は74ページの論文のabstractとIntroductionのみであり、全文分析ではない。本統合も保存レビューに依存し、option cleaning、discount-factor推定、識別仮定、標準誤差、頑健性検証、付録を確認していない。規制変更の因果効果は識別されず、長期満期の後続crossingは標本が薄く、frictionの完全な分解でもない。\n\n## 3. The Favorite-Longshot Bias in Prediction Markets: Evidence from Polymarket\n\n**[arXiv:2609.12878v1](https://arxiv.org/abs/2609.12878v1) — Marcos Cardozo, José Ignacio Rivero-Wildemauwe**\n\n### 概要\n\nPolymarketの大規模取引データからfavorite–longshot biasを調べ、収益率の大きさや符号が集計単位に依存すると報告する研究である。週次レビューでは、予測市場の価格バイアスを測定する際の集計リスクとして注目する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 予測市場 / Polymarket / favorite–longshot bias / 集計感応度 / wallet分析 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 集計方法だけで収益率の符号が変わるという報告は、予測市場のmicrostructure分析に重要である。ただし限定資料に基づくため、実務上の結論を採用する前に本文で検証すべき条件付き推薦とする。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 872 | 1,288 (84) | 0.0017 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 2,728 | 1,745 (170) | 0.0485 | 全51ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らによれば、10セント未満の購入は投資額加重で1ドル当たり19.35セントを失う。一方、longshot収益率はchild market等加重の$-6.30\\%$からparent event等加重の$+4.09\\%$へ反転する。これは一律の価格非効率という解釈に注意を促す報告である。\n\n**手法:** 保存レビューによれば、2022年11月から2026年3月の約5.88億件の取引と248万walletを対象に、解決済み市場の購入価格と最終payoffを比較する。集計加重の変更と、過去の購入から分類したwallet選好の翌月への持続性を分析する。\n\n**実務への応用:** 予測市場の執行評価では、投資額、child market、parent event、カテゴリー別の集計を併記する。反復的なlongshot購入だけを損失集中の代理指標にすることも避けたい。\n\n**限界・注意点:** 分析範囲は51ページの論文のabstractとIntroductionのみであり、全文分析ではない。本統合も保存レビューに基づき、標本構築、収益率定義、推定精度、頑健性検証、付録を確認していない。walletは個人と一致せず、観察結果から因果関係は識別できない。\n\n## 4. Event-Time Order-Flow Memory, Operational-Time Impact, and Subordinated Market Observables\n\n**[arXiv:2609.13715v1](https://arxiv.org/abs/2609.13715v1) — Christopher Angstmann, Tim Gebbie**\n\n### 概要\n\n注文符号の長期記憶、latent order bookの価格インパクト、calendar timeの観測量を異なる時計で整理する理論研究である。既存機構の統合を通じ、観測されるimpact scalingがイベント到着時計に依存し得ることを示す。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 価格インパクト / 注文フローの長期記憶 / 潜在注文板 / event time / subordination |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 新しい実証法則としてではなく、impact推定の時計依存性を点検する理論的チェックリストとして有用である。厳密な消去結果と近似的なscaling結果を区別して読むことを勧める。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 854 | 1,008 (64) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 9,444 | 1,852 (306) | 0.0843 | PDF全文・6ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らは対称なbid/ask更新でimbalance方程式のマッチング反応項が厳密に消えるとする。一方、square-root impactは局所近似に依存し、安定指数$\\beta\\in(0,1)$のheavy-tailed clockへの写像ではインパクト尺度が$t^{\\beta/2}$になると論じる。\n\n**手法:** 離散reaction–diffusionモデルからimbalance recursionを導き、形式的な連続時間極限でVolterra型front equationを構成する。hidden-order長のrenewal modelとinverse subordinatorを用いて、符号相関と価格frontをcalendar timeへ写像する。\n\n**実務への応用:** 資産やvenue間でimpact curveを比較する際、流動性応答とイベント到着頻度を混同しないための整理に使える。event timeとcalendar timeを併記し、執行スケジュールと時計の変換を分離することが有用である。\n\n**限界・注意点:** 保存レビューは6ページの全文を対象とするが、本統合では原文を再確認していない。実証、較正、シミュレーション検証はなく、impact則は局所線形流動性、固定背景、弱い取消、小変位などに依存する。時計は外生的で、注文フローや流動性との内生的相互作用を扱わない。\n\n## 5. Strategic Index Reconstitution: Differential Games, Closed-Loop Equilibria and Mean-Field Dynamics\n\n**[arXiv:2609.15901v1](https://arxiv.org/abs/2609.15901v1) — Lukas-Benedikt Fiechtner, Jose Blanchet**\n\n### 概要\n\n指数組入れ変更を巡る在庫形成と流動性供給を、異質beliefとmulti-asset transient impactを含むclosed-loop gameで分析する。有限プレイヤー均衡とmean-field近似を接続する、執行理論として重要な候補である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 指数リバランス / 戦略的執行 / transient impact / closed-loop均衡 / mean-field game / Riccati方程式 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 計算規模がトレーダー数に依存しない構造と定量的な近似均衡誤差は、戦略的執行研究に有望である。ただし今週は理論候補としての推薦であり、実装や定理への依拠には全文の精査が必要である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 826 | 1,299 (91) | 0.0017 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 7,186 | 8,814 (516) | 0.2122 | 全91ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 7,186 | 16,000 (291) | 0.3229 | 全91ページ（50ページ超）：abstractとIntroductionのみ・全文未解析・未完了の試行 |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 7,186 | 2,361 (516) | 0.0501 | 全91ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 7,186 | 2,671 (738) | 0.0563 | 全91ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らは、no-price-manipulation条件の下で有限期間のsubgame-perfect Nash equilibriumが存在し、トレーダー数に依存しない次元のRiccati ODEで計算できると主張する。集計在庫とimpactは平均beliefに依存し、$\\varepsilon_n=1/n+\\lVert\\bar{\\pi}_n-\\bar{\\pi}\\rVert$に対して経路誤差は$O(\\varepsilon_n)$、approximate-Nash誤差は$C\\varepsilon_n^2$と報告する。\n\n**手法:** 線形二次微分ゲームの状態を自己在庫の平均からの偏差、平均在庫、impactへ縮約し、HJB系をmatrix Riccati ODEと線形ODEへ帰着する。有限プレイヤー均衡からbelief分布を用いるmean-field gameへ移行する。\n\n**実務への応用:** 指数リバランスの発表前後からunwindまでを一貫して扱うscenario analysisに利用できる可能性がある。競合数や集計在庫を完全には観測できない場合のmean-field execution policyも検討対象になる。\n\n**限界・注意点:** 分析範囲は91ページの論文のabstractとIntroductionのみであり、全文分析ではない。本統合も保存レビューに依存し、global solvability、verification、収束率の証明、技術的仮定、数値設定、付録を確認していない。線形impact、二次コスト、外生indexer scheduleなどの実市場への妥当性も未検証である。\n\n## 6. SAiFE-gym: Model-based Environments for Automated Market Making with Concentrated Liquidity\n\n**[arXiv:2609.17788v1](https://arxiv.org/abs/2609.17788v1) — Georgios Chionas, Charalampos Kleitsikas, Stefanos Leonardos, Leandro Sánchez-Betancourt, Carmine Ventre**\n\n### 概要\n\n集中流動性AMMにおける流動性供給、注文到着、price impact、gas cost、latencyを組み替え可能なRL環境として提供する。主な価値は収益性の発見ではなく、方策比較とstress testのための研究基盤にある。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 自動マーケットメーカー / 集中流動性 / 強化学習 / 流動性供給 / domain randomization / シミュレーション基盤 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 集中流動性とblockchain摩擦を同一環境で扱う再利用可能な設計は、AMM研究に有用である。実運用性能の証拠ではなく、研究インフラとして推薦する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 839 | 992 (61) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 17,179 | 1,395 (136) | 0.1138 | PDF全文・8ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らは単一マシンのbenchmarkで、1,000 trajectoriesのrolloutがNumPy並列化では約0.05秒、multiprocessingでは約1.6秒となり、約30倍高速だったと報告する。PPOのdomain randomizationは、多くの評価領域で決定的な改善を示していない。\n\n**手法:** 複数の外部価格過程、流動性や価格乖離に依存する注文到着強度、depth依存または1-tick型impactを実装する。GymnasiumとStable Baselines 3に接続し、固定パラメータ学習とepisode単位のdomain randomizationをMonte Carloで評価する。\n\n**実務への応用:** LPのレンジ選択、rebalancing頻度、inventory risk、gas costの比較実験に使える。未知のvolatilityやorder-flow regimeに対する方策感応度の検証にも適する。\n\n**限界・注意点:** 保存レビューは8ページの全文を対象とするが、本統合では原文や実装を再確認していない。結果は未較正のmodel-based simulationで、外生価格、固定gas cost、決定論的latency、単一agentなどの単純化に依存する。速度比較は単一機材で、PPO評価の信頼区間や十分な複数seed比較も示されていない。\n\n## 7. Model-Free Passive Execution via Order-Level Shadowing\n\n**[arXiv:2609.18019v1](https://arxiv.org/abs/2609.18019v1) — Vincent Maciejewski**\n\n### 概要\n\n第三者の指値注文をexchange order IDで追跡し、同じ価格・venueへ発注して取消や約定後に自注文を取り消すShadow-PPOVを提案する。予測不要のplacement baselineとして興味深いが、評価実装には追加の安全guardが含まれる。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 受動執行 / order-level shadowing / MBO / latency / market replay / 執行baseline |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** order lifecycleを模倣する明確なbaseline設計と年間MBO replayは、受動執行研究の比較軸として有用である。ただし本chunkのFIFO部分識別研究と同様、再現された約定を実市場の反実仮想と同一視せず、production superiorityの証拠とは扱わない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 971 | 1,052 (61) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 25,175 | 2,796 (897) | 0.1818 | PDF全文・29ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者のCME ES replayでは、ほぼ同じparticipationとzero latencyの下でrelative slippageが受動方式で$+0.0955\\pm0.0130$、aggressive POVで$+0.0952\\pm0.0135$ ticks/contractと報告される。delay増加時の悪化は受動方式で小さかったが、latency比較は方式間のparticipationを一致させたものではない。\n\n**手法:** 2025年のCME ES通常取引時間246 sessionsをorder-by-orderでreplayし、各windowで100 contractsの買いと売りを同時執行する。arrival mid基準のコストなどを測定し、session単位のclustered intervalとlatency sweepを用いる。\n\n**実務への応用:** 予測型passive placementと比較する単純なbaseline候補になる。実装にはMBO feed、order ID追跡、FIFO管理、cancel処理、未約定とoverfillの制御が必要であり、目標participationを直接保証する手法ではない。\n\n**限界・注意点:** 保存レビューの対象は29ページの全文だが、本統合では原文を再確認していない。自己注文のimpact、他参加者の反応、historical fillsの置換を除外する追加約定型replayである。単一商品、同時売買、限定的baseline、guard ablationの欠如が一般化を制約し、方式ごとに区間が異なるVWAP比較も順位付けに使えない。\n\n## 8. Quadratic G-BSDEs for bond pricing with endogenous short-rate feedback\n\n**[arXiv:2609.19094v1](https://arxiv.org/abs/2609.19094v1) — Jaehyun Kim, Hyungbin Park**\n\n### 概要\n\nボンド価格依存の短期金利feedbackとvolatility uncertaintyを、対数価格のquadratic G-BSDEとして扱う理論研究である。本chunkで金利モデルに最も直接的に関係するが、完成した実務的yield-curve modelではない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 金利モデル / quadratic G-BSDE / 債券評価 / 内生的短期金利 / volatility uncertainty / 長期利回り |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 価格依存型割引とvolatility ambiguityを統合し、有限・無限期間のwell-posednessを扱う点は理論的に重要である。即時実装向けではなく、数理金利モデル研究者に優先して推薦する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 783 | 1,227 (89) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 34,218 | 2,169 (483) | 0.2145 | PDF全文・32ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 論文は強い正則性条件の下で有限期間の存在、一意性、比較、安定性を報告する。strict monotonicityの下では有界無限期間解を構成し、有限期間解との差を$C e^{-\\mu(T-s)}$で評価する。また、所与の価格プロファイルと長期利回り$\\lambda$を実現するfeedback係数を逆設計する。\n\n**手法:** 暗黙的な割引評価を対数変換し、G-expectation下のquadratic G-BSDEへ帰着する。G-BMO、Girsanov型変換、比較、切断近似、viscosity PDE表現を用い、有限期間近似から無限期間解と収束評価を導く。\n\n**実務への応用:** volatility ambiguity下で価格目標と金利調整ルールを自己整合的に分析する理論基盤になる。取引やカーブ構築への適用には、共通短期金利の下での満期間整合性、係数推定、数値解法が必要である。\n\n**限界・注意点:** 保存レビューの対象は32ページの全文だが、本統合では原証明を再確認していない。有界性、Lipschitz条件、strong ellipticity、strict monotonicityなどに依存し、無裁定の枠組みは外生的に仮定する。複数満期の同時整合性は未解決で、実証、較正、数値実験はなく、表記上の不整合も報告されている。\n\n## 9. Who Aggregates Information? Screening, Rent, and the Coexistence of CLOB and AMM Prediction Markets\n\n**[arXiv:2609.20017v1](https://arxiv.org/abs/2609.20017v1) — Chengqi Zang, Gabriel P. Andrade, Tomoyuki Nakajima**\n\n### 概要\n\n予測市場のCLOBとLMSR型AMMの併存を、informed flowのscreeningとbehavioral tail demandから説明する。maker収益をspread captureだけでなくsettlement時のscreening rentとして捉える仮説が中心である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 予測市場 / CLOB / LMSR / 逆選択 / screening rent / 多結果市場 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** CLOBとAMMの役割分担を問い直す点は、今週の予測市場研究を読むうえで重要である。ただしFLBの集計感応度に関する別論文の結果を、この共存仮説の裏付けとみなすことはできず、推薦は本文検証を前提とする。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 907 | 1,136 (54) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 4,357 | 1,809 (178) | 0.0580 | 全62ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らは、CLOB makerがsignal band外へquoteして情報取引を避け、LMSRがinformed flowを吸収する補完関係を主張する。また、$n\\geq3$の多結果市場ではbinary CLOBのswitch priceだけでimplied beliefの水準は一意に定まらず、LMSRは整合的な価格付けを行うとされる。\n\n**手法:** Introductionの記述では、state-contingent tail demandを持つCLOBとLMSRの共存モデルを構築する。Polymarketのmaker settlement収益、片側ポジション、regime別mispricing、多結果set premiumも分析したと報告する。\n\n**実務への応用:** 予測市場のhybrid設計において、AMM depth、routing、maker競争、担保効率を共同で検討する枠組みになる可能性がある。CLOB収益の源泉を情報集約と同一視しないための仮説整理にも使える。\n\n**限界・注意点:** 分析範囲は62ページの論文のabstractとIntroductionのみであり、全文分析ではない。本統合も保存レビューに基づき、モデル条件、証明、推定表、データ構築、付録を確認していない。取引標本にAMMが含まれずvenue choiceを直接検証できないため、共存機構の実証的確立とは扱えない。\n\n## 10. Herding and Liquidity in Order-Book Markets. III. Leverage and the Onset of Endogenous Liquidity Crises under Weak Anchoring\n\n**[arXiv:2609.20192v1](https://arxiv.org/abs/2609.20192v1) — Jan Novotny**\n\n### 概要\n\n単一資産の注文板agent-based modelで、価値アンカー、群集行動、レバレッジ、maintenance marginの相互作用による流動性枯渇を調べる。危機をレバレッジ単独ではなく、価格支持とmargin bufferの共同作用として整理する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 指値注文板 / エージェントベースモデル / 流動性危機 / レバレッジ / 証拠金バッファ / 群集行動 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 証拠金引き上げとレバレッジが流動性へ与える共同効果を、注文板機構として検討する点が有用である。実証的な市場法則ではなく、検証可能なstress mechanismの仮説として推薦する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 952 | 1,319 (52) | 0.0018 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 17,824 | 2,686 (516) | 0.1428 | PDF全文・16ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者は、追加的な枯渇が主に弱いアンカーと中程度の群集行動に集中し、最初のmargin callまでの下落余地$B=(1/\\lambda-m_{\\mathrm{maint}})/(1-m_{\\mathrm{maint}})$が小さいほど発火確率が高いと報告する。モデル内では開始は滑らかなsub-critical crossoverであり、普遍的な臨界点は示されない。\n\n**手法:** anchored noise trader、chartist、資金制約付きmarket maker、leveraged holderを連続ダブルオークションへ配置する。共通条件でleveredとunleveredを比較し、複数seedのparameter sweepで板枯渇、tail exponent、return依存、発火確率を測る。\n\n**実務への応用:** 電子市場のstress testで、レバレッジ、maintenance margin、価格追随型quote更新、強制売却を同時に変えるscenario設計に使える。モデル内の閾値をそのまま実市場のリスク限度へ転用すべきではない。\n\n**限界・注意点:** 保存レビューは16ページの全文を対象とするが、本統合では原文を再確認していない。未較正の単一資産モデルで、margin-bufferによる整理は一つの開始近傍セルを中心に検証されている。seed数と頑健性探索は限定的で、volatility clusteringは短期記憶にとどまり、branching proxyもHawkes推定ではない。\n\n## 11. CAST: A Cross-Asset State-Space Trading System for Drawdown Control in Stock Markets\n\n**[arXiv:2609.14205v1](https://arxiv.org/abs/2609.14205v1) — Yu Peng, Matloob Khushi, Josiah Poon**\n\n### 概要\n\nCASTはcross-asset Kalman filterとMPCを組み合わせ、予測不確実性をポジション制御のリスク罰則へ変換する日次株式取引システムである。執行技術そのものより、予測と意思決定を分離したrisk-aware trading設計として評価する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | アルゴリズム取引 / Kalman filter / Model Predictive Control / 予測不確実性 / drawdown制御 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 不確実性を直接ポジション制御へ接続する構造は参考になるが、摩擦なし結果を実運用上の優位性とみなすことはできない。中心的な執行研究より優先度を下げ、方法論に限定して推薦する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 891 | 1,198 (92) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 21,810 | 2,119 (362) | 0.1514 | PDF全文・10ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らは摩擦なしbacktestで、4市場すべての最終資産価値と最大drawdownのPareto frontier上に位置すると報告する。Global30のMDDは$0.031$、TPX100は$0.134$で比較手法中最小だった。リスク罰則を除くとNASDAQとCSI300のMDDが大きく悪化したとされる。\n\n**手法:** 複数次数のKalman filterを直近の予測誤差で加重し、事前推定した資産間相関をprocess-noise covarianceへ組み込む。MPCで取引量と期末解消の制約下に毎日再最適化し、2010年から2025年の各市場30銘柄で17手法との比較とablationを行う。\n\n**実務への応用:** 予測分散と明示的なリスク選好を使う低頻度ポジション制御の設計例になる。取引費用、turnover、流動性、意思決定と約定の時系列を追加した検証が実装の前提となる。\n\n**限界・注意点:** 保存レビューは10ページの全文を対象とするが、本統合では原文を再確認していない。費用とslippageはゼロで、終値利用と約定時点の整合性、銘柄選定、survivorship bias、配当などの処理が不明確である。固定相関、リスク係数の選択、baseline調整の公平性、統計検定にも課題が残る。\n\n## 12. Gate Design and Stage-Dependent Incentives in Retail Proprietary-Trading Evaluations: Why Passing Is Not Standalone Evidence of Skill, and Why the Product Fails to Pay Under Measured Trading Constraints\n\n**[arXiv:2609.14859v1](https://arxiv.org/abs/2609.14859v1) — Nicholas Hall**\n\n### 概要\n\n小売prop firmの評価口座を、利益目標、drawdown制約、payout条件を持つ二段階契約として分析する。評価通過と持続的な収益獲得を分け、position sizingと段階別の取引頻度が指標を左右する点を強調する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | 小売prop trading / 評価口座 / position sizing / 取引費用 / zero-edge control / payout条件 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 通過率をskillの証明とみなさず、契約全体の期待値を検証する視点は有益である。ただし電子執行への直接性は限定的で、タイトルの広い否定的主張よりも条件付きの契約分析として読むことを勧める。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 957 | 1,445 (143) | 0.0019 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 35,667 | 16,000 (166) | 0.4983 | PDF全文・40ページ・未完了の試行 |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 35,667 | 2,349 (362) | 0.0613 | PDF全文・40ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者のモデルでは、zero-edgeでもsizing最適化により通過確率が約$0.36$から$0.47$となる。評価段階を高速、funded段階を低速にするとjoint gateが約$1.0\\%$から$8.8\\%$へ改善したと報告する。測定した戦略群では費用控除後のedgeが残らなかったが、全戦略や全firmの不可能性を示す結果ではない。\n\n**手法:** index futures戦略の費用控除後検証と、複数分布によるMonte Carlo、二段階barrier simulation、sizing探索を組み合わせる。公開口座規則と限定的なcohort統計も参照する。\n\n**実務への応用:** pass rateだけでなく、$P(\\mathrm{pass})P(\\mathrm{payout}\\mid\\mathrm{pass})$、resetやactivationを含む総費用、payout上限を評価する。口座単位と参加者単位を分け、同一評価工程のzero-edge controlを置くことが有用である。\n\n**限界・注意点:** 保存レビューの対象は40ページの全文だが、本統合では原文やcodeを再確認していない。未査読working paperで、firm標本は少数かつ非無作為である。固定費用、独立性、有限期間などの仮定、retry相関や裁量的執行の省略、多重検定補正の不足が結論を制約する。sellerの意図も測定されていない。\n\n## 13. Sniper Cohorts and Algorithmic Filter Rejections in Solana Memecoin Markets: Two-Window Replication of Lifecycle-Stage Population Separation\n\n**[arXiv:2609.18975v1](https://arxiv.org/abs/2609.18975v1) — Arati Uday Kamat**\n\n### 概要\n\nSolana memecoinのbonding curve段階で検出したsniper cohortと、主に卒業後のDEX取引を対象とするrejection streamのmint集合を比較する。市場全体の構造的分離よりも、観測pipelineの対象母集団が異なることを示す記述研究として評価する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | Solana / memecoin市場 / token lifecycle / 集合重複 / 選択バイアス / 市場監視 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** token lifecycleを無視したデータ統合への警告としては有用である。ただし証拠は狭いpipelineに依存するため、広いmicrostructure上の発見ではなく、データ品質管理の補助資料として推薦する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 951 | 1,177 (89) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 11,339 | 2,316 (853) | 0.1030 | PDF全文・12ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 期間を揃えた比較では、cohort側の重複率がv1で$0.010\\%$、v2で$0.803\\%$と報告され、重複件数はそれぞれ2件と5件だった。両期間で重複が小さいことは支持するが、一般的な市場分離や因果機構を確立しない。\n\n**手法:** 約5週間の非重複の二期間について、異なるversionのcohort detector出力と対応するrejection集合の積集合を計算する。schema、DEX構成、時間帯を比較し、補助的にカイ二乗統計とPoisson計算を用いる。\n\n**実務への応用:** 卒業前のwallet coordination情報と卒業後の価格・流動性情報を区別し、graduation eventで明示的に結合するデータ設計に役立つ。フィルター間の低重複を、そのまま相互補完性や検出精度と解釈しないことが重要である。\n\n**限界・注意点:** 保存レビューは12ページの全文を対象とするが、本統合では原文やデータを再確認していない。pipelineは同一研究者に由来し、標本期間は短く、rejection streamの約$92\\%$がPumpSwapに集中する。共通母集団の無作為標本ではなく、Poisson比較の流入確率仮定も未検証で、低重複は選択規則から機械的に生じ得る。\n\n## 14. ViperQ: Order Flow Pattern Recognition via Auction Market Theory for Reinforcement Learning Trading\n\n**[arXiv:2609.13825v1](https://arxiv.org/abs/2609.13825v1) — Asser Moustafa, Rares-Mihail Neagu, Jugal Kalita**\n\n### 概要\n\nAuction Market Theoryとorder-flow特徴をPPOの状態表現へ組み込み、米国株のlong-only取引を学習する。特徴設計は関連性があるが、保存レビューで指摘された実証設計と記述の不整合から、性能証拠としての評価は低い。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 非推奨 | 強化学習 / Auction Market Theory / 注文フロー / PPO / バックテスト検証 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 解釈可能な特徴設計には参考価値があるが、大きなbacktest収益を裏付ける比較と実行可能性検証が不足する。今週の優先推薦には含めず、性能主張への依拠は避けたい。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 898 | 1,195 (107) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 11,755 | 1,952 (516) | 0.0978 | PDF全文・7ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らはheld-out期間のROIをTSLAで$+163.6\\%$、NVDAで$+116.5\\%$、最大drawdownをそれぞれ$-27.5\\%$、$-47.8\\%$と報告する。しかし比較可能なbaseline、統計検定、formal ablationがなく、AMT特徴が改善を生んだとは判断できない。\n\n**手法:** TSLA・NVDAのtick dataを1秒足へ集約し、20次元の状態からlongまたはflatを選ぶ銘柄別PPOを訓練する。時系列を訓練用と評価用に分割し、次バーopenでの約定と評価時の規制手数料のみを仮定する。\n\n**実務への応用:** VPOC、CVD、tape velocityなどをRL状態へ変換する設計例として参照できる。実運用の判断には、現実的な約定費用とデータ整合性を含む独立した再検証が必要である。\n\n**限界・注意点:** 保存レビューの対象は7ページの全文であり、本統合では原文を再確認していない。2銘柄と単一分割に限られ、spread、slippage、latency、partial fill、impactを除外する。bar件数、取引数と最低保有時間、reward記述に説明不足や不整合が報告され、VPOCのrolling VWAP近似の妥当性も不明である。\n\n## 15. A prelude to the theory of Real-World Asset (RWA) Tokenization\n\n**[arXiv:2609.15797v1](https://arxiv.org/abs/2609.15797v1) — Wenpin Tang**\n\n### 概要\n\nRWA tokenizationを分類し、非対称情報下の証券設計とDigital Asset Treasuriesの企業金融モデルを提示する。流通市場取引による情報回復と逆選択の議論にmicrostructureとの接点がある。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 非推奨 | RWAトークン化 / 非対称情報 / 逆選択 / 証券設計 / Digital Asset Treasuries |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 逆選択と流通市場取引は対象分野に関連するが、中心は証券設計と企業金融である。資料もabstractに限られるため、今週の優先記事としては推薦しない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 800 | 1,178 (157) | 0.0016 | Abstractのみ |\n| 週次統合 | gpt-6-astra / medium | 1 | 26,596 | 15,386 (122) | 1.1017 | 保存済みレビュー・15論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** abstractによれば、継続的な流通市場取引が情報の非対称性を緩和し、発行価格と最適なtokenization設計に影響する。別のモデルでは、市場評価、資金調達、暗号資産蓄積を内生化した最適発行政策を扱うとされる。\n\n**手法:** 標準的RWA、stablecoin、Digital Asset Treasuriesを区別し、非対称情報モデルと動学的企業金融モデルを構築する。後者はStrategyを事例として説明するとされる。\n\n**実務への応用:** RWA商品の発行条件や流通市場の情報設計を考える概念的枠組みになり得る。具体的な執行、market making、金利商品への適用は確認できない。\n\n**限界・注意点:** 分析対象はabstractのみであり、Introductionも全文も分析していない。本統合はその保存レビューに基づく。モデルの仮定、均衡条件、証明、実証検証、費用や規制の扱いを確認できず、実市場への妥当性は判断できない。",
+      "papers": [
+        {
+          "arxivId": "2609.13597v2",
+          "title": "Same Book, Different Fills: Partial Identification of FIFO Execution from Aggregate Order Books",
+          "authors": [
+            "Riya Danait",
+            "Yuliana Zamora",
+            "Ioana Boier"
+          ],
+          "submittedDate": "2026-09-17",
+          "updatedDate": "2026-09-18",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.13597v2",
+          "pdfUrl": "https://arxiv.org/pdf/2609.13597v2",
+          "schedulerRank": 1,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 10/10",
+          "schedulerSummary": "同じL2板と約定履歴でも、観測できない取消位置によってFIFOの受動約定が変わることを、条件付き部分識別として扱う。今週の執行研究では、backtestのqueue仮定をモデルリスクとして明示する点を最も高く評価する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 986 / 出力 1,411（うち推論 82） · 推定 $0.0019\n論文解析: gpt-5.6-sol / medium · トークン 入力 14,625 / 出力 1,689（うち推論 251） · PDF 9 pages · 推定 $0.1069\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.20224v1",
+          "title": "The Year-End Toll: Frictions Embedded in Option-Implied Rates",
+          "authors": [
+            "Useong Shin"
+          ],
+          "submittedDate": "2026-08-21",
+          "updatedDate": "2026-09-18",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.20224v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.20224v1",
+          "schedulerRank": 2,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 10/10",
+          "schedulerSummary": "SPX・RUTのoption-implied rateと外部benchmarkの差に、満期が12月31日を初めてまたぐ際のfunding frictionが含まれると主張する。精密なput–call parity推定と、経済的に摩擦のない金利の識別を区別する点が中心である。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 762 / 出力 1,137（うち推論 84） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 2,048 / 出力 2,148（うち推論 348） · 全74ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0532\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.12878v1",
+          "title": "The Favorite-Longshot Bias in Prediction Markets: Evidence from Polymarket",
+          "authors": [
+            "Marcos Cardozo",
+            "José Ignacio Rivero-Wildemauwe"
+          ],
+          "submittedDate": "2026-09-11",
+          "updatedDate": "2026-09-14",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.12878v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.12878v1",
+          "schedulerRank": 3,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "Polymarketの大規模取引データからfavorite–longshot biasを調べ、収益率の大きさや符号が集計単位に依存すると報告する研究である。週次レビューでは、予測市場の価格バイアスを測定する際の集計リスクとして注目する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 872 / 出力 1,288（うち推論 84） · 推定 $0.0017\n論文解析: gpt-5.6-sol / medium · トークン 入力 2,728 / 出力 1,745（うち推論 170） · 全51ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0485\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.13715v1",
+          "title": "Event-Time Order-Flow Memory, Operational-Time Impact, and Subordinated Market Observables",
+          "authors": [
+            "Christopher Angstmann",
+            "Tim Gebbie"
+          ],
+          "submittedDate": "2026-09-12",
+          "updatedDate": "2026-09-15",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.13715v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.13715v1",
+          "schedulerRank": 4,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "注文符号の長期記憶、latent order bookの価格インパクト、calendar timeの観測量を異なる時計で整理する理論研究である。既存機構の統合を通じ、観測されるimpact scalingがイベント到着時計に依存し得ることを示す。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 854 / 出力 1,008（うち推論 64） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 9,444 / 出力 1,852（うち推論 306） · PDF 6 pages · 推定 $0.0843\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.15901v1",
+          "title": "Strategic Index Reconstitution: Differential Games, Closed-Loop Equilibria and Mean-Field Dynamics",
+          "authors": [
+            "Lukas-Benedikt Fiechtner",
+            "Jose Blanchet"
+          ],
+          "submittedDate": "2026-09-14",
+          "updatedDate": "2026-09-15",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.15901v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.15901v1",
+          "schedulerRank": 5,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "指数組入れ変更を巡る在庫形成と流動性供給を、異質beliefとmulti-asset transient impactを含むclosed-loop gameで分析する。有限プレイヤー均衡とmean-field近似を接続する、執行理論として重要な候補である。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 826 / 出力 1,299（うち推論 91） · 推定 $0.0017\n論文解析: gpt-5.6-sol / medium · トークン 入力 7,186 / 出力 8,814（うち推論 516） · 全91ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.2122\n論文解析: gpt-5.6-sol / medium · トークン 入力 7,186 / 出力 16,000（うち推論 291） · 全91ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 未完了の試行 · 推定 $0.3229\n論文解析: gpt-5.6-sol / medium · トークン 入力 7,186 / 出力 2,361（うち推論 516） · 全91ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0501\n論文解析: gpt-5.6-sol / medium · トークン 入力 7,186 / 出力 2,671（うち推論 738） · 全91ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0563\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.17788v1",
+          "title": "SAiFE-gym: Model-based Environments for Automated Market Making with Concentrated Liquidity",
+          "authors": [
+            "Georgios Chionas",
+            "Charalampos Kleitsikas",
+            "Stefanos Leonardos",
+            "Leandro Sánchez-Betancourt",
+            "Carmine Ventre"
+          ],
+          "submittedDate": "2026-09-15",
+          "updatedDate": "2026-09-17",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.17788v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.17788v1",
+          "schedulerRank": 6,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "集中流動性AMMにおける流動性供給、注文到着、price impact、gas cost、latencyを組み替え可能なRL環境として提供する。主な価値は収益性の発見ではなく、方策比較とstress testのための研究基盤にある。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 839 / 出力 992（うち推論 61） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 17,179 / 出力 1,395（うち推論 136） · PDF 8 pages · 推定 $0.1138\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.18019v1",
+          "title": "Model-Free Passive Execution via Order-Level Shadowing",
+          "authors": [
+            "Vincent Maciejewski"
+          ],
+          "submittedDate": "2026-09-16",
+          "updatedDate": "2026-09-17",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.18019v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.18019v1",
+          "schedulerRank": 7,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "第三者の指値注文をexchange order IDで追跡し、同じ価格・venueへ発注して取消や約定後に自注文を取り消すShadow-PPOVを提案する。予測不要のplacement baselineとして興味深いが、評価実装には追加の安全guardが含まれる。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 971 / 出力 1,052（うち推論 61） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 25,175 / 出力 2,796（うち推論 897） · PDF 29 pages · 推定 $0.1818\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.19094v1",
+          "title": "Quadratic G-BSDEs for bond pricing with endogenous short-rate feedback",
+          "authors": [
+            "Jaehyun Kim",
+            "Hyungbin Park"
+          ],
+          "submittedDate": "2026-09-16",
+          "updatedDate": "2026-09-17",
+          "topics": [
+            "Interest-rate models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.19094v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.19094v1",
+          "schedulerRank": 8,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "ボンド価格依存の短期金利feedbackとvolatility uncertaintyを、対数価格のquadratic G-BSDEとして扱う理論研究である。本chunkで金利モデルに最も直接的に関係するが、完成した実務的yield-curve modelではない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 783 / 出力 1,227（うち推論 89） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 34,218 / 出力 2,169（うち推論 483） · PDF 32 pages · 推定 $0.2145\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.20017v1",
+          "title": "Who Aggregates Information? Screening, Rent, and the Coexistence of CLOB and AMM Prediction Markets",
+          "authors": [
+            "Chengqi Zang",
+            "Gabriel P. Andrade",
+            "Tomoyuki Nakajima"
+          ],
+          "submittedDate": "2026-09-17",
+          "updatedDate": "2026-09-18",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.20017v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.20017v1",
+          "schedulerRank": 9,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "予測市場のCLOBとLMSR型AMMの併存を、informed flowのscreeningとbehavioral tail demandから説明する。maker収益をspread captureだけでなくsettlement時のscreening rentとして捉える仮説が中心である。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 907 / 出力 1,136（うち推論 54） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 4,357 / 出力 1,809（うち推論 178） · 全62ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0580\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.20192v1",
+          "title": "Herding and Liquidity in Order-Book Markets. III. Leverage and the Onset of Endogenous Liquidity Crises under Weak Anchoring",
+          "authors": [
+            "Jan Novotny"
+          ],
+          "submittedDate": "2026-07-24",
+          "updatedDate": "2026-09-18",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.20192v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.20192v1",
+          "schedulerRank": 10,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "単一資産の注文板agent-based modelで、価値アンカー、群集行動、レバレッジ、maintenance marginの相互作用による流動性枯渇を調べる。危機をレバレッジ単独ではなく、価格支持とmargin bufferの共同作用として整理する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 952 / 出力 1,319（うち推論 52） · 推定 $0.0018\n論文解析: gpt-5.6-sol / medium · トークン 入力 17,824 / 出力 2,686（うち推論 516） · PDF 16 pages · 推定 $0.1428\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.14205v1",
+          "title": "CAST: A Cross-Asset State-Space Trading System for Drawdown Control in Stock Markets",
+          "authors": [
+            "Yu Peng",
+            "Matloob Khushi",
+            "Josiah Poon"
+          ],
+          "submittedDate": "2026-09-13",
+          "updatedDate": "2026-09-15",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.14205v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.14205v1",
+          "schedulerRank": 11,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "CASTはcross-asset Kalman filterとMPCを組み合わせ、予測不確実性をポジション制御のリスク罰則へ変換する日次株式取引システムである。執行技術そのものより、予測と意思決定を分離したrisk-aware trading設計として評価する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 891 / 出力 1,198（うち推論 92） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 21,810 / 出力 2,119（うち推論 362） · PDF 10 pages · 推定 $0.1514\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.14859v1",
+          "title": "Gate Design and Stage-Dependent Incentives in Retail Proprietary-Trading Evaluations: Why Passing Is Not Standalone Evidence of Skill, and Why the Product Fails to Pay Under Measured Trading Constraints",
+          "authors": [
+            "Nicholas Hall"
+          ],
+          "submittedDate": "2026-09-14",
+          "updatedDate": "2026-09-15",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.14859v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.14859v1",
+          "schedulerRank": 12,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "小売prop firmの評価口座を、利益目標、drawdown制約、payout条件を持つ二段階契約として分析する。評価通過と持続的な収益獲得を分け、position sizingと段階別の取引頻度が指標を左右する点を強調する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 957 / 出力 1,445（うち推論 143） · 推定 $0.0019\n論文解析: gpt-5.6-sol / medium · トークン 入力 35,667 / 出力 16,000（うち推論 166） · PDF 40 pages · 未完了の試行 · 推定 $0.4983\n論文解析: gpt-5.6-sol / medium · トークン 入力 35,667 / 出力 2,349（うち推論 362） · PDF 40 pages · 推定 $0.0613\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.18975v1",
+          "title": "Sniper Cohorts and Algorithmic Filter Rejections in Solana Memecoin Markets: Two-Window Replication of Lifecycle-Stage Population Separation",
+          "authors": [
+            "Arati Uday Kamat"
+          ],
+          "submittedDate": "2026-07-16",
+          "updatedDate": "2026-09-17",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.18975v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.18975v1",
+          "schedulerRank": 13,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "Solana memecoinのbonding curve段階で検出したsniper cohortと、主に卒業後のDEX取引を対象とするrejection streamのmint集合を比較する。市場全体の構造的分離よりも、観測pipelineの対象母集団が異なることを示す記述研究として評価する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 951 / 出力 1,177（うち推論 89） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 11,339 / 出力 2,316（うち推論 853） · PDF 12 pages · 推定 $0.1030\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.13825v1",
+          "title": "ViperQ: Order Flow Pattern Recognition via Auction Market Theory for Reinforcement Learning Trading",
+          "authors": [
+            "Asser Moustafa",
+            "Rares-Mihail Neagu",
+            "Jugal Kalita"
+          ],
+          "submittedDate": "2026-09-12",
+          "updatedDate": "2026-09-15",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.13825v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.13825v1",
+          "schedulerRank": 14,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 4/10",
+          "schedulerSummary": "Auction Market Theoryとorder-flow特徴をPPOの状態表現へ組み込み、米国株のlong-only取引を学習する。特徴設計は関連性があるが、保存レビューで指摘された実証設計と記述の不整合から、性能証拠としての評価は低い。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 898 / 出力 1,195（うち推論 107） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 11,755 / 出力 1,952（うち推論 516） · PDF 7 pages · 推定 $0.0978\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.15797v1",
+          "title": "A prelude to the theory of Real-World Asset (RWA) Tokenization",
+          "authors": [
+            "Wenpin Tang"
+          ],
+          "submittedDate": "2026-09-14",
+          "updatedDate": "2026-09-15",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.15797v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.15797v1",
+          "schedulerRank": 15,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 4/10",
+          "schedulerSummary": "RWA tokenizationを分類し、非対称情報下の証券設計とDigital Asset Treasuriesの企業金融モデルを提示する。流通市場取引による情報回復と逆選択の議論にmicrostructureとの接点がある。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 800 / 出力 1,178（うち推論 157） · 推定 $0.0016\n週次統合: gpt-6-astra / medium · トークン 入力 26,596 / 出力 15,386（うち推論 122） · 保存済み日次レビュー使用／15論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $1.1017",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

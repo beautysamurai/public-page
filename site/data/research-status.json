@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "daily": {
-    "status": "UPDATE_NOT_CONFIRMED",
-    "checkedAt": "2026-09-20T00:06:59Z",
+    "status": "UPDATE_CONFIRMED",
+    "checkedAt": "2026-09-20T00:12:14Z",
     "lastCompletedBatchDate": "2026-09-18",
-    "pendingBatchDate": "2026-09-10"
+    "pendingBatchDate": null
   },
   "pendingPeriods": [
     {
@@ -43,18 +43,9 @@
         "2026-08-27"
       ],
       "ready": false
-    },
-    {
-      "reportKind": "weekly",
-      "periodEnd": "2026-09-11",
-      "missingBatchDates": [
-        "2026-09-10"
-      ],
-      "ready": false
     }
   ],
   "pendingDailyBatches": [
-    "2026-09-10",
     "2026-09-15",
     "2026-09-16",
     "2026-09-17"

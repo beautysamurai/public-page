@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-09-10-daily-openai-01",
+  "editionDate": "2026-09-10",
+  "editionKind": "daily",
+  "sourceKind": "openai-responses-api",
+  "sourceLabel": "OpenAI Responses API · automated research pipeline",
+  "importedAt": "2026-09-20T00:12:14Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXivの更新を確認し、対象論文を評価しました。",
+  "expectedBatchDate": "2026-09-10",
+  "observedBatchDate": "2026-09-10",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年9月10日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 11 | 9,314 | 10,432 (563) | 0.0144 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 4,585 | 1,546 (247) | 0.0538 | PDF全文・8ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. dexamine: A Python package for Uniswap event data on Ethereum\n\n**[arXiv:2609.10407v1](https://arxiv.org/abs/2609.10407v1) — Magnus Hansson**\n\n### 概要\n\nEthereum上のUniswap v2/v3について、receipt logを取引・流動性イベントへ変換し、実行順序、pool state、token量、gas情報を付与するPython研究用パッケージを提示する。主眼は実証的なDEX market microstructure分析のための再利用可能なデータ基盤であり、経済学的仮説の検証ではない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 分散型取引所 / Uniswap / Ethereum / 市場マイクロストラクチャー / イベントデータ / 取引実行順序 / 研究ソフトウェア / 再現可能性 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 新しいmarket microstructureの実証結果はないが、DEX研究で誤りが生じやすい単位、符号、event順序、pool stateの処理を標準化し、offlineで再現可能な例を提供する点は有用である。Uniswapデータを直接扱う研究者には推奨できる一方、対応protocolが限定的で性能評価もないため、一般的なexecution研究への重要度は中程度である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 725 | 1,049 (72) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 4,585 | 1,546 (247) | 0.0538 | PDF全文・8ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者は、dexamineがswap、mint、burnをevent単位で識別し、token単位への変換、receipt内順序、取引後の価格・流動性状態、transaction-level metadataを一貫した形式で出力すると報告する。記録済みEthereum responseを用いた4件のUniswap v3 swapのoffline再現例とテストが示されるが、速度優位性や新たな実証結果は主張されていない。\n\n**手法:** RequestsによるEthereum JSON-RPC取得、web3.pyによるcontract metadata解決、Uniswap v2/v3固有のevent decoding、flat output構築を分離する。metadata cache、batch取得、incremental yieldを備え、記録済みRPC responseとseed済みmetadataによるoffline replay、unit test、integration test、独立したABI decodingと高精度計算による検証を行う。\n\n**実務への応用:** DEXのprice discovery、取引費用、liquidity provision、arbitrage、transaction orderingを研究する際のデータ構築に利用できる。特に、同一transaction内の複数swapを実行順に保持し、pool stateとexecution metadataを結合したevent-level datasetの作成に適する。\n\n**限界・注意点:** 対象はEthereum mainnet上のUniswap v2/v3のswap、mint、burnに限られ、transaction discovery、保存、統計推定は含まれない。正規化量は浮動小数点の丸め誤差を含み、gas情報はevent別ではなくtransaction全体の値である。destination labelは内部call path、trader identity、arbitrage、MEVを識別しない。metadataは通常latest blockから取得されるため再現性に影響し得るほか、chain reorganization、RPC endpoint依存、v2で直前のSync条件を満たさないeventの除外も考慮が必要である。比較benchmark、規模別throughput、外部データとの包括的な独立検証は提示されていない。",
+  "papers": [
+    {
+      "arxivId": "2609.10407v1",
+      "title": "dexamine: A Python package for Uniswap event data on Ethereum",
+      "authors": [
+        "Magnus Hansson"
+      ],
+      "submittedDate": "2026-09-09",
+      "updatedDate": "2026-09-10",
+      "topics": [
+        "Market microstructure"
+      ],
+      "absUrl": "https://arxiv.org/abs/2609.10407v1",
+      "pdfUrl": "https://arxiv.org/pdf/2609.10407v1",
+      "schedulerRank": 1,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・テーマ重要度 8/10",
+      "schedulerSummary": "Ethereum上のUniswap v2/v3について、receipt logを取引・流動性イベントへ変換し、実行順序、pool state、token量、gas情報を付与するPython研究用パッケージを提示する。主眼は実証的なDEX market microstructure分析のための再利用可能なデータ基盤であり、経済学的仮説の検証ではない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 725 / 出力 1,049（うち推論 72） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 4,585 / 出力 1,546（うち推論 247） · PDF 8 pages · 推定 $0.0538",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    }
+  ]
+}

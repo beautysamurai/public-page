@@ -1,0 +1,731 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-10",
+  "fingerprint": "244c9bb67717933c1672eeb51e77c8d5d99fb908a7ed397b20224acbeddff366",
+  "candidateFingerprints": {
+    "2609.09323": "e37f47c27a0f2cee85c9f38d33f9d8b0fb278d0d418329f5c9319b97d7913fa2",
+    "2609.09337": "81b5699d645864124342e4cfee568d9d47ead01f8d3d8af15a0ccc4fb2e92908",
+    "2609.09470": "fe2ce697e45740d82c5b7b7e57a1430ec47014be9877b603b7e6a7120a668b2e",
+    "2609.09673": "614d59aebaaefeeaa93131ad7529bbb8a3c0fed269edfa88c57c72b9cfc86988",
+    "2609.09859": "7f7837997280fba73e3de2a715ed33a6c5510f615024fa602108446e95bef778",
+    "2609.09945": "84ea45b74dce6802bee99bfaaa5a907971ff6e960407ef0bfa9290be9d4886dd",
+    "2609.10053": "04b3531d2a67256291d446e1a22f160e3bdc62d5c6c5daf6c32bb6f48337a593",
+    "2609.10074": "17fad9ade49d0dedf114a058e0643e20cab7d5945dee4c557973552d7385b877",
+    "2609.10227": "9d4ca287dd2549c184f7f0a2c3da95cfb13e3c67165afba2669da3252b38e4c3",
+    "2609.10380": "8c46e61c8b15af66a9f4e56c79dbfb3329e0d33ff12a159c5d225cd762713dcf",
+    "2609.10407": "fc13a3786c850d1e3a55012a30a85001cd7cbfe7f74002a7dbd9d62a63fc4e10"
+  },
+  "results": {
+    "2609.09323": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "BNPL（後払い決済）に関する経済学・金融・マーケティング研究を概観し、消費者への影響と政策上の未解決課題を整理するレビュー論文です。",
+        "mainResult": "論文は、BNPL商品の仕組み、貸し手のビジネスモデル、利用動機、利用者層、消費者への影響、信用情報への報告慣行を既存研究に基づいて整理し、政策上の懸念と今後の研究課題を提示すると報告しています。個別の新規実証結果は、提示された抄録からは確認できません。",
+        "practicalApplication": "BNPL規制、信用情報報告、消費者保護に関する政策議論の背景整理には利用できますが、電子取引執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、または金利市場への直接的な実務応用は限定的です。",
+        "methodology": "経済学・金融・マーケティング分野の既存学術文献をレビューし、BNPLの商品構造、利用者、利用動機、消費者効果、信用報告、政策課題をテーマ別に整理するナラティブレビューです。",
+        "limitations": "抄録では検索方法、採択基準、文献の網羅性、効果の定量的統合、因果識別の評価が示されていません。また、主な対象は消費者金融と政策であり、対象サイトの専門領域との直接的な関連性は弱いです。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "BNPLと消費者金融政策を扱うレビューであり、指定された電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利市場の研究スコープには実質的に該当しません。",
+        "tags": [
+          "BNPL",
+          "consumer finance",
+          "consumer protection",
+          "credit reporting",
+          "policy review"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This review surveys economics, finance, and marketing research on Buy Now, Pay Later (BNPL), organizing evidence on consumer effects and unresolved policy questions.",
+          "mainResult": "The paper reports a literature-based synthesis of BNPL products, lender business models, usage motives, user characteristics, consumer effects, credit-reporting practices, and policy concerns. No distinct new empirical result can be identified from the supplied abstract.",
+          "practicalApplication": "It may support background analysis for BNPL regulation, credit reporting, and consumer protection, but it has limited direct practical relevance to electronic execution, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "methodology": "The paper conducts a narrative review of existing academic literature in economics, finance, and marketing, organized around BNPL product structure, users, usage motives, consumer effects, credit reporting, and policy questions.",
+          "limitations": "The abstract does not specify search procedures, inclusion criteria, literature coverage, quantitative synthesis, or assessment of causal identification. The focus is consumer finance and policy, with weak direct relevance to the site's specialist scope.",
+          "reason": "The paper concerns BNPL and consumer-finance policy rather than electronic trading, market microstructure, interest-rate models, yield curves, or rates markets, so it is materially out of scope.",
+          "tags": [
+            "BNPL",
+            "consumer finance",
+            "consumer protection",
+            "credit reporting",
+            "policy review"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.09337": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本稿は、米国の気候政策を不確実性下で評価するため、厚生経済学を用いた分析の必要性を論じ、National Academiesと米国エネルギー省の2025年報告書をケーススタディとして検討する研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "要旨によれば、気候政策に関する公向け報告書の議論は、政策間のトレードオフを評価する際に厚生経済学の活用が不足していると著者は主張しています。ただし、具体的な実証結果や政策効果の定量的推定は要旨からは確認できません。",
+        "practicalApplication": "政策分析における不確実性、価値判断、トレードオフを明示的に扱うための一般的な分析上の示唆はあります。しかし、本サイトの対象である電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利実務への直接的な応用は示されていません。",
+        "methodology": "2025年に公表されたNational Academiesおよび米国エネルギー省の報告書をケーススタディとして取り上げ、気候政策の議論を厚生経済学の枠組みから評価します。要旨だけでは、使用するデータ、モデル、識別戦略、定量評価の詳細は不明です。",
+        "limitations": "要旨の情報だけでは、ケーススタディの選定基準、分析の再現可能性、政策効果の定量性、結論の頑健性を評価できません。また、対象分野との関連性がなく、本サイトの専門領域に対する新規の知見は確認できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "気候政策と厚生経済学に関する研究であり、対象とする金融市場・金利分野に実質的な関連がないため、スコープ外と判定します。",
+        "tags": [
+          "気候政策",
+          "厚生経済学",
+          "不確実性下の政策分析",
+          "ケーススタディ"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper argues for welfare-economic analysis to evaluate U.S. climate policy under uncertainty and examines 2025 reports by the National Academies and the U.S. Department of Energy as case studies. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, the author argues that public-facing climate-policy reports insufficiently use welfare economics when assessing tradeoffs among policies. However, the abstract does not establish specific empirical results or quantitative estimates of policy effects.",
+          "practicalApplication": "The paper may offer general analytical guidance on making uncertainty, value judgments, and tradeoffs explicit in policy analysis. No direct application to electronic execution, market microstructure, interest-rate models, yield curves, or rates practice is indicated.",
+          "methodology": "The study uses 2025 reports from the National Academies and the U.S. Department of Energy as case studies, evaluating climate-policy discussions through a welfare-economics framework. The abstract does not specify the data, model, identification strategy, or quantitative evaluation details.",
+          "limitations": "Based on the abstract alone, the case-selection criteria, reproducibility, quantitative nature of the policy assessment, and robustness of the conclusions cannot be evaluated. The paper also lacks substantive relevance to the site's specialized domains.",
+          "reason": "The paper concerns climate policy and welfare economics and has no material connection to the covered financial-market or interest-rate topics, so it is classified as out of scope.",
+          "tags": [
+            "climate policy",
+            "welfare economics",
+            "policy analysis under uncertainty",
+            "case study"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.09470": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "異なるドリフトと共分散を持つ拡散モデルを、幾何平均型および算術平均型の尤度集約として比較し、局所的なドリフト・共分散の乖離コストを提案する研究です。",
+        "mainResult": "専門家側の射影では事後平均ドリフトと、ドリフト分散に対する逆共分散ペナルティが得られ、一次元ではこのペナルティがボラティリティを増加させると報告しています。候補側の問題はHamilton--Jacobi--Bellman方程式で特徴付けられ、共分散選択はBures--Wasserstein barycenterに帰着します。また、無制約問題の有限性条件として $H+\\lambda M\\succ0$ を示し、コンパクト制約による有限化も論じています。",
+        "practicalApplication": "異なる拡散モデルを統合する際のドリフト不一致、ボラティリティ不一致、共分散制約を整理する理論的枠組みとして利用できます。金融例や線形二次モデルへの適用は示されていますが、電子取引、マーケット・マイクロストラクチャー、イールドカーブ、金利モデルへの直接的な実装手順は要約から確認できません。",
+        "methodology": "相対エントロピー最小化の向きによる幾何平均型と算術平均型の違いを整理し、Gaussian identity、Euler収束評価、局所的なドリフト情報とGaussian shockの輸送コストを用いて基準を構成しています。さらに、Ornstein--Uhlenbeckモデル、Hamilton--Jacobi--Bellman方程式、Bures--Wasserstein barycenter、線形二次および完全遷移の例で性質を検討しています。",
+        "limitations": "評価は提示された要約に基づくため、定量的な実証結果、データ検証、推定誤差、計算コスト、既存手法との比較は判断できません。対象は一般的な拡散モデルであり、OU例があっても金利・イールドカーブへの特化や市場実装上の有効性は示されていません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "拡散モデルの集約に関する理論的貢献はありますが、対象サイトの中心領域である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブに直接焦点を当てた研究ではありません。",
+        "tags": [
+          "diffusion models",
+          "likelihood aggregation",
+          "relative entropy",
+          "covariance pooling",
+          "Bures--Wasserstein barycenter",
+          "Hamilton--Jacobi--Bellman",
+          "Ornstein--Uhlenbeck"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper compares geometric and arithmetic likelihood aggregation for diffusion models with differing drifts and covariances, and proposes a local cost for drift and covariance disagreement.",
+          "mainResult": "The expert-first projection yields a posterior-mean drift and an inverse-covariance penalty for drift dispersion; in one dimension, the paper reports that this penalty increases volatility. The candidate-first problem is characterized by a Hamilton--Jacobi--Bellman equation, and covariance selection reduces to a Bures--Wasserstein barycenter. It also gives $H+\\lambda M\\succ0$ as the finiteness condition for the unrestricted problem and discusses finiteness under compact constraints.",
+          "practicalApplication": "The framework can organize drift disagreement, volatility disagreement, and covariance constraints when combining diffusion models. Although financial, linear-quadratic, and exact-transition examples are mentioned, the abstract does not provide direct implementation procedures for electronic trading, market microstructure, yield curves, or interest-rate models.",
+          "methodology": "The paper distinguishes geometric and arithmetic pooling through the direction of relative-entropy minimization, then constructs a criterion combining locally normalized drift information with transport costs for Gaussian shocks. It uses a Gaussian identity, an Euler convergence estimate, Ornstein--Uhlenbeck models, Hamilton--Jacobi--Bellman equations, Bures--Wasserstein barycenters, and linear-quadratic and exact-transition examples.",
+          "limitations": "This assessment is based only on the supplied abstract, so quantitative empirical results, data validation, estimation error, computational cost, and comparisons with existing methods cannot be assessed. The setting is general diffusion modeling; despite the Ornstein--Uhlenbeck examples, specialization to rates or yield curves and practical market effectiveness are not established.",
+          "reason": "The paper offers a theoretical contribution on diffusion-model aggregation, but it does not directly focus on electronic trading, market microstructure, interest-rate models, or yield curves, which are the site's primary scope.",
+          "tags": [
+            "diffusion models",
+            "likelihood aggregation",
+            "relative entropy",
+            "covariance pooling",
+            "Bures--Wasserstein barycenter",
+            "Hamilton--Jacobi--Bellman",
+            "Ornstein--Uhlenbeck"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.09673": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "医療オペレーションにおける、非強制的な薬物相互作用（DDI）情報介入の効果を検証した研究であり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を主題としていません。",
+        "mainResult": "インドの電子カルテプラットフォーム上で、1,700人の医師による281万件の処方を分析した結果、リアルタイムのDDI情報提示によりDDIエラーが8.6%減少したと報告しています。効果には、警告後の即時修正と、警告前のエラー回避につながる学習の双方が含まれ、年間480万米ドルの入院費削減と約134人の救命に相当すると推計されています。",
+        "practicalApplication": "医療現場では、応答を強制しない情報提示を意思決定支援に組み込むことで、安全性向上とワークフロー disruption の抑制を図れる可能性があります。ただし、本サイトの対象分野における実務的含意はありません。",
+        "methodology": "インド最大の電子カルテプラットフォームを用いたランダム化フィールド実験を実施し、処置群には非強制的なリアルタイムDDI情報、対照群には情報を提示しませんでした。281万件の処方を対象に、difference-in-differences デザインで介入効果と、即時修正および事前回避学習のメカニズムを分析しています。",
+        "limitations": "提示された抄録だけでは、ランダム化の単位、推定の詳細、統計的不確実性、介入の費用、他の医療制度への外的妥当性は確認できません。費用削減額と救命数は推計値であり、因果的な実現額・救命数として確定したものではありません。また、対象は医療処方であり、対象分野との関連性はありません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "医療安全と情報介入に関する実証研究としては意義がありますが、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場のいずれにも実質的に該当しません。キーワードの rates は内容上の関連性を示していません。",
+        "tags": [
+          "医療オペレーション",
+          "医療安全",
+          "情報介入",
+          "ランダム化フィールド実験",
+          "電子カルテ"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study evaluates a non-mandatory drug-drug interaction (DDI) information intervention in healthcare operations and is not primarily about electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using 2.81 million prescriptions from 1,700 physicians on India’s largest electronic medical-record platform, the authors report that real-time DDI information reduced DDI errors by 8.6%. The reported effects included immediate correction after alerts and learning that led to avoidance before alerts, with estimated annual hospitalization-cost savings of US$4.8 million and approximately 134 potentially saved lives.",
+          "practicalApplication": "In healthcare, non-mandatory information displays could potentially improve safety while limiting workflow disruption in decision support. However, the study has no practical implication for the subject areas covered by this site.",
+          "methodology": "The authors conducted a randomized field experiment on India’s largest electronic medical-record platform. Treatment physicians received non-mandatory real-time DDI information, while control physicians received no such information. A difference-in-differences design was used to analyze 2.81 million prescriptions and the mechanisms of immediate correction and proactive learning.",
+          "limitations": "The abstract does not establish the randomization unit, estimation details, statistical uncertainty, intervention costs, or external validity across healthcare systems. The cost-savings and lives-saved figures are estimates rather than confirmed causal amounts or outcomes. The setting is prescription healthcare, with no material relevance to the site’s research scope.",
+          "reason": "Although the study is relevant as empirical research on healthcare safety and information interventions, it does not materially concern electronic trading, market microstructure, interest-rate models, yield curves, or rates markets. The keyword hint rates is not substantively relevant here.",
+          "tags": [
+            "healthcare operations",
+            "patient safety",
+            "information intervention",
+            "randomized field experiment",
+            "electronic medical records"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.09859": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "人口減少が都市規模ごとの産業存続と雇用・賃金、東京への移動に及ぼす影響を、日本の個人パネルデータで分析する研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を主題としていません。",
+        "mainResult": "要旨では、産業が都市人口の閾値に依存するため、小都市ほど人口減少時に複数産業と雇用を同時に失いやすく、失われた産業がより大きな都市へ集約されると説明しています。また、若年労働者の東京向け移住インセンティブが、出身地ごとの雇用の凹性に応じて変化すると報告しています。",
+        "practicalApplication": "地域人口減少、産業立地、地方雇用、都市移住政策の分析には応用可能です。ただし、対象サイトの金融市場・金利研究に直接利用できる実務的含意は限定的です。",
+        "methodology": "日本を対象に、若年労働者の個人パネルデータを用い、実質かつ住宅費を含む賃金の回帰分析によって、東京向け移住インセンティブと出身地の産業・雇用構造の関係を推定します。",
+        "limitations": "要旨だけでは、データ期間、標本規模、変数の具体的定義、識別戦略、因果解釈の妥当性、推定結果の大きさや統計的有意性が確認できません。また、理論上の産業閾値と観測された移住行動の対応も要旨では十分に検証されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "地域経済学・人口移動・産業立地に関する研究であり、指定された電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利分野には実質的に該当しません。",
+        "tags": [
+          "人口減少",
+          "地域経済",
+          "産業立地",
+          "都市階層",
+          "労働移動",
+          "日本"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes how population decline affects industry survival, employment, wages, and migration across cities using Japanese individual panel data. Its subject is not electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "The abstract argues that because industries depend on city-population thresholds, smaller cities lose multiple industries and jobs at once when population declines, while lost industries consolidate in larger cities. It also reports that young workers’ incentives to migrate to Tokyo vary by origin in accordance with the concavity of local jobs.",
+          "practicalApplication": "The study may inform analysis of regional depopulation, industrial location, local employment, and urban migration policy. However, its direct practical implications for the site’s financial-market and interest-rate research are limited.",
+          "methodology": "Using individual panel data on young workers in Japan, the study estimates the relationship between Tokyo-bound migration incentives and origin-specific industrial and employment structures through a regression of real wages that include housing costs.",
+          "limitations": "The abstract does not establish the data period, sample size, precise variable definitions, identification strategy, causal validity, or the magnitude and statistical significance of the estimates. It also does not fully demonstrate how theoretical industry thresholds correspond to observed migration behavior.",
+          "reason": "This is a study of regional economics, population migration, and industrial location, and is not materially relevant to electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "population decline",
+            "regional economics",
+            "industrial location",
+            "urban hierarchy",
+            "labor migration",
+            "Japan"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.09945": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "P2P融資の信用スコアリングモデルについて、申請者が自己申告特徴量を操作する敵対的攻撃への頑健性を評価した研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "Lending Clubデータを用いた評価では、敵対的学習は訓練時と同じ攻撃、および勾配ベース攻撃間の転移に対して高い効果を示しました。一方、非勾配型の特徴量破壊への転移は弱く、複数攻撃で学習する設定が最もバランスのよい頑健性を示し、クリーンデータ上の性能も維持したと報告されています。",
+        "practicalApplication": "信用モデルのガバナンスにおける複数攻撃ストレステストや、申請者が変更可能な入力変数を対象とする頑健性評価に利用できる可能性があります。ただし、本サイトの対象である市場取引・金利分析への直接的な応用は限定的です。",
+        "methodology": "Lending Clubの大規模サブセットに対し、ロジスティック回帰、フィードフォワードニューラルネットワーク、表形式データ向けTransformerの3モデルを比較しました。FGSM、PGD、Salt-and-Pepperノイズ、DeepFool、および混合攻撃を対象に、層化交差検証によるtrain-test頑健性ベンチマークを実施しています。",
+        "limitations": "要旨からは、データ期間、攻撃強度、評価指標、データ分布の変化、実運用での攻撃者行動の妥当性、再現可能性の詳細を確認できません。また、単一のP2P融資データセットに基づくため、他の信用市場や金融機関への一般化は不明です。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "敵対的機械学習と信用リスク管理には関連しますが、電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を研究対象とする本サイトの主要スコープには含まれません。",
+        "tags": [
+          "out_of_scope",
+          "credit_scoring",
+          "adversarial_training",
+          "P2P_lending",
+          "machine_learning",
+          "model_governance"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper evaluates the robustness of P2P lending credit-scoring models to adversarial attacks in which applicants manipulate self-reported features. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using Lending Club data, the study reports that adversarial training is effective against the attack used during training and transfers well among gradient-based attacks. Transfer to non-gradient feature corruption is weak, while mixed-attack training provides the most balanced robustness and preserves clean-data performance.",
+          "practicalApplication": "The findings may support multi-attack stress testing and robustness assessment of mutable applicant inputs in credit-model governance. However, direct application to the site's focus on market trading and rates analysis is limited.",
+          "methodology": "The study compares logistic regression, a feed-forward neural network, and a transformer for tabular data on a large Lending Club subset. It evaluates FGSM, PGD, Salt-and-Pepper noise, DeepFool, and mixed attacks using a stratified cross-validation train-test robustness benchmark.",
+          "limitations": "The abstract does not specify the data period, attack strengths, evaluation metrics, distribution shifts, realism of attacker behavior in production, or reproducibility details. Generalization beyond this single P2P lending dataset and to other credit markets or financial institutions is therefore unclear.",
+          "reason": "Although the work is relevant to adversarial machine learning and credit-risk management, it falls outside the site's main scope of electronic execution, market microstructure, interest-rate models, yield curves, and rates markets.",
+          "tags": [
+            "out_of_scope",
+            "credit_scoring",
+            "adversarial_training",
+            "P2P_lending",
+            "machine_learning",
+            "model_governance"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.10053": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "ドイツの風力・太陽光発電について、負の電力価格に対する支援制度上の停止インセンティブと実際の出力抑制を比較した研究です。",
+        "mainResult": "2025年に価格が$-50$ EUR/MWhを下回った時間帯では、ほぼすべての風力発電所に停止インセンティブがあった一方、実際に停止したのは約半分でした。太陽光では、約3分の2に停止インセンティブがなく、インセンティブにさらされた設備でも停止したのは5分の1強でした。",
+        "practicalApplication": "再生可能エネルギー支援制度の設計、負の価格への市場応答、系統運用上の出力抑制ルールを評価する際の示唆を提供します。ただし、対象はドイツの電力市場であり、本サイトの金利・イールドカーブ・電子執行・市場マイクロ構造の中心テーマには直接適合しません。",
+        "methodology": "発電設備のコホートごとに、20年間の支援政策から時間別の経済的停止インセンティブを推定し、再解析気象データから構築した市場ベースの出力抑制推定値と観測行動を比較しています。",
+        "limitations": "抄録からは、推定手法の詳細、因果識別、データの検証方法、設備ごとの異質性、他国や他の支援制度への一般化可能性が確認できません。また、価格反応以外の技術的・運用上の制約も十分に分離されていない可能性があります。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "電力市場政策と再生可能エネルギーの出力抑制に関する研究としては有用ですが、指定された金利、イールドカーブ、電子取引、マーケットマイクロストラクチャーの範囲には実質的に該当しません。",
+        "tags": [
+          "電力市場",
+          "再生可能エネルギー",
+          "出力抑制",
+          "負の電力価格",
+          "ドイツ",
+          "支援制度"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper compares policy-implied incentives to curtail and observed curtailment of German wind and solar generation during negative electricity prices.",
+          "mainResult": "In 2025, when prices were below $-50$ EUR/MWh, almost all wind generators had an incentive to stop, but only about half actually did so. For solar, around two-thirds of potential generation had no incentive to curtail, while only slightly more than one-fifth of the exposed remainder curtailed.",
+          "practicalApplication": "The study offers implications for renewable-support design, market responses to negative prices, and grid-operating rules for curtailment. However, it concerns the German electricity market and is not directly aligned with the site's core themes of rates, yield curves, electronic execution, or market microstructure.",
+          "methodology": "For each generator cohort, the paper estimates hourly economic curtailment incentives implied by two decades of support policies, then compares them with observed behavior using a market-based curtailment estimate constructed from reanalysis weather data.",
+          "limitations": "The abstract does not establish the details of the estimation procedure, causal identification, validation, generator-level heterogeneity, or transferability to other countries and support schemes. Technical and operational constraints beyond price incentives may also not be fully separated.",
+          "reason": "The paper is relevant to electricity-market policy and renewable curtailment, but it does not materially fall within the specified scope of interest-rate, yield-curve, electronic-trading, or market-microstructure research.",
+          "tags": [
+            "electricity markets",
+            "renewable energy",
+            "curtailment",
+            "negative electricity prices",
+            "Germany",
+            "support schemes"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.10074": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "モデル不確実性の下で、情報提供者がデータの解釈を物語として戦略的に伝える状況を理論分析と実験で検討する研究です。電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "理論上、送り手と受け手の利害対立が強いほど、送り手は情報を誇張し、受け手は推奨される行動をより強く修正すると示します。実験結果はこの両予測と整合的で、ナラティブの尤度は受け手の行動を左右せず、ナラティブはバイアスが小さい場合に限って平均的にわずかな説得力を持ちました。",
+        "practicalApplication": "金融市場への直接的な応用は抽象レベルにとどまります。一般論として、分析コメントや市場見通しを評価する際に、発信者のインセンティブと利害対立を考慮する枠組みを示唆します。",
+        "methodology": "モデル不確実性と戦略的コミュニケーションの理論モデルを構築し、実験室実験で、送り手のバイアスと受け手の行動修正および説得効果を検証しています。",
+        "limitations": "提供された抄録だけでは、実験の標本数、参加者属性、具体的な実験設計、効果量、統計的有意性、金融市場への外的妥当性は確認できません。また、結果は抽象的なナラティブ伝達環境に基づくため、実際の市場参加者や電子執行への適用可能性は不明です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "理論的には情報の戦略的解釈に関する有用な知見がありますが、本サイトの主要対象である電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利市場との直接的な関連がないため、対象外と判断します。",
+        "tags": [
+          "strategic communication",
+          "narratives",
+          "model uncertainty",
+          "laboratory experiment",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper theoretically and experimentally studies situations in which an informed sender strategically communicates interpretations of data as narratives under model uncertainty. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "The theory shows that greater conflict of interest between sender and receiver leads senders to exaggerate their information and receivers to correct the sender's action recommendations more strongly. The laboratory evidence is consistent with both predictions; narrative likelihood does not drive receiver behavior, and narratives are only slightly persuasive on average when bias is low.",
+          "practicalApplication": "Direct application to financial markets remains abstract. More generally, the study suggests accounting for a commentator's incentives and conflicts of interest when evaluating market commentary or forecasts.",
+          "methodology": "The authors develop a theoretical model of strategic communication under model uncertainty and use a laboratory experiment to test how sender bias affects receiver corrections and persuasive effects.",
+          "limitations": "The abstract does not report the sample size, participant characteristics, detailed experimental design, effect sizes, or statistical significance, and it does not establish external validity for financial markets. Applicability to actual market participants or electronic execution is therefore unclear.",
+          "reason": "The paper offers theoretically relevant insights about strategic interpretation of information, but it has no direct connection to the site's core topics of electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "strategic communication",
+            "narratives",
+            "model uncertainty",
+            "laboratory experiment",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.10227": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "イタリアの電子インボイス全件データを用いて、企業間の買い手・売り手関係から生産ネットワークの構造を分析した研究です。",
+        "mainResult": "企業ごとの買い手数、売り手数、中心性、企業間距離の分布は重い裾を持ち、ネットワークがscale-free型であることを示します。また、重要性が少数企業に集中し、下流側の分布は上流側より低いtail exponentを持つと報告しています。",
+        "practicalApplication": "サプライチェーンの集中度、重要企業の特定、地理・産業別の生産ネットワーク分析には応用可能です。ただし、電子取引執行、market microstructure、金利モデル、イールドカーブ分析への直接的な応用は限定的です。",
+        "methodology": "イタリア税務当局が収集した電子インボイスの企業間関係を用い、買い手数・売り手数、企業のcentrality、企業間の平均距離を集計し、分布のheavy tailとtail exponentを推定しています。",
+        "limitations": "抽象からは、tail exponentの推定手法、統計的不確実性、観測期間、ネットワーク構築上の定義、因果解釈、データの欠測や請求書データ固有のバイアスが確認できません。金融市場や金利に関する分析も含まれていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "企業間生産ネットワークの記述研究としては有用ですが、本サイトの対象である電子取引、market microstructure、interest-rate models、yield curves、ratesには実質的に該当しません。",
+        "tags": [
+          "企業間ネットワーク",
+          "サプライチェーン",
+          "電子インボイス",
+          "ネットワーク分析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes the structure of Italy’s production network using firm-to-firm relationships extracted from the universe of electronic invoices.",
+          "mainResult": "The distributions of the numbers of buyers and sellers per firm, firm centrality, and inter-firm distances have heavy tails, indicating a scale-free-type network. Importance is concentrated among a small number of firms, and downstream distributions are reported to have lower tail exponents than upstream distributions.",
+          "practicalApplication": "The results may support analysis of supply-chain concentration, identification of systemically important firms, and geographic or sectoral production-network analysis. However, direct applications to electronic trading, market microstructure, interest-rate models, yield-curve analysis, or rates are limited.",
+          "methodology": "Using firm-to-firm relationships from electronic invoices collected by the Italian Tax Office, the study measures buyer and seller counts, firm centrality, and average inter-firm distances, and estimates heavy-tail properties and tail exponents.",
+          "limitations": "The abstract does not specify the tail-exponent estimation methods, statistical uncertainty, observation period, network-construction definitions, causal interpretation, or missing-data and invoice-data biases. It also contains no analysis of financial markets or interest rates.",
+          "reason": "Although the study may be useful as a descriptive analysis of firm-to-firm production networks, it is not materially relevant to electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "firm-to-firm networks",
+            "supply chains",
+            "electronic invoicing",
+            "network analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.10380": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "英国NHSの外科ハブ導入が医師の生産性と患者待ち時間に与える影響を分析した医療経済学の研究であり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を扱っていません。",
+        "mainResult": "要旨によれば、外科ハブの導入は医師の生産性を反実仮想のハブ未導入時と比べて14.5%高め、平均待ち時間を10日、すなわち7.6%短縮しました。専用サイト型ハブや複数ハブで効果が大きく、単一ハブでは統計的に有意な効果が確認されませんでした。",
+        "practicalApplication": "医療システムにおける選択的診療と救急診療の分離方法、ならびに手術待ち時間の削減策の設計に応用できますが、本サイトの対象分野への直接的な実務応用はありません。",
+        "methodology": "NHS Englandの外科ハブ事業の段階的導入を利用し、異質性に頑健な差の差法で因果効果を推定しています。生産性は、コスト加重された選択的診療の産出を、給与加重された医師投入量で割った指標として測定しています。",
+        "limitations": "要旨だけでは、並行トレンドの妥当性、導入時期や施設選定に関する交絡、推定の標準誤差、データ期間、外部妥当性の詳細は確認できません。また、結果は英国の医療制度と外科ハブに固有で、金融市場へ一般化できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "医療経済学としては政策的意義がありますが、対象サイトの研究領域である電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究には実質的に関連しないためです。",
+        "tags": [
+          "医療経済学",
+          "医師生産性",
+          "差の差法",
+          "NHS",
+          "スコープ外"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This is a health-economics study of how surgical hubs in the NHS affect physician productivity and patient waiting times. It does not address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, surgical-hub adoption increased physician productivity by 14.5% relative to the no-hub counterfactual and reduced average waiting times by 10 days, or 7.6%. Effects were larger for standalone hubs and for systems operating multiple hubs, while a single hub showed no statistically significant effect.",
+          "practicalApplication": "The findings may inform the design of elective-emergency care separation and policies to reduce surgical backlogs, but they have no direct practical application to the subject areas covered by this site.",
+          "methodology": "The study uses the staggered rollout of the NHS England surgical-hub programme and a heterogeneity-robust difference-in-differences design to estimate causal effects. Productivity is measured as cost-weighted elective output divided by salary-weighted physician input.",
+          "limitations": "The abstract does not provide details on the validity of parallel trends, confounding from adoption timing or facility selection, standard errors, the observation period, or external validity. The results are also specific to the English healthcare system and surgical hubs and cannot be generalized to financial markets.",
+          "reason": "Although the paper may have policy relevance in health economics, it is not materially related to electronic execution, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "health economics",
+            "physician productivity",
+            "difference-in-differences",
+            "NHS",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.10407": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "Ethereum上のUniswap v2/v3イベントデータを、取引・流動性変化・プール状態・取引順序・gas情報を含む分析用観測値へ変換するPythonパッケージを提案する研究です。",
+        "mainResult": "報告された主結果は、トランザクションレシートのログを解釈し、データ取得、コントラクトメタデータ、プロトコル解釈、出力構築を分離したdexamineを提供したことです。記録済みEthereumレスポンスとオフライン再現例が付属し、version 1は分散型市場のprice discoveryに関する実証研究のデータ構築に利用されたとされています。",
+        "practicalApplication": "Uniswapの約定、流動性提供、プール状態、取引順序、gasを用いる実証分析のデータ準備を標準化・効率化できる可能性があります。特にDEXのmarket microstructureやprice discovery研究の再現可能なデータ構築に有用です。",
+        "methodology": "Ethereumのトランザクションレシートログを解析し、Uniswap v2/v3のイベントを取引および流動性変化の観測値へ変換します。データ取得、コントラクト情報、プロトコル解釈、出力生成を分離するソフトウェア設計を採用し、記録済みレスポンスとオフライン例で再現性を支援します。",
+        "limitations": "抄録からは、データ抽出の正確性、処理性能、対応するコントラクトやチェーンの範囲、異常なイベントやアップグレードへの頑健性について評価結果を確認できません。Uniswap v2/v3とEthereumに主に限定され、価格発見そのものの因果的・統計的結果ではなく、分析データを構築するためのツールです。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "DEXの取引・流動性イベントを再現可能な形で処理する実務的な基盤であり、電子取引・market microstructure研究との関連が明確です。ただし、抽象では新しい市場知見や定量的な性能評価が限定的なため、中程度の重要度とします。",
+        "tags": [
+          "decentralized exchanges",
+          "Uniswap",
+          "Ethereum",
+          "market microstructure",
+          "price discovery",
+          "blockchain data",
+          "Python package",
+          "reproducibility"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper presents a Python package that converts Uniswap v2 and v3 event data on Ethereum into analytical observations containing trades, liquidity changes, pool state, transaction order, and gas information.",
+          "mainResult": "The reported main result is the provision of dexamine, which interprets transaction-receipt logs and separates data retrieval, contract metadata, protocol interpretation, and output construction. The repository includes recorded Ethereum responses and an offline reproducible example, and version 1 was used to construct data for an empirical study of price discovery in decentralized markets.",
+          "practicalApplication": "The package may standardize and streamline data preparation for empirical analyses using Uniswap executions, liquidity provision, pool state, transaction order, and gas. It is particularly useful for reproducible data construction in DEX market-microstructure and price-discovery research.",
+          "methodology": "Ethereum transaction-receipt logs are parsed and Uniswap v2/v3 events are converted into observations of trades and liquidity changes. The software uses a modular design separating data retrieval, contract information, protocol interpretation, and output generation, with recorded responses and an offline example supporting reproducibility.",
+          "limitations": "The abstract does not report evaluations of extraction accuracy, processing performance, coverage of contracts or chains, or robustness to unusual events and contract upgrades. The package is primarily limited to Uniswap v2/v3 on Ethereum, and it is a tool for constructing analytical data rather than a causal or statistical result about price discovery itself.",
+          "reason": "The work provides a practical and clearly relevant foundation for reproducibly processing DEX trading and liquidity events, making it relevant to electronic trading and market microstructure research. However, the abstract reports limited new market insight and quantitative performance evaluation, so its importance is assessed as moderate.",
+          "tags": [
+            "decentralized exchanges",
+            "Uniswap",
+            "Ethereum",
+            "market microstructure",
+            "price discovery",
+            "blockchain data",
+            "Python package",
+            "reproducibility"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "Ethereum上のUniswap v2/v3について、receipt logを取引・流動性イベントへ変換し、実行順序、pool state、token量、gas情報を付与するPython研究用パッケージを提示する。主眼は実証的なDEX market microstructure分析のための再利用可能なデータ基盤であり、経済学的仮説の検証ではない。",
+        "mainResult": "著者は、dexamineがswap、mint、burnをevent単位で識別し、token単位への変換、receipt内順序、取引後の価格・流動性状態、transaction-level metadataを一貫した形式で出力すると報告する。記録済みEthereum responseを用いた4件のUniswap v3 swapのoffline再現例とテストが示されるが、速度優位性や新たな実証結果は主張されていない。",
+        "practicalApplication": "DEXのprice discovery、取引費用、liquidity provision、arbitrage、transaction orderingを研究する際のデータ構築に利用できる。特に、同一transaction内の複数swapを実行順に保持し、pool stateとexecution metadataを結合したevent-level datasetの作成に適する。",
+        "methodology": "RequestsによるEthereum JSON-RPC取得、web3.pyによるcontract metadata解決、Uniswap v2/v3固有のevent decoding、flat output構築を分離する。metadata cache、batch取得、incremental yieldを備え、記録済みRPC responseとseed済みmetadataによるoffline replay、unit test、integration test、独立したABI decodingと高精度計算による検証を行う。",
+        "limitations": "対象はEthereum mainnet上のUniswap v2/v3のswap、mint、burnに限られ、transaction discovery、保存、統計推定は含まれない。正規化量は浮動小数点の丸め誤差を含み、gas情報はevent別ではなくtransaction全体の値である。destination labelは内部call path、trader identity、arbitrage、MEVを識別しない。metadataは通常latest blockから取得されるため再現性に影響し得るほか、chain reorganization、RPC endpoint依存、v2で直前のSync条件を満たさないeventの除外も考慮が必要である。比較benchmark、規模別throughput、外部データとの包括的な独立検証は提示されていない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "新しいmarket microstructureの実証結果はないが、DEX研究で誤りが生じやすい単位、符号、event順序、pool stateの処理を標準化し、offlineで再現可能な例を提供する点は有用である。Uniswapデータを直接扱う研究者には推奨できる一方、対応protocolが限定的で性能評価もないため、一般的なexecution研究への重要度は中程度である。",
+        "tags": [
+          "分散型取引所",
+          "Uniswap",
+          "Ethereum",
+          "市場マイクロストラクチャー",
+          "イベントデータ",
+          "取引実行順序",
+          "研究ソフトウェア",
+          "再現可能性"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper presents a Python research package that converts Uniswap v2/v3 receipt logs on Ethereum into trade and liquidity events enriched with execution order, pool state, token quantities, and gas information. Its focus is reusable data infrastructure for empirical DEX market-microstructure analysis rather than testing an economic hypothesis.",
+          "mainResult": "The author reports that dexamine identifies swaps, mints, and burns at the event level and consistently outputs token-unit conversions, receipt ordering, post-event price and liquidity state, and transaction-level metadata. The paper provides an offline reproducible example covering four Uniswap v3 swaps and a test suite, but it does not claim a speed advantage or present a new empirical finding.",
+          "practicalApplication": "The package can support data construction for studies of DEX price discovery, trading costs, liquidity provision, arbitrage, and transaction ordering. It is especially suited to creating event-level datasets that preserve multiple swaps within one transaction in execution order and join them with pool state and execution metadata.",
+          "methodology": "The architecture separates Ethereum JSON-RPC retrieval through Requests, contract-metadata resolution through web3.py, protocol-specific decoding for Uniswap v2/v3, and flat-output construction. It provides metadata caching, batched retrieval, and incremental yielding, with verification through offline replay of recorded RPC responses and seeded metadata, unit and integration tests, and separate checks using ABI decoding and high-precision calculations.",
+          "limitations": "Coverage is limited to swaps, mints, and burns for Uniswap v2/v3 on Ethereum mainnet; transaction discovery, storage, and statistical estimation are excluded. Normalized quantities use floating-point arithmetic, while gas fields apply to the entire transaction rather than individual events. Destination labels do not identify internal call paths, traders, arbitrage, or MEV. Metadata is normally resolved at the latest block and can affect reproducibility; chain reorganizations, RPC-endpoint dependence, and the exclusion of v2 events that lack an immediately preceding qualifying Sync must also be considered. The paper provides no comparative benchmark, scale-dependent throughput results, or comprehensive independent validation against external datasets.",
+          "reason": "Although the paper contains no new empirical market-microstructure result, it usefully standardizes error-prone handling of units, signs, event order, and pool state and supplies an offline reproducible example. It is recommended for researchers working directly with Uniswap data, but its limited protocol coverage and lack of performance evaluation make its broader importance to execution research moderate.",
+          "tags": [
+            "decentralized exchanges",
+            "Uniswap",
+            "Ethereum",
+            "market microstructure",
+            "event data",
+            "execution ordering",
+            "research software",
+            "reproducibility"
+          ]
+        }
+      }
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 933,
+      "outputTokens": 760,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1693,
+      "estimatedCostUsd": 0.001099,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09323v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 718,
+      "outputTokens": 865,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1583,
+      "estimatedCostUsd": 0.001182,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09337v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 892,
+      "outputTokens": 1243,
+      "reasoningTokens": 140,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2135,
+      "estimatedCostUsd": 0.00167,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09470v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 887,
+      "outputTokens": 1051,
+      "reasoningTokens": 40,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1938,
+      "estimatedCostUsd": 0.001439,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09673v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 862,
+      "outputTokens": 897,
+      "reasoningTokens": 41,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1759,
+      "estimatedCostUsd": 0.001249,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09859v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 907,
+      "outputTokens": 1001,
+      "reasoningTokens": 54,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1908,
+      "estimatedCostUsd": 0.001383,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09945v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 863,
+      "outputTokens": 935,
+      "reasoningTokens": 77,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1798,
+      "estimatedCostUsd": 0.001295,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.10053v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 792,
+      "outputTokens": 905,
+      "reasoningTokens": 50,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1697,
+      "estimatedCostUsd": 0.001244,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.10074v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 819,
+      "outputTokens": 806,
+      "reasoningTokens": 41,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1625,
+      "estimatedCostUsd": 0.001131,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.10227v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 916,
+      "outputTokens": 920,
+      "reasoningTokens": 48,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1836,
+      "estimatedCostUsd": 0.001287,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.10380v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 725,
+      "outputTokens": 1049,
+      "reasoningTokens": 72,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1774,
+      "estimatedCostUsd": 0.001404,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.10407v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 4585,
+      "outputTokens": 1546,
+      "reasoningTokens": 247,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 4582,
+      "totalTokens": 6131,
+      "estimatedCostUsd": 0.053842,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 8,
+      "paperIds": [
+        "2609.10407v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

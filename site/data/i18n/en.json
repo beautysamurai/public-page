@@ -1050,6 +1050,12 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-09-16-daily-openai-01",
+      "message": "The arXiv update was confirmed, but no papers met the recommendation criteria.",
+      "sourceText": "## September 16, 2026 — Daily review\n\nThe arXiv update was confirmed, but no papers met the recommendation criteria.\n\n### Usage for this edition\n\n| Stage | Model / effort | Calls | Input | Output (reasoning) | Estimated cost (USD) | Source / scope |\n| --- | --- | --- | --- | --- | --- | --- |\n| screen | gpt-5.6-luna / low | 6 | 5,392 | 6,107 (337) | 0.0084 | Abstract |\n\nReported retries are included. Unknown is not zero. Reasoning is included in output; costs are estimates, not billing records.\n\n\n**Recommended papers: None**",
+      "papers": []
     }
   ]
 }

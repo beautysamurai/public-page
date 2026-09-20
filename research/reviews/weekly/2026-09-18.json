@@ -2,14 +2,273 @@
   "schemaVersion": 2,
   "reportKind": "weekly",
   "reportDate": "2026-09-18",
-  "generatedAt": "2026-09-20T00:36:48Z",
-  "status": "UPDATE_NOT_CONFIRMED",
-  "message": "Coverage is incomplete: missing confirmed batches (2026-09-15, 2026-09-16, 2026-09-17); synthesis was not run.",
+  "generatedAt": "2026-09-20T07:00:57Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "Synthesized 15 selected paper(s) from 15 stored paper(s) across 1 bounded request(s) and 7 daily report(s).",
   "expectedBatchDate": null,
   "observedBatchDate": null,
   "periodStart": "2026-09-12",
   "periodEnd": "2026-09-18",
   "papers": [
+    {
+      "metadata": {
+        "arxivId": "2609.13597v2",
+        "title": "Same Book, Different Fills: Partial Identification of FIFO Execution from Aggregate Order Books",
+        "authors": [
+          "Riya Danait",
+          "Yuliana Zamora",
+          "Ioana Boier"
+        ],
+        "submittedDate": "2026-09-17",
+        "updatedDate": "2026-09-18",
+        "categories": [
+          "q-fin.CP",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "同じL2板と約定履歴でも、観測できない取消位置によってFIFOの受動約定が変わることを、条件付き部分識別として扱う。今週の執行研究では、backtestのqueue仮定をモデルリスクとして明示する点を最も高く評価する。",
+        "mainResult": "著者らの検証では、back取消からfront取消への変更で期限前完了率が1301.Tで8.01ポイント、7911.Tで7.39ポイント上昇し、implementation shortfallはそれぞれ1.010 bps、0.384 bps低下した。aggressive benchmarkは不変だったが、frontとbackは全整合的履歴に対するsharp boundではない。",
+        "practicalApplication": "L2執行backtestに複数の取消割当を導入し、約定率、コスト、方策順位の感応度を併記できる。不安定な結果は保守的な方策選択やMBOデータ取得の判断材料になる。",
+        "methodology": "東証2銘柄の10段L2 snapshotとL1 tradeを照合し、集約経路を固定して取消だけをfront、数量加重random、backへ割り当てる。保存レビューでは、JAX-LOBによる一部streamの整合性確認と、18日のheld-out標本での3種類のshadow policy比較が記録されている。",
+        "limitations": "保存レビューの分析範囲は9ページの全文だが、本統合では原文を再確認していない。結果は2銘柄、限定した履歴再構成規則、有限板深度に条件付けられる。shadow policyはlatency、手数料、rebate、market impactを除外し、完全な識別集合の極値も求めていない。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "観測経路を保ったまま隠れたqueue仮定だけを変える設計は、受動執行評価の不確実性を具体的に可視化する。限定的な標本でも、L2 backtestのモデルリスク管理として優先して読む価値が高い。",
+        "tags": [
+          "電子執行",
+          "指値注文板",
+          "FIFO",
+          "部分識別",
+          "取消割当",
+          "バックテストのモデルリスク"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper treats variation in passive FIFO fills caused by unobserved cancellation locations, despite identical L2 books and trade histories, as conditional partial identification. Among this week's execution studies, it stands out for explicitly treating queue assumptions in backtests as model risk.",
+          "mainResult": "In the authors' evaluation, changing from back to front cancellation increased preterminal completion by 8.01 percentage points for 1301.T and 7.39 points for 7911.T, while reducing implementation shortfall by 1.010 bps and 0.384 bps, respectively. The aggressive benchmark was unchanged, but front and back are not sharp bounds over all compatible histories.",
+          "practicalApplication": "L2 execution backtests can incorporate several cancellation allocations and report sensitivity in fill rates, costs, and policy rankings. Unstable results can inform conservative policy selection or decisions to acquire MBO data.",
+          "methodology": "The study reconciles ten-level L2 snapshots and L1 trades for two Tokyo Stock Exchange instruments, preserving aggregate paths while allocating cancellations to front, quantity-weighted random, or back positions. The stored review records consistency checks on selected streams using JAX-LOB and comparisons of three shadow policies over 18 held-out dates.",
+          "limitations": "The stored review covered the full nine-page paper, but the original text was not rechecked for this synthesis. Results are conditional on two instruments, restricted history-reconstruction rules, and finite book depth. The shadow policies omit latency, fees, rebates, and market impact, and the study does not establish extrema of the complete identified set.",
+          "reason": "Holding observed paths fixed while varying hidden queue assumptions makes uncertainty in passive-execution evaluation concrete. Despite the limited sample, the paper merits priority reading for model-risk management in L2 backtests.",
+          "tags": [
+            "electronic execution",
+            "limit order book",
+            "FIFO",
+            "partial identification",
+            "cancellation allocation",
+            "backtest model risk"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 986,
+          "outputTokens": 1411,
+          "reasoningTokens": 82,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2397,
+          "estimatedCostUsd": 0.00189,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.13597v2"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 14625,
+          "outputTokens": 1689,
+          "reasoningTokens": 251,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 14622,
+          "totalTokens": 16314,
+          "estimatedCostUsd": 0.106902,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 9,
+          "paperIds": [
+            "2609.13597v2"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.20224v1",
+        "title": "The Year-End Toll: Frictions Embedded in Option-Implied Rates",
+        "authors": [
+          "Useong Shin"
+        ],
+        "submittedDate": "2026-08-21",
+        "updatedDate": "2026-09-18",
+        "categories": [
+          "q-fin.GN",
+          "q-fin.MF",
+          "q-fin.PR",
+          "q-fin.ST",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "SPX・RUTのoption-implied rateと外部benchmarkの差に、満期が12月31日を初めてまたぐ際のfunding frictionが含まれると主張する。精密なput–call parity推定と、経済的に摩擦のない金利の識別を区別する点が中心である。",
+        "mainResult": "abstractとIntroductionによれば、同一取引日の満期間比較で最初の年末crossingに非年率換算の約2から3 bpのbasis上昇が見られる。著者はこれを固定的なprice wedgeと解釈し、年率換算では概ね$\\kappa/\\tau$として表れると報告する。複数benchmarkなどの確認結果も報告されるが、推定表は未確認である。",
+        "practicalApplication": "box spread、rates relative value、convenience yield、資金調達比較では、年末をまたぐ満期を区別し、固定価格wedgeと年率換算効果を分けて診断する用途が考えられる。option-implied rateを無条件に純粋なrisk-free rateとみなさないことが重要である。",
+        "methodology": "2012年から2025年のSPX・RUTオプションについて、put–call parity由来のdiscount factorと満期対応benchmarkの差を分析する。同一取引日の年末crossingと満期cross sectionを用い、流動性やfunding proxyなどを制御したとされる。",
+        "limitations": "分析範囲は74ページの論文のabstractとIntroductionのみであり、全文分析ではない。本統合も保存レビューに依存し、option cleaning、discount-factor推定、識別仮定、標準誤差、頑健性検証、付録を確認していない。規制変更の因果効果は識別されず、長期満期の後続crossingは標本が薄く、frictionの完全な分解でもない。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "本chunkでは金利とmicrostructureの接点として優先度が高く、年末の資金調達摩擦を金利推定から切り分ける問題設定が実務的である。ただし重要度は問題設定への評価であり、結果の信頼性は全文確認まで保留する条件付き推薦である。",
+        "tags": [
+          "オプション・インプライド金利",
+          "put–call parity",
+          "年末効果",
+          "資金調達摩擦",
+          "box spread",
+          "convenience yield"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper argues that spreads between SPX and RUT option-implied rates and external benchmarks contain a funding friction when maturity first crosses December 31. Its central distinction is between precise put–call parity estimation and identification of an economically frictionless rate.",
+          "mainResult": "According to the abstract and Introduction, same-trade-date maturity comparisons show an unannualized basis increase of approximately two to three bp at the first year-end crossing. The author interprets this as a fixed price wedge that annualizes approximately as $\\kappa/\\tau$. Checks using multiple benchmarks and other comparisons are reported, but the estimation tables have not been examined.",
+          "practicalApplication": "For box spreads, rates relative value, convenience yields, and funding comparisons, the findings may motivate separating year-end-crossing maturities and distinguishing fixed price wedges from annualization effects. Option-implied rates should not automatically be treated as pure risk-free rates.",
+          "methodology": "The study analyzes differences between put–call-parity discount factors and maturity-matched benchmarks using SPX and RUT options from 2012 through 2025. It reportedly uses same-trade-date year-end crossings and maturity cross sections while controlling for liquidity, funding proxies, and related factors.",
+          "limitations": "Only the abstract and Introduction of the 74-page paper were analyzed, not the full text. This synthesis also relies on the stored review and has not checked option cleaning, discount-factor estimation, identification assumptions, standard errors, robustness tests, or appendices. The causal effect of regulatory changes is not identified, later crossings at long maturities have thin data support, and the analysis does not fully decompose frictions.",
+          "reason": "This is a high-priority connection between rates and microstructure within the chunk, with a practically relevant question about separating year-end funding frictions from rate estimates. Its importance reflects the research question rather than verified reliability of the results; the recommendation remains conditional on full-text review.",
+          "tags": [
+            "option-implied rates",
+            "put–call parity",
+            "year-end effects",
+            "funding frictions",
+            "box spread",
+            "convenience yield"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 762,
+          "outputTokens": 1137,
+          "reasoningTokens": 84,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1899,
+          "estimatedCostUsd": 0.001517,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 2048,
+          "outputTokens": 2148,
+          "reasoningTokens": 348,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 2045,
+          "totalTokens": 4196,
+          "estimatedCostUsd": 0.053197,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 74,
+          "paperIds": [
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
     {
       "metadata": {
         "arxivId": "2609.12878v1",
@@ -27,41 +286,35 @@
       },
       "finalAnalysis": {
         "classification": "market_microstructure",
-        "summary": "Polymarketの約5.88億件の取引と248万walletを用い、favorite–longshot bias（FLB）、集計単位による収益率の変化、価格帯別需要の持続性を調べた実証研究である。著者らはaggregate FLBを報告する一方、その大きさや符号はchild market、投資額、parent eventのどれを基準に集計するかで変わると主張する。本レビューは51ページの論文のabstractとIntroductionだけに基づき、本文、証明、実験、付録は提供されておらず検証していない。",
-        "mainResult": "著者らによれば、10セント未満の購入は投資額加重で1ドル当たり19.35セントを失い、90セント以上の購入は0.83セントを得た。child market等加重ではlongshotが6.30%の損失となる一方、parent event等加重では4.09%の利益へ反転する。CryptoとPoliticsでは二方向のFLBが見られるが、Sportsでは見られないとも報告する。また、過去のlongshot選好が強いwalletは翌月の低価格購入の26.6%を占めるものの、他のwalletと同程度の収益率だったと主張する。ただし、これらはabstractとIntroductionに記載された著者の主張であり、本文の推定、頑健性検証、証明、付録は確認していない。",
-        "practicalApplication": "prediction marketの執行分析やリスク監視では、低価格tokenの平均損失を一律の価格バイアスと解釈せず、child market数、parent event、取引金額、カテゴリー別に分解する必要がある。trader segmentationでは、反復的なlongshot購入だけを損失集中の代理変数とすることにも注意を要する。",
-        "methodology": "2022年11月から2026年3月までのPolymarket Users dataset version 1.3を用い、解決済みmarketの購入価格と最終payoffを比較する。longshotとfavoriteについて、child market等加重、投資額によるpooling、parent event内でpoolした後のevent等加重を比較する。過去の購入だけでwalletの価格帯選好を分類し、その後の購入比率と収益率を調べ、カテゴリー、経験、注文方法、手数料、担保共有条件による差も検討するとされる。",
-        "limitations": "51ページの全文は提供されず、利用可能な資料はabstractとIntroductionのみである。このため、標本構築、return定義、標準誤差、confidence interval、欠損・選択バイアス、wallet分類、頑健性検証、証明、実験、付録を確認できない。walletは個人と一対一ではなく、同一人物が複数walletを使う可能性がある。観察研究であるため因果的説明は特定されず、parent eventの構成や集計加重への感応度も高い。報告値はすべて著者の主張として扱うべきである。",
+        "summary": "Polymarketの大規模取引データからfavorite–longshot biasを調べ、収益率の大きさや符号が集計単位に依存すると報告する研究である。週次レビューでは、予測市場の価格バイアスを測定する際の集計リスクとして注目する。",
+        "mainResult": "著者らによれば、10セント未満の購入は投資額加重で1ドル当たり19.35セントを失う。一方、longshot収益率はchild market等加重の$-6.30\\%$からparent event等加重の$+4.09\\%$へ反転する。これは一律の価格非効率という解釈に注意を促す報告である。",
+        "practicalApplication": "予測市場の執行評価では、投資額、child market、parent event、カテゴリー別の集計を併記する。反復的なlongshot購入だけを損失集中の代理指標にすることも避けたい。",
+        "methodology": "保存レビューによれば、2022年11月から2026年3月の約5.88億件の取引と248万walletを対象に、解決済み市場の購入価格と最終payoffを比較する。集計加重の変更と、過去の購入から分類したwallet選好の翌月への持続性を分析する。",
+        "limitations": "分析範囲は51ページの論文のabstractとIntroductionのみであり、全文分析ではない。本統合も保存レビューに基づき、標本構築、収益率定義、推定精度、頑健性検証、付録を確認していない。walletは個人と一致せず、観察結果から因果関係は識別できない。",
         "importance": 4,
         "recommended": true,
-        "reason": "大規模な取引データを用い、FLBの測定がaggregation choiceに強く依存する点を示すため、prediction-market microstructureと執行評価に関連性が高い。ただし、限定資料レビューであり、結果の信頼性や再現性を評価できないため、現段階では条件付きの推薦である。",
+        "reason": "集計方法だけで収益率の符号が変わるという報告は、予測市場のmicrostructure分析に重要である。ただし限定資料に基づくため、実務上の結論を採用する前に本文で検証すべき条件付き推薦とする。",
         "tags": [
           "予測市場",
           "Polymarket",
           "favorite–longshot bias",
-          "市場マイクロストラクチャ",
-          "集計バイアス",
-          "投資家行動",
-          "wallet分析",
-          "取引収益率"
+          "集計感応度",
+          "wallet分析"
         ],
         "english": {
           "classification": "market_microstructure",
-          "summary": "This empirical study uses approximately 588 million Polymarket trades from 2.48 million wallets to examine the favorite–longshot bias (FLB), variation in returns across aggregation units, and persistence of demand at the price tails. The authors report an aggregate FLB but argue that its magnitude and sign depend on whether observations are aggregated by child market, invested dollars, or parent event. This review is based only on the abstract and Introduction of the 51-page paper; the body, proofs, experiments, and appendices were not supplied or checked.",
-          "mainResult": "According to the authors, purchases below 10 cents lose 19.35 cents per dollar on a dollar-weighted basis, while purchases at or above 90 cents earn 0.83 cents. Longshots lose 6.30% under equal child-market weighting but reverse to a 4.09% gain under equal parent-event weighting. The authors also report a two-sided FLB in Crypto and Politics but not in Sports. Wallets with the strongest past longshot preference reportedly account for 26.6% of next-month low-price purchases yet earn returns similar to those of other wallets. These are author claims stated in the abstract and Introduction; the underlying estimates, robustness checks, proofs, and appendices were not examined.",
-          "practicalApplication": "Execution analysis and risk monitoring in prediction markets should not interpret average losses on low-price tokens as a uniform pricing bias without decomposing results by the number of child markets, parent event, traded dollars, and category. Trader segmentation should also avoid treating recurrent longshot purchases alone as a proxy for concentrated losses.",
-          "methodology": "The study uses version 1.3 of the Polymarket Users dataset, covering November 2022 through March 2026, and compares purchase prices in resolved markets with final payoffs. For longshots and favorites, it compares equal child-market weighting, pooling by invested dollars, and equal parent-event weighting after pooling within each event. Wallet price-tail preferences are classified using only prior purchases, after which subsequent purchase shares and returns are examined. The authors also state that they analyze differences across categories, experience, order methods, reported fees, and collateral-sharing conditions.",
-          "limitations": "The full 51-page paper was not provided; only the abstract and Introduction were available. Consequently, the sample construction, return definitions, standard errors, confidence intervals, missing-data and selection biases, wallet classification, robustness checks, proofs, experiments, and appendices could not be examined. Wallets do not map one-to-one to individuals because one person may control multiple wallets. The observational design does not identify a causal explanation, and the findings are highly sensitive to parent-event construction and aggregation weights. All reported figures should therefore be treated as author claims.",
-          "reason": "The paper is highly relevant to prediction-market microstructure and execution assessment because it argues, using a very large transaction dataset, that measured FLB depends strongly on the aggregation choice. However, this is a limited-source review and cannot assess reliability or reproducibility, so the recommendation is conditional.",
+          "summary": "Using a large Polymarket transaction dataset, the study reports that the magnitude and sign of favorite–longshot bias depend on the aggregation unit. In this weekly review, its main relevance is aggregation risk in measuring prediction-market pricing biases.",
+          "mainResult": "According to the authors, purchases below 10 cents lose 19.35 cents per dollar under dollar weighting. However, longshot returns reverse from $-6.30\\%$ under equal child-market weighting to $+4.09\\%$ under equal parent-event weighting. This reported result cautions against interpreting the evidence as a uniform pricing inefficiency.",
+          "practicalApplication": "Prediction-market execution assessments should report results by invested dollars, child market, parent event, and category. Repeated longshot purchases alone should also not be used as a proxy for concentrated losses.",
+          "methodology": "According to the stored review, the study compares purchase prices with final payoffs in resolved markets using approximately 588 million trades and 2.48 million wallets from November 2022 through March 2026. It analyzes alternative aggregation weights and next-month persistence in wallet preferences classified from prior purchases.",
+          "limitations": "The analysis covered only the abstract and Introduction of the 51-page paper, not the full text. This synthesis also relies on the stored review and has not checked sample construction, return definitions, estimation precision, robustness tests, or appendices. Wallets do not correspond directly to individuals, and the observational results do not identify causality.",
+          "reason": "The reported reversal in return signs under different aggregation methods is important for prediction-market microstructure analysis. The recommendation is conditional because the limited source coverage requires verification in the main text before drawing practical conclusions.",
           "tags": [
             "prediction markets",
             "Polymarket",
             "favorite–longshot bias",
-            "market microstructure",
-            "aggregation bias",
-            "investor behavior",
-            "wallet analysis",
-            "trading returns"
+            "aggregation sensitivity",
+            "wallet analysis"
           ]
         }
       },
@@ -105,6 +358,747 @@
             "2609.12878v1"
           ],
           "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.13715v1",
+        "title": "Event-Time Order-Flow Memory, Operational-Time Impact, and Subordinated Market Observables",
+        "authors": [
+          "Christopher Angstmann",
+          "Tim Gebbie"
+        ],
+        "submittedDate": "2026-09-12",
+        "updatedDate": "2026-09-15",
+        "categories": [
+          "cond-mat.stat-mech",
+          "math-ph",
+          "math.MP",
+          "q-fin.MF",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "注文符号の長期記憶、latent order bookの価格インパクト、calendar timeの観測量を異なる時計で整理する理論研究である。既存機構の統合を通じ、観測されるimpact scalingがイベント到着時計に依存し得ることを示す。",
+        "mainResult": "著者らは対称なbid/ask更新でimbalance方程式のマッチング反応項が厳密に消えるとする。一方、square-root impactは局所近似に依存し、安定指数$\\beta\\in(0,1)$のheavy-tailed clockへの写像ではインパクト尺度が$t^{\\beta/2}$になると論じる。",
+        "practicalApplication": "資産やvenue間でimpact curveを比較する際、流動性応答とイベント到着頻度を混同しないための整理に使える。event timeとcalendar timeを併記し、執行スケジュールと時計の変換を分離することが有用である。",
+        "methodology": "離散reaction–diffusionモデルからimbalance recursionを導き、形式的な連続時間極限でVolterra型front equationを構成する。hidden-order長のrenewal modelとinverse subordinatorを用いて、符号相関と価格frontをcalendar timeへ写像する。",
+        "limitations": "保存レビューは6ページの全文を対象とするが、本統合では原文を再確認していない。実証、較正、シミュレーション検証はなく、impact則は局所線形流動性、固定背景、弱い取消、小変位などに依存する。時計は外生的で、注文フローや流動性との内生的相互作用を扱わない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "新しい実証法則としてではなく、impact推定の時計依存性を点検する理論的チェックリストとして有用である。厳密な消去結果と近似的なscaling結果を区別して読むことを勧める。",
+        "tags": [
+          "価格インパクト",
+          "注文フローの長期記憶",
+          "潜在注文板",
+          "event time",
+          "subordination"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "This theoretical study organizes long memory in trade signs, latent-order-book price impact, and calendar-time observables using distinct clocks. By integrating existing mechanisms, it shows how observed impact scaling may depend on the event-arrival clock.",
+          "mainResult": "The authors state that matching reaction terms cancel exactly from the imbalance equation under symmetric bid/ask updates. Square-root impact, however, depends on local approximations, and mapping through a heavy-tailed clock with stable index $\\beta\\in(0,1)$ is argued to produce an impact scale of $t^{\\beta/2}$.",
+          "practicalApplication": "The framework helps avoid conflating liquidity response with event-arrival intensity when comparing impact curves across assets or venues. Reporting both event-time and calendar-time estimates and separating execution schedules from clock transformations would be useful.",
+          "methodology": "The paper derives an imbalance recursion from a discrete reaction–diffusion model and constructs a Volterra front equation through a formal continuous-time limit. A renewal model of hidden-order lengths and an inverse subordinator map sign correlations and the price front into calendar time.",
+          "limitations": "The stored review covered the full six-page paper, but the original text was not rechecked for this synthesis. There is no empirical analysis, calibration, or simulation validation. The impact law depends on locally linear liquidity, a frozen background, weak cancellation, small displacement, and related assumptions. The clock is exogenous and excludes endogenous interactions with order flow and liquidity.",
+          "reason": "The paper is useful as a theoretical checklist for clock dependence in impact estimation rather than as a new empirical law. Readers should distinguish the exact cancellation result from approximate scaling results.",
+          "tags": [
+            "price impact",
+            "long memory in order flow",
+            "latent order book",
+            "event time",
+            "subordination"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 854,
+          "outputTokens": 1008,
+          "reasoningTokens": 64,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1862,
+          "estimatedCostUsd": 0.00138,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.13715v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 9444,
+          "outputTokens": 1852,
+          "reasoningTokens": 306,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 9441,
+          "totalTokens": 11296,
+          "estimatedCostUsd": 0.084257,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 6,
+          "paperIds": [
+            "2609.13715v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.15901v1",
+        "title": "Strategic Index Reconstitution: Differential Games, Closed-Loop Equilibria and Mean-Field Dynamics",
+        "authors": [
+          "Lukas-Benedikt Fiechtner",
+          "Jose Blanchet"
+        ],
+        "submittedDate": "2026-09-14",
+        "updatedDate": "2026-09-15",
+        "categories": [
+          "math.OC",
+          "q-fin.MF",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "指数組入れ変更を巡る在庫形成と流動性供給を、異質beliefとmulti-asset transient impactを含むclosed-loop gameで分析する。有限プレイヤー均衡とmean-field近似を接続する、執行理論として重要な候補である。",
+        "mainResult": "著者らは、no-price-manipulation条件の下で有限期間のsubgame-perfect Nash equilibriumが存在し、トレーダー数に依存しない次元のRiccati ODEで計算できると主張する。集計在庫とimpactは平均beliefに依存し、$\\varepsilon_n=1/n+\\lVert\\bar{\\pi}_n-\\bar{\\pi}\\rVert$に対して経路誤差は$O(\\varepsilon_n)$、approximate-Nash誤差は$C\\varepsilon_n^2$と報告する。",
+        "practicalApplication": "指数リバランスの発表前後からunwindまでを一貫して扱うscenario analysisに利用できる可能性がある。競合数や集計在庫を完全には観測できない場合のmean-field execution policyも検討対象になる。",
+        "methodology": "線形二次微分ゲームの状態を自己在庫の平均からの偏差、平均在庫、impactへ縮約し、HJB系をmatrix Riccati ODEと線形ODEへ帰着する。有限プレイヤー均衡からbelief分布を用いるmean-field gameへ移行する。",
+        "limitations": "分析範囲は91ページの論文のabstractとIntroductionのみであり、全文分析ではない。本統合も保存レビューに依存し、global solvability、verification、収束率の証明、技術的仮定、数値設定、付録を確認していない。線形impact、二次コスト、外生indexer scheduleなどの実市場への妥当性も未検証である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "計算規模がトレーダー数に依存しない構造と定量的な近似均衡誤差は、戦略的執行研究に有望である。ただし今週は理論候補としての推薦であり、実装や定理への依拠には全文の精査が必要である。",
+        "tags": [
+          "指数リバランス",
+          "戦略的執行",
+          "transient impact",
+          "closed-loop均衡",
+          "mean-field game",
+          "Riccati方程式"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper analyzes inventory formation and liquidity provision around index reconstitution through a closed-loop game with heterogeneous beliefs and multi-asset transient impact. Connecting finite-player equilibrium with mean-field approximation makes it a significant candidate for execution-theory coverage.",
+          "mainResult": "The authors claim finite-horizon existence of a subgame-perfect Nash equilibrium under a no-price-manipulation condition, computed through Riccati ODEs whose dimensions do not depend on trader count. Aggregate inventory and impact reportedly depend on average beliefs, with path error $O(\\varepsilon_n)$ and approximate-Nash error $C\\varepsilon_n^2$, where $\\varepsilon_n=1/n+\\lVert\\bar{\\pi}_n-\\bar{\\pi}\\rVert$.",
+          "practicalApplication": "The framework may support scenario analysis spanning pre-announcement positioning, post-announcement adjustment, and unwinding around index rebalances. Mean-field execution policies may also be relevant when competitor counts and aggregate inventories are incompletely observed.",
+          "methodology": "The linear-quadratic differential game reduces the state to own-inventory deviation from the average, average inventory, and impact, transforming the HJB system into matrix Riccati and linear ODEs. The analysis moves from finite-player equilibrium to a mean-field game using belief distributions.",
+          "limitations": "Only the abstract and Introduction of the 91-page paper were analyzed, not the full text. This synthesis also relies on the stored review and has not checked proofs of global solvability, verification or convergence rates, technical assumptions, numerical specifications, or appendices. The real-market validity of linear impact, quadratic costs, an exogenous indexer schedule, and related assumptions remains unverified.",
+          "reason": "The trader-count-independent computational structure and quantitative approximate-equilibrium errors are promising for strategic-execution research. This week's recommendation is as a theoretical candidate; implementation or reliance on the theorems requires full-text scrutiny.",
+          "tags": [
+            "index reconstitution",
+            "strategic execution",
+            "transient impact",
+            "closed-loop equilibrium",
+            "mean-field game",
+            "Riccati equations"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 826,
+          "outputTokens": 1299,
+          "reasoningTokens": 91,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2125,
+          "estimatedCostUsd": 0.001724,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.15901v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 7186,
+          "outputTokens": 8814,
+          "reasoningTokens": 516,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 7183,
+          "totalTokens": 16000,
+          "estimatedCostUsd": 0.212207,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 91,
+          "paperIds": [
+            "2609.15901v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 7186,
+          "outputTokens": 16000,
+          "reasoningTokens": 291,
+          "cachedInputTokens": 7183,
+          "cacheWriteTokens": 0,
+          "totalTokens": 23186,
+          "estimatedCostUsd": 0.322885,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 91,
+          "paperIds": [
+            "2609.15901v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 7186,
+          "outputTokens": 2361,
+          "reasoningTokens": 516,
+          "cachedInputTokens": 7183,
+          "cacheWriteTokens": 0,
+          "totalTokens": 9547,
+          "estimatedCostUsd": 0.050105,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 91,
+          "paperIds": [
+            "2609.15901v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 7186,
+          "outputTokens": 2671,
+          "reasoningTokens": 738,
+          "cachedInputTokens": 7183,
+          "cacheWriteTokens": 0,
+          "totalTokens": 9857,
+          "estimatedCostUsd": 0.056305,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 91,
+          "paperIds": [
+            "2609.15901v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.17788v1",
+        "title": "SAiFE-gym: Model-based Environments for Automated Market Making with Concentrated Liquidity",
+        "authors": [
+          "Georgios Chionas",
+          "Charalampos Kleitsikas",
+          "Stefanos Leonardos",
+          "Leandro Sánchez-Betancourt",
+          "Carmine Ventre"
+        ],
+        "submittedDate": "2026-09-15",
+        "updatedDate": "2026-09-17",
+        "categories": [
+          "cs.AI",
+          "cs.LG",
+          "q-fin.CP",
+          "q-fin.MF",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "集中流動性AMMにおける流動性供給、注文到着、price impact、gas cost、latencyを組み替え可能なRL環境として提供する。主な価値は収益性の発見ではなく、方策比較とstress testのための研究基盤にある。",
+        "mainResult": "著者らは単一マシンのbenchmarkで、1,000 trajectoriesのrolloutがNumPy並列化では約0.05秒、multiprocessingでは約1.6秒となり、約30倍高速だったと報告する。PPOのdomain randomizationは、多くの評価領域で決定的な改善を示していない。",
+        "practicalApplication": "LPのレンジ選択、rebalancing頻度、inventory risk、gas costの比較実験に使える。未知のvolatilityやorder-flow regimeに対する方策感応度の検証にも適する。",
+        "methodology": "複数の外部価格過程、流動性や価格乖離に依存する注文到着強度、depth依存または1-tick型impactを実装する。GymnasiumとStable Baselines 3に接続し、固定パラメータ学習とepisode単位のdomain randomizationをMonte Carloで評価する。",
+        "limitations": "保存レビューは8ページの全文を対象とするが、本統合では原文や実装を再確認していない。結果は未較正のmodel-based simulationで、外生価格、固定gas cost、決定論的latency、単一agentなどの単純化に依存する。速度比較は単一機材で、PPO評価の信頼区間や十分な複数seed比較も示されていない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "集中流動性とblockchain摩擦を同一環境で扱う再利用可能な設計は、AMM研究に有用である。実運用性能の証拠ではなく、研究インフラとして推薦する。",
+        "tags": [
+          "自動マーケットメーカー",
+          "集中流動性",
+          "強化学習",
+          "流動性供給",
+          "domain randomization",
+          "シミュレーション基盤"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper provides a modular RL environment combining liquidity provision, order arrivals, price impact, gas costs, and latency in concentrated-liquidity AMMs. Its main value is research infrastructure for policy comparisons and stress tests rather than a finding about profitability.",
+          "mainResult": "In a single-machine benchmark, the authors report that rolling out 1,000 trajectories takes about 0.05 seconds with NumPy parallelization versus about 1.6 seconds with multiprocessing, approximately a thirtyfold speedup. Domain randomization for PPO does not demonstrate a decisive improvement across many evaluation regimes.",
+          "practicalApplication": "The environment supports comparative experiments on LP range selection, rebalancing frequency, inventory risk, and gas costs. It is also suitable for testing policy sensitivity to unfamiliar volatility and order-flow regimes.",
+          "methodology": "The simulator implements several external-price processes, order-arrival intensities depending on liquidity and mispricing, and depth-dependent or one-tick impact. It integrates with Gymnasium and Stable Baselines 3 and evaluates fixed-parameter training and episode-level domain randomization through Monte Carlo simulation.",
+          "limitations": "The stored review covered the full eight-page paper, but neither the original text nor implementation was rechecked for this synthesis. Results rely on uncalibrated model-based simulations with exogenous prices, fixed gas costs, deterministic latency, a single agent, and other simplifications. Speed comparisons use one machine, and the PPO evaluation lacks reported confidence intervals and extensive multi-seed comparisons.",
+          "reason": "The reusable design integrating concentrated liquidity and blockchain frictions is useful for AMM research. It is recommended as research infrastructure, not as evidence of live trading performance.",
+          "tags": [
+            "automated market makers",
+            "concentrated liquidity",
+            "reinforcement learning",
+            "liquidity provision",
+            "domain randomization",
+            "simulation infrastructure"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 839,
+          "outputTokens": 992,
+          "reasoningTokens": 61,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1831,
+          "estimatedCostUsd": 0.001358,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.17788v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 17179,
+          "outputTokens": 1395,
+          "reasoningTokens": 136,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 17176,
+          "totalTokens": 18574,
+          "estimatedCostUsd": 0.113792,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 8,
+          "paperIds": [
+            "2609.17788v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.18019v1",
+        "title": "Model-Free Passive Execution via Order-Level Shadowing",
+        "authors": [
+          "Vincent Maciejewski"
+        ],
+        "submittedDate": "2026-09-16",
+        "updatedDate": "2026-09-17",
+        "categories": [
+          "q-fin.CP",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "第三者の指値注文をexchange order IDで追跡し、同じ価格・venueへ発注して取消や約定後に自注文を取り消すShadow-PPOVを提案する。予測不要のplacement baselineとして興味深いが、評価実装には追加の安全guardが含まれる。",
+        "mainResult": "著者のCME ES replayでは、ほぼ同じparticipationとzero latencyの下でrelative slippageが受動方式で$+0.0955\\pm0.0130$、aggressive POVで$+0.0952\\pm0.0135$ ticks/contractと報告される。delay増加時の悪化は受動方式で小さかったが、latency比較は方式間のparticipationを一致させたものではない。",
+        "practicalApplication": "予測型passive placementと比較する単純なbaseline候補になる。実装にはMBO feed、order ID追跡、FIFO管理、cancel処理、未約定とoverfillの制御が必要であり、目標participationを直接保証する手法ではない。",
+        "methodology": "2025年のCME ES通常取引時間246 sessionsをorder-by-orderでreplayし、各windowで100 contractsの買いと売りを同時執行する。arrival mid基準のコストなどを測定し、session単位のclustered intervalとlatency sweepを用いる。",
+        "limitations": "保存レビューの対象は29ページの全文だが、本統合では原文を再確認していない。自己注文のimpact、他参加者の反応、historical fillsの置換を除外する追加約定型replayである。単一商品、同時売買、限定的baseline、guard ablationの欠如が一般化を制約し、方式ごとに区間が異なるVWAP比較も順位付けに使えない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "order lifecycleを模倣する明確なbaseline設計と年間MBO replayは、受動執行研究の比較軸として有用である。ただし本chunkのFIFO部分識別研究と同様、再現された約定を実市場の反実仮想と同一視せず、production superiorityの証拠とは扱わない。",
+        "tags": [
+          "受動執行",
+          "order-level shadowing",
+          "MBO",
+          "latency",
+          "market replay",
+          "執行baseline"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "Shadow-PPOV tracks third-party limit orders through exchange order IDs, places orders at the same price and venue, and cancels its own orders following cancellation or execution of the tracked orders. It is an interesting prediction-free placement baseline, although the evaluated implementation includes additional safety guards.",
+          "mainResult": "In the author's CME ES replay, at nearly matched participation and zero latency, relative slippage is reported as $+0.0955\\pm0.0130$ for the passive method and $+0.0952\\pm0.0135$ ticks per contract for aggressive POV. The passive method deteriorates less as delay increases, but that latency comparison does not match participation across methods.",
+          "practicalApplication": "The method is a candidate simple baseline for predictive passive-placement models. Implementation requires an MBO feed, order-ID tracking, FIFO management, cancellation handling, and incomplete-fill and overfill controls; it does not directly guarantee target participation.",
+          "methodology": "The study replays order-by-order data from 246 regular CME ES sessions in 2025, simultaneously executing a 100-contract buy and sell in each window. It measures costs relative to arrival mid and other metrics, using session-clustered intervals and a latency sweep.",
+          "limitations": "The stored review covered the full 29-page paper, but the original text was not rechecked for this synthesis. Replay adds simulated fills without modeling own-order impact, other participants' responses, or displacement of historical fills. One instrument, simultaneous buying and selling, limited baselines, and absent guard ablations constrain generalization. VWAP comparisons cannot rank methods because their working intervals differ.",
+          "reason": "The explicit lifecycle-mirroring baseline and annual MBO replay provide a useful comparison point for passive-execution research. As with the FIFO partial-identification study in this chunk, reconstructed fills should not be equated with real-market counterfactuals or treated as evidence of production superiority.",
+          "tags": [
+            "passive execution",
+            "order-level shadowing",
+            "MBO",
+            "latency",
+            "market replay",
+            "execution baselines"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 971,
+          "outputTokens": 1052,
+          "reasoningTokens": 61,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2023,
+          "estimatedCostUsd": 0.001457,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.18019v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 25175,
+          "outputTokens": 2796,
+          "reasoningTokens": 897,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 25172,
+          "totalTokens": 27971,
+          "estimatedCostUsd": 0.181792,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 29,
+          "paperIds": [
+            "2609.18019v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.19094v1",
+        "title": "Quadratic G-BSDEs for bond pricing with endogenous short-rate feedback",
+        "authors": [
+          "Jaehyun Kim",
+          "Hyungbin Park"
+        ],
+        "submittedDate": "2026-09-16",
+        "updatedDate": "2026-09-17",
+        "categories": [
+          "math.PR",
+          "q-fin.MF"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "ボンド価格依存の短期金利feedbackとvolatility uncertaintyを、対数価格のquadratic G-BSDEとして扱う理論研究である。本chunkで金利モデルに最も直接的に関係するが、完成した実務的yield-curve modelではない。",
+        "mainResult": "論文は強い正則性条件の下で有限期間の存在、一意性、比較、安定性を報告する。strict monotonicityの下では有界無限期間解を構成し、有限期間解との差を$C e^{-\\mu(T-s)}$で評価する。また、所与の価格プロファイルと長期利回り$\\lambda$を実現するfeedback係数を逆設計する。",
+        "practicalApplication": "volatility ambiguity下で価格目標と金利調整ルールを自己整合的に分析する理論基盤になる。取引やカーブ構築への適用には、共通短期金利の下での満期間整合性、係数推定、数値解法が必要である。",
+        "methodology": "暗黙的な割引評価を対数変換し、G-expectation下のquadratic G-BSDEへ帰着する。G-BMO、Girsanov型変換、比較、切断近似、viscosity PDE表現を用い、有限期間近似から無限期間解と収束評価を導く。",
+        "limitations": "保存レビューの対象は32ページの全文だが、本統合では原証明を再確認していない。有界性、Lipschitz条件、strong ellipticity、strict monotonicityなどに依存し、無裁定の枠組みは外生的に仮定する。複数満期の同時整合性は未解決で、実証、較正、数値実験はなく、表記上の不整合も報告されている。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "価格依存型割引とvolatility ambiguityを統合し、有限・無限期間のwell-posednessを扱う点は理論的に重要である。即時実装向けではなく、数理金利モデル研究者に優先して推薦する。",
+        "tags": [
+          "金利モデル",
+          "quadratic G-BSDE",
+          "債券評価",
+          "内生的短期金利",
+          "volatility uncertainty",
+          "長期利回り"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This theoretical paper treats bond-price-dependent short-rate feedback and volatility uncertainty through a quadratic G-BSDE for logarithmic prices. It is the most directly relevant interest-rate-model study in this chunk, but it is not a complete practical yield-curve model.",
+          "mainResult": "The paper reports finite-horizon existence, uniqueness, comparison, and stability under strong regularity conditions. Under strict monotonicity, it constructs a bounded infinite-horizon solution and bounds the finite-horizon difference by $C e^{-\\mu(T-s)}$. It also inversely designs feedback coefficients implementing a prescribed price profile and long-term yield $\\lambda$.",
+          "practicalApplication": "The framework provides a theoretical basis for self-consistent analysis of price targets and rate-adjustment rules under volatility ambiguity. Trading or curve-building applications require cross-maturity consistency under a common short rate, coefficient estimation, and numerical methods.",
+          "methodology": "A logarithmic transformation reduces implicit discount valuation to a quadratic G-BSDE under G-expectation. The analysis uses G-BMO, Girsanov-type transformations, comparison, truncation approximations, and viscosity-PDE representations, deriving infinite-horizon solutions and convergence estimates from finite-horizon approximations.",
+          "limitations": "The stored review covered the full 32-page paper, but the original proofs were not rechecked for this synthesis. Results rely on boundedness, Lipschitz conditions, strong ellipticity, strict monotonicity, and related assumptions, while the no-arbitrage framework is imposed exogenously. Simultaneous cross-maturity consistency remains unresolved. There is no empirical analysis, calibration, or numerical experimentation, and notational inconsistencies are also reported.",
+          "reason": "Combining price-dependent discounting with volatility ambiguity and studying finite- and infinite-horizon well-posedness is theoretically important. The paper is recommended primarily for mathematical interest-rate-model researchers rather than immediate implementation.",
+          "tags": [
+            "interest-rate models",
+            "quadratic G-BSDE",
+            "bond valuation",
+            "endogenous short rates",
+            "volatility uncertainty",
+            "long-term yields"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 783,
+          "outputTokens": 1227,
+          "reasoningTokens": 89,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2010,
+          "estimatedCostUsd": 0.001629,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.19094v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 34218,
+          "outputTokens": 2169,
+          "reasoningTokens": 483,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 34215,
+          "totalTokens": 36387,
+          "estimatedCostUsd": 0.214467,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 32,
+          "paperIds": [
+            "2609.19094v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
         }
       ]
     },
@@ -126,44 +1120,36 @@
       },
       "finalAnalysis": {
         "classification": "mixed",
-        "summary": "予測市場でCLOBとLMSR型AMMが併存する理由を、informed flowのscreeningとbehavioral tail demandから説明するmarket microstructure研究である。著者らは、CLOBがtail-demand rentを得る一方、情報取引はLMSRへ向かうと主張する。ただし全62ページのうちabstractとIntroductionのみを用いた限定レビューであり、本文、証明、推定手順、付録は確認していない。",
-        "mainResult": "著者らの主張では、signal band内の事前CLOB quoteはpick-offされるため、競争的makerはband外でquoteし、informed traderを排除してsettlementまで割安側を保有するscreening rentを得る。LMSRはinformed flowを吸収し、CLOBはbehavioral tail demandから収益を得ることで両市場が補完的に共存する。また、$n \\ge 3$の多結果市場ではbinary CLOBがswitch priceを決めてもimplied beliefの水準は一意に定まらず、LMSRはoutcome simplexを整合的かつ資本効率的に価格付けするとされる。ただしabstractとIntroductionしか提供されておらず、これらの理論結果、証明、実証結果、robustness、付録は検証していない。",
-        "practicalApplication": "予測市場のvenue設計では、CLOBを情報集約装置とだけ見なさず、tail demandをscreeningしてrentを得る機構として評価できる。hybrid設計では、AMM depth、order-routing、maker-side contestabilityがCLOB premiumと流動性配分に与える影響を考慮すべきだという示唆がある。多結果市場では、binary bookの寄せ集めより単一のcost-function AMMが表示確率の整合性とcollateral効率を改善し得る。",
-        "methodology": "Introductionの記述によれば、state-contingent tail demandを組み込んだCLOBとLMSRの共存モデルを構築し、binary equilibriumとmulti-outcome pricingを理論分析している。実証面では、Polymarketの取引データについてmakerのsettlement収益、片側ポジション、regime別mispricing、およびmulti-outcome set premiumを調べ、複数のcounterfactual checkを行ったと著者らは報告している。",
-        "limitations": "本レビューは全62ページの論文に対してabstractとIntroductionのみを参照したLIMITED-SOURCE評価である。モデル仮定、定理の正確な条件、証明、データ構築、識別戦略、統計表、calibration、appendix、再現可能性を確認していない。Introduction自身も、取引レベル標本にAMMが含まれずvenue choiceを直接検証しないこと、regime-dependentなsign reversalが短期binary contractの一種類に基づくことを認めている。したがって、因果解釈、外的妥当性、CLOBとLMSRの実際の共存効果、$n \\ge 3$での主張は未検証の著者主張として扱う必要がある。",
-        "importance": 5,
+        "summary": "予測市場のCLOBとLMSR型AMMの併存を、informed flowのscreeningとbehavioral tail demandから説明する。maker収益をspread captureだけでなくsettlement時のscreening rentとして捉える仮説が中心である。",
+        "mainResult": "著者らは、CLOB makerがsignal band外へquoteして情報取引を避け、LMSRがinformed flowを吸収する補完関係を主張する。また、$n\\geq3$の多結果市場ではbinary CLOBのswitch priceだけでimplied beliefの水準は一意に定まらず、LMSRは整合的な価格付けを行うとされる。",
+        "practicalApplication": "予測市場のhybrid設計において、AMM depth、routing、maker競争、担保効率を共同で検討する枠組みになる可能性がある。CLOB収益の源泉を情報集約と同一視しないための仮説整理にも使える。",
+        "methodology": "Introductionの記述では、state-contingent tail demandを持つCLOBとLMSRの共存モデルを構築する。Polymarketのmaker settlement収益、片側ポジション、regime別mispricing、多結果set premiumも分析したと報告する。",
+        "limitations": "分析範囲は62ページの論文のabstractとIntroductionのみであり、全文分析ではない。本統合も保存レビューに基づき、モデル条件、証明、推定表、データ構築、付録を確認していない。取引標本にAMMが含まれずvenue choiceを直接検証できないため、共存機構の実証的確立とは扱えない。",
+        "importance": 4,
         "recommended": true,
-        "reason": "CLOB、AMM、adverse selection、order routing、multi-outcome pricingを統一的に扱い、電子取引とmarket microstructureの読者に直接関連する。特に、予測市場のmaker収益をspread captureではなくsettlement時のscreening rentとして捉える視点は興味深い。ただし、利用可能な範囲では中心的主張を独立に評価できないため、推薦は本文と付録を用いた完全レビューを前提とする。",
+        "reason": "CLOBとAMMの役割分担を問い直す点は、今週の予測市場研究を読むうえで重要である。ただしFLBの集計感応度に関する別論文の結果を、この共存仮説の裏付けとみなすことはできず、推薦は本文検証を前提とする。",
         "tags": [
           "予測市場",
           "CLOB",
           "LMSR",
-          "自動マーケットメーカー",
-          "市場マイクロストラクチャー",
-          "情報集約",
-          "スクリーニング",
-          "tail demand",
-          "order routing",
+          "逆選択",
+          "screening rent",
           "多結果市場"
         ],
         "english": {
           "classification": "mixed",
-          "summary": "This market-microstructure paper explains the coexistence of CLOB and LMSR-based AMM prediction markets through informed-flow screening and behavioral tail demand. The authors claim that CLOBs earn tail-demand rents while informed trading routes to the LMSR. This is a limited review based only on the abstract and Introduction of a 62-page paper; the main text, proofs, estimation procedures, and appendices were not examined.",
-          "mainResult": "The authors claim that pre-signal CLOB quotes inside the signal band are picked off, causing competitive makers to quote outside the band, screen out informed traders, and earn screening rents by holding the underpriced side until settlement. The LMSR absorbs informed flow, while the CLOB earns revenue from behavioral tail demand, making the venues complementary. For markets with $n \\ge 3$ outcomes, the authors further claim that binary CLOBs can determine switch prices without uniquely determining the level of implied beliefs, whereas the LMSR prices the outcome simplex coherently and with greater collateral efficiency. Only the abstract and Introduction were supplied, so these theoretical claims, proofs, empirical results, robustness analyses, and appendices were not verified.",
-          "practicalApplication": "Prediction-market designers could evaluate a CLOB not only as an information-aggregation mechanism but also as a mechanism that screens tail demand and earns rent. For hybrid venues, the paper suggests considering how AMM depth, order routing, and maker-side contestability affect CLOB premiums and liquidity allocation. In multi-outcome markets, a single cost-function AMM may offer more coherent displayed probabilities and better collateral efficiency than a collection of binary books.",
-          "methodology": "According to the Introduction, the paper constructs a coexistence model of a CLOB and an LMSR with state-contingent tail demand, then theoretically analyzes binary equilibrium and multi-outcome pricing. Empirically, the authors report examining Polymarket transaction data for makers' settlement profits, one-sided positions, regime-dependent mispricing, and multi-outcome set premiums, together with several counterfactual checks.",
-          "limitations": "This is a LIMITED-SOURCE assessment of a 62-page paper based solely on its abstract and Introduction. The model assumptions, exact theorem conditions, proofs, data construction, identification strategy, statistical tables, calibration, appendices, and reproducibility were not examined. The Introduction itself acknowledges that its transaction-level samples contain no AMM and therefore do not directly test venue choice, and that the regime-dependent sign reversal is documented for one type of short-horizon binary contract. Accordingly, the causal interpretation, external validity, actual coexistence effects of CLOB and LMSR venues, and claims for $n \\ge 3$ outcomes must be treated as unverified author claims.",
-          "reason": "The paper directly concerns electronic trading and market microstructure by jointly studying CLOBs, AMMs, adverse selection, order routing, and multi-outcome pricing. Its interpretation of prediction-market maker profits as settlement-time screening rents rather than spread capture is particularly interesting. However, the central claims cannot be independently assessed from the supplied sections, so the recommendation is conditional on a full review of the main text and appendices.",
+          "summary": "The paper explains coexistence between CLOB and LMSR-based AMM prediction markets through screening of informed flow and behavioral tail demand. Its central hypothesis interprets maker revenue as settlement-time screening rent rather than only spread capture.",
+          "mainResult": "The authors claim a complementary relationship in which CLOB makers quote outside the signal band to avoid informed trading while the LMSR absorbs informed flow. They also argue that, for multi-outcome markets with $n\\geq3$, binary-CLOB switch prices do not uniquely determine implied-belief levels, whereas the LMSR provides coherent pricing.",
+          "practicalApplication": "The framework may support joint consideration of AMM depth, routing, maker competition, and collateral efficiency in hybrid prediction-market design. It also helps organize hypotheses without equating CLOB revenue with information aggregation.",
+          "methodology": "According to the Introduction, the paper constructs a CLOB–LMSR coexistence model with state-contingent tail demand. It also reports analyzing Polymarket maker settlement profits, one-sided positions, regime-dependent mispricing, and multi-outcome set premiums.",
+          "limitations": "Only the abstract and Introduction of the 62-page paper were analyzed, not the full text. This synthesis also relies on the stored review and has not checked model conditions, proofs, estimation tables, data construction, or appendices. Because the transaction sample contains no AMM, it cannot directly test venue choice and should not be treated as empirical establishment of the coexistence mechanism.",
+          "reason": "Reconsidering the division of roles between CLOBs and AMMs is important within this week's prediction-market research. However, the separate paper's findings on aggregation sensitivity in FLB do not validate this coexistence hypothesis, and the recommendation remains conditional on checking the main text.",
           "tags": [
             "prediction markets",
             "CLOB",
             "LMSR",
-            "automated market maker",
-            "market microstructure",
-            "information aggregation",
-            "screening",
-            "tail demand",
-            "order routing",
+            "adverse selection",
+            "screening rent",
             "multi-outcome markets"
           ]
         }
@@ -208,6 +1194,40 @@
             "2609.20017v1"
           ],
           "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
         }
       ]
     },
@@ -228,45 +1248,37 @@
       },
       "finalAnalysis": {
         "classification": "market_microstructure",
-        "summary": "単一資産のlimit order book型agent-based modelを用い、resting liquidityのファンダメンタル価値へのアンカー、群集行動、レバレッジ、maintenance marginの相互作用が内生的な流動性危機を生む条件を調べる研究である。論文のシミュレーションでは、アンカーがほぼ失われ、中程度の群集行動と高いレバレッジが重なる狭い領域で、強制売却と注文板枯渇が自己増幅すると報告されている。",
-        "mainResult": "著者の結果では、レバレッジによる追加的な注文板枯渇は主にアンカー強度が $\\phi \\lesssim 0.15$、群集行動比率が概ね $h=0.15$ から $0.30$ の領域に集中する。危機の開始はレバレッジ単独より、最初のmargin callまでの価格下落余地である $B=(1/\\lambda-m_{maint})/(1-m_{maint})$ によって一次的に整理され、$B$ が小さいほど枯渇率と発火確率が高いと報告される。また、弱いアンカー下ではレバレッジ上昇に伴いreturn tail exponentが約 $6.5$ から $2.3$ へ低下する一方、volatility clusteringは主としてアンカー除去と群集行動に由来し、長期記憶ではなく数ラグの短期記憶にとどまる。発火確率は連続的に上昇し、branching-ratio proxyも $1$ を大幅に下回るため、著者は臨界点ではなく滑らかなsub-critical crossoverと結論づける。",
-        "practicalApplication": "電子市場のstress testingにおいて、レバレッジだけでなくmaintenance marginと注文流動性の価値アンカーを共同で監視すべきことを示唆する。特に、価格追随型の再提示、トレンド追随注文、強制デレバレッジが同時に強まる状況では、証拠金引き上げがレバレッジ増加と同様に流動性を悪化させ得る。ただし、実市場への閾値設定やexecution policyへの直接利用には追加の較正と実証検証が必要である。",
-        "methodology": "連続ダブルオークション上に、anchored noise traders、chartist herders、資金制約付きmarket makers、margin callを受けるleveraged holdersを配置する。流動性供給の参照価格を $p_t^{ref}=\\phi v+(1-\\phi)m_t$ とし、アンカー強度 $\\phi$、群集行動比率 $h$、レバレッジ $\\lambda$、maintenance margin $m_{maint}$ を変化させる。危機指標は注文板の片側にresting depthがないイベント比率であり、レバレッジ固有の効果は同一の $\\phi$ と $h$ におけるlevered-minus-unlevered差分で識別する。複数seedのparameter sweepにより、Hill tail exponent、absolute-return ACF、発火確率、breach count、Fano-factor型branching proxyを比較し、外生market sellを用いた対照実験も行う。",
-        "limitations": "結果は単一資産の簡略化されたagent-based modelに基づき、実データへの較正やout-of-sample検証はない。主要なmargin-buffer collapseは一つの開始近傍セルでのみ検証され、同じ $B$ でも残差があるため厳密な一次元縮約ではない。セル当たりのseed数は概ね $8$ から $20$ で、枯渇指標は右裾が長くseed依存性が強いため、開始近傍の推定は不確実である。volatility clusteringは短期記憶しか再現せず、branching proxyもHawkes modelの尤度推定ではない。人口規模、資本、ファンダメンタル過程、群集行動期間に対する頑健性も十分に探索されておらず、臨界性の否定や実市場への一般化はモデル内の証拠として解釈すべきである。",
+        "summary": "単一資産の注文板agent-based modelで、価値アンカー、群集行動、レバレッジ、maintenance marginの相互作用による流動性枯渇を調べる。危機をレバレッジ単独ではなく、価格支持とmargin bufferの共同作用として整理する。",
+        "mainResult": "著者は、追加的な枯渇が主に弱いアンカーと中程度の群集行動に集中し、最初のmargin callまでの下落余地$B=(1/\\lambda-m_{\\mathrm{maint}})/(1-m_{\\mathrm{maint}})$が小さいほど発火確率が高いと報告する。モデル内では開始は滑らかなsub-critical crossoverであり、普遍的な臨界点は示されない。",
+        "practicalApplication": "電子市場のstress testで、レバレッジ、maintenance margin、価格追随型quote更新、強制売却を同時に変えるscenario設計に使える。モデル内の閾値をそのまま実市場のリスク限度へ転用すべきではない。",
+        "methodology": "anchored noise trader、chartist、資金制約付きmarket maker、leveraged holderを連続ダブルオークションへ配置する。共通条件でleveredとunleveredを比較し、複数seedのparameter sweepで板枯渇、tail exponent、return依存、発火確率を測る。",
+        "limitations": "保存レビューは16ページの全文を対象とするが、本統合では原文を再確認していない。未較正の単一資産モデルで、margin-bufferによる整理は一つの開始近傍セルを中心に検証されている。seed数と頑健性探索は限定的で、volatility clusteringは短期記憶にとどまり、branching proxyもHawkes推定ではない。",
         "importance": 4,
         "recommended": true,
-        "reason": "limit order bookの流動性枯渇を、価値アンカー、群集行動、レバレッジ、証拠金制約の共同作用として明示的に整理しており、market microstructure研究との関連性は高い。特に、危機開始をmargin bufferで要約する仮説と、臨界点ではなく確率的crossoverであるという診断は興味深い。一方、結論は未較正のシミュレーションと限定的なparameter sweepに依存するため、実証的事実や普遍的な市場閾値としてではなく、検証可能な機構仮説として読むことを推奨する。",
+        "reason": "証拠金引き上げとレバレッジが流動性へ与える共同効果を、注文板機構として検討する点が有用である。実証的な市場法則ではなく、検証可能なstress mechanismの仮説として推薦する。",
         "tags": [
           "指値注文板",
-          "市場マイクロストラクチャー",
           "エージェントベースモデル",
-          "内生的流動性危機",
+          "流動性危機",
           "レバレッジ",
           "証拠金バッファ",
-          "群集行動",
-          "ファンダメンタル・アンカー",
-          "強制デレバレッジ",
-          "ボラティリティ・クラスタリング"
+          "群集行動"
         ],
         "english": {
           "classification": "market_microstructure",
-          "summary": "Using a single-asset limit-order-book agent-based model, the paper studies when interactions among fundamental-value anchoring of resting liquidity, herding, leverage, and maintenance margins generate endogenous liquidity crises. In the reported simulations, forced selling and order-book depletion become self-reinforcing within a narrow region where the anchor is almost absent and intermediate herding coincides with high leverage.",
-          "mainResult": "The author reports that incremental order-book depletion attributable to leverage is concentrated mainly where anchor strength is $\\phi \\lesssim 0.15$ and the herding share is approximately $h=0.15$ to $0.30$. Crisis onset is organized to leading order by the price decline available before the first margin call, $B=(1/\\lambda-m_{maint})/(1-m_{maint})$, rather than by leverage alone; smaller $B$ is associated with higher depletion and ignition probability. Under weak anchoring, the return tail exponent reportedly falls from about $6.5$ to $2.3$ as leverage rises, whereas volatility clustering is driven mainly by anchor removal and herding and lasts only a few lags rather than exhibiting long memory. Because ignition probability increases continuously and the branching-ratio proxy remains far below $1$, the author concludes that the onset is a smooth sub-critical crossover rather than a critical point.",
-          "practicalApplication": "The results suggest that electronic-market stress testing should jointly monitor leverage, maintenance margins, and the value anchoring of displayed liquidity. In particular, when price-following quote replenishment, trend-following order flow, and forced deleveraging intensify together, tighter margin requirements may impair liquidity in a manner similar to higher leverage. Direct use for real-market thresholds or execution policies would nevertheless require further calibration and empirical validation.",
-          "methodology": "The continuous double auction contains anchored noise traders, chartist herders, funding-constrained market makers, and leveraged holders subject to margin calls. The liquidity reference price is $p_t^{ref}=\\phi v+(1-\\phi)m_t$, while anchor strength $\\phi$, herding share $h$, leverage $\\lambda$, and maintenance margin $m_{maint}$ are varied. The crisis measure is the fraction of events for which one side of the book has no resting depth, and the leverage-specific effect is identified through the levered-minus-unlevered difference at matched $\\phi$ and $h$. Multi-seed parameter sweeps compare the Hill tail exponent, absolute-return ACF, ignition probability, breach count, and a Fano-factor branching proxy; an exogenous market-sell experiment serves as a control.",
-          "limitations": "The findings come from a simplified single-asset agent-based model without calibration to real data or out-of-sample validation. The principal margin-buffer collapse is tested only at one near-onset cell, and residual dispersion at matched $B$ means that it is not an exact one-dimensional reduction. Cell-level seed counts are generally between $8$ and $20$, while the depletion statistic is strongly right-skewed and seed-sensitive, making near-onset estimates uncertain. The model reproduces only short-memory volatility clustering, and the branching proxy is not a likelihood-based Hawkes-model estimate. Robustness to population size, capital, the fundamental process, and the herding horizon is not mapped sufficiently; consequently, the rejection of criticality and any real-market generalization should be interpreted as model-specific evidence.",
-          "reason": "The paper is highly relevant to market microstructure because it explicitly organizes limit-order-book depletion around the joint effects of value anchoring, herding, leverage, and margin constraints. Its margin-buffer hypothesis for crisis onset and its diagnosis of a probabilistic crossover rather than a critical point are particularly interesting. However, because the conclusions depend on an uncalibrated simulation and limited parameter sweeps, the paper is recommended as a source of testable mechanism hypotheses rather than as evidence of universal empirical thresholds.",
+          "summary": "Using a single-asset order-book agent-based model, the paper studies liquidity depletion arising from interactions among value anchoring, herding, leverage, and maintenance margins. It organizes crises around the joint effects of price support and margin buffers rather than leverage alone.",
+          "mainResult": "The author reports that incremental depletion is concentrated mainly under weak anchoring and intermediate herding, and that ignition becomes more likely when the price-decline buffer before the first margin call, $B=(1/\\lambda-m_{\\mathrm{maint}})/(1-m_{\\mathrm{maint}})$, is smaller. Within the model, onset is a smooth sub-critical crossover rather than evidence of a universal critical point.",
+          "practicalApplication": "The framework can inform electronic-market stress scenarios jointly varying leverage, maintenance margins, price-following quote updates, and forced selling. Model thresholds should not be transferred directly into real-market risk limits.",
+          "methodology": "The continuous double auction includes anchored noise traders, chartists, funding-constrained market makers, and leveraged holders. Matched levered and unlevered cases are compared, while multi-seed parameter sweeps measure book depletion, tail exponents, return dependence, and ignition probabilities.",
+          "limitations": "The stored review covered the full 16-page paper, but the original text was not rechecked for this synthesis. This is an uncalibrated single-asset model, and the margin-buffer organization is tested mainly around one near-onset cell. Seed counts and robustness exploration are limited, volatility clustering exhibits only short memory, and the branching proxy is not a Hawkes-model estimate.",
+          "reason": "Examining the joint liquidity effects of tighter margins and leverage through order-book mechanisms is useful. The paper is recommended as a source of testable stress-mechanism hypotheses rather than an empirical market law.",
           "tags": [
             "limit order book",
-            "market microstructure",
             "agent-based model",
-            "endogenous liquidity crisis",
+            "liquidity crises",
             "leverage",
             "margin buffer",
-            "herding",
-            "fundamental anchoring",
-            "forced deleveraging",
-            "volatility clustering"
+            "herding"
           ]
         }
       },
@@ -310,67 +1322,90 @@
             "2609.20192v1"
           ],
           "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
         }
       ]
     },
     {
       "metadata": {
-        "arxivId": "2609.20224v1",
-        "title": "The Year-End Toll: Frictions Embedded in Option-Implied Rates",
+        "arxivId": "2609.14205v1",
+        "title": "CAST: A Cross-Asset State-Space Trading System for Drawdown Control in Stock Markets",
         "authors": [
-          "Useong Shin"
+          "Yu Peng",
+          "Matloob Khushi",
+          "Josiah Poon"
         ],
-        "submittedDate": "2026-08-21",
-        "updatedDate": "2026-09-18",
+        "submittedDate": "2026-09-13",
+        "updatedDate": "2026-09-15",
         "categories": [
-          "q-fin.GN",
-          "q-fin.MF",
-          "q-fin.PR",
-          "q-fin.ST",
-          "q-fin.TR"
+          "cs.CE",
+          "q-fin.RM"
         ]
       },
       "finalAnalysis": {
-        "classification": "mixed",
-        "summary": "本レビューは74ページの全文ではなく、提供されたabstractとIntroductionのみを用いた限定ソース評価であり、証明・実証手順・付録は確認していない。著者は、2012–2025年のSPX・RUTオプションから得るoption-implied rateと外部benchmark rateの差に、満期が将来の12月31日を初めてまたぐ際のyear-end funding frictionが含まれると主張する。したがって、put–call parityによる高精度なdiscount rateの推定だけでは、その金利が経済的にfrictionlessであるとはいえない、というのが論文の中心的主張である。",
-        "mainResult": "abstractとIntroductionにおける著者の報告では、同一取引日の満期間比較で12月31日を初めてまたぐと、非年率換算のoption funding basisがSPXとRUTで約2–3 bp上昇する。著者は、この効果が年率換算のflow premiumよりも固定的なprice wedgeとして振る舞い、おおむね$\\kappa/\\tau$で年率換算され、2010年代半ばに強まったと主張する。また、代替benchmark、regular weeklies、government-bond CIP、独立構築されたoption panelでも整合的な傾向が得られたとしている。ただし全文は提供されておらず、推定表、証明、データ処理、robustness tests、付録を確認していないため、これらの結果を独立に検証していない。",
-        "practicalApplication": "option-implied rateとTreasuryまたはOIS rateの差をconvenience yieldとして利用する際、year-endのmargin、collateral、funding、netting、内部limit、intermediary balance-sheet capacityに由来する実装コストを考慮すべきことを示唆する。rates relative-value、box spread、CIP、資金調達比較では、12月31日をまたぐ満期を別扱いし、固定bpの価格wedgeと年率換算効果を区別する実務上の診断に利用できる可能性がある。",
-        "methodology": "著者は2012–2025年のSPX・RUTオプションについて、put–call parityから推定したdiscount factorと満期を合わせた外部benchmark discount factorの差をoption funding basisとして分析する。Introductionによれば、同一取引日で年末を初めてまたぐ満期の不連続性と全満期cross sectionを推定し、非線形満期構造、quoted liquidity、NFCI、短期funding proxyなどを制御する。Treasury、OIS、DGS、DTB、regular weeklies、calendar controls、dividend adjustments、quarter-end placeboに加え、government-bond CIPと独立option panelによる比較も報告している。",
-        "limitations": "最大の制約は、74ページの全文ではなくabstractとIntroductionしか提供されていない点である。このため、標本構築、option cleaning、discount-factor推定、標準誤差、識別仮定、欠測・選択bias、表・図、証明、robustness tests、付録を確認しておらず、著者の主張を独立検証できない。著者自身も、規制変更の因果効果は識別していないこと、後続する年末crossingは長期満期のデータが薄いこと、12月31日の不連続性はoption-side frictionの完全な分解ではないことを認めている。",
-        "importance": 5,
+        "classification": "electronic_trading",
+        "summary": "CASTはcross-asset Kalman filterとMPCを組み合わせ、予測不確実性をポジション制御のリスク罰則へ変換する日次株式取引システムである。執行技術そのものより、予測と意思決定を分離したrisk-aware trading設計として評価する。",
+        "mainResult": "著者らは摩擦なしbacktestで、4市場すべての最終資産価値と最大drawdownのPareto frontier上に位置すると報告する。Global30のMDDは$0.031$、TPX100は$0.134$で比較手法中最小だった。リスク罰則を除くとNASDAQとCSI300のMDDが大きく悪化したとされる。",
+        "practicalApplication": "予測分散と明示的なリスク選好を使う低頻度ポジション制御の設計例になる。取引費用、turnover、流動性、意思決定と約定の時系列を追加した検証が実装の前提となる。",
+        "methodology": "複数次数のKalman filterを直近の予測誤差で加重し、事前推定した資産間相関をprocess-noise covarianceへ組み込む。MPCで取引量と期末解消の制約下に毎日再最適化し、2010年から2025年の各市場30銘柄で17手法との比較とablationを行う。",
+        "limitations": "保存レビューは10ページの全文を対象とするが、本統合では原文を再確認していない。費用とslippageはゼロで、終値利用と約定時点の整合性、銘柄選定、survivorship bias、配当などの処理が不明確である。固定相関、リスク係数の選択、baseline調整の公平性、統計検定にも課題が残る。",
+        "importance": 3,
         "recommended": true,
-        "reason": "option-implied rateを純粋なrisk-free rateまたはconvenience-yield measureとみなす際の識別上の注意を、明確なyear-end cutoffを使って提示しており、ratesとmarket microstructureの双方に関連する。ただし、結論の信頼性を判断するには全文でデータ処理、推定仕様、統計的有意性、外部再現性を確認する必要があるため、現段階では限定的な推薦とする。",
+        "reason": "不確実性を直接ポジション制御へ接続する構造は参考になるが、摩擦なし結果を実運用上の優位性とみなすことはできない。中心的な執行研究より優先度を下げ、方法論に限定して推薦する。",
         "tags": [
-          "オプション・インプライド金利",
-          "put–call parity",
-          "option funding basis",
-          "年末効果",
-          "balance-sheet capacity",
-          "box spread",
-          "convenience yield",
-          "government-bond CIP",
-          "SPXオプション",
-          "RUTオプション"
+          "アルゴリズム取引",
+          "Kalman filter",
+          "Model Predictive Control",
+          "予測不確実性",
+          "drawdown制御"
         ],
         "english": {
-          "classification": "mixed",
-          "summary": "This is a limited-source assessment based only on the supplied abstract and Introduction, not the full 74-page paper; proofs, empirical procedures, and appendices were not reviewed. The author claims that the spread between option-implied rates and external benchmark rates, estimated from SPX and RUT options over 2012–2025, contains a year-end funding friction when maturity first crosses a future December 31. The paper’s central claim is therefore that precise discount-rate estimation through put–call parity does not by itself establish that the rate is economically frictionless.",
-          "mainResult": "According to the results reported by the author in the abstract and Introduction, the unannualized option funding basis rises by approximately 2–3 bp in both SPX and RUT when maturity first crosses December 31 in same-trade-date comparisons. The author claims that the effect behaves more like a fixed price wedge than an annualized flow premium, annualizing approximately as $\\kappa/\\tau$, and became stronger in the mid-2010s. The author also reports consistent patterns with alternative benchmarks, regular weeklies, government-bond CIP, and an independently constructed option panel. The full paper was not supplied, however, so the estimation tables, proofs, data processing, robustness tests, and appendices were not examined, and these results were not independently verified.",
-          "practicalApplication": "The findings suggest that users interpreting the difference between option-implied rates and Treasury or OIS rates as a convenience yield should account for implementation costs associated with year-end margin, collateral, funding, netting, internal limits, and intermediary balance-sheet capacity. For rates relative-value analysis, box spreads, CIP, and funding comparisons, maturities crossing December 31 may need separate treatment, with a distinction between a fixed-bp price wedge and its annualized effect.",
-          "methodology": "The author analyzes SPX and RUT options from 2012–2025, defining the option funding basis from the difference between a discount factor inferred through put–call parity and a maturity-matched external benchmark discount factor. According to the Introduction, the analysis estimates both the discontinuity for maturities first crossing year-end on the same trade date and the full maturity cross section, controlling for nonlinear maturity structure, quoted liquidity, the NFCI, and a short-term funding proxy. The author also reports checks involving Treasury, OIS, DGS, and DTB benchmarks, regular weeklies, calendar controls, dividend adjustments, quarter-end placebos, government-bond CIP, and an independent option panel.",
-          "limitations": "The primary limitation is that only the abstract and Introduction were supplied, rather than the full 74-page paper. Consequently, the sample construction, option cleaning, discount-factor estimation, standard errors, identification assumptions, missing-data and selection biases, tables, figures, proofs, robustness tests, and appendices were not reviewed, so the author’s claims cannot be independently verified. The author also acknowledges that the causal effect of regulatory changes is not identified, that data support is thin for later year-end crossings at long maturities, and that the December 31 discontinuity does not provide a complete decomposition of option-side frictions.",
-          "reason": "The paper uses a clear year-end cutoff to highlight an identification concern in treating option-implied rates as pure risk-free rates or convenience-yield measures, making it relevant to both rates and market microstructure. It is recommended only provisionally because the full paper is needed to assess data processing, estimation specifications, statistical significance, and external replication.",
+          "classification": "electronic_trading",
+          "summary": "CAST is a daily equity trading system combining a cross-asset Kalman filter with MPC to translate forecast uncertainty into a risk penalty for position control. Its relevance lies more in risk-aware trading design that separates forecasting from decisions than in execution technology itself.",
+          "mainResult": "The authors report that CAST lies on the final-wealth versus maximum-drawdown Pareto frontier in all four markets in a frictionless backtest. MDD was $0.031$ for Global30 and $0.134$ for TPX100, the lowest among the compared methods. Removing the risk penalty reportedly substantially worsened MDD for NASDAQ and CSI300.",
+          "practicalApplication": "The system provides a design example for low-frequency position control using forecast variance and explicit risk preferences. Implementation requires additional validation with transaction costs, turnover, liquidity, and a precise decision-and-execution timeline.",
+          "methodology": "Kalman filters of several orders are weighted by recent forecast errors, and pre-estimated cross-asset correlations enter the process-noise covariance. MPC reoptimizes daily under trade-size and terminal-unwinding constraints. The evaluation uses 30 stocks per market from 2010 through 2025, compares 17 methods, and includes ablations.",
+          "limitations": "The stored review covered the full ten-page paper, but the original text was not rechecked for this synthesis. Costs and slippage are zero, while close-based information versus execution timing, security selection, survivorship bias, dividends, and related processing are unclear. Fixed correlations, risk-coefficient selection, fairness of baseline tuning, and statistical testing remain concerns.",
+          "reason": "The direct connection between uncertainty and position control is useful, but frictionless results do not establish a deployable advantage. It is recommended for its methodology, at lower priority than the core execution studies.",
           "tags": [
-            "option-implied rates",
-            "put–call parity",
-            "option funding basis",
-            "year-end effect",
-            "balance-sheet capacity",
-            "box spread",
-            "convenience yield",
-            "government-bond CIP",
-            "SPX options",
-            "RUT options"
+            "algorithmic trading",
+            "Kalman filter",
+            "Model Predictive Control",
+            "forecast uncertainty",
+            "drawdown control"
           ]
         }
       },
@@ -380,18 +1415,18 @@
           "model": "gpt-5.6-luna",
           "requestedModel": "gpt-5.6-luna",
           "effort": "low",
-          "inputTokens": 762,
-          "outputTokens": 1137,
-          "reasoningTokens": 84,
+          "inputTokens": 891,
+          "outputTokens": 1198,
+          "reasoningTokens": 92,
           "cachedInputTokens": 0,
           "cacheWriteTokens": 0,
-          "totalTokens": 1899,
-          "estimatedCostUsd": 0.001517,
+          "totalTokens": 2089,
+          "estimatedCostUsd": 0.001616,
           "pricingDate": "2026-09-06",
           "sourceScope": "abstract",
           "pdfPages": null,
           "paperIds": [
-            "2609.20224v1"
+            "2609.14205v1"
           ],
           "outcome": "completed"
         },
@@ -400,22 +1435,599 @@
           "model": "gpt-5.6-sol",
           "requestedModel": "gpt-5.6-sol",
           "effort": "medium",
-          "inputTokens": 2048,
-          "outputTokens": 2148,
-          "reasoningTokens": 348,
+          "inputTokens": 21810,
+          "outputTokens": 2119,
+          "reasoningTokens": 362,
           "cachedInputTokens": 0,
-          "cacheWriteTokens": 2045,
-          "totalTokens": 4196,
-          "estimatedCostUsd": 0.053197,
+          "cacheWriteTokens": 21807,
+          "totalTokens": 23929,
+          "estimatedCostUsd": 0.151427,
           "pricingDate": "2026-09-06",
-          "sourceScope": "abstract_introduction",
-          "pdfPages": 74,
+          "sourceScope": "full_text",
+          "pdfPages": 10,
           "paperIds": [
+            "2609.14205v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
             "2609.20224v1"
           ],
           "outcome": "completed"
         }
       ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.14859v1",
+        "title": "Gate Design and Stage-Dependent Incentives in Retail Proprietary-Trading Evaluations: Why Passing Is Not Standalone Evidence of Skill, and Why the Product Fails to Pay Under Measured Trading Constraints",
+        "authors": [
+          "Nicholas Hall"
+        ],
+        "submittedDate": "2026-09-14",
+        "updatedDate": "2026-09-15",
+        "categories": [
+          "q-fin.GN",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "小売prop firmの評価口座を、利益目標、drawdown制約、payout条件を持つ二段階契約として分析する。評価通過と持続的な収益獲得を分け、position sizingと段階別の取引頻度が指標を左右する点を強調する。",
+        "mainResult": "著者のモデルでは、zero-edgeでもsizing最適化により通過確率が約$0.36$から$0.47$となる。評価段階を高速、funded段階を低速にするとjoint gateが約$1.0\\%$から$8.8\\%$へ改善したと報告する。測定した戦略群では費用控除後のedgeが残らなかったが、全戦略や全firmの不可能性を示す結果ではない。",
+        "practicalApplication": "pass rateだけでなく、$P(\\mathrm{pass})P(\\mathrm{payout}\\mid\\mathrm{pass})$、resetやactivationを含む総費用、payout上限を評価する。口座単位と参加者単位を分け、同一評価工程のzero-edge controlを置くことが有用である。",
+        "methodology": "index futures戦略の費用控除後検証と、複数分布によるMonte Carlo、二段階barrier simulation、sizing探索を組み合わせる。公開口座規則と限定的なcohort統計も参照する。",
+        "limitations": "保存レビューの対象は40ページの全文だが、本統合では原文やcodeを再確認していない。未査読working paperで、firm標本は少数かつ非無作為である。固定費用、独立性、有限期間などの仮定、retry相関や裁量的執行の省略、多重検定補正の不足が結論を制約する。sellerの意図も測定されていない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "通過率をskillの証明とみなさず、契約全体の期待値を検証する視点は有益である。ただし電子執行への直接性は限定的で、タイトルの広い否定的主張よりも条件付きの契約分析として読むことを勧める。",
+        "tags": [
+          "小売prop trading",
+          "評価口座",
+          "position sizing",
+          "取引費用",
+          "zero-edge control",
+          "payout条件"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper analyzes retail prop-firm evaluation accounts as two-stage contracts with profit targets, drawdown constraints, and payout conditions. It separates passing an evaluation from earning sustainable returns and emphasizes how position sizing and stage-specific trading cadence affect the metrics.",
+          "mainResult": "In the author's model, sizing optimization yields pass probabilities of roughly $0.36$ to $0.47$ even with zero edge. High cadence during evaluation and low cadence in the funded stage reportedly increase the joint gate from about $1.0\\%$ to $8.8\\%$. The measured strategies retain no edge after costs, but this does not establish impossibility for every strategy or firm.",
+          "practicalApplication": "Assessment should include $P(\\mathrm{pass})P(\\mathrm{payout}\\mid\\mathrm{pass})$, total costs including resets and activation, and payout caps rather than the pass rate alone. Separating account-level from participant-level measures and including a zero-edge control in the same evaluation pipeline are useful.",
+          "methodology": "The study combines after-cost testing of index-futures strategies with Monte Carlo models using several distributions, two-stage barrier simulations, and sizing searches. It also consults published account rules and limited cohort statistics.",
+          "limitations": "The stored review covered the full 40-page paper, but neither the original text nor code was rechecked for this synthesis. It is a non-peer-reviewed working paper with a small, non-random firm sample. Fixed costs, independence and finite-horizon assumptions, omitted retry correlations and discretionary enforcement, and insufficient multiple-testing adjustment constrain the conclusions. Seller intent is also unmeasured.",
+          "reason": "Evaluating the expected value of the entire contract rather than treating passing as proof of skill is useful. However, the connection to electronic execution is limited, and the paper is best read as conditional contract analysis rather than support for the title's broad negative claim.",
+          "tags": [
+            "retail prop trading",
+            "evaluation accounts",
+            "position sizing",
+            "transaction costs",
+            "zero-edge control",
+            "payout conditions"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 957,
+          "outputTokens": 1445,
+          "reasoningTokens": 143,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2402,
+          "estimatedCostUsd": 0.001925,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.14859v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 35667,
+          "outputTokens": 16000,
+          "reasoningTokens": 166,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 35664,
+          "totalTokens": 51667,
+          "estimatedCostUsd": 0.498332,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 40,
+          "paperIds": [
+            "2609.14859v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 35667,
+          "outputTokens": 2349,
+          "reasoningTokens": 362,
+          "cachedInputTokens": 35664,
+          "cacheWriteTokens": 0,
+          "totalTokens": 38016,
+          "estimatedCostUsd": 0.061258,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 40,
+          "paperIds": [
+            "2609.14859v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.18975v1",
+        "title": "Sniper Cohorts and Algorithmic Filter Rejections in Solana Memecoin Markets: Two-Window Replication of Lifecycle-Stage Population Separation",
+        "authors": [
+          "Arati Uday Kamat"
+        ],
+        "submittedDate": "2026-07-16",
+        "updatedDate": "2026-09-17",
+        "categories": [
+          "q-fin.CP",
+          "q-fin.ST",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "Solana memecoinのbonding curve段階で検出したsniper cohortと、主に卒業後のDEX取引を対象とするrejection streamのmint集合を比較する。市場全体の構造的分離よりも、観測pipelineの対象母集団が異なることを示す記述研究として評価する。",
+        "mainResult": "期間を揃えた比較では、cohort側の重複率がv1で$0.010\\%$、v2で$0.803\\%$と報告され、重複件数はそれぞれ2件と5件だった。両期間で重複が小さいことは支持するが、一般的な市場分離や因果機構を確立しない。",
+        "practicalApplication": "卒業前のwallet coordination情報と卒業後の価格・流動性情報を区別し、graduation eventで明示的に結合するデータ設計に役立つ。フィルター間の低重複を、そのまま相互補完性や検出精度と解釈しないことが重要である。",
+        "methodology": "約5週間の非重複の二期間について、異なるversionのcohort detector出力と対応するrejection集合の積集合を計算する。schema、DEX構成、時間帯を比較し、補助的にカイ二乗統計とPoisson計算を用いる。",
+        "limitations": "保存レビューは12ページの全文を対象とするが、本統合では原文やデータを再確認していない。pipelineは同一研究者に由来し、標本期間は短く、rejection streamの約$92\\%$がPumpSwapに集中する。共通母集団の無作為標本ではなく、Poisson比較の流入確率仮定も未検証で、低重複は選択規則から機械的に生じ得る。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "token lifecycleを無視したデータ統合への警告としては有用である。ただし証拠は狭いpipelineに依存するため、広いmicrostructure上の発見ではなく、データ品質管理の補助資料として推薦する。",
+        "tags": [
+          "Solana",
+          "memecoin市場",
+          "token lifecycle",
+          "集合重複",
+          "選択バイアス",
+          "市場監視"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The study compares mint sets from sniper cohorts detected during the bonding-curve stage of Solana memecoins with a rejection stream focused mainly on post-graduation DEX trading. It is best assessed as descriptive evidence of different pipeline target populations rather than market-wide structural separation.",
+          "mainResult": "Window-matched comparisons reportedly yield cohort-based overlap rates of $0.010\\%$ in v1 and $0.803\\%$ in v2, corresponding to two and five overlapping mints. This supports low overlap in both windows but does not establish general market separation or a causal mechanism.",
+          "practicalApplication": "The study informs data designs that distinguish pre-graduation wallet-coordination information from post-graduation price and liquidity information and explicitly join them at graduation events. Low overlap between filters should not automatically be interpreted as complementarity or detection accuracy.",
+          "methodology": "Across two non-overlapping windows totaling approximately five weeks, the study intersects outputs from different cohort-detector versions with corresponding rejection sets. It compares schemas, DEX composition, and time-of-day patterns, with supplementary chi-squared statistics and Poisson calculations.",
+          "limitations": "The stored review covered the full 12-page paper, but neither the original text nor data was rechecked for this synthesis. Both pipelines originate with the same researcher, the sample period is short, and approximately $92\\%$ of the rejection stream is concentrated on PumpSwap. These are not random samples from a shared population, the Poisson comparison's entry-probability assumption is unverified, and selection rules may mechanically generate low overlap.",
+          "reason": "The warning against merging data without accounting for token lifecycle is useful. Because the evidence depends on narrow pipelines, the paper is recommended as supporting material for data-quality management rather than as a broad microstructure finding.",
+          "tags": [
+            "Solana",
+            "memecoin markets",
+            "token lifecycle",
+            "set overlap",
+            "selection bias",
+            "market surveillance"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 951,
+          "outputTokens": 1177,
+          "reasoningTokens": 89,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2128,
+          "estimatedCostUsd": 0.001603,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.18975v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 11339,
+          "outputTokens": 2316,
+          "reasoningTokens": 853,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 11336,
+          "totalTokens": 13655,
+          "estimatedCostUsd": 0.103012,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 12,
+          "paperIds": [
+            "2609.18975v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.13825v1",
+        "title": "ViperQ: Order Flow Pattern Recognition via Auction Market Theory for Reinforcement Learning Trading",
+        "authors": [
+          "Asser Moustafa",
+          "Rares-Mihail Neagu",
+          "Jugal Kalita"
+        ],
+        "submittedDate": "2026-09-12",
+        "updatedDate": "2026-09-15",
+        "categories": [
+          "cs.AI",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "Auction Market Theoryとorder-flow特徴をPPOの状態表現へ組み込み、米国株のlong-only取引を学習する。特徴設計は関連性があるが、保存レビューで指摘された実証設計と記述の不整合から、性能証拠としての評価は低い。",
+        "mainResult": "著者らはheld-out期間のROIをTSLAで$+163.6\\%$、NVDAで$+116.5\\%$、最大drawdownをそれぞれ$-27.5\\%$、$-47.8\\%$と報告する。しかし比較可能なbaseline、統計検定、formal ablationがなく、AMT特徴が改善を生んだとは判断できない。",
+        "practicalApplication": "VPOC、CVD、tape velocityなどをRL状態へ変換する設計例として参照できる。実運用の判断には、現実的な約定費用とデータ整合性を含む独立した再検証が必要である。",
+        "methodology": "TSLA・NVDAのtick dataを1秒足へ集約し、20次元の状態からlongまたはflatを選ぶ銘柄別PPOを訓練する。時系列を訓練用と評価用に分割し、次バーopenでの約定と評価時の規制手数料のみを仮定する。",
+        "limitations": "保存レビューの対象は7ページの全文であり、本統合では原文を再確認していない。2銘柄と単一分割に限られ、spread、slippage、latency、partial fill、impactを除外する。bar件数、取引数と最低保有時間、reward記述に説明不足や不整合が報告され、VPOCのrolling VWAP近似の妥当性も不明である。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "解釈可能な特徴設計には参考価値があるが、大きなbacktest収益を裏付ける比較と実行可能性検証が不足する。今週の優先推薦には含めず、性能主張への依拠は避けたい。",
+        "tags": [
+          "強化学習",
+          "Auction Market Theory",
+          "注文フロー",
+          "PPO",
+          "バックテスト検証"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper incorporates Auction Market Theory and order-flow features into PPO states to learn long-only US equity trading. The feature design is relevant, but empirical-design problems and inconsistencies identified in the stored review weaken its value as performance evidence.",
+          "mainResult": "The authors report held-out ROI of $+163.6\\%$ for TSLA and $+116.5\\%$ for NVDA, with maximum drawdowns of $-27.5\\%$ and $-47.8\\%$, respectively. Without comparable baselines, statistical tests, or formal ablations, these results cannot establish that AMT features caused an improvement.",
+          "practicalApplication": "The paper can serve as a design example for converting VPOC, CVD, tape velocity, and related indicators into RL states. Deployment decisions require independent validation incorporating realistic execution costs and data-consistency checks.",
+          "methodology": "TSLA and NVDA tick data are aggregated into one-second bars, and asset-specific PPO agents choose long or flat from a 20-dimensional state. The study uses a chronological training/evaluation split, assumes execution at the next bar's open, and includes only regulatory fees during evaluation.",
+          "limitations": "The stored review covered the full seven-page paper; the original text was not rechecked for this synthesis. The evaluation is restricted to two stocks and one split and excludes spreads, slippage, latency, partial fills, and impact. The review reports unexplained or inconsistent bar counts, trade counts relative to minimum holding periods, and reward descriptions. The validity of approximating VPOC with rolling VWAP is also unclear.",
+          "reason": "The interpretable feature design has some reference value, but comparative evidence and feasibility checks do not adequately support the large backtest returns. It is not a priority recommendation this week, and reliance on its performance claims should be avoided.",
+          "tags": [
+            "reinforcement learning",
+            "Auction Market Theory",
+            "order flow",
+            "PPO",
+            "backtest validation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 898,
+          "outputTokens": 1195,
+          "reasoningTokens": 107,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2093,
+          "estimatedCostUsd": 0.001614,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.13825v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 11755,
+          "outputTokens": 1952,
+          "reasoningTokens": 516,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 11752,
+          "totalTokens": 13707,
+          "estimatedCostUsd": 0.097812,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 7,
+          "paperIds": [
+            "2609.13825v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.15797v1",
+        "title": "A prelude to the theory of Real-World Asset (RWA) Tokenization",
+        "authors": [
+          "Wenpin Tang"
+        ],
+        "submittedDate": "2026-09-14",
+        "updatedDate": "2026-09-15",
+        "categories": [
+          "econ.GN",
+          "q-fin.EC"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "RWA tokenizationを分類し、非対称情報下の証券設計とDigital Asset Treasuriesの企業金融モデルを提示する。流通市場取引による情報回復と逆選択の議論にmicrostructureとの接点がある。",
+        "mainResult": "abstractによれば、継続的な流通市場取引が情報の非対称性を緩和し、発行価格と最適なtokenization設計に影響する。別のモデルでは、市場評価、資金調達、暗号資産蓄積を内生化した最適発行政策を扱うとされる。",
+        "practicalApplication": "RWA商品の発行条件や流通市場の情報設計を考える概念的枠組みになり得る。具体的な執行、market making、金利商品への適用は確認できない。",
+        "methodology": "標準的RWA、stablecoin、Digital Asset Treasuriesを区別し、非対称情報モデルと動学的企業金融モデルを構築する。後者はStrategyを事例として説明するとされる。",
+        "limitations": "分析対象はabstractのみであり、Introductionも全文も分析していない。本統合はその保存レビューに基づく。モデルの仮定、均衡条件、証明、実証検証、費用や規制の扱いを確認できず、実市場への妥当性は判断できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "逆選択と流通市場取引は対象分野に関連するが、中心は証券設計と企業金融である。資料もabstractに限られるため、今週の優先記事としては推薦しない。",
+        "tags": [
+          "RWAトークン化",
+          "非対称情報",
+          "逆選択",
+          "証券設計",
+          "Digital Asset Treasuries"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper classifies RWA tokenization and presents models of security design under asymmetric information and corporate finance for Digital Asset Treasuries. Its discussion of information recovery and adverse selection through secondary-market trading connects it to microstructure.",
+          "mainResult": "According to the abstract, continuous secondary-market trading reduces information asymmetry and affects issuance prices and optimal tokenization design. A separate model reportedly studies optimal issuance policies with endogenous market valuation, financing, and crypto-asset accumulation.",
+          "practicalApplication": "The framework may help conceptualize issuance terms and information design in secondary markets for RWA products. Specific applications to execution, market making, or interest-rate products cannot be established.",
+          "methodology": "The paper distinguishes standard RWA tokenization, stablecoins, and Digital Asset Treasuries and develops asymmetric-information and dynamic corporate-finance models. The latter is reportedly illustrated using Strategy.",
+          "limitations": "Only the abstract was analyzed; neither the Introduction nor the full text was analyzed. This synthesis relies on that stored review. Model assumptions, equilibrium conditions, proofs, empirical validation, and the treatment of costs and regulation cannot be checked, preventing an assessment of real-market validity.",
+          "reason": "Adverse selection and secondary-market trading are relevant to the site's scope, but the main focus is security design and corporate finance. With coverage also restricted to the abstract, the paper is not recommended as a priority item this week.",
+          "tags": [
+            "RWA tokenization",
+            "asymmetric information",
+            "adverse selection",
+            "security design",
+            "Digital Asset Treasuries"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 800,
+          "outputTokens": 1178,
+          "reasoningTokens": 157,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1978,
+          "estimatedCostUsd": 0.001574,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.15797v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6-astra",
+          "requestedModel": "gpt-6-astra",
+          "effort": "medium",
+          "inputTokens": 26596,
+          "outputTokens": 15386,
+          "reasoningTokens": 122,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26593,
+          "totalTokens": 41982,
+          "estimatedCostUsd": 1.101743,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.12878v1",
+            "2609.13597v2",
+            "2609.13715v1",
+            "2609.13825v1",
+            "2609.14205v1",
+            "2609.14859v1",
+            "2609.15797v1",
+            "2609.15901v1",
+            "2609.17788v1",
+            "2609.18019v1",
+            "2609.18975v1",
+            "2609.19094v1",
+            "2609.20017v1",
+            "2609.20192v1",
+            "2609.20224v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "weekly",
+      "model": "gpt-6-astra",
+      "requestedModel": "gpt-6-astra",
+      "effort": "medium",
+      "inputTokens": 26596,
+      "outputTokens": 15386,
+      "reasoningTokens": 122,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 26593,
+      "totalTokens": 41982,
+      "estimatedCostUsd": 1.101743,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "stored_reviews",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.12878v1",
+        "2609.13597v2",
+        "2609.13715v1",
+        "2609.13825v1",
+        "2609.14205v1",
+        "2609.14859v1",
+        "2609.15797v1",
+        "2609.15901v1",
+        "2609.17788v1",
+        "2609.18019v1",
+        "2609.18975v1",
+        "2609.19094v1",
+        "2609.20017v1",
+        "2609.20192v1",
+        "2609.20224v1"
+      ],
+      "outcome": "completed"
     }
   ]
 }

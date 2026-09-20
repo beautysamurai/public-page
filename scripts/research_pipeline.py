@@ -1163,6 +1163,7 @@ def _parse_oai_record(
         raise ListingParseError("OAI metadata updated date precedes the created date")
 
     authors: list[str] = []
+    seen_authors: set[str] = set()
     authors_element = metadata.find(f"{ARXIV_OAI_NS}authors")
     if authors_element is not None:
         for author in authors_element.findall(f"{ARXIV_OAI_NS}author"):
@@ -1170,8 +1171,10 @@ def _parse_oai_record(
             keyname = " ".join((author.findtext(f"{ARXIV_OAI_NS}keyname") or "").split())
             suffix = " ".join((author.findtext(f"{ARXIV_OAI_NS}suffix") or "").split())
             name = " ".join(part for part in (forenames, keyname, suffix) if part)
-            if name:
+            key = name.casefold()
+            if name and key not in seen_authors:
                 authors.append(name)
+                seen_authors.add(key)
     if not authors:
         raise ListingParseError("OAI metadata has no public author name")
 

@@ -11,7 +11,7 @@ permissions:
 jobs:
   diagnose:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v7
         with:
@@ -19,31 +19,21 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
-      - name: Validate OAI metadata one paper at a time
+      - name: Inspect duplicate authors
         shell: python
         run: |
-          import json, sys, time
-          from pathlib import Path
+          import sys, xml.etree.ElementTree as ET
           sys.path.insert(0, "scripts")
           import research_pipeline as p
 
-          snapshot = json.loads(Path("research/listings/2026-09-15.json").read_text(encoding="utf-8"))
-          ids=[]
-          for page in snapshot["pages"]:
-              for item in page["items"]:
-                  if item["listingType"] in {"new","cross"} and item["arxivId"] not in ids:
-                      ids.append(item["arxivId"])
-          pacer = p.ArxivRequestPacer()
-          failures=[]
-          print("candidate_count=", len(ids))
-          for arxiv_id in ids:
-              try:
-                  result=p.fetch_oai_metadata([arxiv_id], timeout=25.0, opener=pacer.open, retries=1, sleep_fn=time.sleep)
-                  e=result[arxiv_id.casefold()]
-                  print("OK", arxiv_id, "->", e.arxiv_id, repr(e.title))
-              except Exception as exc:
-                  failures.append(arxiv_id)
-                  print("FAIL", arxiv_id, type(exc).__name__, str(exc))
-          print("failures=", failures)
-          if failures:
-              raise SystemExit(1)
+          pacer=p.ArxivRequestPacer()
+          raw=p._fetch_oai_payload("2609.15744","arXiv",timeout=25.0,opener=pacer.open)
+          root=ET.fromstring(raw)
+          metadata=root.find(f"{p.OAI_NS}GetRecord/{p.OAI_NS}record/{p.OAI_NS}metadata/{p.ARXIV_OAI_NS}arXiv")
+          print("TITLE", p._required_oai_text(metadata,"title"))
+          authors=metadata.find(f"{p.ARXIV_OAI_NS}authors")
+          for idx,author in enumerate(authors.findall(f"{p.ARXIV_OAI_NS}author"),1):
+              forenames=" ".join((author.findtext(f"{p.ARXIV_OAI_NS}forenames") or "").split())
+              keyname=" ".join((author.findtext(f"{p.ARXIV_OAI_NS}keyname") or "").split())
+              suffix=" ".join((author.findtext(f"{p.ARXIV_OAI_NS}suffix") or "").split())
+              print("AUTHOR",idx,repr(forenames),repr(keyname),repr(suffix))

@@ -1,0 +1,49 @@
+name: Diagnose 2026-09-15 arXiv metadata
+
+on:
+  push:
+    branches:
+      - ops/diagnose-arxiv-0915
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Validate OAI metadata one paper at a time
+        shell: python
+        run: |
+          import json, sys, time
+          from pathlib import Path
+          sys.path.insert(0, "scripts")
+          import research_pipeline as p
+
+          snapshot = json.loads(Path("research/listings/2026-09-15.json").read_text(encoding="utf-8"))
+          ids=[]
+          for page in snapshot["pages"]:
+              for item in page["items"]:
+                  if item["listingType"] in {"new","cross"} and item["arxivId"] not in ids:
+                      ids.append(item["arxivId"])
+          pacer = p.ArxivRequestPacer()
+          failures=[]
+          print("candidate_count=", len(ids))
+          for arxiv_id in ids:
+              try:
+                  result=p.fetch_oai_metadata([arxiv_id], timeout=25.0, opener=pacer.open, retries=1, sleep_fn=time.sleep)
+                  e=result[arxiv_id.casefold()]
+                  print("OK", arxiv_id, "->", e.arxiv_id, repr(e.title))
+              except Exception as exc:
+                  failures.append(arxiv_id)
+                  print("FAIL", arxiv_id, type(exc).__name__, str(exc))
+          print("failures=", failures)
+          if failures:
+              raise SystemExit(1)

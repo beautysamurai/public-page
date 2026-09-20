@@ -1,0 +1,43 @@
+name: Build clean OAI author normalization branch
+
+on:
+  push:
+    branches:
+      - fix/arxiv-oai-author-dedupe-builder
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: fix/arxiv-oai-author-dedupe-builder
+          fetch-depth: 0
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Preserve implementation
+        shell: bash
+        run: |
+          mkdir -p "$RUNNER_TEMP/fix/scripts" "$RUNNER_TEMP/fix/tests"
+          cp scripts/research_pipeline.py "$RUNNER_TEMP/fix/scripts/"
+          cp tests/test_arxiv_retry_policy.py "$RUNNER_TEMP/fix/tests/"
+      - name: Rebuild review branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout -B fix/arxiv-oai-author-dedupe origin/main
+          cp "$RUNNER_TEMP/fix/scripts/research_pipeline.py" scripts/research_pipeline.py
+          cp "$RUNNER_TEMP/fix/tests/test_arxiv_retry_policy.py" tests/test_arxiv_retry_policy.py
+          python -m unittest discover -s tests -p "test_arxiv_retry_policy.py" -v
+          git diff --check
+          git config user.name "Public Research Digest"
+          git config user.email "public-research-digest@users.noreply.github.com"
+          git add scripts/research_pipeline.py tests/test_arxiv_retry_policy.py
+          git commit -m "fix: normalize duplicate arXiv OAI author names"
+          git push --force origin HEAD:fix/arxiv-oai-author-dedupe

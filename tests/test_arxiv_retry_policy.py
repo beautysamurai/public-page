@@ -206,6 +206,278 @@ class ArxivRetryPolicyTests(unittest.TestCase):
             "2026-09-19",
         )
 
+    def test_oai_retry_is_scoped_to_the_failed_getrecord(self):
+        requested = ["2609.20224", "2609.20405"]
+        calls = []
+        sleeps = []
+        attempts = {}
+
+        class FakeResponse:
+            def __init__(self, body):
+                self.body = body
+
+            def read(self, size=-1):
+                return self.body[:size] if size >= 0 else self.body
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return None
+
+        def oai_xml(arxiv_id):
+            return f"""<?xml version="1.0" encoding="UTF-8"?>
+            <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+              <GetRecord><record><metadata>
+                <arXiv xmlns="http://arxiv.org/OAI/arXiv/">
+                  <id>{arxiv_id}</id>
+                  <created>2026-09-18</created>
+                  <authors><author><keyname>Researcher</keyname></author></authors>
+                  <title>Recovered {arxiv_id}</title>
+                  <categories>q-fin.TR</categories>
+                  <abstract>Rates research.</abstract>
+                </arXiv>
+              </metadata></record></GetRecord>
+            </OAI-PMH>""".encode("utf-8")
+
+        def raw_xml(arxiv_id):
+            return f"""<?xml version="1.0" encoding="UTF-8"?>
+            <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+              <GetRecord><record><metadata>
+                <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/">
+                  <id>{arxiv_id}</id>
+                  <version version="v1" />
+                </arXivRaw>
+              </metadata></record></GetRecord>
+            </OAI-PMH>""".encode("utf-8")
+
+        def opener(request, timeout=0):
+            parsed = urllib.parse.urlparse(request.full_url)
+            if parsed.hostname == "export.arxiv.org":
+                calls.append(("search", "all"))
+                raise http_error(406)
+            query = urllib.parse.parse_qs(parsed.query)
+            arxiv_id = query["identifier"][0].removeprefix("oai:arXiv.org:")
+            prefix = query["metadataPrefix"][0]
+            key = (arxiv_id, prefix)
+            attempts[key] = attempts.get(key, 0) + 1
+            calls.append(key)
+            if key == ("2609.20405", "arXivRaw") and attempts[key] == 1:
+                raise http_error(429)
+            return FakeResponse(raw_xml(arxiv_id) if prefix == "arXivRaw" else oai_xml(arxiv_id))
+
+        fetched = p.fetch_metadata(
+            requested,
+            timeout=7.0,
+            opener=opener,
+            retries=1,
+            sleep_fn=sleeps.append,
+        )
+
+        self.assertEqual(set(fetched), set(requested))
+        self.assertEqual(sleeps, [30])
+        self.assertEqual(attempts[("2609.20224", "arXivRaw")], 1)
+        self.assertEqual(attempts[("2609.20224", "arXiv")], 1)
+        self.assertEqual(attempts[("2609.20405", "arXivRaw")], 2)
+        self.assertEqual(attempts[("2609.20405", "arXiv")], 1)
+
+    def test_default_metadata_retry_is_not_wrapped_around_the_whole_batch(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with mock.patch.object(p, "fetch_metadata", side_effect=http_error()) as fetch:
+                report = p.run_daily(
+                    config(retries=3),
+                    state_path=root / "state.json",
+                    output_dir=root / "daily",
+                    checked_at=CHECKED_AT,
+                    list_fetcher=lambda _: listing_html(new=("2608.10001",)),
+                    sleep_fn=lambda _delay: None,
+                )
+
+        self.assertEqual(report["status"], p.UPDATER_OFFLINE)
+        fetch.assert_called_once()
+
+    def test_oai_retry_resumes_at_failed_record_without_replaying_completed_ids(self):
+        requested = ["2609.20224", "2609.20405"]
+        calls = []
+        sleeps = []
+        failed_once = {"2609.20405": False}
+
+        class FakeResponse:
+            def __init__(self, body):
+                self.body = body
+
+            def read(self, size=-1):
+                return self.body[:size] if size >= 0 else self.body
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return None
+
+        def raw_xml(arxiv_id):
+            return f"""<?xml version="1.0" encoding="UTF-8"?>
+            <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+              <GetRecord><record><metadata>
+                <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/">
+                  <id>{arxiv_id}</id>
+                  <version version="v1" />
+                </arXivRaw>
+              </metadata></record></GetRecord>
+            </OAI-PMH>""".encode("utf-8")
+
+        def oai_xml(arxiv_id):
+            return f"""<?xml version="1.0" encoding="UTF-8"?>
+            <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+              <GetRecord><record><metadata>
+                <arXiv xmlns="http://arxiv.org/OAI/arXiv/">
+                  <id>{arxiv_id}</id>
+                  <created>2026-09-18</created>
+                  <authors>
+                    <author><forenames>Researcher</forenames><keyname>One</keyname></author>
+                  </authors>
+                  <title>Recovered metadata {arxiv_id}</title>
+                  <categories>q-fin.TR</categories>
+                  <abstract>Market microstructure research.</abstract>
+                </arXiv>
+              </metadata></record></GetRecord>
+            </OAI-PMH>""".encode("utf-8")
+
+        def opener(request, timeout=0):
+            parsed = urllib.parse.urlparse(request.full_url)
+            calls.append(request.full_url)
+            if parsed.hostname == "export.arxiv.org":
+                raise http_error(406)
+            query = urllib.parse.parse_qs(parsed.query)
+            arxiv_id = query["identifier"][0].removeprefix("oai:arXiv.org:")
+            prefix = query["metadataPrefix"][0]
+            if (
+                arxiv_id == "2609.20405"
+                and prefix == "arXivRaw"
+                and not failed_once[arxiv_id]
+            ):
+                failed_once[arxiv_id] = True
+                raise http_error(503)
+            return FakeResponse(
+                raw_xml(arxiv_id) if prefix == "arXivRaw" else oai_xml(arxiv_id)
+            )
+
+        fetched = p.fetch_metadata(
+            requested,
+            timeout=7.0,
+            opener=opener,
+            retries=1,
+            sleep_fn=sleeps.append,
+        )
+
+        self.assertEqual(set(fetched), set(requested))
+        first_raw = [
+            url for url in calls
+            if "identifier=oai%3AarXiv.org%3A2609.20224" in url
+            and "metadataPrefix=arXivRaw" in url
+        ]
+        first_metadata = [
+            url for url in calls
+            if "identifier=oai%3AarXiv.org%3A2609.20224" in url
+            and "metadataPrefix=arXiv&" in (url + "&")
+        ]
+        second_raw = [
+            url for url in calls
+            if "identifier=oai%3AarXiv.org%3A2609.20405" in url
+            and "metadataPrefix=arXivRaw" in url
+        ]
+        self.assertEqual(len(first_raw), 1)
+        self.assertEqual(len(first_metadata), 1)
+        self.assertEqual(len(second_raw), 2)
+        self.assertEqual(sleeps, [30])
+
+    def test_oai_metadata_retry_refreshes_version_with_the_descriptive_record(self):
+        calls = []
+        sleeps = []
+        metadata_failed = False
+        raw_attempt = 0
+
+        class FakeResponse:
+            def __init__(self, body):
+                self.body = body
+
+            def read(self, size=-1):
+                return self.body[:size] if size >= 0 else self.body
+
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *_args):
+                return None
+
+        def raw_xml(version):
+            versions = "".join(
+                f'<version version="v{index}" />'
+                for index in range(1, version + 1)
+            )
+            return f"""<?xml version="1.0" encoding="UTF-8"?>
+            <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+              <GetRecord><record><metadata>
+                <arXivRaw xmlns="http://arxiv.org/OAI/arXivRaw/">
+                  <id>2609.20224</id>
+                  {versions}
+                </arXivRaw>
+              </metadata></record></GetRecord>
+            </OAI-PMH>""".encode("utf-8")
+
+        def metadata_xml():
+            return b"""<?xml version="1.0" encoding="UTF-8"?>
+            <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+              <GetRecord><record><metadata>
+                <arXiv xmlns="http://arxiv.org/OAI/arXiv/">
+                  <id>2609.20224</id>
+                  <created>2026-09-18</created>
+                  <updated>2026-09-19</updated>
+                  <authors>
+                    <author><forenames>Researcher</forenames><keyname>One</keyname></author>
+                  </authors>
+                  <title>Second-version metadata</title>
+                  <categories>q-fin.TR</categories>
+                  <abstract>Updated market microstructure research.</abstract>
+                </arXiv>
+              </metadata></record></GetRecord>
+            </OAI-PMH>"""
+
+        def opener(request, timeout=0):
+            nonlocal metadata_failed, raw_attempt
+            calls.append(request.full_url)
+            parsed = urllib.parse.urlparse(request.full_url)
+            if parsed.hostname == "export.arxiv.org":
+                raise http_error(406)
+            query = urllib.parse.parse_qs(parsed.query)
+            prefix = query["metadataPrefix"][0]
+            if prefix == "arXivRaw":
+                raw_attempt += 1
+                return FakeResponse(raw_xml(1 if raw_attempt == 1 else 2))
+            if not metadata_failed:
+                metadata_failed = True
+                raise http_error(503)
+            return FakeResponse(metadata_xml())
+
+        fetched = p.fetch_metadata(
+            ["2609.20224"],
+            timeout=7.0,
+            opener=opener,
+            retries=1,
+            sleep_fn=sleeps.append,
+        )
+
+        self.assertEqual(fetched["2609.20224"].arxiv_id, "2609.20224v2")
+        raw_calls = [url for url in calls if "metadataPrefix=arXivRaw" in url]
+        metadata_calls = [
+            url for url in calls
+            if "metadataPrefix=arXiv&" in (url + "&")
+        ]
+        self.assertEqual(len(raw_calls), 2)
+        self.assertEqual(len(metadata_calls), 2)
+        self.assertEqual(sleeps, [30])
+
     def test_metadata_non_406_http_error_does_not_switch_interface(self):
         calls = []
 

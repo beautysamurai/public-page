@@ -206,6 +206,34 @@ class ArxivRetryPolicyTests(unittest.TestCase):
             "2026-09-19",
         )
 
+    def test_oai_duplicate_author_names_are_normalized_in_order(self):
+        raw = b"""<?xml version="1.0" encoding="UTF-8"?>
+        <OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/">
+          <GetRecord><record><metadata>
+            <arXiv xmlns="http://arxiv.org/OAI/arXiv/">
+              <id>2609.15744</id>
+              <created>2026-09-15</created>
+              <authors>
+                <author><forenames>LiYang</forenames><keyname>Wang</keyname></author>
+                <author><forenames>Zhen</forenames><keyname>Zhong</keyname></author>
+                <author><forenames>Zhen</forenames><keyname>Tian</keyname></author>
+                <author><forenames>Keyu</forenames><keyname>Chen</keyname></author>
+                <author><forenames>Keyu</forenames><keyname>Chen</keyname></author>
+              </authors>
+              <title>Design of a Deep Learning Credit Risk Early Warning System Integrating Multi-source Heterogeneous Data</title>
+              <categories>q-fin.RM</categories>
+              <abstract>Credit risk research.</abstract>
+            </arXiv>
+          </metadata></record></GetRecord>
+        </OAI-PMH>"""
+
+        entry = p._parse_oai_record(raw, "2609.15744", "v1")
+
+        self.assertEqual(
+            entry.authors,
+            ("LiYang Wang", "Zhen Zhong", "Zhen Tian", "Keyu Chen"),
+        )
+
     def test_oai_retry_is_scoped_to_the_failed_getrecord(self):
         requested = ["2609.20224", "2609.20405"]
         calls = []

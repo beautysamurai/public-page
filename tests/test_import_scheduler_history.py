@@ -303,6 +303,7 @@ class PublicSanitizerTests(unittest.TestCase):
             "/home/someone/private.txt",
             "../private/history.json",
             "javascript:alert(1)",
+            "data:text/plain,unsafe",
             "ftp://example.com/research",
             "chatgpt.com/private-thread",
             "threadId: 6a7f9734-03bc-83e8-af16-b0f8195b1ba5",
@@ -315,6 +316,12 @@ class PublicSanitizerTests(unittest.TestCase):
                     importer.UnsafePublicContentError
                 ):
                     importer.validate_history(value)
+
+    def test_natural_language_data_label_is_not_treated_as_a_data_uri(self):
+        source_text = "Italian Business-to-Business Invoicing Data: A Network Analysis"
+        value = history(edition(source_text=source_text))
+        validated = importer.validate_history(value)
+        self.assertEqual(validated["editions"][0]["sourceText"], source_text)
 
     def test_sanitizer_applies_to_nested_scheduler_fields(self):
         value = history(edition())

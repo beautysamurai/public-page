@@ -1,0 +1,59 @@
+name: Build clean public text URI fix
+
+on:
+  push:
+    branches:
+      - fix/public-text-uri-builder
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out builder branch
+        uses: actions/checkout@v7
+        with:
+          ref: fix/public-text-uri-builder
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Preserve implementation files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/fix/scripts" "$RUNNER_TEMP/fix/tests"
+          cp scripts/import_scheduler_history.py "$RUNNER_TEMP/fix/scripts/"
+          cp tests/test_import_scheduler_history.py "$RUNNER_TEMP/fix/tests/"
+
+      - name: Rebuild review branch from main
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          git checkout -B fix/public-text-uri-false-positive origin/main
+          cp "$RUNNER_TEMP/fix/scripts/import_scheduler_history.py" scripts/import_scheduler_history.py
+          cp "$RUNNER_TEMP/fix/tests/test_import_scheduler_history.py" tests/test_import_scheduler_history.py
+
+      - name: Run focused tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m unittest discover -s tests -p "test_import_scheduler_history.py" -v
+          git diff --check
+
+      - name: Commit and push clean review branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "Public Research Digest"
+          git config user.email "public-research-digest@users.noreply.github.com"
+          git add scripts/import_scheduler_history.py tests/test_import_scheduler_history.py
+          git commit -m "fix: distinguish prose labels from unsupported URIs"
+          git push --force origin HEAD:fix/public-text-uri-false-positive

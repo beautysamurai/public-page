@@ -1,4 +1,4 @@
-name: Dispatch remaining arXiv pending recoveries
+name: Dispatch repaired arXiv pending recoveries
 
 on:
   push:
@@ -14,18 +14,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Queue three more pending daily recoveries
+      - name: Queue four repaired pending daily recoveries
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          for attempt in 1 2 3; do
+          for attempt in 1 2 3 4; do
             gh workflow run arxiv-research.yml \
               --repo "$GITHUB_REPOSITORY" \
               --ref main \
               -f run_mode=daily \
               -f recover_pending=true
-            echo "queued recovery $attempt of 3"
+            echo "queued repaired recovery $attempt of 4"
             sleep 2
           done

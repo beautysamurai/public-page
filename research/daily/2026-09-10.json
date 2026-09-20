@@ -2,12 +2,352 @@
   "schemaVersion": 2,
   "reportKind": "daily",
   "reportDate": "2026-09-10",
-  "generatedAt": "2026-09-20T00:09:37Z",
-  "status": "UPDATE_NOT_CONFIRMED",
-  "message": "The arXiv batch or structured analysis could not be validated; the review remains pending. Diagnostic: stage=metadata; error=StructuredOutputError.",
+  "generatedAt": "2026-09-20T00:12:14Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "Recovered carried arXiv batch 2026-09-10 from the bounded past-week listing with 1 relevant paper(s).",
   "expectedBatchDate": "2026-09-10",
   "observedBatchDate": "2026-09-10",
   "periodStart": null,
   "periodEnd": null,
-  "papers": []
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2609.10407v1",
+        "title": "dexamine: A Python package for Uniswap event data on Ethereum",
+        "authors": [
+          "Magnus Hansson"
+        ],
+        "submittedDate": "2026-09-09",
+        "updatedDate": "2026-09-10",
+        "categories": [
+          "cs.SE",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "Ethereum上のUniswap v2/v3について、receipt logを取引・流動性イベントへ変換し、実行順序、pool state、token量、gas情報を付与するPython研究用パッケージを提示する。主眼は実証的なDEX market microstructure分析のための再利用可能なデータ基盤であり、経済学的仮説の検証ではない。",
+        "mainResult": "著者は、dexamineがswap、mint、burnをevent単位で識別し、token単位への変換、receipt内順序、取引後の価格・流動性状態、transaction-level metadataを一貫した形式で出力すると報告する。記録済みEthereum responseを用いた4件のUniswap v3 swapのoffline再現例とテストが示されるが、速度優位性や新たな実証結果は主張されていない。",
+        "practicalApplication": "DEXのprice discovery、取引費用、liquidity provision、arbitrage、transaction orderingを研究する際のデータ構築に利用できる。特に、同一transaction内の複数swapを実行順に保持し、pool stateとexecution metadataを結合したevent-level datasetの作成に適する。",
+        "methodology": "RequestsによるEthereum JSON-RPC取得、web3.pyによるcontract metadata解決、Uniswap v2/v3固有のevent decoding、flat output構築を分離する。metadata cache、batch取得、incremental yieldを備え、記録済みRPC responseとseed済みmetadataによるoffline replay、unit test、integration test、独立したABI decodingと高精度計算による検証を行う。",
+        "limitations": "対象はEthereum mainnet上のUniswap v2/v3のswap、mint、burnに限られ、transaction discovery、保存、統計推定は含まれない。正規化量は浮動小数点の丸め誤差を含み、gas情報はevent別ではなくtransaction全体の値である。destination labelは内部call path、trader identity、arbitrage、MEVを識別しない。metadataは通常latest blockから取得されるため再現性に影響し得るほか、chain reorganization、RPC endpoint依存、v2で直前のSync条件を満たさないeventの除外も考慮が必要である。比較benchmark、規模別throughput、外部データとの包括的な独立検証は提示されていない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "新しいmarket microstructureの実証結果はないが、DEX研究で誤りが生じやすい単位、符号、event順序、pool stateの処理を標準化し、offlineで再現可能な例を提供する点は有用である。Uniswapデータを直接扱う研究者には推奨できる一方、対応protocolが限定的で性能評価もないため、一般的なexecution研究への重要度は中程度である。",
+        "tags": [
+          "分散型取引所",
+          "Uniswap",
+          "Ethereum",
+          "市場マイクロストラクチャー",
+          "イベントデータ",
+          "取引実行順序",
+          "研究ソフトウェア",
+          "再現可能性"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper presents a Python research package that converts Uniswap v2/v3 receipt logs on Ethereum into trade and liquidity events enriched with execution order, pool state, token quantities, and gas information. Its focus is reusable data infrastructure for empirical DEX market-microstructure analysis rather than testing an economic hypothesis.",
+          "mainResult": "The author reports that dexamine identifies swaps, mints, and burns at the event level and consistently outputs token-unit conversions, receipt ordering, post-event price and liquidity state, and transaction-level metadata. The paper provides an offline reproducible example covering four Uniswap v3 swaps and a test suite, but it does not claim a speed advantage or present a new empirical finding.",
+          "practicalApplication": "The package can support data construction for studies of DEX price discovery, trading costs, liquidity provision, arbitrage, and transaction ordering. It is especially suited to creating event-level datasets that preserve multiple swaps within one transaction in execution order and join them with pool state and execution metadata.",
+          "methodology": "The architecture separates Ethereum JSON-RPC retrieval through Requests, contract-metadata resolution through web3.py, protocol-specific decoding for Uniswap v2/v3, and flat-output construction. It provides metadata caching, batched retrieval, and incremental yielding, with verification through offline replay of recorded RPC responses and seeded metadata, unit and integration tests, and separate checks using ABI decoding and high-precision calculations.",
+          "limitations": "Coverage is limited to swaps, mints, and burns for Uniswap v2/v3 on Ethereum mainnet; transaction discovery, storage, and statistical estimation are excluded. Normalized quantities use floating-point arithmetic, while gas fields apply to the entire transaction rather than individual events. Destination labels do not identify internal call paths, traders, arbitrage, or MEV. Metadata is normally resolved at the latest block and can affect reproducibility; chain reorganizations, RPC-endpoint dependence, and the exclusion of v2 events that lack an immediately preceding qualifying Sync must also be considered. The paper provides no comparative benchmark, scale-dependent throughput results, or comprehensive independent validation against external datasets.",
+          "reason": "Although the paper contains no new empirical market-microstructure result, it usefully standardizes error-prone handling of units, signs, event order, and pool state and supplies an offline reproducible example. It is recommended for researchers working directly with Uniswap data, but its limited protocol coverage and lack of performance evaluation make its broader importance to execution research moderate.",
+          "tags": [
+            "decentralized exchanges",
+            "Uniswap",
+            "Ethereum",
+            "market microstructure",
+            "event data",
+            "execution ordering",
+            "research software",
+            "reproducibility"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 725,
+          "outputTokens": 1049,
+          "reasoningTokens": 72,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1774,
+          "estimatedCostUsd": 0.001404,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.10407v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 4585,
+          "outputTokens": 1546,
+          "reasoningTokens": 247,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 4582,
+          "totalTokens": 6131,
+          "estimatedCostUsd": 0.053842,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 8,
+          "paperIds": [
+            "2609.10407v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 933,
+      "outputTokens": 760,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1693,
+      "estimatedCostUsd": 0.001099,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09323v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 718,
+      "outputTokens": 865,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1583,
+      "estimatedCostUsd": 0.001182,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09337v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 892,
+      "outputTokens": 1243,
+      "reasoningTokens": 140,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2135,
+      "estimatedCostUsd": 0.00167,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09470v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 887,
+      "outputTokens": 1051,
+      "reasoningTokens": 40,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1938,
+      "estimatedCostUsd": 0.001439,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09673v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 862,
+      "outputTokens": 897,
+      "reasoningTokens": 41,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1759,
+      "estimatedCostUsd": 0.001249,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09859v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 907,
+      "outputTokens": 1001,
+      "reasoningTokens": 54,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1908,
+      "estimatedCostUsd": 0.001383,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.09945v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 863,
+      "outputTokens": 935,
+      "reasoningTokens": 77,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1798,
+      "estimatedCostUsd": 0.001295,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.10053v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 792,
+      "outputTokens": 905,
+      "reasoningTokens": 50,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1697,
+      "estimatedCostUsd": 0.001244,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.10074v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 819,
+      "outputTokens": 806,
+      "reasoningTokens": 41,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1625,
+      "estimatedCostUsd": 0.001131,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.10227v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 916,
+      "outputTokens": 920,
+      "reasoningTokens": 48,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1836,
+      "estimatedCostUsd": 0.001287,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.10380v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 725,
+      "outputTokens": 1049,
+      "reasoningTokens": 72,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1774,
+      "estimatedCostUsd": 0.001404,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.10407v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 4585,
+      "outputTokens": 1546,
+      "reasoningTokens": 247,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 4582,
+      "totalTokens": 6131,
+      "estimatedCostUsd": 0.053842,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 8,
+      "paperIds": [
+        "2609.10407v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
 }

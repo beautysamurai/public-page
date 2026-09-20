@@ -1,0 +1,371 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-16",
+  "fingerprint": "257211eeff2ba1e3b3465cc5e2b623d568a07ad9348d0d06f427b7b864255cb5",
+  "candidateFingerprints": {
+    "2609.16203": "e28e104b6385d4e4954fabc61a01b90e65e045361e1b9e635ae0a3ed57c7de66",
+    "2609.16258": "0895a53f9207dbb5eced408b9049a7f86603992ae074773b00eb15b143f186c4",
+    "2609.16642": "dba39664ac4683b0a9fd9af0dcbbab3e86abd5ea5aa6e9b3e7cc646d5ab8704b",
+    "2609.17200": "e230294ea7262ee8b2eddffb52f71d134722f5d583c6eabaef03f1aad1ade9c3",
+    "2609.17409": "c3535a57b5310f4c55954fff9b4ce7ff3393fa02c544b439903d39b2f8f2f32d",
+    "2609.17415": "9462e576b159387f0bcc7f3380cadd10e344a6bd8f4d294f5259c1d2d8793e39"
+  },
+  "results": {
+    "2609.16203": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本稿は、世界の貧困を複数の所得基準と非金銭的指標で推計し、極度貧困線が物質的困窮の下限しか捉えないと論じる報告書です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "報告書は、2024年の世界銀行の極度貧困線では約8.47億人が貧困とされる一方、各国の発展水準に応じた基準では約37億人が上位中所得国基準を下回り、約11億人が多次元貧困、約23億人が食料不安にあると述べています。また、貧困地域ほど調査対象のカバレッジが弱く、公式統計は困窮を過小評価しやすいと主張しています。",
+        "practicalApplication": "貧困政策、国際開発、社会保障、食料安全保障の指標設計には応用可能ですが、本サイトが対象とする定量金融分野への直接的な実務応用は確認できません。",
+        "methodology": "世界銀行の所得基準を起点に、各国の発展水準に応じた所得基準、食料安全保障、就労貧困、社会保障、相対的貧困などの複数指標を比較し、地理、年齢、性別に分解して評価しています。",
+        "limitations": "提示された要旨だけでは、推計手順、データセット、集計方法、指標間の重複調整、推定不確実性、因果識別の詳細を確認できません。報告書自身も、調査カバレッジの地域差による過小推計の可能性を認めています。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "貧困測定に関する社会経済研究としては関連性がありますが、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場の研究ではないため、対象サイトには不適合です。",
+        "tags": [
+          "貧困測定",
+          "国際開発",
+          "所得基準",
+          "多次元貧困",
+          "食料安全保障"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This report estimates global poverty using multiple income thresholds and non-monetary indicators, arguing that the extreme-poverty line captures only a floor of material deprivation. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "The report states that although about 847 million people are classified as poor in 2024 under the World Bank's extreme-poverty line, about 3.7 billion fall below the upper-middle-income reference standard when income thresholds are matched to countries' development levels; about 1.1 billion are multidimensionally poor and about 2.3 billion face food insecurity. It also argues that weaker survey coverage in poorer regions makes official statistics more likely to understate deprivation.",
+          "practicalApplication": "The findings may inform poverty policy, international development, social protection, and food-security indicator design, but no direct practical application to the quantitative-finance fields covered by this site is evident.",
+          "methodology": "The report starts from World Bank income thresholds and compares them with development-adjusted income standards, food security, working poverty, social protection, and relative-poverty measures, disaggregating the assessment by geography, age, and gender.",
+          "limitations": "Based on the abstract alone, the estimation procedures, datasets, aggregation methods, adjustments for overlap among indicators, uncertainty estimates, and details of any causal identification cannot be assessed. The report itself acknowledges possible downward bias caused by regional differences in survey coverage.",
+          "reason": "The paper is relevant as socioeconomic research on poverty measurement, but it does not study electronic trading, market microstructure, interest-rate models, yield curves, or rates markets, so it is outside the site's scope.",
+          "tags": [
+            "poverty measurement",
+            "international development",
+            "income thresholds",
+            "multidimensional poverty",
+            "food security"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.16258": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "27分野における2,507件の比較を用いて、AIと従来の統計手法・scientific computingの性能および計算コストを分析した研究です。電子取引、market microstructure、金利モデル、yield curve、ratesを直接扱っていません。",
+        "mainResult": "要旨によれば、AIは従来の統計手法を上回ることが多い一方で計算コストが高く、約4分の1では高コストかつ低性能でした。scientific computingとの比較では従来は劣ることが多かったものの、2020年以降に改善し、現在は比較の過半数で上回ると報告されています。",
+        "practicalApplication": "AIを科学的手法の普遍的な代替とみなさず、性能と計算コストを分野・手法別に比較して導入判断を行う際の一般的な示唆があります。ただし、対象サイトの量的金融・市場実務への直接的な応用は示されていません。",
+        "methodology": "2000年から2025年初頭までに公表された論文から、27分野にわたるAIと他の科学的分析手法のhead-to-head比較2,507件を収集し、性能と計算コストを比較しています。",
+        "limitations": "要旨だけでは、比較対象の選定基準、性能指標、計算コストの定義、分野間の異質性、出版バイアス、因果関係の扱いが不明です。金融市場、電子執行、金利・イールドカーブ分析に特化した結果も報告されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "AI手法の一般的な科学利用に関するレビューですが、対象分野の中核テーマである電子取引、market microstructure、interest-rate models、yield curves、ratesとの直接的な関連がなく、q-fin.ECの分類だけでは採用理由になりません。",
+        "tags": [
+          "AI",
+          "scientific method",
+          "computational cost",
+          "cross-disciplinary comparison"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes the performance and computational cost of AI versus traditional statistics and scientific computing across 2,507 comparisons in 27 fields. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "mainResult": "According to the abstract, AI often outperforms traditional statistical methods but at higher computational cost, while in nearly one quarter of cases it is both more expensive and less effective. AI historically often underperformed scientific computing, but has improved since 2020 and now outperforms it in more than half of comparisons.",
+          "practicalApplication": "The study offers general guidance to assess AI adoption by comparing performance and computational cost rather than treating AI as a universal replacement for existing methods. However, it provides no direct application to quantitative finance or market practice within the target scope.",
+          "methodology": "The authors assemble 2,507 head-to-head comparisons between AI and other scientific analysis techniques from papers published between 2000 and early 2025 across 27 disciplines, comparing performance and computational cost.",
+          "limitations": "The abstract does not specify the selection criteria, performance measures, definition of computational cost, cross-disciplinary heterogeneity, publication bias, or treatment of causality. It reports no results focused on financial markets, electronic execution, interest-rate models, or yield-curve analysis.",
+          "reason": "This is a broad review of AI in scientific research, but it has no direct connection to the core topics of electronic trading, market microstructure, interest-rate models, yield curves, or rates. The q-fin.EC category alone is insufficient for inclusion.",
+          "tags": [
+            "AI",
+            "scientific method",
+            "computational cost",
+            "cross-disciplinary comparison"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.16642": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "Kalshi予測市場について、公開証拠から契約結果が決定可能になる時点を「first decidability」と「stable decidability」として定義し、歴史データの再現可能性と将来観測基盤を検証した研究です。",
+        "mainResult": "遡及的な完全検証では25件すべてで識別情報とブラインド検査に成功し、現行ルールは回収できましたが、過去の正確または範囲付きルール版と公式リリース対象は一件も回収できませんでした。152,694ティッカー、11,530イベント識別子、6,540件の公式読み取り専用リクエストを調査したものの、歴史的適格イベントとティッカーはゼロでした。将来観測基盤では、25市場・3情報源について781,266ライフサイクルフレームを再検証し、未解決の再接続欠損や期限到来後の公式リリース取り逃しはありませんでした。ただし、契約の決定可能性そのもの、価格、人的判定、他市場比較の結果は報告していません。",
+        "practicalApplication": "予測市場の契約決済を監視するデータ基盤、ルール版・情報源・訂正履歴のプロベナンス管理、イベント研究の事前登録設計には応用可能です。ただし、電子執行、注文フロー、価格形成、金利市場への直接的な実務応用は示されていません。",
+        "methodology": "契約ルールと公開証拠の写像に基づき、最初に単一結果へ収束する時点と、最終化まで不変である遡及的な時点を定義しました。25件のブラインド遡及パイロット、広範な公式データ回収、25市場を対象とした前向き観測基盤の完全性検査を実施しています。",
+        "limitations": "歴史的なルール版と公式リリース対象を回収できず、歴史サンプルの適格案件はゼロでした。前向きサンプルは登録時点の凍結情報に限定され、契約決定可能性、人的判定、価格、他市場との比較を評価していません。したがって、公開証拠が契約を決定可能にした市場が存在しないとは結論できません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "データ観測性と契約決済プロベナンスに関する方法論的な報告ですが、対象はKalshi予測市場であり、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、またはレート分析への主要な実証結果は含まれていません。",
+        "tags": [
+          "prediction markets",
+          "Kalshi",
+          "contract settlement",
+          "data provenance",
+          "observability",
+          "reproducibility",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper defines “first decidability” and “stable decidability” for Kalshi prediction-market contracts, based on when public evidence can determine a unique outcome, and evaluates historical reproducibility and prospective observation infrastructure.",
+          "mainResult": "The retrospective identification test passed all 25 identities and blinding checks, and current rules were recovered for all 25 cases, but no exact or bounded historical rule version or official source-release object was recovered. The historical recovery covered 152,694 tickers, 11,530 event identities, and 6,540 official read-only requests, yet produced zero historically eligible events and tickers. The prospective infrastructure revalidated 781,266 lifecycle frames across 25 markets and three source programmes, with no unresolved reconnect gap and no missed due official release. However, no result is reported for contractual decidability itself, human adjudication, prices, or cross-venue comparisons.",
+          "practicalApplication": "The approach could support prediction-market settlement monitoring, provenance management for rule versions, sources, and corrections, and preregistered event-study infrastructure. It does not demonstrate direct practical applications to electronic execution, order flow, price formation, or interest-rate markets.",
+          "methodology": "The paper defines the earliest time at which the rule-evidence mapping yields a singleton outcome and the retrospective earliest time after which that singleton remains unchanged through finalization. It conducts a 25-case blinded retrospective pilot, broad official-data recovery, and integrity testing of prospective observation infrastructure across 25 markets.",
+          "limitations": "Historical rule versions and official source-release objects could not be recovered, leaving no historically eligible cases. The prospective sample is limited to identities and fields frozen at enrollment, and it does not evaluate contractual decidability, human adjudication, prices, or cross-venue outcomes. Therefore, the study cannot conclude that no market was ever decidable from public evidence.",
+          "reason": "This is a methodological report on data observability and contractual-settlement provenance in Kalshi prediction markets. It does not provide a material empirical result for electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "prediction markets",
+            "Kalshi",
+            "contract settlement",
+            "data provenance",
+            "observability",
+            "reproducibility",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.17200": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、AI関連財の輸出データを用いて各国の生産能力と将来の多角化機会を測定する、国際貿易・経済複雑性の研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を対象としていません。",
+        "mainResult": "2007年から2023年のBACI輸出データと103品目を用い、AI関連財の複雑性加重特化度、隣接的な多角化機会、候補品目の関連性を測定しました。2023年には日本が複雑性加重特化度で、中国が候補機会の平均複雑性で首位でした。潜在力の指標は、その後のAI関連輸出比率の変化とは正の関連を示しましたが、複雑性加重特化度や特化品目数の変化との関連は5%水準で有意ではありませんでした。",
+        "practicalApplication": "AI関連の輸出能力や多角化候補を国際比較する探索的な分析、ならびに公開ダッシュボードによる政策調査の補助に利用できます。ただし、電子取引や金利市場の実務への直接的な応用はありません。",
+        "methodology": "BACIの2007年から2023年までの輸出データと103のAI関連品目を対象に、経済複雑性と関連性に基づく3つの指標を構築し、指標と将来の輸出構成変化との関連を分析しています。",
+        "limitations": "輸出特化は国内のAI能力全体を表すものではなく、分析はAIの総合的な国力の尺度でも、多角化を予測・検証したモデルでもありません。要旨では因果関係、推計仕様、データ上の制約、国別の異質性の詳細が示されていません。また、報告された関連は一部の指標で統計的に有意ではありません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "q-fin.ECという分類は付されていますが、内容は国際貿易と経済複雑性に関する研究であり、本サイトの対象である電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場には実質的に関連しません。",
+        "tags": [
+          "out_of_scope",
+          "economic complexity",
+          "AI-enabling goods",
+          "international trade",
+          "export data"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies national productive capabilities and future diversification opportunities using exports of AI-related goods and economic-complexity methods. It does not address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using BACI export data from 2007 to 2023 and 103 AI-enabling goods, the authors measure complexity-weighted specialization, adjacent diversification opportunities, and the average complexity of candidate goods. In 2023, Japan ranked first in complexity-weighted specialization, while China ranked first in the average complexity of opportunities. The potential indicator was positively associated with subsequent changes in the AI-enabling export share, but its associations with changes in complexity-weighted specialization and specialization counts were not statistically significant at the 5% level.",
+          "practicalApplication": "The measures can support exploratory cross-country comparisons of AI-related export capabilities and diversification candidates, as well as policy research through the public dashboard. However, they have no direct application to electronic trading or rates-market practice.",
+          "methodology": "The study constructs three indicators based on economic complexity and relatedness using BACI export data for 2007–2023 and 103 AI-enabling goods, then examines their associations with subsequent changes in export composition.",
+          "limitations": "Export specialization does not represent overall domestic AI capability, and the analysis is neither a comprehensive measure of national AI performance nor a validated forecasting model for diversification. The abstract does not provide details on causal identification, estimation specifications, data limitations, or country heterogeneity. Some reported associations are not statistically significant.",
+          "reason": "Although the paper is classified under q-fin.EC, it concerns international trade and economic complexity rather than electronic execution, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "out_of_scope",
+            "economic complexity",
+            "AI-enabling goods",
+            "international trade",
+            "export data"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.17409": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "テレワーク行動に関する系統的レビューと構成主義的グラウンデッド・セオリー分析であり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を扱わない。",
+        "mainResult": "114本のレビュー論文から、テレワーク行動を業績、コミュニケーション、環境、タスク、方針、ウェルビーイングの6次元で整理した。個人要因、職務特性、組織規範、技術、職場環境を先行要因、満足度、生産性、離職、健康、ワーク・ライフ・バランス、社会的孤立を結果として整理し、14の検証可能な命題を提示している。ただし、これらは実証済みの因果結果ではない。",
+        "practicalApplication": "テレワークに関する施策、研修、介入の論点整理や測定尺度の内容領域設計には利用できる可能性があるが、対象分野の実務には直接適用できない。",
+        "methodology": "PRISMAに基づく系統的文献レビューで114本のレビュー論文を特定し、構成主義的グラウンデッド・セオリーにより概念、先行要因、結果、モデレーターを統合した。",
+        "limitations": "分析対象は既存のレビュー論文であり、提示された14命題は未検証である。したがって、因果関係、効果の大きさ、一般化可能性はこの要旨から確認できない。また、金融市場や定量ファイナンスとの関連は示されていない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "q-fin.ECに分類されているが、内容はテレワーク行動と組織行動の概念枠組みに関する研究であり、本サイトの対象領域から外れる。",
+        "tags": [
+          "out_of_scope",
+          "telework",
+          "systematic review",
+          "grounded theory",
+          "organizational behavior"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This is a systematic review and constructivist grounded-theory analysis of telework behavior, not a study of electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using 114 review articles, the paper organizes telework behavior into six dimensions: performance, communication, environmental, task, policy, and well-being conduct. It also groups antecedents into individual factors, job characteristics, organizational norms, technology, and work-environment factors, and outcomes into satisfaction, productivity, turnover, health, work-life balance, and social isolation. Fourteen testable propositions are presented, but they are not empirically established.",
+          "practicalApplication": "The framework may support the organization of telework policies, training, and interventions, as well as the design of measurement constructs, but it has no direct application to the site's target domains.",
+          "methodology": "A PRISMA-based systematic review identified 114 review articles, which were synthesized using constructivist grounded theory to integrate constructs, antecedents, outcomes, and moderators.",
+          "limitations": "The analysis relies on existing review articles, and the 14 propositions remain untested. Therefore, causality, effect sizes, and generalizability cannot be established from the abstract. The paper also shows no connection to financial markets or quantitative finance.",
+          "reason": "Although it is classified under q-fin.EC, the paper concerns telework behavior and organizational research and is outside the site's scope.",
+          "tags": [
+            "out_of_scope",
+            "telework",
+            "systematic review",
+            "grounded theory",
+            "organizational behavior"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.17415": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、金融ネットワークにおける連鎖破綻と救済配分を、IsingモデルおよびQuadratic Unconstrained Binary Optimization（QUBO）として定式化する枠組みを提案する。",
+        "mainResult": "要旨によれば、Elliott–Golub–Jackson型の金融ネットワークモデルを拡張し、最大連鎖破綻問題、予算制約下の最適救済配分、機関ごとの救済感応度をQUBOまたは統合されたIsing形式で表現した。異なる規模のネットワークに対する数値シミュレーションで、均衡評価、最悪連鎖の特定、救済配分、感応度分析を実施したと報告している。",
+        "practicalApplication": "システミックリスク分析、金融機関の優先順位付け、限られた救済予算の配分、量子アニーリングや量子インスパイアード最適化への適用候補を提供する。ただし、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ分析への直接的な応用は要旨から確認できない。",
+        "methodology": "金融ネットワークの均衡評価に閾値型破綻を導入し、連鎖破綻と救済介入を二値最適化問題として定式化する。二層最適化を単一のjoint QUBOへ変換し、救済感応度に基づくgreedy介入戦略と数値シミュレーションを用いる。",
+        "limitations": "要旨だけでは、ネットワーク構造、破綻閾値、パラメータ較正、計算規模、ベースライン比較、実データでの検証、ノイズやモデル誤特定への頑健性が不明である。また、量子アニーリングとの互換性は主張されているが、実機での優位性や計算上の改善は要旨から確認できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "金融システムのネットワーク型システミックリスクには関連するが、本サイトの中心領域である電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場には直接該当しないため。",
+        "tags": [
+          "金融ネットワーク",
+          "システミックリスク",
+          "金融コンテイジョン",
+          "Ising model",
+          "QUBO",
+          "救済配分",
+          "量子アニーリング"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a framework that formulates contagion failures and bailout allocation in financial networks as Ising models and Quadratic Unconstrained Binary Optimization (QUBO) problems.",
+          "mainResult": "According to the abstract, the paper extends an Elliott–Golub–Jackson financial network model with threshold-induced failures and represents the Maximum Cascade Failure Problem, budget-constrained optimal bailout allocation, and institution-level bailout susceptibility using QUBO or a unified Ising formulation. Numerical simulations on networks of different sizes are reported for equilibrium valuation, worst-case cascade identification, bailout allocation, and susceptibility analysis.",
+          "practicalApplication": "The framework may support systemic-risk analysis, prioritization of financial institutions, allocation of limited bailout budgets, and applications of quantum annealing or quantum-inspired optimization. However, the abstract does not establish a direct application to electronic trading, market microstructure, interest-rate models, or yield-curve analysis.",
+          "methodology": "The authors introduce threshold-induced failures into financial-network equilibrium valuation and formulate contagion and intervention as binary optimization problems. They transform a bilevel optimization problem into a single joint QUBO and use a susceptibility-driven greedy intervention strategy together with numerical simulations.",
+          "limitations": "The abstract does not specify the network construction, failure thresholds, parameter calibration, computational scale, benchmark comparisons, empirical validation, or robustness to noise and model misspecification. Although compatibility with quantum annealing is claimed, practical performance gains or superiority on quantum hardware are not established by the abstract.",
+          "reason": "The paper is relevant to network-based systemic financial risk, but it does not directly address the site’s core areas of electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "financial networks",
+            "systemic risk",
+            "financial contagion",
+            "Ising model",
+            "QUBO",
+            "bailout allocation",
+            "quantum annealing"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 967,
+      "outputTokens": 978,
+      "reasoningTokens": 37,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1945,
+      "estimatedCostUsd": 0.001367,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.16203v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 843,
+      "outputTokens": 896,
+      "reasoningTokens": 47,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1739,
+      "estimatedCostUsd": 0.001244,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.16258v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 951,
+      "outputTokens": 1262,
+      "reasoningTokens": 104,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2213,
+      "estimatedCostUsd": 0.001705,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.16642v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 835,
+      "outputTokens": 1038,
+      "reasoningTokens": 45,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1873,
+      "estimatedCostUsd": 0.001413,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.17200v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 877,
+      "outputTokens": 861,
+      "reasoningTokens": 34,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1738,
+      "estimatedCostUsd": 0.001209,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.17409v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 919,
+      "outputTokens": 1072,
+      "reasoningTokens": 70,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1991,
+      "estimatedCostUsd": 0.00147,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.17415v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

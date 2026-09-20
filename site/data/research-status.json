@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "daily": {
-    "status": "UPDATE_CONFIRMED",
-    "checkedAt": "2026-09-20T06:33:52Z",
+    "status": "NO_RELEVANT_PAPERS",
+    "checkedAt": "2026-09-20T06:51:40Z",
     "lastCompletedBatchDate": "2026-09-18",
     "pendingBatchDate": null
   },
@@ -48,14 +48,12 @@
       "reportKind": "weekly",
       "periodEnd": "2026-09-18",
       "missingBatchDates": [
-        "2026-09-16",
         "2026-09-17"
       ],
       "ready": false
     }
   ],
   "pendingDailyBatches": [
-    "2026-09-16",
     "2026-09-17"
   ],
   "dailyRetryPolicy": "next_daily_run"

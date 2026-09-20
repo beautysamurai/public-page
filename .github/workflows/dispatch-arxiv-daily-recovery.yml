@@ -20,4 +20,4 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          gh workflow run arxiv-research.yml             --repo "$GITHUB_REPOSITORY"             --ref main             -f run_mode=daily             -f recover_pending=false
+          gh workflow run arxiv-research.yml             --repo "$GITHUB_REPOSITORY"             --ref main             -f run_mode=daily             -f recover_pending=true

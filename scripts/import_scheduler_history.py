@@ -140,7 +140,7 @@ POSIX_PATH_RE = re.compile(
 )
 LOCAL_URI_RE = re.compile(r"\b(?:file|vscode)://", re.IGNORECASE)
 UNSUPPORTED_URI_RE = re.compile(
-    r"\b(?:data|javascript|ftp|sftp|ssh):",
+    r"\b(?:data:(?!\s)|javascript:(?!\s)|(?:ftp|sftp|ssh)://)",
     re.IGNORECASE,
 )
 RELATIVE_PATH_RE = re.compile(

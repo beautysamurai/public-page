@@ -3421,6 +3421,49 @@
       "periodEnd": null,
       "sourceText": "## 2026年9月20日 — 日次レビュー\n\n通常の公開スケジュール上、新しいarXivバッチは予定されていません。\n\n### この号の利用状況\n\nモデル・effort・トークン数：未記録。\n\n\n**推薦論文: なし**",
       "papers": []
+    },
+    {
+      "editionId": "2026-09-21-daily-openai-01",
+      "editionDate": "2026-09-21",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-21T13:13:03Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-21",
+      "observedBatchDate": "2026-09-21",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月21日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 11 | 9,269 | 11,600 (842) | 0.0158 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 24,296 | 2,007 (473) | 0.1616 | PDF全文・31ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Adapting the Actor Model of Concurrency for High-Frequency Trading: Synchronous Message Delivery (fast\\_send) and a Tick-to-Book Latency Study\n\n**[arXiv:2609.21173v1](https://arxiv.org/abs/2609.21173v1) — Vincent Maciejewski**\n\n### 概要\n\n共置されたアクター向けに、送信側スレッドが受信側の排他ロック下で handler を直接実行する fast\\_send を提案する。actor group、mailbox queue の選択、memory pool と組み合わせ、CME先物の live market data path で socket-to-book latency を評価している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | アクターモデル / 高頻度取引 / 電子取引 / 低遅延システム / market data / socket-to-book latency / CME先物 / 同期 message delivery / mailbox queue / deterministic backtest |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** electronic trading infrastructure に直接関係し、actor abstraction と低 latency を両立させる具体的設計、実装、live CME計測を提示しているため読む価値がある。一方、結果は著者自身の単一環境での測定であり、実経路の component-level attribution や負荷下評価が不足するため、性能主張は有望な engineering evidence として扱い、一般化には独立再現が必要である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 980 | 1,097 (33) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 24,296 | 2,007 (473) | 0.1616 | PDF全文・31ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者の microbenchmark では、非同期・別スレッドの往復が約 $3.4\\,\\mu\\mathrm{s}$、同一スレッドの grouped send が $90\\,\\mathrm{ns}$、fast\\_send が約 $30\\,\\mathrm{ns}$だった。live study では latency を約 $7\\,\\mu\\mathrm{s}$ の floor と packet 内位置に比例する slope に分解し、framework の寄与は floor の $1\\%$ 未満で、tail は主に packet 内位置と稀な queue backlog に由来すると報告している。ただし、実経路の非同期 handoff と decode/book 処理を個別計測していないため、この寄与率と因果帰属は完全には実証されていない。\n\n**手法:** C++20実装 kaspar-hft を用い、AMD EPYC 9374F上で pinned-core の逐次 ping-pong microbenchmark を実施した。さらに、ES、NQ、ZNのCME feedから約 $829$ 万 message、$53$ 分の software-timestamped socket-to-book latency を収集し、queue occupancy と packet 内位置を条件付けて median、percentile、および $\\operatorname{median}(L)\\approx a+b\\,\\mathrm{idx}$ の関係を分析した。\n\n**実務への応用:** market-data decode、order-book 更新、signal generation を同一 core 上の actor group と fast\\_send chain にまとめ、socket capture と order transmission だけを非同期 handoff にする設計に利用できる。共通 queue による順序固定は、同じ actor code を live trading と deterministic backtest で共有する用途にも適する。\n\n**限界・注意点:** 評価は単一マシン、単一の $53$ 分 session、逐次 microbenchmark に限られ、saturation、contention、chain depth、message size、multi-core stress は未検証である。timestamp は socket read 後の software timestamp で、NIC・kernel latency を含まない。最大数 millisecond の stall は未解明で、slope の要因も分離されていない。live path の asynchronous mailbox handoff と decode/book work を独立に計測していないため、framework overhead が $1\\%$ 未満という推定や tail との非関連は限定的な証拠に基づく。receiver transparency は FIFO を保存せず、blocking、hot actor contention、permissive reentrancy という運用上のリスクも残る。",
+      "papers": [
+        {
+          "arxivId": "2609.21173v1",
+          "title": "Adapting the Actor Model of Concurrency for High-Frequency Trading: Synchronous Message Delivery (fast_send) and a Tick-to-Book Latency Study",
+          "authors": [
+            "Vincent Maciejewski"
+          ],
+          "submittedDate": "2026-09-18",
+          "updatedDate": "2026-09-21",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.21173v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.21173v1",
+          "schedulerRank": 1,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "共置されたアクター向けに、送信側スレッドが受信側の排他ロック下で handler を直接実行する fast_send を提案する。actor group、mailbox queue の選択、memory pool と組み合わせ、CME先物の live market data path で socket-to-book latency を評価している。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 980 / 出力 1,097（うち推論 33） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 24,296 / 出力 2,007（うち推論 473） · PDF 31 pages · 推定 $0.1616",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

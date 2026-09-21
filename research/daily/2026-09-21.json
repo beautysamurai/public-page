@@ -1,0 +1,357 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-09-21",
+  "generatedAt": "2026-09-21T13:13:03Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-09-21 was confirmed with 1 relevant paper(s).",
+  "expectedBatchDate": "2026-09-21",
+  "observedBatchDate": "2026-09-21",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2609.21173v1",
+        "title": "Adapting the Actor Model of Concurrency for High-Frequency Trading: Synchronous Message Delivery (fast_send) and a Tick-to-Book Latency Study",
+        "authors": [
+          "Vincent Maciejewski"
+        ],
+        "submittedDate": "2026-09-18",
+        "updatedDate": "2026-09-21",
+        "categories": [
+          "cs.DC",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "共置されたアクター向けに、送信側スレッドが受信側の排他ロック下で handler を直接実行する fast_send を提案する。actor group、mailbox queue の選択、memory pool と組み合わせ、CME先物の live market data path で socket-to-book latency を評価している。",
+        "mainResult": "著者の microbenchmark では、非同期・別スレッドの往復が約 $3.4\\,\\mu\\mathrm{s}$、同一スレッドの grouped send が $90\\,\\mathrm{ns}$、fast_send が約 $30\\,\\mathrm{ns}$だった。live study では latency を約 $7\\,\\mu\\mathrm{s}$ の floor と packet 内位置に比例する slope に分解し、framework の寄与は floor の $1\\%$ 未満で、tail は主に packet 内位置と稀な queue backlog に由来すると報告している。ただし、実経路の非同期 handoff と decode/book 処理を個別計測していないため、この寄与率と因果帰属は完全には実証されていない。",
+        "practicalApplication": "market-data decode、order-book 更新、signal generation を同一 core 上の actor group と fast_send chain にまとめ、socket capture と order transmission だけを非同期 handoff にする設計に利用できる。共通 queue による順序固定は、同じ actor code を live trading と deterministic backtest で共有する用途にも適する。",
+        "methodology": "C++20実装 kaspar-hft を用い、AMD EPYC 9374F上で pinned-core の逐次 ping-pong microbenchmark を実施した。さらに、ES、NQ、ZNのCME feedから約 $829$ 万 message、$53$ 分の software-timestamped socket-to-book latency を収集し、queue occupancy と packet 内位置を条件付けて median、percentile、および $\\operatorname{median}(L)\\approx a+b\\,\\mathrm{idx}$ の関係を分析した。",
+        "limitations": "評価は単一マシン、単一の $53$ 分 session、逐次 microbenchmark に限られ、saturation、contention、chain depth、message size、multi-core stress は未検証である。timestamp は socket read 後の software timestamp で、NIC・kernel latency を含まない。最大数 millisecond の stall は未解明で、slope の要因も分離されていない。live path の asynchronous mailbox handoff と decode/book work を独立に計測していないため、framework overhead が $1\\%$ 未満という推定や tail との非関連は限定的な証拠に基づく。receiver transparency は FIFO を保存せず、blocking、hot actor contention、permissive reentrancy という運用上のリスクも残る。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "electronic trading infrastructure に直接関係し、actor abstraction と低 latency を両立させる具体的設計、実装、live CME計測を提示しているため読む価値がある。一方、結果は著者自身の単一環境での測定であり、実経路の component-level attribution や負荷下評価が不足するため、性能主張は有望な engineering evidence として扱い、一般化には独立再現が必要である。",
+        "tags": [
+          "アクターモデル",
+          "高頻度取引",
+          "電子取引",
+          "低遅延システム",
+          "market data",
+          "socket-to-book latency",
+          "CME先物",
+          "同期 message delivery",
+          "mailbox queue",
+          "deterministic backtest"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper proposes fast_send for co-located actors, whereby the sender’s thread directly executes the receiver’s handler under the receiver’s exclusive lock. It combines this mechanism with actor groups, selectable mailbox queues, and a memory pool, and evaluates socket-to-book latency on a live CME futures market-data path.",
+          "mainResult": "In the authors’ microbenchmark, an asynchronous cross-thread round trip took about $3.4\\,\\mu\\mathrm{s}$, a same-thread grouped send took $90\\,\\mathrm{ns}$, and fast_send took about $30\\,\\mathrm{ns}$. The live study decomposes latency into a floor of about $7\\,\\mu\\mathrm{s}$ and a slope proportional to position within the packet, reporting that framework overhead is below $1\\%$ of the floor and that the tail mainly reflects within-packet position and rare queue backlogs. However, because the asynchronous handoff and decode/book processing in the live path were not measured separately, the contribution estimate and causal attribution are not fully demonstrated.",
+          "practicalApplication": "The design can place market-data decoding, order-book updates, and signal generation in an actor group on one core, connect them through a fast_send chain, and retain asynchronous handoffs only for socket capture and order transmission. The common queue’s fixed ordering can also support sharing identical actor code between live trading and deterministic backtesting.",
+          "methodology": "Using the C++20 kaspar-hft implementation, the author ran sequential, pinned-core ping-pong microbenchmarks on an AMD EPYC 9374F. The study also collected software-timestamped socket-to-book latency for approximately $8.29$ million messages over $53$ minutes from CME feeds for ES, NQ, and ZN, conditioning on queue occupancy and within-packet position and analyzing medians, percentiles, and the relation $\\operatorname{median}(L)\\approx a+b\\,\\mathrm{idx}$.",
+          "limitations": "The evaluation is limited to one machine, one $53$-minute session, and sequential microbenchmarks; saturation, contention, chain depth, message size, and multi-core stress remain untested. Timestamps are taken in software after the socket read and exclude NIC and kernel latency. Multi-millisecond stalls remain unexplained, and the causes of the slope are not separated. Because the live path’s asynchronous mailbox handoff and decode/book work were not independently measured, the estimate that framework overhead is below $1\\%$ and its claimed lack of association with the tail rest on limited evidence. Receiver transparency also does not preserve FIFO ordering, while blocking, hot-actor contention, and permissive reentrancy remain operational risks.",
+          "reason": "The paper is directly relevant to electronic-trading infrastructure and provides a concrete design, implementation, and live CME measurement for reconciling actor abstractions with low latency. However, the results come from the author’s own single environment and lack component-level attribution and load testing, so the performance claims should be treated as promising engineering evidence that still requires independent replication before generalization.",
+          "tags": [
+            "actor model",
+            "high-frequency trading",
+            "electronic trading",
+            "low-latency systems",
+            "market data",
+            "socket-to-book latency",
+            "CME futures",
+            "synchronous message delivery",
+            "mailbox queue",
+            "deterministic backtesting"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 980,
+          "outputTokens": 1097,
+          "reasoningTokens": 33,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2077,
+          "estimatedCostUsd": 0.001512,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.21173v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 24296,
+          "outputTokens": 2007,
+          "reasoningTokens": 473,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 24293,
+          "totalTokens": 26303,
+          "estimatedCostUsd": 0.161617,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 31,
+          "paperIds": [
+            "2609.21173v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 980,
+      "outputTokens": 1097,
+      "reasoningTokens": 33,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2077,
+      "estimatedCostUsd": 0.001512,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21173v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 24296,
+      "outputTokens": 2007,
+      "reasoningTokens": 473,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 24293,
+      "totalTokens": 26303,
+      "estimatedCostUsd": 0.161617,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 31,
+      "paperIds": [
+        "2609.21173v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 782,
+      "outputTokens": 902,
+      "reasoningTokens": 56,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1684,
+      "estimatedCostUsd": 0.001239,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21232v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 814,
+      "outputTokens": 1197,
+      "reasoningTokens": 99,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2011,
+      "estimatedCostUsd": 0.001599,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21271v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 814,
+      "outputTokens": 1125,
+      "reasoningTokens": 91,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1939,
+      "estimatedCostUsd": 0.001513,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21271v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 863,
+      "outputTokens": 1019,
+      "reasoningTokens": 83,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1882,
+      "estimatedCostUsd": 0.001395,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21291v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 847,
+      "outputTokens": 1044,
+      "reasoningTokens": 111,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1891,
+      "estimatedCostUsd": 0.001422,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21301v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 768,
+      "outputTokens": 922,
+      "reasoningTokens": 37,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1690,
+      "estimatedCostUsd": 0.00126,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21478v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 814,
+      "outputTokens": 1260,
+      "reasoningTokens": 156,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2074,
+      "estimatedCostUsd": 0.001675,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21684v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 853,
+      "outputTokens": 1030,
+      "reasoningTokens": 54,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1883,
+      "estimatedCostUsd": 0.001407,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21688v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 853,
+      "outputTokens": 996,
+      "reasoningTokens": 76,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1849,
+      "estimatedCostUsd": 0.001366,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21688v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 881,
+      "outputTokens": 1008,
+      "reasoningTokens": 46,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1889,
+      "estimatedCostUsd": 0.001386,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.22052v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

@@ -1,0 +1,665 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-21",
+  "fingerprint": "800b77e05afde6f102828f390465b1f7cd4509283ff5b752750b380ac91cb0fd",
+  "candidateFingerprints": {
+    "2609.21173": "b6e3b6d584ce762fdc399ca8416929581c5610add9a4849772d870bb5028d890",
+    "2609.21232": "1bc4a70b7aaaadcc1f23898782ccf3b188cc883ffdfc32a320b4ee06aff60066",
+    "2609.21271": "b0ba805b242251e22a8f2ff68394c081ac0afa5058a4299ea9b0e45aaa3c110e",
+    "2609.21291": "5d6a6cca3d601dc649e1c9885bef57320fe0b5baa2b0712fa2fc4609e31334ea",
+    "2609.21301": "a1e4bf8a972e67bd5d6a7c8ad4958b3cc41f9600f0871c6c319c2d3196e341ff",
+    "2609.21478": "fbb7948070071244cbf76afe3866fd0810b62e99b19e20502aa701b3b19adebf",
+    "2609.21684": "d2d8bcb07ee33384f7e927d0e4972c2b5405e469ed620fc8838e0a3601a8d964",
+    "2609.21688": "3062e2ce7bf201c514a070e88287f85cfec9de1e522e295ed0a3da7db4a05afa",
+    "2609.22052": "10192817fb5bff1ed16af980a52ba3702529f24a80732e487e9c522071760f41"
+  },
+  "results": {
+    "2609.21173": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本論文は、HFT向けにActor Modelを拡張したC++20フレームワークを提案し、同期メッセージ配送とactor groupingによって低遅延実行を実現できるかを測定している。",
+        "mainResult": "報告された測定では、同期ラウンドトリップは数十ナノ秒で、CMEのES、NQ、ZN先物の市場データ処理におけるフレームワーク固有の遅延は、約7マイクロ秒のdecode-and-book処理時間の1%未満だった。また、actor groupにより連鎖処理のスケジューラ文脈切替を$O(N)$から$O(1)$へ削減できるとしている。",
+        "practicalApplication": "低遅延な市場データ処理、注文執行、ライブ取引と決定論的バックテストで共有できる実装基盤に応用できる可能性がある。特に、状態分離やデータ競合回避を維持しながら、同期呼び出しで通信オーバーヘッドを抑える設計上の示唆がある。",
+        "methodology": "Actor Modelの拡張として、fast_send、actor groups、actorごとの選択可能なmailbox queue、memory poolを実装したkaspar-hftを用い、マイクロベンチマークとCMEのES、NQ、ZN先物の実市場データフィードで遅延を測定している。さらに、同期呼び出しの循環をロック取得前に検出するthread-local call-chain testを採用している。",
+        "limitations": "抽象からは、ベンチマーク条件、ハードウェア、比較対象、統計的分布、約7マイクロ秒の分解方法、実際の注文執行性能や約定品質の詳細が確認できない。結果は著者の実装と対象市場データに依存する可能性があり、非ポアソン到着過程によるtail遅延の説明も companion paper に依存している。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "HFTの電子取引実装と市場データ処理に直接関係し、Actor Modelの一般的な低速性という見方に対して、実装測定に基づく反証を提示しているため、実務・システム設計の観点で有用である。ただし、抽象だけでは再現性と外部妥当性を十分に評価できない。",
+        "tags": [
+          "high-frequency trading",
+          "electronic trading",
+          "market data",
+          "low latency",
+          "actor model",
+          "concurrency",
+          "C++20",
+          "backtesting"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This paper proposes a C++20 framework that adapts the Actor Model for HFT and measures whether synchronous message delivery and actor grouping can support low-latency execution.",
+          "mainResult": "The reported measurements show synchronous round trips in the tens of nanoseconds, while the framework-specific latency in market-data processing for CME ES, NQ, and ZN futures was under 1% of an approximately 7-microsecond decode-and-book floor. Actor groups are also reported to reduce scheduler context switches in a processing chain from $O(N)$ to $O(1)$.",
+          "practicalApplication": "The approach could be applied to low-latency market-data processing, order execution, and shared production and deterministic backtesting infrastructure. It offers a design approach for reducing communication overhead through synchronous calls while retaining state isolation and data-race avoidance.",
+          "methodology": "The authors implement kaspar-hft with four Actor Model extensions: fast_send, actor groups, per-actor selectable mailbox queues, and a memory pool. They evaluate it with microbenchmarks and live CME market-data feeds for ES, NQ, and ZN futures. A thread-local call-chain test is also used to detect cyclic synchronous invocation before lock acquisition.",
+          "limitations": "The abstract does not provide the benchmark conditions, hardware, baselines, statistical distributions, detailed decomposition of the approximately 7-microsecond floor, or performance and execution-quality results for actual order placement. Results may depend on the implementation and selected markets, while the explanation of tail latency from non-Poisson arrivals relies on a companion paper.",
+          "reason": "The paper is directly relevant to electronic-trading implementation and market-data processing, and provides measurement-based evidence challenging the conventional view that the Actor Model is inherently too slow for HFT. It is useful for practitioners and system designers, although reproducibility and external validity cannot be fully assessed from the abstract alone.",
+          "tags": [
+            "high-frequency trading",
+            "electronic trading",
+            "market data",
+            "low latency",
+            "actor model",
+            "concurrency",
+            "C++20",
+            "backtesting"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "共置されたアクター向けに、送信側スレッドが受信側の排他ロック下で handler を直接実行する fast_send を提案する。actor group、mailbox queue の選択、memory pool と組み合わせ、CME先物の live market data path で socket-to-book latency を評価している。",
+        "mainResult": "著者の microbenchmark では、非同期・別スレッドの往復が約 $3.4\\,\\mu\\mathrm{s}$、同一スレッドの grouped send が $90\\,\\mathrm{ns}$、fast_send が約 $30\\,\\mathrm{ns}$だった。live study では latency を約 $7\\,\\mu\\mathrm{s}$ の floor と packet 内位置に比例する slope に分解し、framework の寄与は floor の $1\\%$ 未満で、tail は主に packet 内位置と稀な queue backlog に由来すると報告している。ただし、実経路の非同期 handoff と decode/book 処理を個別計測していないため、この寄与率と因果帰属は完全には実証されていない。",
+        "practicalApplication": "market-data decode、order-book 更新、signal generation を同一 core 上の actor group と fast_send chain にまとめ、socket capture と order transmission だけを非同期 handoff にする設計に利用できる。共通 queue による順序固定は、同じ actor code を live trading と deterministic backtest で共有する用途にも適する。",
+        "methodology": "C++20実装 kaspar-hft を用い、AMD EPYC 9374F上で pinned-core の逐次 ping-pong microbenchmark を実施した。さらに、ES、NQ、ZNのCME feedから約 $829$ 万 message、$53$ 分の software-timestamped socket-to-book latency を収集し、queue occupancy と packet 内位置を条件付けて median、percentile、および $\\operatorname{median}(L)\\approx a+b\\,\\mathrm{idx}$ の関係を分析した。",
+        "limitations": "評価は単一マシン、単一の $53$ 分 session、逐次 microbenchmark に限られ、saturation、contention、chain depth、message size、multi-core stress は未検証である。timestamp は socket read 後の software timestamp で、NIC・kernel latency を含まない。最大数 millisecond の stall は未解明で、slope の要因も分離されていない。live path の asynchronous mailbox handoff と decode/book work を独立に計測していないため、framework overhead が $1\\%$ 未満という推定や tail との非関連は限定的な証拠に基づく。receiver transparency は FIFO を保存せず、blocking、hot actor contention、permissive reentrancy という運用上のリスクも残る。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "electronic trading infrastructure に直接関係し、actor abstraction と低 latency を両立させる具体的設計、実装、live CME計測を提示しているため読む価値がある。一方、結果は著者自身の単一環境での測定であり、実経路の component-level attribution や負荷下評価が不足するため、性能主張は有望な engineering evidence として扱い、一般化には独立再現が必要である。",
+        "tags": [
+          "アクターモデル",
+          "高頻度取引",
+          "電子取引",
+          "低遅延システム",
+          "market data",
+          "socket-to-book latency",
+          "CME先物",
+          "同期 message delivery",
+          "mailbox queue",
+          "deterministic backtest"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper proposes fast_send for co-located actors, whereby the sender’s thread directly executes the receiver’s handler under the receiver’s exclusive lock. It combines this mechanism with actor groups, selectable mailbox queues, and a memory pool, and evaluates socket-to-book latency on a live CME futures market-data path.",
+          "mainResult": "In the authors’ microbenchmark, an asynchronous cross-thread round trip took about $3.4\\,\\mu\\mathrm{s}$, a same-thread grouped send took $90\\,\\mathrm{ns}$, and fast_send took about $30\\,\\mathrm{ns}$. The live study decomposes latency into a floor of about $7\\,\\mu\\mathrm{s}$ and a slope proportional to position within the packet, reporting that framework overhead is below $1\\%$ of the floor and that the tail mainly reflects within-packet position and rare queue backlogs. However, because the asynchronous handoff and decode/book processing in the live path were not measured separately, the contribution estimate and causal attribution are not fully demonstrated.",
+          "practicalApplication": "The design can place market-data decoding, order-book updates, and signal generation in an actor group on one core, connect them through a fast_send chain, and retain asynchronous handoffs only for socket capture and order transmission. The common queue’s fixed ordering can also support sharing identical actor code between live trading and deterministic backtesting.",
+          "methodology": "Using the C++20 kaspar-hft implementation, the author ran sequential, pinned-core ping-pong microbenchmarks on an AMD EPYC 9374F. The study also collected software-timestamped socket-to-book latency for approximately $8.29$ million messages over $53$ minutes from CME feeds for ES, NQ, and ZN, conditioning on queue occupancy and within-packet position and analyzing medians, percentiles, and the relation $\\operatorname{median}(L)\\approx a+b\\,\\mathrm{idx}$.",
+          "limitations": "The evaluation is limited to one machine, one $53$-minute session, and sequential microbenchmarks; saturation, contention, chain depth, message size, and multi-core stress remain untested. Timestamps are taken in software after the socket read and exclude NIC and kernel latency. Multi-millisecond stalls remain unexplained, and the causes of the slope are not separated. Because the live path’s asynchronous mailbox handoff and decode/book work were not independently measured, the estimate that framework overhead is below $1\\%$ and its claimed lack of association with the tail rest on limited evidence. Receiver transparency also does not preserve FIFO ordering, while blocking, hot-actor contention, and permissive reentrancy remain operational risks.",
+          "reason": "The paper is directly relevant to electronic-trading infrastructure and provides a concrete design, implementation, and live CME measurement for reconciling actor abstractions with low latency. However, the results come from the author’s own single environment and lack component-level attribution and load testing, so the performance claims should be treated as promising engineering evidence that still requires independent replication before generalization.",
+          "tags": [
+            "actor model",
+            "high-frequency trading",
+            "electronic trading",
+            "low-latency systems",
+            "market data",
+            "socket-to-book latency",
+            "CME futures",
+            "synchronous message delivery",
+            "mailbox queue",
+            "deterministic backtesting"
+          ]
+        }
+      }
+    },
+    "2609.21232": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、長期依存を表現する fractional Lévy process と標準 Brownian motion を組み合わせた確率的死亡率モデルを提案する。",
+        "mainResult": "要旨によれば、提案モデルは保険数理評価で解析的に扱いやすく、Lévy 過程の仕様選択にも柔軟性がある。第二次世界大戦期と COVID-19 の死亡率ショックに関する実証分析では、長期依存性を適切に反映し、longevity derivatives の数値評価に向けて singular value decomposition と residual correction に基づく近似手法を構築したと報告している。",
+        "practicalApplication": "年金、資金調達、長寿リスク管理、longevity derivatives の価格評価には応用可能だが、電子取引、market microstructure、金利モデル、イールドカーブ分析への直接的な応用は限定的である。",
+        "methodology": "fractional Lévy process と標準 Brownian motion の混合による死亡率モデルを定式化し、歴史的な死亡率ショックの実証分析を行う。非 Markov 性に伴う計算負荷に対して、singular value decomposition 近似と残差補正を用いる数値手法を提案する。",
+        "limitations": "要旨だけでは、モデルの具体的な仕様、推定方法、データ範囲、ベンチマーク比較、価格評価の精度、近似誤差の定量的な大きさは確認できない。また、対象は死亡率・長寿リスクであり、本サイトの主要対象である金利・イールドカーブ・電子執行との関連性は弱い。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "保険数理と長寿リスクには関連するが、本サイトの対象分野である電子取引、market microstructure、interest-rate models、yield curves、ratesには実質的に該当しないため。",
+        "tags": [
+          "stochastic mortality",
+          "fractional Lévy process",
+          "long-range dependence",
+          "longevity risk",
+          "longevity derivatives",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a stochastic mortality model that combines a fractional Lévy process, which captures long-range dependence, with standard Brownian motion.",
+          "mainResult": "According to the abstract, the proposed model is analytically tractable for actuarial valuation and flexible in its choice of Lévy specifications. Empirical studies of mortality shocks during World War II and COVID-19 reportedly show that it captures long-range dependence, while a numerical scheme based on singular value decomposition and residual correction is developed for pricing longevity derivatives.",
+          "practicalApplication": "The model may be applied to pensions, funding arrangements, longevity-risk management, and longevity-derivative pricing, but its direct relevance to electronic trading, market microstructure, interest-rate models, and yield-curve analysis is limited.",
+          "methodology": "The paper formulates a mortality model combining a fractional Lévy process with standard Brownian motion and conducts empirical analyses of historical mortality shocks. To address the computational burden caused by non-Markovian dynamics, it proposes a numerical method using singular value decomposition approximation and residual correction.",
+          "limitations": "The abstract does not specify the model details, estimation procedure, data coverage, benchmark comparisons, pricing accuracy, or the quantitative magnitude of approximation errors. Moreover, the subject is mortality and longevity risk, with weak relevance to the site's primary focus on rates, yield curves, and electronic execution.",
+          "reason": "Although the paper is relevant to actuarial science and longevity risk, it does not materially concern electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "stochastic mortality",
+            "fractional Lévy process",
+            "long-range dependence",
+            "longevity risk",
+            "longevity derivatives",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.21271": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "クラスタ内共分散とクラスタ間のSchur補完を組み合わせる、最小分散ポートフォリオ最適化の補間手法を理論的に分析した研究です。電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、または金利市場を主題としていません。",
+        "mainResult": "Nested clustered optimizationを$\\gamma=0$、global minimum-variance portfolioを$\\gamma=1$とするbridgeを構成し、クラスタまたはクラスタ数より大きな線形方程式を解かずに両者を接続できると報告しています。特定のrank-one cross-cluster dependenceでは手法が厳密で、推定誤差下では最適な$\\gamma$が内部点となる場合や、完全なcouplingが最適な場合があるとしています。",
+        "practicalApplication": "大規模な共分散行列を扱うportfolio constructionで、計算負荷を抑えながらクラスタ間依存を段階的に導入する手法として利用できる可能性があります。ただし、金利・イールドカーブ運用やexecutionへの直接的な応用は要約から確認できません。",
+        "methodology": "共分散行列のblock inversionとSchur complementを用いて二段階最小分散ポートフォリオの構造を示し、他クラスタの代表点だけで条件付けるVecchia型近似を導入しています。補完項を$\\gamma\\in[0,1]$で減衰させ、rank-one依存の厳密性、推定誤差下の局所定理、解析例および対称族のclosed-form解を検討しています。",
+        "limitations": "評価は提示された抽象の範囲では理論結果と例に限られ、実データ、取引コスト、制約、非定常性、クラスタ推定誤差、out-of-sample性能は確認できません。rank-one依存や対称構造が一般の市場共分散行列にどの程度適用できるかも不明です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "ポートフォリオ最適化としては数理的に関連性がありますが、対象サイトの中心領域である電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、金利市場には直接該当しません。",
+        "tags": [
+          "portfolio optimization",
+          "minimum-variance portfolio",
+          "Schur complement",
+          "clustered optimization",
+          "Vecchia approximation",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper theoretically analyzes an interpolation method for minimum-variance portfolio optimization that combines within-cluster covariance structure with cross-cluster Schur complements. It does not focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "The paper constructs a bridge with nested clustered optimization at $\\gamma=0$ and the global minimum-variance portfolio at $\\gamma=1$, while avoiding linear solves larger than a cluster or the number of clusters. It reports exactness under a specific rank-one cross-cluster dependence structure, and shows that under estimation error the optimal $\\gamma$ can be an interior value or that full coupling can remain optimal.",
+          "practicalApplication": "The approach may be useful for portfolio construction with large covariance matrices, allowing cross-cluster dependence to be introduced progressively while controlling computational cost. However, the abstract does not establish direct applications to rates, yield-curve portfolios, or execution.",
+          "methodology": "Using block inversion and Schur complements, the paper derives the structure of two-tier minimum-variance portfolios and introduces a Vecchia-style approximation that conditions on representative points from other clusters. It damps the complement with $\\gamma\\in[0,1]$ and studies exactness under rank-one dependence, local results under estimation error, analytical examples, and a symmetric family with a closed-form solution.",
+          "limitations": "Based on the abstract, the evaluation is limited to theoretical results and examples; empirical data, transaction costs, portfolio constraints, nonstationarity, cluster-estimation error, and out-of-sample performance are not assessed. The general applicability of rank-one dependence and symmetric structures to real market covariance matrices is also unclear.",
+          "reason": "Although the paper is relevant to mathematical portfolio optimization, it does not directly address the site's core areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "portfolio optimization",
+            "minimum-variance portfolio",
+            "Schur complement",
+            "clustered optimization",
+            "Vecchia approximation",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.21291": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "Ornstein–Uhlenbeck駆動の確率的ボラティリティモデルでのオプション価格評価に向け、operator splittingによる効率的なMonte Carloシミュレーション手法を提案する研究です。",
+        "mainResult": "各分割ステップを解析的に解けるように設計し、少数の正規乱数だけで実装できる手法を示しています。数値実験では、既存の3手法と比較して、特に監視時点の多いパス依存オプションで精度と速度のトレードオフが良好だったと報告しています。martingale-preserving control variatesとconditioningによる分散削減で性能が向上するとされています。",
+        "practicalApplication": "確率的ボラティリティモデルに基づくオプション価格評価や、監視時点の多いパス依存商品のMonte Carlo計算に応用可能です。ただし、電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱う研究ではありません。",
+        "methodology": "確率微分方程式をoperator splittingで分割し、各サブステップの解析解を用いてシミュレーションします。既存のHilbert interpolation、Karhunen–Loève expansion、Inverse Gaussianに基づくmoment matchingの3手法と、オプション価格の精度・計算速度を数値比較しています。",
+        "limitations": "要約からは、モデルの詳細な仮定、誤差次数、計算量、テスト設定、ベンチマークの具体的な数値が確認できません。また、実市場データでの検証や、金利・執行問題への適用結果は報告されていません。結論は要約に記載された数値実験の範囲に限られます。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "効率的な確率的ボラティリティ・オプションシミュレーションとしては関連性がありますが、本サイトの対象である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場には直接該当しないためです。",
+        "tags": [
+          "確率的ボラティリティ",
+          "Ornstein–Uhlenbeckモデル",
+          "Monte Carlo",
+          "operator splitting",
+          "オプション価格評価",
+          "パス依存オプション"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper develops an efficient Monte Carlo simulation scheme for option pricing under an Ornstein–Uhlenbeck-driven stochastic volatility model using operator splitting.",
+          "mainResult": "The scheme is designed so that every split step has an analytic solution and implementation requires only a few normal variates. Numerical tests reportedly show a favorable accuracy–speed tradeoff relative to three existing methods, especially for path-dependent options with many monitoring dates. Performance is further improved by martingale-preserving control variates and conditioning-based variance reduction.",
+          "practicalApplication": "The method could be applied to option pricing under stochastic volatility models, particularly Monte Carlo valuation of path-dependent products with many monitoring dates. However, the study does not directly address electronic execution, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "methodology": "The governing stochastic differential equations are decomposed using operator splitting, and each sub-step is simulated from its analytic solution. Pricing accuracy and computational speed are compared numerically with Hilbert interpolation, Karhunen–Loève expansion, and Inverse Gaussian-based moment-matching schemes.",
+          "limitations": "The abstract does not provide the model assumptions, error orders, computational complexity, detailed test design, or quantitative benchmark results. It also does not report validation with market data or applications to rates or execution problems. The conclusions therefore remain limited to the numerical experiments described in the abstract.",
+          "reason": "The paper is relevant as a stochastic-volatility option-simulation study, but it is not materially within this site's focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "stochastic volatility",
+            "Ornstein–Uhlenbeck model",
+            "Monte Carlo",
+            "operator splitting",
+            "option pricing",
+            "path-dependent options"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.21301": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "確率ボラティリティモデルのオプション価格評価におけるシミュレーション手法を提案する研究であり、電子取引、マーケット・マイクロストラクチャ、イールドカーブ、または金利モデルを主題としていません。",
+        "mainResult": "Strang operator splitting に基づくシミュレーション枠組みを提案し、条件付き積分分散や積分ボラティリティの評価を回避しながら、既存の exact simulation および Euler 法と比べて精度、効率、信頼性、実装容易性で競争力があると報告しています。さらに、主要な確率ボラティリティモデルに対する数値検証と、手法の二次収束性の証明を示しています。",
+        "practicalApplication": "Heston型、lifted Heston、Hull–White、Barndorff–Nielsen and Shephard モデルのオプション価格シミュレーションに利用できる可能性があります。ただし、本サイトの対象である電子執行や金利市場分析への直接的な応用は、要旨からは確認できません。",
+        "methodology": "Strang operator splitting approximation によりシミュレーション手順を構成し、条件付き特性関数の Fourier inversion や moment-matched distribution による近似を避けています。複数モデルで数値実験を行い、二次収束性を理論的に証明しています。",
+        "limitations": "評価は要旨に記載された数値実験と主張に基づくもので、具体的な誤差、計算時間、パラメータ範囲、ベンチマーク条件は確認できません。また、Hull–White モデルを含むものの、金利モデル研究としての具体的な貢献や yield-curve への応用は要旨から判定できません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "確率ボラティリティの数値計算法としては関連性がある一方、対象サイトの主要分野である電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブへの直接的な適合性が低いためです。",
+        "tags": [
+          "確率ボラティリティ",
+          "モンテカルロ・シミュレーション",
+          "operator splitting",
+          "Strang splitting",
+          "オプション価格評価",
+          "Heston model"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a simulation method for option pricing under stochastic volatility models and is not primarily about electronic trading, market microstructure, yield curves, or interest-rate models.",
+          "mainResult": "It proposes a simulation framework based on Strang operator splitting and reports that it avoids evaluating conditional integrated variance or integrated volatility while competing favorably with existing exact-simulation and Euler methods in accuracy, efficiency, reliability, and implementation simplicity. It also presents numerical tests for several major stochastic-volatility models and proves second-order convergence.",
+          "practicalApplication": "The method may be useful for option-pricing simulation under Heston-type, lifted Heston, Hull–White, and Barndorff–Nielsen and Shephard models. However, the abstract does not establish a direct application to electronic execution or rates-market analysis, which are the primary focus of this site.",
+          "methodology": "The authors construct simulation procedures using a Strang operator splitting approximation, avoiding Fourier inversion of conditional characteristic functions and moment-matched distribution approximations. They conduct numerical experiments across multiple models and provide a theoretical proof of second-order convergence.",
+          "limitations": "This assessment relies on the numerical tests and claims stated in the abstract; specific errors, computation times, parameter ranges, and benchmark settings cannot be assessed. Although the paper includes a Hull–White model, its concrete contribution to interest-rate modeling or yield-curve applications is not clear from the abstract.",
+          "reason": "Although the paper is relevant as a numerical-method contribution for stochastic-volatility models, it has limited direct fit with the site's main areas of electronic trading, market microstructure, interest-rate models, and yield curves.",
+          "tags": [
+            "stochastic volatility",
+            "Monte Carlo simulation",
+            "operator splitting",
+            "Strang splitting",
+            "option pricing",
+            "Heston model"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.21478": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "シンガポールの公営住宅改修が、対象建物と近隣建物の住宅価格および居住者構成に与える外部性を推定した研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "全国的な住宅改修事業の段階的導入を利用し、改修完了時に対象建物の価格が11.5%上昇し、500メートル以内の近隣建物の再販売価格が約2%上昇する一方、距離が広がると効果はゼロに近づくと報告しています。また、改修は高齢の既存居住者を不均衡に引き留めるとされています。",
+        "practicalApplication": "住宅政策や公営住宅の現物給付の設計、都市密度に応じた改修事業の費用便益評価には応用可能です。ただし、本サイトの対象である金融市場分析や金利実務への直接的な応用は限定的です。",
+        "methodology": "シンガポールの公営住宅におけるMain Upgrading Programmeの段階的導入を自然実験として利用し、近隣への非ランダムな曝露を調整して住宅価格への外部性を推定しています。距離によって減衰する外部性を含むモデルと、200万人超の居住者に関する行政データを用いています。",
+        "limitations": "抽象で示されている情報だけでは、識別戦略の詳細、推定誤差、頑健性検証、モデルの仮定、改修費用や他地域への外的妥当性を評価できません。結果はシンガポールの高密度な公営住宅市場に依存する可能性があります。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "住宅政策と都市経済に関する研究であり、指定された電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利分野の中心的テーマには該当しません。",
+        "tags": [
+          "住宅政策",
+          "都市経済",
+          "外部性",
+          "公営住宅",
+          "シンガポール"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper estimates the externalities of public-housing upgrades in Singapore on treated and neighboring housing prices and resident composition. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using the staggered rollout of a nationwide housing-upgrading program, the paper reports an 11.5% increase in treated-building prices upon completion and an approximately 2% increase in resale prices for neighboring buildings within 500 meters, with effects declining to zero at greater distances. Upgrading also disproportionately retains older incumbent residents.",
+          "practicalApplication": "The findings may inform housing policy, the design of in-kind public-housing provision, and cost-benefit evaluations of upgrading programs conditional on urban density. Direct applications to the financial-market and rates topics covered by this site are limited.",
+          "methodology": "The study uses the staggered rollout of Singapore's Main Upgrading Programme as a natural experiment, adjusting for nonrandom neighborhood exposure to estimate housing-price externalities. It combines a distance-decaying externality model with administrative data on more than two million residents.",
+          "limitations": "Based on the abstract alone, the details of the identification strategy, standard errors, robustness checks, model assumptions, upgrading costs, and external validity cannot be assessed. The results may depend on Singapore's high-density public-housing market.",
+          "reason": "This is a study of housing policy and urban economics, not a material contribution to electronic trading, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "housing policy",
+            "urban economics",
+            "externalities",
+            "public housing",
+            "Singapore"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.21684": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "隠れた有限状態Markovドリフトを持つ配当成長を前提に、代表的投資家のEpstein–Zin均衡における株価・評価要因の構造を分析する理論研究です。",
+        "mainResult": "指定されたクラスと正則性・許容性・正値性条件の下で、価格配当比に追加された正の絶対連続な評価要因は均衡により定数となり、価格はbelief-Markov型になると報告しています。2状態モデルでは、価格方程式の正値解について存在性、一意性、端点での滑らかさ、内部解析性、一様有界性を示し、さらに株価ボラティリティ、欧州オプション価格付けPDE、短期条件付きリスク中立対数リターン歪度の展開を導出しています。",
+        "practicalApplication": "隠れ状態と投資家の信念を含む株価・オプション価格モデルの理論的基盤を提供しますが、実証推定、キャリブレーション、取引執行、イールドカーブ構築への直接的な手法は示されていません。",
+        "methodology": "代表的投資家のEpstein–Zin効用、幾何ブラウン型配当、隠れ有限状態Markovドリフトを用いて均衡条件を解析し、価格方程式の正値解に対する解析的性質を証明しています。2状態の場合には、信念依存の株価ボラティリティとオプション価格付けPDEを導出しています。",
+        "limitations": "結果は指定されたクラス、正則性・許容性・正値性条件、および2状態設定に依存します。短期金利は連続で一側面のポートフォリオ条件を満たすものとして許容されるにとどまり、具体的な金利モデルやイールドカーブの推定・予測性能は検討されていません。抽象からは数値検証、データ分析、実装上の計算量も確認できません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "隠れ状態、均衡価格、オプションPDE、短期金利が登場するため金利・資産価格理論と接点はありますが、主題は電子取引、マーケットマイクロストラクチャー、金利モデル、またはイールドカーブではなく、株式資産価格の数理均衡分析です。対象サイトの中核スコープには直接該当しないためです。",
+        "tags": [
+          "hidden Markov fundamentals",
+          "equilibrium asset pricing",
+          "Epstein–Zin preferences",
+          "belief-Markov prices",
+          "option-pricing PDE",
+          "short-rate condition",
+          "stock volatility"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This theoretical study analyzes the structure of stock prices and valuation factors in a representative-agent Epstein–Zin equilibrium with geometric dividends and a hidden finite-state Markov drift.",
+          "mainResult": "Under the specified class and regularity, admissibility, and positivity conditions, the additional positive absolutely continuous valuation factor in the price-dividend ratio is forced by equilibrium to be constant, yielding belief-Markovian prices. In the two-state model, the authors report existence, uniqueness, endpoint smoothness, interior analyticity, and uniform bounds for the positive solution of the pricing equation, and derive belief-dependent stock volatility, a European option-pricing PDE, and a short-maturity conditional risk-neutral log-return skewness expansion.",
+          "practicalApplication": "The paper provides a theoretical foundation for stock and option-pricing models incorporating hidden states and investor beliefs, but it does not provide direct methods for empirical estimation, calibration, trade execution, or yield-curve construction.",
+          "methodology": "The authors analyze equilibrium conditions in a representative-agent Epstein–Zin economy with geometric dividends and a hidden finite-state Markov drift, proving analytical properties of positive solutions to the pricing equation. In the two-state case, they derive belief-dependent stock volatility and an option-pricing PDE.",
+          "limitations": "The results depend on the specified class and on regularity, admissibility, and positivity conditions, as well as on the two-state setting for several conclusions. The short rate is only assumed to be continuous and to satisfy a one-sided portfolio condition; no specific interest-rate model or yield-curve estimation and forecasting exercise is studied. The abstract also does not establish numerical validation, data analysis, or implementation complexity.",
+          "reason": "Although the paper connects to rates and asset-pricing theory through hidden states, equilibrium pricing, option PDEs, and short rates, its main topic is mathematical equilibrium analysis of equity prices rather than electronic trading, market microstructure, interest-rate models, or yield curves. It is therefore outside the site's core scope.",
+          "tags": [
+            "hidden Markov fundamentals",
+            "equilibrium asset pricing",
+            "Epstein–Zin preferences",
+            "belief-Markov prices",
+            "option-pricing PDE",
+            "short-rate condition",
+            "stock volatility"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.21688": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "ランダム符号付き Takagi--Landsberg bridge の二次変動と $p$ 次変動の、分割列に対する不変性を確率論的に解析した研究です。電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブには直接取り組んでいません。",
+        "mainResult": "$H=1/2$ では、固定された決定論的な細分割列に沿う二次変動が、ほとんど確実に一様に $t$ へ収束すると報告しています。非細分割列ではメッシュ条件 $o(1/\\log n)$ が十分かつ鋭い一方、$H\\ne1/2$ では臨界指数 $p=1/H$ の変動が分割列に依存し得ることを示しています。",
+        "practicalApplication": "金融市場データの価格変動推定や実行アルゴリズムへの直接的な応用は、要旨からは確認できません。主な意義は、特定のフラクタル確率過程における変動量の分割依存性を理解する基礎理論にあります。",
+        "methodology": "独立な Rademacher 係数を持つランダム符号付き Takagi--Landsberg bridge を対象に、二次和の作用素表示と Rademacher chaos のモーメント評価を用いて、分割列に沿う収束、不変性、蓄積点を解析しています。",
+        "limitations": "評価対象は特定の構成的な確率過程と決定論的分割列に限られます。実際の金融時系列、確率金利、取引コスト、観測ノイズへの検証や応用は要旨に示されていません。また、結論の詳細な条件は本文の確認が必要です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "確率過程の変動理論としては興味深いものの、本サイトの主要対象である電子執行、マーケット・マイクロストラクチャ、金利モデル、イールドカーブへの関連性が直接的ではありません。",
+        "tags": [
+          "out of scope",
+          "stochastic processes",
+          "quadratic variation",
+          "p-variation",
+          "Takagi--Landsberg bridge",
+          "Rademacher chaos"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper probabilistically analyzes the partition-sequence invariance of quadratic and $p$-th variation for random signed Takagi--Landsberg bridges. It does not directly address electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "At $H=1/2$, the paper reports that quadratic variation along every fixed deterministic refining sequence converges almost surely and uniformly to $t$. For non-refining sequences, the mesh condition $o(1/\\log n)$ is sufficient and sharp, whereas for $H\\ne1/2$ the critical variation with exponent $p=1/H$ can depend on the partition sequence.",
+          "practicalApplication": "The abstract does not establish a direct application to financial price-variation estimation or execution algorithms. Its main contribution is foundational: understanding partition dependence of variation for a class of fractal stochastic processes.",
+          "methodology": "The authors study random signed Takagi--Landsberg bridges with independent Rademacher coefficients. They use an operator representation of quadratic sums and moment bounds for Rademacher chaos to analyze convergence, invariance, and accumulation points along partition sequences.",
+          "limitations": "The analysis is restricted to a specific constructed stochastic process and deterministic partition sequences. The abstract provides no validation or application to real financial time series, stochastic interest rates, transaction costs, or observation noise. The precise conditions require checking the full paper.",
+          "reason": "Although the paper is mathematically interesting as variation theory, its relevance to the site's core areas—electronic execution, market microstructure, interest-rate models, and yield curves—is not direct.",
+          "tags": [
+            "out of scope",
+            "stochastic processes",
+            "quadratic variation",
+            "p-variation",
+            "Takagi--Landsberg bridge",
+            "Rademacher chaos"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.22052": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "ドイツの風災を対象に、透明性の高いパラメトリック型損失CATボンドのトリガー設計と価格付け手法を提案する研究です。",
+        "mainResult": "物理的ハザード、脆弱性、エクスポージャーを分離するコスト確率場から、パラメトリック型とモデル損失型の間で柔軟に設定できるトリガーを構築し、ドイツの過去の風災データを用いて較正、basis riskの測定、モデル評価、数値分析を行ったと報告しています。抽象からは、具体的な価格や性能改善の定量結果は確認できません。",
+        "practicalApplication": "保険会社、公共機関、CATボンド投資家に対し、従来の補償損失モデルより透明で評価しやすいトリガーと価格付けの枠組みを提供する可能性があります。ただし、電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ分析への直接的な応用はありません。",
+        "methodology": "コスト確率場で物理的ハザード、脆弱性関数、エクスポージャーを分解し、ドイツの歴史的風災の風速データにmax-stable random fieldを適合させています。再保険業界で標準的な解像度を用い、業界損失・エクスポージャーデータから脆弱性を較正し、トリガーのbasis riskとモデル全体を評価しています。",
+        "limitations": "提示された抽象だけでは、価格付け式、較正手順の詳細、サンプル規模、検証方法、比較対象、basis riskや価格精度の定量値が不明です。分析対象もドイツの風災に限定され、他地域・他災害・実際の市場運用への外部妥当性は確認できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "保険リスクとCATボンドの設計・価格付けを扱う研究であり、対象サイトの主要分野である電子執行、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、金利研究には実質的に該当しません。",
+        "tags": [
+          "catastrophe bonds",
+          "parametric insurance",
+          "basis risk",
+          "windstorm risk",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a transparent parametric-modeled loss CAT bond trigger and pricing methodology for German windstorms.",
+          "mainResult": "Using a cost random field that separates physical hazard, vulnerability, and exposure, the authors construct a trigger that can flexibly range between parametric and modeled-loss structures. They calibrate it with historical German windstorm data, measure basis risk, assess the model, and report numerical results. The abstract does not provide specific quantitative results for pricing or performance improvements.",
+          "practicalApplication": "The framework could provide insurers, public authorities, and CAT bond investors with a more transparent and easier-to-evaluate trigger and pricing approach than conventional indemnity-loss modeling. However, it has no direct application to electronic trading, market microstructure, interest-rate models, or yield-curve analysis.",
+          "methodology": "The study decomposes physical hazard, a vulnerability function, and exposure through a cost random field. It fits a max-stable random field to historical wind-speed data for German storms at a resolution standard in the reinsurance industry, calibrates vulnerability using industry loss and exposure data, and evaluates basis risk and the overall model.",
+          "limitations": "The abstract does not specify the pricing equations, calibration details, sample size, validation design, benchmark models, or quantitative values for basis risk or pricing accuracy. The analysis is also limited to German windstorms, so external validity across regions, perils, and live market implementation is unestablished.",
+          "reason": "The paper concerns insurance risk and CAT bond design and pricing. It is not materially related to the site's core areas of electronic execution, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "catastrophe bonds",
+            "parametric insurance",
+            "basis risk",
+            "windstorm risk",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 980,
+      "outputTokens": 1097,
+      "reasoningTokens": 33,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2077,
+      "estimatedCostUsd": 0.001512,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21173v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 24296,
+      "outputTokens": 2007,
+      "reasoningTokens": 473,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 24293,
+      "totalTokens": 26303,
+      "estimatedCostUsd": 0.161617,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 31,
+      "paperIds": [
+        "2609.21173v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 782,
+      "outputTokens": 902,
+      "reasoningTokens": 56,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1684,
+      "estimatedCostUsd": 0.001239,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21232v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 814,
+      "outputTokens": 1197,
+      "reasoningTokens": 99,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2011,
+      "estimatedCostUsd": 0.001599,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21271v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 814,
+      "outputTokens": 1125,
+      "reasoningTokens": 91,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1939,
+      "estimatedCostUsd": 0.001513,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21271v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 863,
+      "outputTokens": 1019,
+      "reasoningTokens": 83,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1882,
+      "estimatedCostUsd": 0.001395,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21291v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 847,
+      "outputTokens": 1044,
+      "reasoningTokens": 111,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1891,
+      "estimatedCostUsd": 0.001422,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21301v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 768,
+      "outputTokens": 922,
+      "reasoningTokens": 37,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1690,
+      "estimatedCostUsd": 0.00126,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21478v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 814,
+      "outputTokens": 1260,
+      "reasoningTokens": 156,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2074,
+      "estimatedCostUsd": 0.001675,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21684v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 853,
+      "outputTokens": 1030,
+      "reasoningTokens": 54,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1883,
+      "estimatedCostUsd": 0.001407,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21688v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 853,
+      "outputTokens": 996,
+      "reasoningTokens": 76,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1849,
+      "estimatedCostUsd": 0.001366,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21688v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 881,
+      "outputTokens": 1008,
+      "reasoningTokens": 46,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1889,
+      "estimatedCostUsd": 0.001386,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.22052v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

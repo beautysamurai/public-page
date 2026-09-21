@@ -2,6 +2,26 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-09-21-daily-openai-01",
+      "date": "2026-09-21",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.21173v1",
+          "title": "Adapting the Actor Model of Concurrency for High-Frequency Trading: Synchronous Message Delivery (fast_send) and a Tick-to-Book Latency Study",
+          "authors": [
+            "Vincent Maciejewski"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-09-20-daily-openai-01",
       "date": "2026-09-20",
       "kind": "daily",

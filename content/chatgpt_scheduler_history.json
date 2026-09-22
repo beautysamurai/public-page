@@ -3464,6 +3464,104 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-09-22-daily-openai-01",
+      "editionDate": "2026-09-22",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-22T11:59:03Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-22",
+      "observedBatchDate": "2026-09-22",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月22日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 16 | 13,522 | 16,108 (1,089) | 0.0220 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 3 | 69,250 | 6,994 (1,655) | 0.4861 | PDF全文・10ページ / PDF全文・47ページ / PDF全文・31ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Financial Language Models as Applied Artificial Intelligence Systems for News-Based Trading under Market Frictions\n\n**[arXiv:2609.23703v1](https://arxiv.org/abs/2609.23703v1) — Kemal Kirtac**\n\n### 概要\n\n企業ニュースから取引可能なシグナルを生成するMFASTを提案し、時刻整合、確率校正、取引コスト、流動性、capacity、計算負荷、統計検定を一体化して金融language modelを評価する。RefinitivニュースとCRSP株式データによる著者報告では、decoder-only modelがencoder系と辞書法を上回った。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 推奨 | 金融language model / ニュース取引 / market microstructure / 取引コスト / 流動性 / capacity制約 / sentiment analysis / backtest / MLOps / 実行時刻整合 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 電子執行とmarket microstructureを考慮した金融NLP評価というテーマは実務的で、予測精度だけでなく時刻整合、コスト、capacity、計算資源まで扱う設計は有用である。一方、極めて高いbacktest成績は簡略化された執行・コスト仮定に依存し、公開データでの再現は弱いため、収益性の証拠よりも評価frameworkとして読むべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 922 | 1,055 (72) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 22,303 | 2,066 (405) | 0.1528 | PDF全文・47ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 2024年6月から2026年1月のout-of-sample期間について、LLaMA-3はaccuracy 0.787、AUC 0.846を記録し、5 bpの片道コストと日次売買代金10%の参加率上限を課したlong-short戦略では年率Sharpe ratio 2.85、累積収益率180%だったと報告される。公開データでの再現ではSharpe ratioは0.92に低下し、計算面ではLLaMA-3が最大54.2 GB、記事当たり112 msを要した。\n\n**手法:** 2010年から2026年のRefinitivニュースをCRSPに結合し、単一企業記事、片側のnovelty filter、tradability screenを経て973,481件を構築する。2010～2023年を学習、2024年1～5月を検証、2024年6月以降をtestとし、将来3日超過収益の符号を教師ラベルに用いる。6種類のsentiment手法を分類・校正・固定効果回帰・value-weighted portfolioで比較し、5 bpコスト、流動性screen、参加率上限、factor調整、bootstrap、White reality check、Hansen SPA、deflated Sharpe ratioを適用する。公開GDELTと価格データによるreplication、計算性能測定、言語カテゴリ別error analysisも行う。\n\n**実務への応用:** ニュースsentimentモデルをalpha pipelineへ導入する際に、情報の観測可能時刻、校正、執行遅延、turnover、流動性、取引容量、推論速度を共通基準で比較するための評価テンプレートとして利用できる。高いsignal qualityを重視する運用ではLLaMA-3、低遅延・低コストを重視する監視用途ではRoBERTaやFinBERTが候補となる。\n\n**限界・注意点:** 結果は英語の米国株に限定され、日次執行モデルはorder book、queue position、market impact、short availability、borrow fee、intraday latencyを明示的に再現しない。固定5 bpコストはニュース直後や低流動性銘柄の実コストを過小評価し得る。教師ラベルは経済的sentimentそのものではなく将来収益の符号であり、モデルは実質的にtext-based return classifierである。主要データが非公開で、foundation-model contaminationを完全には排除できず、公開データ再現の成績も大幅に弱い。多くのrobustness結果とfactor alphaは本文で要約されるだけで詳細表がなく、戦略選択の事前固定やreported statisticsを独立に検証できない。\n\n## 2. Risk Measures under Paired-Ambiguity: A Deep Learning Reflected BSDE Framework\n\n**[arXiv:2609.23768v1](https://arxiv.org/abs/2609.23768v1) — Nacira Agram, Jan Rems, Emanuela Rosazza Gianin**\n\n### 概要\n\n本稿は、Girsanov変換による確率モデルの曖昧性と確率的割引率の曖昧性を同時に扱う「paired ambiguity」下の最適停止を定式化する。停止価値を上側反射型BSDEで表現し、entropic riskに対応する二次ドライバー、明示的な停止則、深層学習による数値解法を検討している。金利期間構造モデルではないが、割引率不確実性とAmerican optionの行使判断を結び付ける点でratesとデリバティブ評価の双方に関連する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 推奨 | paired ambiguity / 反射型BSDE / 動的リスク尺度 / 割引率の曖昧性 / entropic risk / 最適停止 / American option / deep BSDE / cash-subadditivity / Snell envelope |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 割引率曖昧性をcash-subadditive risk measureとして扱い、二次反射型BSDEをdeep learningで解く統合的枠組みは、頑健なAmerican option評価を研究する読者には有用である。特にentropic変換と離散反射を用いた数値構成は実装上の参考になる。一方、金利期間構造モデルそのものではなく、数値実証も限定的であるため、rates研究としての重要性は中程度と評価する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 780 | 1,303 (143) | 0.0017 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 25,306 | 2,790 (677) | 0.1823 | PDF全文・31ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らは、停止価値が障害過程$-\\xi_t$を持つ一意な上側反射型BSDEの第1成分に一致し、適切な正則性と最適解の達成条件の下で初回接触時刻$\\tau_t^*=\\inf\\{s\\ge t:Y_s=-\\xi_s\\}$が最適であると報告する。停止作用素について単調性、cash-subadditivity、特定条件下のcash-additivity・準凹性・凹性、および一般には凸でないことを示す。entropic driver $g(z)=\\frac{\\gamma}{2}|z|^2$では指数変換により問題を$e^{-\\gamma\\xi_t}$のlower Snell envelopeへ帰着させる。数値面では離散反射と厳密な切断を介してLipschitz系へ変換し、ネットワーク近似誤差を含む収束評価を与える。\n\n**手法:** まずcash-subadditive risk measureの双対表現に、確率測度変更を表す制御と割引率を表す制御を組み込み、非線形Snell envelopeと上側反射型BSDEを用いて最適停止問題を解析する。entropic caseでは指数変換により古典的な停止問題との対応を導き、submartingale、supermartingale、決定論的payoff、Brownian payoffについて明示解を示す。数値法ではMarkov設定、決定論的で状態非依存のvolatility、Euler離散化、離散反射、$Z$の一様有界性に基づく二次ドライバーの切断、deep backward regressionを組み合わせる。American put、割引率区間の曖昧性、entropic-discount ambiguityの3例を$50$時間ステップとニューラルネットワークで検証する。\n\n**実務への応用:** 確率モデルと割引率の双方に不確実性があるAmerican option、最適清算、投資タイミングの評価に利用できる。数値例ではBlack–Scholes American putに対する推定価格が$0.11638$で、binomial基準値$0.11973$との差は約$-2.8\\%$だった。entropic parameterを$\\gamma=5$とした例では価格が$0.10881$となり、早期停止比率は基準例の$0.41$から$0.82$へ上昇したと報告されるが、著者らもこれを停止境界の一般的な比較静学とは位置付けていない。\n\n**限界・注意点:** 理論の数値部分はMarkovian settingと状態非依存の決定論的volatilityに限定され、state-dependent volatilityは未解決とされる。収束証明は既存の離散反射・時間離散化評価とLipschitz deep BSDE評価の組合せであり、定数は切断半径を通じて指数的に大きくなり得る。定量的収束率には追加の滑らかさ条件が必要だが、主要なAmerican put payoffはstrikeで微分不可能なため、その実験には提示された収束率を直接適用できない。数値検証は低次元の少数例、単一の基本設定、有限学習回数に限られ、統計的信頼区間、広範なhyperparameter感応度、実市場データによる較正は示されていない。また、割引率は有界区間または定数として扱われ、yield curve dynamics、金利商品の較正、取引コストやmarket microstructureは対象外である。\n\n## 3. OrderFusion+: Probabilistic Buy--Sell Price Trajectory Forecasting in Intraday Electricity Markets\n\n**[arXiv:2609.23598v1](https://arxiv.org/abs/2609.23598v1) — Runyao Yu, Derek W. Bunn**\n\n### 概要\n\nドイツの連続時間内電力市場を対象に、対象商品と隣接受渡商品、買い・売り双方の注文情報から、受渡前の15分刻み価格軌跡を分位点予測するOrderFusion+を提案する。動的マスクで参照履歴と隣接商品の範囲を市場状況ごとに選択し、2024年のテストでは比較モデルを上回ったと報告している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 2/10 | 推奨 | 時間内電力市場 / 注文板 / 確率的価格軌跡予測 / cross-attention / 動的マスキング / 分位点予測 / 隣接受渡商品 / 電子取引 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 注文板のside interaction、隣接受渡商品の依存性、価格のpath forecastを一体化しており、電子取引と電力市場microstructureの双方に直接関係する。複数の強いbaseline、時系列fold、DM検定を含む実証は有用だが、単一市場での予測精度に限定され、経済価値やmarket-efficiencyに関する主張は追加検証を要する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 889 | 1,076 (104) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 21,641 | 2,138 (573) | 0.1510 | PDF全文・10ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** OrderFusion+は3つの予測起点を平均してAQL $10.62$、MAE $28.04$、RMSE $101.76$、$R^2=0.39$を記録し、全比較モデルに対するAQLの改善が片側Diebold–Mariano検定で有意だったと報告される。最良の学習済みbaselineであるTransformerのAQL $11.72$に対する改善は約$9.4\\%$で、quantile crossingも$0\\%$だった。一方、coverage誤差は単純なpersistence baselineの方が小さい。\n\n**手法:** EPEX SPOTの商用ドイツ注文データを用い、買い側と売り側をcross-attentionで融合する。対象商品と最大12の隣接商品、最大180分の履歴を入力し、30種類の候補からside-specificな動的マスクを選択する。15分刻みの買い・売り別VWAP軌跡について3分位点を出力し、masked Average Quantile Lossで学習する。2022年以降のデータを用いた3つの時系列foldで2024年全体をテストし、persistence、LQR、MLP、LSTM、Transformer、および4種のzero-shot foundation modelと比較している。\n\n**実務への応用:** 予測された買い・売り別の価格経路と分位点は、蓄電池や需要応答の発注時刻・価格閾値・ポジション調整に利用できる可能性がある。推論時間は著者のA100環境で1秒未満とされるが、本論文は実取引戦略、約定可能性、取引費用、market impact、損益を検証していないため、executionへの有効性は未確認である。\n\n**限界・注意点:** 単一のドイツ市場と15分商品だけの結果であり、他国・他商品への外的妥当性は不明である。動的マスク候補は経験的に設計され、選択分布はrandom seedで変化するため、市場効率や買い・売り行動の構造的証拠とは解釈できない。予測分位点は3水準のみで、coverageはpersistenceより劣る。商用データ依存で再現コストがあり、foundation modelへの入力変換や公平な比較条件の詳細も限定的である。さらに、取引費用、流動性、約定、損益を含むout-of-sample trading evaluationがない。",
+      "papers": [
+        {
+          "arxivId": "2609.23703v1",
+          "title": "Financial Language Models as Applied Artificial Intelligence Systems for News-Based Trading under Market Frictions",
+          "authors": [
+            "Kemal Kirtac"
+          ],
+          "submittedDate": "2026-09-20",
+          "updatedDate": "2026-09-22",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.23703v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.23703v1",
+          "schedulerRank": 1,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 10/10",
+          "schedulerSummary": "企業ニュースから取引可能なシグナルを生成するMFASTを提案し、時刻整合、確率校正、取引コスト、流動性、capacity、計算負荷、統計検定を一体化して金融language modelを評価する。RefinitivニュースとCRSP株式データによる著者報告では、decoder-only modelがencoder系と辞書法を上回った。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 922 / 出力 1,055（うち推論 72） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 22,303 / 出力 2,066（うち推論 405） · PDF 47 pages · 推定 $0.1528",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.23768v1",
+          "title": "Risk Measures under Paired-Ambiguity: A Deep Learning Reflected BSDE Framework",
+          "authors": [
+            "Nacira Agram",
+            "Jan Rems",
+            "Emanuela Rosazza Gianin"
+          ],
+          "submittedDate": "2026-09-20",
+          "updatedDate": "2026-09-22",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.23768v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.23768v1",
+          "schedulerRank": 2,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 10/10",
+          "schedulerSummary": "本稿は、Girsanov変換による確率モデルの曖昧性と確率的割引率の曖昧性を同時に扱う「paired ambiguity」下の最適停止を定式化する。停止価値を上側反射型BSDEで表現し、entropic riskに対応する二次ドライバー、明示的な停止則、深層学習による数値解法を検討している。金利期間構造モデルではないが、割引率不確実性とAmerican optionの行使判断を結び付ける点でratesとデリバティブ評価の双方に関連する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 780 / 出力 1,303（うち推論 143） · 推定 $0.0017\n論文解析: gpt-5.6-sol / medium · トークン 入力 25,306 / 出力 2,790（うち推論 677） · PDF 31 pages · 推定 $0.1823",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.23598v1",
+          "title": "OrderFusion+: Probabilistic Buy--Sell Price Trajectory Forecasting in Intraday Electricity Markets",
+          "authors": [
+            "Runyao Yu",
+            "Derek W. Bunn"
+          ],
+          "submittedDate": "2026-09-20",
+          "updatedDate": "2026-09-22",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.23598v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.23598v1",
+          "schedulerRank": 3,
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 2/10",
+          "schedulerSummary": "ドイツの連続時間内電力市場を対象に、対象商品と隣接受渡商品、買い・売り双方の注文情報から、受渡前の15分刻み価格軌跡を分位点予測するOrderFusion+を提案する。動的マスクで参照履歴と隣接商品の範囲を市場状況ごとに選択し、2024年のテストでは比較モデルを上回ったと報告している。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 889 / 出力 1,076（うち推論 104） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 21,641 / 出力 2,138（うち推論 573） · PDF 10 pages · 推定 $0.1510",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 2,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

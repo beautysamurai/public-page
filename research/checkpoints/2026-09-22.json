@@ -1,0 +1,1166 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-22",
+  "fingerprint": "8676a5637a928bb65bb924c72ab87a2bbc4113f663b8abbd8178a3cef1b906e9",
+  "candidateFingerprints": {
+    "2609.21439": "a6c7484a29cbb2504d6a84af11065b7ae650153dcfc2e4bca0fc07e96bf6391e",
+    "2609.22169": "12c9e20252462bfc8c101cb8891c98bfa3ede608998a189d831f1b4b5f5878e8",
+    "2609.22202": "38273e7629604f9606a0f8a808c6e48ea2a31baa0b7161e2b05e1e6becc5b319",
+    "2609.22408": "7dedf633fef2fd0ac6a54cdcd41778b6cd5f7d7a19174a96cc22d511a2a6aea3",
+    "2609.22446": "e37bade26bb95cd82eb602a5835e4fb9e46af79fdb67f402d0b5391e3a84f375",
+    "2609.22652": "a8d13492946647cebde1801a860a61fabf21758fe2289a3d25950d3bc03eaeef",
+    "2609.22893": "cc48855acedd24aa4bc2102ab22e410c37b245b7eade3d74191ea6a113766a0a",
+    "2609.23272": "1708233e21e423094f8dbd25973fbbf7bcd700d8972f5c5935f0d5c34f03fbbb",
+    "2609.23378": "f46cd80afa782ec450a9fa32a0ce42b263c1c2e383671aac9075b475a22328d0",
+    "2609.23571": "150c3ef3687309b1eff245ab87b2796accaaeee85bb5c520c937935ed921d4fe",
+    "2609.23598": "4b71b71896d8fb3db526ae5bc36775648fa97e1617c1a0d7f433489cdd838c06",
+    "2609.23703": "1fc89cd650cdc7ed212e87c90186bd920cff1a500fcbee5ec3277e1614e52a3a",
+    "2609.23744": "b40df82c599657ccfdc7c629b29f6650364069b35b80294e713f04761c068eb5",
+    "2609.23768": "8f7d297c9900ea12b8e453d0afef37897b016f1ea2c4b4e8c3e65e1ff39f0ca2",
+    "2609.24181": "24ebd846a4b7e678446c1d6a6210973c872725828b5ca8e1d0d1a3c1163358f6",
+    "2609.24548": "a0b5e8efd3fb54e769cc80b58f3ec0761c3f9f55690f72deae05392d2c38541c"
+  },
+  "results": {
+    "2609.21439": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、AIまたは人間と競争する際の情報提示が参加者の入札・エスカレーション行動に与える影響を、動的 all-pay auction 実験で検証している。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱う研究ではない。",
+        "mainResult": "事前登録された参加者1,395人の実験では、対戦相手が人間かもしれないと伝えると中央値の価格が6.7ポイント上昇し、最適化機械かもしれないと伝えると8.8ポイント低下した。情報だけで生じた差は、競争の賞金価値の約15%に相当した。また、AIとの実際の対戦は価格を低下させる一方、双方が正の収益を得る確率も低下させた。",
+        "practicalApplication": "AIエージェントの表示方法が競争行動に影響するという示唆は、一般的なオークション設計やAI対人インターフェースには応用可能である。ただし、電子執行、注文設計、流動性、価格形成、金利取引への直接的な実務含意は抽象からは確認できない。",
+        "methodology": "動的な all-pay auction による反復コンテストを用い、参加者に伝える相手の種類（人間、人間を模倣するAI、競争に最適化されたAI）と実際の対戦相手を直交的に操作した、欺瞞を用いない実験である。標本数は1,395人で、研究は事前登録されている。",
+        "limitations": "抽象からは、参加者の募集方法、実験報酬の詳細、価格単位、効果の統計的不確実性、反復回数、外部的妥当性が確認できない。単一の実験的all-pay auctionから、実際の市場や電子取引参加者の行動へ一般化するには限界がある。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "AIと人間の競争、オークション行動、情報効果を扱う点は興味深いが、対象サイトの中核分野である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場に materially relevant ではないため。",
+        "tags": [
+          "AI競争",
+          "all-pay auction",
+          "実験経済学",
+          "情報効果",
+          "行動ファイナンス"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines how information about whether a competitor is human or an AI affects bidding and escalation behavior in a dynamic all-pay auction. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "In a preregistered experiment with 1,395 participants, the median price increased by 6.7 points when participants were told that the opponent might be human and decreased by 8.8 points when they were told that the opponent might be an optimizing machine. The information-only spread was about 15% of the competition's prize value. Actually competing against AI agents lowered prices while also reducing the probability that both sides earned positive returns.",
+          "practicalApplication": "The finding that how an AI agent is described can affect competitive behavior may apply to general auction design and human-AI interfaces. However, the abstract provides no direct practical implications for electronic execution, order design, liquidity, price formation, or rates trading.",
+          "methodology": "The authors use a repeated contest implemented as a dynamic all-pay auction. The communicated opponent type—human, AI trained to imitate people, or AI trained to compete well—and the actual opponent are varied independently in a deception-free experiment. The sample contains 1,395 participants, and the study is preregistered.",
+          "limitations": "The abstract does not report recruitment procedures, payment details, price units, statistical uncertainty, number of repetitions, or external validity. Generalizing from a single experimental all-pay auction to real markets or electronic-trading participants is limited.",
+          "reason": "Although the paper offers an interesting result on AI-versus-human competition, auctions, and information effects, it is not materially relevant to the site's core areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "AI competition",
+            "all-pay auction",
+            "experimental economics",
+            "information effects",
+            "behavioral finance"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.22169": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "LLMを用いた採用において、複数モデルの判断が均質化することで、年齢などに基づく体系的な排除が拡大するリスクを分析した研究です。電子取引、market microstructure、金利モデル、yield curve、またはrates市場を扱っていません。",
+        "mainResult": "10種類のLLMを比較した結果、post-trainedモデルはbaseモデルより高齢応募者へのcallback確率が3.6%低く、この変化は10モデル中8モデルで確認されました。モデル間の判断相関が高まる一方、global systemic exclusion rateは5.6%から17.3%に上昇し、intersectional systemic exclusion rateは12.2%から21.7%の範囲でした。",
+        "practicalApplication": "採用自動化におけるモデル選定、監査、年齢差別やintersectional biasの検証には示唆がありますが、本サイトの対象である金融市場の電子執行や金利分析への直接的な応用はありません。",
+        "methodology": "10種類のLLMについてbaseモデルとpost-trainedモデルの採用バイアスを測定し、callback傾向、モデル間の判断相関、体系的排除率、人口統計上の不均衡を比較しています。",
+        "limitations": "抄録からは応募者データ、実験設計、バイアス測定の定義、統計的有意性、モデルやプロンプトの詳細、実際の採用結果との外部妥当性を確認できません。また、モデル間の相関やpost-trainingが不平等を生む因果メカニズムは、抄録では限定的に説明されています。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "採用におけるAIバイアス研究としては関連性がありますが、対象分野である電子取引、market microstructure、interest-rate models、yield curves、ratesには実質的に関係しないため、対象サイトには推奨しません。",
+        "tags": [
+          "LLM",
+          "AI hiring",
+          "algorithmic bias",
+          "systemic exclusion",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes the risk that homogenized decisions across multiple LLMs used in hiring amplify systemic exclusion based on age and other demographic characteristics. It does not address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Across ten LLMs, post-trained models were 3.6% less likely than base models to callback older applicants, with this shift observed in eight of the ten models. Although decision correlation across models increased, global systemic exclusion rates rose from 5.6% to 17.3%, while intersectional systemic exclusion rates ranged from 12.2% to 21.7%.",
+          "practicalApplication": "The findings may inform model selection, auditing, and evaluation of age discrimination and intersectional bias in automated hiring, but they have no direct application to electronic execution or interest-rate analysis covered by this site.",
+          "methodology": "The authors measure hiring bias for ten LLMs by comparing base and post-trained versions, including callback tendencies, cross-model decision correlations, systemic exclusion rates, and demographic inequality.",
+          "limitations": "The abstract does not provide the applicant data, experimental design, definitions of bias measures, statistical significance, model and prompt details, or external validity against real hiring outcomes. It also gives only limited evidence about the causal mechanism linking post-training to inequality or cross-model correlation.",
+          "reason": "Although this is relevant research on AI bias in hiring, it is not materially related to electronic trading, market microstructure, interest-rate models, yield curves, or rates, so it is not recommended for the target site.",
+          "tags": [
+            "LLM",
+            "AI hiring",
+            "algorithmic bias",
+            "systemic exclusion",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.22202": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、合成的な金融ネットワーク上のシステミックリスクを可視化する、6段階のoperator-based分析パイプラインを提案する。潜在リスク、確率スコア、ネットワーク構造、距離ベースのcontagion、visual encoding、perspective projectionを順次接続する枠組みである。",
+        "mainResult": "報告された合成実験では、非線形な潜在リスク表現を確率スコアと重み付き金融ネットワークに変換し、shortest-path contagionで状態を伝播させたうえで、動的な可視表現に変換できることを示した。ただし、新たな予測モデルやcontagionメカニズムの提案は目的としていない。",
+        "practicalApplication": "金融ネットワークにおけるショック伝播やシステミックリスクの探索・説明・再現可能な可視化には利用できる可能性がある。一方、電子取引、execution、market microstructure、金利モデル、yield curve分析への直接的な応用は抽象からは確認できない。",
+        "methodology": "6つの数学的operatorを合成するモジュール型パイプラインを定式化し、制御されたsynthetic experimentsで実装例を示している。リスク表現、確率状態、ネットワーク、contagion、可視化を一連の変換として扱う。",
+        "limitations": "実験はsynthetic settingsに限定され、実データでの予測精度、頑健性、経済的妥当性、実際の金融ネットワークへの移転可能性は評価されていない。contagion dynamicsもshortest-pathに基づくため、現実の伝播機構を十分に表すとは限らない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "可視化とシステミックリスク分析の方法論としては関連性があるが、本サイトの主要対象である電子執行、market microstructure、interest-rate models、yield curves、ratesには直接該当しない。",
+        "tags": [
+          "システミックリスク",
+          "金融ネットワーク",
+          "contagion",
+          "scientific visualization",
+          "synthetic data",
+          "operator-based pipeline"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This work proposes a six-stage operator-based analytics pipeline for visualizing systemic risk dynamics on synthetic financial networks. It sequentially connects latent risk, probabilistic scores, network structure, distance-based contagion, visual encoding, and perspective projection.",
+          "mainResult": "In the reported synthetic experiments, nonlinear latent risk representations were transformed into probabilistic scores and a weighted financial network, propagated using shortest-path contagion, and converted into dynamic visual representations. The work does not aim to introduce a new predictive model or contagion mechanism.",
+          "practicalApplication": "The framework may support exploration, explanation, and reproducible visualization of shock propagation and systemic risk in financial networks. However, the abstract provides no direct application to electronic trading, execution, market microstructure, interest-rate models, or yield-curve analysis.",
+          "methodology": "The study formulates a modular pipeline as a composition of six mathematical operators and demonstrates it through controlled synthetic experiments. Risk representations, probabilistic states, networks, contagion, and visualization are treated as sequential transformations.",
+          "limitations": "The experiments are limited to synthetic settings, and predictive accuracy, robustness, economic validity, and transferability to real financial networks are not evaluated. The shortest-path contagion dynamics may also fail to represent real-world transmission mechanisms adequately.",
+          "reason": "Although the work is relevant to systemic-risk analysis and visualization methodology, it does not directly address the site's core areas of electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "systemic risk",
+            "financial networks",
+            "contagion",
+            "scientific visualization",
+            "synthetic data",
+            "operator-based pipeline"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.22408": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "AIエージェント集団における科学論文への注目の配分を、社会的影響の有無を操作して調べた研究です。電子取引、market microstructure、金利モデル、イールドカーブ、ratesの研究ではありません。",
+        "mainResult": "要旨によれば、社会情報を観察するAIエージェントは、独立に選択する場合より一人当たりの選択数が17.2%少なく、選択がより集中し、選ばれる論文の集合も狭くなりました。初期選択をランダムに与えると、その後の選択率が45.55 percentage points上昇しました。",
+        "practicalApplication": "AIによる研究推薦、論文評価、科学的アテンションの設計に示唆がありますが、本サイトの対象である電子執行や金利市場への直接的な応用は確認できません。",
+        "methodology": "American Economic Reviewの2025年通常論文114本をタイトルと要旨だけで選ぶAIエージェント実験を実施し、独立選択コミュニティと社会情報コミュニティを比較しています。追加実験では、20の社会コミュニティにおいて初期選択をランダムに割り当てています。",
+        "limitations": "要旨からはAIエージェントの具体的なモデル、選択生成過程、再現性、統計的検定の詳細が確認できません。対象論文が単一雑誌に限られ、結果を人間の研究者や他のAI集団、金融市場へ一般化できるかは不明です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "科学的注目の社会的形成を扱う研究であり、指定された電子取引、market microstructure、interest-rate models、yield curves、ratesの主要領域には実質的に該当しません。",
+        "tags": [
+          "AI agents",
+          "scientific attention",
+          "social influence",
+          "citation effects",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies how social influence affects the allocation of attention to scientific papers among populations of AI agents. It is not research on electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "mainResult": "According to the abstract, AI agents exposed to social information selected 17.2% fewer papers per agent than independently choosing agents, concentrated their choices more heavily, and covered a narrower set of papers. Randomly assigned initial selections increased subsequent selection rates by 45.55 percentage points.",
+          "practicalApplication": "The findings may inform the design of AI-based research recommendation systems, paper evaluation, and scientific-attention mechanisms, but no direct application to electronic execution or interest-rate markets is reported.",
+          "methodology": "The study uses experiments in which AI agents choose among the titles and abstracts of 114 regular American Economic Review papers published in 2025. It compares independent-choice communities with communities observing earlier selections. A second experiment randomly assigns initial selections across 20 social communities.",
+          "limitations": "The abstract does not specify the AI models, choice-generation process, reproducibility details, or full statistical procedures. The paper set comes from one journal, and generalization to human researchers, other AI populations, or financial markets is uncertain.",
+          "reason": "The paper concerns the social formation of scientific attention and is not materially related to the designated areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "AI agents",
+            "scientific attention",
+            "social influence",
+            "citation effects",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.22446": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "複数モデルが競合する状況で、選好がモデル選択と信念更新に与える影響を、理論枠組みと実験で分析した行動経済学研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "実験では、参加者の多くが複数モデルを平均するBayesian updaterに分類され、相当数が観測シグナルへの適合度が最も高いモデルを選ぶbest-fit updaterに分類されました。非対称な利得条件では、特にbest-fit updaterにおいて、望ましい状態への報告確率が対称条件より約8パーセントポイント上昇しました。一方、Bayesian updaterへの推定効果はほぼゼロでした。",
+        "practicalApplication": "政治的分極化や金融投資における競合するナラティブと選好の理解には示唆があります。ただし、電子執行、注文設計、流動性分析、金利リスク管理への直接的な実務応用は、要旨からは確認できません。",
+        "methodology": "選好に基づくバイアスが知覚されたモデルを歪める理論枠組みを提示し、実験で参加者をBayesian updaterまたはbest-fit updaterとして分類しました。対称的利得条件と非対称的利得条件の参加者内比較により、報告された信念の差を推定しています。",
+        "limitations": "要旨だけでは、実験の標本数、参加者属性、推定手法、統計的有意性、外部妥当性、金融投資への具体的な適用方法が不明です。また、報告された信念が実際の市場行動や取引成果に結び付くかも示されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "行動経済学および信念形成には関連しますが、本サイトの対象である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場に対する直接的な研究貢献がないためです。",
+        "tags": [
+          "behavioral economics",
+          "belief updating",
+          "model selection",
+          "motivated reasoning",
+          "laboratory experiment"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This behavioral-economics study analyzes how preferences affect model selection and belief updating when multiple models compete, using a theoretical framework and a laboratory experiment. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "In the experiment, most participants were classified as Bayesian updaters who average across models, while a substantial minority were classified as best-fit updaters who select the model with the best fit to the observed signal. Under asymmetric payoffs, reported beliefs shifted toward the preferred state, particularly among best-fit updaters. Their reported probability of the preferred state increased by about 8 percentage points relative to the symmetric-payoff condition, whereas the estimated effect among Bayesian updaters was close to zero.",
+          "practicalApplication": "The findings may inform understanding of competing narratives and preferences in political polarization and financial investment. However, the abstract does not establish direct practical applications to electronic execution, order design, liquidity analysis, or interest-rate risk management.",
+          "methodology": "The paper develops a framework in which preference-driven bias distorts the perceived model, then classifies experimental participants as Bayesian or best-fit updaters. Within-participant comparisons between symmetric- and asymmetric-payoff conditions are used to estimate changes in reported beliefs.",
+          "limitations": "The abstract does not report the sample size, participant characteristics, estimation details, statistical significance, external validity, or concrete applications to financial investment. It also does not show whether reported beliefs translate into actual market behavior or trading outcomes.",
+          "reason": "The paper is relevant to behavioral economics and belief formation, but it does not make a direct contribution to the site’s focus areas: electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "behavioral economics",
+            "belief updating",
+            "model selection",
+            "motivated reasoning",
+            "laboratory experiment"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.22652": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "異質なエージェントを対象とする優先価格制度の理論設計を分析し、平等配分よりもパレート改善となる条件を検討した研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "要旨によれば、品質向上が他者に提供できる平均品質を低下させる環境でも、優先価格制度が平等配分をパレート改善し得ると示しています。高品質・有料、低品質・補償付き、ベンチマーク品質の中間という3階層で改善が可能ですが、2階層では不可能と報告されています。",
+        "practicalApplication": "レーン料金、待ち行列設計、公共サービス、保険などの制度設計への概念的な応用可能性があります。ただし、対象分野の電子執行や金利市場への直接的な実務応用は限定的です。",
+        "methodology": "異質なエージェントと品質配分のトレードオフを含む優先価格制度について、理論的な制度設計と比較静学を行った研究と読めます。具体的なモデル設定、仮定、証明方法は要旨では示されていません。",
+        "limitations": "評価は要旨に基づくため、パレート改善の成立条件、エージェントの行動仮定、制度実装上の摩擦、実証的妥当性は確認できません。また、金融市場の価格形成、注文執行、流動性、金利リスクとの関連も要旨からは確認できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "優先価格と資源配分に関する理論的貢献はありますが、本サイトの対象である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究には直接該当しません。",
+        "tags": [
+          "priority pricing",
+          "mechanism design",
+          "Pareto improvement",
+          "resource allocation",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper theoretically studies the design of priority-pricing systems for heterogeneous agents and examines when they can Pareto-improve on equal allocation. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, priority pricing can Pareto-improve on equal allocation even when improving quality for some agents reduces the average quality available to others. Improvement is possible with three tiers—higher quality for a fee, lower quality with compensation, and an intermediate benchmark-quality tier—but is impossible with only two tiers.",
+          "practicalApplication": "The framework may have conceptual applications to lane pricing, queue design, public provision, and insurance. Its direct practical relevance to electronic execution or rates markets is limited.",
+          "methodology": "The paper appears to use theoretical mechanism design and comparative analysis for priority-pricing systems with heterogeneous agents and quality-allocation tradeoffs. The abstract does not specify the model, assumptions, or proof techniques.",
+          "limitations": "This assessment is based only on the abstract, so the conditions for Pareto improvement, behavioral assumptions, implementation frictions, and empirical validity cannot be evaluated. The abstract also does not establish a connection to financial-market price formation, execution, liquidity, or interest-rate risk.",
+          "reason": "Although the paper offers a theoretical contribution on priority pricing and resource allocation, it does not materially fall within the site's focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "priority pricing",
+            "mechanism design",
+            "Pareto improvement",
+            "resource allocation",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.22893": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "株式オプションのimplied volatility surface（IVS）と株式リターンを共同生成するuniversal conditional diffusion modelを提案した研究です。対象はオプション価格・ボラティリティモデリングであり、電子執行、market microstructure、金利モデル、yield curve、ratesを主題としていません。",
+        "mainResult": "50銘柄で学習し、in-sampleおよび学習対象外の50銘柄で評価した結果、提案モデルはVolGANと比べてarbitrage violation、株式リスク予測、第一主成分から第三主成分までの説明分散比の整合性を改善したと報告されています。",
+        "practicalApplication": "複数銘柄のオプション・ポートフォリオに対するIVSシナリオ生成、pricing、hedging、risk managementへの利用可能性が示されています。ただし、金利商品のシナリオ生成や実行戦略への直接的な応用は抽象から確認できません。",
+        "methodology": "50銘柄のpooled dataを用い、翌日のIVS incrementと原資産リターンを条件付きdiffusion modelで共同生成します。主な学習目的はMSEで、surface smoothnessとstatic-arbitrage penaltyを加えるvariantsも評価し、VolGANと比較しています。",
+        "limitations": "評価結果は抽象で報告された指標に限られ、データ期間、オプション市場、ベンチマーク設定、統計的有意性、取引コスト、実運用での再現性は不明です。また、arbitrage violationの低減が実際の収益性やhedging performanceを保証するとは限りません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "オプションのIVSモデリングとしては関連性がありますが、本サイトの対象である電子取引、market microstructure、interest-rate models、yield curves、ratesには直接該当しません。",
+        "tags": [
+          "implied volatility surface",
+          "diffusion models",
+          "options",
+          "scenario generation",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a universal conditional diffusion model that jointly generates equity-option implied volatility surface (IVS) changes and stock returns. Its focus is option pricing and volatility modeling, not electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "mainResult": "Using pooled data from 50 stocks and evaluating on 50 in-sample and 50 excluded out-of-sample stocks, the authors report that the proposed model outperforms VolGAN in reducing arbitrage violations, improving stock-risk prediction, and matching the explained variance ratios of the first three principal components.",
+          "practicalApplication": "The model may support IVS scenario generation for multi-stock option portfolios, pricing, hedging, and risk management. However, the abstract does not establish a direct application to rates products, rate scenarios, or execution strategies.",
+          "methodology": "The model uses pooled data from 50 stocks to jointly generate next-day IVS increments and underlying-stock returns with a conditional diffusion model. The primary objective is MSE, with variants adding surface-smoothness and static-arbitrage penalties, and performance is compared with VolGAN.",
+          "limitations": "The abstract does not specify the sample period, option markets, benchmark design, statistical significance, transaction costs, or live-trading reproducibility. A reduction in arbitrage violations also does not necessarily imply improved profitability or hedging performance.",
+          "reason": "The paper is relevant as options-IVS modeling research, but it does not directly address the website's scope of electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "implied volatility surface",
+            "diffusion models",
+            "options",
+            "scenario generation",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.23272": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、複数資産の確率システムにおいて、富の過去最高値からの下落であるドローダウンを所定の上限以内に保つ、有限期間のロバスト制御を扱う。電子執行、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ分析を主題としていない。",
+        "mainResult": "抄録によれば、許容されるすべてのリターンに対してドローダウン制約を維持する制御を、現在のドローダウン・クッションと実行可能な正規化方向の積として完全に特徴付ける。また、段階独立リターンのもとでは、ロバストに安全な因果政策の最適化を一次元のBellman再帰に帰着でき、最適な状態フィードバック政策を得る。さらに、一定のLTIゲインを用いる政策と比較し、ドローダウン変調政策は同じ制約下で期待リターンを下回らず、一定条件では厳密に上回ると報告する。",
+        "practicalApplication": "ポートフォリオのリスク制約、資産配分、ロバストな資本管理に応用可能であり、ドローダウン制約を満たす政策の設計原理を与える。ただし、電子取引や約定執行、金利商品の実務に直接適用する結果は抄録から確認できない。",
+        "methodology": "有限期間のロバスト制御として問題を定式化し、すべての支持されたリターンに対するrobust invarianceを解析する。安全な制御の完全パラメータ化、段階独立リターン下の一次元Bellman再帰、LTIゲインとの期待リターン比較を理論的に示す。",
+        "limitations": "評価は抄録に記載された理論結果に限られ、データ実証、取引コスト、流動性、価格インパクト、推定誤差、モデルミススペシフィケーションの検証は示されていない。また、実際の市場でリターン支持集合や段階独立性を設定できるかは不明である。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "ロバストなドローダウン制御としては理論的に興味深いが、対象サイトの主要領域である電子執行、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、レート分析への直接的な貢献がないため、掲載対象としては推奨しない。",
+        "tags": [
+          "ドローダウン制御",
+          "ロバスト制御",
+          "ポートフォリオ管理",
+          "動的計画法",
+          "リスク管理"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies finite-horizon robust control for keeping drawdowns, defined as declines from the historical wealth peak, within a prescribed limit in multi-asset stochastic systems. It is not primarily about electronic execution, market microstructure, interest-rate models, yield-curve analysis, or rates.",
+          "mainResult": "According to the abstract, all controls that preserve the drawdown constraint against every admissible return are completely characterized as the product of the current drawdown cushion and a feasible normalized direction. Under stagewise-independent returns, optimization over robustly safe causal policies reduces to a one-dimensional Bellman recursion and produces an optimal state-feedback policy. The paper also reports that drawdown modulation achieves no lower expected return than a fixed LTI policy under the same constraint, with strict improvement under stated conditions.",
+          "practicalApplication": "The framework may be useful for portfolio risk constraints, asset allocation, and robust capital management, providing design principles for policies that satisfy drawdown limits. However, the abstract does not establish direct applications to electronic trading, execution, or interest-rate products.",
+          "methodology": "The problem is formulated as finite-horizon robust control, with robust invariance analyzed against all returns in the specified support. The paper theoretically derives a complete parameterization of safe controls, a one-dimensional Bellman recursion under stagewise-independent returns, and an expected-return comparison with LTI gains.",
+          "limitations": "The assessment is based only on the theoretical results stated in the abstract. No empirical validation is reported for transaction costs, liquidity, price impact, estimation error, or model misspecification. It is also unclear whether the assumed return support sets and stagewise independence are realistic for actual markets.",
+          "reason": "The work is theoretically relevant to robust drawdown control, but it does not directly contribute to the site's core areas of electronic execution, market microstructure, interest-rate models, yield curves, or rates. It is therefore not recommended for inclusion.",
+          "tags": [
+            "drawdown control",
+            "robust control",
+            "portfolio management",
+            "dynamic programming",
+            "risk management"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.23378": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、差分時系列を再帰的に予測する際の誤差蓄積を抑える、再学習不要の leaky-integrator reconstruction 手法を提案する。金融市場、電子執行、market microstructure、金利モデル、yield curve の分析は主題ではない。",
+        "mainResult": "著者は、通常の累積和による再構成が単位円上の pole を持つ離散積分器となり、非線形モデルの再帰予測を不安定化させると報告している。固定値 $\\gamma=0.9$ の leaky integrator $H(z)=1/(1-\\gamma z^{-1})$ を再構成時に適用すると、7種類の発散する architecture と20データセットで、$H=336$ における平均改善率が約51%になったとされる。",
+        "practicalApplication": "既存の one-step または foundation-model forecaster に再学習なしで適用でき、長期予測の誤差蓄積を抑える可能性がある。ただし、本サイトの対象分野への直接的な実務応用は抽象から確認できない。",
+        "methodology": "誤差蓄積を離散時間フィルタの pole 配置として診断し、単位円上の pole を $\\gamma<1$ の内部へ移す leaky integrator を導入する。理論上の誤差分散の有界性を示し、固定した $\\gamma=0.9$ を再構成時に適用して、複数の neural architecture、予測 horizon、データセットで正規化 MAE を比較している。",
+        "limitations": "評価対象の20データセットの内容、金融データの有無、データ分割、統計的有意性、ベースラインの詳細は抽象から不明である。性能改善は著者の実験報告であり、異なるデータや本番環境への一般化は未検証である。また、対象は一般的な時系列予測手法であり、金利・yield curve・執行・market microstructure に固有の制約は扱っていない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "時系列予測としては興味深い手法だが、研究の中心が一般的な再帰時系列 forecasting であり、指定された電子取引、market microstructure、interest-rate models、yield curves、rates のスコープに実質的に該当しないため。",
+        "tags": [
+          "time-series forecasting",
+          "recursive forecasting",
+          "error accumulation",
+          "signal processing",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a training-free leaky-integrator reconstruction method to reduce error accumulation when differenced time series are forecast recursively. It does not focus on financial markets, electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "mainResult": "The authors report that standard cumulative-sum reconstruction behaves as a discrete integrator with a pole on the unit circle, making recursive forecasts from nonlinear models unstable. Applying a leaky integrator $H(z)=1/(1-\\gamma z^{-1})$ with fixed $\\gamma=0.9$ at reconstruction time reportedly produced a mean improvement of about 51% at $H=336$ across seven diverging architectures and 20 datasets.",
+          "practicalApplication": "The method could reduce long-horizon forecast error accumulation and can reportedly be applied to existing one-step or foundation-model forecasters without retraining. However, the abstract does not establish direct practical relevance to the domains covered by this site.",
+          "methodology": "The paper diagnoses error accumulation through discrete-time filter pole placement and moves the pole from the unit circle into the interior using a leaky integrator with $\\gamma<1$. It claims a theoretical bound on accumulated error variance and compares normalized MAE after applying fixed $\\gamma=0.9$ during reconstruction across neural architectures, forecast horizons, and datasets.",
+          "limitations": "The abstract does not specify the contents of the 20 datasets, whether financial data are included, the data splits, statistical significance, or baseline details. The performance gains are reported by the authors and generalization to other data or production settings is unverified. The method also addresses generic time-series forecasting rather than constraints specific to rates, yield curves, execution, or market microstructure.",
+          "reason": "This is an interesting general time-series forecasting method, but its focus is recursive forecasting rather than electronic trading, market microstructure, interest-rate models, yield curves, or rates. It is therefore materially outside the requested scope.",
+          "tags": [
+            "time-series forecasting",
+            "recursive forecasting",
+            "error accumulation",
+            "signal processing",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.23571": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "この論文は、$2$-Wasserstein ball上の平均分散汎関数について最悪・最良ケースを特徴づけ、リスク分担への応用を論じる。電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、または金利市場を主題としていない。",
+        "mainResult": "平均と標準偏差の到達可能領域を用いて、無限次元の最適化問題をスカラー方程式へ縮約し、極値分布が参照分布のlocation-scale変換として構成できることを示す。極値は参照分布の最初の2モーメントのみに依存し、同一信念の下では、曖昧性半径や$\\alpha$-maxmin weightにかかわらず古典的な比例配分が最適であると報告する。",
+        "practicalApplication": "ロバストなリスク分担や分布曖昧性下のポートフォリオ・リスク配分を有限次元最適化として扱う枠組みを提供し得る。ただし、対象は一般的なリスク管理であり、対象サイトの専門領域への直接的な実務応用は限定的である。",
+        "methodology": "$2$-Wasserstein距離の量化表現と、平均・標準偏差の幾何を用いて最悪・最良ケースの平均分散問題を解析する。さらに双対表現、異質な信念の下での比例リスク分担、ならびにconvex-envelope構成によるdistortion-variance汎関数の極値分位点を導出する。",
+        "limitations": "提示された要旨だけでは、仮定の詳細、スカラー方程式の解の存在・一意性、数値性能、データでの検証、計算コストは確認できない。平均分散評価は分布の高次モーメントやテール形状を十分に反映しない可能性があり、同一信念下の結果を実市場へ一般化できるかも不明である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "数学的には分布ロバストなリスク分担に関する新しい結果を含む可能性があるが、対象サイトが扱う電子執行、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、金利市場とは直接関係しないため。",
+        "tags": [
+          "out_of_scope",
+          "distributionally robust risk",
+          "Wasserstein balls",
+          "mean-variance",
+          "risk sharing",
+          "quantile methods"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper characterizes worst- and best-case mean-variance functionals over a $2$-Wasserstein ball and discusses applications to risk sharing. It does not focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using the attainable geometry of means and standard deviations, the paper reduces the infinite-dimensional optimization problems to scalar equations and constructs extremal distributions as location-scale transformations of the reference distribution. The extrema depend only on the first two moments of the reference law, and under homogeneous beliefs the classical proportional allocation is reported to remain optimal for every ambiguity radius and $\\alpha$-maxmin weight.",
+          "practicalApplication": "The framework may support robust risk sharing and portfolio risk allocation under distributional ambiguity by converting the problem into a finite-dimensional optimization. However, it concerns general risk management and has limited direct practical relevance to the target site's research areas.",
+          "methodology": "The analysis uses quantile representations and the geometry of means and standard deviations under the $2$-Wasserstein metric. It also derives dual representations, formulates proportional risk sharing under heterogeneous beliefs, and characterizes extremal quantiles for a distortion-variance functional through a convex-envelope construction.",
+          "limitations": "From the abstract alone, the detailed assumptions, existence and uniqueness of scalar-equation solutions, numerical performance, empirical validation, and computational cost cannot be assessed. Mean-variance criteria may not adequately capture higher moments or tail shapes, and it is unclear whether the homogeneous-belief results generalize to real markets.",
+          "reason": "The paper may contain mathematically novel results on distributionally robust risk sharing, but it is not materially related to electronic execution, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "out_of_scope",
+            "distributionally robust risk",
+            "Wasserstein balls",
+            "mean-variance",
+            "risk sharing",
+            "quantile methods"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.23598": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本論文は、ドイツの電力イントラデイ市場において、対象および隣接する受渡し商品の注文情報から、確率的な買い・売り価格軌跡を予測するOrderFusion+を提案する。",
+        "mainResult": "抄録によれば、OrderFusion+は複数の受渡し商品の過去注文を統合し、既存の予測ベースラインおよび事前学習済み時系列基盤モデルと比較評価する。また、dynamic maskingにより市場環境の変化と市場効率に関する分析を行う。ただし、改善幅などの定量結果は抄録に示されていない。",
+        "practicalApplication": "予測結果は、電力ポジションの調整、柔軟な電源・需要家のスケジューリング、注文価格や売買判断の支援に利用できる可能性がある。一方、直接的な執行アルゴリズムや取引収益の検証ではない。",
+        "methodology": "連続注文板のmicro-levelな買い・売り情報を対象に、目標商品と隣接する受渡し商品の履歴注文を統合するdeep learningモデルを構築し、確率的な価格軌跡を予測する。複数の予測ベースラインおよびpretrained time-series foundation modelsとのbenchmark、ならびにdynamic maskingを用いた動的市場条件の分析を実施する。",
+        "limitations": "提供された抄録だけでは、データ期間、商品・市場範囲、評価指標、ベースラインの詳細、統計的有意性、計算コスト、実運用時の約定・スリッページ・取引コストを含む経済的評価が不明である。したがって、予測精度の優位性が実際の執行利益や頑健な市場効率性の結論につながるかは判断できない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "注文板情報、複数商品の情報統合、確率的価格予測を扱っており、電子取引およびmarket microstructureに関連する。ただし、抄録には定量的な主要結果がなく、直接的な執行性能の研究ではないため、重要度は中程度と評価する。",
+        "tags": [
+          "intraday electricity markets",
+          "order book forecasting",
+          "probabilistic forecasting",
+          "buy-sell price trajectories",
+          "deep learning",
+          "market microstructure",
+          "foundation models",
+          "cross-product information"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This paper proposes OrderFusion+, which forecasts probabilistic buy-sell price trajectories in the German intraday electricity market using order information from the target and neighboring delivery products.",
+          "mainResult": "According to the abstract, OrderFusion+ combines historical orders from multiple delivery products and is benchmarked against existing forecasting baselines and pretrained time-series foundation models. It also uses dynamic masking to analyze changing market conditions and market efficiency. However, the abstract does not report quantitative improvement magnitudes.",
+          "practicalApplication": "The forecasts could support electricity position adjustment, scheduling of flexible generation and demand, and order-pricing or trading decisions. However, the paper is not described as a direct execution algorithm or a study of trading profitability.",
+          "methodology": "The authors build a deep learning model for continuous-orderbook micro-level buy and sell information, integrating historical orders from the target and neighboring delivery products to forecast probabilistic price trajectories. They conduct benchmarks against forecasting baselines and pretrained time-series foundation models, together with dynamic-market analysis using dynamic masking.",
+          "limitations": "The supplied abstract does not specify the data period, market and product coverage, evaluation metrics, baseline details, statistical significance, computational costs, or economic evaluation including fills, slippage, and transaction costs. Therefore, it is not possible to determine whether any forecasting advantage translates into trading profits or robust conclusions about market efficiency.",
+          "reason": "The study is relevant to electronic trading and market microstructure through its focus on orderbook information, cross-product integration, and probabilistic price forecasting. Since the abstract provides no quantitative headline results and the work is not directly focused on execution performance, its importance is assessed as moderate.",
+          "tags": [
+            "intraday electricity markets",
+            "order book forecasting",
+            "probabilistic forecasting",
+            "buy-sell price trajectories",
+            "deep learning",
+            "market microstructure",
+            "foundation models",
+            "cross-product information"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "ドイツの連続時間内電力市場を対象に、対象商品と隣接受渡商品、買い・売り双方の注文情報から、受渡前の15分刻み価格軌跡を分位点予測するOrderFusion+を提案する。動的マスクで参照履歴と隣接商品の範囲を市場状況ごとに選択し、2024年のテストでは比較モデルを上回ったと報告している。",
+        "mainResult": "OrderFusion+は3つの予測起点を平均してAQL $10.62$、MAE $28.04$、RMSE $101.76$、$R^2=0.39$を記録し、全比較モデルに対するAQLの改善が片側Diebold–Mariano検定で有意だったと報告される。最良の学習済みbaselineであるTransformerのAQL $11.72$に対する改善は約$9.4\\%$で、quantile crossingも$0\\%$だった。一方、coverage誤差は単純なpersistence baselineの方が小さい。",
+        "practicalApplication": "予測された買い・売り別の価格経路と分位点は、蓄電池や需要応答の発注時刻・価格閾値・ポジション調整に利用できる可能性がある。推論時間は著者のA100環境で1秒未満とされるが、本論文は実取引戦略、約定可能性、取引費用、market impact、損益を検証していないため、executionへの有効性は未確認である。",
+        "methodology": "EPEX SPOTの商用ドイツ注文データを用い、買い側と売り側をcross-attentionで融合する。対象商品と最大12の隣接商品、最大180分の履歴を入力し、30種類の候補からside-specificな動的マスクを選択する。15分刻みの買い・売り別VWAP軌跡について3分位点を出力し、masked Average Quantile Lossで学習する。2022年以降のデータを用いた3つの時系列foldで2024年全体をテストし、persistence、LQR、MLP、LSTM、Transformer、および4種のzero-shot foundation modelと比較している。",
+        "limitations": "単一のドイツ市場と15分商品だけの結果であり、他国・他商品への外的妥当性は不明である。動的マスク候補は経験的に設計され、選択分布はrandom seedで変化するため、市場効率や買い・売り行動の構造的証拠とは解釈できない。予測分位点は3水準のみで、coverageはpersistenceより劣る。商用データ依存で再現コストがあり、foundation modelへの入力変換や公平な比較条件の詳細も限定的である。さらに、取引費用、流動性、約定、損益を含むout-of-sample trading evaluationがない。",
+        "importance": 1,
+        "recommended": true,
+        "reason": "注文板のside interaction、隣接受渡商品の依存性、価格のpath forecastを一体化しており、電子取引と電力市場microstructureの双方に直接関係する。複数の強いbaseline、時系列fold、DM検定を含む実証は有用だが、単一市場での予測精度に限定され、経済価値やmarket-efficiencyに関する主張は追加検証を要する。",
+        "tags": [
+          "時間内電力市場",
+          "注文板",
+          "確率的価格軌跡予測",
+          "cross-attention",
+          "動的マスキング",
+          "分位点予測",
+          "隣接受渡商品",
+          "電子取引"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper proposes OrderFusion+ for the German continuous intraday electricity market. It forecasts 15-minute pre-delivery price trajectories by quantile using orders from the target and neighboring delivery products on both the buy and sell sides. A dynamic mask selects the relevant history and neighboring-product range for each market condition, and the model reportedly outperforms the comparators in the 2024 test period.",
+          "mainResult": "Averaged across three forecast origins, OrderFusion+ reports an AQL of $10.62$, MAE of $28.04$, RMSE of $101.76$, and $R^2=0.39$. Its AQL improvement over every comparator is reported as significant under one-sided Diebold–Mariano tests. The improvement over Transformer, the best fully trained baseline with an AQL of $11.72$, is approximately $9.4\\%$, while quantile crossing is $0\\%$. However, simple persistence baselines have lower coverage error.",
+          "practicalApplication": "The predicted side-specific price paths and quantiles could inform order timing, price thresholds, and position adjustments for batteries and demand response. Inference reportedly takes less than one second in the authors' A100 environment. The paper does not test a live trading strategy, fill probability, transaction costs, market impact, or profit and loss, so execution value remains unverified.",
+          "methodology": "The model uses commercial EPEX SPOT German order data and fuses buy- and sell-side representations through cross-attention. Inputs cover the target product, up to 12 neighboring products, and up to 180 minutes of history; side-specific dynamic masks are selected from 30 candidates. It outputs three quantiles for separate 15-minute buy- and sell-side VWAP trajectories and is trained with masked Average Quantile Loss. Three chronological folds use data from 2022 onward and collectively test the full year of 2024. Comparators include persistence methods, LQR, MLP, LSTM, Transformer, and four zero-shot foundation models.",
+          "limitations": "The evidence covers only one national market and 15-minute products, leaving external validity across countries and products unknown. The dynamic-mask bank is empirically designed, and mask distributions vary by random seed, so they should not be treated as structural evidence about market efficiency or side behavior. Only three quantile levels are forecast, and coverage is worse than for persistence baselines. Reliance on commercial data raises replication costs, while details of foundation-model input adaptation and comparison fairness are limited. There is also no out-of-sample trading evaluation incorporating costs, liquidity, fills, or profit and loss.",
+          "reason": "The study directly addresses electronic trading and electricity-market microstructure by combining side interactions, dependencies among neighboring delivery products, and path forecasting. Its chronological folds, strong baselines, and DM tests make the empirical evidence useful, but it remains a single-market forecasting study, and claims about economic value or market efficiency require further validation.",
+          "tags": [
+            "intraday electricity market",
+            "order book",
+            "probabilistic price trajectory forecasting",
+            "cross-attention",
+            "dynamic masking",
+            "quantile forecasting",
+            "neighboring delivery products",
+            "electronic trading"
+          ]
+        }
+      }
+    },
+    "2609.23703": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本論文は、金融ニュースを言語モデルで取引シグナルに変換し、観測可能時刻、確率較正、執行タイミング、取引コスト、流動性、運用制約を一体的に評価するMFASTフレームワークを提案する。",
+        "mainResult": "報告された結果では、decoder-only言語モデルが、encoder系ベースラインおよび辞書型センチメント手法を、分類、較正、リターン予測、取引コスト控除後のポートフォリオ成績で上回った。また、精度、レイテンシ、メモリ、スループット、推論コストの間にトレードオフがあることを運用診断で示した。",
+        "practicalApplication": "ニュースの公表時刻と銘柄を正確に対応付け、利用可能な情報だけで取引判断を生成するニュースベース取引システムの設計・検証に利用できる。Refinitiv News AnalyticsとCRSPを用いた検証に加え、公開データによる再現実験を想定している。",
+        "methodology": "タイムスタンプ付き企業ニュースを証券にリンクし、基盤モデルのデータ鮮度期間後に公表されたニュースを主なアウトオブサンプル評価対象とする。言語モデル、テキスト分類、リターン予測、ポートフォリオ評価を、較正、イベント時点の情報制約、取引コスト、流動性、容量、運用指標、統計的推論と組み合わせる。",
+        "limitations": "抽象からは、各モデル、データ期間、サンプル数、取引ルール、性能差の大きさ、統計的有意性が確認できない。したがって、主張された優位性の頑健性、実際の約定可能性、データベンダーへの依存、将来のニュース環境への一般化は判断できない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "ニュースベース取引における情報時点、執行摩擦、再現性を統合して扱う点は、本サイトの電子取引・実装評価の対象として重要である。ただし、定量的な結果や詳細な実験設計は本文確認が必要である。",
+        "tags": [
+          "金融言語モデル",
+          "ニュースベース取引",
+          "電子取引",
+          "取引コスト",
+          "流動性制約",
+          "確率較正",
+          "イベント時点評価",
+          "再現可能性"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This paper proposes MFAST, a framework that converts financial news into trading signals and evaluates them jointly under event-time observability, probability calibration, execution timing, transaction costs, liquidity, and operational constraints.",
+          "mainResult": "The reported results show that decoder-only language models outperform encoder baselines and dictionary-based sentiment methods in classification, calibration, return prediction, and net portfolio performance. Operational diagnostics also show trade-offs among accuracy, latency, memory, throughput, and inference cost.",
+          "practicalApplication": "The framework can support the design and validation of news-based trading systems that link publication timestamps to securities and generate decisions using only information available at the relevant time. It uses Refinitiv News Analytics and CRSP for evaluation and includes a public-data replication arm.",
+          "methodology": "Timestamped firm-specific news is linked to securities, with the primary out-of-sample evaluation restricted to news released after the disclosed data-freshness periods of foundation models. Language modeling, text classification, return prediction, and portfolio evaluation are combined with calibration, event-time information constraints, transaction costs, liquidity, capacity, operational diagnostics, and statistical inference.",
+          "limitations": "The abstract does not provide the models, sample period, sample size, trading rules, magnitude of performance differences, or statistical significance. Therefore, the robustness of the reported advantage, actual fillability, dependence on data vendors, and generalization to future news environments cannot be assessed.",
+          "reason": "The integration of information timing, execution frictions, and reproducibility for news-based trading makes the work relevant to electronic trading and implementation research. However, the quantitative results and detailed experimental design require verification in the full paper.",
+          "tags": [
+            "financial language models",
+            "news-based trading",
+            "electronic trading",
+            "transaction costs",
+            "liquidity constraints",
+            "probability calibration",
+            "event-time evaluation",
+            "reproducibility"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "企業ニュースから取引可能なシグナルを生成するMFASTを提案し、時刻整合、確率校正、取引コスト、流動性、capacity、計算負荷、統計検定を一体化して金融language modelを評価する。RefinitivニュースとCRSP株式データによる著者報告では、decoder-only modelがencoder系と辞書法を上回った。",
+        "mainResult": "2024年6月から2026年1月のout-of-sample期間について、LLaMA-3はaccuracy 0.787、AUC 0.846を記録し、5 bpの片道コストと日次売買代金10%の参加率上限を課したlong-short戦略では年率Sharpe ratio 2.85、累積収益率180%だったと報告される。公開データでの再現ではSharpe ratioは0.92に低下し、計算面ではLLaMA-3が最大54.2 GB、記事当たり112 msを要した。",
+        "practicalApplication": "ニュースsentimentモデルをalpha pipelineへ導入する際に、情報の観測可能時刻、校正、執行遅延、turnover、流動性、取引容量、推論速度を共通基準で比較するための評価テンプレートとして利用できる。高いsignal qualityを重視する運用ではLLaMA-3、低遅延・低コストを重視する監視用途ではRoBERTaやFinBERTが候補となる。",
+        "methodology": "2010年から2026年のRefinitivニュースをCRSPに結合し、単一企業記事、片側のnovelty filter、tradability screenを経て973,481件を構築する。2010～2023年を学習、2024年1～5月を検証、2024年6月以降をtestとし、将来3日超過収益の符号を教師ラベルに用いる。6種類のsentiment手法を分類・校正・固定効果回帰・value-weighted portfolioで比較し、5 bpコスト、流動性screen、参加率上限、factor調整、bootstrap、White reality check、Hansen SPA、deflated Sharpe ratioを適用する。公開GDELTと価格データによるreplication、計算性能測定、言語カテゴリ別error analysisも行う。",
+        "limitations": "結果は英語の米国株に限定され、日次執行モデルはorder book、queue position、market impact、short availability、borrow fee、intraday latencyを明示的に再現しない。固定5 bpコストはニュース直後や低流動性銘柄の実コストを過小評価し得る。教師ラベルは経済的sentimentそのものではなく将来収益の符号であり、モデルは実質的にtext-based return classifierである。主要データが非公開で、foundation-model contaminationを完全には排除できず、公開データ再現の成績も大幅に弱い。多くのrobustness結果とfactor alphaは本文で要約されるだけで詳細表がなく、戦略選択の事前固定やreported statisticsを独立に検証できない。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "電子執行とmarket microstructureを考慮した金融NLP評価というテーマは実務的で、予測精度だけでなく時刻整合、コスト、capacity、計算資源まで扱う設計は有用である。一方、極めて高いbacktest成績は簡略化された執行・コスト仮定に依存し、公開データでの再現は弱いため、収益性の証拠よりも評価frameworkとして読むべきである。",
+        "tags": [
+          "金融language model",
+          "ニュース取引",
+          "market microstructure",
+          "取引コスト",
+          "流動性",
+          "capacity制約",
+          "sentiment analysis",
+          "backtest",
+          "MLOps",
+          "実行時刻整合"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper proposes MFAST, a framework for generating tradable signals from firm news and jointly evaluating financial language models under timestamp alignment, probability calibration, transaction costs, liquidity, capacity, computational burden, and statistical testing. In the authors' Refinitiv-news and CRSP-equity results, decoder-only models outperform encoder models and dictionary sentiment.",
+          "mainResult": "For the June 2024 to January 2026 out-of-sample period, the paper reports that LLaMA-3 achieves accuracy of 0.787 and AUC of 0.846. Its long-short strategy reportedly delivers an annualized Sharpe ratio of 2.85 and a cumulative return of 180% after 5 bp one-way costs and a 10% daily-dollar-volume participation cap. In the public-data replication, the Sharpe ratio falls to 0.92, while LLaMA-3 requires up to 54.2 GB of memory and 112 ms per article.",
+          "practicalApplication": "The framework can serve as an evaluation template for comparing news-sentiment models before adding them to an alpha pipeline, covering information observability, calibration, execution delay, turnover, liquidity, trading capacity, and inference speed. LLaMA-3 may suit deployments prioritizing signal quality, whereas RoBERTa or FinBERT may be preferable for lower-latency and lower-cost monitoring.",
+          "methodology": "The study links Refinitiv news from 2010 through 2026 to CRSP, producing 973,481 observations after single-firm, one-sided novelty, and tradability filters. It uses 2010–2023 for training, January–May 2024 for validation, and June 2024 onward for testing, with the sign of the future three-day excess return as the supervised label. Six sentiment methods are compared using classification, calibration, fixed-effects regressions, and value-weighted portfolios. The evaluation applies 5 bp costs, liquidity screens, participation caps, factor adjustment, bootstrap inference, the White reality check, Hansen's SPA test, and the deflated Sharpe ratio. It also includes a public GDELT and price-data replication, computational benchmarks, and linguistic-category error analysis.",
+          "limitations": "The evidence is limited to English-language U.S. equities, and the daily execution model does not explicitly simulate the order book, queue position, market impact, short availability, borrow fees, or intraday latency. A fixed 5 bp cost may understate actual costs immediately after news or in illiquid stocks. The supervised label is the sign of a future return rather than economic sentiment itself, making the models effectively text-based return classifiers. The principal datasets are proprietary, foundation-model contamination cannot be fully excluded, and performance is substantially weaker in the public-data replication. Many robustness and factor-alpha results are only summarized without detailed tables, so the pre-specification of strategy choices and the reported statistics cannot be independently verified from the paper.",
+          "reason": "The topic is directly relevant to electronic execution and market microstructure, and the design usefully extends evaluation beyond predictive accuracy to timing, costs, capacity, and computing resources. However, the unusually strong backtest depends on simplified execution and cost assumptions, while the public replication is weaker. The paper is therefore more persuasive as an evaluation framework than as definitive evidence of attainable profitability.",
+          "tags": [
+            "financial language models",
+            "news trading",
+            "market microstructure",
+            "transaction costs",
+            "liquidity",
+            "capacity constraints",
+            "sentiment analysis",
+            "backtesting",
+            "MLOps",
+            "execution-time alignment"
+          ]
+        }
+      }
+    },
+    "2609.23744": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本稿は、組織内部の仕組みが複数の業績目標に及ぼす内部外部性を分析し、組織的非効率性を理論化する研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "要旨によれば、符号の異なる内部外部性が組織的努力を内部で相殺し、実現業績に乗法的な割引を生じさせる理論を提示しています。弱く現実的な条件の下では、組織の一貫性が回復する前には、配分的非効率性より構造的非効率性が支配的になると主張しています。",
+        "practicalApplication": "組織設計、ガバナンス、業績指標、インセンティブ制度の分析には応用可能と考えられますが、対象サイトの金融市場・金利研究への直接的な実務応用は限定的です。",
+        "methodology": "組織の基本要素と主要業績指標を単純化して表現し、内部の相互作用を含む実現業績の法則を理論的に導出しています。実証分析や金融市場データによる検証は要旨から確認できません。",
+        "limitations": "評価は要旨のみに基づきます。理論の具体的な仮定、モデルの識別可能性、実証的妥当性、業績指標の測定方法は不明です。また、金融市場、電子執行、金利商品への適用可能性は示されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "組織論および一般的な経営理論としては関連性がありますが、対象サイトの主要スコープである電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究には直接該当しません。",
+        "tags": [
+          "organizational inefficiency",
+          "internal externalities",
+          "organizational design",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper theorizes organizational inefficiency through internal externalities generated by organizational mechanisms that affect multiple performance objectives. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, internal externalities with mixed signs can internally cancel organizational effort and create a multiplicative discount in realized performance. Under weak and realistic conditions, the paper argues that structural inefficiency dominates allocative inefficiency before organizational coherence is restored.",
+          "practicalApplication": "The framework may be applicable to organizational design, governance, performance measurement, and incentive systems, but its direct practical relevance to the site's financial-market and interest-rate research is limited.",
+          "methodology": "The paper represents organizational primitives and key performance indicators in a simplified theoretical framework and derives a realized-performance law incorporating internal interactions. No empirical analysis or validation using financial-market data is evident from the abstract.",
+          "limitations": "This assessment is based only on the abstract. The precise assumptions, identification, empirical validity, and measurement of performance indicators are unclear. The abstract also does not establish applicability to financial markets, electronic execution, or interest-rate instruments.",
+          "reason": "The paper is relevant to organizational theory and general management research, but it does not materially concern the site's core scope of electronic trading, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "organizational inefficiency",
+            "internal externalities",
+            "organizational design",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.23768": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "本論文は、確率モデルと割引率を同時に曖昧とする動的リスク測度の下で、最適停止問題を上反射BSDEで定式化・解析する。",
+        "mainResult": "著者らは、Girsanov型のモデル不確実性と現金劣加法的リスク評価を組み合わせたpaired ambiguity frameworkを提案し、停止価値を上反射BSDEで特徴付ける。エントロピー型リスク測度に対応する二次ドライバーについて、いくつかのベンチマークで明示的な停止規則を得たと報告している。また、離散反射、打ち切り、ニューラルネットワーク近似を組み合わせた反射二次BSDEの深層学習手法を示し、American optionの数値実験で割引率とエントロピー型曖昧性が停止価値と行使判断に与える影響を検証している。",
+        "practicalApplication": "割引率と確率モデルの双方に不確実性があるAmerican optionのロバストな評価・行使判断や、深層学習による高次元最適停止問題に応用可能である。特に、金利環境の不確実性をリスク評価へ組み込む概念的枠組みを提供する。",
+        "methodology": "動的リスク測度、Girsanov変換によるモデル不確実性、cash subadditive risk evaluationを統合し、最適停止価値をupper reflected BSDEとして解析する。二次ドライバーの理論結果に加え、離散反射とtruncationで大域的Lipschitz系へ帰着し、反射BSDEの離散化誤差とニューラルネットワーク近似誤差を用いて収束を分析する。",
+        "limitations": "要旨からは、理論結果の仮定、収束率の具体値、数値実験の規模・ベンチマーク・計算コスト、実市場データでの検証は確認できない。したがって、実務的なモデルリスク削減効果や、複雑な金利期間構造への適用可能性は未検証である。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "電子取引や市場マイクロ構造、イールドカーブ推定を直接扱わないが、割引率の不確実性を含む最適停止とBSDE計算は、interest-rate riskおよび金融デリバティブ評価に関連する。対象サイトのrates・interest-rate models領域には有用だが、中心テーマとの直接性は限定的である。",
+        "tags": [
+          "動的リスク測度",
+          "割引率不確実性",
+          "モデル曖昧性",
+          "最適停止",
+          "反射BSDE",
+          "エントロピー型リスク",
+          "American options",
+          "深層学習",
+          "金利リスク"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This paper formulates and analyzes optimal stopping under dynamic risk measures with simultaneous ambiguity in the probability model and the discount rate, using an upper reflected BSDE.",
+          "mainResult": "The authors propose a paired ambiguity framework combining Girsanov-type model uncertainty with cash-subadditive risk evaluation, and characterize the stopping value through an upper reflected BSDE. For quadratic drivers associated with entropic risk measures, they report explicit stopping rules in several benchmark cases. They also present a deep-learning method for reflected quadratic BSDEs that combines discrete reflection, truncation, and neural-network approximation, and use American option experiments to examine how discount-rate and entropic ambiguity affect stopping values and exercise decisions.",
+          "practicalApplication": "The framework may be applied to robust valuation and exercise decisions for American options when both the probability model and the discount rate are uncertain, as well as to high-dimensional optimal stopping with deep learning. It provides a conceptual way to incorporate interest-rate uncertainty into risk evaluation.",
+          "methodology": "The study integrates dynamic risk measures, Girsanov-based model uncertainty, and cash-subadditive risk evaluation, and analyzes the optimal stopping value as an upper reflected BSDE. In addition to theoretical results for quadratic drivers, it reduces the problem to a globally Lipschitz system through discrete reflection and truncation, and analyzes convergence using reflected BSDE discretization errors and neural-network approximation errors.",
+          "limitations": "The abstract does not specify the assumptions behind the theoretical results, the exact convergence rates, the scale and benchmarks of the numerical experiments, computational costs, or validation on market data. Consequently, practical reductions in model risk and applicability to complex interest-rate term structures remain untested.",
+          "reason": "The paper does not directly study electronic trading, market microstructure, or yield-curve estimation, but its treatment of discount-rate uncertainty in optimal stopping and BSDE computation is relevant to interest-rate risk and derivatives valuation. It is useful for the site's rates and interest-rate-models coverage, although its direct connection to the core topics is limited.",
+          "tags": [
+            "dynamic risk measures",
+            "discount-rate uncertainty",
+            "model ambiguity",
+            "optimal stopping",
+            "reflected BSDE",
+            "entropic risk",
+            "American options",
+            "deep learning",
+            "interest-rate risk"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "本稿は、Girsanov変換による確率モデルの曖昧性と確率的割引率の曖昧性を同時に扱う「paired ambiguity」下の最適停止を定式化する。停止価値を上側反射型BSDEで表現し、entropic riskに対応する二次ドライバー、明示的な停止則、深層学習による数値解法を検討している。金利期間構造モデルではないが、割引率不確実性とAmerican optionの行使判断を結び付ける点でratesとデリバティブ評価の双方に関連する。",
+        "mainResult": "著者らは、停止価値が障害過程$-\\xi_t$を持つ一意な上側反射型BSDEの第1成分に一致し、適切な正則性と最適解の達成条件の下で初回接触時刻$\\tau_t^*=\\inf\\{s\\ge t:Y_s=-\\xi_s\\}$が最適であると報告する。停止作用素について単調性、cash-subadditivity、特定条件下のcash-additivity・準凹性・凹性、および一般には凸でないことを示す。entropic driver $g(z)=\\frac{\\gamma}{2}|z|^2$では指数変換により問題を$e^{-\\gamma\\xi_t}$のlower Snell envelopeへ帰着させる。数値面では離散反射と厳密な切断を介してLipschitz系へ変換し、ネットワーク近似誤差を含む収束評価を与える。",
+        "practicalApplication": "確率モデルと割引率の双方に不確実性があるAmerican option、最適清算、投資タイミングの評価に利用できる。数値例ではBlack–Scholes American putに対する推定価格が$0.11638$で、binomial基準値$0.11973$との差は約$-2.8\\%$だった。entropic parameterを$\\gamma=5$とした例では価格が$0.10881$となり、早期停止比率は基準例の$0.41$から$0.82$へ上昇したと報告されるが、著者らもこれを停止境界の一般的な比較静学とは位置付けていない。",
+        "methodology": "まずcash-subadditive risk measureの双対表現に、確率測度変更を表す制御と割引率を表す制御を組み込み、非線形Snell envelopeと上側反射型BSDEを用いて最適停止問題を解析する。entropic caseでは指数変換により古典的な停止問題との対応を導き、submartingale、supermartingale、決定論的payoff、Brownian payoffについて明示解を示す。数値法ではMarkov設定、決定論的で状態非依存のvolatility、Euler離散化、離散反射、$Z$の一様有界性に基づく二次ドライバーの切断、deep backward regressionを組み合わせる。American put、割引率区間の曖昧性、entropic-discount ambiguityの3例を$50$時間ステップとニューラルネットワークで検証する。",
+        "limitations": "理論の数値部分はMarkovian settingと状態非依存の決定論的volatilityに限定され、state-dependent volatilityは未解決とされる。収束証明は既存の離散反射・時間離散化評価とLipschitz deep BSDE評価の組合せであり、定数は切断半径を通じて指数的に大きくなり得る。定量的収束率には追加の滑らかさ条件が必要だが、主要なAmerican put payoffはstrikeで微分不可能なため、その実験には提示された収束率を直接適用できない。数値検証は低次元の少数例、単一の基本設定、有限学習回数に限られ、統計的信頼区間、広範なhyperparameter感応度、実市場データによる較正は示されていない。また、割引率は有界区間または定数として扱われ、yield curve dynamics、金利商品の較正、取引コストやmarket microstructureは対象外である。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "割引率曖昧性をcash-subadditive risk measureとして扱い、二次反射型BSDEをdeep learningで解く統合的枠組みは、頑健なAmerican option評価を研究する読者には有用である。特にentropic変換と離散反射を用いた数値構成は実装上の参考になる。一方、金利期間構造モデルそのものではなく、数値実証も限定的であるため、rates研究としての重要性は中程度と評価する。",
+        "tags": [
+          "paired ambiguity",
+          "反射型BSDE",
+          "動的リスク尺度",
+          "割引率の曖昧性",
+          "entropic risk",
+          "最適停止",
+          "American option",
+          "deep BSDE",
+          "cash-subadditivity",
+          "Snell envelope"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper formulates optimal stopping under “paired ambiguity,” simultaneously covering probability-model ambiguity through Girsanov transformations and stochastic discount-rate ambiguity. It represents the stopping value by an upper reflected BSDE and studies quadratic drivers associated with entropic risk, explicit stopping rules, and a deep-learning numerical method. Although it is not a term-structure model, it is relevant to both rates and derivatives valuation because it links discount-rate uncertainty to American-option exercise decisions.",
+          "mainResult": "The authors report that the stopping value equals the first component of a unique upper reflected BSDE with obstacle $-\\xi_t$ and that, under suitable regularity and attainment conditions, the first contact time $\\tau_t^*=\\inf\\{s\\ge t:Y_s=-\\xi_s\\}$ is optimal. They establish monotonicity, cash subadditivity, and, under additional conditions, cash additivity, quasi-concavity, and concavity of the stopping operator, while showing that it is not generally convex. For the entropic driver $g(z)=\\frac{\\gamma}{2}|z|^2$, an exponential transform reduces the problem to the lower Snell envelope of $e^{-\\gamma\\xi_t}$. Numerically, discrete reflection and an exact truncation reduce the problem to a Lipschitz system, for which the paper provides a convergence estimate including neural-network approximation errors.",
+          "practicalApplication": "The framework can be applied to American options, optimal liquidation, and investment timing when both the probability model and discount rate are uncertain. In the numerical examples, the estimated Black–Scholes American put price is $0.11638$, about $-2.8\\%$ from the binomial benchmark of $0.11973$. With entropic parameter $\\gamma=5$, the reported price is $0.10881$, while the early-stopping fraction rises from $0.41$ in the baseline case to $0.82$. The authors appropriately caution that this experiment does not establish general comparative statics for the exercise boundary.",
+          "methodology": "The paper first augments the dual representation of a cash-subadditive risk measure with controls for probability-measure changes and discount rates, then analyzes the resulting stopping problem through nonlinear Snell envelopes and upper reflected BSDEs. In the entropic case, an exponential transform connects the problem to classical optimal stopping and yields explicit solutions for submartingale, supermartingale, deterministic-payoff, and Brownian-payoff cases. The numerical method combines a Markovian setting, deterministic state-independent volatility, Euler discretization, discrete reflection, truncation of the quadratic driver using a uniform bound on $Z$, and deep backward regression. Three examples are evaluated with $50$ time steps: an American put, bounded discount-rate ambiguity, and entropic-discount ambiguity.",
+          "limitations": "The numerical theory is restricted to a Markovian setting with deterministic, state-independent volatility; state-dependent volatility is explicitly left open. The convergence argument combines existing discrete-reflection and time-discretization estimates with a Lipschitz deep-BSDE estimate, and its constants may become exponentially large through the truncation radius. Quantitative rates require additional smoothness, but the principal American put payoff is not differentiable at the strike, so the stated rates do not directly apply to that experiment. Numerical evidence is limited to a few low-dimensional examples, one main training configuration, and finite training runs, without statistical confidence intervals, broad hyperparameter sensitivity analysis, or market-data calibration. Discount rates are modeled as constants or bounded intervals rather than full yield-curve dynamics, and the paper does not address rates-product calibration, transaction costs, or market microstructure.",
+          "reason": "The integrated treatment of discount-rate ambiguity as a cash-subadditive risk measure and the deep-learning solution of quadratic reflected BSDEs are useful for readers studying robust American-option valuation. The entropic transform and discrete-reflection construction are particularly informative for implementation. However, this is not a term-structure model, and its numerical validation is limited, so its importance for rates research is moderate.",
+          "tags": [
+            "paired ambiguity",
+            "reflected BSDE",
+            "dynamic risk measure",
+            "discount-rate ambiguity",
+            "entropic risk",
+            "optimal stopping",
+            "American option",
+            "deep BSDE",
+            "cash subadditivity",
+            "Snell envelope"
+          ]
+        }
+      }
+    },
+    "2609.24181": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "AIを事業モデルに統合する企業の評価に向けて、マイルストーン型リアルオプションとAHPベースの成功準備度指数を組み合わせた枠組みを提案する研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "AI IntegratorとAI Providerを区別し、AI統合の深度とマイルストーンごとの継続オプションを分解することで、識別可能な仮定に基づく評価レンジを構成できると報告しています。AI-nativeなエネルギーSaaS企業への単一事例では、リスクが後期の継続オプションに集中し、AI Providerに関する構造的予測と整合したとされています。",
+        "practicalApplication": "AI導入企業のシナリオ評価、M&Aデューデリジェンス、事業計画のマイルストーン管理に利用できる可能性があります。ただし、本サイトの対象である電子執行や金利関連分析への直接的な応用は確認できません。",
+        "methodology": "AI企業を業態と統合深度で分類し、マイルストーン状態価値を5要素に分解します。さらに、Analytic Hierarchy Processによる一対比較から各オプションの成功確率を設定し、リアルオプション型のシナリオ評価を行います。",
+        "limitations": "検証は単一企業のケーススタディに限られ、実現した売却後評価との比較による実証的妥当性は示されていません。AHPの主観的な比較判断、確率設定、モデル仕様への依存も残ります。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "企業価値評価とAI事業戦略に関する研究であり、指定された電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場の中心テーマには該当しません。",
+        "tags": [
+          "out_of_scope",
+          "corporate_valuation",
+          "real_options",
+          "AI_business_models",
+          "M&A_due_diligence"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a milestone-based real-options framework combined with an AHP-based Success Readiness Index for valuing firms that integrate AI into their business models. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "The paper distinguishes AI Integrators from AI Providers and decomposes AI integration depth and milestone-level continuation options into identifiable assumptions, producing a valuation range. In a single case involving an AI-native energy SaaS firm, risk was reported to concentrate in later-stage continuation options, consistent with the framework's structural prediction for AI Providers.",
+          "practicalApplication": "The framework could support scenario valuation for AI-adopting firms, M&A due diligence, and milestone-based business planning. However, no direct application to electronic execution or interest-rate analysis is established.",
+          "methodology": "The framework classifies firms by business type and integration depth, decomposes milestone-state value into five components, and derives option-specific success probabilities from pairwise comparisons using the Analytic Hierarchy Process. It then conducts real-options-based scenario valuation.",
+          "limitations": "The evidence is limited to a single-firm case study, with no empirical validation against realised post-exit valuations. Dependence on subjective AHP judgments, probability assignments, and model specification also remains.",
+          "reason": "This is a corporate-valuation and AI-business-strategy paper rather than research on electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "out_of_scope",
+            "corporate_valuation",
+            "real_options",
+            "AI_business_models",
+            "M&A_due_diligence"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.24548": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、対称正半定値行列上の affine stochastic Volterra 過程を理論化し、商品市場向けの Volterra–Wishart モデルへ応用する研究である。分散の長期記憶と確率的な瞬時相関を、affine tractability を保ったまま表現する。",
+        "mainResult": "著者らは、行列値 Volterra 方程式の弱解の存在を示し、行列値 Riccati–Volterra 方程式で特徴付けられる条件付き Fourier–Laplace 変換公式を導出した。Gibson–Schwartz モデルを拡張し、確率的分散共分散構造、分散の memory、stochastic instantaneous correlation を持つ商品モデルを構成した。",
+        "practicalApplication": "商品価格・分散共分散を同時に扱うモデルの解析、transform-based pricing、較正、リスク分析に応用できる可能性がある。ただし、本サイトの中心である電子執行、market microstructure、interest-rate models、yield curves、rates への直接的な応用は示されていない。",
+        "methodology": "凸領域上の Volterra 方程式に関する stochastic invariance の結果を利用して弱解の存在を示し、affine 構造から条件付き Fourier–Laplace 変換を Riccati–Volterra 方程式で特徴付ける。商品市場への応用では、共分散過程を Volterra–Wishart process に置き換える。",
+        "limitations": "抽象では、推定、数値計算法、実データでの較正、予測精度、pricing performance の実証結果は報告されていない。また、存在理論は原点で特異な kernel を除外する一方、shifted fractional kernels は許容される。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "数学ファイナンスとしては affine Volterra covariance と commodity volatility modeling に関係するが、指定された主要テーマである電子取引、market microstructure、金利モデル、イールドカーブ、rates には直接該当しないため、対象外と判定する。",
+        "tags": [
+          "affine Volterra process",
+          "Volterra–Wishart",
+          "commodity markets",
+          "stochastic volatility",
+          "matrix-valued covariance",
+          "Riccati–Volterra equations",
+          "long memory"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper develops affine stochastic Volterra processes on the cone of symmetric positive semidefinite matrices and applies them to a Volterra–Wishart model for commodity markets. It represents long memory in variances and stochastic instantaneous correlation while preserving affine tractability.",
+          "mainResult": "The authors establish weak existence for matrix-valued Volterra equations and derive a conditional Fourier–Laplace transform characterized by matrix-valued Riccati–Volterra equations. They extend the Gibson–Schwartz model with a stochastic variance–covariance structure, memory in variances, and stochastic instantaneous correlation.",
+          "practicalApplication": "The framework could support joint modeling of commodity prices and variance–covariance dynamics, including transform-based pricing, calibration, and risk analysis. However, the abstract does not present a direct application to electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "methodology": "Weak existence is established using stochastic invariance results for Volterra equations on convex domains. The affine structure yields conditional Fourier–Laplace transforms characterized by Riccati–Volterra equations. For the commodity-market application, the covariance process is replaced with a Volterra–Wishart process.",
+          "limitations": "The abstract reports no estimation, numerical implementation, empirical calibration, forecasting evaluation, or pricing-performance results. The existence theory excludes kernels that are singular at the origin, although shifted fractional kernels are admissible.",
+          "reason": "The paper is relevant to mathematical finance, affine Volterra processes, and commodity volatility modeling, but it does not directly address the target areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "affine Volterra process",
+            "Volterra–Wishart",
+            "commodity markets",
+            "stochastic volatility",
+            "matrix-valued covariance",
+            "Riccati–Volterra equations",
+            "long memory"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 880,
+      "outputTokens": 1018,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1898,
+      "estimatedCostUsd": 0.001398,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.21439v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 898,
+      "outputTokens": 912,
+      "reasoningTokens": 55,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1810,
+      "estimatedCostUsd": 0.001274,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.22169v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 843,
+      "outputTokens": 945,
+      "reasoningTokens": 76,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1788,
+      "estimatedCostUsd": 0.001303,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.22202v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 873,
+      "outputTokens": 835,
+      "reasoningTokens": 43,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1708,
+      "estimatedCostUsd": 0.001177,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.22408v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 826,
+      "outputTokens": 999,
+      "reasoningTokens": 54,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1825,
+      "estimatedCostUsd": 0.001364,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.22446v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 744,
+      "outputTokens": 908,
+      "reasoningTokens": 70,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1652,
+      "estimatedCostUsd": 0.001238,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.22652v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 838,
+      "outputTokens": 911,
+      "reasoningTokens": 74,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1749,
+      "estimatedCostUsd": 0.001261,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.22893v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 863,
+      "outputTokens": 1150,
+      "reasoningTokens": 71,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2013,
+      "estimatedCostUsd": 0.001553,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.23272v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 913,
+      "outputTokens": 1120,
+      "reasoningTokens": 69,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2033,
+      "estimatedCostUsd": 0.001527,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.23378v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 776,
+      "outputTokens": 1069,
+      "reasoningTokens": 53,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1845,
+      "estimatedCostUsd": 0.001438,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.23571v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 889,
+      "outputTokens": 1076,
+      "reasoningTokens": 104,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1965,
+      "estimatedCostUsd": 0.001469,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.23598v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 21641,
+      "outputTokens": 2138,
+      "reasoningTokens": 573,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 21638,
+      "totalTokens": 23779,
+      "estimatedCostUsd": 0.150962,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 10,
+      "paperIds": [
+        "2609.23598v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 922,
+      "outputTokens": 1055,
+      "reasoningTokens": 72,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1977,
+      "estimatedCostUsd": 0.00145,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.23703v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 22303,
+      "outputTokens": 2066,
+      "reasoningTokens": 405,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 22300,
+      "totalTokens": 24369,
+      "estimatedCostUsd": 0.152832,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 47,
+      "paperIds": [
+        "2609.23703v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 811,
+      "outputTokens": 886,
+      "reasoningTokens": 72,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1697,
+      "estimatedCostUsd": 0.001225,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.23744v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 780,
+      "outputTokens": 1303,
+      "reasoningTokens": 143,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2083,
+      "estimatedCostUsd": 0.00172,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.23768v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 25306,
+      "outputTokens": 2790,
+      "reasoningTokens": 677,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 25303,
+      "totalTokens": 28096,
+      "estimatedCostUsd": 0.182327,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 31,
+      "paperIds": [
+        "2609.23768v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 881,
+      "outputTokens": 904,
+      "reasoningTokens": 44,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1785,
+      "estimatedCostUsd": 0.001261,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.24181v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 785,
+      "outputTokens": 1017,
+      "reasoningTokens": 89,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1802,
+      "estimatedCostUsd": 0.001377,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.24548v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

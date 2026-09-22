@@ -2,6 +2,53 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-09-22-daily-openai-01",
+      "date": "2026-09-22",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.23703v1",
+          "title": "Financial Language Models as Applied Artificial Intelligence Systems for News-Based Trading under Market Frictions",
+          "authors": [
+            "Kemal Kirtac"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.23768v1",
+          "title": "Risk Measures under Paired-Ambiguity: A Deep Learning Reflected BSDE Framework",
+          "authors": [
+            "Nacira Agram",
+            "Jan Rems",
+            "Emanuela Rosazza Gianin"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.23598v1",
+          "title": "OrderFusion+: Probabilistic Buy--Sell Price Trajectory Forecasting in Intraday Electricity Markets",
+          "authors": [
+            "Runyao Yu",
+            "Derek W. Bunn"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-09-21-daily-openai-01",
       "date": "2026-09-21",
       "kind": "daily",

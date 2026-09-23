@@ -3562,6 +3562,111 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-09-23-daily-openai-01",
+      "editionDate": "2026-09-23",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-23T12:00:18Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-23",
+      "observedBatchDate": "2026-09-23",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月23日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 12 | 10,124 | 12,937 (806) | 0.0175 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 3 | 63,376 | 6,074 (1,027) | 0.4384 | PDF全文・9ページ / 全51ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 / PDF全文・36ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Hierarchical Multi-Task Learning with Liquidity-Aware Signals for Stock Forecasting\n\n**[arXiv:2609.25617v1](https://arxiv.org/abs/2609.25617v1) — Hengyi Yang, Sida Lin, Yiyan Qi, Yankai Chen, Haohan Zhang, Xianhua Peng, Jian Guo**\n\n### 概要\n\n中国A株の日次リターン予測に、出来高ショックとボラティリティの補助学習を組み合わせ、流動性制約付きポートフォリオ構築まで接続する研究である。LiMTは、各時点の銘柄間attention、銘柄別の時系列attention、multi-task mixture-of-experts、予測流動性とリスクを使うAPOで構成される。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 株式予測 / multi-task learning / mixture-of-experts / 流動性 / 出来高ショック / ボラティリティ / cross-sectional attention / ポートフォリオ最適化 / 取引コスト / 中国A株 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** market microstructureそのものの推定研究ではないが、出来高・ボラティリティ予測をcapacity-aware sizingへ接続し、予測精度と執行可能性の橋渡しを試みる点は実務的に有用である。ablationとコスト・参加率制約を含む点も評価できる。ただし、実際の執行摩擦とshort制約のモデル化は粗く、強い収益結果は独立検証が必要なため、方法論の参考として条件付きで推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 926 | 1,186 (148) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 17,694 | 2,153 (516) | 0.1315 | PDF全文・9ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者報告では、CSI300とCSI500の全評価指標でLiMTが比較対象を上回った。CSI300の別個のlong-short backtestでは、APOがequal weightに対して年率リターンを3.99%から10.01%、Sharpe ratioを1.22から1.86へ改善した一方、最大drawdownとturnoverは増加した。\n\n**手法:** 2008～2020年のCSI300・CSI500とQlib Alpha158を使用し、21日lookbackから翌日相当のリターン、出来高ショック、high-low rangeベースのボラティリティを予測する。MREは各履歴時点でcross-stock attentionを適用した後に銘柄別temporal attentionを行い、LDLはMMoEとcross-task gateで3目的を共同学習する。APOはリターン予測の上位・下位decileをlong-short候補とし、$r=0.1$で流動性と低ボラティリティを合成し、取引コスト10 basis pointsと日次売買代金の2%上限を課している。実験は3回の初期値で反復され、主要componentについてablationも実施された。\n\n**実務への応用:** 翌日リターンで売買候補を選び、予測出来高と予測ボラティリティでposition sizingを調整する用途を想定している。日次売買の参加率上限と取引コストを考慮するため、単純なランキング戦略よりexecution capacityを意識したポートフォリオ設計に応用できる。\n\n**限界・注意点:** 検証は中国A株の日次データと2017～2020年の単一test期間に限られ、他市場・他期間・intraday executionへの外的妥当性は不明である。構成銘柄履歴、上場廃止、short sellingの実行可能性、borrow cost、bid-ask spread、税、非線形market impactの扱いが十分に記載されていない。APOの参加率制約は単純化され、制約適用後の再正規化や未投資資金の処理も明確でない。Table Iのlong-only設定とAPOのlong-short設定は異なるため、数値を直接結び付けられない。3回の反復は限定的で、複数期間・複数市場での検定はなく、報告された日次alpha 0.35%のfactor regressionにも詳細な仕様が不足する。attention可視化は1日・少数銘柄の事例であり、経済的な因果や安定した解釈を示すものではない。\n\n## 2. Modeling interest rate swap volatility with GARCH processes\n\n**[arXiv:2609.25965v1](https://arxiv.org/abs/2609.25965v1) — Michał Balcerek, Michał Wronka**\n\n### 概要\n\n本研究は、2007～2023年の日次データを用い、USD 1年先10年フォワード・スワップレートの条件付きボラティリティをGARCH、GJR-GARCH、2レジームMSGARCHで比較する。著者らは、単一レジームモデルでは長期分散が不安定になる一方、MSGARCHは高・低ボラティリティ局面を構造的に分離すると主張する。ただし、本レビューは51頁の論文本文ではなく、提供されたabstractとIntroductionのみに基づく限定評価であり、証明、実験、詳細な推定結果、付録は確認していない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 金利スワップ / フォワード・スワップレート / GARCH / GJR-GARCH / MSGARCH / レジーム・スイッチング / 条件付きボラティリティ / スワップション / SRVIX / ボラティリティ予測 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 金利ボラティリティのレジーム変化、パラメータ安定性、市場インプライド指標との比較を一つの枠組みで扱っており、ratesリスク管理には関連性が高い。ただし、短期予測でMSGARCHの明確な優位性は著者自身も主張しておらず、全文未確認のため結論の信頼性を評価できない。限定ソースであることを前提に、実務的なモデル比較の参考資料として推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 868 | 1,202 (51) | 0.0016 | Abstractのみ |\n| 一次判定 | gpt-5.6-luna / low | 1 | 868 | 1,283 (52) | 0.0017 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 2,544 | 1,969 (303) | 0.0521 | 全51ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 提供されたabstractとIntroductionによれば、著者らは、標準GARCHとGJR-GARCHでは短期パラメータが安定する一方、切片がローリング窓ごとに大きく変動し、含意される長期分散が不安定になると報告している。また、MSGARCHが最大の対数尤度と最小のAICを示す一方、BICはより簡潔なGJR-GARCHを選び、1日先予測精度は各モデルで同程度だと主張する。これは著者の報告であり、abstractとIntroductionしか提供されていないため、推定表、検定計算、バックテスト、証明、付録を独立に確認していない。\n\n**手法:** 著者らは、2007～2023年のUSDフォワード・スワップレートの日次データにGARCH、GJR-GARCH、2レジームMSGARCHを適用し、ATMスワップション・ボラティリティとSRVIXも参照する。モデル比較には対数尤度、AIC、BICを用い、Nyblom安定性検定、Engle–Ng符号・規模バイアス検定、適合度検定を実施すると説明している。ローリング窓で再推定し、1日先ボラティリティ予測による95％予測区間のカバレッジを評価する設計である。\n\n**実務への応用:** 金利デリバティブのリスク管理、短期ボラティリティ予測、予測区間の構築、スワップション評価の補助に利用できる可能性がある。短期予測だけなら簡潔なGJR-GARCHが候補となり、ストレス局面や構造変化の解釈を重視する場合はMSGARCHのフィルター済みレジーム確率が有用となり得る。\n\n**限界・注意点:** 本レビューの情報源は提供されたabstractとIntroductionのみであり、51頁の全文は提供されていない。したがって、データ加工、推定仕様、イノベーション分布、取引日処理、頑健性分析、数値表、図、証明、バックテスト実装、付録は確認できない。結果はすべて著者の主張として扱う必要がある。また、対象が単一のUSDフォワード・スワップ満期構成と日次データに限られるため、他通貨、他テナー、イントラデイ執行への一般化は不明である。\n\n## 3. Liquidity Provision and Rebate Design in Option Markets\n\n**[arXiv:2609.26606v1](https://arxiv.org/abs/2609.26606v1) — Samuel N. Cohen, Lyndon Drake, Zihan Guo, Christoph Reisinger**\n\n### 概要\n\n複数の欧州型コールを扱う単一market makerのmake-take戦略と、取引所のrebate設計を統合した確率制御モデルである。limit orderを連続制御、market orderをimpulse controlとして扱い、delta・vega在庫リスクを抑えながら、取引所が指定した流動性目標を実現する報酬体系を設計する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | オプション市場形成 / make-take fee / rebate設計 / limit order book / 在庫リスク / impulse control / HJBQVI / portfolio delta / CBOE SPXW |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** option market making、在庫制御、make-take feeを一つの動学モデルにまとめ、取引所の流動性目標からrebate上限・追加報酬を逆算する点は実務的かつ新規性がある。特に連続的なquote報酬とmarket-order hedgeを同時に扱う構成は有用である。一方、結論は強い観測可能性・外生spread・定数Greek仮定と限定的な数値事例に依存するため、実運用前には複数日・多数銘柄での再推定と市場均衡を含む検証が必要である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 782 | 1,001 (61) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 43,138 | 1,952 (208) | 0.2547 | PDF全文・36ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らは市場形成問題をHJB quasi-variational inequalityとして定式化し、Black–Scholesモデルと定数delta近似の下で状態次元を削減して、最適なmake-take戦略をfeedback形式で導出した。さらに、指定されたaggressive quotingをmarket makerの最適反応にする三段階のrebate設計法を提示した。CBOEの2銘柄・1取引日データによる数値例では、必要な追加報酬がspread、portfolio delta、執行強度に依存し、執行強度がほぼゼロの広いspreadではaggressive quoteへの追加報酬効果も限定的であると報告している。\n\n**手法:** 基礎資産をlocal-stochastic volatility過程、複数オプションのspreadを外生的な有限状態CTMC、limit-order約定を制御付きCox過程としてモデル化する。平均利益からrunningおよびterminalのdelta・vega二次ペナルティを差し引く目的関数を設定し、連続制御とimpulse controlを含むHJBQVIを導く。Black–Scholes・定数deltaの場合には価値関数をportfolio deltaとspreadへ縮約し、penalty methodとsemi-implicit Euler法で解く。数値例ではSPXW 1DTE call 2銘柄のCBOE Level 1データからspread遷移率と約定強度のproxyを推定する。\n\n**実務への応用:** 取引所は、銘柄別のspread目標とmarket makerの在庫状態に応じ、best quoteを1 tick改善させるための最小限のmarginal rebateを推定できる。market maker側では、limit orderによる収益とrebate、delta・vegaリスク、market orderの即時ヘッジ費用を一体的に比較する戦略設計に利用できる。\n\n**限界・注意点:** 取引所がmarket makerのquote行動とnet deltaを観測して支払いに利用できるfirst-best設定であり、情報の非対称性や契約実務を十分に扱わない。単一の小規模market makerを仮定し、その注文によるspread、queue、price impactへの影響を無視している。spreadは外生CTMCで、主要な解法とrebate設計はBlack–Scholes、定数delta、vegaなしへ簡略化される。実証部分は1取引日のSPXW 2銘柄に限られ、実際のmarket maker約定ではなくorder-flow proxyを使用しており、out-of-sample検証、政策導入後の市場反応、収益性・厚み・取引量への因果効果は示されていない。負のrebateが生じる場合もあり、著者らのrelative rebateへの置換は提案段階である。",
+      "papers": [
+        {
+          "arxivId": "2609.25617v1",
+          "title": "Hierarchical Multi-Task Learning with Liquidity-Aware Signals for Stock Forecasting",
+          "authors": [
+            "Hengyi Yang",
+            "Sida Lin",
+            "Yiyan Qi",
+            "Yankai Chen",
+            "Haohan Zhang",
+            "Xianhua Peng",
+            "Jian Guo"
+          ],
+          "submittedDate": "2026-09-22",
+          "updatedDate": "2026-09-23",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.25617v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.25617v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "中国A株の日次リターン予測に、出来高ショックとボラティリティの補助学習を組み合わせ、流動性制約付きポートフォリオ構築まで接続する研究である。LiMTは、各時点の銘柄間attention、銘柄別の時系列attention、multi-task mixture-of-experts、予測流動性とリスクを使うAPOで構成される。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 926 / 出力 1,186（うち推論 148） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 17,694 / 出力 2,153（うち推論 516） · PDF 9 pages · 推定 $0.1315",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.25965v1",
+          "title": "Modeling interest rate swap volatility with GARCH processes",
+          "authors": [
+            "Michał Balcerek",
+            "Michał Wronka"
+          ],
+          "submittedDate": "2026-09-22",
+          "updatedDate": "2026-09-23",
+          "topics": [
+            "Interest-rate models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.25965v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.25965v1",
+          "schedulerRank": 2,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "本研究は、2007～2023年の日次データを用い、USD 1年先10年フォワード・スワップレートの条件付きボラティリティをGARCH、GJR-GARCH、2レジームMSGARCHで比較する。著者らは、単一レジームモデルでは長期分散が不安定になる一方、MSGARCHは高・低ボラティリティ局面を構造的に分離すると主張する。ただし、本レビューは51頁の論文本文ではなく、提供されたabstractとIntroductionのみに基づく限定評価であり、証明、実験、詳細な推定結果、付録は確認していない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 868 / 出力 1,202（うち推論 51） · 推定 $0.0016\n一次判定: gpt-5.6-luna / low · トークン 入力 868 / 出力 1,283（うち推論 52） · 推定 $0.0017\n論文解析: gpt-5.6-sol / medium · トークン 入力 2,544 / 出力 1,969（うち推論 303） · 全51ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0521",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.26606v1",
+          "title": "Liquidity Provision and Rebate Design in Option Markets",
+          "authors": [
+            "Samuel N. Cohen",
+            "Lyndon Drake",
+            "Zihan Guo",
+            "Christoph Reisinger"
+          ],
+          "submittedDate": "2026-09-22",
+          "updatedDate": "2026-09-23",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.26606v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.26606v1",
+          "schedulerRank": 3,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "複数の欧州型コールを扱う単一market makerのmake-take戦略と、取引所のrebate設計を統合した確率制御モデルである。limit orderを連続制御、market orderをimpulse controlとして扱い、delta・vega在庫リスクを抑えながら、取引所が指定した流動性目標を実現する報酬体系を設計する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 782 / 出力 1,001（うち推論 61） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 43,138 / 出力 1,952（うち推論 208） · PDF 36 pages · 推定 $0.2547",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

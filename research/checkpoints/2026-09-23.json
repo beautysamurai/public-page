@@ -1,0 +1,907 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-23",
+  "fingerprint": "7b22e22ff955e4d43f0526e77a0c83ad10438475e97a332f268075b1b4adb39b",
+  "candidateFingerprints": {
+    "2609.25144": "de8d94a071f868438649ac65258f6c807a8403d83549d8d99a930a3f2c32a42d",
+    "2609.25452": "0ed67d153f66b6d7114b91c54b44735843f2849ffe9deb454bd68216e6e2f549",
+    "2609.25617": "9f4ec674f0c276ee2d06b4ad5a3a29d4a710b8809f7204c5dcd3a6a357dba0f9",
+    "2609.25677": "a22a805d07bcb209de5855f0dc3acec278a51ca9c314d6c7b0b29f866fe41974",
+    "2609.25965": "07dc336ef2d6bcc290f1d8e73b1347f4586c7d4cce500b3b0373ca36b2b37c7e",
+    "2609.26062": "0e26e17699cce01e838569bde7678fbc75ca0b7f946712171e148f876f01f132",
+    "2609.26212": "abd6ba6f6ff7ad7ab72a81684ba207b0cddcbbaa0523e4e15f4790a1a4f7457b",
+    "2609.26349": "1766d915157f888821aa6796694bed03cee5ea73f23b47f932f101d9e8f4244c",
+    "2609.26445": "c8251699324f345af541429a98716b84b916f6de516e4096d6f38c616aff1996",
+    "2609.26604": "aa55e2e46ac848d3e5d57b4df94a736654a4190e32cc79639870cc8204a7b271",
+    "2609.26606": "87d911f7984e9323caff88d74d1cff4a6aa08b77a377a67d924896ed9d663dea"
+  },
+  "results": {
+    "2609.25144": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、自己回帰木に基づく新しい統計量であるlepto-varianceとlepto-ratioが、標本分散・歪度・超過尖度とどのように関係するかを、正規乱数シミュレーションで調べている。電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、金利市場を直接扱っていない。",
+        "mainResult": "標準正規分布の大標本ではlepto-ratioが36.3%に収束した。小標本では、lepto-variance自体は標本分散と強く相関する一方、総分散に占めるlepto-varianceの比率は超過尖度と強く相関した。また、lepto-varianceとlepto-ratioは標本歪度とは直交し、lepto-ratioはlepto-varianceとは強く相関するが、標本分散とは直交すると報告されている。米国株式リターンの変動性の58%が、金融ファクターで説明できない1ビットlepto-varianceだという主張も示されている。",
+        "practicalApplication": "新しい分散分解や高次モーメント指標として、リスク分析やリターン分布の診断に利用できる可能性がある。ただし、電子執行、注文市場設計、金利曲線分析、金利モデルへの具体的な応用は抽象から確認できない。",
+        "methodology": "自己回帰木として定義したlepto-regressionを用い、標準正規分布から生成した小標本および大標本のシミュレーションで、1ビットlepto-varianceとlepto-ratioを標本分散、歪度、超過尖度と比較している。米国株式リターンに関する主張も提示されているが、抽象ではデータ、推定手順、検定方法の詳細は示されていない。",
+        "limitations": "結果は主に標準正規シミュレーションに基づき、非正規性、時系列依存性、異分散性、市場制度の影響は不明である。「直交」や「相関」の定義、統計的有意性、頑健性、1ビットlepto-varianceの構成も抽象だけでは十分に説明されていない。58%という株式市場の主張も再現可能な検証情報が不足している。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "統計的な新規性はある可能性があるが、本サイトの主要対象である電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、金利市場との直接的な関連が弱いため、対象外と判断する。",
+        "tags": [
+          "lepto-variance",
+          "lepto-ratio",
+          "higher moments",
+          "sample variance",
+          "excess kurtosis",
+          "machine learning",
+          "simulation"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies how lepto-variance and lepto-ratio, novel statistics based on self-regression trees, relate to sample variance, skewness, and excess kurtosis using simulations from the standard normal distribution. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "For large samples from a standard normal distribution, the lepto-ratio converged to 36.3%. In smaller samples, lepto-variance itself was highly correlated with sample variance, while lepto-variance as a fraction of total variance was highly correlated with excess kurtosis. Lepto-variance and lepto-ratio were reported to be orthogonal to sample skewness. Lepto-ratio was strongly correlated with lepto-variance but orthogonal to sample variance. The paper also claims that 58% of historical US stock-return variability is 1-bit lepto-variance unexplained by financial factors.",
+          "practicalApplication": "The measures may be useful as new variance-decomposition or higher-moment diagnostics for risk analysis and return-distribution analysis. However, the abstract provides no concrete application to electronic execution, order-market design, yield-curve analysis, or interest-rate models.",
+          "methodology": "The paper defines lepto-regression through a regression tree of a target feature on itself, then uses small- and large-sample simulations from the standard normal distribution to compare 1-bit lepto-variance and lepto-ratio with sample variance, skewness, and excess kurtosis. It also presents a claim about US stock returns, although the abstract does not specify the data, estimation procedure, or testing methodology.",
+          "limitations": "The results are primarily based on standard-normal simulations, so the effects of non-normality, time-series dependence, heteroskedasticity, and market regimes are unclear. The abstract does not sufficiently define orthogonality or correlation, report statistical significance, establish robustness, or explain how 1-bit lepto-variance is constructed. The 58% stock-market claim lacks enough information for reproducible evaluation.",
+          "reason": "The work may offer statistical novelty, but it has weak direct relevance to the site’s main areas of electronic trading, market microstructure, interest-rate models, yield curves, and rates markets; it is therefore classified as out of scope.",
+          "tags": [
+            "lepto-variance",
+            "lepto-ratio",
+            "higher moments",
+            "sample variance",
+            "excess kurtosis",
+            "machine learning",
+            "simulation"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.25452": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "無限分解可能分布に従うリスクの凸結合について、majorization order に基づく分散効果と非分散効果を、Lévy 過程および関連する確率過程の範囲で分析する研究です。電子取引、market microstructure、金利モデル、yield curve、rates を直接扱っていません。",
+        "mainResult": "変換 Lévy measure の劣加法性・凹性を用いて、全ての時間 horizon で非分散現象または逆向きの分散順序を示す Lévy 過程を特徴付けています。特に、対称 Lévy 過程で非分散現象を示すのは symmetric 1-stable Lévy process のみであると報告しています。また、依存性や異質な分布を許す多変量モデル、running maxima、Lévy-driven stochastic integrals、Lévy-driven Ornstein–Uhlenbeck processes へ結果を拡張し、ruin theory、storage processes、stochastic volatility への応用を論じています。",
+        "practicalApplication": "ポートフォリオのリスク分散効果、破産確率、storage のリスク、stochastic volatility を評価する理論的枠組みとして利用できる可能性があります。ただし、対象サイトの電子執行、market microstructure、金利・イールドカーブ分析への直接的な実務適用は抽象からは確認できません。",
+        "methodology": "無限分解可能分布の Lévy measure を変換し、その subadditivity と concavity を majorization order による凸結合の比較に用いています。独立同分布の場合から、依存・異質な多変量 Lévy 過程、さらに sample-path-dependent processes へ理論的に拡張しています。",
+        "limitations": "評価は abstract のみに基づき、定理の正確な仮定、証明、分散順序の定義、数値検証、データ分析、実装可能性は確認できません。主な成果はリスク分散理論に関するものであり、対象分野との直接的な関連性は限定的です。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "確率論およびリスク分散研究としては有用な理論的貢献が示唆されますが、対象サイトが重視する電子取引、market microstructure、interest-rate models、yield curves、rates には実質的に焦点を置いていないため、スクリーニング上は対象外と判断します。",
+        "tags": [
+          "out_of_scope",
+          "risk diversification",
+          "infinitely divisible distributions",
+          "Lévy processes",
+          "majorization order",
+          "stochastic volatility"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes diversification and non-diversification effects for convex combinations of risks with infinitely divisible distributions, using the majorization order across Lévy processes and related stochastic processes. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "mainResult": "The paper characterizes Lévy processes that exhibit non-diversification or reverse diversification order uniformly over all time horizons through subadditivity and concavity properties of transformed Lévy measures. In particular, it reports that the symmetric 1-stable Lévy process is the only symmetric Lévy process exhibiting non-diversification. The results are also extended to multivariate models with dependence and heterogeneous distributions, running maxima, Lévy-driven stochastic integrals, and Lévy-driven Ornstein–Uhlenbeck processes, with applications discussed for ruin theory, storage processes, and stochastic volatility.",
+          "practicalApplication": "The framework may support theoretical analysis of portfolio diversification, ruin probabilities, storage risk, and stochastic volatility. However, the abstract does not establish direct practical relevance to electronic execution, market microstructure, or interest-rate and yield-curve analysis.",
+          "methodology": "The authors transform Lévy measures and use their subadditivity and concavity to compare convex combinations under the majorization order. The analysis is extended from iid risks to dependent and heterogeneous multivariate Lévy processes and then to several sample-path-dependent processes.",
+          "limitations": "This assessment is based only on the abstract; the precise assumptions, proofs, definitions of the diversification orders, numerical validation, empirical analysis, and implementation feasibility are not available. The contribution is primarily theoretical risk-diversification research and has limited direct relevance to the target domains.",
+          "reason": "The paper suggests a useful theoretical contribution to probability and risk diversification, but it does not materially focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates. It is therefore out of scope for this site.",
+          "tags": [
+            "out_of_scope",
+            "risk diversification",
+            "infinitely divisible distributions",
+            "Lévy processes",
+            "majorization order",
+            "stochastic volatility"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.25617": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "株価、ボラティリティ、取引量を同時に予測し、流動性と取引コストを考慮してポートフォリオ配分へ変換するLiMTを提案した研究です。",
+        "mainResult": "要旨によれば、CSI300とCSI500でLiMTがニューラルネットワークおよび木ベースの強力なベースラインを上回りました。CSI300のバックテストでは、等ウェイト比で年率リターンが3.99%から10.01%、Sharpe ratioが1.22から1.86へ改善したと報告されています。",
+        "practicalApplication": "価格、ボラティリティ、取引量の予測を、取引コストと流動性制約を含む実行可能なポートフォリオウェイトへ変換する枠組みとして、シグナル生成とポートフォリオ構築に応用できます。ただし、実運用での執行品質や市場インパクトの検証までは要旨から確認できません。",
+        "methodology": "Market Regime Encoderが銘柄間の同時依存関係と各銘柄の時系列特性を階層的に抽出します。Liquidity-Driven Learningはmixture-of-expertsとタスク間ゲーティングにより、価格変動、ボラティリティ、取引量を共同予測します。Adaptive Portfolio Optimizationはこれらの予測を、取引コストおよび流動性制約下のポートフォリオウェイトへ変換します。",
+        "limitations": "評価はCSI300とCSI500、および要旨で示されたCSI300バックテストに依存しています。サンプル期間、データ処理、手数料設定、スリッページ、市場インパクト、回転率、統計的有意性、将来期間での頑健性は要旨から不明です。強力なベースラインを含むとされますが、比較条件やアブレーションの詳細も確認できません。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "流動性情報を用いたマルチタスク予測と制約付きポートフォリオ構築を結び付けており、電子取引・実行設計に関連する実務的な示唆があります。一方、主題の中心は株式リターン予測であり、要旨だけでは実運用上の優位性を十分に検証できないため、重要度は中程度としました。",
+        "tags": [
+          "株価予測",
+          "流動性シグナル",
+          "マルチタスク学習",
+          "ポートフォリオ最適化",
+          "取引コスト",
+          "流動性制約",
+          "バックテスト"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This paper proposes LiMT, a framework that jointly forecasts stock prices, volatility, and trading volume, then converts the forecasts into portfolio allocations subject to liquidity and transaction-cost constraints.",
+          "mainResult": "According to the abstract, LiMT outperformed strong neural-network and tree-based baselines on CSI300 and CSI500. In a CSI300 backtest, annualized return reportedly improved from 3.99% to 10.01% and the Sharpe ratio from 1.22 to 1.86 versus equal weighting.",
+          "practicalApplication": "The framework can be applied to signal generation and portfolio construction by converting forecasts of price movement, volatility, and trading volume into executable portfolio weights with transaction-cost and liquidity constraints. However, execution quality and market-impact performance in live trading cannot be assessed from the abstract.",
+          "methodology": "The Market Regime Encoder hierarchically extracts contemporaneous cross-stock dependencies and each stock's temporal dynamics. Liquidity-Driven Learning uses mixture-of-experts and cross-task gating to jointly forecast price movement, volatility, and trading volume. Adaptive Portfolio Optimization converts these forecasts into portfolio weights under transaction-cost and liquidity constraints.",
+          "limitations": "The evaluation relies on CSI300 and CSI500 and on the CSI300 backtest described in the abstract. The sample period, data processing, fee assumptions, slippage, market impact, turnover, statistical significance, and robustness in future periods are unspecified. Although strong baselines are claimed, the comparison conditions and ablation details are also unavailable.",
+          "reason": "The paper connects liquidity-aware multi-task forecasting with constrained portfolio construction, providing practical relevance to electronic trading and execution design. However, its main focus is equity return forecasting, and the abstract does not establish operational trading advantages, so its importance is assessed as moderate.",
+          "tags": [
+            "stock forecasting",
+            "liquidity signals",
+            "multi-task learning",
+            "portfolio optimization",
+            "transaction costs",
+            "liquidity constraints",
+            "backtesting"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "中国A株の日次リターン予測に、出来高ショックとボラティリティの補助学習を組み合わせ、流動性制約付きポートフォリオ構築まで接続する研究である。LiMTは、各時点の銘柄間attention、銘柄別の時系列attention、multi-task mixture-of-experts、予測流動性とリスクを使うAPOで構成される。",
+        "mainResult": "著者報告では、CSI300とCSI500の全評価指標でLiMTが比較対象を上回った。CSI300の別個のlong-short backtestでは、APOがequal weightに対して年率リターンを3.99%から10.01%、Sharpe ratioを1.22から1.86へ改善した一方、最大drawdownとturnoverは増加した。",
+        "practicalApplication": "翌日リターンで売買候補を選び、予測出来高と予測ボラティリティでposition sizingを調整する用途を想定している。日次売買の参加率上限と取引コストを考慮するため、単純なランキング戦略よりexecution capacityを意識したポートフォリオ設計に応用できる。",
+        "methodology": "2008～2020年のCSI300・CSI500とQlib Alpha158を使用し、21日lookbackから翌日相当のリターン、出来高ショック、high-low rangeベースのボラティリティを予測する。MREは各履歴時点でcross-stock attentionを適用した後に銘柄別temporal attentionを行い、LDLはMMoEとcross-task gateで3目的を共同学習する。APOはリターン予測の上位・下位decileをlong-short候補とし、$r=0.1$で流動性と低ボラティリティを合成し、取引コスト10 basis pointsと日次売買代金の2%上限を課している。実験は3回の初期値で反復され、主要componentについてablationも実施された。",
+        "limitations": "検証は中国A株の日次データと2017～2020年の単一test期間に限られ、他市場・他期間・intraday executionへの外的妥当性は不明である。構成銘柄履歴、上場廃止、short sellingの実行可能性、borrow cost、bid-ask spread、税、非線形market impactの扱いが十分に記載されていない。APOの参加率制約は単純化され、制約適用後の再正規化や未投資資金の処理も明確でない。Table Iのlong-only設定とAPOのlong-short設定は異なるため、数値を直接結び付けられない。3回の反復は限定的で、複数期間・複数市場での検定はなく、報告された日次alpha 0.35%のfactor regressionにも詳細な仕様が不足する。attention可視化は1日・少数銘柄の事例であり、経済的な因果や安定した解釈を示すものではない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "market microstructureそのものの推定研究ではないが、出来高・ボラティリティ予測をcapacity-aware sizingへ接続し、予測精度と執行可能性の橋渡しを試みる点は実務的に有用である。ablationとコスト・参加率制約を含む点も評価できる。ただし、実際の執行摩擦とshort制約のモデル化は粗く、強い収益結果は独立検証が必要なため、方法論の参考として条件付きで推奨する。",
+        "tags": [
+          "株式予測",
+          "multi-task learning",
+          "mixture-of-experts",
+          "流動性",
+          "出来高ショック",
+          "ボラティリティ",
+          "cross-sectional attention",
+          "ポートフォリオ最適化",
+          "取引コスト",
+          "中国A株"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "This study combines daily return forecasting for Chinese A-shares with auxiliary learning of volume shocks and volatility, then connects the forecasts to liquidity-constrained portfolio construction. LiMT consists of cross-stock attention at each historical step, stock-level temporal attention, a multi-task mixture-of-experts, and APO using predicted liquidity and risk.",
+          "mainResult": "The authors report that LiMT outperforms the compared methods on every evaluation metric for CSI300 and CSI500. In a separate CSI300 long-short backtest, APO improves annualized return from 3.99% to 10.01% and the Sharpe ratio from 1.22 to 1.86 relative to equal weighting, while increasing maximum drawdown and turnover.",
+          "practicalApplication": "The intended application is to select trading candidates using next-day return forecasts and adjust position sizes using predicted volume and volatility. By incorporating a daily participation cap and transaction costs, the method can support portfolio design that is more execution-capacity-aware than a simple ranking strategy.",
+          "methodology": "The study uses CSI300 and CSI500 data and Qlib Alpha158 features from 2008 to 2020, predicting the next-day-equivalent return, volume shock, and high-low-range-based volatility from a 21-day lookback. MRE applies cross-stock attention at every historical step before stock-level temporal attention, while LDL jointly learns the three objectives through an MMoE and cross-task gates. APO forms long-short candidates from the top and bottom return-prediction deciles, combines liquidity and low-volatility preferences with $r=0.1$, and applies transaction costs of 10 basis points and a cap of 2% of daily turnover. Experiments are repeated with three initializations, and ablations cover the main components.",
+          "limitations": "Validation is limited to daily Chinese A-share data and one 2017–2020 test period, leaving external validity across markets, periods, and intraday execution unclear. The treatment of historical index membership, delistings, short-selling feasibility, borrow costs, bid-ask spreads, taxes, and nonlinear market impact is insufficiently documented. APO uses a simplified participation constraint, and the handling of post-cap renormalization or uninvested capital is unclear. The long-only setup in Table I differs from the APO long-short setup, so their figures cannot be linked directly. Three repetitions provide limited robustness, there are no tests across multiple markets or test periods, and the reported daily alpha of 0.35% lacks detailed factor-regression specifications. The attention visualization covers one date and a few stocks, so it does not establish economic causality or stable interpretability.",
+          "reason": "Although this is not primarily a market-microstructure estimation paper, its attempt to connect volume and volatility forecasts to capacity-aware sizing is practically relevant and helps bridge predictive accuracy and executability. The ablations and inclusion of transaction-cost and participation constraints are also useful. However, execution frictions and shorting constraints are modeled coarsely, and the strong return results require independent validation; it is therefore recommended conditionally as a methodological reference.",
+          "tags": [
+            "stock forecasting",
+            "multi-task learning",
+            "mixture-of-experts",
+            "liquidity",
+            "volume shock",
+            "volatility",
+            "cross-sectional attention",
+            "portfolio optimization",
+            "transaction costs",
+            "Chinese A-shares"
+          ]
+        }
+      }
+    },
+    "2609.25677": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "生成AIエージェントをsynthetic consumersとして視覚マーケティング素材の事前評価に使えるかを、6種類の既存の人間実験で検証した研究です。電子取引、market microstructure、金利モデル、イールドカーブ、ratesの研究ではありません。",
+        "mainResult": "GPT-4o-miniとGPT-5.4-mini、plain textとJSONの全設定で操作チェックは通過しましたが、人間で観測された6つの効果のうち再現できたのは最大2つでした。in-context learningによる介入で平均反応は人間の効果に近づく場合がある一方、人間反応の自然な分散の半分未満しか再現せず、消費者異質性を過小評価しました。",
+        "practicalApplication": "AI governance protocolとして、合成消費者をクリエイティブのスクリーニングに使える場合と、人間パネルが必要な場合を判断する枠組みを示します。ただし、本サイトの対象領域への直接的な実務応用はありません。",
+        "methodology": "6つのcanonical visual marketing experimentsについて、モデル世代と入力形式を変え、操作チェック、人間効果の再現、in-context learningによるsteering、人間反応の分散を比較しました。",
+        "limitations": "要約からは、6実験の具体的内容、サンプル設計、統計手法、効果量、再現対象となる人間データの範囲が不明です。GPTモデルと入力形式の検証に限定され、他のモデル、視覚刺激、消費者集団への一般化も確認できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "生成AIによるマーケティング評価としては関連性がありますが、電子的執行、market microstructure、interest-rate models、yield curves、ratesのいずれにも materially relevant ではないため、対象外です。",
+        "tags": [
+          "synthetic consumers",
+          "generative AI",
+          "visual marketing",
+          "AI governance",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study tests whether generative AI agents used as synthetic consumers can pretest visual marketing assets using six established human experiments. It is not a study of electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "mainResult": "All configurations using GPT-4o-mini or GPT-5.4-mini with plain-text or JSON inputs passed the manipulation checks, but reproduced at most two of the six human effects. In-context learning sometimes moved average responses toward the human effect, but even successful steering reproduced less than half of the natural spread of human responses and therefore understated consumer heterogeneity.",
+          "practicalApplication": "The paper proposes an AI governance protocol for deciding when synthetic consumers can screen creative assets and when human panels remain necessary. It has no direct practical application to this site's target domains.",
+          "methodology": "Across six canonical visual marketing experiments, the study varied model generation and input format, then compared manipulation checks, replication of human effects, in-context-learning steering, and the dispersion of human responses.",
+          "limitations": "The abstract does not report the specific experiments, sample design, statistical methods, effect sizes, or scope of the human benchmark data. The evaluation is limited to selected GPT models, input formats, visual stimuli, and consumer contexts, so generalization is uncertain.",
+          "reason": "The paper is relevant to generative-AI-based marketing evaluation, but it is not materially relevant to electronic execution, market microstructure, interest-rate models, yield curves, or rates, so it is out of scope.",
+          "tags": [
+            "synthetic consumers",
+            "generative AI",
+            "visual marketing",
+            "AI governance",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.25965": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "USDの1Yx10Yフォワード・スワップレートの条件付きボラティリティを、GARCH、GJR-GARCH、二状態Markov-switching GARCH（MSGARCH）で比較した研究です。2007年から2023年の日次データに、ATM swaption volatilityとSRVIX indexを組み合わせています。",
+        "mainResult": "通常のGARCHとGJR-GARCHでは短期パラメータは安定している一方、ローリング推定で切片パラメータが大きく変動し、長期分散の推定が不安定でした。Nyblom testもこの不安定性を支持しています。MSGARCHはレジーム別パラメータを安定させ、filtered regime probabilitiesによって時間変動を表現しました。MSGARCHは最高のlog-likelihoodと最低のAICを示し、BICはより単純なGJR-GARCHを選好しました。一期先予測の精度は各モデルで概ね同程度でしたが、MSGARCHは高・低ボラティリティ・レジームと主要な市場イベントの対応を明確に解釈できました。",
+        "practicalApplication": "金利スワップやswaptionのボラティリティ予測、リスク管理、ストレス期間のレジーム識別に利用可能です。ただし、一期先の予測精度が他モデルを明確に上回ったわけではないため、直ちに取引優位性を示す結果ではありません。",
+        "methodology": "USD 1Yx10Y forward swap rateの日次データを用い、GARCH(1,1)、GJR-GARCH(1,1)、二状態MSGARCHを推定しました。ATM swaption volatilityとSRVIX indexを参照し、ローリング推定、Nyblom test、log-likelihood、AIC、BIC、一歩先予測のbacktestingを比較しています。",
+        "limitations": "評価対象は単一のUSDスワップレートと2007年から2023年の期間に限られます。抽象からは、外部サンプルでの検証、取引コストを考慮した経済的価値、モデル選択の頑健性、swaption volatilityとSRVIXの具体的な組み込み方法は確認できません。また、MSGARCHの情報量基準上の優位性は基準によって異なり、予測精度の優位性も限定的です。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "金利市場のボラティリティ・モデリングとレジーム分析に直接関連し、構造的不安定性とモデル選択を実証的に検討しています。予測精度の改善は限定的ですが、ratesリスク管理やinterest-rate model研究に有用な比較結果を提供するため、採用を推奨します。",
+        "tags": [
+          "interest-rate volatility",
+          "swap rate",
+          "GARCH",
+          "GJR-GARCH",
+          "MSGARCH",
+          "Markov switching",
+          "swaption volatility",
+          "SRVIX",
+          "regime modeling",
+          "rates risk management"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This paper compares GARCH, GJR-GARCH, and two-state Markov-switching GARCH (MSGARCH) models for the conditional volatility of the USD 1Yx10Y forward swap rate. It uses daily data from 2007 to 2023 together with ATM swaption volatility and the SRVIX index.",
+          "mainResult": "Standard GARCH and GJR-GARCH models have stable short-run parameters, but their intercept parameter varies substantially across rolling windows, making long-run variance estimates unstable. The Nyblom test also supports this instability. MSGARCH stabilizes regime-specific parameters and represents time variation through filtered regime probabilities. MSGARCH produces the highest log-likelihood and lowest AIC, while BIC favors the more parsimonious GJR-GARCH. One-step-ahead forecast accuracy is broadly similar across models, but MSGARCH provides a clearer interpretation by associating high- and low-volatility regimes with major market events.",
+          "practicalApplication": "The models may support volatility forecasting for interest-rate swaps and swaptions, risk management, and identification of high- and low-volatility regimes during stress periods. However, the results do not show a clear one-step-ahead forecasting advantage or a direct trading benefit for MSGARCH.",
+          "methodology": "The study estimates GARCH(1,1), GJR-GARCH(1,1), and two-state MSGARCH models using daily USD 1Yx10Y forward swap-rate data. It considers ATM swaption volatility and the SRVIX index and compares rolling estimation, the Nyblom test, log-likelihood, AIC, BIC, and one-step-ahead backtesting.",
+          "limitations": "The analysis covers only one USD swap rate and the 2007–2023 period. The abstract does not establish the robustness of the results in external samples, economic value after transaction costs, model-selection robustness, or the precise way in which swaption volatility and SRVIX are incorporated. Information-criterion results differ by criterion, and the forecasting advantage of MSGARCH is limited.",
+          "reason": "The paper is directly relevant to interest-rate volatility modeling and regime analysis and empirically examines structural instability and model selection. Although forecast improvements are limited, it offers useful comparative evidence for rates risk management and interest-rate model research, so it is recommended.",
+          "tags": [
+            "interest-rate volatility",
+            "swap rate",
+            "GARCH",
+            "GJR-GARCH",
+            "MSGARCH",
+            "Markov switching",
+            "swaption volatility",
+            "SRVIX",
+            "regime modeling",
+            "rates risk management"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "本研究は、2007～2023年の日次データを用い、USD 1年先10年フォワード・スワップレートの条件付きボラティリティをGARCH、GJR-GARCH、2レジームMSGARCHで比較する。著者らは、単一レジームモデルでは長期分散が不安定になる一方、MSGARCHは高・低ボラティリティ局面を構造的に分離すると主張する。ただし、本レビューは51頁の論文本文ではなく、提供されたabstractとIntroductionのみに基づく限定評価であり、証明、実験、詳細な推定結果、付録は確認していない。",
+        "mainResult": "提供されたabstractとIntroductionによれば、著者らは、標準GARCHとGJR-GARCHでは短期パラメータが安定する一方、切片がローリング窓ごとに大きく変動し、含意される長期分散が不安定になると報告している。また、MSGARCHが最大の対数尤度と最小のAICを示す一方、BICはより簡潔なGJR-GARCHを選び、1日先予測精度は各モデルで同程度だと主張する。これは著者の報告であり、abstractとIntroductionしか提供されていないため、推定表、検定計算、バックテスト、証明、付録を独立に確認していない。",
+        "practicalApplication": "金利デリバティブのリスク管理、短期ボラティリティ予測、予測区間の構築、スワップション評価の補助に利用できる可能性がある。短期予測だけなら簡潔なGJR-GARCHが候補となり、ストレス局面や構造変化の解釈を重視する場合はMSGARCHのフィルター済みレジーム確率が有用となり得る。",
+        "methodology": "著者らは、2007～2023年のUSDフォワード・スワップレートの日次データにGARCH、GJR-GARCH、2レジームMSGARCHを適用し、ATMスワップション・ボラティリティとSRVIXも参照する。モデル比較には対数尤度、AIC、BICを用い、Nyblom安定性検定、Engle–Ng符号・規模バイアス検定、適合度検定を実施すると説明している。ローリング窓で再推定し、1日先ボラティリティ予測による95％予測区間のカバレッジを評価する設計である。",
+        "limitations": "本レビューの情報源は提供されたabstractとIntroductionのみであり、51頁の全文は提供されていない。したがって、データ加工、推定仕様、イノベーション分布、取引日処理、頑健性分析、数値表、図、証明、バックテスト実装、付録は確認できない。結果はすべて著者の主張として扱う必要がある。また、対象が単一のUSDフォワード・スワップ満期構成と日次データに限られるため、他通貨、他テナー、イントラデイ執行への一般化は不明である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "金利ボラティリティのレジーム変化、パラメータ安定性、市場インプライド指標との比較を一つの枠組みで扱っており、ratesリスク管理には関連性が高い。ただし、短期予測でMSGARCHの明確な優位性は著者自身も主張しておらず、全文未確認のため結論の信頼性を評価できない。限定ソースであることを前提に、実務的なモデル比較の参考資料として推奨する。",
+        "tags": [
+          "金利スワップ",
+          "フォワード・スワップレート",
+          "GARCH",
+          "GJR-GARCH",
+          "MSGARCH",
+          "レジーム・スイッチング",
+          "条件付きボラティリティ",
+          "スワップション",
+          "SRVIX",
+          "ボラティリティ予測"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "The study compares GARCH, GJR-GARCH, and two-regime MSGARCH models for the conditional volatility of the USD 1-year-forward 10-year swap rate using daily data from 2007 to 2023. The authors claim that long-run variance becomes unstable in the single-regime models, while MSGARCH provides a structural separation between high- and low-volatility phases. However, this is a limited-source review based only on the supplied abstract and Introduction rather than the 51-page full paper; proofs, experiments, detailed estimation results, and appendices were not checked.",
+          "mainResult": "According to the supplied abstract and Introduction, the authors report that standard GARCH and GJR-GARCH have stable short-run parameters, but their intercept varies substantially across rolling windows and makes the implied long-run variance unstable. They also claim that MSGARCH achieves the highest log-likelihood and lowest AIC, while BIC selects the more parsimonious GJR-GARCH and one-day-ahead forecasting accuracy is comparable across models. These are author-reported results; because only the abstract and Introduction were supplied, the estimation tables, test calculations, backtests, proofs, and appendices were not independently checked.",
+          "practicalApplication": "The models could potentially support interest-rate derivatives risk management, short-horizon volatility forecasting, prediction-interval construction, and swaption valuation. A parsimonious GJR-GARCH may be suitable when short-horizon forecasting is the main objective, while filtered MSGARCH regime probabilities may be useful when interpreting stress periods and structural changes is important.",
+          "methodology": "The authors apply GARCH, GJR-GARCH, and two-regime MSGARCH models to daily USD forward-swap-rate data from 2007 to 2023, also referencing ATM swaption volatility and SRVIX. They state that models are compared using log-likelihood, AIC, and BIC, with Nyblom stability tests, Engle–Ng sign and size bias tests, and goodness-of-fit tests. The design uses rolling-window re-estimation and evaluates the coverage of 95% prediction intervals based on one-day-ahead volatility forecasts.",
+          "limitations": "This review uses only the supplied abstract and Introduction; the full 51-page paper was not provided. Consequently, data processing, estimation specifications, innovation distributions, trading-day treatment, robustness analysis, numerical tables, figures, proofs, backtest implementation, and appendices could not be checked. All results must therefore be treated as author claims. Moreover, the analysis concerns one USD forward-swap maturity configuration at daily frequency, so generalization to other currencies, tenors, or intraday execution is unknown.",
+          "reason": "The paper addresses regime changes in interest-rate volatility, parameter stability, and comparisons with market-implied measures within one framework, making it relevant to rates risk management. However, the authors do not claim a clear short-horizon forecasting advantage for MSGARCH, and the absence of the full paper prevents an assessment of the reliability of the conclusions. It is recommended as a practical model-comparison reference, subject to the limited-source qualification.",
+          "tags": [
+            "interest-rate swaps",
+            "forward swap rate",
+            "GARCH",
+            "GJR-GARCH",
+            "MSGARCH",
+            "regime switching",
+            "conditional volatility",
+            "swaptions",
+            "SRVIX",
+            "volatility forecasting"
+          ]
+        }
+      }
+    },
+    "2609.26062": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、ネイティブ労働者と移民労働者の代替弾力性に関する1,091件の推定値を対象としたメタ分析であり、金融市場、電子取引、金利モデル、イールドカーブを扱っていません。",
+        "mainResult": "論文の報告では、選択的報告による出版バイアスを補正すると、代替弾力性の含意は約13から約22へ上昇し、移民による相対賃金への圧力は未補正結果より約40%小さくなります。最も粒度の高いデータを重視したベースラインの地域仕様では、最良推定値は約17です。",
+        "practicalApplication": "移民労働の労働市場分析や政策評価には応用可能ですが、本サイトの対象である電子執行、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ分析への直接的な実務応用は確認できません。",
+        "methodology": "41研究から得た1,091件の推定値を用い、メタ回帰、選択モデル、Bayesianおよびfrequentist model averagingにより出版バイアスと推定値の異質性を分析しています。異質性については、地理的スケール、データの粒度、低経験労働者へのサンプル限定などを検討しています。",
+        "limitations": "抄録からは、各研究の識別戦略、データ品質、選択モデルの仕様、推定値の比較可能性の詳細を確認できません。また、報告された結論は労働経済学上の推定に限られ、金融市場や金利分析への外挿根拠は示されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "労働経済学における重要なメタ分析ですが、本サイトの専門範囲である電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、rates研究には実質的に該当しません。",
+        "tags": [
+          "meta-analysis",
+          "labor economics",
+          "immigration",
+          "elasticity of substitution",
+          "publication bias"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper is a meta-analysis of the elasticity of substitution between native and immigrant labor based on 1,091 estimates, and does not address financial markets, electronic trading, interest-rate models, or yield curves.",
+          "mainResult": "The paper reports that correcting for selective reporting raises the implied elasticity from about 13 to about 22, reducing the relative-wage pressure attributed to immigration by about 40% compared with uncorrected results. Its best-practice baseline regional specification, which prioritizes the most granular data, gives an estimate of about 17.",
+          "practicalApplication": "The findings may be useful for labor-market analysis and immigration-policy evaluation, but no direct practical application to electronic execution, market microstructure, interest-rate models, yield-curve analysis, or rates trading is established.",
+          "methodology": "The authors analyze 1,091 estimates from 41 studies using meta-regression, selection methods, and Bayesian and frequentist model averaging to study publication bias and heterogeneity. The heterogeneity analysis considers geographic scale, data granularity, and samples restricted to low-experience workers.",
+          "limitations": "The abstract does not provide details on the identification strategies, data quality, selection-model specifications, or comparability of estimates across the underlying studies. The reported conclusions concern labor-economics estimates, and no basis is provided for extrapolation to financial markets or interest-rate analysis.",
+          "reason": "This is a potentially important meta-analysis in labor economics, but it is not materially relevant to the site's scope of electronic trading, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "meta-analysis",
+            "labor economics",
+            "immigration",
+            "elasticity of substitution",
+            "publication bias"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.26212": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "企業規模プレミアムに関する既存研究の推定値の異質性を、法の支配と一般化された信頼で説明するメタ分析です。電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "105研究、31か国の1,613件のsize-slope推定値を分析した結果、法の支配との関連が比較的安定しており、法の支配が強い国ほど報告されたsize slopeがより負で、従来型の規模プレミアムが大きい傾向が示されました。信頼との関連は条件付きで精度が低く、法の支配が弱い場合に限り、信頼が高いほどプレミアムが弱い傾向が報告されています。",
+        "practicalApplication": "資産価格研究の文献評価や、制度環境を考慮した規模プレミアム推定の整理には利用できます。ただし、本サイトの対象である電子執行、取引市場の構造、金利・イールドカーブ分析への直接的な実務適用性は限定的です。",
+        "methodology": "105研究、31か国から収集した1,613件の報告済みsize-slope推定値に対して、研究デザイン、モデル仕様、推定精度、出版環境、市場・マクロ金融条件を統制したメタ回帰を実施しています。統制変数の不確実性にはBayesian model averagingを用いています。",
+        "limitations": "分析対象は各研究が報告した推定値の差異であり、法の支配や信頼が規模プレミアムを因果的に変化させることは識別していません。メタ分析に伴う研究間の測定差、出版・報告バイアス、制度指標と市場環境の交絡も残ります。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "金融経済学および資産価格の文献としては関連性がありますが、対象サイトの主要分野である電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、金利市場には直接関係しないためです。",
+        "tags": [
+          "企業規模プレミアム",
+          "メタ分析",
+          "資産価格",
+          "法の支配",
+          "一般化された信頼",
+          "制度要因"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This is a meta-analysis explaining heterogeneity in estimates of the size premium using rule of law and generalized trust. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using 1,613 size-slope estimates from 105 studies across 31 countries, the paper finds a relatively stable association with rule of law: stronger rule of law is associated with more negative reported size slopes and therefore larger conventional size premia. The association with trust is conditional and less precisely estimated; where rule of law is weak, higher trust is associated with a weaker premium.",
+          "practicalApplication": "The study can support literature assessment in asset pricing and the organization of size-premium estimates across institutional environments. However, its direct practical relevance to electronic execution, market structure, and interest-rate or yield-curve analysis is limited.",
+          "methodology": "The authors conduct meta-regressions on 1,613 reported size-slope estimates from 105 studies and 31 countries, controlling for study design, specification, precision, publication context, and market and macro-financial conditions. Bayesian model averaging is used to assess uncertainty over the control set.",
+          "limitations": "The analysis concerns variation in reported estimates and does not identify causal effects of rule of law or trust on the size premium. Cross-study measurement differences, publication or reporting bias, and confounding between institutional indicators and market conditions remain possible.",
+          "reason": "The paper is relevant to financial economics and asset pricing, but it is not directly related to the site's core areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "size premium",
+            "meta-analysis",
+            "asset pricing",
+            "rule of law",
+            "generalized trust",
+            "institutional factors"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.26349": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "確率的分散時計を用いる連続金融市場で、無限期間の最適投資・消費問題を研究した数理ファイナンス論文である。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブを主題としていない。",
+        "mainResult": "論文は、カレンダー時間と確率的分散時計の双方に駆動される非線形無限期間 IVC-BSDE により価値過程と最適戦略を特徴づける。subsolution と supersolution に基づく理論から、自然な条件下で存在、一意性、安定性を示し、Malliavin calculus により解の $Z$ 成分の符号も特定したと報告している。さらに、局所可積分カーネルを持つ Volterra Heston モデルに適用し、不完備市場で候補戦略の最適性を検証し、完備市場では解の明示表現を得たとしている。",
+        "practicalApplication": "ポートフォリオ設計や消費計画において、rough volatility、hyper-rough volatility、spot volatility が存在しない realized-variance 型モデルを扱う理論的基盤になり得る。ただし、電子執行、注文設計、流動性管理、金利・イールドカーブ分析への直接的な応用は抽象からは示されていない。",
+        "methodology": "一般の連続金融市場と非減少連続確率時計を設定し、価値過程と戦略を IVC-BSDE に還元する。subsolution と supersolution による well-posedness 理論、Malliavin calculus による $Z$ 成分の符号判定、Volterra Heston モデルの affine 構造を用いた最適性検証と完備市場での明示解を組み合わせている。",
+        "limitations": "評価は抽象に記載された主張に限られる。具体的な効用関数、経済パラメータ、数値実験、推定手法、取引コスト、離散的な執行制約、モデル誤差の詳細は示されていない。また、結果が実際の市場データや金利商品にどの程度有効かは抽象から判断できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "確率的ボラティリティと最適投資・消費に関する高度な理論研究だが、本サイトの主要対象である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブには直接該当しないため。",
+        "tags": [
+          "optimal investment",
+          "optimal consumption",
+          "stochastic volatility",
+          "integrated variance clocks",
+          "IVC-BSDE",
+          "Volterra Heston",
+          "rough volatility",
+          "Malliavin calculus"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This is a mathematical-finance paper on infinite-horizon optimal investment and consumption in continuous financial markets driven by stochastic integrated variance clocks. It is not primarily about electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "The paper reports that the value process and optimal strategies can be characterized by a nonlinear infinite-horizon IVC-BSDE driven by both calendar time and a stochastic variance clock. Using sub- and supersolutions, it establishes existence, uniqueness, and stability under natural conditions, and identifies the sign of the solution's $Z$ component through Malliavin calculus. It applies the framework to Volterra Heston models with locally integrable kernels, including rough and hyper-rough regimes, verifies candidate-strategy optimality in incomplete markets, and obtains an explicit solution representation in complete markets.",
+          "practicalApplication": "The framework could support portfolio and consumption planning in models with rough volatility, hyper-rough volatility, or realized-variance dynamics where no spot-volatility process exists. However, the abstract does not indicate direct applications to electronic execution, order design, liquidity management, or interest-rate and yield-curve analysis.",
+          "methodology": "The authors formulate a general continuous-market model with a continuous non-decreasing stochastic clock and reduce the value process and strategies to an IVC-BSDE. They combine well-posedness results based on sub- and supersolutions, Malliavin-calculus analysis of the sign of $Z$, and affine-structure arguments for optimality verification and explicit solutions in the Volterra Heston setting.",
+          "limitations": "This assessment is limited to the claims in the abstract. Details on the utility specification, economic parameters, numerical experiments, estimation, transaction costs, discrete execution constraints, and model risk are not provided. The abstract also does not establish how well the results perform with real market data or for interest-rate instruments.",
+          "reason": "Although this is an advanced theoretical contribution on stochastic volatility and optimal investment and consumption, it does not directly address the site's core areas of electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "optimal investment",
+            "optimal consumption",
+            "stochastic volatility",
+            "integrated variance clocks",
+            "IVC-BSDE",
+            "Volterra Heston",
+            "rough volatility",
+            "Malliavin calculus"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.26445": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "一般保険の保険数理モデルにおけるモデル検証手法を体系化する実務ガイドであり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "要旨では、calibration plots、actual-vs-expected plots、lift charts、Murphy diagrams、Bregman losses、deviance losses、elementary losses、Murphy's decomposition、Gini scoresなどの検証手法を整理しています。また、calibrationとdiscriminationをpolicy-weightedまたはexposure-weightedな母集団測度で評価する違いが、保険料を適切な尺度で較正する上で重要だと述べています。",
+        "practicalApplication": "一般保険における保険料モデルの較正・識別力の評価や、policy-weightedとexposure-weightedの選択に実務上の指針を与える可能性があります。ただし、対象サイトの専門領域への直接的な応用は要旨から確認できません。",
+        "methodology": "既存のグラフィカルな検証ツールと統計的な損失・分解指標を形式化し、評価時の母集団測度としてpolicy-weightedとexposure-weightedを比較する枠組みを提示しています。要旨だけでは、理論証明、データ分析、実証結果の詳細は不明です。",
+        "limitations": "要旨には具体的なデータ、数値結果、比較実験、金利市場または電子取引への応用が示されていません。したがって、提示された主張がどの条件で成立するか、手法間の優劣、実務上の効果は評価できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "保険数理に関連する研究ですが、対象サイトの重点分野である電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場には直接関係しないため、対象範囲外と判定します。",
+        "tags": [
+          "一般保険",
+          "保険数理",
+          "モデル検証",
+          "calibration",
+          "discrimination",
+          "policy-weighted",
+          "exposure-weighted"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This is a practical guide to model validation in general insurance actuarial modeling and does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "The abstract organizes graphical validation tools such as calibration plots, actual-vs-expected plots, lift charts, and Murphy diagrams, together with statistical tools including Bregman losses, deviance losses, elementary losses, Murphy's decomposition, and Gini scores. It also emphasizes that evaluating calibration and discrimination under policy-weighted versus exposure-weighted population measures is important for calibrating premium schemes on the appropriate scale.",
+          "practicalApplication": "The work may provide practical guidance for evaluating calibration and discrimination in general-insurance pricing models and for selecting between policy-weighted and exposure-weighted measures. Its direct applicability to the site's target domains cannot be established from the abstract.",
+          "methodology": "The manuscript formalizes established graphical validation tools and statistical loss or decomposition measures, while framing evaluation under policy-weighted and exposure-weighted population measures. The abstract does not specify the theoretical proofs, datasets, or empirical experiments.",
+          "limitations": "The abstract provides no concrete datasets, numerical results, comparative experiments, or applications to rates markets or electronic trading. Therefore, the conditions supporting the claims, relative performance across methods, and practical impact cannot be assessed.",
+          "reason": "Although the paper concerns actuarial risk modeling, it is not materially related to electronic execution, market microstructure, interest-rate models, yield curves, or rates markets, so it is outside the site's scope.",
+          "tags": [
+            "general insurance",
+            "actuarial modeling",
+            "model validation",
+            "calibration",
+            "discrimination",
+            "policy-weighted",
+            "exposure-weighted"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.26604": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "中国の26地域を対象に、AI関連の地域間共同出版による知識スピルオーバーがAI特許活動へ与える影響を分析した研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "2006年から2020年のデータに基づくネットワーク計量分析により、地域間のAI関連共同出版はAI特許活動を促進すると報告しています。ただし、その効果は民間企業が地域の研究開発を主導する地域にほぼ集中し、地域間格差を強めるとしています。",
+        "practicalApplication": "研究開発政策、地域イノベーション政策、AI知識ネットワークの設計には示唆がありますが、本サイトの電子執行、マーケット・マイクロストラクチャー、金利関連実務への直接的な応用は限定的です。",
+        "methodology": "中国の省級26地域について2006年から2020年のデータを用い、地域間のAI関連共同出版ネットワークを組み込んだネットワーク計量分析を実施しています。",
+        "limitations": "抄録だけでは、ネットワークの具体的な構築方法、識別戦略、推定量、因果解釈の妥当性、頑健性検証、特許指標の詳細は確認できません。また、中国の地域制度に関する結果を他国や対象分野へ一般化できるかは不明です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "AIイノベーションと地域間知識スピルオーバーに関する研究ですが、対象サイトの主要スコープである金融市場の電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場には実質的に関連しないためです。",
+        "tags": [
+          "out_of_scope",
+          "AI patenting",
+          "knowledge spillovers",
+          "regional innovation",
+          "network econometrics",
+          "R&D ownership"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes how interregional co-publication-based knowledge spillovers related to AI affect AI patenting across 26 Chinese regions. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using network-econometric analysis of data from 2006 to 2020, the study reports that interregional AI-related co-publications promote AI patenting. However, the effect is concentrated almost entirely in regions where private enterprises dominate R&D, thereby reinforcing regional divergence.",
+          "practicalApplication": "The findings may inform R&D policy, regional innovation policy, and the design of AI knowledge networks, but their direct application to electronic execution, market microstructure, or rates-related practice is limited.",
+          "methodology": "The study uses data for 26 Chinese provincial-level regions from 2006 to 2020 and applies network-econometric analysis incorporating an interregional AI-related co-publication network.",
+          "limitations": "The abstract does not specify the network construction, identification strategy, estimator, causal validity, robustness checks, or details of the patent measures. It is also unclear whether the results from the Chinese regional institutional setting generalize to other countries or target domains.",
+          "reason": "Although the paper concerns AI innovation and interregional knowledge spillovers, it is not materially related to the site's core scope of electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "out_of_scope",
+            "AI patenting",
+            "knowledge spillovers",
+            "regional innovation",
+            "network econometrics",
+            "R&D ownership"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.26606": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "オプション市場におけるマーケットメイキングと取引所リベート設計を、局所確率ボラティリティモデルの下で統合的に扱う研究です。",
+        "mainResult": "単一のマーケットメイカーが複数の欧州コールを取引し、メイク取引とテイク取引を組み合わせて純利益を最大化する最適戦略を導出します。さらに、取引所が所定の流動性目標を達成できるよう、三段階のリベート設計スキームを提案し、数値結果によって有効性を検証したと報告しています。",
+        "practicalApplication": "オプション取引所やマーケットメイカーが、流動性供給、テイク取引、残存デルタ・ベガリスク、リベート水準を同時に評価する際の設計フレームワークとして利用できる可能性があります。",
+        "methodology": "複数の欧州コールを対象とし、マーケットメイキングを連続制御、テイク取引をインパルス制御として表現したネスト型最適化問題を構築します。目的関数にはオプション・ポートフォリオの価値、累積リベート収入、残存デルタおよびベガへのペナルティを含め、数値計算で戦略とリベート設計を評価します。",
+        "limitations": "抽象からは、モデルのパラメータ設定、数値実験の範囲、実市場データによる検証、取引コストや注文到着過程の具体的なモデル化は確認できません。したがって、提案された最適戦略や三段階スキームの実市場での頑健性は未検証です。また、単一マーケットメイカーの設定は競争的な市場環境を十分に表さない可能性があります。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子的な流動性供給と取引所インセンティブ設計を直接扱い、マーケットマイクロストラクチャーおよびオプション市場の実務に関連します。特に、メイク・テイク戦略とリベートを統合した点に研究上の有用性がありますが、抽象のみでは実証的妥当性を評価できません。",
+        "tags": [
+          "market making",
+          "option markets",
+          "liquidity provision",
+          "rebate design",
+          "make-take strategies",
+          "impulse control",
+          "local-stochastic volatility",
+          "delta and vega risk"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper jointly studies market making and exchange rebate design in option markets under a local-stochastic volatility model.",
+          "mainResult": "It derives optimal strategies for a single market maker trading multiple European calls, combining make and take strategies to maximize net profit. It also proposes a three-step rebate design scheme through which an exchange can pursue specified liquidity targets, and reports that numerical results validate its effectiveness.",
+          "practicalApplication": "The framework could help option exchanges and market makers jointly evaluate liquidity provision, taking activity, residual delta and vega risk, and rebate levels.",
+          "methodology": "The authors formulate a nested optimization problem in which market making is represented by continuous control and taking trades by impulse control. The objective includes option portfolio value, cumulative rebate revenue, and penalties for residual delta and vega, with strategies and rebate designs evaluated numerically.",
+          "limitations": "The abstract does not specify the parameterization, numerical-experiment scope, empirical validation, or detailed modeling of trading costs and order-arrival processes. The robustness of the proposed strategies and three-step scheme in live markets therefore remains untested. Moreover, a single-market-maker setting may not fully represent a competitive market environment.",
+          "reason": "The paper directly addresses electronic liquidity provision and exchange incentives, making it relevant to market microstructure and option-market practice. Its integration of make-take strategies and rebates is useful, although empirical validity cannot be assessed from the abstract alone.",
+          "tags": [
+            "market making",
+            "option markets",
+            "liquidity provision",
+            "rebate design",
+            "make-take strategies",
+            "impulse control",
+            "local-stochastic volatility",
+            "delta and vega risk"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "複数の欧州型コールを扱う単一market makerのmake-take戦略と、取引所のrebate設計を統合した確率制御モデルである。limit orderを連続制御、market orderをimpulse controlとして扱い、delta・vega在庫リスクを抑えながら、取引所が指定した流動性目標を実現する報酬体系を設計する。",
+        "mainResult": "著者らは市場形成問題をHJB quasi-variational inequalityとして定式化し、Black–Scholesモデルと定数delta近似の下で状態次元を削減して、最適なmake-take戦略をfeedback形式で導出した。さらに、指定されたaggressive quotingをmarket makerの最適反応にする三段階のrebate設計法を提示した。CBOEの2銘柄・1取引日データによる数値例では、必要な追加報酬がspread、portfolio delta、執行強度に依存し、執行強度がほぼゼロの広いspreadではaggressive quoteへの追加報酬効果も限定的であると報告している。",
+        "practicalApplication": "取引所は、銘柄別のspread目標とmarket makerの在庫状態に応じ、best quoteを1 tick改善させるための最小限のmarginal rebateを推定できる。market maker側では、limit orderによる収益とrebate、delta・vegaリスク、market orderの即時ヘッジ費用を一体的に比較する戦略設計に利用できる。",
+        "methodology": "基礎資産をlocal-stochastic volatility過程、複数オプションのspreadを外生的な有限状態CTMC、limit-order約定を制御付きCox過程としてモデル化する。平均利益からrunningおよびterminalのdelta・vega二次ペナルティを差し引く目的関数を設定し、連続制御とimpulse controlを含むHJBQVIを導く。Black–Scholes・定数deltaの場合には価値関数をportfolio deltaとspreadへ縮約し、penalty methodとsemi-implicit Euler法で解く。数値例ではSPXW 1DTE call 2銘柄のCBOE Level 1データからspread遷移率と約定強度のproxyを推定する。",
+        "limitations": "取引所がmarket makerのquote行動とnet deltaを観測して支払いに利用できるfirst-best設定であり、情報の非対称性や契約実務を十分に扱わない。単一の小規模market makerを仮定し、その注文によるspread、queue、price impactへの影響を無視している。spreadは外生CTMCで、主要な解法とrebate設計はBlack–Scholes、定数delta、vegaなしへ簡略化される。実証部分は1取引日のSPXW 2銘柄に限られ、実際のmarket maker約定ではなくorder-flow proxyを使用しており、out-of-sample検証、政策導入後の市場反応、収益性・厚み・取引量への因果効果は示されていない。負のrebateが生じる場合もあり、著者らのrelative rebateへの置換は提案段階である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "option market making、在庫制御、make-take feeを一つの動学モデルにまとめ、取引所の流動性目標からrebate上限・追加報酬を逆算する点は実務的かつ新規性がある。特に連続的なquote報酬とmarket-order hedgeを同時に扱う構成は有用である。一方、結論は強い観測可能性・外生spread・定数Greek仮定と限定的な数値事例に依存するため、実運用前には複数日・多数銘柄での再推定と市場均衡を含む検証が必要である。",
+        "tags": [
+          "オプション市場形成",
+          "make-take fee",
+          "rebate設計",
+          "limit order book",
+          "在庫リスク",
+          "impulse control",
+          "HJBQVI",
+          "portfolio delta",
+          "CBOE SPXW"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper develops a stochastic-control model integrating the make-take strategies of a single market maker trading multiple European calls with an exchange’s rebate design. It treats limit orders as continuous controls and market orders as impulse controls, while designing compensation intended to achieve exchange-specified liquidity targets subject to delta and vega inventory risk.",
+          "mainResult": "The authors formulate the market-making problem as an HJB quasi-variational inequality and, under Black–Scholes dynamics and a constant-delta approximation, reduce its state dimension and derive the optimal make-take strategy in feedback form. They also propose a three-step rebate-design procedure that makes prescribed aggressive quoting an optimal response for the market maker. In a numerical example using two options from one CBOE trading day, the required incremental reward is reported to depend on the spread, portfolio delta, and execution intensity; when execution intensity is nearly zero at wide spreads, additional rewards for aggressive quotes also have limited effect.",
+          "practicalApplication": "An exchange could estimate the minimum marginal rebate required to induce a one-tick improvement in the best quote, conditional on option-specific spread targets and the market maker’s inventory state. A market maker could use the framework to jointly compare limit-order revenue and rebates, delta and vega risk, and the immediate hedging cost of market orders.",
+          "methodology": "The underlying follows a local-stochastic volatility process, the spreads of multiple options follow an exogenous finite-state CTMC, and limit-order executions are controlled Cox processes. The objective subtracts running and terminal quadratic delta and vega penalties from expected profit, producing an HJBQVI with continuous and impulse controls. Under Black–Scholes dynamics and constant delta, the value function is reduced to portfolio delta and spreads and solved with a penalty method and semi-implicit Euler scheme. The numerical example estimates spread transition rates and proxy execution intensities from CBOE Level 1 data for two SPXW 1DTE calls.",
+          "limitations": "The model uses a first-best setting in which the exchange can observe the market maker’s quoting behavior and net delta and condition payments on them, so it does not fully address information asymmetry or contractual implementation. It assumes one small market maker and ignores the effects of her orders on spreads, queues, and price impact. Spreads are exogenous CTMCs, while the principal solution and rebate design are simplified to Black–Scholes dynamics, constant delta, and no vega risk. The empirical section covers only two SPXW options on one trading day and uses order-flow proxies rather than actual market-maker executions; it provides no out-of-sample test or causal evidence for effects on profitability, depth, volume, or post-policy market responses. Some calculated rebates are negative, and the authors’ relative-rebate alternative remains a proposal rather than a validated implementation.",
+          "reason": "The paper makes a practically relevant contribution by combining option market making, inventory control, and make-take fees in one dynamic model and working backward from exchange liquidity targets to rebate caps and incremental rewards. Its joint treatment of continuous quote compensation and market-order hedging is particularly useful. However, the conclusions depend on strong observability, exogenous-spread, and constant-Greek assumptions and on a limited numerical illustration, so implementation would require recalibration across many options and days and validation in a model that includes market equilibrium responses.",
+          "tags": [
+            "option market making",
+            "make-take fees",
+            "rebate design",
+            "limit order book",
+            "inventory risk",
+            "impulse control",
+            "HJBQVI",
+            "portfolio delta",
+            "CBOE SPXW"
+          ]
+        }
+      }
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 881,
+      "outputTokens": 1317,
+      "reasoningTokens": 98,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2198,
+      "estimatedCostUsd": 0.001757,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.25144v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 844,
+      "outputTokens": 1128,
+      "reasoningTokens": 63,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1972,
+      "estimatedCostUsd": 0.001522,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.25452v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 926,
+      "outputTokens": 1186,
+      "reasoningTokens": 148,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2112,
+      "estimatedCostUsd": 0.001608,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.25617v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 17694,
+      "outputTokens": 2153,
+      "reasoningTokens": 516,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 17691,
+      "totalTokens": 19847,
+      "estimatedCostUsd": 0.131527,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 9,
+      "paperIds": [
+        "2609.25617v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 864,
+      "outputTokens": 863,
+      "reasoningTokens": 43,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1727,
+      "estimatedCostUsd": 0.001208,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.25677v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 868,
+      "outputTokens": 1202,
+      "reasoningTokens": 51,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2070,
+      "estimatedCostUsd": 0.001616,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.25965v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 868,
+      "outputTokens": 1283,
+      "reasoningTokens": 52,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2151,
+      "estimatedCostUsd": 0.001713,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.25965v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 2544,
+      "outputTokens": 1969,
+      "reasoningTokens": 303,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 2541,
+      "totalTokens": 4513,
+      "estimatedCostUsd": 0.052097,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 51,
+      "paperIds": [
+        "2609.25965v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 821,
+      "outputTokens": 925,
+      "reasoningTokens": 45,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1746,
+      "estimatedCostUsd": 0.001274,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.26062v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 878,
+      "outputTokens": 1008,
+      "reasoningTokens": 56,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1886,
+      "estimatedCostUsd": 0.001385,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.26212v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 912,
+      "outputTokens": 1235,
+      "reasoningTokens": 94,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2147,
+      "estimatedCostUsd": 0.001664,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.26349v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 714,
+      "outputTokens": 922,
+      "reasoningTokens": 43,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1636,
+      "estimatedCostUsd": 0.001249,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.26445v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 766,
+      "outputTokens": 867,
+      "reasoningTokens": 52,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1633,
+      "estimatedCostUsd": 0.001194,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.26604v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 782,
+      "outputTokens": 1001,
+      "reasoningTokens": 61,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1783,
+      "estimatedCostUsd": 0.001358,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.26606v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 43138,
+      "outputTokens": 1952,
+      "reasoningTokens": 208,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 43135,
+      "totalTokens": 45090,
+      "estimatedCostUsd": 0.254727,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 36,
+      "paperIds": [
+        "2609.26606v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

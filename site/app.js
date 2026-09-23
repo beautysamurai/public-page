@@ -584,9 +584,11 @@
 
   function appendInline(parent, value) {
     // Parse delimited TeX before stripping prose markup so x<y<z survives.
+    // Consume escaped punctuation as literal text, never as new Markdown.
+    // TeX spans and fenced code keep their original backslashes.
     // All output is constructed from text nodes and allowlisted MathML nodes.
     var text = String(value || "");
-    var pattern = /\*\*([^*]+)\*\*|\[([^\]]+)\]\(([^)\s]+)\)|(?<![\\$])\$([^$\n]+)\$(?!\$)|(https:\/\/arxiv\.org\/(?:abs|pdf)\/[A-Za-z0-9.\/-]+(?:\.pdf)?)/gi;
+    var pattern = /\*\*((?:\\.|[^*\\])+)\*\*|\[((?:\\.|[^\]\\])+)\]\(([^)\s]+)\)|(?<![\\$])\$([^$\n]+)\$(?!\$)|(https:\/\/arxiv\.org\/(?:abs|pdf)\/[A-Za-z0-9.\/-]+(?:\.pdf)?)|\\([!-/:-@\[-\x60{-~])/gi;
     var cursor = 0;
     var match;
 
@@ -597,14 +599,17 @@
         appendInline(strong, match[1]);
         parent.appendChild(strong);
       } else if (match[2] !== undefined) {
-        var markdownLink = sourceLink(match[3], stripRawHtml(match[2]));
-        parent.appendChild(markdownLink || document.createTextNode(stripRawHtml(match[2])));
+        var label = stripRawHtml(match[2]).replace(/\\([!-/:-@\[-\x60{-~])/g, "$1");
+        var markdownLink = sourceLink(match[3], label);
+        parent.appendChild(markdownLink || document.createTextNode(label));
       } else if (match[4] !== undefined) {
         var inlineMath = window.RatesTexMath && window.RatesTexMath.render(match[4], false, document);
         parent.appendChild(inlineMath || createNode("code", "source-tex-fallback", match[4]));
-      } else {
+      } else if (match[5] !== undefined) {
         var bareLink = sourceLink(match[5], match[5]);
         parent.appendChild(bareLink || document.createTextNode(match[5]));
+      } else {
+        parent.appendChild(document.createTextNode(match[6]));
       }
       cursor = pattern.lastIndex;
     }
@@ -728,7 +733,7 @@
       if (heading) {
         var headingNode = createNode("h" + Math.min(6, heading[1].length + 2), "source-heading source-heading-" + heading[1].length);
         appendInline(headingNode, heading[2]);
-        tableLabel = stripRawHtml(heading[2]);
+        tableLabel = headingNode.textContent;
         if (heading[1].length === 3 && /^(概要|判定結果|まとめ|Overview|Assessment|Takeaways)$/.test(heading[2])) headingNode.classList.add("source-review-part");
         fragment.appendChild(headingNode);
         index += 1;

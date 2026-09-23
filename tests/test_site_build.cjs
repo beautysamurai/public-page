@@ -2,6 +2,7 @@ const { test } = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs"), path = require("node:path");
 const { spawnSync } = require("node:child_process");
+const { createHash } = require("node:crypto");
 const root = path.join(__dirname, ".."), output = path.join(root, ".local/site");
 const publicKey = "sb_publishable_" + "x".repeat(25);
 function build(env) {
@@ -17,6 +18,12 @@ test("Pages build publishes only public settings, narrows CSP, rejects secrets, 
     const config = fs.readFileSync(path.join(output, "personal-config.js"), "utf8");
     assert.ok(config.includes(publicKey)); assert.ok(!config.includes("private-test-sentinel"));
     const html = fs.readFileSync(path.join(output, "index.html"), "utf8");
+    const renderer = fs.readFileSync(path.join(output, "app.js"));
+    const version = createHash("sha256").update(renderer).digest("hex").slice(0, 16);
+    const rendererTag = '<script src="./app.js?v=' + version + '" defer></script>';
+    assert.equal(html.split(rendererTag).length, 2, "exactly one content-versioned renderer");
+    assert.ok(!html.includes('src="./app.js"'), "old cached renderer URL is not reused");
+    assert.deepEqual(renderer, fs.readFileSync(path.join(root, "site/app.js")), "versioned code stays unchanged");
     assert.ok(html.includes("connect-src 'self' https://abcdefgh.supabase.co;"));
     assert.ok(html.includes("script-src 'self';")); assert.ok(!html.includes("https://*.supabase.co"));
     assert.ok(fs.existsSync(path.join(output, "vendor/supabase.js")));
@@ -37,6 +44,8 @@ test("Pages build publishes only public settings, narrows CSP, rejects secrets, 
     assert.ok(!fs.existsSync(path.join(output, "obsolete-generated-test.txt")));
     assert.ok(fs.readFileSync(path.join(output, "personal-config.js"), "utf8").includes("= null;"));
     assert.ok(fs.readFileSync(path.join(output, "index.html"), "utf8").includes("connect-src 'self';"));
+    assert.ok(fs.readFileSync(path.join(output, "index.html"), "utf8").includes(rendererTag), "same renderer has the same version regardless of public configuration");
+    assert.ok(fs.readFileSync(path.join(root, "site/index.html"), "utf8").includes('<script src="./app.js" defer></script>'), "source HTML is not rewritten");
     assert.equal(fs.readFileSync(path.join(root, "site/personal-config.js"), "utf8"), committed);
   } finally { build({}); }
 });

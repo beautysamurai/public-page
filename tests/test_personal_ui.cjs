@@ -96,6 +96,57 @@ test("source tables handle escaped pipes and hostile content using text-only DOM
   } finally { page.dom.window.close(); }
 });
 
+test("September 21 review preserves fast_send in Japanese and English direct-link headings", async () => {
+  const edition = JSON.parse(fs.readFileSync(path.join(site, "data/archive/2026-09-21-daily-openai-01.json"), "utf8"));
+  for (const lang of ["ja", "en"]) {
+    const page = await setup(false, false, "?edition=" + edition.editionId + "&lang=" + lang + "#review-2609.21173");
+    try {
+      const target = page.id("review-2609.21173");
+      assert.ok(page.id("source-document").contains(target));
+      assert.ok(target.textContent.includes(edition.papers[0].title));
+      assert.ok(!target.textContent.includes(String.raw`fast\_send`));
+      assert.equal(page.w.document.activeElement, target);
+      assert.equal(page.scrolls.at(-1), target.id);
+    } finally { page.dom.window.close(); }
+  }
+});
+
+test("Markdown prose escapes render literally without altering TeX, code or safe links", async () => {
+  const code = String.raw`fast\_send = "C:\\folder"`;
+  const source = [
+    String.raw`## fast\_send and \[v1\]`, "",
+    String.raw`Literal \*\*not bold\*\*, \#tag, \! and path C:\\folder.`, "",
+    String.raw`**real bold with \* star and fast\_send**`, "",
+    String.raw`[fast\_send \[v1\]](https://arxiv.org/abs/2609.21173v1)`, "",
+    String.raw`\[literal\](javascript:alert) and <img src=x onerror=alert(1)>.`, "",
+    String.raw`Math $\alpha_1 + \{t\} + 4\%$ stays math. Cost \$5 stays text.`, "",
+    "```text", code, "```", "",
+    String.raw`| Field | Value |`, "| --- | --- |", String.raw`| fast\_send | a\|b |`
+  ].join("\n");
+  const page = await setup(false, false, "?edition=2026-09-21-daily-openai-01", null, (value, relative) => {
+    if (relative.endsWith("2026-09-21-daily-openai-01.json")) value.sourceText = source;
+    return value;
+  });
+  try {
+    const doc = page.id("source-document");
+    assert.equal(doc.querySelector(".source-heading").textContent, "fast_send and [v1]");
+    assert.ok(doc.textContent.includes(String.raw`Literal **not bold**, #tag, ! and path C:\folder.`));
+    assert.deepEqual([...doc.querySelectorAll("strong")].map(n => n.textContent), ["real bold with * star and fast_send"]);
+    assert.deepEqual([...doc.querySelectorAll("a")].map(n => n.textContent), ["fast_send [v1]"]);
+    assert.equal(doc.querySelector("a").href, "https://arxiv.org/abs/2609.21173v1");
+    assert.equal(doc.querySelector("a").rel, "noopener noreferrer");
+    assert.equal(doc.querySelectorAll("img,script,iframe").length, 0);
+    assert.equal(doc.querySelectorAll("math").length, 1);
+    assert.equal(doc.querySelectorAll(".source-tex-fallback").length, 0);
+    assert.ok(doc.querySelector("math msub"));
+    assert.ok(doc.querySelector("math").textContent.includes("4%"));
+    assert.ok(doc.textContent.includes("Cost $5 stays text."));
+    assert.equal(doc.querySelector("pre code").textContent, code);
+    assert.deepEqual([...doc.querySelectorAll("td")].map(n => n.textContent), ["fast_send", "a|b"]);
+    assert.equal(doc.querySelector("caption").textContent, "fast_send and [v1]");
+  } finally { page.dom.window.close(); }
+});
+
 const githubPendingKey = "rates-personal:abcdefgh.supabase.co:/public-page/:github-pending";
 
 test("reported high-importance negative review explains its separate verdict and renders percentages", async () => {

@@ -2,6 +2,7 @@ import { cpSync, existsSync, lstatSync, mkdirSync, mkdtempSync, readFileSync, re
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import { createRequire } from "node:module";
+import { createHash } from "node:crypto";
 import { build } from "esbuild";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
@@ -23,12 +24,19 @@ try {
   cpSync(path.join(root, "site"), stage, { recursive: true });
   writeFileSync(path.join(stage, "personal-config.js"),
     "window.RatesPersonalConfig = " + JSON.stringify(config) + ";\n");
+  const htmlPath = path.join(stage, "index.html");
+  let html = readFileSync(htmlPath, "utf8");
+  const rendererTag = '<script src="./app.js" defer></script>';
+  if (html.split(rendererTag).length !== 2) throw new Error("Expected exactly one review renderer script.");
+  // New renderer content gets a new URL; cached pre-fix code cannot survive a
+  // normal page reload. Hash public bytes only, never configuration or secrets.
+  const rendererVersion = createHash("sha256").update(readFileSync(path.join(stage, "app.js"))).digest("hex").slice(0, 16);
+  html = html.replace(rendererTag, '<script src="./app.js?v=' + rendererVersion + '" defer></script>');
   if (config) {
-    const htmlPath = path.join(stage, "index.html");
-    const html = readFileSync(htmlPath, "utf8");
     if (!html.includes("connect-src 'self';")) throw new Error("Unexpected CSP; refusing to widen it.");
-    writeFileSync(htmlPath, html.replace("connect-src 'self';", "connect-src 'self' " + config.url + ";"));
+    html = html.replace("connect-src 'self';", "connect-src 'self' " + config.url + ";");
   }
+  writeFileSync(htmlPath, html);
   await build({
     entryPoints: [path.join(root, "scripts", "supabase_entry.js")],
     outfile: path.join(stage, "vendor", "supabase.js"),

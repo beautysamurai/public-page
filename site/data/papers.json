@@ -2,6 +2,60 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-09-23-daily-openai-01",
+      "date": "2026-09-23",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.25617v1",
+          "title": "Hierarchical Multi-Task Learning with Liquidity-Aware Signals for Stock Forecasting",
+          "authors": [
+            "Hengyi Yang",
+            "Sida Lin",
+            "Yiyan Qi",
+            "Yankai Chen",
+            "Haohan Zhang",
+            "Xianhua Peng",
+            "Jian Guo"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.25965v1",
+          "title": "Modeling interest rate swap volatility with GARCH processes",
+          "authors": [
+            "Michał Balcerek",
+            "Michał Wronka"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.26606v1",
+          "title": "Liquidity Provision and Rebate Design in Option Markets",
+          "authors": [
+            "Samuel N. Cohen",
+            "Lyndon Drake",
+            "Zihan Guo",
+            "Christoph Reisinger"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-09-22-daily-openai-01",
       "date": "2026-09-22",
       "kind": "daily",

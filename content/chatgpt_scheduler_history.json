@@ -3667,6 +3667,76 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-09-24-daily-openai-01",
+      "editionDate": "2026-09-24",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-24T12:06:10Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-24",
+      "observedBatchDate": "2026-09-24",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月24日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 16 | 13,521 | 16,917 (1,207) | 0.0230 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 2 | 18,227 | 3,736 (815) | 0.1658 | 全55ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 / PDF全文・8ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Feasible Multi-Asset Optimal Execution under Cash Constraints\n\n**[arXiv:2609.27786v1](https://arxiv.org/abs/2609.27786v1) — Ryuji Hashimoto, Namid R. Stillman**\n\n### 概要\n\n本稿は、Almgren–Chriss型のmulti-asset optimal executionに各時点の期待累積支出上限を導入し、売却代金で買付を賄うcash-feasibleな執行計画を設計する。著者らは線形market impactの下で問題をconvex QCQPとして表現し、合成実験とagent-based market simulatorで評価している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 最適執行 / 複数資産執行 / 資金制約 / Almgren–Chrissモデル / 凸QCQP / portfolio rebalancing / implementation shortfall / agent-based simulation |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 資金制約をpathwiseな運用課題としてoptimal executionに組み込み、標準的仮定の下で解釈可能なconvex QCQPに落とした点は、electronic executionの実務と研究の双方に有用である。一方、実証は合成市場に限定され、期待cash制約は実現ベースの資金安全性を保証しないため、現時点では実運用の完成形よりも有望な理論的benchmarkとして読むべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 901 | 1,013 (48) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 17,174 | 1,903 (352) | 0.1239 | PDF全文・8ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らの定式化では、非負のimpact係数とrisk-aversionの下で目的関数と期待cash制約が凸二次形式となり、global optimumを凸最適化で求められる。シミュレーションでは、制約を厳しくすると売りが先行し買いが後ろ倒しになった。基準数量の6資産ペアでは、AC freeのpeak cash drawdownが57.06%～88.45%だったのに対し、提案法は0.03%～11.81%と報告され、combined ISも全ペアでAC freeをわずかに下回った。ただしTWAPやVWAPがISで優れるペアもある。\n\n**手法:** 線形のpermanent impactとtemporary impactを持つ離散時間Almgren–Chrissモデルを用い、expected implementation shortfallとその分散の加重和を最小化する。銘柄別の完了制約と各期間の期待累積cash上限を課し、目的関数と制約をQCQPへ構成的に変換して凸性を証明した。2銘柄のoracle実験に加え、3銘柄から成る6通りのbuy–sellペアを対象に、別日のagent-based simulationからOLSでimpactを推定し、300回のvalidation simulationでTWAP、VWAP、cash制約なしのAC freeと比較した。\n\n**実務への応用:** 資金枠が限られるportfolio rebalancingで、各時点の期待資金使用量を明示的に管理しながら、複数銘柄の買いと売りのタイミングを共同最適化できる。既存のconvex solverを利用でき、運用会社のpre-trade planningやfunding-limit管理に適用しやすい。\n\n**限界・注意点:** cash制約は期待値にしか課されず、実現支出が予算を超える可能性がある。モデルは線形impact、独立な価格ショック、銘柄別impactを仮定し、cross-impactや資産間共分散、非線形impact、出来高・参加率制約を扱わない。検証は実市場約定ではなく単一のagent-based simulator、3銘柄、2銘柄ペア、限られた日付に依存する。impact推定のcalibration runも少なく、推定数量より大幅に大きい執行への外挿が含まれる。TWAP・VWAPに対するISの一貫した優位性はなく、期待制約から実現drawdownへの効果に関する一般化には追加検証が必要である。\n\n## 2. Sovereign Grassroots Currencies: A CBDC Architecture for Credit and Monetary Policy (Full Version)\n\n**[arXiv:2609.27727v1](https://arxiv.org/abs/2609.27727v1) — Ehud Shapiro**\n\n### 概要\n\nCBDCを貨幣・信用・利付債券へ拡張し、中央銀行の金融政策に組み込む「grassroots currencies」型アーキテクチャを提案する論文である。著者は、預金からCBDCへの即時転換に依存せず、中央銀行が公衆の保有するコインや債券を通じて信用供与、流動性吸収、金利設定、証券売買を行えると主張する。ただし、55ページの全文は提供されておらず、本レビューはabstractと極めて短いIntroductionだけに基づくため、証明、設計詳細、実験、付録は確認していない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 非推奨 | CBDC / 草の根通貨 / 中央銀行 / 金融政策 / 信用創造 / デジタル債券 / 無裁定価格 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** CBDCと金利・金融政策を結ぶ着想は対象分野に関連するが、電子執行や市場マイクロストラクチャへの直接的示唆は限定的である。さらに、全文なしでは中心的な無裁定命題や運用可能性を評価できないため、現段階での推薦は見送る。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 940 | 1,459 (121) | 0.0019 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 1,053 | 1,833 (463) | 0.0419 | 全55ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者は、履行要求に応じる発行者のgrassroots coinについて、法定通貨1単位が唯一の無裁定価格になると証明したと主張する。また、中央銀行の貸出金利と自行債券の金利が、同等条件で取引する相手方の受払金利を制約すると論じる。ただし全文未提供のため、これらはabstract上の著者主張であり、証明や前提条件は検証していない。\n\n**手法:** 著者は、中央銀行発行のsovereign grassroots coins、民間主体が発行するpar償還可能なnon-sovereign grassroots coins、満期と利息を導入するsovereign／non-sovereign grassroots bondsという三要素の制度設計を提示する。abstractでは無裁定価格の証明と政策金利に関する議論が報告されるが、その形式モデル、仮定、証明手法、評価方法は確認できない。\n\n**実務への応用:** 構想上は、中央銀行が銀行以外の個人・法人も取引相手に選び、デジタルコインと債券を用いて信用供与、流動性管理、政策金利操作、公開市場型取引を実施できる可能性がある。CBDCへの預金流出リスクを抑えながら金融政策機能を付与する設計案として参考になり得るが、実装可能性や制度適合性は供給資料から判断できない。\n\n**限界・注意点:** 55ページの全文は提供されず、利用可能な資料はabstractと数行のIntroductionのみである。そのため、定義、制度上の仮定、無裁定証明、セキュリティ、信用・流動性リスク、スケーラビリティ、プライバシー、法規制、銀行システムへの影響、実証評価、実験、付録を確認していない。結果はすべて著者の報告として扱う必要があり、政策上または技術上の妥当性を独立に評価できない。",
+      "papers": [
+        {
+          "arxivId": "2609.27786v1",
+          "title": "Feasible Multi-Asset Optimal Execution under Cash Constraints",
+          "authors": [
+            "Ryuji Hashimoto",
+            "Namid R. Stillman"
+          ],
+          "submittedDate": "2026-08-18",
+          "updatedDate": "2026-09-24",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.27786v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.27786v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "本稿は、Almgren–Chriss型のmulti-asset optimal executionに各時点の期待累積支出上限を導入し、売却代金で買付を賄うcash-feasibleな執行計画を設計する。著者らは線形market impactの下で問題をconvex QCQPとして表現し、合成実験とagent-based market simulatorで評価している。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 901 / 出力 1,013（うち推論 48） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 17,174 / 出力 1,903（うち推論 352） · PDF 8 pages · 推定 $0.1239",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.27727v1",
+          "title": "Sovereign Grassroots Currencies: A CBDC Architecture for Credit and Monetary Policy (Full Version)",
+          "authors": [
+            "Ehud Shapiro"
+          ],
+          "submittedDate": "2026-09-23",
+          "updatedDate": "2026-09-24",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.27727v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.27727v1",
+          "schedulerRank": 2,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 6/10",
+          "schedulerSummary": "CBDCを貨幣・信用・利付債券へ拡張し、中央銀行の金融政策に組み込む「grassroots currencies」型アーキテクチャを提案する論文である。著者は、預金からCBDCへの即時転換に依存せず、中央銀行が公衆の保有するコインや債券を通じて信用供与、流動性吸収、金利設定、証券売買を行えると主張する。ただし、55ページの全文は提供されておらず、本レビューはabstractと極めて短いIntroductionだけに基づくため、証明、設計詳細、実験、付録は確認していない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 940 / 出力 1,459（うち推論 121） · 推定 $0.0019\n論文解析: gpt-5.6-sol / medium · トークン 入力 1,053 / 出力 1,833（うち推論 463） · 全55ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0419",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

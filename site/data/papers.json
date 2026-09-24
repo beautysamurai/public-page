@@ -2,6 +2,39 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-09-24-daily-openai-01",
+      "date": "2026-09-24",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.27786v1",
+          "title": "Feasible Multi-Asset Optimal Execution under Cash Constraints",
+          "authors": [
+            "Ryuji Hashimoto",
+            "Namid R. Stillman"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.27727v1",
+          "title": "Sovereign Grassroots Currencies: A CBDC Architecture for Credit and Monetary Policy (Full Version)",
+          "authors": [
+            "Ehud Shapiro"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-09-23-daily-openai-01",
       "date": "2026-09-23",
       "kind": "daily",

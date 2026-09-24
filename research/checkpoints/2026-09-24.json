@@ -1,0 +1,1103 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-24",
+  "fingerprint": "1fcb9dac1bfaabce643658184613125fbbad026a542bea42aa31199b235599a4",
+  "candidateFingerprints": {
+    "2609.26398": "167b0a5123263b2a0c4a096443654b6e980a4e0ccdd017ce17f0b704ff72b486",
+    "2609.26822": "5c2307bb61735f0b6fcf823c908360489e3685e38159f378cf1bfc307d6f3b16",
+    "2609.26861": "787ec212b6a38f93167ff93b2a17017fecd457ab74c53b99bc867e5476749dac",
+    "2609.27024": "107ca0eb30cffad66602aba63304fe0d8c54c1d45117cca29397cd63e746a54c",
+    "2609.27107": "af4494bdb7cac4ac5a1e1f49971868d477f94f712303e6531c4f433aee0f2581",
+    "2609.27113": "0914ad57ec4989d01702a7a404aa1debbc1e46e644a4f181d624a732d996feaf",
+    "2609.27138": "87e140da4012e382bf61671aeaac1c960c3f9cfefe61717adf0a4a3ab2f4a80f",
+    "2609.27404": "caaf4a6dbeffa36d77fe212da28380a387a4b43ac6a1963d77f0824136ec8808",
+    "2609.27636": "8d9a505901976416d9b60f2bf793368364b9b5259e4ed39d0dac753f3e2769d0",
+    "2609.27686": "84b558c67af70cac65a8ef7facf444d782beb1e3d908a2894e88be7ae6579588",
+    "2609.27727": "641d7dad5a62b95f49a73e1d5a48eeb3d459adb14840eb3e64064f7ce832b7a0",
+    "2609.27732": "219d84ba606ec01f198edfa7104aad3da9128d3db6b26541034c151a77a7720c",
+    "2609.27785": "e18a4c376b952fc167a1866a07aa586e8fad651191d8be40e508f7217bd55988",
+    "2609.27786": "69df908c730139367bf99fd9bf30699c94cdd5b3c922e48cd186adff81344e75",
+    "2609.28372": "f8ade0a2271670ffe78a0b7181c2343508902f1240f6287a43e79a3baeedfb23",
+    "2609.28463": "b68d2ba09986b1b8c7d96ef2011b7fb80a6e4c7c347ae986c6502b07f54ea395"
+  },
+  "results": {
+    "2609.26398": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、離散分布に対する weighted universal Value-at-Risk superadditivity（WUVS）の成立可能性を理論的に検討する短いノートである。",
+        "mainResult": "著者は、comonotonicityの場合を除き、WUVSは離散分布では基本的に成立しないことを証明した。また、無限平均を持つ離散分布について、独立同分布確率変数の凸結合が元の分布を確率順序で支配することも成立しないと示し、既存研究の未解決問題を解決したと報告している。",
+        "practicalApplication": "結果はVaRの集計性やリスク測度の理論的理解には関係するが、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ分析への直接的な実務応用は抽象からは確認できない。",
+        "methodology": "WUVSの定義と離散分布の性質を用いた理論的証明であり、数値実験や実データ分析は報告されていない。",
+        "limitations": "評価は抽象に基づくため、証明の仮定、WUVSの厳密な定義、comonotonicityの扱い、連続分布や有限平均の場合への含意は確認できない。また、実務上のVaR推定やモデルリスクへの検証も含まれていない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "リスク測度に関する数学的結果としては明確だが、本サイトの主要対象である電子的執行、マーケット・マイクロストラクチャー、金利・イールドカーブ研究には直接的に該当しない。",
+        "tags": [
+          "Value-at-Risk",
+          "risk aggregation",
+          "superadditivity",
+          "discrete distributions",
+          "comonotonicity",
+          "theoretical risk measures"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This short note theoretically studies whether weighted universal Value-at-Risk superadditivity (WUVS) can hold for discrete distributions.",
+          "mainResult": "The author reports proving that WUVS essentially cannot hold for discrete distributions except in the comonotonicity case. As a corollary, for discrete distributions with infinite mean, convex combinations of independent and identically distributed random variables cannot stochastically dominate the parent distribution. The paper therefore claims to resolve an open problem from prior work.",
+          "practicalApplication": "The result is relevant to the theoretical understanding of VaR aggregation and risk measures, but the abstract indicates no direct practical application to electronic trading, market microstructure, interest-rate models, or yield-curve analysis.",
+          "methodology": "The paper uses theoretical arguments based on the definition of WUVS and properties of discrete distributions; no numerical experiments or empirical data analysis are reported.",
+          "limitations": "Because the assessment is based only on the abstract, the assumptions, precise definition of WUVS, treatment of comonotonicity, and implications for continuous or finite-mean distributions cannot be verified. The paper also does not report validation for practical VaR estimation or model risk.",
+          "reason": "Although the result is a clear mathematical contribution concerning risk measures, it is not materially focused on the site's primary areas of electronic execution, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "Value-at-Risk",
+            "risk aggregation",
+            "superadditivity",
+            "discrete distributions",
+            "comonotonicity",
+            "theoretical risk measures"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.26822": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "HARNは、複数の時間足をイベント駆動で更新する金融時系列予測ニューラルネットワークです。",
+        "mainResult": "要旨によれば、株式・外国為替・コモディティの4資産で、HARNは単一時間足のPatchTSTおよびTimeXerに対して競争的な再構成価格予測誤差を示しました。アブレーションでは各構成要素の影響を調べ、実装とイベント駆動型因果プロトコルの整合性も監査しています。ただし、普遍的な予測優位性は主張していません。",
+        "practicalApplication": "複数時間足の情報を保持し、完成したバーが利用可能になった時点だけ表現を更新する予測システムには応用可能です。ただし、電子執行、板情報、マーケットマイクロストラクチャー、金利モデルまたはイールドカーブ分析への直接的な応用は要旨から確認できません。",
+        "methodology": "永続的な階層表現、因果的なマルチスケール時間エンコーディング、ゲート付き連想メモリ、時間足間の共鳴、階層的証拠集約を組み合わせます。予測はベーシスポイント空間で行い、元の価格スケールへ再構成します。4資産、多数の乱数シード、構成要素のアブレーション、実装監査で評価しています。",
+        "limitations": "要旨だけでは、データ期間、サンプル外評価、統計的有意性、取引コスト、収益性、ベンチマークの詳細が不明です。報告結果は予測誤差に関するものであり、実運用での執行性能や経済的価値を示していません。対象資産数も限られ、一般化可能性は未確認です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "金融時系列予測としては関連性がありますが、対象サイトの中心である電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、または広義の金利研究には直接該当しません。",
+        "tags": [
+          "金融時系列予測",
+          "マルチタイムフレーム",
+          "イベント駆動更新",
+          "ニューラルネットワーク",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "HARN is a neural financial time-series forecasting network that updates multiple timeframes in an event-driven manner.",
+          "mainResult": "According to the abstract, HARN achieves competitive reconstructed-price forecasting errors relative to single-timeframe PatchTST and TimeXer across four assets from equities, foreign exchange, and commodities. Ablations examine the effects of its components, and an implementation audit checks consistency with the event-driven causal protocol. However, the paper does not claim universal predictive superiority.",
+          "practicalApplication": "The framework could be applied to forecasting systems that preserve information across multiple timeframes and update representations only when the corresponding completed bar becomes available. The abstract does not establish direct applications to electronic execution, limit-order-book microstructure, interest-rate models, or yield-curve analysis.",
+          "methodology": "The method combines persistent hierarchical representations, causal multiscale temporal encoding, gated associative memory, cross-timeframe resonance, and hierarchical evidence aggregation. Forecasts are produced in basis-point space and reconstructed to the original price scale. Evaluation uses four assets, multiple random seeds, component ablations, and an implementation audit.",
+          "limitations": "The abstract does not specify the data periods, out-of-sample design, statistical significance, transaction costs, profitability, or benchmark details. The reported results concern forecasting errors rather than live execution performance or economic value. The asset universe is also limited, so generalizability remains unestablished.",
+          "reason": "Although relevant to financial time-series forecasting, the paper is not materially focused on electronic trading, market microstructure, interest-rate models, yield curves, or rates research, which are the site's core scope.",
+          "tags": [
+            "financial time-series forecasting",
+            "multi-timeframe",
+            "event-driven updates",
+            "neural networks",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.26861": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "デジタル商取引におけるルールベース価格設定ツールの設計が、市場価格とアルゴリズム間の協調に与える影響を実験的に分析した研究です。金融市場の電子執行、マーケット・マイクロストラクチャ、金利モデル、イールドカーブを直接扱っていません。",
+        "mainResult": "逐次的なBertrand競争実験では、価格戦争への警告、事前設定戦略、LLMからの助言などの多くの設計変更が市場価格を上昇させました。効果は、初期価格の上昇と、より協調的なアルゴリズム設計の増加によって説明されています。",
+        "practicalApplication": "デジタル市場の競争政策、プラットフォーム規制、価格再設定ツールの設計評価には示唆があります。ただし、金融市場の電子取引や執行アルゴリズムへの直接的な適用可能性は限定的です。",
+        "methodology": "参加者がダッシュボードを用いて価格設定アルゴリズムを構築し、複数期間の逐次的Bertrandゲームで競争する統制市場実験を実施しました。価格戦争への警告、事前設定戦略、LLM助言といった処置を比較しています。",
+        "limitations": "抄録からは、参加者数、実験環境の詳細、統計的有意性、効果量、処置間の具体的比較、外部妥当性が確認できません。単純化された実験市場の結果を、実際のデジタル商取引や金融市場へ一般化するには注意が必要です。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "アルゴリズム設計と市場成果の関係は周辺的には関連しますが、対象はデジタル商取引の価格競争であり、対象サイトの中核である金融市場の電子取引、マーケット・マイクロストラクチャ、金利・イールドカーブ研究には該当しません。",
+        "tags": [
+          "algorithmic pricing",
+          "Bertrand competition",
+          "market experiment",
+          "platform regulation",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study experimentally analyzes how the design of rule-based pricing tools in digital commerce affects market prices and coordination among algorithms. It does not directly address electronic execution in financial markets, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "In a sequential Bertrand competition experiment, many design changes, including warnings about price wars, pre-configured strategies, and advice from a large language model, increased market prices. The effects were driven by higher starting prices and more cooperative algorithm designs.",
+          "practicalApplication": "The findings may inform competition policy, platform regulation, and the evaluation of repricing-tool design in digital markets. However, direct applicability to electronic trading or execution algorithms in financial markets is limited.",
+          "methodology": "Participants used dashboards to build pricing algorithms and competed in a multi-period sequential Bertrand game in a controlled market experiment. The study compared treatments involving price-war warnings, pre-configured strategies, and advice from a large language model.",
+          "limitations": "The abstract does not report the number of participants, experimental details, statistical significance, effect sizes, specific treatment comparisons, or external validity. Generalizing results from a simplified experimental market to actual digital commerce or financial markets requires caution.",
+          "reason": "The relationship between algorithm design and market outcomes is peripherally relevant, but the study concerns price competition in digital commerce rather than the financial-market electronic trading, market microstructure, interest-rate, or yield-curve research covered by this site.",
+          "tags": [
+            "algorithmic pricing",
+            "Bertrand competition",
+            "market experiment",
+            "platform regulation",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.27024": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "暗号資産のボラティリティ予測において、損失関数の選択とモデルの選択が予測水準および日々の変動に与える影響を比較した研究です。",
+        "mainResult": "7種類の損失関数と5種類のモデルを比較した結果、予測水準を調整する前は損失関数間のスコア差が大きかった一方、調整後はモデル選択の影響が相対的に大きくなりました。また、Value-at-Riskの超過率における損失関数間の差も大幅に縮小しました。",
+        "practicalApplication": "損失関数を単純な予測精度比較だけで選ぶのではなく、予測水準を調整した評価やValue-at-Riskなど下流のリスク指標で確認する実務上の示唆があります。ただし、電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ分析への直接的な応用は限定的です。",
+        "methodology": "主要な暗号資産を対象に、7種類の損失関数と5種類の予測モデルを比較しました。Validation-based alignmentによって予測水準を調整し、調整前後の統計的スコアと1日Value-at-Riskの超過率を評価しています。",
+        "limitations": "抽象からは対象となる暗号資産、具体的なモデルと損失関数、評価期間、統計的有意性、アラインメント手法の詳細が確認できません。また、結果は暗号資産市場に依存する可能性があり、他の資産クラスや実運用での取引コストを含む有効性は示されていません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "リスク予測とモデル評価に関する有用な研究ですが、対象が暗号資産のボラティリティ予測であり、対象サイトの中核である電子執行、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、金利分析には直接該当しません。",
+        "tags": [
+          "暗号資産",
+          "ボラティリティ予測",
+          "損失関数",
+          "モデル選択",
+          "Value-at-Risk",
+          "リスク管理"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper compares how loss-function choice and model choice affect forecast levels and day-to-day movements in cryptocurrency volatility forecasting.",
+          "mainResult": "Across seven losses and five models, variation in statistical scores was larger across losses before forecast-level adjustment, whereas model choice became relatively more influential after alignment. Differences in Value-at-Risk breach rates across losses also narrowed substantially.",
+          "practicalApplication": "The study suggests that loss functions should not be selected solely through raw forecast-accuracy comparisons; practitioners should also examine level-adjusted forecasts and downstream risk measures such as Value-at-Risk. However, its direct application to electronic trading, market microstructure, interest-rate models, and yield-curve analysis is limited.",
+          "methodology": "Using major cryptocurrencies, the authors compare seven losses and five forecasting models. Validation-based alignment adjusts forecast levels, after which raw and aligned forecasts are evaluated with statistical scores and one-day Value-at-Risk breach rates.",
+          "limitations": "The abstract does not specify the cryptocurrencies, exact models and losses, evaluation period, statistical significance, or details of the alignment procedure. Results may depend on cryptocurrency markets, and effectiveness in other asset classes or live implementation with transaction costs is not established.",
+          "reason": "The paper offers useful evidence on risk-forecast evaluation and model selection, but it focuses on cryptocurrency volatility forecasting and does not directly address the site's core areas of electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "cryptocurrency",
+            "volatility forecasting",
+            "loss functions",
+            "model selection",
+            "Value-at-Risk",
+            "risk management"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.27107": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "大規模で疎な経済ネットワークにおける均衡結果とリスク評価を、極限根付きネットワーク上の局所計算で近似する理論を提示した研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブを主題としていないため、本サイトの主要スコープ外です。",
+        "mainResult": "マーク付き局所弱収束のもとで、均衡応答が一様収縮的な場合、および有界単調非膨張的で下側・上側反復が一致する場合に、有限ネットワークの経験的均衡分布が確率収束することを示したと報告されています。均衡が一意でなくても、極限は可測な均衡選択に依存しないとされています。さらに、追加の有界性・連続性・正則性条件のもとで、条件付きバリュー・アット・リスクを含むlaw-invariantリスク指標にも収束と再帰深度に関する誤差評価を拡張しています。",
+        "practicalApplication": "生産ネットワークや決済清算システムで、全ネットワークを解かず局所近傍から均衡分布とリスクを推定する計算手法に応用できる可能性があります。ただし、電子執行や市場取引の注文・約定メカニズムへの直接的な応用は抽象から確認できません。",
+        "methodology": "局所弱収束する根付きネットワークを用いて、均衡方程式を局所反復計算で近似します。均一収縮性、または単調非膨張性と上下反復の一致を仮定し、経験的均衡分布の確率収束を理論的に導出します。数値実験では生産ネットワークと決済清算システムを対象に近似精度と計算上の利点を検証しています。",
+        "limitations": "評価は抽象に記載された仮定に依存しており、特にネットワークの局所弱収束、応答の有界性・連続性、収縮性または反復の一致条件が現実の金融ネットワークで成立するかは不明です。数値実験の規模、データ、ベンチマーク、誤差の実証的な大きさも抽象からは確認できません。対象は経済ネットワークの均衡・リスクであり、本サイトの金利、イールドカーブ、電子取引、マイクロストラクチャーへの直接的な新規性は限定的です。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "理論的にはネットワーク均衡とリスク評価に有用な結果を報告していますが、対象が経済ネットワークと決済清算であり、指定された主要分野への直接的な関連性が低いためです。",
+        "tags": [
+          "economic networks",
+          "local weak convergence",
+          "equilibrium selection",
+          "risk measures",
+          "conditional value-at-risk",
+          "payment clearing",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper develops a theory for approximating equilibrium outcomes and risk evaluation in large sparse economic networks through local computations on limiting rooted networks. It does not primarily address electronic trading, market microstructure, interest-rate models, or yield curves, so it is outside the main scope of this site.",
+          "mainResult": "Under marked local weak convergence, the paper reports convergence in probability of the empirical equilibrium distribution when responses are uniformly contractive, or when they are bounded, monotone, and nonexpansive with coalescing lower and upper iterations. It further claims that the limit is independent of measurable finite-network equilibrium selection even when equilibria are nonunique. Under additional boundedness, continuity, and regularity assumptions, the result is extended to law-invariant risk measures, including conditional value-at-risk, with recursion-depth error bounds.",
+          "practicalApplication": "The approach could be used to estimate equilibrium distributions and risk from local neighborhoods without solving the full network, particularly in production networks and payment-clearing systems. However, the abstract does not establish a direct application to electronic execution or market-trading mechanisms.",
+          "methodology": "The authors use locally weakly convergent rooted networks and approximate equilibrium equations through local iterative computations. They derive convergence of empirical equilibrium distributions under uniform contractivity or under monotone nonexpansiveness combined with agreement of lower and upper iterations. Numerical experiments on production networks and payment-clearing systems evaluate approximation accuracy and computational benefits.",
+          "limitations": "The conclusions depend on assumptions stated in the abstract, including local weak convergence, boundedness and continuity of responses, and contractivity or agreement of the iterative bounds. It is unclear whether these conditions hold in realistic financial networks. The abstract does not provide the experiment sizes, data, benchmarks, or empirical error magnitudes. The paper focuses on network equilibrium and risk rather than rates, yield curves, electronic trading, or market microstructure, limiting its direct relevance to this site.",
+          "reason": "The paper reports potentially useful theoretical results for network equilibrium and risk evaluation, but its subject is economic networks and payment clearing rather than the site's core areas, giving it low direct relevance.",
+          "tags": [
+            "economic networks",
+            "local weak convergence",
+            "equilibrium selection",
+            "risk measures",
+            "conditional value-at-risk",
+            "payment clearing",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.27113": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、集中度と相関が変動する株式市場で、等ウェイト・ポートフォリオと時価総額加重ポートフォリオの間を動的に配分する確率的ポートフォリオ管理を扱う。電子執行、金利モデル、イールドカーブ、または金利市場が主題ではないため、対象サイトの中心範囲からは外れる。",
+        "mainResult": "抄録によれば、柔軟な stochastic diversity--dispersion モデルによる予測と取引摩擦を含む確率制御に基づき、最適取引率を線形 forward--backward SDE と「moving target の前を狙う」表現で導出した。1995年から2024年の S&P 500 のアウト・オブ・サンプル検証では、提案戦略が等ウェイトおよび時価総額加重ポートフォリオを上回る累積ネットリターンを示し、15 basis points の比例取引コスト控除後には等ウェイトを上回る information ratio を示したと報告している。",
+        "practicalApplication": "株式ポートフォリオの配分、リバランス頻度、取引摩擦を考慮した運用設計には応用可能である。ただし、電子執行の注文最適化や市場マイクロ構造への直接的な含意は限定的である。",
+        "methodology": "等ウェイトと市場ポートフォリオ間の配分を確率制御問題として定式化し、実装摩擦を二次近似した。最適配分を線形 forward--backward SDE で特徴づけ、SDD モデルを用いて予測した。摩擦ペナルティは比例取引コストによる累積ウェルス効果にインサンプルで較正し、1995年から2024年の S&P 500 データでアウト・オブ・サンプル評価を行った。",
+        "limitations": "評価は抄録で示された S&P 500 の単一市場と特定期間のバックテストに依存する。ペナルティ・パラメータをインサンプルで較正しているため、モデル選択や較正による過学習の可能性がある。提案結果の統計的有意性、取引容量、執行遅延、流動性制約、税金、異なる市場環境への頑健性は抄録から確認できない。また、二次摩擦近似と15 basis points のコスト仮定が実際の執行コストを十分に表すかは未検証である。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "確率的ポートフォリオ管理と取引コストを扱う点では関連するが、研究対象は主として株式資産配分であり、当サイトの電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究の中心テーマには該当しない。",
+        "tags": [
+          "out_of_scope",
+          "portfolio_management",
+          "stochastic_portfolio_theory",
+          "transaction_costs",
+          "S&P_500",
+          "stochastic_control"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies dynamic allocation between equal-weighted and capitalization-weighted portfolios in equity markets with changing concentration and correlations. Its primary focus is stochastic portfolio management rather than electronic execution, interest-rate models, yield curves, or rates, so it falls outside the site’s core scope.",
+          "mainResult": "According to the abstract, the paper formulates a stochastic control problem using forecasts from a flexible stochastic diversity--dispersion model and trading frictions, and characterizes the optimal trading rate through a linear forward--backward SDE and an “aiming in front of a moving target” representation. In out-of-sample tests on the S&P 500 from 1995 to 2024, the proposed strategies reportedly achieved higher cumulative net returns than both the equal-weighted and capitalization-weighted portfolios, and a higher information ratio than the equal-weighted portfolio after deducting 15 basis points of proportional transaction costs.",
+          "practicalApplication": "The approach could be applied to equity portfolio allocation, rebalancing decisions, and strategy design that accounts for trading frictions. However, its direct implications for electronic execution and market microstructure are limited.",
+          "methodology": "The allocation between the equal-weighted and market portfolios is formulated as a stochastic control problem with quadratic implementation frictions. The optimal allocation is characterized by a linear forward--backward SDE and forecasts from an SDD model. The friction penalties are calibrated in sample to match the cumulative wealth effect of proportional transaction costs, followed by out-of-sample evaluation using S&P 500 data from 1995 to 2024.",
+          "limitations": "The evaluation reported in the abstract relies on a single market and historical period. Because the penalty parameters are calibrated in sample, model-selection and calibration overfitting are possible. The abstract does not establish statistical significance, capacity, execution latency, liquidity constraints, taxes, or robustness across other market environments. It also remains unclear whether the quadratic friction approximation and the 15-basis-point cost assumption adequately represent actual execution costs.",
+          "reason": "Although the paper addresses stochastic portfolio management and transaction costs, its main subject is equity asset allocation rather than the site’s core areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "out_of_scope",
+            "portfolio_management",
+            "stochastic_portfolio_theory",
+            "transaction_costs",
+            "S&P_500",
+            "stochastic_control"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.27138": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、CMEの大豆先物オプションのボラティリティ・サーフェスを用いて、確率的ボラティリティ、vol-of-vol、レバレッジを識別し、価格付けへ利用する枠組みを提案する。金利、イールドカーブ、電子取引、または市場マイクロ構造が主題ではない。",
+        "mainResult": "ATM水準とconvexityは対数OU過程、skewは実数上のOU過程で表現し、これらを動的なサーフェス因子として統合した。有限差分とMonte Carloの価格は検証グリッド上で近く、neural-network surrogateは推論コストを大幅に削減したと報告されている。",
+        "practicalApplication": "大豆などの商品オプションで、level、skew、convexityを同時に用いる価格付け、モデル診断、反復的な評価に応用できる可能性がある。ただし、本サイトの対象領域への直接的な応用は限定的である。",
+        "methodology": "2013年10月から2025年8月までのCME CVOL指標を分析し、joint mean-reverting surface-factor systemを構築した。leading-order smile relationsで観測サーフェス因子を潜在状態へ対応付け、risk-neutral pricing equationとFeynman–Kac表現を導出し、Monte Carlo、有限差分、neural-network surrogateで数値検証した。",
+        "limitations": "要約からは、モデルの詳細な推定手順、パラメータの不確実性、取引コスト、流動性、アウト・オブ・サンプル性能、他の商品や市場での頑健性は確認できない。結果は大豆先物オプションと特定期間に依存し、価格手法の優位性も要約記載の範囲では限定的に示されている。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "商品オプションの確率的ボラティリティとサーフェス・ダイナミクスに関する研究としては関連性があるが、対象サイトの中心である電子取引、市場マイクロ構造、金利モデル、イールドカーブ、金利市場には実質的に該当しないため。",
+        "tags": [
+          "commodity options",
+          "stochastic volatility",
+          "volatility surface",
+          "smile dynamics",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a framework for identifying stochastic volatility, vol-of-vol, and leverage from the volatility surface of CME soybean futures options and using them for pricing. Its primary topic is not interest rates, yield curves, electronic trading, or market microstructure.",
+          "mainResult": "The ATM level and convexity are modeled with log-OU processes, while skew is modeled with an OU process on the real line, forming a dynamic surface-factor system. Finite-difference and Monte Carlo prices reportedly agree closely on the validation grid, while a neural-network surrogate substantially reduces inference cost.",
+          "practicalApplication": "The approach may support joint use of level, skew, and convexity for pricing, model diagnostics, and repeated valuation of soybean and other commodity options. Its direct applicability to this site's target areas is limited.",
+          "methodology": "The authors analyze CME CVOL indicators from October 2013 through August 2025 and construct a joint mean-reverting surface-factor system. Leading-order smile relations map observed surface factors to latent states; a risk-neutral pricing equation and Feynman–Kac representation are derived and evaluated using Monte Carlo, finite differences, and a neural-network surrogate.",
+          "limitations": "The abstract does not establish the detailed estimation procedure, parameter uncertainty, transaction costs, liquidity effects, out-of-sample performance, or robustness across commodities and markets. The results depend on soybean futures options and the stated sample period, and the pricing advantage is only supported at the level reported in the abstract.",
+          "reason": "The study is relevant to commodity-option stochastic volatility and surface dynamics, but it does not materially address electronic trading, market microstructure, interest-rate models, yield curves, or rates, which are the site's core scope.",
+          "tags": [
+            "commodity options",
+            "stochastic volatility",
+            "volatility surface",
+            "smile dynamics",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.27404": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "生成AIが詐欺的な主張の作成・検証・標的化コストを低下させるとき、信頼性の高い市場ほど検証の遅れを通じて一時的な脆弱性を持ち得ることを示す理論研究です。",
+        "mainResult": "2市場のシグナリングモデルにおいて、詐欺的主張の作成が検証前に採算化すると、信頼性は一度低下した後に回復します。高品質市場で検証が遅れる局面では、詐欺的販売者が同市場へ移動しますが、その流入が検証を誘発し、参入を自己制限すると報告しています。",
+        "practicalApplication": "市場間での詐欺リスクの移転、検証タイミング、生成AI時代の信頼メカニズムを考える概念的示唆はあります。ただし、電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、または金利市場への直接的な応用は示されていません。",
+        "methodology": "生成AIによる作成・検証・標的化コストの変化を組み込んだ、2市場の理論的シグナリングモデルを構築しています。",
+        "limitations": "提示された抄録では、モデルの具体的な仮定、均衡の導出、パラメータ設定、データによる検証、実証的な効果量は示されていません。また、主題は詐欺と市場間の信頼 arbitrage であり、対象サイトの専門領域に直接対応しません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "経済理論としては信頼・検証・生成AIと詐欺の関係を扱いますが、対象とする電子執行、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、金利研究には実質的に該当しません。",
+        "tags": [
+          "生成AI",
+          "詐欺",
+          "信頼",
+          "シグナリングモデル",
+          "市場間裁定"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This theoretical study argues that markets with higher reliability can develop temporary vulnerabilities when generative AI lowers the costs of fabricating, verifying, and targeting deceptive claims and delays verification.",
+          "mainResult": "In a two-market signaling model, reliability initially declines and later recovers when fabricating deceptive claims becomes profitable before verification. When verification is delayed in the higher-quality market, deceptive sellers move there, but their inflow triggers verification and self-limits further entry.",
+          "practicalApplication": "The paper offers conceptual implications for the migration of fraud risk across markets, verification timing, and trust mechanisms in the generative-AI era. However, it does not present direct applications to electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "methodology": "The authors develop a theoretical two-market signaling model incorporating changes in the costs of fabrication, verification, and targeting caused by generative AI.",
+          "limitations": "The abstract does not provide the model's specific assumptions, equilibrium derivations, parameterization, empirical validation, or estimated effect sizes. The topic is fraud and cross-market trust arbitrage rather than a direct contribution to the site's target domains.",
+          "reason": "Although the paper studies trust, verification, generative AI, and fraud through economic theory, it is not materially relevant to electronic execution, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "generative AI",
+            "fraud",
+            "trust",
+            "signaling model",
+            "cross-market arbitrage"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.27636": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本稿は、オーストリアおよびドイツの規制対象保険会社向けに、複数の専門AIエージェントを統合する企業AIアーキテクチャを提案する。",
+        "mainResult": "Arrowのリスク・プーリング理論、Nash均衡、Principal-Agent理論を組み合わせ、資本管理、引受、保険金請求、コンプライアンス、不正検知、顧客対応などを分担するエージェント構成を定式化する。MCPとA2Aによる非同期通信、Human-in-the-loop、階層的アクセス制御、オーケストレーターによって、Solvency II、AI Act、Insurance Distribution Directiveへの適合性と監査可能性を実現すると論じている。",
+        "practicalApplication": "規制対象保険会社におけるAIガバナンス、権限管理、部門間連携、監査設計の概念的な検討に利用できる。ただし、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利実務への直接的な応用は示されていない。",
+        "methodology": "経済理論と制度設計を統合した概念的・形式的フレームワークを提示している。抽象文からは、実データ、実装実験、性能評価、ケーススタディの実施は確認できない。",
+        "limitations": "抽象文の範囲では、提案アーキテクチャの実証的有効性、導入コスト、エージェント間の障害や攻撃への頑健性、規制解釈の妥当性は検証されていない。また、対象は保険会社の企業AIであり、本サイトの主要テーマである市場取引や金利分析とは異なる。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "規制金融に関するAIガバナンス研究ではあるが、対象分野の電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究には実質的に該当しないため。",
+        "tags": [
+          "out of scope",
+          "insurance AI",
+          "multi-agent systems",
+          "AI governance",
+          "Solvency II",
+          "AI Act",
+          "institutional design"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes an enterprise AI architecture that integrates multiple specialised AI agents for regulated insurers in Austria and Germany.",
+          "mainResult": "It combines Arrow’s risk-pooling theory, Nash equilibrium, and Principal-Agent theory to formulate an agent structure covering capital management, underwriting, claims processing, compliance, fraud detection, and client interaction. It argues that asynchronous communication through MCP and A2A, human-in-the-loop controls, hierarchical access management, and an orchestrator can support compliance and auditability under Solvency II, the AI Act, and the Insurance Distribution Directive.",
+          "practicalApplication": "The framework may support conceptual analysis of AI governance, access control, interdepartmental coordination, and audit design in regulated insurers. However, it does not present direct applications to electronic trading, market microstructure, interest-rate models, yield curves, or rates practice.",
+          "methodology": "The paper presents a conceptual and formal framework combining economic theory with institutional design. Based on the abstract, no real data, implementation experiment, performance evaluation, or case study is reported.",
+          "limitations": "The abstract does not establish the empirical effectiveness, implementation cost, robustness to inter-agent failures or attacks, or validity of the regulatory interpretations. The subject is enterprise AI for insurers rather than the market-trading and rates topics central to this site.",
+          "reason": "Although it concerns AI governance in regulated finance, it is not materially about electronic execution, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "out of scope",
+            "insurance AI",
+            "multi-agent systems",
+            "AI governance",
+            "Solvency II",
+            "AI Act",
+            "institutional design"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.27686": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、LLMを用いた学術文献レビューにおける分類・メタデータ抽出・統合の測定誤差と、その誤差が下流の研究結論に与える影響を分析する。対象は降雨を操作変数として用いる経済学論文であり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱わない。",
+        "mainResult": "3種類のChatGPT実装は二値分類では良好に機能したが、文脈解釈を要するタスクでは性能が低下した。同程度の測定誤差でも、個別論文に関する主張には大きな影響を与える一方、文献全体に関するより広い主張への影響は小さかったと報告されている。",
+        "practicalApplication": "LLMによる文献レビューやメタデータ生成を利用する研究者に対し、通常のモデル性能指標だけでなく、生成データに基づく実質的な結論の頑健性も検証する必要性を示す。ただし、本サイトの対象分野における取引執行や金利分析への直接的な応用は限定的である。",
+        "methodology": "著者らはLLM支援文献レビューを測定問題として定式化し、降雨を操作変数として用いる経済学論文の識別とメタデータ抽出を実施した。3種類のChatGPT実装を人手ラベル付き評価データの一部と比較してベンチマークし、その後、全コーパスに適用して測定誤差と下流の主張への影響を比較した。",
+        "limitations": "提示された要旨だけでは、評価データの規模・代表性、各実装の具体的な設定、性能指標、誤差の大きさ、統計的推論の詳細は確認できない。また、経済学の特定テーマを対象とした結果であり、他分野や金融市場研究への一般化可能性は不明である。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "LLMを用いた研究方法論としては有用な警告を含むが、本サイトが重視する電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場の研究成果ではないため、対象文献としては推奨しない。",
+        "tags": [
+          "LLM",
+          "生成AI",
+          "文献レビュー",
+          "測定誤差",
+          "研究方法論",
+          "因果推論"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes measurement error in LLM-assisted academic literature reviews, including classification, metadata extraction, and synthesis, and its effects on downstream research conclusions. Its application concerns economics papers using rainfall as an instrumental variable and does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "The three ChatGPT implementations performed well on binary classification, but performance deteriorated on tasks requiring contextual interpretation. The paper reports that the same amount of measurement error substantially affected claims about individual papers while having little effect on broader claims about the literature.",
+          "practicalApplication": "The study advises researchers using LLMs for literature reviews or metadata generation to assess not only standard model-performance metrics but also the robustness of substantive conclusions based on the generated data. However, its direct applicability to execution or rates analysis within this site's scope is limited.",
+          "methodology": "The authors frame LLM-assisted literature reviews as a measurement problem and use economics papers that employ rainfall as an instrumental variable for identification and metadata extraction. They benchmark three ChatGPT implementations against a subset of human-labeled evaluation data, apply them to the full corpus, and compare measurement error with its effects on downstream claims.",
+          "limitations": "The abstract does not provide the size or representativeness of the evaluation data, the precise implementation settings, performance metrics, error magnitudes, or details of the statistical analysis. The study focuses on a specific economics topic, so its generalizability to other fields and financial-market research is unclear.",
+          "reason": "Although the paper offers a useful methodological warning about LLM-assisted research, it does not study electronic trading, market microstructure, interest-rate models, yield curves, or rates markets, so it is not recommended as an in-scope paper.",
+          "tags": [
+            "LLM",
+            "generative AI",
+            "literature review",
+            "measurement error",
+            "research methodology",
+            "causal inference"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.27727": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "rates",
+        "summary": "CBDC、民間発行可能な信用貨幣、満期を持つ債券を統合し、中央銀行の貸出・流動性吸収・政策金利操作を可能にする制度設計を提案する研究です。電子執行や市場マイクロ構造ではなく、中央銀行信用と金利政策のアーキテクチャに関する理論的研究です。",
+        "mainResult": "著者は、中央銀行発行の sovereign grassroots coins、民間発行の non-sovereign grassroots coins、ならびに sovereign／non-sovereign grassroots bonds の三層構造を提案しています。要旨によれば、発行者が所定の表明を満たす場合、grassroots coin の裁定なし価格は法定通貨1単位であり、中央銀行の貸出金利と自己債券金利が、同等条件で取引する相手方の金利を上下から制約すると論じています。また、中央銀行は銀行に限定されず任意の相手方を選び、預金から新規中央銀行貨幣への即時転換なしに信用政策を実施できるとしています。",
+        "practicalApplication": "CBDCの設計、中央銀行の信用供給、流動性管理、政策金利の伝達経路を検討する際の概念的な枠組みになり得ます。特に、CBDCへの預金流出リスクと、CBDCを信用創造・金融政策から切り離す問題を同時に扱おうとする点に実務上の示唆があります。ただし、実装可能な決済・清算インフラや政策運営ルールまで具体化したものではありません。",
+        "methodology": "要旨に基づく理論的な制度設計と裁定価格に関する主張です。grassroots coin の構成、発行主体、償還条件、grassroots bond の満期と金利を定義し、これらを用いて中央銀行の貸出、流動性吸収、証券売買、金利設定を説明しています。要旨では、裁定なし価格と中央銀行金利による金利制約を証明したと報告されています。",
+        "limitations": "評価は要旨だけに基づき、証明の仮定や本文の妥当性を検証できません。金融機関の信用リスク、取り付け、担保、決済ファイナリティ、規制・法的地位、プライバシー、サイバーセキュリティ、マクロ経済への影響、政策金利の実証的な伝達については、要旨から十分に確認できません。裁定なし価格の結論も、発行者が所定の表明を満たすという条件に依存します。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "中央銀行の金利政策とCBDCの制度設計を直接扱うため、rates分野には関連します。一方、利回り曲線推定、金利モデル、電子取引、注文執行、市場マイクロ構造を分析する研究ではなく、サイトの主要テーマへの直接性は中程度です。",
+        "tags": [
+          "CBDC",
+          "中央銀行デジタル通貨",
+          "金融政策",
+          "政策金利",
+          "信用創造",
+          "流動性管理",
+          "裁定価格",
+          "grassroots currencies"
+        ],
+        "english": {
+          "classification": "rates",
+          "summary": "This paper proposes an institutional design that combines CBDC, privately issuable credit money, and maturity-bearing bonds to support central-bank lending, liquidity absorption, and policy-rate operations. It concerns the architecture of central-bank credit and interest-rate policy rather than electronic execution or market microstructure.",
+          "mainResult": "The author proposes a three-layer structure consisting of sovereign grassroots coins, non-sovereign grassroots coins issued by private parties, and sovereign or non-sovereign grassroots bonds. According to the abstract, when the issuer satisfies the specified representations, the no-arbitrage price of a grassroots coin is one unit of fiat currency. The paper also argues that the central bank's lending rate and the rate on its own bonds bound rates paid or accepted by counterparties on comparable terms. It further claims that the central bank can select any counterparty, not only banks, and conduct credit policy without immediate conversion of deposits into newly issued central-bank money.",
+          "practicalApplication": "The framework may be useful for considering CBDC design, central-bank credit provision, liquidity management, and the transmission of policy rates. It is particularly relevant because it attempts to address both the risk of deposit outflows into CBDC and the separation of CBDC from credit creation and monetary-policy operations. However, it does not, based on the abstract, specify implementable payment and settlement infrastructure or complete operating rules for policy implementation.",
+          "methodology": "The paper presents a theoretical institutional design and claims concerning arbitrage-free pricing. It defines grassroots coins, their issuers and redemption conditions, and grassroots bonds with maturity and interest, then uses these instruments to describe central-bank lending, liquidity absorption, securities trading, and rate setting. The abstract reports proofs concerning the no-arbitrage price and interest-rate bounds imposed by central-bank rates.",
+          "limitations": "This assessment is based only on the abstract, so the assumptions and validity of the proofs cannot be evaluated. The abstract does not adequately establish how the proposal addresses intermediary credit risk, runs, collateral, settlement finality, regulation and legal status, privacy, cybersecurity, macroeconomic effects, or empirical policy-rate transmission. The no-arbitrage pricing result also depends on the condition that the issuer satisfies the specified representations.",
+          "reason": "The paper directly addresses central-bank interest-rate policy and CBDC institutional design, making it relevant to the rates category. However, it does not analyze yield-curve estimation, interest-rate models, electronic trading, order execution, or market microstructure, so its direct relevance to the site's core topics is moderate.",
+          "tags": [
+            "CBDC",
+            "central bank digital currency",
+            "monetary policy",
+            "policy rates",
+            "credit creation",
+            "liquidity management",
+            "arbitrage-free pricing",
+            "grassroots currencies"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "CBDCを貨幣・信用・利付債券へ拡張し、中央銀行の金融政策に組み込む「grassroots currencies」型アーキテクチャを提案する論文である。著者は、預金からCBDCへの即時転換に依存せず、中央銀行が公衆の保有するコインや債券を通じて信用供与、流動性吸収、金利設定、証券売買を行えると主張する。ただし、55ページの全文は提供されておらず、本レビューはabstractと極めて短いIntroductionだけに基づくため、証明、設計詳細、実験、付録は確認していない。",
+        "mainResult": "著者は、履行要求に応じる発行者のgrassroots coinについて、法定通貨1単位が唯一の無裁定価格になると証明したと主張する。また、中央銀行の貸出金利と自行債券の金利が、同等条件で取引する相手方の受払金利を制約すると論じる。ただし全文未提供のため、これらはabstract上の著者主張であり、証明や前提条件は検証していない。",
+        "practicalApplication": "構想上は、中央銀行が銀行以外の個人・法人も取引相手に選び、デジタルコインと債券を用いて信用供与、流動性管理、政策金利操作、公開市場型取引を実施できる可能性がある。CBDCへの預金流出リスクを抑えながら金融政策機能を付与する設計案として参考になり得るが、実装可能性や制度適合性は供給資料から判断できない。",
+        "methodology": "著者は、中央銀行発行のsovereign grassroots coins、民間主体が発行するpar償還可能なnon-sovereign grassroots coins、満期と利息を導入するsovereign／non-sovereign grassroots bondsという三要素の制度設計を提示する。abstractでは無裁定価格の証明と政策金利に関する議論が報告されるが、その形式モデル、仮定、証明手法、評価方法は確認できない。",
+        "limitations": "55ページの全文は提供されず、利用可能な資料はabstractと数行のIntroductionのみである。そのため、定義、制度上の仮定、無裁定証明、セキュリティ、信用・流動性リスク、スケーラビリティ、プライバシー、法規制、銀行システムへの影響、実証評価、実験、付録を確認していない。結果はすべて著者の報告として扱う必要があり、政策上または技術上の妥当性を独立に評価できない。",
+        "importance": 3,
+        "recommended": false,
+        "reason": "CBDCと金利・金融政策を結ぶ着想は対象分野に関連するが、電子執行や市場マイクロストラクチャへの直接的示唆は限定的である。さらに、全文なしでは中心的な無裁定命題や運用可能性を評価できないため、現段階での推薦は見送る。",
+        "tags": [
+          "CBDC",
+          "草の根通貨",
+          "中央銀行",
+          "金融政策",
+          "信用創造",
+          "デジタル債券",
+          "無裁定価格"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper proposes a “grassroots currencies” architecture that extends a CBDC into money, credit, and interest-bearing bonds and integrates it with central-bank monetary-policy operations. The author claims that the central bank could provide credit, absorb liquidity, set rates, and trade securities using coins and bonds held by the public without relying on on-demand conversion of bank deposits into CBDC. However, the 55-page full paper was not provided; this review uses only the abstract and a very short Introduction, so no proofs, design details, experiments, or appendices were checked.",
+          "mainResult": "The author claims to prove that one unit of fiat currency is the unique arbitrage-free price of a grassroots coin when its issuer meets redemption presentations. The author also argues that the central bank’s lending rate and the rate on its own bonds bound the rates its counterparties pay or accept on comparable terms. Because the full paper was not provided, these are author claims reported in the abstract; the proofs and underlying assumptions were not verified.",
+          "practicalApplication": "Conceptually, the architecture could allow a central bank to transact with individuals and legal entities beyond banks and use digital coins and bonds for lending, liquidity management, policy-rate operations, and open-market-style transactions. It may offer a design approach for adding monetary-policy functions to a CBDC while limiting deposit-flight concerns, but implementation feasibility and institutional compatibility cannot be assessed from the supplied material.",
+          "methodology": "The author presents a three-part institutional design: central-bank-issued sovereign grassroots coins, par-redeemable non-sovereign grassroots coins issued by private parties, and sovereign or non-sovereign grassroots bonds that introduce maturity and interest. The abstract reports an arbitrage-pricing proof and an argument about policy-rate bounds, but the formal model, assumptions, proof techniques, and evaluation methods could not be examined.",
+          "limitations": "The 55-page full paper was not supplied; only the abstract and a few lines of the Introduction were available. Definitions, institutional assumptions, the arbitrage proof, security, credit and liquidity risk, scalability, privacy, regulation, effects on the banking system, empirical evaluation, experiments, and appendices were therefore not checked. All results must be treated as author-reported claims, and their policy or technical validity cannot be independently assessed.",
+          "reason": "The proposed link between CBDC architecture, interest rates, and monetary policy is relevant to the site, but its direct implications for electronic execution and market microstructure are limited. Moreover, without the full paper, the central arbitrage proposition and operational feasibility cannot be evaluated, so recommendation is withheld at this stage.",
+          "tags": [
+            "CBDC",
+            "grassroots currencies",
+            "central banks",
+            "monetary policy",
+            "credit creation",
+            "digital bonds",
+            "arbitrage-free pricing"
+          ]
+        }
+      }
+    },
+    "2609.27732": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "スイスのDrug Consumption Room（DCR）開設が薬物関連入院に与える因果効果を、医療記録と差の差分析で推定した公衆衛生研究である。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を扱っていない。",
+        "mainResult": "1998年から2022年にかけてのスイスの都市別DCR開設を利用した推定では、施設から5 km以内の薬物関連入院率が約35%低下した。致死的転帰は35%減少した一方、麻薬中毒による入院は同程度増加し、致死的過量摂取が非致死的入院に転換された可能性が示された。精神・行動障害による入院は32%減少し、肝炎およびHIVについては推定が不精確だった。",
+        "practicalApplication": "示唆される実務的応用は、DCRを含む薬害軽減政策の評価と公衆衛生資源の配分である。ただし、本サイトの対象である金融市場分析や電子執行への直接的な応用はない。",
+        "methodology": "1998年から2022年のスイスの都市におけるDCRの段階的導入と個人レベルの病院記録を用い、staggered difference-in-differences estimatorで開設前後の入院結果を比較している。",
+        "limitations": "要旨からは、平行トレンド仮定、処置効果の異質性、都市間の波及効果、DCR開設と同時に生じた他の政策変更への対処方法が確認できない。また、肝炎およびHIVの推定は不精確であり、報告結果はスイスの制度・地域環境に依存する可能性がある。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "公衆衛生政策としては意味のある因果推定を報告しているが、対象分野である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場には実質的に関係しないため。",
+        "tags": [
+          "out_of_scope",
+          "public health",
+          "drug consumption rooms",
+          "difference-in-differences",
+          "Switzerland"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This is a public-health study estimating the causal effect of Drug Consumption Room (DCR) openings on drug-related hospitalizations in Switzerland using hospital records and a difference-in-differences design. It does not address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using staggered DCR openings across Swiss cities from 1998 to 2022, the estimates indicate that drug-related hospitalization rates within 5 km of a facility fell by roughly 35%. Fatal outcomes declined by 35%, while narcotics-poisoning hospitalizations increased by a comparable amount, suggesting that potentially fatal overdoses may have been converted into non-fatal hospitalizations. Hospitalizations for mental and behavioral disorders declined by 32%, while estimates for hepatitis and HIV were imprecise.",
+          "practicalApplication": "The reported practical application is the evaluation of harm-reduction policies, including DCRs, and the allocation of public-health resources. There is no direct application to the financial-market analysis or electronic execution focus of this site.",
+          "methodology": "The paper uses staggered DCR adoption across Swiss cities from 1998 to 2022 and individual-level hospital records in a staggered difference-in-differences estimator to compare hospitalization outcomes before and after openings.",
+          "limitations": "The abstract does not specify how the parallel-trends assumption, treatment-effect heterogeneity, spillovers across cities, or other policy changes coinciding with DCR openings are addressed. Estimates for hepatitis and HIV are imprecise, and the findings may depend on Switzerland's institutional and regional setting.",
+          "reason": "Although the paper reports a potentially relevant causal estimate for public-health policy, it is not materially related to electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "out_of_scope",
+            "public health",
+            "drug consumption rooms",
+            "difference-in-differences",
+            "Switzerland"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.27785": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "重い裾を持つ金融リターンの生成モデルについて、Lipschitz制約による裾の再現限界を論じ、Semi-Discrete Optimal Transport（SDOT）を用いた推定を評価する研究です。ただし、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブを直接扱っていません。",
+        "mainResult": "要旨によれば、Merton jump-diffusionの尖度を$94$から$1{,}679$まで変化させた実験で、SDOTはtail ratioを$0.85$--$0.94$に保ち、cross-seed標準偏差を$0.025$未満に抑えました。既存の学習生成器は裾を圧縮するか、分散を増加させながら裾を過大評価しました。S\\&P 500リターンと21年間のバックテストでは、CVaR最適化のmarket-neutral戦略でSDOTが最良とされ、Sharpeは$0.70$、最大ドローダウンは$-2.60\\%$でした。",
+        "practicalApplication": "ポートフォリオのtail risk推定、CVaR最適化、重い裾を持つリターン分布の生成に応用できる可能性があります。ただし、電子執行や金利商品のリスク管理への有効性は要旨からは確認できません。",
+        "methodology": "Lipschitz写像でGaussian分布を変換する生成モデルの裾の制約を理論的に説明し、Semi-Discrete Optimal Transportのpower diagramに基づく手法と、他の学習生成器を比較しています。評価対象は校正済みMerton jump-diffusion、実際のS\\&P 500リターン、および21年間のバックテストです。",
+        "limitations": "判断材料は要旨のみであり、tail ratioの定義、ベースラインの詳細、データ分割、取引コスト、統計的有意性、ハイパーパラメータ、バックテストの再現条件は不明です。Sharpeやドローダウンの優位性も、要旨の報告を超えて一般化できません。また、金利・イールドカーブ・市場マイクロストラクチャーへの検証は示されていません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "金融リスク管理に関連する手法研究ですが、対象サイトの中心である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブへの直接的な貢献がありません。",
+        "tags": [
+          "tail risk",
+          "Semi-Discrete Optimal Transport",
+          "生成モデル",
+          "CVaR",
+          "Merton jump-diffusion",
+          "portfolio risk"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies the inability of Lipschitz-constrained generative models to reproduce heavy-tailed financial returns and evaluates Semi-Discrete Optimal Transport (SDOT) as an alternative. However, it does not directly address electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "According to the abstract, across Merton jump-diffusion experiments with kurtosis ranging from $94$ to $1{,}679$, SDOT kept tail ratios between $0.85$ and $0.94$ with cross-seed standard deviations below $0.025$. Existing learned generators either compressed the tails or overstated them with increasing variance. On S\\&P 500 returns and a 21-year backtest, SDOT reportedly produced the best market-neutral strategy under CVaR optimization, with a Sharpe ratio of $0.70$ and maximum drawdown of $-2.60\\%$.",
+          "practicalApplication": "The method may be applicable to portfolio tail-risk estimation, CVaR optimization, and generation of return distributions with heavy tails. Its usefulness for electronic execution or interest-rate risk management cannot be established from the abstract.",
+          "methodology": "The paper theoretically explains tail limitations of generative models that transform Gaussian distributions through Lipschitz maps, then compares an SDOT method based on power diagrams with other learned generators. The evaluation uses a calibrated Merton jump-diffusion, empirical S\\&P 500 returns, and a 21-year backtest.",
+          "limitations": "Only the abstract is available, so the definition of the tail ratio, baseline details, data splits, transaction costs, statistical significance, hyperparameters, and backtest reproducibility are unknown. The reported Sharpe and drawdown advantages therefore cannot be generalized beyond the abstract's claims. No validation for interest rates, yield curves, or market microstructure is presented.",
+          "reason": "This is a financial risk-management methods paper, but it does not directly contribute to the site's core areas of electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "tail risk",
+            "Semi-Discrete Optimal Transport",
+            "generative models",
+            "CVaR",
+            "Merton jump-diffusion",
+            "portfolio risk"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.27786": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本論文は、複数資産の最適執行において、各取引時点までの期待累積現金支出が予算を超えない制約を導入し、資金制約下で実行可能な執行計画を分析する。",
+        "mainResult": "拡張した Almgren–Chriss 型モデルは QCQP として定式化でき、穏やかな条件下で凸最適化問題として表現できると報告している。制約が厳しくなると執行順序が sell-first に変化し、エージェントベース市場シミュレーターでは、既存手法と同程度の implementation shortfall を維持しながらピーク現金ドローダウンを大幅に削減した。",
+        "practicalApplication": "複数資産のポートフォリオ・リバランスにおいて、利用可能な現金や日中の資金制約を考慮した執行スケジュールの設計に応用できる。凸性が成立すれば、実務的な最適化システムへの組み込みも期待できる。",
+        "methodology": "古典的な Almgren–Chriss 最適執行モデルに、取引期間ごとの期待累積 cash consumption 制約を追加し、問題を QCQP および凸表現へ変換する。効果を controlled synthetic experiments と out-of-sample agent-based market simulator で評価している。",
+        "limitations": "提示された要旨では、凸性が成立する具体的条件、資産数や制約規模に対する計算性能、パラメータ推定方法、実市場データでの検証、確率的な現金支出や決済リスクの扱いが明らかでない。シミュレーション結果は実市場での改善を直接保証しない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "資金制約を明示的に扱う複数資産最適執行は、電子執行と市場マイクロストラクチャーに直接関連する。理論的な凸最適化表現とシミュレーション上の実務的効果の双方を示しており、サイトの対象分野にとって有用性が高い。",
+        "tags": [
+          "optimal execution",
+          "multi-asset execution",
+          "cash constraints",
+          "Almgren–Chriss",
+          "convex optimization",
+          "QCQP",
+          "portfolio rebalancing",
+          "agent-based simulation"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This paper introduces, for multi-asset optimal execution, constraints requiring expected cumulative cash spending up to each trading time to remain within a prescribed budget, and analyzes execution schedules that are feasible under capital constraints.",
+          "mainResult": "The extended Almgren–Chriss-type model is reported to admit a QCQP formulation and, under mild conditions, a convex optimization representation. As the constraints tighten, execution schedules shift toward sell-first trading. In an agent-based market simulator, the method substantially reduces peak cash drawdown while maintaining implementation shortfall comparable to existing strategies.",
+          "practicalApplication": "The approach can be applied to execution-schedule design for multi-asset portfolio rebalancing when available cash or intraday funding limits must be respected. If the convexity conditions hold, it may be suitable for integration into practical optimization systems.",
+          "methodology": "The authors augment the classical Almgren–Chriss optimal-execution model with intertemporal expected cumulative cash-consumption constraints, then reformulate the problem as a QCQP and as a convex program. They evaluate the effects using controlled synthetic experiments and an out-of-sample agent-based market simulator.",
+          "limitations": "The abstract does not specify the precise conditions ensuring convexity, computational performance as the number of assets or constraints grows, parameter-estimation procedures, validation with real market data, or treatment of stochastic cash spending and settlement risk. Simulation results do not directly guarantee improvements in live markets.",
+          "reason": "Explicitly modeling funding constraints in multi-asset optimal execution is directly relevant to electronic trading and market microstructure. The paper combines a convex-optimization formulation with practically motivated simulation results, making it highly relevant to the site's scope.",
+          "tags": [
+            "optimal execution",
+            "multi-asset execution",
+            "cash constraints",
+            "Almgren–Chriss",
+            "convex optimization",
+            "QCQP",
+            "portfolio rebalancing",
+            "agent-based simulation"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本稿は、Almgren–Chriss型のmulti-asset optimal executionに各時点の期待累積支出上限を導入し、売却代金で買付を賄うcash-feasibleな執行計画を設計する。著者らは線形market impactの下で問題をconvex QCQPとして表現し、合成実験とagent-based market simulatorで評価している。",
+        "mainResult": "著者らの定式化では、非負のimpact係数とrisk-aversionの下で目的関数と期待cash制約が凸二次形式となり、global optimumを凸最適化で求められる。シミュレーションでは、制約を厳しくすると売りが先行し買いが後ろ倒しになった。基準数量の6資産ペアでは、AC freeのpeak cash drawdownが57.06%～88.45%だったのに対し、提案法は0.03%～11.81%と報告され、combined ISも全ペアでAC freeをわずかに下回った。ただしTWAPやVWAPがISで優れるペアもある。",
+        "practicalApplication": "資金枠が限られるportfolio rebalancingで、各時点の期待資金使用量を明示的に管理しながら、複数銘柄の買いと売りのタイミングを共同最適化できる。既存のconvex solverを利用でき、運用会社のpre-trade planningやfunding-limit管理に適用しやすい。",
+        "methodology": "線形のpermanent impactとtemporary impactを持つ離散時間Almgren–Chrissモデルを用い、expected implementation shortfallとその分散の加重和を最小化する。銘柄別の完了制約と各期間の期待累積cash上限を課し、目的関数と制約をQCQPへ構成的に変換して凸性を証明した。2銘柄のoracle実験に加え、3銘柄から成る6通りのbuy–sellペアを対象に、別日のagent-based simulationからOLSでimpactを推定し、300回のvalidation simulationでTWAP、VWAP、cash制約なしのAC freeと比較した。",
+        "limitations": "cash制約は期待値にしか課されず、実現支出が予算を超える可能性がある。モデルは線形impact、独立な価格ショック、銘柄別impactを仮定し、cross-impactや資産間共分散、非線形impact、出来高・参加率制約を扱わない。検証は実市場約定ではなく単一のagent-based simulator、3銘柄、2銘柄ペア、限られた日付に依存する。impact推定のcalibration runも少なく、推定数量より大幅に大きい執行への外挿が含まれる。TWAP・VWAPに対するISの一貫した優位性はなく、期待制約から実現drawdownへの効果に関する一般化には追加検証が必要である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "資金制約をpathwiseな運用課題としてoptimal executionに組み込み、標準的仮定の下で解釈可能なconvex QCQPに落とした点は、electronic executionの実務と研究の双方に有用である。一方、実証は合成市場に限定され、期待cash制約は実現ベースの資金安全性を保証しないため、現時点では実運用の完成形よりも有望な理論的benchmarkとして読むべきである。",
+        "tags": [
+          "最適執行",
+          "複数資産執行",
+          "資金制約",
+          "Almgren–Chrissモデル",
+          "凸QCQP",
+          "portfolio rebalancing",
+          "implementation shortfall",
+          "agent-based simulation"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper introduces per-period limits on expected cumulative cash expenditure into Almgren–Chriss-style multi-asset optimal execution, seeking cash-feasible schedules in which sale proceeds finance purchases. Under linear market impact, the authors represent the problem as a convex QCQP and evaluate it using synthetic experiments and an agent-based market simulator.",
+          "mainResult": "In the authors’ formulation, the objective and expected-cash constraints are convex quadratic forms when impact coefficients and risk aversion are nonnegative, allowing a global optimum to be obtained by convex optimization. In simulations, tighter constraints moved sales earlier and delayed purchases. Across six asset pairs at the benchmark size, peak cash drawdown was reported at 57.06%–88.45% for unconstrained AC versus 0.03%–11.81% for the proposed method; combined IS was also slightly lower than unconstrained AC for every pair. TWAP or VWAP nevertheless achieved lower IS for some pairs.",
+          "practicalApplication": "The method can jointly optimize the timing of purchases and sales in capital-limited portfolio rebalancing while explicitly controlling expected funding usage at each period. It can use existing convex solvers and is potentially suitable for institutional pre-trade planning and funding-limit management.",
+          "methodology": "The study uses a discrete-time Almgren–Chriss model with linear permanent and temporary impact and minimizes a weighted sum of expected implementation shortfall and its variance. It imposes asset-level completion constraints and per-period expected cumulative cash limits, constructively converts the objective and constraints into a QCQP, and proves convexity. In addition to a two-asset oracle experiment, it studies six ordered buy–sell pairs formed from three assets, estimates impact by OLS from a separate day of agent-based simulations, and compares against TWAP, VWAP, and unconstrained AC over 300 validation simulations.",
+          "limitations": "The cash constraint applies only in expectation, so realized expenditure can exceed the budget. The model assumes linear impact, independent price shocks, and asset-specific impact, omitting cross-impact, inter-asset covariance, nonlinear impact, and volume or participation constraints. Validation relies on one agent-based simulator, three assets, two-asset pairs, and a limited set of dates rather than actual market executions. The impact calibration uses few runs and includes extrapolation to execution sizes far above the calibration quantities. IS does not consistently outperform TWAP or VWAP, and further evidence is needed before generalizing the realized-drawdown benefits of an expected-cash constraint.",
+          "reason": "Embedding funding limits as an intertemporal operational constraint and reducing the resulting execution problem to an interpretable convex QCQP is useful for both electronic-execution research and practice. However, because the evidence is limited to a synthetic market and expected-cash constraints do not guarantee realized funding safety, the work is best viewed as a promising theoretical benchmark rather than a production-ready solution.",
+          "tags": [
+            "optimal execution",
+            "multi-asset execution",
+            "cash constraints",
+            "Almgren–Chriss model",
+            "convex QCQP",
+            "portfolio rebalancing",
+            "implementation shortfall",
+            "agent-based simulation"
+          ]
+        }
+      }
+    },
+    "2609.28372": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "LLMを購買代理人として用いる際、価格表示や情報取得コストが商品選択に与える影響を検証した研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "8種類の商用LLMを対象に、情報取得コストと曖昧な目標指示が、単位価格計算に必要な属性の探索を省略させ、人間のヒューリスティックに似た非最適な選択を誘発すると報告しています。具体的な目標指示では診断的な探索と選択の最適性が主に維持され、脆弱性はLLM固有の欠陥よりも店舗の情報設計に依存するとされています。",
+        "practicalApplication": "オンライン小売におけるAIショッピング代理人、商品情報設計、価格表示、プロンプト設計には示唆がありますが、対象サイトの専門領域である金融市場の執行や市場構造への直接的な応用は示されていません。",
+        "methodology": "Tool-Labと呼ぶ情報ボード型のプロセス追跡手法を用い、商品属性へのアクセスをコスト付きツール呼び出しとして設定し、3社の8種類の商用LLMについて選択前の情報取得を追跡しています。ゼロコスト、コスト付きの曖昧な目標、具体的な目標を比較しています。",
+        "limitations": "抄録だけでは、商品・価格条件、実験規模、各LLMの具体的な性能差、統計的検定、実際の消費者や実運用環境との比較が確認できません。また、金融商品の取引、注文執行、流動性、価格形成に関する分析は含まれていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "AIエージェントと消費者行動に関する研究としては関連性がありますが、金融市場、電子取引、マーケット・マイクロストラクチャー、金利・イールドカーブ研究を対象とする本サイトのスコープからは外れています。",
+        "tags": [
+          "LLM",
+          "AI agents",
+          "consumer behavior",
+          "algorithmic shopping",
+          "information acquisition",
+          "pricing cues"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper examines how price presentation and information-acquisition costs affect product choices when LLMs act as purchasing agents. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Across eight commercially deployed LLMs, the study reports that acquisition costs and vague goal prompts cause agents to omit attributes needed to calculate unit prices, producing suboptimal choices resembling human heuristics. Specific goal prompts largely preserve diagnostic search and choice optimality, suggesting that the vulnerability depends more on storefront information architecture than on immutable LLM flaws.",
+          "practicalApplication": "The findings may inform AI shopping agents, online retail information design, price presentation, and prompt design, but the abstract provides no direct application to financial-market execution or market structure.",
+          "methodology": "Using an information-board process-tracing method called Tool-Lab, the authors make access to product attributes costly through tool calls and trace pre-choice information acquisition across eight commercial LLMs from three providers. They compare zero-cost conditions with costly vague-goal and specific-goal conditions.",
+          "limitations": "The abstract does not specify the products and pricing conditions, experimental scale, model-level performance differences, statistical tests, or comparisons with human consumers and real operating environments. It also contains no analysis of financial instruments, order execution, liquidity, or price formation.",
+          "reason": "Although relevant to AI agents and consumer behavior, the paper falls outside this site's scope, which focuses on financial markets, electronic trading, market microstructure, interest-rate and yield-curve research, and rates.",
+          "tags": [
+            "LLM",
+            "AI agents",
+            "consumer behavior",
+            "algorithmic shopping",
+            "information acquisition",
+            "pricing cues"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.28463": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "有限離散時間市場で、価格情報に適合しない取引フィルトレーションの下でのoptional projectionと市場完備性を分析する理論研究です。",
+        "mainResult": "固定された投影過程について、終端価格履歴で可測な請求権がすべて複製可能である条件を、同じ過程に対する全ての同値マルチンゲール測度が請求権のsigma-field上で一致することとして特徴づけています。さらに、投影が元の価格の全てのoptional martingale measureに共通な場合の含意、二項モデルで遅延が有効期間を$(T-k)^+$にする結果、明示的な複製構成を示しています。",
+        "practicalApplication": "情報制約下の市場完備性、請求権の複製可能性、フィルトレーション変更の理論的検討に利用できます。ただし、抽象的な有限モデルの結果であり、電子取引の執行、注文帳、市場流動性、金利商品の実務に直接適用する手法は示されていません。",
+        "methodology": "有限離散時間市場におけるoptional projection、同値マルチンゲール測度、請求権のsigma-fieldを用いた有限次元の理論証明を行い、三状態モデルと二項モデルの例で命題を検証しています。",
+        "limitations": "要旨からは、連続時間・無限状態・取引コスト・価格インパクト・推定誤差への拡張は確認できません。また、結果は理論的な有限モデルに依存し、実データによる検証や実装評価は報告されていません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "市場完備性と情報制約に関する明確な理論的貢献はありますが、本サイトの中心である電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、rates実務との直接的な関連が弱いため、対象外と判断します。",
+        "tags": [
+          "market completeness",
+          "restricted information",
+          "optional projection",
+          "martingale measures",
+          "discrete-time finance"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This theoretical paper studies optional projections and market completeness under a trading filtration that does not adapt to asset prices in a finite discrete-time market.",
+          "mainResult": "For a fixed projected process, it characterizes attainability of all claims measurable with respect to terminal price history by agreement of all equivalent martingale measures for that process on the claim sigma-field. It also reports implications when the projection is common to all optional martingale measures of the original prices, a delayed binomial result with effective horizon $(T-k)^+$, and explicit replication constructions.",
+          "practicalApplication": "The results may support theoretical analysis of completeness, claim replication, and filtration changes under information restrictions. However, the abstract provides no direct method for electronic execution, order books, liquidity, interest-rate products, or practical market implementation.",
+          "methodology": "The paper uses finite-dimensional theoretical proofs based on optional projections, equivalent martingale measures, and claim sigma-fields, with examples involving a three-state model and a binomial model.",
+          "limitations": "The abstract does not establish extensions to continuous time, infinite state spaces, transaction costs, price impact, or estimation error. The results rely on finite theoretical models, and no empirical validation or implementation assessment is reported.",
+          "reason": "The paper offers a clear theoretical contribution on market completeness under restricted information, but it has weak direct relevance to electronic execution, market microstructure, interest-rate models, yield curves, or rates practice, so it is classified as out of scope.",
+          "tags": [
+            "market completeness",
+            "restricted information",
+            "optional projection",
+            "martingale measures",
+            "discrete-time finance"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 737,
+      "outputTokens": 876,
+      "reasoningTokens": 94,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1613,
+      "estimatedCostUsd": 0.001199,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.26398v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 824,
+      "outputTokens": 993,
+      "reasoningTokens": 56,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1817,
+      "estimatedCostUsd": 0.001356,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.26822v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 737,
+      "outputTokens": 914,
+      "reasoningTokens": 70,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1651,
+      "estimatedCostUsd": 0.001244,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.26861v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 856,
+      "outputTokens": 961,
+      "reasoningTokens": 85,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1817,
+      "estimatedCostUsd": 0.001324,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.27024v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 778,
+      "outputTokens": 1281,
+      "reasoningTokens": 76,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2059,
+      "estimatedCostUsd": 0.001693,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.27107v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 923,
+      "outputTokens": 1311,
+      "reasoningTokens": 61,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2234,
+      "estimatedCostUsd": 0.001758,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.27113v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 920,
+      "outputTokens": 1050,
+      "reasoningTokens": 90,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1970,
+      "estimatedCostUsd": 0.001444,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.27138v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 754,
+      "outputTokens": 849,
+      "reasoningTokens": 33,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1603,
+      "estimatedCostUsd": 0.00117,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.27404v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 884,
+      "outputTokens": 950,
+      "reasoningTokens": 62,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1834,
+      "estimatedCostUsd": 0.001317,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.27636v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 896,
+      "outputTokens": 1065,
+      "reasoningTokens": 48,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1961,
+      "estimatedCostUsd": 0.001457,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.27686v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 940,
+      "outputTokens": 1459,
+      "reasoningTokens": 121,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2399,
+      "estimatedCostUsd": 0.001939,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.27727v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 1053,
+      "outputTokens": 1833,
+      "reasoningTokens": 463,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 1050,
+      "totalTokens": 2886,
+      "estimatedCostUsd": 0.041922,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 55,
+      "paperIds": [
+        "2609.27727v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 773,
+      "outputTokens": 1041,
+      "reasoningTokens": 75,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1814,
+      "estimatedCostUsd": 0.001404,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.27732v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 1004,
+      "outputTokens": 1213,
+      "reasoningTokens": 97,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2217,
+      "estimatedCostUsd": 0.001656,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.27785v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 901,
+      "outputTokens": 1013,
+      "reasoningTokens": 48,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1914,
+      "estimatedCostUsd": 0.001396,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.27786v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 17174,
+      "outputTokens": 1903,
+      "reasoningTokens": 352,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 17171,
+      "totalTokens": 19077,
+      "estimatedCostUsd": 0.123927,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 8,
+      "paperIds": [
+        "2609.27786v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 793,
+      "outputTokens": 967,
+      "reasoningTokens": 65,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1760,
+      "estimatedCostUsd": 0.001319,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28372v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 801,
+      "outputTokens": 974,
+      "reasoningTokens": 126,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1775,
+      "estimatedCostUsd": 0.001329,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28463v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

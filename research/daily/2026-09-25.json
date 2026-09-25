@@ -1,0 +1,461 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-09-25",
+  "generatedAt": "2026-09-25T12:06:19Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-09-25 was confirmed with 2 relevant paper(s).",
+  "expectedBatchDate": "2026-09-25",
+  "observedBatchDate": "2026-09-25",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2609.28863v1",
+        "title": "Affine Pricing Models from Group Quantization and Holonomy",
+        "authors": [
+          "Santiago Garcia"
+        ],
+        "submittedDate": "2026-09-24",
+        "updatedDate": "2026-09-25",
+        "categories": [
+          "q-fin.MF"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "本稿は、連続経路・時間同次の affine pricing modelについて、座標空間の pricing operator と generalized Riccati equations による exponential-affine transform を同一の幾何学的構造から導く Affine Holonomy Group Quantization（AHGQ）を提案する。CIR、Vasicek、Heston、Black–Scholes などを共通形式で扱う理論研究である。",
+        "mainResult": "著者は affine pricing symbol $C_A(x,p)=F(p)+x^\\top R(p)$ を、有限次元 symplectic transport を生成する二次部分と、thin-path groupoid 上の multiplicative holonomy を与える補完部分に分解する。この両者から affine Poincaré–Cartan form を構成し、momentum reduction が generalized Riccati flow と scalar amplitude を、coordinate representation が標準的な affine pricing operator を再現すると示している。これは新しい価格公式ではなく、既知の二つの表現に共通の幾何学的起源を与える構造的結果である。",
+        "practicalApplication": "CIR・Vasicek の金利モデルや Heston 系モデルで、transform pricing と PDE pricing の整合性を統一的に整理する理論基盤として利用できる。affine killing を含む信用リスクにも適用可能とされるが、実務上の計算速度、較正安定性、ヘッジ性能の改善は本稿では実証されていない。",
+        "methodology": "一般の affine drift、affine covariance、affine discounting を pricing symbol にまとめ、homogeneous quadratic sector から symplectic matrix flow、半直積 Lie group、中央拡大を構成する。残余項は thin-path holonomy として表し、両者を affine Poincaré–Cartan form に統合する。その characteristic field を momentum polarization と coordinate polarization で還元し、前者から Riccati characteristics、後者から二階 pricing generator を導く。さらに Black–Scholes、Vasicek、CIR、Heston、two-factor Heston への代入例と CIR の詳細な特殊化を示す。",
+        "limitations": "対象は連続経路かつ時間同次の affine diffusion に限定され、jump-affine、Lévy、時間依存係数、matrix-valued state は未処理である。新しい価格公式や calibration algorithm は提示されず、本稿内での数値実験、実データ検証、計算量比較もない。coordinate operator は特定の ordering により選ばれており、polarization の保存だけでは一意に決まらない。逆冪型 default intensity のような非 affine 項は有限次元 Riccati closure を破り、拡張は将来課題である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "金利・確率的ボラティリティを含む affine model の PDE 表現と transform 表現を一つの幾何学的枠組みで結び付ける点は、数理ファイナンス研究者に有用である。一方、直接的な執行・market microstructure への関連はなく、実務的性能向上も示されていないため、幾何学的量子化や affine transform に関心のある専門読者向けとして推奨する。",
+        "tags": [
+          "affine pricing models",
+          "generalized Riccati equations",
+          "group quantization",
+          "holonomy",
+          "symplectic geometry",
+          "CIR model",
+          "Vasicek model",
+          "Heston model",
+          "pricing PDE",
+          "interest-rate models"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper proposes Affine Holonomy Group Quantization (AHGQ), a framework deriving both the coordinate-space pricing operator and the exponential-affine transform governed by generalized Riccati equations from one geometric structure for continuous-path, time-homogeneous affine pricing models. It is a theoretical treatment encompassing CIR, Vasicek, Heston, and Black–Scholes models.",
+          "mainResult": "The author decomposes the affine pricing symbol $C_A(x,p)=F(p)+x^\\top R(p)$ into a quadratic sector generating finite-dimensional symplectic transport and a complementary sector represented by multiplicative holonomy on a thin-path groupoid. Combining them yields an affine Poincaré–Cartan form whose momentum reduction reproduces the generalized Riccati flow and scalar amplitude, while its coordinate representation recovers the standard affine pricing operator. The result is structural rather than a new pricing formula: it supplies a common geometric origin for two established representations.",
+          "practicalApplication": "The framework can provide a unified theoretical basis for reconciling transform pricing and PDE pricing in interest-rate models such as CIR and Vasicek and in Heston-type models. The paper also states that affine killing can cover credit-risk applications, but it does not demonstrate improvements in computational speed, calibration stability, or hedging performance.",
+          "methodology": "The paper collects affine drift, affine covariance, and affine discounting in a pricing symbol, then constructs a symplectic matrix flow, semidirect-product Lie group, and central extension from its homogeneous quadratic sector. It represents the remainder through thin-path holonomy and combines both components in an affine Poincaré–Cartan form. Reductions of its characteristic field under momentum and coordinate polarizations yield Riccati characteristics and the second-order pricing generator, respectively. The general derivation is illustrated with Black–Scholes, Vasicek, CIR, Heston, and two-factor Heston models, including a more detailed CIR specialization.",
+          "limitations": "The analysis is restricted to continuous-path, time-homogeneous affine diffusions; jump-affine and Lévy models, time-dependent coefficients, and matrix-valued states are not developed. It supplies neither new pricing formulas nor a calibration algorithm, and contains no numerical experiments, empirical validation, or computational-complexity comparison. The coordinate operator is selected through a particular ordering and is not uniquely determined by preservation of the polarization alone. Non-affine terms such as inverse-power default intensity break finite-dimensional Riccati closure and are left for future work.",
+          "reason": "Connecting the PDE and transform representations of affine interest-rate and stochastic-volatility models within one geometric framework is useful for mathematical-finance researchers. The paper has no direct electronic-execution or market-microstructure application and demonstrates no practical performance gains, so it is recommended primarily for specialists interested in geometric quantization and affine transforms.",
+          "tags": [
+            "affine pricing models",
+            "generalized Riccati equations",
+            "group quantization",
+            "holonomy",
+            "symplectic geometry",
+            "CIR model",
+            "Vasicek model",
+            "Heston model",
+            "pricing PDE",
+            "interest-rate models"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 805,
+          "outputTokens": 1192,
+          "reasoningTokens": 101,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1997,
+          "estimatedCostUsd": 0.001591,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.28863v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 20247,
+          "outputTokens": 1690,
+          "reasoningTokens": 219,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 20244,
+          "totalTokens": 21937,
+          "estimatedCostUsd": 0.135032,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 28,
+          "paperIds": [
+            "2609.28863v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.29108v1",
+        "title": "Functional Architecture of European Electricity Trading Markets: Requirements for AI Supported Trading Systems under Regulatory Constraints",
+        "authors": [
+          "Walter Kurz",
+          "Wojtek Stricker"
+        ],
+        "submittedDate": "2026-09-24",
+        "updatedDate": "2026-09-25",
+        "categories": [
+          "cs.AI",
+          "cs.SY",
+          "eess.SY",
+          "q-fin.GN",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "EU電力市場をforward、day-ahead、intraday、balancingが連結した制約付きシステムとして捉え、AI支援取引の機能アーキテクチャを提示する。市場状態、残余エクスポージャー、越境容量、venue権限、規制適合性を統合し、条件不成立時には注文を出さないfail-closed設計を提案している。",
+        "mainResult": "主な成果は、状態ベクトル、ゾーン別残余エクスポージャー、CVaRを含む制約付き目的関数、注文単位のpermission gate、不確実性較正、model drift時の安全方策、監査記録を一つの設計にまとめたことである。ただし、性能向上や規制違反削減を実データで実証した結果ではなく、著者らが提案する仕様である。",
+        "practicalApplication": "複数のNEMO、商品、gate closure、参加資格、REMIT等の条件をpre-tradeで検査する取引基盤の要件定義に利用できる。特に、day-aheadからintraday、balancingへ残余ポジションを引き継ぐ運用や、蓄電池のmulti-horizon dispatch、異常時の自動停止、意思決定から決済までのaudit trail設計に適用可能である。",
+        "methodology": "EU規則、ACER・ENTSO-E資料、取引所rulebook、既存の予測・最適化研究を整理するdesign-orientedな方法を採用する。市場参加者とvenueの構造をマッピングしたうえで、状態表現、残余数量、取引費用・imbalance risk・規制コストを含む最適化、実行可能性判定、conformal prediction型の予測区間、監督・記録・stress testingの数理仕様を構成している。",
+        "limitations": "同期されたmulti-venue event dataによるbacktest、out-of-sample評価、transaction cost・latency・imbalance penaltyを含む実証がない。各国・各venueの実装差、データフィード障害、改訂頻度、法規制の変化を十分にはモデル化していない。蓄電池収益や価格spreadに関する例も体系的なデータ分析ではなく、提案アーキテクチャの経済価値や各control gateの限界効果は未確認である。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "電子執行、電力市場microstructure、リスク管理、compliance-by-designを横断する実装チェックリストとして有用であり、単一市場の価格予測に偏らない点は評価できる。一方で、新しい取引アルゴリズムや定量的performance evidenceを提供する論文ではないため、研究成果というより設計・ガバナンスの参照枠として読むのが適切である。",
+        "tags": [
+          "EU電力市場",
+          "電子取引",
+          "市場結合",
+          "pre-trade compliance",
+          "AIガバナンス",
+          "NEMO",
+          "balancing market",
+          "蓄電池最適化",
+          "CVaR",
+          "fail-closed制御"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper treats the EU electricity market as a constrained system linking forward, day-ahead, intraday, and balancing horizons, and proposes a functional architecture for AI-supported trading. It integrates market state, residual exposure, cross-zonal capacity, venue permissions, and regulatory compliance, with a fail-closed design that releases no order when required conditions are not met.",
+          "mainResult": "The main contribution is a unified design combining a state vector, zonal residual-exposure accounting, a constrained objective including CVaR, an order-level permission gate, uncertainty calibration, a safe policy for model drift, and audit records. These are proposed specifications rather than empirically demonstrated results showing better performance or fewer compliance violations.",
+          "practicalApplication": "The framework can support requirements engineering for trading platforms that check multiple NEMOs, products, gate closures, participant permissions, and conditions such as REMIT before execution. Potential applications include carrying residual positions from day-ahead into intraday and balancing operations, multi-horizon battery dispatch, automatic suspension under abnormal conditions, and audit trails spanning decisions through settlement.",
+          "methodology": "The paper uses a design-oriented synthesis of EU regulations, ACER and ENTSO-E materials, exchange rulebooks, and prior forecasting and optimization research. After mapping market participants and venue structure, it constructs mathematical specifications for state representation, residual quantities, optimization over trading cost, imbalance risk and regulatory cost, execution-feasibility checks, conformal-prediction-style intervals, supervision, recordkeeping, and stress testing.",
+          "limitations": "There is no backtest on synchronized multi-venue event data, out-of-sample evaluation, or empirical treatment incorporating transaction costs, latency, and imbalance penalties. National and venue-level implementation differences, data-feed failures, revision-frequency asymmetry, and evolving regulation are not modeled in sufficient detail. The battery-revenue and price-spread examples are not based on a systematic data analysis, and neither the architecture’s economic value nor the marginal effect of each control gate is established.",
+          "reason": "The paper is useful as an implementation checklist spanning electronic execution, electricity-market microstructure, risk management, and compliance by design, especially because it goes beyond isolated price forecasting. However, it offers neither a new trading algorithm nor quantitative performance evidence, so it is best read as a design and governance reference framework rather than a validated trading study.",
+          "tags": [
+            "EU electricity market",
+            "electronic trading",
+            "market coupling",
+            "pre-trade compliance",
+            "AI governance",
+            "NEMO",
+            "balancing market",
+            "battery optimization",
+            "CVaR",
+            "fail-closed control"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 833,
+          "outputTokens": 1142,
+          "reasoningTokens": 71,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1975,
+          "estimatedCostUsd": 0.001537,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.29108v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 13196,
+          "outputTokens": 1579,
+          "reasoningTokens": 292,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 13193,
+          "totalTokens": 14775,
+          "estimatedCostUsd": 0.097557,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 12,
+          "paperIds": [
+            "2609.29108v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 1021,
+      "outputTokens": 929,
+      "reasoningTokens": 47,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1950,
+      "estimatedCostUsd": 0.001319,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28504v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 853,
+      "outputTokens": 921,
+      "reasoningTokens": 50,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1774,
+      "estimatedCostUsd": 0.001276,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28549v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 909,
+      "outputTokens": 808,
+      "reasoningTokens": 37,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1717,
+      "estimatedCostUsd": 0.001151,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28675v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 924,
+      "outputTokens": 1055,
+      "reasoningTokens": 40,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1979,
+      "estimatedCostUsd": 0.001451,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28681v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 805,
+      "outputTokens": 1192,
+      "reasoningTokens": 101,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1997,
+      "estimatedCostUsd": 0.001591,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28863v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 20247,
+      "outputTokens": 1690,
+      "reasoningTokens": 219,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 20244,
+      "totalTokens": 21937,
+      "estimatedCostUsd": 0.135032,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 28,
+      "paperIds": [
+        "2609.28863v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 959,
+      "outputTokens": 1116,
+      "reasoningTokens": 39,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2075,
+      "estimatedCostUsd": 0.001531,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28947v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 903,
+      "outputTokens": 806,
+      "reasoningTokens": 39,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1709,
+      "estimatedCostUsd": 0.001148,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.29080v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 833,
+      "outputTokens": 1142,
+      "reasoningTokens": 71,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1975,
+      "estimatedCostUsd": 0.001537,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.29108v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 13196,
+      "outputTokens": 1579,
+      "reasoningTokens": 292,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 13193,
+      "totalTokens": 14775,
+      "estimatedCostUsd": 0.097557,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 12,
+      "paperIds": [
+        "2609.29108v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 855,
+      "outputTokens": 1115,
+      "reasoningTokens": 57,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1970,
+      "estimatedCostUsd": 0.001509,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.29700v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 812,
+      "outputTokens": 1036,
+      "reasoningTokens": 60,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1848,
+      "estimatedCostUsd": 0.001406,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.29905v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

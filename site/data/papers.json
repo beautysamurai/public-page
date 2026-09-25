@@ -2,6 +2,39 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-09-25-daily-openai-01",
+      "date": "2026-09-25",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.28863v1",
+          "title": "Affine Pricing Models from Group Quantization and Holonomy",
+          "authors": [
+            "Santiago Garcia"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.29108v1",
+          "title": "Functional Architecture of European Electricity Trading Markets: Requirements for AI Supported Trading Systems under Regulatory Constraints",
+          "authors": [
+            "Walter Kurz",
+            "Wojtek Stricker"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-09-24-daily-openai-01",
       "date": "2026-09-24",
       "kind": "daily",

@@ -3737,6 +3737,76 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-09-25-daily-openai-01",
+      "editionDate": "2026-09-25",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-25T12:06:19Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-25",
+      "observedBatchDate": "2026-09-25",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月25日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 10 | 8,874 | 10,120 (541) | 0.0139 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 2 | 33,443 | 3,269 (511) | 0.2326 | PDF全文・28ページ / PDF全文・12ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Affine Pricing Models from Group Quantization and Holonomy\n\n**[arXiv:2609.28863v1](https://arxiv.org/abs/2609.28863v1) — Santiago Garcia**\n\n### 概要\n\n本稿は、連続経路・時間同次の affine pricing modelについて、座標空間の pricing operator と generalized Riccati equations による exponential-affine transform を同一の幾何学的構造から導く Affine Holonomy Group Quantization（AHGQ）を提案する。CIR、Vasicek、Heston、Black–Scholes などを共通形式で扱う理論研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | affine pricing models / generalized Riccati equations / group quantization / holonomy / symplectic geometry / CIR model / Vasicek model / Heston model / pricing PDE / interest-rate models |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 金利・確率的ボラティリティを含む affine model の PDE 表現と transform 表現を一つの幾何学的枠組みで結び付ける点は、数理ファイナンス研究者に有用である。一方、直接的な執行・market microstructure への関連はなく、実務的性能向上も示されていないため、幾何学的量子化や affine transform に関心のある専門読者向けとして推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 805 | 1,192 (101) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 20,247 | 1,690 (219) | 0.1350 | PDF全文・28ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者は affine pricing symbol $C_A(x,p)=F(p)+x^\\top R(p)$ を、有限次元 symplectic transport を生成する二次部分と、thin-path groupoid 上の multiplicative holonomy を与える補完部分に分解する。この両者から affine Poincaré–Cartan form を構成し、momentum reduction が generalized Riccati flow と scalar amplitude を、coordinate representation が標準的な affine pricing operator を再現すると示している。これは新しい価格公式ではなく、既知の二つの表現に共通の幾何学的起源を与える構造的結果である。\n\n**手法:** 一般の affine drift、affine covariance、affine discounting を pricing symbol にまとめ、homogeneous quadratic sector から symplectic matrix flow、半直積 Lie group、中央拡大を構成する。残余項は thin-path holonomy として表し、両者を affine Poincaré–Cartan form に統合する。その characteristic field を momentum polarization と coordinate polarization で還元し、前者から Riccati characteristics、後者から二階 pricing generator を導く。さらに Black–Scholes、Vasicek、CIR、Heston、two-factor Heston への代入例と CIR の詳細な特殊化を示す。\n\n**実務への応用:** CIR・Vasicek の金利モデルや Heston 系モデルで、transform pricing と PDE pricing の整合性を統一的に整理する理論基盤として利用できる。affine killing を含む信用リスクにも適用可能とされるが、実務上の計算速度、較正安定性、ヘッジ性能の改善は本稿では実証されていない。\n\n**限界・注意点:** 対象は連続経路かつ時間同次の affine diffusion に限定され、jump-affine、Lévy、時間依存係数、matrix-valued state は未処理である。新しい価格公式や calibration algorithm は提示されず、本稿内での数値実験、実データ検証、計算量比較もない。coordinate operator は特定の ordering により選ばれており、polarization の保存だけでは一意に決まらない。逆冪型 default intensity のような非 affine 項は有限次元 Riccati closure を破り、拡張は将来課題である。\n\n## 2. Functional Architecture of European Electricity Trading Markets: Requirements for AI Supported Trading Systems under Regulatory Constraints\n\n**[arXiv:2609.29108v1](https://arxiv.org/abs/2609.29108v1) — Walter Kurz, Wojtek Stricker**\n\n### 概要\n\nEU電力市場をforward、day-ahead、intraday、balancingが連結した制約付きシステムとして捉え、AI支援取引の機能アーキテクチャを提示する。市場状態、残余エクスポージャー、越境容量、venue権限、規制適合性を統合し、条件不成立時には注文を出さないfail-closed設計を提案している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | EU電力市場 / 電子取引 / 市場結合 / pre-trade compliance / AIガバナンス / NEMO / balancing market / 蓄電池最適化 / CVaR / fail-closed制御 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 電子執行、電力市場microstructure、リスク管理、compliance-by-designを横断する実装チェックリストとして有用であり、単一市場の価格予測に偏らない点は評価できる。一方で、新しい取引アルゴリズムや定量的performance evidenceを提供する論文ではないため、研究成果というより設計・ガバナンスの参照枠として読むのが適切である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 833 | 1,142 (71) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 13,196 | 1,579 (292) | 0.0976 | PDF全文・12ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 主な成果は、状態ベクトル、ゾーン別残余エクスポージャー、CVaRを含む制約付き目的関数、注文単位のpermission gate、不確実性較正、model drift時の安全方策、監査記録を一つの設計にまとめたことである。ただし、性能向上や規制違反削減を実データで実証した結果ではなく、著者らが提案する仕様である。\n\n**手法:** EU規則、ACER・ENTSO-E資料、取引所rulebook、既存の予測・最適化研究を整理するdesign-orientedな方法を採用する。市場参加者とvenueの構造をマッピングしたうえで、状態表現、残余数量、取引費用・imbalance risk・規制コストを含む最適化、実行可能性判定、conformal prediction型の予測区間、監督・記録・stress testingの数理仕様を構成している。\n\n**実務への応用:** 複数のNEMO、商品、gate closure、参加資格、REMIT等の条件をpre-tradeで検査する取引基盤の要件定義に利用できる。特に、day-aheadからintraday、balancingへ残余ポジションを引き継ぐ運用や、蓄電池のmulti-horizon dispatch、異常時の自動停止、意思決定から決済までのaudit trail設計に適用可能である。\n\n**限界・注意点:** 同期されたmulti-venue event dataによるbacktest、out-of-sample評価、transaction cost・latency・imbalance penaltyを含む実証がない。各国・各venueの実装差、データフィード障害、改訂頻度、法規制の変化を十分にはモデル化していない。蓄電池収益や価格spreadに関する例も体系的なデータ分析ではなく、提案アーキテクチャの経済価値や各control gateの限界効果は未確認である。",
+      "papers": [
+        {
+          "arxivId": "2609.28863v1",
+          "title": "Affine Pricing Models from Group Quantization and Holonomy",
+          "authors": [
+            "Santiago Garcia"
+          ],
+          "submittedDate": "2026-09-24",
+          "updatedDate": "2026-09-25",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.28863v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.28863v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "本稿は、連続経路・時間同次の affine pricing modelについて、座標空間の pricing operator と generalized Riccati equations による exponential-affine transform を同一の幾何学的構造から導く Affine Holonomy Group Quantization（AHGQ）を提案する。CIR、Vasicek、Heston、Black–Scholes などを共通形式で扱う理論研究である。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 805 / 出力 1,192（うち推論 101） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 20,247 / 出力 1,690（うち推論 219） · PDF 28 pages · 推定 $0.1350",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.29108v1",
+          "title": "Functional Architecture of European Electricity Trading Markets: Requirements for AI Supported Trading Systems under Regulatory Constraints",
+          "authors": [
+            "Walter Kurz",
+            "Wojtek Stricker"
+          ],
+          "submittedDate": "2026-09-24",
+          "updatedDate": "2026-09-25",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.29108v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.29108v1",
+          "schedulerRank": 2,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "EU電力市場をforward、day-ahead、intraday、balancingが連結した制約付きシステムとして捉え、AI支援取引の機能アーキテクチャを提示する。市場状態、残余エクスポージャー、越境容量、venue権限、規制適合性を統合し、条件不成立時には注文を出さないfail-closed設計を提案している。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 833 / 出力 1,142（うち推論 71） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 13,196 / 出力 1,579（うち推論 292） · PDF 12 pages · 推定 $0.0976",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

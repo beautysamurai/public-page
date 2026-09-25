@@ -1,0 +1,743 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-09-25",
+  "fingerprint": "4d2dbeee7b0a81e686959f5684a773f8b7243ba8c6e4d78aaee92d817d4a71ca",
+  "candidateFingerprints": {
+    "2609.28504": "31947f9505c60764ed0ceb62bc6f6692966c134fd2cdbe0e902c28134e7d2747",
+    "2609.28549": "f248616091e53d63cf98790e0d3f34fd071e939540ff0e08268d0ac83bb3f0e5",
+    "2609.28675": "046fd29038b02416544c81f922d74bd0e9223297b971b1e15927c2877c3dc55a",
+    "2609.28681": "3411ad0e10fb60d3296cacbfe7bf63ecffbe7d49215b2d686e5d599d292e0894",
+    "2609.28863": "9a862ac2a06e49b1a59167592db2a7ea65b0569af8c5a74f5b0e53c9d9e118d1",
+    "2609.28947": "0585c1a17bf9990b645c4bcf6fd2734fafaa2312cea26deb813eb301ae9465ab",
+    "2609.29080": "ef225f69b7d0d094d8acba8d5a6956c9be1aaff196c6f053e0e2830bbb3b9e3a",
+    "2609.29108": "aa8b42492ba7774daf09051e4486ee96f51f9099d91ec6cf11903531c5d07327",
+    "2609.29700": "bda7eab00cc10248bb75fb63f7997004ba486bf7c5d7e0fc2443aa4feb56f654",
+    "2609.29905": "3e19569da0119b72574fa30d963d0418467d0dbc908da69d548cea4003d8d6ee"
+  },
+  "results": {
+    "2609.28504": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "科学研究全般におけるAI利用、補完性、生産性効果、研究プロセスの変化を調査した概観研究であり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていない。",
+        "mainResult": "15百万件のGemini利用、2,600超の専門AIモデル、600人超の科学者調査を用い、科学者のAI利用は広範で、LLMと専門モデルは補完的に使われると報告している。回答者は週約7時間の節約と、その時間の主に研究への再投資を報告し、検証待ち仮説や成果物検証の需要が増えたとしている。",
+        "practicalApplication": "科学研究におけるAI導入、タスク分担、検証体制、ボトルネック管理の検討には参考になる。ただし、対象分野の取引執行や金利市場運用への直接的な示唆は限定的である。",
+        "methodology": "Geminiインタラクション約1,500万件、分野横断の専門AIモデル2,600件超のインベントリ、科学者600人超の調査を、新しい科学タスク分類に対応付けて分析している。",
+        "limitations": "抽象では、サンプルの代表性、因果識別、Gemini利用の測定範囲、自己申告による生産性推定、分野別の異質性、専門モデルの引用指標の詳細が示されていない。したがって、報告された関連や認識を実際の因果的生産性効果と同一視できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "AIと科学政策に関する一般研究としては有用な可能性があるが、対象サイトの主要領域である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場への物質的な関連性がないため。",
+        "tags": [
+          "AI in science",
+          "scientific productivity",
+          "large language models",
+          "specialized AI models",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This is a broad study of AI use in science, complementarity, productivity effects, and changes in the research process; it does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using 15 million Gemini interactions, more than 2,600 specialized AI models, and a survey of over 600 scientists, the paper reports broad AI adoption among scientists and complementary use of LLMs and specialized models. Survey respondents report saving nearly seven hours per week, with most of that time reinvested in research, while untested hypotheses and demand for output verification increase.",
+          "practicalApplication": "The findings may inform AI adoption, task allocation, verification frameworks, and bottleneck management in scientific research. However, they provide limited direct guidance for execution or rates-market operations in the target domains.",
+          "methodology": "The study analyzes approximately 15 million Gemini interactions, an inventory of more than 2,600 cross-disciplinary specialized AI models, and a survey of over 600 scientists, mapping these sources to a new taxonomy of scientific tasks.",
+          "limitations": "The abstract does not provide details on sample representativeness, causal identification, the coverage of Gemini usage, self-reported productivity estimates, cross-disciplinary heterogeneity, or the construction of citation measures for specialized models. Reported associations and perceptions therefore should not be treated as established causal productivity effects.",
+          "reason": "Although potentially useful as a general study of AI and science policy, it is not materially relevant to the site's core areas of electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "AI in science",
+            "scientific productivity",
+            "large language models",
+            "specialized AI models",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.28549": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "取締役会のジェンダー多様性とESG評価の関係を、106研究・533推定値に基づいてメタ分析した研究です。電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "公表研究上の平均効果は、取締役会の女性比率が1パーセントポイント上昇するとESG評価が約0.28ポイント上がるというものでした。しかし、出版バイアスを補正すると効果はおよそ0.08から0.17ポイントに低下し、研究設計も考慮したベストプラクティス推定値は世界の大半で約0.12、東南アジアでは約-0.11でした。",
+        "practicalApplication": "企業の取締役会構成やESG政策の評価には示唆がありますが、対象サイトの量的金融・金利研究の実務には直接的な応用はありません。",
+        "methodology": "BloombergまたはLSEGのESG評価を用いた106研究から533推定値を集約し、線形・非線形の複数手法で出版バイアスを補正したメタ分析です。研究間の差を地理、推定手法、評価提供者、統制変数などから比較しています。",
+        "limitations": "提供された抄録だけでは、各研究の選定基準、効果量の定義、異質性の統計的処理、因果識別の妥当性、地域別サンプル構成の詳細を確認できません。また、結果はESG評価と対象研究に依存し、真の因果効果を確立するものではありません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "ESG・コーポレートガバナンス分野のメタ分析としては関連性がありますが、電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を主題とする対象範囲には該当しません。",
+        "tags": [
+          "ESG",
+          "corporate governance",
+          "meta-analysis",
+          "publication bias",
+          "gender diversity"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper presents a meta-analysis of the relationship between board gender diversity and ESG ratings, based on 533 estimates from 106 studies. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "The average reported effect was an increase of about 0.28 ESG points for a one-percentage-point increase in the share of women on corporate boards. After correcting for publication bias, the effect fell to roughly 0.08–0.17 points; a best-practice estimate was about 0.12 for most of the world and about -0.11 for Southeast Asia.",
+          "practicalApplication": "The findings may inform assessments of corporate board composition and ESG policy, but they have no direct application to the site's focus on quantitative finance, electronic execution, or interest-rate research.",
+          "methodology": "The study aggregates 533 estimates from 106 studies using Bloomberg or LSEG ESG ratings and applies multiple linear and non-linear methods to correct for publication bias. It compares systematic differences across studies by geography, estimation method, rating provider, and control variables.",
+          "limitations": "The abstract does not provide enough detail to assess study-selection criteria, effect-size definitions, statistical treatment of heterogeneity, causal identification, or regional sample composition. The results also depend on ESG ratings and the underlying studies and do not establish a true causal effect.",
+          "reason": "Although relevant to ESG and corporate governance, the paper does not materially concern electronic execution, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "ESG",
+            "corporate governance",
+            "meta-analysis",
+            "publication bias",
+            "gender diversity"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.28675": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "組織間の社会的模倣と探索能力を扱う agent-based model の研究であり、電子取引、market microstructure、金利モデル、イールドカーブ、または rates には実質的に焦点を当てていません。",
+        "mainResult": "抽象によれば、collective sourcing だけでは性能は向上せず、候補が組織の状況に適合するかを評価する informed adoption が重要です。相互依存性や問題規模が大きい場合、社会的に蒸留された候補を評価する仕組みが、直接観察した組織を模倣する方法を上回り得ると報告されています。",
+        "practicalApplication": "企業が外部知識を探索・共有する仕組みや、候補戦略の評価能力を設計する際の概念的示唆はありますが、金融市場の執行、価格形成、金利リスク管理への直接的な応用は抽象から確認できません。",
+        "methodology": "組織探索を表現する agent-based model で、候補の source と adoption mode を区別し、個別組織または collective からの候補、および blind または informed な採用を比較しています。",
+        "limitations": "提示された抽象だけでは、モデルの具体的な仮定、パラメータ、校正、データによる検証、頑健性、および実際の組織や市場への外的妥当性を評価できません。報告結果は金融領域に特化した実証結果ではありません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "組織論と computational social science に関する研究であり、対象サイトの主要スコープである electronic execution、market microstructure、interest-rate models、yield curves、rates との関連が限定的です。",
+        "tags": [
+          "organizational search",
+          "social imitation",
+          "agent-based model",
+          "computational social science"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines social imitation across organizations and organizational search using an agent-based model; it does not materially focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "mainResult": "According to the abstract, collective sourcing alone does not improve performance; informed adoption that evaluates whether a candidate fits the organization's situation is important. As interdependence and problem size increase, evaluating socially distilled candidates can outperform imitation of directly observed organizations or peers.",
+          "practicalApplication": "The study offers conceptual implications for designing systems through which firms search for and share external knowledge, as well as for developing the ability to evaluate candidate strategies. However, no direct application to financial execution, price formation, or interest-rate risk management is established in the abstract.",
+          "methodology": "The authors use an agent-based model of organizational search, distinguishing the source of a candidate from its adoption mode, and compare candidates sourced from individual organizations or a collective under blind or informed adoption.",
+          "limitations": "The abstract does not provide enough information to assess the model's specific assumptions, parameters, calibration, empirical validation, robustness, or external validity for real organizations or markets. The reported results are not finance-specific empirical findings.",
+          "reason": "This is a study in organization theory and computational social science, with limited relevance to the site's core scope of electronic execution, market microstructure, interest-rate models, yield curves, and rates.",
+          "tags": [
+            "organizational search",
+            "social imitation",
+            "agent-based model",
+            "computational social science"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.28681": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "生成AIや組織間の集合学習が、現在の成果と将来の探索可能性に与える影響を、相互依存するランドスケープ上で探索する企業モデルにより分析した研究である。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場を直接扱っていない。",
+        "mainResult": "抽象によれば、リーダー企業の単純な模倣は多様性を急速に消費する一方、再利用可能な実践知のレパートリーと地域固有の判断を組み合わせると、集団学習が将来の生成能力を維持できる。環境変化後には、蓄積知識の価値が低下して局所探索が再開されるため、均質化して疲弊した産業が相対的に有利になる場合があるが、多様な産業は全体として高い成果を保つと報告されている。",
+        "practicalApplication": "生成AIの利用、ベストプラクティス共有、研究分野の収束を設計する際に、短期的な回答性能だけでなく、知識源の多様性と現場での適応的判断を管理するという示唆を与える。ただし、対象分野への直接的な実装手法や金融市場での検証は示されていない。",
+        "methodology": "相互依存するランドスケープ上で探索する企業のモデルを構築し、先行構成に共通するパターンから集合的レパートリーを抽出する仕組みと、企業ごとに異なるローカル評価を組み込んで、模倣、抽象化、局所判断、環境撹乱の影響を分析している。",
+        "limitations": "評価は抽象的なモデルに基づくため、抽象に記載された範囲では、実データ、金融市場データ、生成AIの実運用データによる検証は確認できない。企業行動、環境変化、実践知の抽象化をどのようにパラメータ化したかも不明であり、結果の外的妥当性には限界がある。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "組織学習と生成AIに関する研究としては関連性があるが、本サイトの対象である電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場の研究には該当しないため。",
+        "tags": [
+          "生成AI",
+          "集合学習",
+          "組織の多様性",
+          "探索モデル",
+          "ベストプラクティス",
+          "対象外"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies how collective learning across firms, including learning associated with generative AI, affects current performance and future searchability using a model of firms searching interdependent landscapes. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "According to the abstract, simple imitation of leading firms rapidly consumes diversity, whereas combining reusable repertoires of practices with situated judgment can preserve collective generativity. After environmental change, accumulated knowledge loses value and local search reopens, which can relatively benefit homogeneous, exhausted industries, although diverse industries continue to perform better overall.",
+          "practicalApplication": "The study suggests that organizations using generative AI, best-practice communities, or convergent research programs should manage not only short-term answer quality but also the diversity of knowledge sources and adaptive local judgment. However, it provides no direct implementation method or validation in financial markets.",
+          "methodology": "The authors construct a model of firms searching interdependent landscapes. The model extracts a collective repertoire from patterns shared by leading configurations and incorporates heterogeneous local evaluation by firms to analyze imitation, abstraction, situated judgment, and environmental disruption.",
+          "limitations": "The analysis is based on an abstract model; from the abstract, no validation using real data, financial-market data, or operational generative-AI data can be confirmed. The parameterization of firm behavior, environmental change, and practice abstraction is also unspecified, limiting external validity.",
+          "reason": "Although relevant to organizational learning and generative AI, the paper does not materially address electronic execution, market microstructure, interest-rate models, yield curves, or rates markets, which are the scope of this site.",
+          "tags": [
+            "generative AI",
+            "collective learning",
+            "organizational diversity",
+            "search model",
+            "best practices",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.28863": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "本論文は、連続経路・時間一様な affine pricing model における座標空間の pricing operator と exponential-affine transform 表現を、群量子化と holonomy に基づく単一の幾何学的枠組みで統合する研究です。Gaussian model と square-root model を例にしています。",
+        "mainResult": "著者は Affine Holonomy Group Quantization（AHGQ）を導入し、affine pricing symbol を二次の斉次部分と affine 部分に分解します。前者は有限次元 symplectic transport と中心拡大 Lie group を、後者は thin-path groupoid 上の multiplicative holonomy を生成し、両者から affine Poincaré–Cartan form を構成します。報告された結果では、その characteristic dynamics が momentum 表現で generalized Riccati system と scalar amplitude に還元され、coordinate 表現では標準的な affine pricing operator を再現します。",
+        "practicalApplication": "既存の affine pricing model の座標表現と transform 表現の関係を整理する理論的基盤として利用でき、Gaussian や square-root 型の金利モデルを含む解析的 pricing framework の理解に役立つ可能性があります。ただし、実装手法、数値性能、calibration 改善、取引執行への直接的な応用は abstract からは示されていません。",
+        "methodology": "affine pricing symbol を homogeneous quadratic sector と complementary affine sector に分け、symplectic transport、centrally extended Lie group、thin-path groupoid 上の holonomy を組み合わせる幾何学的構成を用いています。代表的な Gaussian model と square-root model により構成を例示しています。",
+        "limitations": "abstract で示される貢献は structural なものであり、理論の完全な適用条件、証明の範囲、非時間一様モデルや discontinuous-path model への拡張、数値安定性、実データでの検証、既存手法に対する精度・速度の優位性は確認できません。金利モデルへの具体的な calibration や risk-management 効果も報告されていません。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "affine pricing と generalized Riccati system の統一的理解を与える理論研究であり、interest-rate model の基礎構造には関連します。一方、abstract の範囲では実証的・実務的な新規性や計算上の改善は限定的にしか評価できないため、中程度の重要度とします。",
+        "tags": [
+          "affine pricing models",
+          "interest-rate models",
+          "generalized Riccati equations",
+          "geometric quantization",
+          "holonomy",
+          "Gaussian models",
+          "square-root models"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This paper develops a unified geometric framework, based on group quantization and holonomy, for the coordinate-space pricing operator and exponential-affine transform representation of continuous-path, time-homogeneous affine pricing models. Gaussian and square-root models are used as examples.",
+          "mainResult": "The authors introduce Affine Holonomy Group Quantization (AHGQ) and decompose the affine pricing symbol into a homogeneous quadratic sector and a complementary affine sector. The first produces finite-dimensional symplectic transport and a centrally extended Lie group, while the second produces multiplicative holonomy on a thin-path groupoid. Their combination defines an affine Poincaré–Cartan form. The reported result is that its characteristic dynamics reduce in momentum variables to the generalized Riccati system and scalar amplitude, while the coordinate representation recovers the standard affine pricing operator.",
+          "practicalApplication": "The framework may provide a theoretical basis for organizing the relationship between coordinate and transform representations in affine pricing models, including Gaussian and square-root interest-rate models. However, the abstract does not demonstrate implementation methods, numerical performance, calibration improvements, or direct applications to trading execution.",
+          "methodology": "The paper uses a geometric construction that separates the affine pricing symbol into homogeneous quadratic and complementary affine sectors, then combines symplectic transport, a centrally extended Lie group, and holonomy on a thin-path groupoid. Representative Gaussian and square-root models are used to illustrate the construction.",
+          "limitations": "The abstract describes a structural contribution and does not establish the full conditions of applicability, the scope of the proofs, extensions to time-inhomogeneous or discontinuous-path models, numerical stability, empirical validation, or improvements in accuracy or speed relative to existing methods. Concrete effects on interest-rate calibration or risk management are also not reported.",
+          "reason": "This is a theoretically relevant contribution to the foundations of affine and interest-rate pricing models because it offers a unified interpretation of their operator and transform formulations. Since the abstract provides little evidence of empirical or computational improvements, its practical importance is assessed as moderate.",
+          "tags": [
+            "affine pricing models",
+            "interest-rate models",
+            "generalized Riccati equations",
+            "geometric quantization",
+            "holonomy",
+            "Gaussian models",
+            "square-root models"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "本稿は、連続経路・時間同次の affine pricing modelについて、座標空間の pricing operator と generalized Riccati equations による exponential-affine transform を同一の幾何学的構造から導く Affine Holonomy Group Quantization（AHGQ）を提案する。CIR、Vasicek、Heston、Black–Scholes などを共通形式で扱う理論研究である。",
+        "mainResult": "著者は affine pricing symbol $C_A(x,p)=F(p)+x^\\top R(p)$ を、有限次元 symplectic transport を生成する二次部分と、thin-path groupoid 上の multiplicative holonomy を与える補完部分に分解する。この両者から affine Poincaré–Cartan form を構成し、momentum reduction が generalized Riccati flow と scalar amplitude を、coordinate representation が標準的な affine pricing operator を再現すると示している。これは新しい価格公式ではなく、既知の二つの表現に共通の幾何学的起源を与える構造的結果である。",
+        "practicalApplication": "CIR・Vasicek の金利モデルや Heston 系モデルで、transform pricing と PDE pricing の整合性を統一的に整理する理論基盤として利用できる。affine killing を含む信用リスクにも適用可能とされるが、実務上の計算速度、較正安定性、ヘッジ性能の改善は本稿では実証されていない。",
+        "methodology": "一般の affine drift、affine covariance、affine discounting を pricing symbol にまとめ、homogeneous quadratic sector から symplectic matrix flow、半直積 Lie group、中央拡大を構成する。残余項は thin-path holonomy として表し、両者を affine Poincaré–Cartan form に統合する。その characteristic field を momentum polarization と coordinate polarization で還元し、前者から Riccati characteristics、後者から二階 pricing generator を導く。さらに Black–Scholes、Vasicek、CIR、Heston、two-factor Heston への代入例と CIR の詳細な特殊化を示す。",
+        "limitations": "対象は連続経路かつ時間同次の affine diffusion に限定され、jump-affine、Lévy、時間依存係数、matrix-valued state は未処理である。新しい価格公式や calibration algorithm は提示されず、本稿内での数値実験、実データ検証、計算量比較もない。coordinate operator は特定の ordering により選ばれており、polarization の保存だけでは一意に決まらない。逆冪型 default intensity のような非 affine 項は有限次元 Riccati closure を破り、拡張は将来課題である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "金利・確率的ボラティリティを含む affine model の PDE 表現と transform 表現を一つの幾何学的枠組みで結び付ける点は、数理ファイナンス研究者に有用である。一方、直接的な執行・market microstructure への関連はなく、実務的性能向上も示されていないため、幾何学的量子化や affine transform に関心のある専門読者向けとして推奨する。",
+        "tags": [
+          "affine pricing models",
+          "generalized Riccati equations",
+          "group quantization",
+          "holonomy",
+          "symplectic geometry",
+          "CIR model",
+          "Vasicek model",
+          "Heston model",
+          "pricing PDE",
+          "interest-rate models"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper proposes Affine Holonomy Group Quantization (AHGQ), a framework deriving both the coordinate-space pricing operator and the exponential-affine transform governed by generalized Riccati equations from one geometric structure for continuous-path, time-homogeneous affine pricing models. It is a theoretical treatment encompassing CIR, Vasicek, Heston, and Black–Scholes models.",
+          "mainResult": "The author decomposes the affine pricing symbol $C_A(x,p)=F(p)+x^\\top R(p)$ into a quadratic sector generating finite-dimensional symplectic transport and a complementary sector represented by multiplicative holonomy on a thin-path groupoid. Combining them yields an affine Poincaré–Cartan form whose momentum reduction reproduces the generalized Riccati flow and scalar amplitude, while its coordinate representation recovers the standard affine pricing operator. The result is structural rather than a new pricing formula: it supplies a common geometric origin for two established representations.",
+          "practicalApplication": "The framework can provide a unified theoretical basis for reconciling transform pricing and PDE pricing in interest-rate models such as CIR and Vasicek and in Heston-type models. The paper also states that affine killing can cover credit-risk applications, but it does not demonstrate improvements in computational speed, calibration stability, or hedging performance.",
+          "methodology": "The paper collects affine drift, affine covariance, and affine discounting in a pricing symbol, then constructs a symplectic matrix flow, semidirect-product Lie group, and central extension from its homogeneous quadratic sector. It represents the remainder through thin-path holonomy and combines both components in an affine Poincaré–Cartan form. Reductions of its characteristic field under momentum and coordinate polarizations yield Riccati characteristics and the second-order pricing generator, respectively. The general derivation is illustrated with Black–Scholes, Vasicek, CIR, Heston, and two-factor Heston models, including a more detailed CIR specialization.",
+          "limitations": "The analysis is restricted to continuous-path, time-homogeneous affine diffusions; jump-affine and Lévy models, time-dependent coefficients, and matrix-valued states are not developed. It supplies neither new pricing formulas nor a calibration algorithm, and contains no numerical experiments, empirical validation, or computational-complexity comparison. The coordinate operator is selected through a particular ordering and is not uniquely determined by preservation of the polarization alone. Non-affine terms such as inverse-power default intensity break finite-dimensional Riccati closure and are left for future work.",
+          "reason": "Connecting the PDE and transform representations of affine interest-rate and stochastic-volatility models within one geometric framework is useful for mathematical-finance researchers. The paper has no direct electronic-execution or market-microstructure application and demonstrates no practical performance gains, so it is recommended primarily for specialists interested in geometric quantization and affine transforms.",
+          "tags": [
+            "affine pricing models",
+            "generalized Riccati equations",
+            "group quantization",
+            "holonomy",
+            "symplectic geometry",
+            "CIR model",
+            "Vasicek model",
+            "Heston model",
+            "pricing PDE",
+            "interest-rate models"
+          ]
+        }
+      }
+    },
+    "2609.28947": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、Xの推薦アルゴリズムにおいて、即時的な反応と熟考的な反応を同一の加算的スコアで扱う仕組みが、誤情報の拡散を速める可能性を分析する。金融市場、電子取引、マーケット・マイクロストラクチャー、金利モデル、またはイールドカーブを主題としていない。",
+        "mainResult": "著者らは、誤情報が即時反応からより多くのエンゲージメントを得るため、総合スコアの重みを単に再調整しても信頼性の低い情報への露出格差はほとんど、または悪化する場合があると報告する。一方、熟考的なエンゲージメントが予測されるまで増幅を停止する reflective-threshold gate は、主流情報への露出や総エンゲージメントを損なわずに格差を大幅に縮小したとしている。",
+        "practicalApplication": "Xなどのエンゲージメント型プラットフォームでは、推薦スコアへの単純な重み付け変更ではなく、熟考的反応を増幅の事前条件とするゲートを実装する提案として利用できる。ただし、これは対象サイトの推薦システム設計に関する応用であり、本サイトの金融研究領域への直接的な応用はない。",
+        "methodology": "Xの公開推薦アルゴリズムを構成要素単位で分析し、USC X 2024 election corpus 上にアルゴリズムを再実装した。さらに、異なるスコアリング規則を比較する calibrated simulation study と46件の robustness checks を用いて、信頼性の低い情報への露出格差を評価した。",
+        "limitations": "要旨では、データセットがUSC X 2024 election corpusに依存すること、シミュレーションの較正方法、予測モデルの誤差、実運用での因果効果が十分に示されていない。また、報告結果はXの特定の推薦設計と定義された低信頼性指標に依存する可能性があり、他のプラットフォームや長期的な利用者行動への一般化は不明である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "社会メディア推薦と誤情報拡散に関する研究であり、指定された電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利研究には実質的に該当しない。arXivのq-fin.EC分類は内容上の関連性を示す決定的根拠ではない。",
+        "tags": [
+          "social-media-recommendation",
+          "misinformation",
+          "algorithmic-amplification",
+          "out-of-scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes how treating immediate and thoughtful reactions in the same additive score in X's recommendation algorithm may accelerate misinformation propagation. It does not focus on financial markets, electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "mainResult": "The authors report that because misinformation obtains a larger share of engagement from immediate reactions, simply retuning aggregate score weights has little or sometimes a negative effect on the exposure gap for low-credibility content. In contrast, a reflective-threshold gate that withholds amplification until thoughtful engagement is predicted substantially reduces the gap without reducing mainstream exposure or total engagement, according to the study.",
+          "practicalApplication": "For engagement-based platforms such as X, the proposal can be used as a design intervention that makes thoughtful engagement a precondition for amplification rather than merely changing score weights. However, it applies to social-media recommendation systems and has no direct application to the financial research scope of this site.",
+          "methodology": "The authors conduct a component-level analysis of X's open recommendation algorithm and re-implement it on the USC X 2024 election corpus. They then use a calibrated simulation study comparing alternative scoring rules and 46 robustness checks to evaluate the exposure gap for low-credibility content.",
+          "limitations": "The abstract does not provide sufficient detail on dependence on the USC X 2024 election corpus, the calibration procedure, prediction errors, or causal effects in live deployment. The findings may depend on X's particular recommendation design and the definition of low credibility, so generalization to other platforms and long-term user behavior is uncertain.",
+          "reason": "This is a study of social-media recommendation and misinformation propagation, not electronic trading, market microstructure, interest-rate models, yield curves, or rates. The arXiv q-fin.EC category is not decisive evidence of topical relevance.",
+          "tags": [
+            "social-media-recommendation",
+            "misinformation",
+            "algorithmic-amplification",
+            "out-of-scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.29080": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、ラストマイル配送における配達員の不正行動と、その後の配送生産性への影響を分析するものであり、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を主題としていません。",
+        "mainResult": "インドの大手ラストマイル配送企業との共同研究に基づく操作変数回帰の結果、配達員が実際には配達せずに虚偽の失敗理由を記録する行為は、翌日の配達成功件数を1.60%、初回配達成功率を1.86%低下させると報告されています。",
+        "practicalApplication": "配送企業における不正検知、業務監督、タスク設計、配達員インセンティブの改善には応用可能ですが、本サイトの対象分野への直接的な実務応用は限定的です。",
+        "methodology": "インドのラストマイル配送企業のデータを用い、虚偽の配達失敗記録が翌日の生産性に与える影響を操作変数回帰で推定しています。また、不正行動とタスク複雑性などの要因との関連を検討しています。",
+        "limitations": "抄録からは、操作変数の詳細、識別仮定の妥当性、標本規模、測定誤差、企業や地域を超えた外的妥当性が確認できません。報告された因果解釈は、これらの前提に依存します。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "労働・オペレーション管理および配送サービスに関する研究であり、電子取引、市場ミクロ構造、金利モデル、イールドカーブ、金利市場への実質的な関連性がないためです。",
+        "tags": [
+          "out_of_scope",
+          "last-mile delivery",
+          "worker misconduct",
+          "instrumental variables",
+          "operations management"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes delivery-agent misconduct in last-mile delivery and its effects on subsequent delivery productivity. It is not materially about electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using an instrumental-variable regression in collaboration with a leading Indian last-mile delivery firm, the study reports that falsely recording delivery failures when parcels were not actually delivered reduces next-day successful deliveries by 1.60% and first-time-right deliveries by 1.86%.",
+          "practicalApplication": "The findings may support fraud detection, operational monitoring, task design, and incentive improvements in delivery firms, but their direct practical relevance to this site's target areas is limited.",
+          "methodology": "The study uses data from an Indian last-mile delivery firm and estimates the effect of falsely recorded delivery failures on next-day productivity with instrumental-variable regression. It also examines associations between misconduct and factors such as task complexity.",
+          "limitations": "The abstract does not provide details about the instrument, identification assumptions, sample size, measurement error, or generalizability across firms and regions. The reported causal interpretation depends on these assumptions.",
+          "reason": "This is a labor and operations-management study about delivery services, with no material connection to electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "out_of_scope",
+            "last-mile delivery",
+            "worker misconduct",
+            "instrumental variables",
+            "operations management"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.29108": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "EU電力市場の複数時間軸、取引所マイクロストラクチャ、系統制約、規制要件を統合したAI支援取引システムの機能アーキテクチャを提案する研究です。",
+        "mainResult": "抽象要約によれば、意思決定状態ベクトル、残余エクスポージャー管理、制約付き最適化、実行許可ゲート、監査可能な記録を含むformal system specificationを構築しています。また、NEMOなどのvenue topologyを整理し、インターフェースのタイミング、権限の異質性、balancing layerとの結合を越境協調の実務上の障害として特定しています。",
+        "practicalApplication": "AIを自由な予測モデルではなく、規制・権限・系統制約の内側で動くbounded decision componentとして実装する際の要件整理や、fail-closedな実行制御、監査設計に利用できます。電子執行や市場運用との関連は強い一方、伝統的な金融市場の執行アルゴリズムへの直接的な性能示唆は限定的です。",
+        "methodology": "EU電力市場のforward、day-ahead、intraday、balancing市場、market-coupling mechanics、cross-zonal transfer constraints、REMIT、MiFID II、MiFIR、EMIRなどを対象に、運用上の構成要素と接続関係を機能仕様として整理・形式化しています。抽象要約からは、実データによる検証や実験の実施は確認できません。",
+        "limitations": "抽象要約の範囲では、提案アーキテクチャの実運用性能、予測精度、執行コスト、レイテンシ、制約違反率、規制当局や市場参加者による評価は示されていません。各国・各市場の制度差や、実装時のデータ品質、モデル更新、責任分界の詳細も不明です。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "規制制約下のAI支援取引、実行許可、監査可能性を体系化しており、電子取引システムの設計論として関連性があります。ただし、抽象要約上は概念・仕様提案が中心で、定量的な市場マイクロストラクチャ分析や実証的な執行結果は確認できないため、重要度は中程度とします。",
+        "tags": [
+          "electricity trading",
+          "electronic trading",
+          "market microstructure",
+          "AI governance",
+          "market coupling",
+          "cross-zonal constraints",
+          "execution controls",
+          "regulatory compliance",
+          "NEMO",
+          "balancing markets"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This paper proposes a functional architecture for AI-supported trading systems that integrates multiple EU electricity-market horizons, exchange microstructure, physical grid constraints, and regulatory requirements.",
+          "mainResult": "According to the abstract, the paper develops a formal system specification including a decision-state vector, residual-exposure accounting, constrained optimization, an executable-action permission gate, and auditable records. It also maps NEMO and related venue topologies and identifies interface timing, heterogeneous permissions, and coupling with the balancing layer as practical obstacles to cross-border coordination.",
+          "practicalApplication": "The framework can support requirements analysis and the design of fail-closed execution controls and audit mechanisms when implementing AI as a bounded decision component within regulatory, permission, and grid constraints. It is strongly relevant to electronic execution and market operation, although its direct implications for execution algorithms in conventional financial markets are limited.",
+          "methodology": "The study organizes and formalizes the functional components and interfaces of EU forward, day-ahead, intraday, and balancing markets, together with market-coupling mechanics, cross-zonal transfer constraints, and requirements associated with REMIT, MiFID II, MiFIR, and EMIR. The abstract does not indicate empirical testing with market data or experiments.",
+          "limitations": "The abstract does not report operational performance, predictive accuracy, execution costs, latency, constraint-violation rates, or evaluations by regulators or market participants. Differences across national and market regimes, as well as implementation issues involving data quality, model updates, and responsibility allocation, also remain unclear.",
+          "reason": "The paper is relevant as a systems-design contribution that organizes AI-assisted trading, execution permissions, and auditability under regulatory constraints. However, based on the abstract, it is primarily a conceptual and specification-oriented proposal, with no confirmed quantitative market-microstructure analysis or empirical execution results; therefore, its importance is assessed as moderate.",
+          "tags": [
+            "electricity trading",
+            "electronic trading",
+            "market microstructure",
+            "AI governance",
+            "market coupling",
+            "cross-zonal constraints",
+            "execution controls",
+            "regulatory compliance",
+            "NEMO",
+            "balancing markets"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "EU電力市場をforward、day-ahead、intraday、balancingが連結した制約付きシステムとして捉え、AI支援取引の機能アーキテクチャを提示する。市場状態、残余エクスポージャー、越境容量、venue権限、規制適合性を統合し、条件不成立時には注文を出さないfail-closed設計を提案している。",
+        "mainResult": "主な成果は、状態ベクトル、ゾーン別残余エクスポージャー、CVaRを含む制約付き目的関数、注文単位のpermission gate、不確実性較正、model drift時の安全方策、監査記録を一つの設計にまとめたことである。ただし、性能向上や規制違反削減を実データで実証した結果ではなく、著者らが提案する仕様である。",
+        "practicalApplication": "複数のNEMO、商品、gate closure、参加資格、REMIT等の条件をpre-tradeで検査する取引基盤の要件定義に利用できる。特に、day-aheadからintraday、balancingへ残余ポジションを引き継ぐ運用や、蓄電池のmulti-horizon dispatch、異常時の自動停止、意思決定から決済までのaudit trail設計に適用可能である。",
+        "methodology": "EU規則、ACER・ENTSO-E資料、取引所rulebook、既存の予測・最適化研究を整理するdesign-orientedな方法を採用する。市場参加者とvenueの構造をマッピングしたうえで、状態表現、残余数量、取引費用・imbalance risk・規制コストを含む最適化、実行可能性判定、conformal prediction型の予測区間、監督・記録・stress testingの数理仕様を構成している。",
+        "limitations": "同期されたmulti-venue event dataによるbacktest、out-of-sample評価、transaction cost・latency・imbalance penaltyを含む実証がない。各国・各venueの実装差、データフィード障害、改訂頻度、法規制の変化を十分にはモデル化していない。蓄電池収益や価格spreadに関する例も体系的なデータ分析ではなく、提案アーキテクチャの経済価値や各control gateの限界効果は未確認である。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "電子執行、電力市場microstructure、リスク管理、compliance-by-designを横断する実装チェックリストとして有用であり、単一市場の価格予測に偏らない点は評価できる。一方で、新しい取引アルゴリズムや定量的performance evidenceを提供する論文ではないため、研究成果というより設計・ガバナンスの参照枠として読むのが適切である。",
+        "tags": [
+          "EU電力市場",
+          "電子取引",
+          "市場結合",
+          "pre-trade compliance",
+          "AIガバナンス",
+          "NEMO",
+          "balancing market",
+          "蓄電池最適化",
+          "CVaR",
+          "fail-closed制御"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper treats the EU electricity market as a constrained system linking forward, day-ahead, intraday, and balancing horizons, and proposes a functional architecture for AI-supported trading. It integrates market state, residual exposure, cross-zonal capacity, venue permissions, and regulatory compliance, with a fail-closed design that releases no order when required conditions are not met.",
+          "mainResult": "The main contribution is a unified design combining a state vector, zonal residual-exposure accounting, a constrained objective including CVaR, an order-level permission gate, uncertainty calibration, a safe policy for model drift, and audit records. These are proposed specifications rather than empirically demonstrated results showing better performance or fewer compliance violations.",
+          "practicalApplication": "The framework can support requirements engineering for trading platforms that check multiple NEMOs, products, gate closures, participant permissions, and conditions such as REMIT before execution. Potential applications include carrying residual positions from day-ahead into intraday and balancing operations, multi-horizon battery dispatch, automatic suspension under abnormal conditions, and audit trails spanning decisions through settlement.",
+          "methodology": "The paper uses a design-oriented synthesis of EU regulations, ACER and ENTSO-E materials, exchange rulebooks, and prior forecasting and optimization research. After mapping market participants and venue structure, it constructs mathematical specifications for state representation, residual quantities, optimization over trading cost, imbalance risk and regulatory cost, execution-feasibility checks, conformal-prediction-style intervals, supervision, recordkeeping, and stress testing.",
+          "limitations": "There is no backtest on synchronized multi-venue event data, out-of-sample evaluation, or empirical treatment incorporating transaction costs, latency, and imbalance penalties. National and venue-level implementation differences, data-feed failures, revision-frequency asymmetry, and evolving regulation are not modeled in sufficient detail. The battery-revenue and price-spread examples are not based on a systematic data analysis, and neither the architecture’s economic value nor the marginal effect of each control gate is established.",
+          "reason": "The paper is useful as an implementation checklist spanning electronic execution, electricity-market microstructure, risk management, and compliance by design, especially because it goes beyond isolated price forecasting. However, it offers neither a new trading algorithm nor quantitative performance evidence, so it is best read as a design and governance reference framework rather than a validated trading study.",
+          "tags": [
+            "EU electricity market",
+            "electronic trading",
+            "market coupling",
+            "pre-trade compliance",
+            "AI governance",
+            "NEMO",
+            "balancing market",
+            "battery optimization",
+            "CVaR",
+            "fail-closed control"
+          ]
+        }
+      }
+    },
+    "2609.29700": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、貯蔵可能なコモディティの価格形成を、売却または保有を選択する実物オプションと内生的な価格決定の固定点問題として分析する。金利、イールドカーブ、電子取引、または市場マイクロストラクチャーを主題としていない。",
+        "mainResult": "抽象によれば、著者らは適切なドリフト・割引条件の下で内生的な貯蔵オプション均衡の大域的存在結果を示し、均衡を非線形 obstacle problem として特徴づける。また、単調有限差分法、policy iteration、モンテカルロ検証などによる数値分析を提示し、需要弾力性、割引、減耗、ボラティリティが貯蔵プレミアムと売却閾値に与える影響を調べている。",
+        "practicalApplication": "コモディティの在庫管理、貯蔵価値評価、売却タイミング分析には応用可能と考えられる。ただし、対象サイトの主要領域である電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利市場への直接的な応用は抽象から確認できない。",
+        "methodology": "価格関数が需要動学を決定し、その動学から得られる optimal stopping value が新たな価格関数を生成するフィードバックを固定点として定式化する。コンパクトな許容集合上での大域的存在証明、非線形 obstacle problem による特徴づけ、漸近的に整合的な遠方境界条件を用いた有限差分・policy iteration、モンテカルロ検証、比較静学を組み合わせている。",
+        "limitations": "評価は提供された抽象のみに基づく。抽象ではモデルの具体的な仮定、パラメータ設定、数値結果の大きさ、データによる実証、均衡の一意性は十分に示されていない。また、Schauder の定理による一意性は主張していない。対象分野との関連性も間接的である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "コモディティの連続時間価格形成と実物オプションに関する研究としては関連性があるが、本サイトの対象である電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利市場に実質的には該当しないため。",
+        "tags": [
+          "commodity pricing",
+          "storage option",
+          "optimal stopping",
+          "fixed-point equilibrium",
+          "obstacle problem",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies the price formation of a storable commodity as a fixed-point problem involving an embedded sell-or-hold real option and endogenous price determination. It does not focus on interest rates, yield curves, electronic trading, or market microstructure.",
+          "mainResult": "According to the abstract, the authors establish a global existence result for an endogenous storage-option equilibrium under a suitable drift-discount condition and characterize the equilibrium as a nonlinear obstacle problem. They also present numerical analysis using monotone finite differences, policy iteration, and Monte Carlo validation, examining how demand elasticity, discounting, depreciation, and volatility affect the storage premium and selling threshold.",
+          "practicalApplication": "The framework may be applicable to commodity inventory management, storage valuation, and selling-timing analysis. However, no direct application to the site's core areas—electronic execution, market microstructure, interest-rate models, yield curves, or rates markets—is evident from the abstract.",
+          "methodology": "The model defines a feedback loop in which a candidate price function determines demand dynamics and the resulting optimal-stopping value generates a new price function, with equilibrium defined as a fixed point. The study combines a global existence proof on a compact admissible class, an obstacle-problem characterization, finite-difference and policy-iteration methods with an asymptotically consistent far-field boundary condition, Monte Carlo validation, and comparative statics.",
+          "limitations": "This assessment is based only on the supplied abstract. The specific model assumptions, parameter choices, magnitudes of numerical results, empirical validation, and uniqueness of equilibrium are not sufficiently described. The abstract explicitly does not claim uniqueness from Schauder's theorem. Relevance to the target fields is also indirect.",
+          "reason": "Although the paper is relevant to continuous-time commodity pricing and real options, it is not materially about electronic trading, market microstructure, interest-rate models, yield curves, or rates markets, which are the site's target areas.",
+          "tags": [
+            "commodity pricing",
+            "storage option",
+            "optimal stopping",
+            "fixed-point equilibrium",
+            "obstacle problem",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.29905": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "生産ネットワークにおいて、個別のネットワーク構造やエクスポージャーを完全に特定できなくても、エクスポージャーに基づく経済的意思決定を特定できる条件を分析する研究です。",
+        "mainResult": "日本の地域間産業連関表では、完全開示に必要な統計量の約半分で、2005年ベンチマークに対する平均エクスポージャーの損失を0.07ポイントに抑えました。一方、整合的なネットワークに対する最大後悔は4.83ポイントでした。米国の石炭供給事例では、追加の出荷情報により、供給途絶時の在庫リスクを監視すべき工場集合を特定できました。",
+        "practicalApplication": "ネットワークデータを、構造全体の開示度ではなく、監視対象の選定など具体的な意思決定をどの程度支援できるかで評価する枠組みを提供します。ただし、電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ分析への直接的な応用は示されていません。",
+        "methodology": "公開された集計値と整合するネットワーク集合を考え、意思決定に必要な十分な測定値を特徴づけ、最大後悔を計算しています。1995年の日本の地域間産業連関表から測定項目を選び、2005年表で凍結された設計を評価し、さらに2005年のワイオミング州の鉄道途絶前後における米国の石炭配送事例を検討しています。",
+        "limitations": "抽象で報告されている実証例は日本の産業連関表と米国の石炭配送に限られます。結果の統計的推定誤差、測定コスト、ネットワークが想定集合に含まれることの妥当性、金融市場や金利関連データへの外挿可能性は示されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "経済ネットワークにおける情報開示と意思決定の識別を扱う研究ですが、本サイトの対象である電子執行、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、レート市場には直接関係しません。",
+        "tags": [
+          "production networks",
+          "decision identification",
+          "partial observation",
+          "maximum regret",
+          "input-output tables",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies when exposure-based economic decisions can be identified even if the underlying production network and individual exposures cannot be fully identified.",
+          "mainResult": "Using Japanese interregional input-output tables, the authors report that using roughly half of the statistics needed for full disclosure limits the average exposure loss relative to the 2005 benchmark to 0.07 percentage points, while sharp maximum regret over compatible networks is 4.83 points. In a U.S. coal-delivery example, additional shipment measurements identify which plants should be monitored for inventory risk.",
+          "practicalApplication": "The framework evaluates network data by how well it supports specific decisions, such as selecting facilities to monitor, rather than by the completeness of structural disclosure. However, the abstract does not establish direct applications to electronic trading, market microstructure, interest-rate models, yield-curve analysis, or rates markets.",
+          "methodology": "The study characterizes sufficient measurements for decisions and computes maximum regret over networks consistent with released aggregate totals. It selects measurements from the 1995 Japanese interregional input-output table, evaluates the frozen design against the 2005 table, and examines U.S. coal deliveries around a 2005 Wyoming rail disruption.",
+          "limitations": "The abstract reports only examples involving Japanese input-output tables and U.S. coal deliveries. It does not discuss statistical estimation error, measurement costs, the validity of the compatible-network set, or the transferability of the results to financial and interest-rate data.",
+          "reason": "The research concerns information disclosure and decision identification in economic production networks, not the electronic execution, market microstructure, interest-rate modeling, yield-curve, or rates topics targeted by this site.",
+          "tags": [
+            "production networks",
+            "decision identification",
+            "partial observation",
+            "maximum regret",
+            "input-output tables",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 1021,
+      "outputTokens": 929,
+      "reasoningTokens": 47,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1950,
+      "estimatedCostUsd": 0.001319,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28504v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 853,
+      "outputTokens": 921,
+      "reasoningTokens": 50,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1774,
+      "estimatedCostUsd": 0.001276,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28549v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 909,
+      "outputTokens": 808,
+      "reasoningTokens": 37,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1717,
+      "estimatedCostUsd": 0.001151,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28675v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 924,
+      "outputTokens": 1055,
+      "reasoningTokens": 40,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1979,
+      "estimatedCostUsd": 0.001451,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28681v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 805,
+      "outputTokens": 1192,
+      "reasoningTokens": 101,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1997,
+      "estimatedCostUsd": 0.001591,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28863v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 20247,
+      "outputTokens": 1690,
+      "reasoningTokens": 219,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 20244,
+      "totalTokens": 21937,
+      "estimatedCostUsd": 0.135032,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 28,
+      "paperIds": [
+        "2609.28863v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 959,
+      "outputTokens": 1116,
+      "reasoningTokens": 39,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2075,
+      "estimatedCostUsd": 0.001531,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.28947v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 903,
+      "outputTokens": 806,
+      "reasoningTokens": 39,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1709,
+      "estimatedCostUsd": 0.001148,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.29080v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 833,
+      "outputTokens": 1142,
+      "reasoningTokens": 71,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1975,
+      "estimatedCostUsd": 0.001537,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.29108v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 13196,
+      "outputTokens": 1579,
+      "reasoningTokens": 292,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 13193,
+      "totalTokens": 14775,
+      "estimatedCostUsd": 0.097557,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 12,
+      "paperIds": [
+        "2609.29108v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 855,
+      "outputTokens": 1115,
+      "reasoningTokens": 57,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1970,
+      "estimatedCostUsd": 0.001509,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.29700v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 812,
+      "outputTokens": 1036,
+      "reasoningTokens": 60,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1848,
+      "estimatedCostUsd": 0.001406,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.29905v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

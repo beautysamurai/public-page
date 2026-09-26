@@ -3807,6 +3807,22 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-09-26-daily-openai-01",
+      "editionDate": "2026-09-26",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-26T11:42:42Z",
+      "status": "NO_NEW_BATCH_EXPECTED",
+      "message": "通常の公開スケジュール上、新しいarXivバッチは予定されていません。",
+      "expectedBatchDate": "2026-09-25",
+      "observedBatchDate": "2026-09-25",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月26日 — 日次レビュー\n\n通常の公開スケジュール上、新しいarXivバッチは予定されていません。\n\n### この号の利用状況\n\nモデル・effort・トークン数：未記録。\n\n\n**推薦論文: なし**",
+      "papers": []
     }
   ]
 }

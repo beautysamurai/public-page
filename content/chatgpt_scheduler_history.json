@@ -3823,6 +3823,324 @@
       "periodEnd": null,
       "sourceText": "## 2026年9月26日 — 日次レビュー\n\n通常の公開スケジュール上、新しいarXivバッチは予定されていません。\n\n### この号の利用状況\n\nモデル・effort・トークン数：未記録。\n\n\n**推薦論文: なし**",
       "papers": []
+    },
+    {
+      "editionId": "2026-09-25-weekly-openai-01",
+      "editionDate": "2026-09-25",
+      "editionKind": "weekly",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-27T01:04:21Z",
+      "status": "WEEKLY_REVIEW",
+      "message": "対象期間の週次レビューを生成しました。",
+      "expectedBatchDate": null,
+      "observedBatchDate": null,
+      "periodStart": "2026-09-19",
+      "periodEnd": "2026-09-25",
+      "sourceText": "## 2026年9月25日 — 週次レビュー\n\n対象期間の週次レビューを生成しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6-astra / medium | 2 | 20,684 | 12,933 (151) | 0.9052 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） / 保存済みレビュー・1論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Feasible Multi-Asset Optimal Execution under Cash Constraints\n\n**[arXiv:2609.27786v1](https://arxiv.org/abs/2609.27786v1) — Ryuji Hashimoto, Namid R. Stillman**\n\n### 概要\n\nAlmgren–Chriss型の複数資産執行に各時点の期待累積支出上限を追加し、売却と買付の時点を共同最適化する。資金制約を凸QCQPへ落とす点で、今週の電子執行研究の中核となる。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 推奨 | 最適執行 / 資金制約 / 複数資産 / 凸QCQP / Almgren–Chrissモデル / 期待値制約 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 運用上重要な資金使用の時間制約を、解釈可能で実装しやすい最適執行問題に組み込むため優先推薦する。ただし、pathwiseな資金保証ではなく、合成市場で検証された期待制約付きbenchmarkとして読む必要がある。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 901 | 1,013 (48) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 17,174 | 1,903 (352) | 0.1239 | PDF全文・8ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 19,174 | 11,781 (151) | 0.8287 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n| 週次統合 | gpt-6-astra / medium | 1 | 1,510 | 1,152 (0) | 0.0765 | 保存済みレビュー・1論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らは非負のimpact係数とrisk aversionの下で凸性を示す。基準数量の6ペアでは、peak cash drawdownが無制約ACの$57.06\\%$～$88.45\\%$から提案法の$0.03\\%$～$11.81\\%$へ低下したと報告する。combined ISも無制約ACをわずかに下回ったが、TWAP・VWAPには一貫して勝っていない。\n\n**手法:** 線形permanent・temporary impactを持つ離散時間モデルで、期待implementation shortfallと分散の加重和を最小化する。銘柄別完了制約と各期間の期待cash制約をQCQPへ変換し、oracle実験と3銘柄から成る6売買ペアのagent-based simulationで比較する。impactは別日のsimulationからOLS推定し、validationは300回行う。\n\n**実務への応用:** 資金枠の限られたportfolio rebalancingで、売却先行・買付後置を含むpre-trade scheduleを既存の凸solverで作成できる。実現ベースの資金安全性には、追加のbufferや確率制約、執行中の再最適化が必要となる。\n\n**限界・注意点:** cash制約は期待値に対するもので、実現支出の予算超過を防がない。独立価格ショックと銘柄別線形impactを仮定し、資産間共分散、cross-impact、非線形impact、参加率制約を扱わない。実市場約定ではなく単一simulatorの少数銘柄で検証され、impact較正量からの大幅な外挿も含む。\n\n## 2. Adapting the Actor Model of Concurrency for High-Frequency Trading: Synchronous Message Delivery (fast\\_send) and a Tick-to-Book Latency Study\n\n**[arXiv:2609.21173v1](https://arxiv.org/abs/2609.21173v1) — Vincent Maciejewski**\n\n### 概要\n\n共置されたアクターのhandlerを送信側スレッドで直接実行するfast\\_sendを提案し、CME先物のmarket-data処理で遅延を評価する。今週の取引基盤研究では、具体的な実装と実データ計測を備えた論文として位置付けられる。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 電子取引基盤 / アクターモデル / 低遅延 / 市場データ / CME先物 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 低遅延取引基盤に直接関係し、実装上の判断材料が具体的である。ただし、microbenchmarkの高速化を実経路全体の改善と同一視せず、負荷試験と独立再現を前提に読むべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 980 | 1,097 (33) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 24,296 | 2,007 (473) | 0.1616 | PDF全文・31ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 19,174 | 11,781 (151) | 0.8287 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n| 週次統合 | gpt-6-astra / medium | 1 | 1,510 | 1,152 (0) | 0.0765 | 保存済みレビュー・1論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者のmicrobenchmarkではfast\\_sendが約$30\\,\\mathrm{ns}$、非同期の別スレッド往復が約$3.4\\,\\mu\\mathrm{s}$だった。実データ経路では約$7\\,\\mu\\mathrm{s}$の遅延下限とpacket内位置に応じた増分を報告するが、frameworkの寄与が$1\\%$未満という推定は実経路の処理別計測で裏付けられていない。\n\n**手法:** C++20実装kaspar-hftのpinned-core microbenchmarkと、CMEのES、NQ、ZNから収集した約829万message・53分間のsocket-to-book計測を用いる。queue occupancyとpacket内位置で条件付けて遅延分布を分析する。\n\n**実務への応用:** decode、order-book更新、signal生成を同一coreにまとめる設計や、live tradingとdeterministic backtestでactor codeを共有する設計の参考になる。採用時にはFIFO、再入可能性、競合時の停止を別途検証する必要がある。\n\n**限界・注意点:** 単一マシン・単一sessionであり、高負荷、競合、長い処理chain、多core環境での検証がない。socket read後のsoftware timestampはNIC・kernel遅延を含まず、非同期handoffとdecode/book処理も独立計測されていない。millisecond級stallの原因やFIFO非保存の運用影響も残る。\n\n## 3. Modeling interest rate swap volatility with GARCH processes\n\n**[arXiv:2609.25965v1](https://arxiv.org/abs/2609.25965v1) — Michał Balcerek, Michał Wronka**\n\n### 概要\n\nUSDの1年先10年フォワード・スワップレートについて、GARCH、GJR-GARCH、2レジームMSGARCHを比較する。保存レビューの分析範囲はabstractとIntroductionのみであり、51頁の全文を分析した評価ではない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 金利スワップ / GARCH / MSGARCH / レジーム転換 / ボラティリティ予測 / 限定ソース |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 今週の中ではratesリスク管理への関連性が高く、適合度・安定性・予測性能を区別する視点が有用である。ただし、MSGARCHの短期予測優位は報告されておらず、限定資料に基づく条件付き推薦である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 868 | 1,202 (51) | 0.0016 | Abstractのみ |\n| 一次判定 | gpt-5.6-luna / low | 1 | 868 | 1,283 (52) | 0.0017 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 2,544 | 1,969 (303) | 0.0521 | 全51ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n| 週次統合 | gpt-6-astra / medium | 1 | 19,174 | 11,781 (151) | 0.8287 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n| 週次統合 | gpt-6-astra / medium | 1 | 1,510 | 1,152 (0) | 0.0765 | 保存済みレビュー・1論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 限定資料によれば、著者らは単一レジームモデルの切片と長期分散がローリング窓で不安定になると報告する。MSGARCHは対数尤度とAICで優位だが、BICはGJR-GARCHを選び、1日先予測精度は同程度とされる。推定表や検定計算は確認されていない。\n\n**手法:** 著者らは2007～2023年の日次データに3モデルを適用し、ATMスワップションvolatilityとSRVIXも参照すると説明する。情報量規準、Nyblom検定、Engle–Ng検定、ローリング推定、$95\\%$予測区間のcoverageを用いる設計である。\n\n**実務への応用:** 短期金利volatility予測では簡潔なGJR-GARCH、局面の解釈ではMSGARCHのレジーム確率を検討する判断材料になり得る。スワップション評価への利用には、市場インプライドvolatilityとの関係や評価測度を別途確認する必要がある。\n\n**限界・注意点:** sourceCoverageはabstract\\_introductionであり、分析対象はabstractとIntroductionに限られる。全文、詳細な推定仕様、データ加工、イノベーション分布、数値表、backtest実装、頑健性分析、付録は未確認で、結果は著者主張として扱う。単一通貨・満期構成・日次頻度への限定もある。\n\n## 4. Liquidity Provision and Rebate Design in Option Markets\n\n**[arXiv:2609.26606v1](https://arxiv.org/abs/2609.26606v1) — Samuel N. Cohen, Lyndon Drake, Zihan Guo, Christoph Reisinger**\n\n### 概要\n\n複数オプションのmarket makingと取引所のrebate設計を統合し、limit orderとmarket-order hedgeを同時に最適化する。今週の市場設計研究では、流動性目標から報酬を逆算する点が中心的な貢献である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | オプション市場形成 / rebate設計 / 在庫リスク / impulse control / HJBQVI |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** option market making、在庫制御、取引所インセンティブを直接結び付けるため、今週の優先読書候補である。実装には情報非対称性、競合market maker、内生的な市場反応を追加する必要がある。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 782 | 1,001 (61) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 43,138 | 1,952 (208) | 0.2547 | PDF全文・36ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 19,174 | 11,781 (151) | 0.8287 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n| 週次統合 | gpt-6-astra / medium | 1 | 1,510 | 1,152 (0) | 0.0765 | 保存済みレビュー・1論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らはHJBQVIを導き、Black–Scholes・定数delta近似の下で状態次元を削減してfeedback戦略を構成する。指定したaggressive quotingを最適反応にする三段階のrebate設計を提示し、必要報酬がspread、portfolio delta、執行強度に依存する数値例を示す。\n\n**手法:** spreadを外生CTMC、limit-order約定を制御付きCox過程、market orderをimpulse controlとして扱う。delta・vegaの二次penaltyを含む目的関数を構成し、簡略化モデルをpenalty methodとsemi-implicit Euler法で解く。CBOEのSPXW 1DTE call 2銘柄・1取引日のLevel 1データで数値例を較正する。\n\n**実務への応用:** 取引所がbest quoteの1 tick改善を促す追加報酬を検討する際や、market makerがrebate、在庫risk、即時hedge費用を比較する際のモデルとして使える。ただし、算出した報酬をそのまま実際のfee scheduleへ移せるわけではない。\n\n**限界・注意点:** 取引所がquote行動とnet deltaを観測できるfirst-best設定で、単一の小規模market makerを仮定する。spread、queue、impactへの内生的影響を無視し、主要解法は定数delta・vegaなしへ簡略化される。約定強度は実約定ではなくproxyで、out-of-sample検証や政策効果の因果評価がない。負のrebateの運用も未解決である。\n\n## 5. OrderFusion+: Probabilistic Buy--Sell Price Trajectory Forecasting in Intraday Electricity Markets\n\n**[arXiv:2609.23598v1](https://arxiv.org/abs/2609.23598v1) — Runyao Yu, Derek W. Bunn**\n\n### 概要\n\nOrderFusion+は、ドイツ時間内電力市場の買い・売り注文と隣接受渡商品の情報から価格軌跡を分位点予測する。今週の電力市場研究では予測モデルを担うが、執行や収益の検証まで進んだ研究ではない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | 時間内電力市場 / 分位点予測 / 価格軌跡 / 動的マスキング / 電子取引 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 注文の売買両側と隣接商品の依存性を扱う設計は電子取引に有用である。予測精度の改善と経済価値を明確に分け、電力取引向けの予測部品として推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 889 | 1,076 (104) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 21,641 | 2,138 (573) | 0.1510 | PDF全文・10ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 19,174 | 11,781 (151) | 0.8287 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n| 週次統合 | gpt-6-astra / medium | 1 | 1,510 | 1,152 (0) | 0.0765 | 保存済みレビュー・1論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者報告では平均AQLが$10.62$で、最良の学習済みbaselineであるTransformerの$11.72$から約$9.4\\%$改善した。全比較対象へのAQL改善は片側Diebold–Mariano検定で有意とされ、quantile crossingは$0\\%$だったが、coverage誤差はpersistenceの方が小さい。\n\n**手法:** EPEX SPOTの商用注文データを用い、買い・売りのcross-attentionと動的マスクを組み合わせる。対象商品と最大12の隣接商品、最大180分の履歴から15分刻みの価格軌跡を3分位点で予測し、時系列foldで2024年を評価する。\n\n**実務への応用:** 蓄電池や需要応答の発注時刻、価格閾値、ポジション調整に利用できる可能性がある。ただし、予測されたVWAP軌跡はその価格での約定を保証せず、取引費用やmarket impactを含む戦略検証が必要である。\n\n**限界・注意点:** 単一国・15分商品に限られ、他市場への一般化は不明である。分位点は3水準のみで、動的マスクの選択は初期値に依存するため構造的な市場行動の証拠にはならない。商用データ、foundation modelとの比較条件、約定・費用・損益評価の欠如も制約となる。\n\n## 6. Financial Language Models as Applied Artificial Intelligence Systems for News-Based Trading under Market Frictions\n\n**[arXiv:2609.23703v1](https://arxiv.org/abs/2609.23703v1) — Kemal Kirtac**\n\n### 概要\n\nMFASTは、企業ニュースのlanguage model評価に時刻整合、確率校正、取引費用、流動性、capacity、計算負荷を組み込む。高いbacktest成績よりも、予測モデルを取引可能性の観点から比較する評価枠組みが主要な読みどころである。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | 金融言語モデル / ニュース取引 / 取引コスト / capacity制約 / 時刻整合 / 再現性 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 時刻・費用・capacityを含めた金融NLP評価は実務的である。ただし、収益性の証拠としては執行モデルと再現性が弱く、今週の直接的な執行研究より優先度を下げ、評価設計の参考として推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 922 | 1,055 (72) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 22,303 | 2,066 (405) | 0.1528 | PDF全文・47ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 19,174 | 11,781 (151) | 0.8287 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n| 週次統合 | gpt-6-astra / medium | 1 | 1,510 | 1,152 (0) | 0.0765 | 保存済みレビュー・1論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者は2024年6月から2026年1月のtestで、LLaMA-3のaccuracyを$0.787$、AUCを$0.846$と報告する。片道$5\\,\\mathrm{bp}$の費用と日次売買代金の$10\\%$上限を課した戦略の年率Sharpe ratioは$2.85$、累積収益率は$180\\%$だった一方、公開データ再現のSharpe ratioは$0.92$に低下した。\n\n**手法:** RefinitivニュースとCRSPを結合した973,481件を時系列分割し、将来3日超過収益の符号を予測する6手法を比較する。分類・校正・portfolio評価に加え、factor調整、bootstrap、複数のdata-snooping検定、公開データ再現、計算性能測定を行う。\n\n**実務への応用:** ニュースalpha導入前に、情報が利用可能になる時刻、執行遅延、流動性、turnover、推論資源を共通基準で検査するための参考になる。報告された収益を実運用の期待値として使うのではなく、評価工程を採用するのが適切である。\n\n**限界・注意点:** 英語の米国株と日次執行に限定され、queue、market impact、空売り可能性、borrow fee、intraday latencyを明示的に再現しない。固定費用はニュース直後の摩擦を過小評価し得る。主要データは非公開で、事前学習データ混入を排除できず、頑健性検定の詳細不足と公開再現の成績低下が残る。教師ラベルはsentiment自体ではなく将来収益である。\n\n## 7. Risk Measures under Paired-Ambiguity: A Deep Learning Reflected BSDE Framework\n\n**[arXiv:2609.23768v1](https://arxiv.org/abs/2609.23768v1) — Nacira Agram, Jan Rems, Emanuela Rosazza Gianin**\n\n### 概要\n\n確率モデルと割引率の曖昧性を同時に扱う最適停止問題を、上側反射型BSDEとdeep learningで解析する。ratesとの接点は割引率不確実性であり、yield curveや金利商品の較正を扱う研究ではない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | 割引率の曖昧性 / 反射型BSDE / 最適停止 / entropic risk / deep BSDE |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 割引率曖昧性と二次反射型BSDEを結ぶ構成は専門読者に有用である。ただし、rates実務への距離と数値検証の範囲を踏まえ、頑健評価・最適停止の研究者向けに限定して推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 780 | 1,303 (143) | 0.0017 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 25,306 | 2,790 (677) | 0.1823 | PDF全文・31ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 19,174 | 11,781 (151) | 0.8287 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n| 週次統合 | gpt-6-astra / medium | 1 | 1,510 | 1,152 (0) | 0.0765 | 保存済みレビュー・1論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らは正則性・達成条件の下で停止価値の反射型BSDE表現と初回接触による最適停止則を示す。entropic driver $g(z)=\\frac{\\gamma}{2}|z|^2$には指数変換を適用し、離散反射と切断に基づく数値収束評価を与える。American putの数値例は$0.11638$で、binomial基準値$0.11973$を約$2.8\\%$下回った。\n\n**手法:** cash-subadditive risk measureの双対表現に測度変更と割引率の制御を導入し、非線形Snell envelopeと反射型BSDEを構成する。Markov設定でEuler離散化、離散反射、二次driverの切断、deep backward regressionを組み合わせる。\n\n**実務への応用:** モデルと割引率の双方に不確実性があるAmerican option評価、最適清算、投資タイミングの研究に利用できる。市場較正済みの金利評価基盤というより、頑健な停止問題の理論・数値benchmarkとして有用である。\n\n**限界・注意点:** 数値理論は決定論的・状態非依存volatilityに制限され、収束評価の定数は切断半径に対して大きくなり得る。定量的収束率の滑らかさ条件はstrikeで微分不可能なput payoffには直接適用できない。数値例は少数・低次元で、信頼区間、広範な感応度分析、市場較正がない。期間構造や市場摩擦も対象外である。\n\n## 8. Hierarchical Multi-Task Learning with Liquidity-Aware Signals for Stock Forecasting\n\n**[arXiv:2609.25617v1](https://arxiv.org/abs/2609.25617v1) — Hengyi Yang, Sida Lin, Yiyan Qi, Yankai Chen, Haohan Zhang, Xianhua Peng, Jian Guo**\n\n### 概要\n\nLiMTは中国A株の日次リターン、出来高ショック、volatilityを共同予測し、流動性制約付きposition sizingへ接続する。予測と執行capacityの橋渡しを試みる研究だが、直接的な約定モデルではない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | 株式予測 / multi-task learning / 流動性 / position sizing / 中国A株 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 出来高とriskの補助予測をcapacity-aware sizingへ接続する方法は参考になる。ただし、実際の売買制約を十分に再現していないため、収益結果より設計とablationを重視する条件付き推薦とする。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 926 | 1,186 (148) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 17,694 | 2,153 (516) | 0.1315 | PDF全文・9ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 19,174 | 11,781 (151) | 0.8287 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n| 週次統合 | gpt-6-astra / medium | 1 | 1,510 | 1,152 (0) | 0.0765 | 保存済みレビュー・1論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者報告ではCSI300・CSI500の予測評価で比較対象を上回る。別個のCSI300 long-short実験では、APOがequal weightに対し年率リターンを$3.99\\%$から$10.01\\%$、Sharpe ratioを$1.22$から$1.86$へ改善した一方、最大drawdownとturnoverは増加した。\n\n**手法:** 2008～2020年のCSI300・CSI500とQlib Alpha158を用い、銘柄間・時系列attentionとmulti-task mixture-of-expertsを組み合わせる。APOは予測上位・下位decileを対象に、$10\\,\\mathrm{bp}$の取引費用と日次売買代金の$2\\%$上限を課す。3初期値で反復し、component ablationも行う。\n\n**実務への応用:** 翌日リターンによる銘柄選択に、予測出来高と予測volatilityによるsizingを加える設計の参考になる。資金制約付き最適執行とは異なり、主に日次portfolio配分段階でcapacityを考慮する用途である。\n\n**限界・注意点:** testは2017～2020年の中国A株に限定される。構成銘柄履歴、上場廃止、空売り、borrow cost、税、非線形impactの扱いが不十分で、上限制約後の再正規化や未投資資金の処理も不明確である。主要表のlong-only評価とAPOのlong-short評価は直接比較できず、3反復だけでは頑健性の確認が限られる。\n\n## 9. Affine Pricing Models from Group Quantization and Holonomy\n\n**[arXiv:2609.28863v1](https://arxiv.org/abs/2609.28863v1) — Santiago Garcia**\n\n### 概要\n\nアフィン・ホロノミー群量子化により、アフィンモデルの価格評価偏微分方程式と一般化リッカチ方程式を同一の幾何学的構造から導く。CIR・Vasicek・Hestonなどのモデルを統一的に扱う理論研究であり、実務的な価格計算の改善を示すものではない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | affine pricing / Riccati方程式 / 幾何学的量子化 / CIRモデル / Vasicekモデル / pricing PDE |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 金利モデルを含むアフィン型の価格評価の構造を理解したい専門読者には価値がある。一方、今週の執行・リスク管理研究に比べて実務への即効性は低く、幾何学的手法に関心のある読者向けの推薦とする。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 805 | 1,192 (101) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 20,247 | 1,690 (219) | 0.1350 | PDF全文・28ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 19,174 | 11,781 (151) | 0.8287 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n| 週次統合 | gpt-6-astra / medium | 1 | 1,510 | 1,152 (0) | 0.0765 | 保存済みレビュー・1論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者は価格評価のシンボル $C_A(x,p)=F(p)+x^\\top R(p)$ を二次部分とホロノミーを担う補完部分に分解し、運動量表示からリッカチ流を、座標表示から標準的な価格評価作用素を再現する。主張される成果は既知の表現に共通する構造の提示であり、新しい価格公式ではない。\n\n**手法:** アフィン型のドリフト、共分散、割引をシンボルに集約し、シンプレクティック流、リー群の中心拡大、細道ホロノミーを構成する。アフィン型のポアンカレ–カルタン形式を異なる偏極のもとで還元し、Black–Scholes・Vasicek・CIR・Hestonなどのモデルを代入した例を示す。\n\n**実務への応用:** CIR・Vasicekなどの金利モデルにおいて、変換を用いた価格評価と偏微分方程式による価格評価の関係を整理するための理論的参考になる。較正、計算速度、ヘッジ精度の改善を目指す用途には、追加のアルゴリズム研究が必要である。\n\n**限界・注意点:** 対象は連続経路を持つ時間同次のアフィン拡散過程に限定され、ジャンプ、時間依存係数、行列値の状態は扱わない。数値実験、実データ、計算量比較、較正手法の提示はない。座標表示の作用素には特定の順序付けが必要であり、偏極の保存だけでは一意に決まらない。非アフィン項への拡張も未解決である。\n\n## 10. Functional Architecture of European Electricity Trading Markets: Requirements for AI Supported Trading Systems under Regulatory Constraints\n\n**[arXiv:2609.29108v1](https://arxiv.org/abs/2609.29108v1) — Walter Kurz, Wojtek Stricker**\n\n### 概要\n\nEU電力市場のforward、day-ahead、intraday、balancingを連結し、規制・参加資格・残余exposureを組み込むAI支援取引基盤を提案する。今週のOrderFusion+が予測を扱うのに対し、本稿は注文を許可する条件と運用統制を扱う。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | EU電力市場 / 電子取引 / pre-trade compliance / AIガバナンス / fail-closed制御 / 監査記録 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 価格予測だけでは不足する電力取引基盤の運用・統制要件を整理する点が有用である。検証済み取引手法や法令適合性の保証としてではなく、実装チェックリストとして推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 833 | 1,142 (71) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 13,196 | 1,579 (292) | 0.0976 | PDF全文・12ページ |\n| 週次統合 | gpt-6-astra / medium | 1 | 19,174 | 11,781 (151) | 0.8287 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n| 週次統合 | gpt-6-astra / medium | 1 | 1,510 | 1,152 (0) | 0.0765 | 保存済みレビュー・1論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 状態表現、残余数量、CVaRを含む目的関数、注文単位のpermission gate、不確実性較正、安全方策、監査記録を一つの仕様にまとめる。これは設計上の成果であり、収益改善や規制違反削減を実証した結果ではない。\n\n**手法:** EU規則、ACER・ENTSO-E資料、取引所rulebook、既存研究を整理するdesign-orientedな研究である。市場構造のmappingに基づき、費用・imbalance risk・規制コストを含む最適化、実行可能性判定、conformal prediction型区間、stress testingの仕様を構成する。\n\n**実務への応用:** 複数venueのgate closure、権限、REMIT等をpre-tradeで確認し、条件不成立時に注文を止めるfail-closed基盤の要件定義に使える。蓄電池dispatchや市場間の残余ポジション引継ぎ、意思決定から決済までのaudit trailにも参考となる。\n\n**限界・注意点:** 同期multi-venue dataによるbacktestやout-of-sample評価がなく、費用、latency、imbalance penaltyを含む経済価値は未検証である。各国・venueの差、feed障害、更新頻度、規制変更を十分にモデル化していない。個別control gateの効果やcomplianceの十分性も確認されていない。\n\n## 11. Sovereign Grassroots Currencies: A CBDC Architecture for Credit and Monetary Policy (Full Version)\n\n**[arXiv:2609.27727v1](https://arxiv.org/abs/2609.27727v1) — Ehud Shapiro**\n\n### 概要\n\nCBDCを信用供与と利付債券へ拡張し、中央銀行の政策運営を支えるgrassroots currenciesを提案する。主題は通貨制度・技術アーキテクチャであり、電子執行、市場マイクロストラクチャ、金利モデルへの直接的な貢献は限定的である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 2/10 | 非推奨 | CBDC / 通貨制度設計 / 金融政策 / デジタル債券 / 限定ソース |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 金利への言及はあるが、中心はCBDC制度設計であり、当サイトの定量的な執行・市場構造・rates研究とは距離がある。限定ソースでもあるため、今週の専門読書候補には含めない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 940 | 1,459 (121) | 0.0019 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 1,053 | 1,833 (463) | 0.0419 | 全55ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n| 週次統合 | gpt-6-astra / medium | 1 | 19,174 | 11,781 (151) | 0.8287 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n| 週次統合 | gpt-6-astra / medium | 1 | 1,510 | 1,152 (0) | 0.0765 | 保存済みレビュー・1論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者は、履行要求に応じる発行者のcoinについて法定通貨1単位が唯一の無裁定価格になると主張し、中央銀行の貸出・債券金利が同等条件の相手方金利を制約すると論じる。これは限定資料上の報告であり、証明や前提条件は確認されていない。\n\n**手法:** 中央銀行発行coin、民間発行のpar償還可能coin、満期・利息を持つbondという制度構成を提示する。無裁定議論の形式モデルや評価方法は、保存レビューの分析範囲では確認できない。\n\n**実務への応用:** 中央銀行が個人・法人に信用供与し、coinとbondで流動性や政策金利を管理する制度設計の参考になり得る。ただし、取引システムやrates評価への具体的な適用可能性は供給情報から判断できない。\n\n**限界・注意点:** sourceCoverageはabstract\\_introductionで、分析対象はabstractと極めて短いIntroductionのみである。55頁の全文を分析しておらず、証明、設計詳細、信用・流動性リスク、security、scalability、法制度、実験、付録は未確認である。政策上・技術上の妥当性を独立に評価できない。",
+      "papers": [
+        {
+          "arxivId": "2609.27786v1",
+          "title": "Feasible Multi-Asset Optimal Execution under Cash Constraints",
+          "authors": [
+            "Ryuji Hashimoto",
+            "Namid R. Stillman"
+          ],
+          "submittedDate": "2026-08-18",
+          "updatedDate": "2026-09-24",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.27786v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.27786v1",
+          "schedulerRank": 1,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 10/10",
+          "schedulerSummary": "Almgren–Chriss型の複数資産執行に各時点の期待累積支出上限を追加し、売却と買付の時点を共同最適化する。資金制約を凸QCQPへ落とす点で、今週の電子執行研究の中核となる。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 901 / 出力 1,013（うち推論 48） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 17,174 / 出力 1,903（うち推論 352） · PDF 8 pages · 推定 $0.1239\n週次統合: gpt-6-astra / medium · トークン 入力 19,174 / 出力 11,781（うち推論 151） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.8287\n週次統合: gpt-6-astra / medium · トークン 入力 1,510 / 出力 1,152（うち推論 0） · 保存済み日次レビュー使用／1論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0765",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.21173v1",
+          "title": "Adapting the Actor Model of Concurrency for High-Frequency Trading: Synchronous Message Delivery (fast_send) and a Tick-to-Book Latency Study",
+          "authors": [
+            "Vincent Maciejewski"
+          ],
+          "submittedDate": "2026-09-18",
+          "updatedDate": "2026-09-21",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.21173v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.21173v1",
+          "schedulerRank": 2,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "共置されたアクターのhandlerを送信側スレッドで直接実行するfast_sendを提案し、CME先物のmarket-data処理で遅延を評価する。今週の取引基盤研究では、具体的な実装と実データ計測を備えた論文として位置付けられる。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 980 / 出力 1,097（うち推論 33） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 24,296 / 出力 2,007（うち推論 473） · PDF 31 pages · 推定 $0.1616\n週次統合: gpt-6-astra / medium · トークン 入力 19,174 / 出力 11,781（うち推論 151） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.8287\n週次統合: gpt-6-astra / medium · トークン 入力 1,510 / 出力 1,152（うち推論 0） · 保存済み日次レビュー使用／1論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0765",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.25965v1",
+          "title": "Modeling interest rate swap volatility with GARCH processes",
+          "authors": [
+            "Michał Balcerek",
+            "Michał Wronka"
+          ],
+          "submittedDate": "2026-09-22",
+          "updatedDate": "2026-09-23",
+          "topics": [
+            "Interest-rate models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.25965v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.25965v1",
+          "schedulerRank": 3,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "USDの1年先10年フォワード・スワップレートについて、GARCH、GJR-GARCH、2レジームMSGARCHを比較する。保存レビューの分析範囲はabstractとIntroductionのみであり、51頁の全文を分析した評価ではない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 868 / 出力 1,202（うち推論 51） · 推定 $0.0016\n一次判定: gpt-5.6-luna / low · トークン 入力 868 / 出力 1,283（うち推論 52） · 推定 $0.0017\n論文解析: gpt-5.6-sol / medium · トークン 入力 2,544 / 出力 1,969（うち推論 303） · 全51ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0521\n週次統合: gpt-6-astra / medium · トークン 入力 19,174 / 出力 11,781（うち推論 151） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.8287\n週次統合: gpt-6-astra / medium · トークン 入力 1,510 / 出力 1,152（うち推論 0） · 保存済み日次レビュー使用／1論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0765",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.26606v1",
+          "title": "Liquidity Provision and Rebate Design in Option Markets",
+          "authors": [
+            "Samuel N. Cohen",
+            "Lyndon Drake",
+            "Zihan Guo",
+            "Christoph Reisinger"
+          ],
+          "submittedDate": "2026-09-22",
+          "updatedDate": "2026-09-23",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.26606v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.26606v1",
+          "schedulerRank": 4,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "複数オプションのmarket makingと取引所のrebate設計を統合し、limit orderとmarket-order hedgeを同時に最適化する。今週の市場設計研究では、流動性目標から報酬を逆算する点が中心的な貢献である。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 782 / 出力 1,001（うち推論 61） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 43,138 / 出力 1,952（うち推論 208） · PDF 36 pages · 推定 $0.2547\n週次統合: gpt-6-astra / medium · トークン 入力 19,174 / 出力 11,781（うち推論 151） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.8287\n週次統合: gpt-6-astra / medium · トークン 入力 1,510 / 出力 1,152（うち推論 0） · 保存済み日次レビュー使用／1論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0765",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.23598v1",
+          "title": "OrderFusion+: Probabilistic Buy--Sell Price Trajectory Forecasting in Intraday Electricity Markets",
+          "authors": [
+            "Runyao Yu",
+            "Derek W. Bunn"
+          ],
+          "submittedDate": "2026-09-20",
+          "updatedDate": "2026-09-22",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.23598v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.23598v1",
+          "schedulerRank": 5,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "OrderFusion+は、ドイツ時間内電力市場の買い・売り注文と隣接受渡商品の情報から価格軌跡を分位点予測する。今週の電力市場研究では予測モデルを担うが、執行や収益の検証まで進んだ研究ではない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 889 / 出力 1,076（うち推論 104） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 21,641 / 出力 2,138（うち推論 573） · PDF 10 pages · 推定 $0.1510\n週次統合: gpt-6-astra / medium · トークン 入力 19,174 / 出力 11,781（うち推論 151） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.8287\n週次統合: gpt-6-astra / medium · トークン 入力 1,510 / 出力 1,152（うち推論 0） · 保存済み日次レビュー使用／1論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0765",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.23703v1",
+          "title": "Financial Language Models as Applied Artificial Intelligence Systems for News-Based Trading under Market Frictions",
+          "authors": [
+            "Kemal Kirtac"
+          ],
+          "submittedDate": "2026-09-20",
+          "updatedDate": "2026-09-22",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.23703v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.23703v1",
+          "schedulerRank": 6,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "MFASTは、企業ニュースのlanguage model評価に時刻整合、確率校正、取引費用、流動性、capacity、計算負荷を組み込む。高いbacktest成績よりも、予測モデルを取引可能性の観点から比較する評価枠組みが主要な読みどころである。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 922 / 出力 1,055（うち推論 72） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 22,303 / 出力 2,066（うち推論 405） · PDF 47 pages · 推定 $0.1528\n週次統合: gpt-6-astra / medium · トークン 入力 19,174 / 出力 11,781（うち推論 151） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.8287\n週次統合: gpt-6-astra / medium · トークン 入力 1,510 / 出力 1,152（うち推論 0） · 保存済み日次レビュー使用／1論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0765",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.23768v1",
+          "title": "Risk Measures under Paired-Ambiguity: A Deep Learning Reflected BSDE Framework",
+          "authors": [
+            "Nacira Agram",
+            "Jan Rems",
+            "Emanuela Rosazza Gianin"
+          ],
+          "submittedDate": "2026-09-20",
+          "updatedDate": "2026-09-22",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.23768v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.23768v1",
+          "schedulerRank": 7,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "確率モデルと割引率の曖昧性を同時に扱う最適停止問題を、上側反射型BSDEとdeep learningで解析する。ratesとの接点は割引率不確実性であり、yield curveや金利商品の較正を扱う研究ではない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 780 / 出力 1,303（うち推論 143） · 推定 $0.0017\n論文解析: gpt-5.6-sol / medium · トークン 入力 25,306 / 出力 2,790（うち推論 677） · PDF 31 pages · 推定 $0.1823\n週次統合: gpt-6-astra / medium · トークン 入力 19,174 / 出力 11,781（うち推論 151） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.8287\n週次統合: gpt-6-astra / medium · トークン 入力 1,510 / 出力 1,152（うち推論 0） · 保存済み日次レビュー使用／1論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0765",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.25617v1",
+          "title": "Hierarchical Multi-Task Learning with Liquidity-Aware Signals for Stock Forecasting",
+          "authors": [
+            "Hengyi Yang",
+            "Sida Lin",
+            "Yiyan Qi",
+            "Yankai Chen",
+            "Haohan Zhang",
+            "Xianhua Peng",
+            "Jian Guo"
+          ],
+          "submittedDate": "2026-09-22",
+          "updatedDate": "2026-09-23",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.25617v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.25617v1",
+          "schedulerRank": 8,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "LiMTは中国A株の日次リターン、出来高ショック、volatilityを共同予測し、流動性制約付きposition sizingへ接続する。予測と執行capacityの橋渡しを試みる研究だが、直接的な約定モデルではない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 926 / 出力 1,186（うち推論 148） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 17,694 / 出力 2,153（うち推論 516） · PDF 9 pages · 推定 $0.1315\n週次統合: gpt-6-astra / medium · トークン 入力 19,174 / 出力 11,781（うち推論 151） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.8287\n週次統合: gpt-6-astra / medium · トークン 入力 1,510 / 出力 1,152（うち推論 0） · 保存済み日次レビュー使用／1論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0765",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.28863v1",
+          "title": "Affine Pricing Models from Group Quantization and Holonomy",
+          "authors": [
+            "Santiago Garcia"
+          ],
+          "submittedDate": "2026-09-24",
+          "updatedDate": "2026-09-25",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.28863v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.28863v1",
+          "schedulerRank": 9,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "アフィン・ホロノミー群量子化により、アフィンモデルの価格評価偏微分方程式と一般化リッカチ方程式を同一の幾何学的構造から導く。CIR・Vasicek・Hestonなどのモデルを統一的に扱う理論研究であり、実務的な価格計算の改善を示すものではない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 805 / 出力 1,192（うち推論 101） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 20,247 / 出力 1,690（うち推論 219） · PDF 28 pages · 推定 $0.1350\n週次統合: gpt-6-astra / medium · トークン 入力 19,174 / 出力 11,781（うち推論 151） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.8287\n週次統合: gpt-6-astra / medium · トークン 入力 1,510 / 出力 1,152（うち推論 0） · 保存済み日次レビュー使用／1論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0765",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.29108v1",
+          "title": "Functional Architecture of European Electricity Trading Markets: Requirements for AI Supported Trading Systems under Regulatory Constraints",
+          "authors": [
+            "Walter Kurz",
+            "Wojtek Stricker"
+          ],
+          "submittedDate": "2026-09-24",
+          "updatedDate": "2026-09-25",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.29108v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.29108v1",
+          "schedulerRank": 10,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "EU電力市場のforward、day-ahead、intraday、balancingを連結し、規制・参加資格・残余exposureを組み込むAI支援取引基盤を提案する。今週のOrderFusion+が予測を扱うのに対し、本稿は注文を許可する条件と運用統制を扱う。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 833 / 出力 1,142（うち推論 71） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 13,196 / 出力 1,579（うち推論 292） · PDF 12 pages · 推定 $0.0976\n週次統合: gpt-6-astra / medium · トークン 入力 19,174 / 出力 11,781（うち推論 151） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.8287\n週次統合: gpt-6-astra / medium · トークン 入力 1,510 / 出力 1,152（うち推論 0） · 保存済み日次レビュー使用／1論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0765",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.27727v1",
+          "title": "Sovereign Grassroots Currencies: A CBDC Architecture for Credit and Monetary Policy (Full Version)",
+          "authors": [
+            "Ehud Shapiro"
+          ],
+          "submittedDate": "2026-09-23",
+          "updatedDate": "2026-09-24",
+          "topics": [
+            "Out of scope"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.27727v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.27727v1",
+          "schedulerRank": 11,
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 2/10",
+          "schedulerSummary": "CBDCを信用供与と利付債券へ拡張し、中央銀行の政策運営を支えるgrassroots currenciesを提案する。主題は通貨制度・技術アーキテクチャであり、電子執行、市場マイクロストラクチャ、金利モデルへの直接的な貢献は限定的である。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 940 / 出力 1,459（うち推論 121） · 推定 $0.0019\n論文解析: gpt-5.6-sol / medium · トークン 入力 1,053 / 出力 1,833（うち推論 463） · 全55ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0419\n週次統合: gpt-6-astra / medium · トークン 入力 19,174 / 出力 11,781（うち推論 151） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.8287\n週次統合: gpt-6-astra / medium · トークン 入力 1,510 / 出力 1,152（うち推論 0） · 保存済み日次レビュー使用／1論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0765",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 2,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

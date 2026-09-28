@@ -4157,6 +4157,156 @@
       "periodEnd": null,
       "sourceText": "## 2026年9月27日 — 日次レビュー\n\n通常の公開スケジュール上、新しいarXivバッチは予定されていません。\n\n### この号の利用状況\n\nモデル・effort・トークン数：未記録。\n\n\n**推薦論文: なし**",
       "papers": []
+    },
+    {
+      "editionId": "2026-09-28-daily-openai-01",
+      "editionDate": "2026-09-28",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-28T14:21:49Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-28",
+      "observedBatchDate": "2026-09-28",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月28日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 13 | 11,206 | 14,158 (858) | 0.0192 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 6 | 97,852 | 12,616 (2,442) | 0.6748 | PDF全文・16ページ / PDF全文・6ページ / PDF全文・23ページ / 全76ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 / PDF全文・35ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Agentic Limit Order Books: Phase Transitions and Market Impact\n\n**[arXiv:2609.31260v1](https://arxiv.org/abs/2609.31260v1) — Jan Rosenzweig**\n\n### 概要\n\n自律エージェントだけで構成した合成Limit Order Bookを用い、流動性供給者数と観測深度に応じた市場状態、および単発の大口注文後のmarket impactをシミュレーションしている。崩壊・連続流動性・凍結という3状態を報告するが、実市場への較正や実証検証は行われていない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 非推奨 | 指値注文板 / 市場マイクロストラクチャー / エージェントベースモデル / 強化学習 / マーケットインパクト / 相転移 / 流動性崩壊 / 執行シミュレーション |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** Agentic LOBを反応型execution simulatorとして捉え、phase transitionとimpactを同じ枠組みで検討する着想はサイト分野に適合する。一方、エージェント学習の仕様、実証的較正、統計的不確実性、注文量別impact分析が不足しており、主要な臨界値やsquare-root則からの逸脱を頑健な結論として採用できないため、現段階では推奨しない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 756 | 985 (75) | 0.0013 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 6,811 | 2,163 (507) | 0.0773 | PDF全文・6ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者のシミュレーションでは、崩壊から連続流動性への境界は深度に依存しない一定の臨界エージェント数で決まり、連続流動性と凍結の境界は$d_c\\propto n$と報告される。また、連続流動性状態では約$\\sigma=4.21$ ticksを境にimpactが減衰型から非減衰型へ移り、凍結状態では約$\\sigma=0.1$ ticksを境にcrackingとmeltingが現れるとしている。ただし、注文量は実質的に$Q=200$の一点しか検証していないため、square-root impactからの逸脱や一般的なimpact関数は立証されていない。\n\n**手法:** 1体の確率的Market Agent、$n$体のLiquidity Provider、$\\max(3,\\lfloor n/3\\rfloor)$体のScalperからなる離散時間double auctionを構築し、各$(n,d)$設定について100,000 callbacksの経路を10,000本生成する。mid-price volatilityと片側bookが空になるcollapse probabilityを測定する。Impact実験では時点$t_Q=10$に$Q=200$の買い注文を投入し、$Q=0$の対照群との差を$z(t)=(\\mu_I(t)-\\mu_N(t))/\\sqrt{\\sigma_I(t)\\sigma_N(t)}$で評価する。\n\n**実務への応用:** Agent-based LOBをexecution strategyの反応型stress-testing環境として利用し、流動性崩壊、価格硬直、注文後のcascadeをシナリオ分析する用途が想定される。もっとも、提示された臨界値をlive execution、circuit breaker、VaRへ直接適用するには、実データによる較正と異質な戦略群での再検証が必要である。\n\n**限界・注意点:** エージェント集団が同質的で、Market Agentのflowも主にdrift-freeである。RLの状態・報酬・学習アルゴリズム・訓練手順・収束診断がほぼ記載されず、再現性を判断しにくい。実市場への較正、out-of-sample検証、現実的なlatency・優先順位・手数料・情報非対称性、異質な注文サイズや戦略は扱われない。Phase boundaryとvolatility閾値には推定誤差や感度分析が示されず、impactは単一の非ゼロ注文量に基づく。さらに、採用した$z$-scoreの分母は通常の平均差の標準誤差ではなく、経路間の統計的有意性を直接示さない。実市場との類似性も定性的な図の比較にとどまる。\n\n## 2. How Much Must a Private Mempool Hide? Exact Leakage Thresholds for Sandwich Attacks\n\n**[arXiv:2609.31379v1](https://arxiv.org/abs/2609.31379v1) — Tingyi Lin, Jiazhuo Li, Ruoran Lai**\n\n### 概要\n\nprivate mempoolから注文サイズの区間、方向、slippage toleranceが漏れる状況で、fee-free constant-product AMMに対するsandwich attackの成立条件を理論的に分析する。論文は、全候補サイズで被害注文を約定可能にするrobust front-runでは、漏洩区間の下限だけが実行可能性と保証利益を決めると報告する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | private mempool / サンドイッチ攻撃 / MEV / constant-product AMM / 注文情報漏洩 / execution auction / robust admissibility / 市場マイクロストラクチャ |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** DeFi固有の設定ではあるが、order-flow leakage、adverse execution、execution-right auctionというmarket microstructure上の論点を明確な必要十分条件まで落とし込んでいる。証明は本文と付録で提示され、privacy設計への示唆も具体的である一方、実証性と一般的なAMM・複数注文環境への外的妥当性は限定的である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 903 | 1,237 (69) | 0.0017 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 21,123 | 1,999 (516) | 0.1456 | PDF全文・23ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 漏洩区間を$[\\ell,u]$とすると、最大のrobust front-runが各サイズでの利益、期待利益、最悪時利益を同時に最大化し、保証gross profitは$W=\\tau\\ell(X+\\ell)/(X+\\tau\\ell)$となる。固定実行費用$c$を差し引いて全候補サイズで正の利益を得られる必要十分条件は$\\ell›\\lambda_c$であり、$c/X$が小さいとき$\\lambda_c\\approx c/\\tau$である。また、対称・risk-neutralなtraderが2者以上いるfirst-price execution auctionでは、正の期待net rentをauctioneerが全額獲得すると論文は示す。\n\n**手法:** 単一被害注文とfee-free constant-product invariantを用いた解析モデルを構築し、被害者の相対出力と攻撃者利益の単調性からrobust admissibilityを導出する。その後、最適front-run、closed-formの利益閾値、bit-prefix leakage、hidden direction、hidden slippage、swap feeの比較結果を定理として証明し、対称入札者によるfirst-price auctionをpure-strategy perfect Bayesian equilibriumで解析する。実証実験は行っていない。\n\n**実務への応用:** private mempoolやencrypted order-flow設計では、注文サイズの上限漏洩よりも、$\\lambda_c$を超える下限の漏洩を避けることがrobust sandwich抑止に重要となる。方向まで隠せば、方向判明前に固定する単一のfirst legでは両方向をfront-runできない一方、約定後のarbitrageは残り得る。\n\n**限界・注意点:** 結果は主に単一victim、constant-product AMM、既知のpair・方向・slippage tolerance、区間型leakage、固定費用、対称かつrisk-neutralなtrader、単一execution slot、pure strategyを仮定する。厳密なclosed formはfee-freeモデルに依存し、swap feeについては主に一方向の比較、Uniswap v3については単一tick内の局所的適用に限られる。複数注文、一般CFMM、非対称参加者、離散入札、失敗確率を許す攻撃、実運用データによる妥当性検証は対象外であり、期待利益型の攻撃やpost-trade arbitrageは完全な事前秘匿でも排除されない。\n\n## 3. Tolerable Inflation, Intolerable Uncertainty\n\n**[arXiv:2609.31512v1](https://arxiv.org/abs/2609.31512v1) — Eric Vansteenberghe**\n\n### 概要\n\n76ページの論文だが、提供されたAbstractとIntroductionのみを用いた限定レビューであり、全文は未提供である。著者は、数値インフレ目標が期待を安定化する一方、目標超過時には政策上正当なlook-throughと目標の実質的なドリフトが観察上同値となり、インフレ不確実性を押し上げると主張する。証明、実証分析、Appendixは確認していない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | インフレ目標 / インフレ不確実性 / 金融政策 / 観察上の同値性 / New Keynesian model / 期待形成 / inflation swaps / inflation options / 貸出金利 / Normalized Uncertainty |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** インフレ目標、期待形成、金利・信用価格への波及を結び付け、rates研究で頻用される不確実性指標の測定誤差に具体的な修正を提案しているため関連性は高い。ただし、限定ソースでは中心的な識別主張と実証結果を検証できないため、現段階の推奨は全文確認を前提とする。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 929 | 1,186 (78) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 5,176 | 1,783 (402) | 0.0615 | 全76ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者は、予測分散が目標以下では平坦、目標超過幅に対して線形に上昇し、公表目標でkinkを持つと主張する。また、目標からの距離が専門家予測分散の変動の70%を説明し、その成分を除くNormalized Uncertaintyの1標準偏差上昇がフランスの企業向け貸出金利89 basis points上昇と関連すると報告する。ただし、これはAbstractとIntroductionに記載された著者の主張のみであり、全文未提供のため証明、推定、頑健性は検証していない。\n\n**手法:** Introductionによれば、New Keynesian modelで政策反応と一時的なインフレ許容の識別不能性を示し、有限かつ異質な忍耐閾値を持つ主体のモデルから分散の片側線形則を導く。著者はECBおよび米国の専門家予測、inflation swaps、inflation options、実現インフレ、フランスの71,069件の当座貸越、クロスカントリー成長回帰、VARを用いると説明している。\n\n**実務への応用:** 中央銀行、金利ストラテジスト、信用リスク分析者に対し、survey、inflation swap、option由来の不確実性指標をそのまま用いず、インフレの目標距離で予測可能な成分を除去してから貸出金利、成長、景気反応との関係を分析する方法を提案している。\n\n**限界・注意点:** 全文76ページは提供されず、AbstractとIntroductionだけに基づくため、理論命題の証明、データ構築、サンプル選択、推定仕様、標準誤差、代替説明、因果識別、頑健性検証、Appendixを評価できない。70%や89 basis pointsなどの数値は著者報告であり、独立に確認していない。Normalized Uncertaintyが「真の」不確実性を分離するという解釈も、未確認の仮定とモデル依存性を伴う。\n\n## 4. Algorithmic trading and stochastic integration\n\n**[arXiv:2609.31578v1](https://arxiv.org/abs/2609.31578v1) — Aleksandar Arandjelovic, Uwe Schmock**\n\n### 概要\n\n連続時間の摩擦なし市場で、有限個の観測を入力とするニューラルネットワーク係数の単純予測可能戦略が、一般の予測可能な取引戦略とその確率積分を近似できることを示す理論論文である。Orlicz空間の普遍近似から出発し、平均分散ヘッジ、同値マルチンゲール測度、semimartingale判定への帰結を導く。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | algorithmic trading / stochastic integration / neural networks / semimartingales / Orlicz spaces / mean-variance hedging / partial information / equivalent martingale measures / Bichteler–Dellacherie theorem / universal approximation |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 電子執行そのものやmarket microstructureの実証研究ではないが、ニューラルネットワーク型取引戦略が連続時間の確率積分理論をどこまで保持するかを厳密に示しており、deep hedgingとalgorithmic tradingの数学的基礎として価値が高い。特に、ヘッジ最適値、no-free-lunch、semimartingale特徴付けを同じ制限戦略クラスで結び付けた点が重要である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 776 | 1,179 (84) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 35,726 | 2,157 (352) | 0.2218 | PDF全文・35ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 論文は、semimartingale価格過程$X$に対する任意の予測可能かつ$X$-可積分な戦略$V$について、algorithmic strategy $V^n$を用いた積分$V^n\\cdot X$が$V\\cdot X$へsemimartingale topologyで収束すると報告する。càglàdな$V$では戦略自体もucp収束し、追加の可積分性の下では$L^p(X)$および$H^p_{\\mathrm{sm}}$での収束も得られる。また、部分情報下の最小平均分散ヘッジ誤差はalgorithmic strategyへの制限で変わらず、適切な条件下でno-free-lunchと同値マルチンゲール測度の存在が同値となり、Bichteler–Dellacherieのsemimartingale特徴付けも限定された戦略クラスで成立する。\n\n**手法:** 有限測度上の一般の可測空間について、bounded sigmoidal activationを持つ浅いニューラルネットワークのOrlicz heartでの稠密性をHahn–Banach分離とdiscriminatory propertyにより証明する。次に、生成族が非可算でも可測変数が可算個、最終的には有限個の観測に依存するネットワークで近似できることを、条件付き期待値と$\\Delta_2$条件下のOrlicz収束から導く。この結果を単純予測可能過程へ拡張し、確率積分の優収束、functional monotone class、stochastic integral isometry、既存のBichteler–Dellacherieおよびmartingale-measure分離定理を用いて金融上の系を証明する。\n\n**実務への応用:** 連続時間deep hedgingで、各取引時点のポジションを停止時刻と有限個の市場観測を入力とする浅いニューラルネットワークで表現することへの理論的根拠を与える。特に、二乗ヘッジ誤差の最適値を保ったままニューラルネットワーク戦略へ近似できるため、部分情報下のヘッジ設計や戦略クラスの妥当性検証に利用できる。ただし、近似率や学習手順は提供されない。\n\n**限界・注意点:** 結果は主として質的な稠密性であり、近似率、必要なnetwork width、sample complexity、訓練アルゴリズム、数値実験を含まない。主要な確率積分結果はLévy processが生成する通常条件付きfiltration、bounded sigmoidal activation、摩擦なし市場に依存する。取引費用、market impact、流動性制約、注文執行、portfolio constraintsは扱わず、平均分散ヘッジには$H^2_{\\mathrm{sm}}$型の積分可能性が必要である。したがって、実市場での実装可能性やexecution performanceは論文からは判断できない。\n\n## 5. Stability of Change-of-Numéraire Reweighting: An Exact Wasserstein Boundary\n\n**[arXiv:2609.30329v1](https://arxiv.org/abs/2609.30329v1) — Shaosai Huang**\n\n### 概要\n\n正のnuméraire $A$ で基礎法則を再加重し、比率 $B/A$ をpushforwardして得る分布のWasserstein安定性を研究する。論文は、弱収束、numéraireの一様可積分性、正の極限平均の下で、$W_s$収束を基礎法則上の単一のratio-tail条件によって特徴付ける。annuity measure下のswap rate、martingale optimal transportのnuméraire inversion、self-normalized importance samplingを共通の枠組みで扱う。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 2/10 | 推奨 | numéraire変更 / Wasserstein安定性 / annuity measure / swap rate / swaption / 一様可積分性 / martingale optimal transport / CMS二次moment / self-normalized importance sampling / 境界mass |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** change of numéraire後の分布について、弱い安定性だけでなく$W_s$安定性の必要十分条件を基礎法則上で明示しており、金利デリバティブとmartingale optimal transportの双方に直接関連する。特に一次価格量と高次moment依存量の差を明確にし、bounded primitive inputsでも二次統計量が不安定になり得ることをsharpな例で示す点が有用である。ただし実務導入には、具体的な金利モデルで仮定を検証し、定量的な誤差評価を追加する必要がある。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 818 | 1,079 (88) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 14,508 | 2,251 (322) | 0.1176 | PDF全文・16ページ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 14,508 | 2,263 (343) | 0.0511 | PDF全文・16ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 論文の主結果は、再加重分布の$W_s$収束が、$|B_n|^sA_n^{1-s}$のtailを事象 $\\{|B_n|›RA_n\\}$上で一様に消失させる条件と同値だという主張である。極限法則が$\\{A=0\\}$を持たない場合、これは$\\{|B_n|^sA_n^{1-s}\\}$の通常の一様可積分性と同値になる。$s=1$ではnuméraireが厳密に相殺され、payoff $|B_n|$の一様可積分性の下で残る障害は極限の$\\{A=0\\}$上にある非ゼロpayoff massだけであり、$1/A_n$のmoment条件は不要とされる。二点分布の反例により、任意の$s›1$で閾値が達成されることも示す。\n\n**手法:** まずperspective identityにより、再加重後の$s$次momentを$\\mathbb{E}[|B|^sA^{1-s}]/\\mathbb{E}[A]$へ変換する。次にtruncationとnuméraireの一様可積分性から再加重分布の弱収束を証明し、Wasserstein収束の「弱収束＋moment収束」特徴付けを適用して必要十分条件を導く。境界$\\{A=0\\}$を明示的に扱い、二点分布によるsharpness例、compactなmodel・contract class上のjoint continuity、martingale transportとswap-rate marginalへの応用を提示する。\n\n**実務への応用:** 金利分野では、primitive lawの収束からannuity-measure swap-rate分布、physically settled swaption価格、normalized call-price curveの安定性を判定できる。一次の価格量にはinverse-annuity momentを要求しない一方、二次moment $\\mathbb{E}[B^2/A]/\\mathbb{E}[A]$を使うCMS型近似には$B^2/A$の一様可積分性が必要であり、call価格が収束しても二次統計量は収束し得ない。martingale optimal transportでは、numéraire inversionの$W_s$安定性をinverse momentの一様可積分性として判定できる。\n\n**限界・注意点:** 結果は理論的な漸近安定性であり、収束速度、有限標本誤差、calibration誤差、数値実験は与えない。主要結論は弱収束、numéraireの一様可積分性、正の極限平均、および必要なratio-tail条件に依存する。swaptionへの反例は抽象的なprimitive lawであり、現実の金利モデルにおけるbond、annuity、leg value間のno-arbitrage制約を組み込んでいない。cash settlementについても市場pricing measureの構成や逆問題のinverse-annuity条件を解決せず、指定されたweighted lawのforward stabilityだけを扱う。",
+      "papers": [
+        {
+          "arxivId": "2609.31260v1",
+          "title": "Agentic Limit Order Books: Phase Transitions and Market Impact",
+          "authors": [
+            "Jan Rosenzweig"
+          ],
+          "submittedDate": "2026-09-25",
+          "updatedDate": "2026-09-28",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.31260v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.31260v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 8/10",
+          "schedulerSummary": "自律エージェントだけで構成した合成Limit Order Bookを用い、流動性供給者数と観測深度に応じた市場状態、および単発の大口注文後のmarket impactをシミュレーションしている。崩壊・連続流動性・凍結という3状態を報告するが、実市場への較正や実証検証は行われていない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 756 / 出力 985（うち推論 75） · 推定 $0.0013\n論文解析: gpt-5.6-sol / medium · トークン 入力 6,811 / 出力 2,163（うち推論 507） · PDF 6 pages · 推定 $0.0773",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.31379v1",
+          "title": "How Much Must a Private Mempool Hide? Exact Leakage Thresholds for Sandwich Attacks",
+          "authors": [
+            "Tingyi Lin",
+            "Jiazhuo Li",
+            "Ruoran Lai"
+          ],
+          "submittedDate": "2026-09-25",
+          "updatedDate": "2026-09-28",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.31379v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.31379v1",
+          "schedulerRank": 2,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "private mempoolから注文サイズの区間、方向、slippage toleranceが漏れる状況で、fee-free constant-product AMMに対するsandwich attackの成立条件を理論的に分析する。論文は、全候補サイズで被害注文を約定可能にするrobust front-runでは、漏洩区間の下限だけが実行可能性と保証利益を決めると報告する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 903 / 出力 1,237（うち推論 69） · 推定 $0.0017\n論文解析: gpt-5.6-sol / medium · トークン 入力 21,123 / 出力 1,999（うち推論 516） · PDF 23 pages · 推定 $0.1456",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.31512v1",
+          "title": "Tolerable Inflation, Intolerable Uncertainty",
+          "authors": [
+            "Eric Vansteenberghe"
+          ],
+          "submittedDate": "2026-09-25",
+          "updatedDate": "2026-09-28",
+          "topics": [
+            "Rates"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.31512v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.31512v1",
+          "schedulerRank": 3,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "76ページの論文だが、提供されたAbstractとIntroductionのみを用いた限定レビューであり、全文は未提供である。著者は、数値インフレ目標が期待を安定化する一方、目標超過時には政策上正当なlook-throughと目標の実質的なドリフトが観察上同値となり、インフレ不確実性を押し上げると主張する。証明、実証分析、Appendixは確認していない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 929 / 出力 1,186（うち推論 78） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 5,176 / 出力 1,783（うち推論 402） · 全76ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0615",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.31578v1",
+          "title": "Algorithmic trading and stochastic integration",
+          "authors": [
+            "Aleksandar Arandjelovic",
+            "Uwe Schmock"
+          ],
+          "submittedDate": "2026-09-25",
+          "updatedDate": "2026-09-28",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.31578v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.31578v1",
+          "schedulerRank": 4,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "連続時間の摩擦なし市場で、有限個の観測を入力とするニューラルネットワーク係数の単純予測可能戦略が、一般の予測可能な取引戦略とその確率積分を近似できることを示す理論論文である。Orlicz空間の普遍近似から出発し、平均分散ヘッジ、同値マルチンゲール測度、semimartingale判定への帰結を導く。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 776 / 出力 1,179（うち推論 84） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 35,726 / 出力 2,157（うち推論 352） · PDF 35 pages · 推定 $0.2218",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.30329v1",
+          "title": "Stability of Change-of-Numéraire Reweighting: An Exact Wasserstein Boundary",
+          "authors": [
+            "Shaosai Huang"
+          ],
+          "submittedDate": "2026-09-24",
+          "updatedDate": "2026-09-28",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.30329v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.30329v1",
+          "schedulerRank": 5,
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 2/10",
+          "schedulerSummary": "正のnuméraire $A$ で基礎法則を再加重し、比率 $B/A$ をpushforwardして得る分布のWasserstein安定性を研究する。論文は、弱収束、numéraireの一様可積分性、正の極限平均の下で、$W_s$収束を基礎法則上の単一のratio-tail条件によって特徴付ける。annuity measure下のswap rate、martingale optimal transportのnuméraire inversion、self-normalized importance samplingを共通の枠組みで扱う。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 818 / 出力 1,079（うち推論 88） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 14,508 / 出力 2,251（うち推論 322） · PDF 16 pages · 推定 $0.1176\n論文解析: gpt-5.6-sol / medium · トークン 入力 14,508 / 出力 2,263（うち推論 343） · PDF 16 pages · 推定 $0.0511",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 2,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

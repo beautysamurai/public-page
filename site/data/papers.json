@@ -2,6 +2,77 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-09-28-daily-openai-01",
+      "date": "2026-09-28",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.31260v1",
+          "title": "Agentic Limit Order Books: Phase Transitions and Market Impact",
+          "authors": [
+            "Jan Rosenzweig"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.31379v1",
+          "title": "How Much Must a Private Mempool Hide? Exact Leakage Thresholds for Sandwich Attacks",
+          "authors": [
+            "Tingyi Lin",
+            "Jiazhuo Li",
+            "Ruoran Lai"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.31512v1",
+          "title": "Tolerable Inflation, Intolerable Uncertainty",
+          "authors": [
+            "Eric Vansteenberghe"
+          ],
+          "topics": [
+            "Rates"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.31578v1",
+          "title": "Algorithmic trading and stochastic integration",
+          "authors": [
+            "Aleksandar Arandjelovic",
+            "Uwe Schmock"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.30329v1",
+          "title": "Stability of Change-of-Numéraire Reweighting: An Exact Wasserstein Boundary",
+          "authors": [
+            "Shaosai Huang"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-09-27-daily-openai-01",
       "date": "2026-09-27",
       "kind": "daily",

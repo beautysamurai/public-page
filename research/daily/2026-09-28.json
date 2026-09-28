@@ -1,0 +1,918 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-09-28",
+  "generatedAt": "2026-09-28T14:21:49Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-09-28 was confirmed with 5 relevant paper(s).",
+  "expectedBatchDate": "2026-09-28",
+  "observedBatchDate": "2026-09-28",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2609.31260v1",
+        "title": "Agentic Limit Order Books: Phase Transitions and Market Impact",
+        "authors": [
+          "Jan Rosenzweig"
+        ],
+        "submittedDate": "2026-09-25",
+        "updatedDate": "2026-09-28",
+        "categories": [
+          "cs.AI",
+          "q-fin.CP",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "自律エージェントだけで構成した合成Limit Order Bookを用い、流動性供給者数と観測深度に応じた市場状態、および単発の大口注文後のmarket impactをシミュレーションしている。崩壊・連続流動性・凍結という3状態を報告するが、実市場への較正や実証検証は行われていない。",
+        "mainResult": "著者のシミュレーションでは、崩壊から連続流動性への境界は深度に依存しない一定の臨界エージェント数で決まり、連続流動性と凍結の境界は$d_c\\propto n$と報告される。また、連続流動性状態では約$\\sigma=4.21$ ticksを境にimpactが減衰型から非減衰型へ移り、凍結状態では約$\\sigma=0.1$ ticksを境にcrackingとmeltingが現れるとしている。ただし、注文量は実質的に$Q=200$の一点しか検証していないため、square-root impactからの逸脱や一般的なimpact関数は立証されていない。",
+        "practicalApplication": "Agent-based LOBをexecution strategyの反応型stress-testing環境として利用し、流動性崩壊、価格硬直、注文後のcascadeをシナリオ分析する用途が想定される。もっとも、提示された臨界値をlive execution、circuit breaker、VaRへ直接適用するには、実データによる較正と異質な戦略群での再検証が必要である。",
+        "methodology": "1体の確率的Market Agent、$n$体のLiquidity Provider、$\\max(3,\\lfloor n/3\\rfloor)$体のScalperからなる離散時間double auctionを構築し、各$(n,d)$設定について100,000 callbacksの経路を10,000本生成する。mid-price volatilityと片側bookが空になるcollapse probabilityを測定する。Impact実験では時点$t_Q=10$に$Q=200$の買い注文を投入し、$Q=0$の対照群との差を$z(t)=(\\mu_I(t)-\\mu_N(t))/\\sqrt{\\sigma_I(t)\\sigma_N(t)}$で評価する。",
+        "limitations": "エージェント集団が同質的で、Market Agentのflowも主にdrift-freeである。RLの状態・報酬・学習アルゴリズム・訓練手順・収束診断がほぼ記載されず、再現性を判断しにくい。実市場への較正、out-of-sample検証、現実的なlatency・優先順位・手数料・情報非対称性、異質な注文サイズや戦略は扱われない。Phase boundaryとvolatility閾値には推定誤差や感度分析が示されず、impactは単一の非ゼロ注文量に基づく。さらに、採用した$z$-scoreの分母は通常の平均差の標準誤差ではなく、経路間の統計的有意性を直接示さない。実市場との類似性も定性的な図の比較にとどまる。",
+        "importance": 4,
+        "recommended": false,
+        "reason": "Agentic LOBを反応型execution simulatorとして捉え、phase transitionとimpactを同じ枠組みで検討する着想はサイト分野に適合する。一方、エージェント学習の仕様、実証的較正、統計的不確実性、注文量別impact分析が不足しており、主要な臨界値やsquare-root則からの逸脱を頑健な結論として採用できないため、現段階では推奨しない。",
+        "tags": [
+          "指値注文板",
+          "市場マイクロストラクチャー",
+          "エージェントベースモデル",
+          "強化学習",
+          "マーケットインパクト",
+          "相転移",
+          "流動性崩壊",
+          "執行シミュレーション"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper simulates market states and post-trade market impact in a synthetic limit order book populated only by autonomous agents, varying the number of liquidity providers and their observable depth. It reports collapsed, continuous-liquidity, and frozen states, but provides neither calibration to real markets nor empirical validation.",
+          "mainResult": "In the authors' simulations, the boundary between collapse and continuous liquidity is determined by a constant critical agent count independent of depth, while the continuous-to-frozen boundary follows $d_c\\propto n$. They also report a transition from dissipative to non-dissipative impact near $\\sigma=4.21$ ticks in the continuous-liquidity state and a cracking-to-melting transition near $\\sigma=0.1$ ticks in the frozen state. However, because the experiment effectively tests only one nonzero order size, $Q=200$, it does not establish a departure from square-root impact or a general impact function.",
+          "practicalApplication": "An agent-based LOB could serve as a reactive stress-testing environment for execution strategies, including scenarios involving liquidity collapse, price freezing, and post-order cascades. Direct application of the reported thresholds to live execution, circuit breakers, or VaR would require calibration to market data and validation with heterogeneous strategy populations.",
+          "methodology": "The paper constructs a discrete-time double auction with one stochastic Market Agent, $n$ Liquidity Providers, and $\\max(3,\\lfloor n/3\\rfloor)$ Scalpers. For each $(n,d)$ configuration, it generates 10,000 paths of 100,000 callbacks and measures mid-price volatility and the probability that one side of the book becomes empty. In the impact experiment, a buy order of $Q=200$ is submitted at $t_Q=10$ and compared with a $Q=0$ control using $z(t)=(\\mu_I(t)-\\mu_N(t))/\\sqrt{\\sigma_I(t)\\sigma_N(t)}$.",
+          "limitations": "The agent population is homogeneous, and Market Agent flow is primarily drift-free. The RL state, reward, learning algorithm, training procedure, and convergence diagnostics are largely unspecified, making reproducibility difficult to assess. The model lacks calibration, out-of-sample validation, and realistic treatment of latency, priority, fees, information asymmetry, heterogeneous order sizes, and heterogeneous strategies. No estimation uncertainty or sensitivity analysis is given for the phase boundaries or volatility thresholds, and impact is evaluated with only one nonzero order size. Moreover, the denominator of the reported $z$-score is not the usual standard error of a difference in means, so it does not directly quantify statistical significance across paths. Similarity to real markets is supported only by qualitative visual comparisons.",
+          "reason": "The idea of using an agentic LOB as a reactive execution simulator and studying phase transitions and impact in one framework is relevant to the site's focus. However, the missing learning specifications, empirical calibration, uncertainty analysis, and order-size-dependent impact tests prevent the reported thresholds and departure from the square-root law from being treated as robust conclusions, so the paper is not recommended at this stage.",
+          "tags": [
+            "limit order book",
+            "market microstructure",
+            "agent-based model",
+            "reinforcement learning",
+            "market impact",
+            "phase transition",
+            "liquidity collapse",
+            "execution simulation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 756,
+          "outputTokens": 985,
+          "reasoningTokens": 75,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1741,
+          "estimatedCostUsd": 0.001333,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.31260v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 6811,
+          "outputTokens": 2163,
+          "reasoningTokens": 507,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 6808,
+          "totalTokens": 8974,
+          "estimatedCostUsd": 0.077312,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 6,
+          "paperIds": [
+            "2609.31260v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.31379v1",
+        "title": "How Much Must a Private Mempool Hide? Exact Leakage Thresholds for Sandwich Attacks",
+        "authors": [
+          "Tingyi Lin",
+          "Jiazhuo Li",
+          "Ruoran Lai"
+        ],
+        "submittedDate": "2026-09-25",
+        "updatedDate": "2026-09-28",
+        "categories": [
+          "cs.CR",
+          "cs.GT",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "private mempoolから注文サイズの区間、方向、slippage toleranceが漏れる状況で、fee-free constant-product AMMに対するsandwich attackの成立条件を理論的に分析する。論文は、全候補サイズで被害注文を約定可能にするrobust front-runでは、漏洩区間の下限だけが実行可能性と保証利益を決めると報告する。",
+        "mainResult": "漏洩区間を$[\\ell,u]$とすると、最大のrobust front-runが各サイズでの利益、期待利益、最悪時利益を同時に最大化し、保証gross profitは$W=\\tau\\ell(X+\\ell)/(X+\\tau\\ell)$となる。固定実行費用$c$を差し引いて全候補サイズで正の利益を得られる必要十分条件は$\\ell>\\lambda_c$であり、$c/X$が小さいとき$\\lambda_c\\approx c/\\tau$である。また、対称・risk-neutralなtraderが2者以上いるfirst-price execution auctionでは、正の期待net rentをauctioneerが全額獲得すると論文は示す。",
+        "practicalApplication": "private mempoolやencrypted order-flow設計では、注文サイズの上限漏洩よりも、$\\lambda_c$を超える下限の漏洩を避けることがrobust sandwich抑止に重要となる。方向まで隠せば、方向判明前に固定する単一のfirst legでは両方向をfront-runできない一方、約定後のarbitrageは残り得る。",
+        "methodology": "単一被害注文とfee-free constant-product invariantを用いた解析モデルを構築し、被害者の相対出力と攻撃者利益の単調性からrobust admissibilityを導出する。その後、最適front-run、closed-formの利益閾値、bit-prefix leakage、hidden direction、hidden slippage、swap feeの比較結果を定理として証明し、対称入札者によるfirst-price auctionをpure-strategy perfect Bayesian equilibriumで解析する。実証実験は行っていない。",
+        "limitations": "結果は主に単一victim、constant-product AMM、既知のpair・方向・slippage tolerance、区間型leakage、固定費用、対称かつrisk-neutralなtrader、単一execution slot、pure strategyを仮定する。厳密なclosed formはfee-freeモデルに依存し、swap feeについては主に一方向の比較、Uniswap v3については単一tick内の局所的適用に限られる。複数注文、一般CFMM、非対称参加者、離散入札、失敗確率を許す攻撃、実運用データによる妥当性検証は対象外であり、期待利益型の攻撃やpost-trade arbitrageは完全な事前秘匿でも排除されない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "DeFi固有の設定ではあるが、order-flow leakage、adverse execution、execution-right auctionというmarket microstructure上の論点を明確な必要十分条件まで落とし込んでいる。証明は本文と付録で提示され、privacy設計への示唆も具体的である一方、実証性と一般的なAMM・複数注文環境への外的妥当性は限定的である。",
+        "tags": [
+          "private mempool",
+          "サンドイッチ攻撃",
+          "MEV",
+          "constant-product AMM",
+          "注文情報漏洩",
+          "execution auction",
+          "robust admissibility",
+          "市場マイクロストラクチャ"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper theoretically analyzes when sandwich attacks are viable against a fee-free constant-product AMM when a private mempool leaks an interval for order size, direction, and slippage tolerance. It reports that, for a robust front-run that must keep the victim executable at every consistent size, only the lower endpoint of the leaked interval determines feasibility and guaranteed profit.",
+          "mainResult": "For a leaked interval $[\\ell,u]$, the largest robustly admissible front-run simultaneously maximizes pointwise, expected, and worst-case profit, with guaranteed gross profit $W=\\tau\\ell(X+\\ell)/(X+\\tau\\ell)$. A strictly positive payoff at every consistent size after fixed execution cost $c$ exists if and only if $\\ell>\\lambda_c$, where $\\lambda_c\\approx c/\\tau$ when $c/X$ is small. The paper also shows that, in a first-price execution auction with at least two symmetric, risk-neutral traders, the auctioneer captures the entire positive expected net rent.",
+          "practicalApplication": "For private-mempool and encrypted order-flow design, preventing leakage of a lower size bound above $\\lambda_c$ is more important for robust sandwich prevention than concealing an upper bound. Hiding direction also prevents one non-contingent first leg, chosen before direction is known, from front-running both directions, although post-trade arbitrage may remain.",
+          "methodology": "The paper builds an analytical model with one victim order and a fee-free constant-product invariant. It derives robust admissibility from monotonicity of the victim's relative output and attacker profit, then proves results for the optimal front-run, a closed-form profitability threshold, bit-prefix leakage, hidden direction, hidden slippage, and comparative effects of swap fees. It analyzes the first-price auction among symmetric bidders using pure-strategy perfect Bayesian equilibrium. No empirical experiments are conducted.",
+          "limitations": "The results primarily assume one victim, a constant-product AMM, known pair, direction, and slippage tolerance, interval leakage, fixed cost, symmetric risk-neutral traders, one execution slot, and pure strategies. The exact closed forms depend on the fee-free model; fee results are mainly one-sided comparisons, and the Uniswap v3 discussion applies locally within a single tick range. Multiple orders, general CFMMs, asymmetric participants, discrete bidding, attacks allowing failure probability, and validation with operational data are outside scope. Expected-profit attacks and post-trade arbitrage may also survive perfect pre-trade hiding.",
+          "reason": "Although the setting is specific to DeFi, the paper reduces market-microstructure questions about order-flow leakage, adverse execution, and execution-right auctions to explicit necessary and sufficient conditions. Proofs are supplied in the paper and appendix, and the privacy-design implications are concrete, but empirical support and external validity for broader AMMs and multi-order environments are limited.",
+          "tags": [
+            "private mempool",
+            "sandwich attacks",
+            "MEV",
+            "constant-product AMM",
+            "order-information leakage",
+            "execution auction",
+            "robust admissibility",
+            "market microstructure"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 903,
+          "outputTokens": 1237,
+          "reasoningTokens": 69,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2140,
+          "estimatedCostUsd": 0.001665,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.31379v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 21123,
+          "outputTokens": 1999,
+          "reasoningTokens": 516,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 21120,
+          "totalTokens": 23122,
+          "estimatedCostUsd": 0.145592,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 23,
+          "paperIds": [
+            "2609.31379v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.31512v1",
+        "title": "Tolerable Inflation, Intolerable Uncertainty",
+        "authors": [
+          "Eric Vansteenberghe"
+        ],
+        "submittedDate": "2026-09-25",
+        "updatedDate": "2026-09-28",
+        "categories": [
+          "econ.GN",
+          "q-fin.EC"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "rates",
+        "summary": "76ページの論文だが、提供されたAbstractとIntroductionのみを用いた限定レビューであり、全文は未提供である。著者は、数値インフレ目標が期待を安定化する一方、目標超過時には政策上正当なlook-throughと目標の実質的なドリフトが観察上同値となり、インフレ不確実性を押し上げると主張する。証明、実証分析、Appendixは確認していない。",
+        "mainResult": "著者は、予測分散が目標以下では平坦、目標超過幅に対して線形に上昇し、公表目標でkinkを持つと主張する。また、目標からの距離が専門家予測分散の変動の70%を説明し、その成分を除くNormalized Uncertaintyの1標準偏差上昇がフランスの企業向け貸出金利89 basis points上昇と関連すると報告する。ただし、これはAbstractとIntroductionに記載された著者の主張のみであり、全文未提供のため証明、推定、頑健性は検証していない。",
+        "practicalApplication": "中央銀行、金利ストラテジスト、信用リスク分析者に対し、survey、inflation swap、option由来の不確実性指標をそのまま用いず、インフレの目標距離で予測可能な成分を除去してから貸出金利、成長、景気反応との関係を分析する方法を提案している。",
+        "methodology": "Introductionによれば、New Keynesian modelで政策反応と一時的なインフレ許容の識別不能性を示し、有限かつ異質な忍耐閾値を持つ主体のモデルから分散の片側線形則を導く。著者はECBおよび米国の専門家予測、inflation swaps、inflation options、実現インフレ、フランスの71,069件の当座貸越、クロスカントリー成長回帰、VARを用いると説明している。",
+        "limitations": "全文76ページは提供されず、AbstractとIntroductionだけに基づくため、理論命題の証明、データ構築、サンプル選択、推定仕様、標準誤差、代替説明、因果識別、頑健性検証、Appendixを評価できない。70%や89 basis pointsなどの数値は著者報告であり、独立に確認していない。Normalized Uncertaintyが「真の」不確実性を分離するという解釈も、未確認の仮定とモデル依存性を伴う。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "インフレ目標、期待形成、金利・信用価格への波及を結び付け、rates研究で頻用される不確実性指標の測定誤差に具体的な修正を提案しているため関連性は高い。ただし、限定ソースでは中心的な識別主張と実証結果を検証できないため、現段階の推奨は全文確認を前提とする。",
+        "tags": [
+          "インフレ目標",
+          "インフレ不確実性",
+          "金融政策",
+          "観察上の同値性",
+          "New Keynesian model",
+          "期待形成",
+          "inflation swaps",
+          "inflation options",
+          "貸出金利",
+          "Normalized Uncertainty"
+        ],
+        "english": {
+          "classification": "rates",
+          "summary": "This is a limited review based only on the supplied Abstract and Introduction of a 76-page paper; the full paper was not provided. The author claims that while a numerical inflation target anchors expectations, an overshoot makes warranted policy look-through observationally equivalent to effective target drift, thereby increasing inflation uncertainty. The proofs, empirical analysis, and appendices were not examined.",
+          "mainResult": "The author claims that forecast variance is flat below the target, rises linearly with the expected overshoot, and has a kink at the announced target. The paper also reports that distance from target explains 70% of the variation in professional forecast variance and that a one-standard-deviation increase in Normalized Uncertainty is associated with French corporate loan rates that are 89 basis points higher. These are solely the author's claims as stated in the Abstract and Introduction; because the full paper was not provided, the proofs, estimates, and robustness checks were not verified.",
+          "practicalApplication": "The paper proposes that central banks, rates strategists, and credit-risk analysts should not use uncertainty measures from surveys, inflation swaps, or options without adjustment. Instead, they should remove the component predictable from inflation's distance from target before analyzing relationships with loan rates, growth, and economic activity.",
+          "methodology": "According to the Introduction, the paper uses a New Keynesian model to establish the non-identification of the policy response and temporary inflation tolerance, then derives a one-sided linear variance law from a model of agents with finite, heterogeneous patience thresholds. The author describes evidence from ECB and US professional forecasts, inflation swaps, inflation options, realized inflation, 71,069 French overdraft facilities, cross-country growth regressions, and a VAR.",
+          "limitations": "The 76-page full paper was not provided, so this review relies only on the Abstract and Introduction. It cannot assess the proofs of the theoretical propositions, data construction, sample selection, estimation specifications, standard errors, alternative explanations, causal identification, robustness tests, or appendices. Figures such as 70% and 89 basis points are author-reported and were not independently checked. The interpretation that Normalized Uncertainty separates “true” uncertainty also depends on unverified assumptions and model-specific structure.",
+          "reason": "The paper is highly relevant because it links inflation targeting, expectation formation, and transmission into interest and credit rates while proposing a specific correction for measurement error in uncertainty indicators commonly used in rates research. However, the central identification claim and empirical findings cannot be evaluated from the limited source, so the recommendation is conditional on reviewing the full paper.",
+          "tags": [
+            "inflation target",
+            "inflation uncertainty",
+            "monetary policy",
+            "observational equivalence",
+            "New Keynesian model",
+            "expectation formation",
+            "inflation swaps",
+            "inflation options",
+            "loan rates",
+            "Normalized Uncertainty"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 929,
+          "outputTokens": 1186,
+          "reasoningTokens": 78,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2115,
+          "estimatedCostUsd": 0.001609,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.31512v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 5176,
+          "outputTokens": 1783,
+          "reasoningTokens": 402,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 5173,
+          "totalTokens": 6959,
+          "estimatedCostUsd": 0.061537,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 76,
+          "paperIds": [
+            "2609.31512v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.31578v1",
+        "title": "Algorithmic trading and stochastic integration",
+        "authors": [
+          "Aleksandar Arandjelovic",
+          "Uwe Schmock"
+        ],
+        "submittedDate": "2026-09-25",
+        "updatedDate": "2026-09-28",
+        "categories": [
+          "math.PR",
+          "q-fin.MF"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "連続時間の摩擦なし市場で、有限個の観測を入力とするニューラルネットワーク係数の単純予測可能戦略が、一般の予測可能な取引戦略とその確率積分を近似できることを示す理論論文である。Orlicz空間の普遍近似から出発し、平均分散ヘッジ、同値マルチンゲール測度、semimartingale判定への帰結を導く。",
+        "mainResult": "論文は、semimartingale価格過程$X$に対する任意の予測可能かつ$X$-可積分な戦略$V$について、algorithmic strategy $V^n$を用いた積分$V^n\\cdot X$が$V\\cdot X$へsemimartingale topologyで収束すると報告する。càglàdな$V$では戦略自体もucp収束し、追加の可積分性の下では$L^p(X)$および$H^p_{\\mathrm{sm}}$での収束も得られる。また、部分情報下の最小平均分散ヘッジ誤差はalgorithmic strategyへの制限で変わらず、適切な条件下でno-free-lunchと同値マルチンゲール測度の存在が同値となり、Bichteler–Dellacherieのsemimartingale特徴付けも限定された戦略クラスで成立する。",
+        "practicalApplication": "連続時間deep hedgingで、各取引時点のポジションを停止時刻と有限個の市場観測を入力とする浅いニューラルネットワークで表現することへの理論的根拠を与える。特に、二乗ヘッジ誤差の最適値を保ったままニューラルネットワーク戦略へ近似できるため、部分情報下のヘッジ設計や戦略クラスの妥当性検証に利用できる。ただし、近似率や学習手順は提供されない。",
+        "methodology": "有限測度上の一般の可測空間について、bounded sigmoidal activationを持つ浅いニューラルネットワークのOrlicz heartでの稠密性をHahn–Banach分離とdiscriminatory propertyにより証明する。次に、生成族が非可算でも可測変数が可算個、最終的には有限個の観測に依存するネットワークで近似できることを、条件付き期待値と$\\Delta_2$条件下のOrlicz収束から導く。この結果を単純予測可能過程へ拡張し、確率積分の優収束、functional monotone class、stochastic integral isometry、既存のBichteler–Dellacherieおよびmartingale-measure分離定理を用いて金融上の系を証明する。",
+        "limitations": "結果は主として質的な稠密性であり、近似率、必要なnetwork width、sample complexity、訓練アルゴリズム、数値実験を含まない。主要な確率積分結果はLévy processが生成する通常条件付きfiltration、bounded sigmoidal activation、摩擦なし市場に依存する。取引費用、market impact、流動性制約、注文執行、portfolio constraintsは扱わず、平均分散ヘッジには$H^2_{\\mathrm{sm}}$型の積分可能性が必要である。したがって、実市場での実装可能性やexecution performanceは論文からは判断できない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "電子執行そのものやmarket microstructureの実証研究ではないが、ニューラルネットワーク型取引戦略が連続時間の確率積分理論をどこまで保持するかを厳密に示しており、deep hedgingとalgorithmic tradingの数学的基礎として価値が高い。特に、ヘッジ最適値、no-free-lunch、semimartingale特徴付けを同じ制限戦略クラスで結び付けた点が重要である。",
+        "tags": [
+          "algorithmic trading",
+          "stochastic integration",
+          "neural networks",
+          "semimartingales",
+          "Orlicz spaces",
+          "mean-variance hedging",
+          "partial information",
+          "equivalent martingale measures",
+          "Bichteler–Dellacherie theorem",
+          "universal approximation"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This theoretical paper studies frictionless continuous-time markets and shows that simple predictable strategies with neural-network coefficients based on finitely many observations can approximate general predictable trading strategies and their stochastic integrals. Starting from universal approximation in Orlicz spaces, it derives consequences for mean-variance hedging, equivalent martingale measures, and semimartingale tests.",
+          "mainResult": "The paper reports that, for any predictable and $X$-integrable strategy $V$ against a semimartingale price process $X$, there are algorithmic strategies $V^n$ such that $V^n\\cdot X$ converges to $V\\cdot X$ in the semimartingale topology. For càglàd $V$, the strategies themselves also converge in ucp, while stronger integrability assumptions yield convergence in $L^p(X)$ and $H^p_{\\mathrm{sm}}$. It also shows that restricting strategies to the algorithmic class leaves the minimum mean-variance hedging error under partial information unchanged, establishes an equivalence between an appropriate no-free-lunch condition and the existence of an equivalent martingale measure, and preserves the Bichteler–Dellacherie characterization of semimartingales.",
+          "practicalApplication": "The results provide theoretical support for continuous-time deep hedging in which positions at each trading time are represented by shallow neural networks taking the stopping time and finitely many market observations as inputs. In particular, neural-network strategies can approximate the optimal quadratic hedging value under partial information, making the framework useful for validating restricted strategy classes and designing hedging models. The paper does not, however, provide approximation rates or a training procedure.",
+          "methodology": "The authors prove density in Orlicz hearts for shallow neural networks with bounded sigmoidal activations on general finite-measure spaces, using Hahn–Banach separation and a discriminatory-property argument. They then use conditional expectations and Orlicz convergence under the $\\Delta_2$ condition to show that variables measurable with respect to possibly uncountable generating families can be approximated by networks using finitely many observations. The result is extended to simple predictable processes, after which dominated convergence for stochastic integrals, functional monotone-class arguments, stochastic-integral isometries, and existing Bichteler–Dellacherie and martingale-measure separation theorems produce the financial consequences.",
+          "limitations": "The results are primarily qualitative density statements and provide no approximation rates, required network width, sample complexity, training algorithm, or numerical experiments. The main stochastic-integration results rely on a filtration generated by a Lévy process and satisfying the usual conditions, bounded sigmoidal activations, and frictionless markets. Transaction costs, market impact, liquidity constraints, order execution, and portfolio constraints are excluded, while the mean-variance result requires $H^2_{\\mathrm{sm}}$-type integrability. The paper therefore does not establish practical implementability or execution performance in real markets.",
+          "reason": "Although this is not an empirical study of electronic execution or market microstructure, it rigorously establishes how much continuous-time stochastic-integration theory is retained by neural-network trading strategies, making it valuable for the mathematical foundations of deep hedging and algorithmic trading. Its joint treatment of hedging values, no-free-lunch conditions, and semimartingale characterization within the same restricted strategy class is particularly important.",
+          "tags": [
+            "algorithmic trading",
+            "stochastic integration",
+            "neural networks",
+            "semimartingales",
+            "Orlicz spaces",
+            "mean-variance hedging",
+            "partial information",
+            "equivalent martingale measures",
+            "Bichteler–Dellacherie theorem",
+            "universal approximation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 776,
+          "outputTokens": 1179,
+          "reasoningTokens": 84,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1955,
+          "estimatedCostUsd": 0.00157,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.31578v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 35726,
+          "outputTokens": 2157,
+          "reasoningTokens": 352,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 35723,
+          "totalTokens": 37883,
+          "estimatedCostUsd": 0.221767,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 35,
+          "paperIds": [
+            "2609.31578v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2609.30329v1",
+        "title": "Stability of Change-of-Numéraire Reweighting: An Exact Wasserstein Boundary",
+        "authors": [
+          "Shaosai Huang"
+        ],
+        "submittedDate": "2026-09-24",
+        "updatedDate": "2026-09-28",
+        "categories": [
+          "math.PR",
+          "q-fin.MF"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "正のnuméraire $A$ で基礎法則を再加重し、比率 $B/A$ をpushforwardして得る分布のWasserstein安定性を研究する。論文は、弱収束、numéraireの一様可積分性、正の極限平均の下で、$W_s$収束を基礎法則上の単一のratio-tail条件によって特徴付ける。annuity measure下のswap rate、martingale optimal transportのnuméraire inversion、self-normalized importance samplingを共通の枠組みで扱う。",
+        "mainResult": "論文の主結果は、再加重分布の$W_s$収束が、$|B_n|^sA_n^{1-s}$のtailを事象 $\\{|B_n|>RA_n\\}$上で一様に消失させる条件と同値だという主張である。極限法則が$\\{A=0\\}$を持たない場合、これは$\\{|B_n|^sA_n^{1-s}\\}$の通常の一様可積分性と同値になる。$s=1$ではnuméraireが厳密に相殺され、payoff $|B_n|$の一様可積分性の下で残る障害は極限の$\\{A=0\\}$上にある非ゼロpayoff massだけであり、$1/A_n$のmoment条件は不要とされる。二点分布の反例により、任意の$s>1$で閾値が達成されることも示す。",
+        "practicalApplication": "金利分野では、primitive lawの収束からannuity-measure swap-rate分布、physically settled swaption価格、normalized call-price curveの安定性を判定できる。一次の価格量にはinverse-annuity momentを要求しない一方、二次moment $\\mathbb{E}[B^2/A]/\\mathbb{E}[A]$を使うCMS型近似には$B^2/A$の一様可積分性が必要であり、call価格が収束しても二次統計量は収束し得ない。martingale optimal transportでは、numéraire inversionの$W_s$安定性をinverse momentの一様可積分性として判定できる。",
+        "methodology": "まずperspective identityにより、再加重後の$s$次momentを$\\mathbb{E}[|B|^sA^{1-s}]/\\mathbb{E}[A]$へ変換する。次にtruncationとnuméraireの一様可積分性から再加重分布の弱収束を証明し、Wasserstein収束の「弱収束＋moment収束」特徴付けを適用して必要十分条件を導く。境界$\\{A=0\\}$を明示的に扱い、二点分布によるsharpness例、compactなmodel・contract class上のjoint continuity、martingale transportとswap-rate marginalへの応用を提示する。",
+        "limitations": "結果は理論的な漸近安定性であり、収束速度、有限標本誤差、calibration誤差、数値実験は与えない。主要結論は弱収束、numéraireの一様可積分性、正の極限平均、および必要なratio-tail条件に依存する。swaptionへの反例は抽象的なprimitive lawであり、現実の金利モデルにおけるbond、annuity、leg value間のno-arbitrage制約を組み込んでいない。cash settlementについても市場pricing measureの構成や逆問題のinverse-annuity条件を解決せず、指定されたweighted lawのforward stabilityだけを扱う。",
+        "importance": 1,
+        "recommended": true,
+        "reason": "change of numéraire後の分布について、弱い安定性だけでなく$W_s$安定性の必要十分条件を基礎法則上で明示しており、金利デリバティブとmartingale optimal transportの双方に直接関連する。特に一次価格量と高次moment依存量の差を明確にし、bounded primitive inputsでも二次統計量が不安定になり得ることをsharpな例で示す点が有用である。ただし実務導入には、具体的な金利モデルで仮定を検証し、定量的な誤差評価を追加する必要がある。",
+        "tags": [
+          "numéraire変更",
+          "Wasserstein安定性",
+          "annuity measure",
+          "swap rate",
+          "swaption",
+          "一様可積分性",
+          "martingale optimal transport",
+          "CMS二次moment",
+          "self-normalized importance sampling",
+          "境界mass"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper studies the Wasserstein stability of the distribution obtained by reweighting a base law with a positive numéraire $A$ and pushing forward the ratio $B/A$. Under weak convergence, uniform integrability of the numéraires, and a positive limiting mean, it characterizes $W_s$ convergence through a single ratio-tail condition under the base laws. The framework jointly covers swap rates under the annuity measure, numéraire inversion in martingale optimal transport, and self-normalized importance sampling.",
+          "mainResult": "The paper's main result states that $W_s$ convergence of the reweighted distributions is equivalent to uniform disappearance of the tails of $|B_n|^sA_n^{1-s}$ on the events $\\{|B_n|>RA_n\\}$. When the limiting law does not charge $\\{A=0\\}$, this is equivalent to ordinary uniform integrability of $\\{|B_n|^sA_n^{1-s}\\}$. At $s=1$, the numéraire cancels exactly: under uniform integrability of $|B_n|$, the only remaining obstruction is nonzero payoff mass on $\\{A=0\\}$ in the limit, and no moment condition on $1/A_n$ is required. Two-point counterexamples are also used to attain the threshold for every $s>1$.",
+          "practicalApplication": "For rates, the result can determine when convergence of primitive laws implies stability of annuity-measure swap-rate distributions, physically settled swaption prices, and normalized call-price curves. While first-order price quantities require no inverse-annuity moment, CMS-type approximations using the second moment $\\mathbb{E}[B^2/A]/\\mathbb{E}[A]$ require uniform integrability of $B^2/A$; call prices may converge even when this statistic does not. In martingale optimal transport, $W_s$ stability of numéraire inversion can be tested through uniform integrability of inverse moments.",
+          "methodology": "The paper first uses a perspective identity to express the reweighted $s$-th moment as $\\mathbb{E}[|B|^sA^{1-s}]/\\mathbb{E}[A]$. It then proves weak convergence of the reweighted distributions through truncation and uniform integrability of the numéraires, and applies the weak-convergence-plus-moment characterization of Wasserstein convergence to obtain necessary and sufficient conditions. It explicitly treats the boundary $\\{A=0\\}$ and provides sharp two-point examples, a joint-continuity result over compact model and contract classes, and applications to martingale transport and swap-rate marginals.",
+          "limitations": "The results concern theoretical asymptotic stability and provide no convergence rates, finite-sample error analysis, calibration-error bounds, or numerical experiments. The main conclusions depend on weak convergence, uniform integrability of the numéraires, a positive limiting mean, and the required ratio-tail condition. The swaption counterexamples use abstract primitive laws and do not impose the no-arbitrage relationships among bonds, annuities, and leg values found in realistic rates models. For cash settlement, the paper neither constructs a market pricing measure nor resolves inverse-annuity conditions in the reverse problem; it only studies forward stability of specified weighted laws.",
+          "reason": "The paper gives a base-law necessary-and-sufficient condition for $W_s$ stability after change of numéraire, rather than only weak stability or a sufficient bound, making it directly relevant to both rates derivatives and martingale optimal transport. It clearly separates first-order price quantities from higher-moment-dependent statistics and uses sharp examples to show that second moments can remain unstable even with bounded primitive inputs. Practical adoption would still require verifying the assumptions in concrete rates models and adding quantitative error estimates.",
+          "tags": [
+            "change of numéraire",
+            "Wasserstein stability",
+            "annuity measure",
+            "swap rate",
+            "swaption",
+            "uniform integrability",
+            "martingale optimal transport",
+            "CMS second moment",
+            "self-normalized importance sampling",
+            "boundary mass"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-5.6-luna",
+          "requestedModel": "gpt-5.6-luna",
+          "effort": "low",
+          "inputTokens": 818,
+          "outputTokens": 1079,
+          "reasoningTokens": 88,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1897,
+          "estimatedCostUsd": 0.001458,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2609.30329v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 14508,
+          "outputTokens": 2251,
+          "reasoningTokens": 322,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 14505,
+          "totalTokens": 16759,
+          "estimatedCostUsd": 0.117557,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 16,
+          "paperIds": [
+            "2609.30329v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-5.6-sol",
+          "requestedModel": "gpt-5.6-sol",
+          "effort": "medium",
+          "inputTokens": 14508,
+          "outputTokens": 2263,
+          "reasoningTokens": 343,
+          "cachedInputTokens": 14505,
+          "cacheWriteTokens": 0,
+          "totalTokens": 16771,
+          "estimatedCostUsd": 0.051074,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 16,
+          "paperIds": [
+            "2609.30329v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 979,
+      "outputTokens": 1123,
+      "reasoningTokens": 46,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2102,
+      "estimatedCostUsd": 0.001543,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.30269v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 954,
+      "outputTokens": 1082,
+      "reasoningTokens": 85,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2036,
+      "estimatedCostUsd": 0.001489,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.30316v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 818,
+      "outputTokens": 1079,
+      "reasoningTokens": 88,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1897,
+      "estimatedCostUsd": 0.001458,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.30329v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 14508,
+      "outputTokens": 2251,
+      "reasoningTokens": 322,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 14505,
+      "totalTokens": 16759,
+      "estimatedCostUsd": 0.117557,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 16,
+      "paperIds": [
+        "2609.30329v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 14508,
+      "outputTokens": 2263,
+      "reasoningTokens": 343,
+      "cachedInputTokens": 14505,
+      "cacheWriteTokens": 0,
+      "totalTokens": 16771,
+      "estimatedCostUsd": 0.051074,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 16,
+      "paperIds": [
+        "2609.30329v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 1017,
+      "outputTokens": 1005,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2022,
+      "estimatedCostUsd": 0.001409,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.30684v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 824,
+      "outputTokens": 1147,
+      "reasoningTokens": 58,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1971,
+      "estimatedCostUsd": 0.001541,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.31013v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 849,
+      "outputTokens": 1106,
+      "reasoningTokens": 66,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1955,
+      "estimatedCostUsd": 0.001497,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.31236v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 756,
+      "outputTokens": 985,
+      "reasoningTokens": 75,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1741,
+      "estimatedCostUsd": 0.001333,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.31260v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 6811,
+      "outputTokens": 2163,
+      "reasoningTokens": 507,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 6808,
+      "totalTokens": 8974,
+      "estimatedCostUsd": 0.077312,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 6,
+      "paperIds": [
+        "2609.31260v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 796,
+      "outputTokens": 1218,
+      "reasoningTokens": 78,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2014,
+      "estimatedCostUsd": 0.001621,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.31263v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 725,
+      "outputTokens": 834,
+      "reasoningTokens": 51,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1559,
+      "estimatedCostUsd": 0.001146,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.31345v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 903,
+      "outputTokens": 1237,
+      "reasoningTokens": 69,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2140,
+      "estimatedCostUsd": 0.001665,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.31379v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 21123,
+      "outputTokens": 1999,
+      "reasoningTokens": 516,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 21120,
+      "totalTokens": 23122,
+      "estimatedCostUsd": 0.145592,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 23,
+      "paperIds": [
+        "2609.31379v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 880,
+      "outputTokens": 977,
+      "reasoningTokens": 80,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1857,
+      "estimatedCostUsd": 0.001348,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.31468v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 929,
+      "outputTokens": 1186,
+      "reasoningTokens": 78,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2115,
+      "estimatedCostUsd": 0.001609,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.31512v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 5176,
+      "outputTokens": 1783,
+      "reasoningTokens": 402,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 5173,
+      "totalTokens": 6959,
+      "estimatedCostUsd": 0.061537,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 76,
+      "paperIds": [
+        "2609.31512v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 776,
+      "outputTokens": 1179,
+      "reasoningTokens": 84,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1955,
+      "estimatedCostUsd": 0.00157,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.31578v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 35726,
+      "outputTokens": 2157,
+      "reasoningTokens": 352,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 35723,
+      "totalTokens": 37883,
+      "estimatedCostUsd": 0.221767,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 35,
+      "paperIds": [
+        "2609.31578v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

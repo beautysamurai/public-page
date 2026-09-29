@@ -2,6 +2,110 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-09-29-daily-openai-01",
+      "date": "2026-09-29",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.31951v1",
+          "title": "Information Latency: Theory and Economic Consequences",
+          "authors": [
+            "Gaurav Subedi",
+            "Ratna K. Shrestha"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.32773v1",
+          "title": "Forecasting Intraday USD/CAD Exchange Rate with News-Derived Monetary-Policy Signals",
+          "authors": [
+            "Maya Kodeih",
+            "Aliaa Alnaggar",
+            "Mucahit Cevik"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.32848v1",
+          "title": "Packets, Transactions and Queues: Design Principles for HFT Systems from a Measurement Study of CME Market Data",
+          "authors": [
+            "Vincent Maciejewski"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.33058v1",
+          "title": "Evolution of Market Microstructure in the Age of AI",
+          "authors": [
+            "Irene Aldridge"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.33767v1",
+          "title": "Taming the Greeks: Option Portfolios with Inductive Biases",
+          "authors": [
+            "Wee Ling Tan",
+            "Stephen Roberts",
+            "Stefan Zohren"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.33799v1",
+          "title": "Oracle-Parametrized Constant Function Market Makers: From Price Feeds to Pricing Rules",
+          "authors": [
+            "Hamed Amini",
+            "Zachary Feinstein"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.33470v1",
+          "title": "LiveOption: Evaluating LLM Agents in Structured Option Trading with Nonlinear Payoffs",
+          "authors": [
+            "Haochen Luo",
+            "Yifan Li",
+            "Binh Minh An",
+            "Xiaolong Luo",
+            "Zhengzhao Lai",
+            "Yuan Zhang",
+            "Chen Liu"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-09-28-daily-openai-01",
       "date": "2026-09-28",
       "kind": "daily",

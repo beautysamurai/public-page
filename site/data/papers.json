@@ -2,6 +2,86 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-09-30-daily-openai-01",
+      "date": "2026-09-30",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.36631v1",
+          "title": "A Spread-Gated Hawkes-Flocking Model for Best Bid and Ask Dynamics, with an Application to Limit Order Placement",
+          "authors": [
+            "Hyoeun Lee",
+            "Kiseop Lee"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.37872v1",
+          "title": "A Generalized Langevin Model of Latent Liquidity and Concave Price Impact",
+          "authors": [
+            "Andrey Itkin"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.37903v1",
+          "title": "From Intraday Orderbook to Imbalance Price: Understanding Cross-Market Interaction",
+          "authors": [
+            "Runyao Yu",
+            "Jochen L. Cremer",
+            "Pierre Pinson",
+            "Jalal Kazempour",
+            "Leo Semmelmann",
+            "Takuji Matsumoto",
+            "Derek W. Bunn"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.36257v1",
+          "title": "When Hedging Changes the Payoff: Option Replication with Price Impact and Execution Costs",
+          "authors": [
+            "David Itkin",
+            "Leandro Sánchez-Betancourt"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.37963v1",
+          "title": "Not All LPs Are Equal: The Active-Passive Gap in Automated Market Maker Liquidity Provision",
+          "authors": [
+            "Agathe Sadeghi",
+            "Dingyue Liu",
+            "Ciamac Moallemi",
+            "Xin Wan",
+            "Brian Zhu"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-09-29-daily-openai-01",
       "date": "2026-09-29",
       "kind": "daily",

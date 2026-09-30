@@ -4518,6 +4518,165 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-09-30-daily-openai-01",
+      "editionDate": "2026-09-30",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-09-30T12:55:30Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-09-30",
+      "observedBatchDate": "2026-09-30",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年9月30日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 18 | 15,923 | 19,620 (1,266) | 0.0268 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 7 | 184,696 | 41,120 (1,875) | 1.4648 | 全52ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 / PDF全文・34ページ / PDF全文・42ページ・未完了の試行 / PDF全文・42ページ / PDF全文・10ページ・未完了の試行 / PDF全文・10ページ / PDF全文・33ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. A Spread-Gated Hawkes-Flocking Model for Best Bid and Ask Dynamics, with an Application to Limit Order Placement\n\n**[arXiv:2609.36631v1](https://arxiv.org/abs/2609.36631v1) — Hyoeun Lee, Kiseop Lee**\n\n### 概要\n\n最良気配の4種類の1ティック変動を、最小スプレッド時の縮小イベントを禁止する gate と、スプレッド状態に応じた cross-side excitation を持つ多変量 Hawkes process で記述する。LOBSTER の INTC と MSFT 各1日では、著者らの推定上、cross-side 項が急速なスプレッド回復を捉え、制約モデルより大幅に良い相対適合を示した。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | Hawkes過程 / 指値注文板 / 最良気配 / ビッド・アスク・スプレッド / 状態依存強度 / cross-side excitation / limit order placement / 市場マイクロストラクチャ / 最尤推定 / non-explosion |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 状態依存 Hawkes model の数学的 well-posedness、線形時間尤度、実データ比較、order placement への接続を一つの枠組みにまとめており、market microstructure と electronic execution の双方に直接関係する。ただし実証範囲が極めて狭く、絶対的 goodness-of-fit は不十分で、取引結果も外生的な約定確率に大きく依存するため、完成した実運用モデルではなく研究用の構成要素として読むべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 851 | 1,061 (114) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 34,227 | 1,910 (138) | 0.2093 | PDF全文・34ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 非負かつ可積分な支配 Hawkes process への thinning coupling により、有限時間上の non-explosion を示している。また指数 kernel を利用した尤度評価を $O(N)$ とし、シミュレーションでは観測期間の延長に伴う MLE 誤差の縮小を報告する。実データでは $\\Psi=0$ の制約に対する尤度比統計量が INTC と MSFT の双方で非常に大きく、AIC・BIC も full model を支持したが、time-rescaling 残差検定は全イベント型で両モデルを棄却した。\n\n**手法:** 4次元の best-quote counting process に、同一サイドの self/mutual excitation、スプレッド依存の cross-side flocking kernel、最小スプレッドで縮小強度をゼロにする gate を組み合わせる。支配過程との単調 thinning で存在と有限時間 non-explosion を論証し、指数減衰 accumulator により recursive likelihood を構成する。MLE を $R=200$ の模擬経路で検証した後、2012年6月21日10:00–15:30の LOBSTER level-5 データについて multi-start 推定、尤度比、AIC・BIC、time-rescaled residual を用いて比較する。\n\n**実務への応用:** モデルの次イベント確率と外部から与える約定確率を用い、最良または第2気配への単一期間 limit order の価格水準と数量を比較できる。平均分散効用が数量 $l$ の凹二次式 $H(l)=c_2l^2+c_1l+c_0$ となる場合、制約なしの最適数量は $l^*=-c_1/(2c_2)$ である。著者らの INTC の例では仮定した約定確率の下で約85株となるが、実運用には queue position、数量制約、adverse selection を含む約定モデルが必要である。\n\n**限界・注意点:** 実証は大型 tick 株2銘柄の各1日だけで、同時気配変動と複数 tick jump を除外しており、out-of-sample 検証もない。尤度は multimodal で推定値が初期値に敏感であり、境界帰無仮説のため通常の $\\chi^2_4$ 尤度比近似は厳密でない。定常性・ergodicity・スプレッドの再帰性を証明していないため漸近標準誤差は記述的にすぎず、全残差検定がモデル誤設定を示す。取引例は単一期間で、約定確率を推定せず外生入力とし、queue dynamics、latency、adverse selection、手数料以外の市場摩擦、数量・在庫制約を十分扱わない。\n\n## 2. A Generalized Langevin Model of Latent Liquidity and Concave Price Impact\n\n**[arXiv:2609.37872v1](https://arxiv.org/abs/2609.37872v1) — Andrey Itkin**\n\n### 概要\n\n潜在流動性を、価格変位で起動するcounterflowと、複数時間尺度で枯渇・回復するgeneralized Langevin equation（GLE）状態としてモデル化する。個別参加者の閾値と線形反応を集約すると、小口・大口の線形領域の間に中間的なsquare-root impactが生じると報告する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | market impact / latent liquidity / generalized Langevin equation / optimal execution / square-root law / liquidity depletion / memory kernel / counterflow / price manipulation / Monte Carlo |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** square-root impactを直接仮定せず、latent counterflowと流動性回復から条件付きで導く点はmarket microstructureとexecution研究に有用である。厳密なMarkovian lift、no-round-trip-manipulation結果、repeated-order診断も興味深い。一方、実証検証がなく構造仮定への感応度が高いため、現段階では実務モデルというより理論・シミュレーション研究として推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 843 | 1,301 (44) | 0.0017 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 41,920 | 16,000 (339) | 0.5296 | PDF全文・42ページ・未完了の試行 |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 41,920 | 1,406 (123) | 0.0449 | PDF全文・42ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 閾値密度がゼロ近傍で正かつ連続で、個別反応が閾値超過幅に線形なら、fresh poolでは中間領域のimpact exponentが約$1/2$になる。数値実験では、pool depletionがこの領域を狭め、単発注文への反応が近いmemory spectrumでも、大きな先行注文後のprobe impactは異なり得る。また、一定のdisplayed depthとlog-price costの定義の下では、期待round-trip costが非負となる。\n\n**手法:** 閾値付きlatent counterpartyの反応を集約し、潜在poolを有限個の指数kernelを持つGLEで駆動する。有限指数和に対するexact Markovian liftを導出し、small-order展開、fresh-pool解、pathwise bounds、round-trip cost恒等式を解析する。Kyle、fresh pool、single-mode、multi-mode GLEを、決定論的計算と2048 pathのMonte Carloで比較し、PINNは補助的に検証する。\n\n**実務への応用:** 大口注文のimpact予測、execution schedule比較、取引後のprice reversal、先行注文によるliquidity depletionの推定に利用できる。特に、単発注文のsize-impact曲線だけでなく、gapを置いたprobe orderへの条件付き反応を使って流動性memoryを識別する枠組みを提供する。\n\n**限界・注意点:** 市場データへのcalibrationとout-of-sample validationはなく、主要結果は仮定した閾値分布、個別反応、pool map、固定volatility、一定displayed depth、counterfactual referenceに依存する。基準モデルではpermanent impactがなく、固定detection horizonではimpactがexecution durationに依存する。数値比較は限定的なparameterization、有限size grid、2048 pathsに基づき、memory spectrumの識別可能性やtransaction-triggered manipulationは示していない。\n\n## 3. From Intraday Orderbook to Imbalance Price: Understanding Cross-Market Interaction\n\n**[arXiv:2609.37903v1](https://arxiv.org/abs/2609.37903v1) — Runyao Yu, Jochen L. Cremer, Pierre Pinson, Jalal Kazempour, Leo Semmelmann, Takuji Matsumoto, Derek W. Bunn**\n\n### 概要\n\nドイツとオーストリアの電力市場を対象に、continuous intraday orderbookが後続のimbalance price形成をどこまで反映するかを検証した研究である。論文の実証結果では、隣接受渡商品を含むVWAP表現がOHLCVやLast Mid Priceより一貫して高い予測性能を示し、その情報価値とfundamentalsの追加効果には国別の差が見られた。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 電力市場マイクロストラクチャ / intraday orderbook / imbalance price / VWAP / 隣接商品 / 分位点回帰 / 確率予測 / cross-market interaction / ANN / training-window selection |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 電力市場に限定されるものの、orderbook表現、隣接商品の情報伝播、非線形性、fundamentalsとの重複というmarket microstructure上の論点を、rolling out-of-sample評価と統計検定で体系的に検証しているため推奨する。特にVWAPとcross-product contextの比較は電子執行や短期価格形成の読者に有用である。ただし、因果分析や実取引の経済評価ではなく、二市場における予測性能の研究として解釈すべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 934 | 1,223 (73) | 0.0017 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 19,183 | 16,000 (329) | 0.4159 | PDF全文・10ページ・未完了の試行 |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 19,183 | 2,149 (355) | 0.0507 | PDF全文・10ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 隣接商品を用いるVWAPは、両国の全予測horizonでAQL、MAE、RMSEが最小となり、統計的に最上位のセルはドイツで12件中11件、オーストリアで12件中10件だった。ANNは18比較中17比較でLQRを有意に上回った。fundamentalsとの結合はドイツではtesting lossを一貫して低下させたが、オーストリアでは上昇させた。また、全履歴は全標本で最良だった一方、極端価格に限定すると2022年を除いたVWAPモデルのlossが最小だった。\n\n**手法:** 2022年1月から2025年1月までのEPEX SPOT orderbookとENTSO-Eのfundamentalsおよびimbalance priceを使用した。orderbookを15分間隔でOHLCV、VWAP、Last Mid Priceに集約し、自己商品、最大12本の後続商品、隣国の同時刻商品を比較した。予測horizonは15分、60分、180分、分位点は$q \\in \\{0.1,0.5,0.9\\}$である。ANNとLinear Quantile Regressionを3つのrolling-origin foldおよび3つのrandom seedで評価し、AQL、AQCE、MAE、RMSEとpaired Diebold–Mariano testを用いた。さらにfundamental feature setとの結合と、1か月、6か月、2022年除外、全履歴というtraining-history ablationを実施した。\n\n**実務への応用:** リアルタイムで観測可能なintraday orderbookからimbalance priceの分位点を推定し、BESSや柔軟資産のintraday取引、imbalance exposure管理、balancing市場への意思決定に利用できる可能性がある。実装上はVWAPと隣接商品を主要入力とし、ドイツでは再生可能発電や系統情報を追加する一方、オーストリアでは追加特徴量によるノイズを検証する必要がある。ただし、取引収益や執行コストは本研究で評価されていない。\n\n**限界・注意点:** 対象はドイツとオーストリア、主なout-of-sample期間は2024年に限られ、市場制度や流動性が異なる地域への外的妥当性は不明である。分析は予測的であり、未決済ポジションや物理的不確実性が国別差を生むという説明を因果的に識別していない。orderbook表現は集約された3方式だけで、depthやorder-level dynamicsを扱わない。比較モデルも汎用ANNと線形分位点回帰に限定される。極端価格の結果は条件付きの少数標本を含み、将来レジームに依存する。fundamental dataには公表遅延があり、実運用での可用性にも注意が必要である。売買収益、transaction cost、market impact、storage biddingの経済価値は未検証である。\n\n## 4. When Hedging Changes the Payoff: Option Replication with Price Impact and Execution Costs\n\n**[arXiv:2609.36257v1](https://arxiv.org/abs/2609.36257v1) — David Itkin, Leandro Sánchez-Betancourt**\n\n### 概要\n\n本稿は、ヘッジ取引による price impact が原資産価格を動かし、複製対象のオプション payoff 自体を変える「moving-target」問題を扱う。著者らは、execution costs、満期と決済日の分離、最終ポジションの解消を組み込んだ完全複製の枠組みを提示すると主張する。ただし本レビューは52ページの全文ではなく、提供されたabstractとIntroductionのみを対象としており、証明、数値実験、付録は確認していない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 2/10 | 推奨 | 価格インパクト / 執行コスト / オプション複製 / 非線形価格付けPDE / 固定点方程式 / インプリシット終端条件 / リミットオーダーブック / 短期オプション / 大口ヘッジ / 市場マイクロストラクチャー |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** price impact、execution costs、derivative replication、非線形pricing PDE、limit order bookを直接結び付けており、電子執行、market microstructure、デリバティブ価格付けの交差領域として関連性が高い。特に短期オプションや大口ヘッジへの応用可能性があるため推奨するが、全文未確認の限定的・暫定的評価である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 839 | 1,108 (90) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 2,544 | 1,726 (216) | 0.0472 | 全52ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らの主張では、二項モデルの複製は固定点方程式に帰着し、連続時間ではimplicit terminal conditionを伴う非線形pricing PDEとなる。さらに、単調・凸・Lipschitz payoffについてmidpoint execution costsの下で完全複製とPDEの古典的well-posednessを示し、複製費用の契約数量に対する非線形性、effective strikeの変化、terminal holdingsの平滑化などを得るとしている。ただし、これはabstractとIntroductionだけに基づく著者主張の要約であり、52ページの全文、証明、実験、付録は提供されておらず検証していない。\n\n**手法:** 著者らは、一般的なimpactとexecution costsを持つ一期間二項モデルを固定点問題として分析し、線形設定ではrecombining fundamental-price treeによる多期間backward inductionを構成する。連続時間では離散的リバランスの極限からwealth dynamicsと非線形PDEを導き、payoffとterminal hedgeのfeedbackをimplicit ODEで表す。さらにverification argument、確率表現、二次payoffの明示解、call optionの数値実験を用いるとしている。\n\n**実務への応用:** 大口または短期オプションの執行・ヘッジ設計において、自身の取引がsettlement priceとpayoffを変える効果を価格と必要資本へ反映できる可能性がある。著者らは、contract size別の非線形価格、impact-adjusted strike、最終ヘッジ解消、および原資産のlimit order bookからオプション市場のspreadとbook shapeを説明する用途を示唆している。\n\n**限界・注意点:** 52ページの全文は提供されず、利用可能な情報はabstractとIntroductionだけである。したがって、仮定の完全な内容、定理の適用範囲、証明の正確性、admissibility条件、数値手法、parameter calibration、感度分析、実験結果、付録を確認できない。報告された完全複製、well-posedness、価格・ヘッジ効果はすべて著者らの主張として扱う必要があり、実市場での頑健性や外部妥当性も評価できない。\n\n## 5. Not All LPs Are Equal: The Active-Passive Gap in Automated Market Maker Liquidity Provision\n\n**[arXiv:2609.37963v1](https://arxiv.org/abs/2609.37963v1) — Agathe Sadeghi, Dingyue Liu, Ciamac Moallemi, Xin Wan, Brian Zhu**\n\n### 概要\n\nUniswapのLP収益性をpool集計ではなくactive LPとpassive LPに分解し、concentrated liquidityが受動的資本へのadverse selectionを偏らせる可能性を検証した実証研究である。Ethereum、Arbitrum、Baseのv2・v3・v4を対象に、swap後の外部価格を用いるfee込みmarkoutを比較する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 2/10 | 推奨 | 自動マーケットメーカー / Uniswap / 流動性供給 / 市場マイクロストラクチャ / adverse selection / markout / concentrated liquidity / JIT liquidity / 分散型取引所 / MEV |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** AMMのpool-level profitabilityがpassive LPの実態を代表しないことを、異なる識別仮定を持つ二つの推定法で示した点は市場microstructure上重要である。実務的な監視指標も提示しているため推奨するが、active/passive分類の測定誤差と収益指標の範囲には注意が必要である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 965 | 1,150 (60) | 0.0016 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 25,719 | 1,929 (375) | 0.1672 | PDF全文・33ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らの推定では、active liquidityがほぼ検出されないv2ではpool全体とpassive LPのmarkoutがほぼ一致する一方、v3・v4ではpassive LPがpool集計値を下回る傾向がある。差は概してEthereumと低fee tierで大きく、高fee poolではpassive markoutが良好だった。ただしpool別の例外や不確実性があり、chain間差は因果効果ではなく記述的結果である。\n\n**手法:** 2025年2月から11月までの高volume Uniswap poolを対象に、on-chainのMint・Burn・Swap等とBinanceの秒次mid-priceを結合した。第1手法はaddress・pool・tick range単位でmintとburnをLIFO照合し、20秒以内の短期positionをactiveと分類してswap-level markoutをliquidity shareで配分し、残差をpassiveとする。第2手法は実現したAMM price pathから常時in-rangeのinfinitesimal LPを再現する。基準markout horizonは15秒で、FIFO、60秒のmatching horizon、複数のmarkout horizon、exact matching、day-block bootstrapによる頑健性確認も行う。\n\n**実務への応用:** LPはinfinitesimal benchmarkをrolling-windowで監視し、chain・pool・fee tierの選択や撤退判断に利用できる。protocol設計者はJIT対策、sequencing変更、block time短縮などの導入前後でactive-passive gapを測定できる。ただしmarkoutはgas、運用費、capital cost、長期inventory riskを含まないため、実現収益の代替にはならない。\n\n**限界・注意点:** LIFO分類は観測address単位なので、複数address、vault、smart contractを介した同一主体を捉えず、active shareを過小評価し得る。infinitesimal LPはfull-rangeかつ限界的な仮想positionであり、有限rangeの実在LPとは異なる。markoutはgas、rebalancing、capital cost、長期inventory revaluationを除外する。外部価格をBinanceとUSDTに依存し、15秒評価は短期microstructure P&Lに限定される。対象は一定期間の主要poolに限られ、EthereumとL2のgas、MEV、flow、liquidity構成を統制していないためchain比較は非因果的である。一部poolではconfidence intervalが広く、低fee Ethereum poolではsandwich比率も極端に高い。",
+      "papers": [
+        {
+          "arxivId": "2609.36631v1",
+          "title": "A Spread-Gated Hawkes-Flocking Model for Best Bid and Ask Dynamics, with an Application to Limit Order Placement",
+          "authors": [
+            "Hyoeun Lee",
+            "Kiseop Lee"
+          ],
+          "submittedDate": "2026-09-29",
+          "updatedDate": "2026-09-29",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.36631v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.36631v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "最良気配の4種類の1ティック変動を、最小スプレッド時の縮小イベントを禁止する gate と、スプレッド状態に応じた cross-side excitation を持つ多変量 Hawkes process で記述する。LOBSTER の INTC と MSFT 各1日では、著者らの推定上、cross-side 項が急速なスプレッド回復を捉え、制約モデルより大幅に良い相対適合を示した。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 851 / 出力 1,061（うち推論 114） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 34,227 / 出力 1,910（うち推論 138） · PDF 34 pages · 推定 $0.2093",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.37872v1",
+          "title": "A Generalized Langevin Model of Latent Liquidity and Concave Price Impact",
+          "authors": [
+            "Andrey Itkin"
+          ],
+          "submittedDate": "2026-09-29",
+          "updatedDate": "2026-09-29",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.37872v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.37872v1",
+          "schedulerRank": 2,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "潜在流動性を、価格変位で起動するcounterflowと、複数時間尺度で枯渇・回復するgeneralized Langevin equation（GLE）状態としてモデル化する。個別参加者の閾値と線形反応を集約すると、小口・大口の線形領域の間に中間的なsquare-root impactが生じると報告する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 843 / 出力 1,301（うち推論 44） · 推定 $0.0017\n論文解析: gpt-5.6-sol / medium · トークン 入力 41,920 / 出力 16,000（うち推論 339） · PDF 42 pages · 未完了の試行 · 推定 $0.5296\n論文解析: gpt-5.6-sol / medium · トークン 入力 41,920 / 出力 1,406（うち推論 123） · PDF 42 pages · 推定 $0.0449",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.37903v1",
+          "title": "From Intraday Orderbook to Imbalance Price: Understanding Cross-Market Interaction",
+          "authors": [
+            "Runyao Yu",
+            "Jochen L. Cremer",
+            "Pierre Pinson",
+            "Jalal Kazempour",
+            "Leo Semmelmann",
+            "Takuji Matsumoto",
+            "Derek W. Bunn"
+          ],
+          "submittedDate": "2026-09-29",
+          "updatedDate": "2026-09-29",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.37903v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.37903v1",
+          "schedulerRank": 3,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "ドイツとオーストリアの電力市場を対象に、continuous intraday orderbookが後続のimbalance price形成をどこまで反映するかを検証した研究である。論文の実証結果では、隣接受渡商品を含むVWAP表現がOHLCVやLast Mid Priceより一貫して高い予測性能を示し、その情報価値とfundamentalsの追加効果には国別の差が見られた。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 934 / 出力 1,223（うち推論 73） · 推定 $0.0017\n論文解析: gpt-5.6-sol / medium · トークン 入力 19,183 / 出力 16,000（うち推論 329） · PDF 10 pages · 未完了の試行 · 推定 $0.4159\n論文解析: gpt-5.6-sol / medium · トークン 入力 19,183 / 出力 2,149（うち推論 355） · PDF 10 pages · 推定 $0.0507",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.36257v1",
+          "title": "When Hedging Changes the Payoff: Option Replication with Price Impact and Execution Costs",
+          "authors": [
+            "David Itkin",
+            "Leandro Sánchez-Betancourt"
+          ],
+          "submittedDate": "2026-09-28",
+          "updatedDate": "2026-09-28",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.36257v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.36257v1",
+          "schedulerRank": 4,
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 2/10",
+          "schedulerSummary": "本稿は、ヘッジ取引による price impact が原資産価格を動かし、複製対象のオプション payoff 自体を変える「moving-target」問題を扱う。著者らは、execution costs、満期と決済日の分離、最終ポジションの解消を組み込んだ完全複製の枠組みを提示すると主張する。ただし本レビューは52ページの全文ではなく、提供されたabstractとIntroductionのみを対象としており、証明、数値実験、付録は確認していない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 839 / 出力 1,108（うち推論 90） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 2,544 / 出力 1,726（うち推論 216） · 全52ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0472",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 2,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.37963v1",
+          "title": "Not All LPs Are Equal: The Active-Passive Gap in Automated Market Maker Liquidity Provision",
+          "authors": [
+            "Agathe Sadeghi",
+            "Dingyue Liu",
+            "Ciamac Moallemi",
+            "Xin Wan",
+            "Brian Zhu"
+          ],
+          "submittedDate": "2026-09-29",
+          "updatedDate": "2026-09-29",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.37963v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.37963v1",
+          "schedulerRank": 5,
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 2/10",
+          "schedulerSummary": "UniswapのLP収益性をpool集計ではなくactive LPとpassive LPに分解し、concentrated liquidityが受動的資本へのadverse selectionを偏らせる可能性を検証した実証研究である。Ethereum、Arbitrum、Baseのv2・v3・v4を対象に、swap後の外部価格を用いるfee込みmarkoutを比較する。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 965 / 出力 1,150（うち推論 60） · 推定 $0.0016\n論文解析: gpt-5.6-sol / medium · トークン 入力 25,719 / 出力 1,929（うち推論 375） · PDF 33 pages · 推定 $0.1672",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 2,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

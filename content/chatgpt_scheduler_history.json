@@ -4677,6 +4677,105 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-10-01-daily-openai-01",
+      "editionDate": "2026-10-01",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-10-01T13:47:44Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-10-01",
+      "observedBatchDate": "2026-10-01",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年10月1日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 7 | 6,012 | 7,742 (501) | 0.0105 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 3 | 68,303 | 5,667 (694) | 0.4548 | PDF全文・31ページ / PDF全文・27ページ / PDF全文・16ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Say, Echo, Do: Strategic Narratives and Revealed Positioning in Financial Markets\n\n**[arXiv:2609.38545v1](https://arxiv.org/abs/2609.38545v1) — Ali Atiah Alzahrani**\n\n### 概要\n\n機関の発言をSay、報道の反復をEcho、開示ポジションやフローをDoとして分離し、言葉と資金行動が逆向きなら発言をfadeすべきだと論じる。戦略的発言モデル、Hawkes過程によるecho識別、return-aligned embedding、Lévy areaによるlead–lag測定を統合している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 戦略的ナラティブ / Say–Do共分散 / ニュース反復 / Hawkes過程 / 市場テキスト / リターン整合embedding / Lévy area / シミュレーション研究 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 市場テキストを額面通りに使わず、反復記事と資金行動を組み合わせて符号を決めるという発想は、market microstructureとelectronic signal constructionの双方に関連する。理論条件と失敗例を明示し、追加予測力が小さいことも報告している点は評価できる。ただし実証的有効性は未確立であり、現段階では実運用モデルというより、実データ検証に値する研究仮説と測定ツールとして推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 908 | 1,246 (81) | 0.0017 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 34,365 | 1,988 (307) | 0.2116 | PDF全文・31ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 理論上、好材料を持つ機関が弱気発言と買いを組み合わせるfalse alarmは、$\\phi^2‹2\\lambda k‹\\phi$で最適となる。また論文の仮定下では$\\operatorname{Cov}(r,\\widetilde m)=\\lambda\\operatorname{Cov}(x,\\widetilde m)-\\phi\\sigma_\\varepsilon^2$が成り立ち、負のSay–Do共分散は発言を逆張りで読む根拠となる。シミュレーションではecho sentimentが全29市場で負の符号を示し、rolling Say–Do correlationによるfalse-alarm識別のAUCは約$0.895$だったが、実データでの検証結果ではない。\n\n**手法:** 線形Gaussian価格形成モデルとlinear–quadraticな戦略的発言モデルからfollow/fade条件を導出する。測定面では、時刻とembedding similarityを用いるmarked Hawkes過程のparentage posterior、将来の市場反応に距離を整合させるcontrastive loss、Lévy areaによるlead–lag統計を構築する。評価は300社、各60イベントの市場シミュレーション29本とsynthetic headline benchmarkで行い、企業内の前半30イベントを学習、後半30イベントをテストに用いている。\n\n**実務への応用:** point-in-timeのニュース・開示データに対し、semantic Hawkes declusteringで独立ニュースと反復記事を分け、過去のSay–Do相関で発言の符号を切り替える実行シグナル設計に利用できる。もっとも、理論特徴量を線形予測へ追加した改善はICで$0.169$から$0.171$にとどまり、unit-weight compositeも弱いため、実運用では係数と符号を市場データで再推定すべきである。\n\n**限界・注意点:** 実市場データを一切用いず、主要評価は理論と共通構造を持つシミュレーター上で行われているため、外的妥当性は不明である。価格形成の主要結果はlinear–Gaussianおよびreduced-form crowd pricingに依存し、false-alarm detectorは現実には事後的にしか得にくいラベルを必要とする。absorptionはnarrative modelのmisspecificationに支配されて理論を検証できず、Lévy areaは統計的に弱かった。return-aligned embeddingのbenchmarkも結果が少数の語で決まるsynthetic corpusであり、現実的なoutcome noiseではneighbour certificateが何も認証しなかった。SayとDoの逆行は欺瞞の証拠ではなく、hedging、client flow、時間軸の相違でも生じ得る。\n\n## 2. Multiperiod bond portfolio optimization with transaction costs using a Markov Decision process\n\n**[arXiv:2609.38765v1](https://arxiv.org/abs/2609.38765v1) — Balaji Ramachandran, Srikanth Iyer, Shashi Jain**\n\n### 概要\n\nDynamic Nelson–Siegelで生成した利回り曲線を離散Markov chainで近似し、比例取引コスト下の複数期間債券配分を有限期間MDPとして解く研究である。2年・5年・10年ゼロクーポン債のシミュレーションでは、動的方策が静的benchmarkより平均・中央値の終端富を高める一方、下方リスクは一貫して改善しないと報告している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 複数期間債券配分 / Markov Decision Process / Dynamic Nelson–Siegel / イールドカーブ / 取引コスト / 動的計画法 / Markov chain近似 / 銀行treasury / 金利リスク / portfolio optimization |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** イールドカーブモデル、取引コスト、動的債券配分を一つのMDPに統合し、遷移kernel切り詰めがtail riskを歪める点まで定量化しているため関連性は高い。もっとも、優位性は完全にモデル内simulationから得られ、初期曲線やコストへの依存も大きいため、実務的な性能証拠ではなく方法論的研究として読むべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 882 | 1,107 (80) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 19,467 | 1,789 (163) | 0.1331 | PDF全文・27ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らのモデル内シミュレーションでは、DP方策の静的MVOに対する平均終端富の優位性は6か月で約0.7–4.0 percentage points、12か月で約2.7–9.0 percentage pointsだった。ただし利益は初期イールドカーブと取引コストに強く依存し、100 bpのコストでは一部の初期曲線で優位性が0.05–0.10 percentage pointsまで縮小した。期待終端富を最大化するrisk-neutral目的のため、5パーセンタイル富や最大drawdownは体系的に改善しなかった。\n\n**手法:** DNSのlevel・slope・curvature因子を独立なAR(1)から成るVARで推移させ、シミュレーションされた利回りを40 bp幅で離散化する。各状態について上位25の遷移先を残した時点依存Markov chainを構築し、6種類のlong-only配分をactionとする有限期間MDPをbackward inductionで解く。2年・5年・10年債を月次で再配分し、equal-weight buy-and-holdおよび独立simulationで推定した静的MVOと、共通乱数を用いて比較している。\n\n**実務への応用:** 銀行treasuryや債券運用で、イールドカーブ状態と既存保有を基に満期配分を動的に変更する方策設計に利用できる。取引コスト上昇時のturnover抑制や、満期間のrelative-value機会が再配分に値するかを評価する枠組みとして有用だが、実務利用には負債、流動性・資本制約、coupon、bid-ask spread、market impactを組み込む必要がある。\n\n**限界・注意点:** 結果は指定したDNS-VARが真のdata-generating processであるmodel-internal simulationに限られ、out-of-sample実証ではないため、実現可能な効果の上限に近い。状態・actionの粗い離散化、遷移kernelのtruncation、3本のゼロクーポン債、比例コスト、short禁止という単純化がある。特にtruncationは平均終端富への影響が小さくても条件付きvolatility、tail、drawdownを大きく歪め得る。負債、預金流出、LCR、HTM/AFS会計、信用リスク、coupon、bid-ask spread、market impact、parameter uncertaintyは扱っていない。またrisk-neutral目的は銀行の下方リスク管理と整合しない可能性がある。\n\n## 3. QuantCode Model: Specializing Language Models for Executable Algorithmic Trading Code\n\n**[arXiv:2609.39420v1](https://arxiv.org/abs/2609.39420v1) — Alexey Chernysh, Orkhan Ekhtibarov, Dmitry Zmitrovich**\n\n### 概要\n\nアルゴリズム取引戦略を自然言語から実行可能なBacktraderコードへ変換するLLMの特化手法を検証した研究である。取引コードによる継続事前学習はframework知識を改善し、実行検証済みのrequest-to-codeペアによるSFTは、実行可能性と要求への意味的一致をさらに大きく改善したと報告している。一方、特化によりstructured tool callingが劣化する能力保持上の問題も示された。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 推奨 | アルゴリズム取引 / コード生成 / 大規模言語モデル / Backtrader / 継続事前学習 / 教師あり微調整 / agentic coding / 実行ベース評価 / tool calling / 能力保持 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 電子取引そのもののalphaやexecution qualityを扱う研究ではないが、取引戦略コード生成を実行、取引発生、意味的一致まで分解して評価しており、algorithmic-trading開発支援には直接的な関連がある。特化性能の向上とagent/tool-use能力の劣化を同時に示した点は実務上有用である。ただし成果は著者独自benchmarkと限定的なmodel lineageに依存し、収益性やproduction suitabilityを裏付けないため、重要度は限定的と評価する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 1,010 | 1,300 (82) | 0.0018 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 14,471 | 1,890 (224) | 0.1102 | PDF全文・16ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** Qwen3.6-35B-A3Bでは、単一ターンのJudge Passがbaseの27.8%から継続事前学習後に33.0%、SFT後に58.2%へ上昇した。agentic評価でも、SFT後の初回成功率は58.3%、最大10ターン後は79.5%となり、baseの22.3%と47.5%を上回った。ただし継続事前学習だけでは最大10ターン後の成功率が47.5%から32.5%へ低下した。これらは著者らのbenchmark上の報告結果であり、収益性や実運用成績を示すものではない。\n\n**手法:** 400タスクのQuantCode-Benchを用い、backtest成功、1件以上の取引生成、LLM judgeによる意味的一致を段階的に評価した。約50億〜60億tokenのアルゴリズム取引repositoryコードでfull-parameter継続事前学習を行い、その後、約800件の実行検証済みrequest-to-codeペアでSFTした。単一ターンに加え、最大10回修正できるagentic設定、約200件のrepository-level課題、weight mergingおよびtool-use trajectoryによる回復SFTも評価した。生成はgreedy decodingで、意味判定にはGPT-5.4を使用した。\n\n**実務への応用:** 自然言語の売買ルールからBacktrader戦略を生成し、backtestの失敗を反復修正する開発支援モデルに応用できる。実運用では、コードの実行確認、注文・状態管理の検査、戦略仕様との一致確認に加え、tool-call構文とagent性能を別々に監視する必要がある。生成戦略の収益性、取引コスト、市場インパクト、リスク管理は別途検証しなければならない。\n\n**限界・注意点:** SFTは35B系統のみで、継続事前学習なしのSFTとの比較や十分なscale ablationがない。semantic judgeは自動評価であり、微妙な売買ロジックの誤りやjudge biasを見逃し得る。学習データとbenchmarkは同じ広いdomainに由来するためcontaminationの懸念があり、完全な再現用データ、seed、versionも公開されていない。tool-call回復はparse成功率を定量保存しておらず、merge比率や初期checkpointのablationもない。さらに、収益性、regime robustness、取引コスト、市場インパクト、production riskは評価対象外である。",
+      "papers": [
+        {
+          "arxivId": "2609.38545v1",
+          "title": "Say, Echo, Do: Strategic Narratives and Revealed Positioning in Financial Markets",
+          "authors": [
+            "Ali Atiah Alzahrani"
+          ],
+          "submittedDate": "2026-09-29",
+          "updatedDate": "2026-09-29",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.38545v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.38545v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "機関の発言をSay、報道の反復をEcho、開示ポジションやフローをDoとして分離し、言葉と資金行動が逆向きなら発言をfadeすべきだと論じる。戦略的発言モデル、Hawkes過程によるecho識別、return-aligned embedding、Lévy areaによるlead–lag測定を統合している。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 908 / 出力 1,246（うち推論 81） · 推定 $0.0017\n論文解析: gpt-5.6-sol / medium · トークン 入力 34,365 / 出力 1,988（うち推論 307） · PDF 31 pages · 推定 $0.2116",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.38765v1",
+          "title": "Multiperiod bond portfolio optimization with transaction costs using a Markov Decision process",
+          "authors": [
+            "Balaji Ramachandran",
+            "Srikanth Iyer",
+            "Shashi Jain"
+          ],
+          "submittedDate": "2026-09-30",
+          "updatedDate": "2026-09-30",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.38765v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.38765v1",
+          "schedulerRank": 2,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "Dynamic Nelson–Siegelで生成した利回り曲線を離散Markov chainで近似し、比例取引コスト下の複数期間債券配分を有限期間MDPとして解く研究である。2年・5年・10年ゼロクーポン債のシミュレーションでは、動的方策が静的benchmarkより平均・中央値の終端富を高める一方、下方リスクは一貫して改善しないと報告している。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 882 / 出力 1,107（うち推論 80） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 19,467 / 出力 1,789（うち推論 163） · PDF 27 pages · 推定 $0.1331",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2609.39420v1",
+          "title": "QuantCode Model: Specializing Language Models for Executable Algorithmic Trading Code",
+          "authors": [
+            "Alexey Chernysh",
+            "Orkhan Ekhtibarov",
+            "Dmitry Zmitrovich"
+          ],
+          "submittedDate": "2026-09-30",
+          "updatedDate": "2026-09-30",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2609.39420v1",
+          "pdfUrl": "https://arxiv.org/pdf/2609.39420v1",
+          "schedulerRank": 3,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 4/10",
+          "schedulerSummary": "アルゴリズム取引戦略を自然言語から実行可能なBacktraderコードへ変換するLLMの特化手法を検証した研究である。取引コードによる継続事前学習はframework知識を改善し、実行検証済みのrequest-to-codeペアによるSFTは、実行可能性と要求への意味的一致をさらに大きく改善したと報告している。一方、特化によりstructured tool callingが劣化する能力保持上の問題も示された。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 1,010 / 出力 1,300（うち推論 82） · 推定 $0.0018\n論文解析: gpt-5.6-sol / medium · トークン 入力 14,471 / 出力 1,890（うち推論 224） · PDF 16 pages · 推定 $0.1102",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

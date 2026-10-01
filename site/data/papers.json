@@ -2,6 +2,54 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-10-01-daily-openai-01",
+      "date": "2026-10-01",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2609.38545v1",
+          "title": "Say, Echo, Do: Strategic Narratives and Revealed Positioning in Financial Markets",
+          "authors": [
+            "Ali Atiah Alzahrani"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.38765v1",
+          "title": "Multiperiod bond portfolio optimization with transaction costs using a Markov Decision process",
+          "authors": [
+            "Balaji Ramachandran",
+            "Srikanth Iyer",
+            "Shashi Jain"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2609.39420v1",
+          "title": "QuantCode Model: Specializing Language Models for Executable Algorithmic Trading Code",
+          "authors": [
+            "Alexey Chernysh",
+            "Orkhan Ekhtibarov",
+            "Dmitry Zmitrovich"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-09-30-daily-openai-01",
       "date": "2026-09-30",
       "kind": "daily",

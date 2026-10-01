@@ -1,0 +1,645 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-10-01",
+  "fingerprint": "b8e00facc3caafc5f3dcf26d62a1c87c4488d243fda18e67a05cec567206e12b",
+  "candidateFingerprints": {
+    "2609.38230": "1c9d5f6719bfc599b6aed0bbf27b0d5678d01408a412f971a270b6e71d23fcbe",
+    "2609.38459": "19a80e41ade6cb6e864109c38576ef3f07b14c7718e51cb1105040121eb571db",
+    "2609.38545": "db82ef6981b72e9129b4d2d8248be119989fa37a24c80560d62c68c43ac230a8",
+    "2609.38765": "519835191f0f4ce5fc0059ace889696b4783ed2c5b692c16ce09dece299e1b13",
+    "2609.39256": "d19d5a020a6afa35428b0e2462ba865dace3ef6e55e92988a25e5d335e66e42f",
+    "2609.39420": "00dd9afb3432d4d85f13dd7d7e3e8d4bb39136ca3c0f9fdabda03c2f2a4408d3",
+    "2609.39932": "972bf8920017486e3c84963b577228723a36a7fdda064a25519f934bb42144bd"
+  },
+  "results": {
+    "2609.38230": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "バスケット資産の短期インプライド・ボラティリティ、スキュー、およびスキューのstickiness ratioを、連続かつroughな確率ボラティリティモデルで分析する研究です。対象は主にequity/volatility derivativesであり、電子取引、market microstructure、金利モデル、yield curve、ratesには直接焦点を置いていません。",
+        "mainResult": "短期のnear-the-moneyインプライド・ボラティリティ展開において、構成資産の分散変動とバスケットウェイトの変動による寄与を分離します。Gaussian Volterra factorモデルでは明示的なバスケット・スキュー係数を導出し、Gaussian factor basket modelにおける短期skew stickiness ratioが普遍的に $H + 3/2$ へ収束することを示したと報告されています。",
+        "practicalApplication": "バスケットや指数オプションの短期スキュー評価、volatility surface extrapolation、ヘッジやモデル較正の理論的基礎になり得ます。ただし、本サイトの主要対象であるexecutionやratesへの直接的な応用は限定的です。",
+        "methodology": "短期near-the-moneyインプライド・ボラティリティ展開、Gaussian Volterra factorへの特殊化、密度展開によるmoneyでの微分の正当化、Malliavin表現によるtotal implied varianceの解析を用いています。",
+        "limitations": "提供されたabstractだけでは、数値検証、実データ適合性、有限満期での近似精度、流動性や取引コストを含む実装面は評価できません。また、普遍極限はGaussian factor basket modelや $H \\in (0,1/2]$ などの仮定に依存します。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "確率ボラティリティとバスケット・オプションの理論としては専門的な意義がありますが、対象サイトの電子取引、market microstructure、interest-rate models、yield curves、ratesというスコープには直接該当しないため、掲載対象としては推奨しません。",
+        "tags": [
+          "basket options",
+          "implied volatility",
+          "volatility skew",
+          "skew stickiness",
+          "rough volatility",
+          "Gaussian Volterra factors",
+          "Malliavin calculus"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies short-maturity implied volatility, skew, and the skew stickiness ratio for baskets under continuous and possibly rough stochastic volatility. It mainly concerns equity/volatility derivatives and does not directly focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "mainResult": "The paper separates the contributions of constituent-variance fluctuations and basket-weight fluctuations in a short-maturity near-the-money implied-volatility expansion. For Gaussian Volterra factor models, it derives an explicit basket-skew coefficient and reports that the short-maturity skew stickiness ratio converges universally to $H + 3/2$ for Gaussian factor basket models.",
+          "practicalApplication": "The results may support short-maturity skew valuation for basket or index options, volatility-surface extrapolation, hedging, and model calibration. However, direct applications to the site's core topics of execution and rates appear limited.",
+          "methodology": "The authors use a short-maturity near-the-money implied-volatility expansion, specialize it to Gaussian Volterra factors, justify differentiation at the money through a density expansion, and analyze total implied variance using a Malliavin representation.",
+          "limitations": "The abstract does not provide evidence on numerical validation, empirical fit, finite-maturity approximation accuracy, or implementation issues such as liquidity and transaction costs. The universal limit also depends on assumptions including the Gaussian factor basket setting and $H \\in (0,1/2]$.",
+          "reason": "The work has specialized theoretical value for stochastic volatility and basket options, but it does not directly match the site's scope of electronic trading, market microstructure, interest-rate models, yield curves, or rates. It is therefore not recommended for inclusion.",
+          "tags": [
+            "basket options",
+            "implied volatility",
+            "volatility skew",
+            "skew stickiness",
+            "rough volatility",
+            "Gaussian Volterra factors",
+            "Malliavin calculus"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.38459": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "自動化されたチェックに依存する組織で、人間の検証能力を維持するための理論的枠組みを提示する研究です。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、または金利市場を直接扱っていません。",
+        "mainResult": "より informative な自動チェッカーは稼働中の誤り検出率を高める一方、人間の独立した技能を維持するインセンティブを弱め、チェッカー停止時の検出能力を低下させる可能性があると論じています。検出目標は現在の能力だけでなく、再訓練が有効になるまで技能が維持される予備能力も考慮すべきだと提案しています。",
+        "practicalApplication": "自動化された検査工程において、通常時の検出率だけでなく、automation bias、silent checker failures、システム停止時の人間の検証能力を評価するための longitudinal test や訓練計画に応用できます。ただし、対象は主に一般的な組織の検証業務であり、金融市場への具体的な適用例は示されていません。",
+        "methodology": "自動チェッカーへの依存、人間の checking ability への投資、チェッカー停止時の性能を結び付ける理論的枠組みを構築しています。colonoscopy と aviation に関する既存の証拠を紹介し、検出目標、技能の予備、training pipeline を標準的な検出テストで測定する方法を提案しています。",
+        "limitations": "提示された要旨では、理論モデルの詳細、数値例の具体的な数値、実証データの識別戦略や因果推論は確認できません。紹介された colonoscopy と aviation の証拠もメカニズムを分離しておらず、金融市場や電子取引での検証結果は報告されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "自動化下の人的技能維持という一般的な経済・組織論の研究であり、対象サイトが扱う電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利市場への直接的な関連性がありません。",
+        "tags": [
+          "automation",
+          "human verification",
+          "automation bias",
+          "organizational economics",
+          "out of scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper presents a theoretical framework for maintaining human verification capacity in organizations that rely on automated checks. It does not directly address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "The paper argues that a more informative automated checker can improve error detection while operating, but may weaken incentives to maintain independent human expertise and thereby reduce detection capacity when the checker fails. It proposes that detection targets should account not only for current capability but also for a reserve of expertise maintained until retraining becomes effective.",
+          "practicalApplication": "The framework could support longitudinal tests and training plans that evaluate automation bias, silent checker failures, and human verification capacity during automation outages, rather than relying only on normal-operation detection rates. However, the abstract provides no concrete application to financial markets.",
+          "methodology": "The paper develops a framework linking reliance on automated checks, investment in human checking ability, and performance when the checker is interrupted. It discusses evidence from colonoscopy and aviation, and proposes measuring detection targets, expertise reserves, and the training pipeline through standard detection tests.",
+          "limitations": "The abstract does not provide the model details, the concrete numerical values in the illustration, or an identification strategy for the empirical evidence. The cited colonoscopy and aviation evidence does not isolate the proposed mechanism, and no validation in financial markets or electronic trading is reported.",
+          "reason": "This is a general economics and organizational study of maintaining human expertise under automation. It has no direct material relevance to electronic execution, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "tags": [
+            "automation",
+            "human verification",
+            "automation bias",
+            "organizational economics",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.38545": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "機関投資家の発言（Say）、メディアによる反復（Echo）、実際のポジション形成（Do）の関係を、情報開示と取引を行う主体および追随する投資家を含むモデルで分析する研究です。",
+        "mainResult": "線形二次モデルでは、機関投資家が資産について弱気な発言をしながら買い進める戦略が、条件 $\\varphi^2<2\\lambda k<\\varphi$ の下で最適になると報告しています。また、観測された Say-Do 共分散が負なら、発言の予測内容も負であり、発言を逆張りすべきだという分布非依存の恒等式を示しています。シミュレーション29市場では、Echo センチメントのリターン予測係数がすべて有意に負となり、Say-Do 相関による誤警報イベント検出の AUC は 0.90 でした。",
+        "practicalApplication": "機関投資家の声明、メディア記事、取引・ポジション情報を統合し、ニュースを追随するか逆張りするかを判定するシグナル設計、記事のエコー検出、イベント分析に応用できる可能性があります。",
+        "methodology": "発言・取引・群衆行動を含む線形二次モデル、Say-Do 共分散に関する分布非依存分析、到着時刻と embedding 類似度を用いたエコー記事の事後分布、リターン整合型 contrastive learning、誰が先に市場を動かしたかを測る path-signature 統計量を組み合わせています。評価は真の状態が既知の controlled market simulation で行われています。",
+        "limitations": "提示された抄録では実市場データでの検証、取引コスト、流動性、執行遅延、モデル誤特定への頑健性は確認できません。シミュレーション結果は29市場に限られ、負の予測効果や AUC が実運用でも成立するとは限りません。また、パラメータ条件や「ツールが失敗する」具体的状況の詳細は抄録だけでは不明です。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "発言と実際のポジショニングの乖離を市場マイクロストラクチャー上の戦略シグナルとして扱い、テキスト分析と取引行動を接続している点で関連性が高いです。理論的条件、複数の測定手法、シミュレーション評価を含む一方、実証的な実市場検証がないため重要度は4とします。",
+        "tags": [
+          "market microstructure",
+          "strategic disclosure",
+          "text-based signals",
+          "institutional trading",
+          "media echoes",
+          "contrarian signals",
+          "market simulation",
+          "contrastive learning",
+          "event detection"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper analyzes the relationship among institutional statements (Say), media repetition (Echo), and actual position formation (Do) using a model with an informed institution that communicates and trades alongside partly credulous investors.",
+          "mainResult": "In a linear-quadratic model, the paper reports that talking an asset down while buying it is optimal when $\\varphi^2<2\\lambda k<\\varphi$. It also derives a distribution-free identity stating that negative observed Say-Do covariance implies negative predictive content in the statements, so the statements should be faded. In 29 controlled simulated markets, Echo sentiment had a significantly negative return-prediction coefficient in every market, while Say-Do correlation detected false-alarm events with an AUC of 0.90.",
+          "practicalApplication": "The framework could support signal design that combines institutional statements, media articles, and trading or positioning information to decide whether news should be followed or faded. It may also be useful for echo-article detection and event analysis.",
+          "methodology": "The study combines a linear-quadratic model of communication, trading, and crowd behavior; a distribution-free analysis of Say-Do covariance; an exact posterior over echo articles using arrival times and embedding similarity; a return-aligned contrastive-learning objective; and a path-signature statistic for identifying who moved the market first. Evaluation is conducted in controlled market simulations with known ground truth.",
+          "limitations": "The abstract does not establish validation on real-market data or address transaction costs, liquidity, execution latency, or robustness to model misspecification. The simulation results cover only 29 markets, so the negative predictive effect and AUC may not hold in live trading. The detailed failure cases and parameter interpretation are also not specified in the abstract.",
+          "reason": "The paper is highly relevant to market microstructure because it treats discrepancies between public narratives and revealed positioning as strategic trading signals, linking text analysis with trading behavior. It offers theoretical conditions, several measurement tools, and simulation evidence, but lacks empirical validation on real markets; therefore, importance is rated 4.",
+          "tags": [
+            "market microstructure",
+            "strategic disclosure",
+            "text-based signals",
+            "institutional trading",
+            "media echoes",
+            "contrarian signals",
+            "market simulation",
+            "contrastive learning",
+            "event detection"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "機関の発言をSay、報道の反復をEcho、開示ポジションやフローをDoとして分離し、言葉と資金行動が逆向きなら発言をfadeすべきだと論じる。戦略的発言モデル、Hawkes過程によるecho識別、return-aligned embedding、Lévy areaによるlead–lag測定を統合している。",
+        "mainResult": "理論上、好材料を持つ機関が弱気発言と買いを組み合わせるfalse alarmは、$\\phi^2<2\\lambda k<\\phi$で最適となる。また論文の仮定下では$\\operatorname{Cov}(r,\\widetilde m)=\\lambda\\operatorname{Cov}(x,\\widetilde m)-\\phi\\sigma_\\varepsilon^2$が成り立ち、負のSay–Do共分散は発言を逆張りで読む根拠となる。シミュレーションではecho sentimentが全29市場で負の符号を示し、rolling Say–Do correlationによるfalse-alarm識別のAUCは約$0.895$だったが、実データでの検証結果ではない。",
+        "practicalApplication": "point-in-timeのニュース・開示データに対し、semantic Hawkes declusteringで独立ニュースと反復記事を分け、過去のSay–Do相関で発言の符号を切り替える実行シグナル設計に利用できる。もっとも、理論特徴量を線形予測へ追加した改善はICで$0.169$から$0.171$にとどまり、unit-weight compositeも弱いため、実運用では係数と符号を市場データで再推定すべきである。",
+        "methodology": "線形Gaussian価格形成モデルとlinear–quadraticな戦略的発言モデルからfollow/fade条件を導出する。測定面では、時刻とembedding similarityを用いるmarked Hawkes過程のparentage posterior、将来の市場反応に距離を整合させるcontrastive loss、Lévy areaによるlead–lag統計を構築する。評価は300社、各60イベントの市場シミュレーション29本とsynthetic headline benchmarkで行い、企業内の前半30イベントを学習、後半30イベントをテストに用いている。",
+        "limitations": "実市場データを一切用いず、主要評価は理論と共通構造を持つシミュレーター上で行われているため、外的妥当性は不明である。価格形成の主要結果はlinear–Gaussianおよびreduced-form crowd pricingに依存し、false-alarm detectorは現実には事後的にしか得にくいラベルを必要とする。absorptionはnarrative modelのmisspecificationに支配されて理論を検証できず、Lévy areaは統計的に弱かった。return-aligned embeddingのbenchmarkも結果が少数の語で決まるsynthetic corpusであり、現実的なoutcome noiseではneighbour certificateが何も認証しなかった。SayとDoの逆行は欺瞞の証拠ではなく、hedging、client flow、時間軸の相違でも生じ得る。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "市場テキストを額面通りに使わず、反復記事と資金行動を組み合わせて符号を決めるという発想は、market microstructureとelectronic signal constructionの双方に関連する。理論条件と失敗例を明示し、追加予測力が小さいことも報告している点は評価できる。ただし実証的有効性は未確立であり、現段階では実運用モデルというより、実データ検証に値する研究仮説と測定ツールとして推奨する。",
+        "tags": [
+          "戦略的ナラティブ",
+          "Say–Do共分散",
+          "ニュース反復",
+          "Hawkes過程",
+          "市場テキスト",
+          "リターン整合embedding",
+          "Lévy area",
+          "シミュレーション研究"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper separates institutional statements as Say, media repetition as Echo, and disclosed positioning or flow as Do, arguing that words should be faded when speech and capital move in opposite directions. It integrates a strategic-speech model, Hawkes-based echo identification, return-aligned embeddings, and Lévy-area lead–lag measurement.",
+          "mainResult": "In the model, a false alarm combining bearish speech with buying despite favorable information is optimal when $\\phi^2<2\\lambda k<\\phi$. Under the paper's assumptions, $\\operatorname{Cov}(r,\\widetilde m)=\\lambda\\operatorname{Cov}(x,\\widetilde m)-\\phi\\sigma_\\varepsilon^2$, making negative Say–Do covariance a reason to interpret words contrarily. In simulation, echo sentiment had a negative sign in all 29 markets, while rolling Say–Do correlation achieved a false-alarm AUC of about $0.895$; these are not results from real-market data.",
+          "practicalApplication": "For point-in-time news and disclosure data, the framework could separate independent news from repeated articles using semantic Hawkes declustering and switch the sign assigned to statements using historical Say–Do correlation. However, adding the theory features to a linear forecast improved IC only from $0.169$ to $0.171$, and the unit-weight composite was weak, so coefficients and signs should be re-estimated on market data before practical use.",
+          "methodology": "The paper derives follow-or-fade conditions from a linear Gaussian price-formation model and a linear–quadratic strategic-speech model. Its measurement layer consists of a parentage posterior for a marked Hawkes process using timestamps and embedding similarity, a contrastive loss aligning distances with subsequent market outcomes, and a Lévy-area lead–lag statistic. Evaluation uses 29 simulated markets with 300 firms and 60 events per firm, training on the first 30 events and testing on the last 30, plus a synthetic-headline benchmark.",
+          "limitations": "No real-market data are used, and the main evaluation relies on a simulator that shares the theory's structure, leaving external validity unknown. The central price-formation results depend on linear–Gaussian assumptions and reduced-form crowd pricing, while the false-alarm detector requires labels that would generally be available only retrospectively. Absorption was dominated by narrative-model misspecification and could not test its theorem, and the Lévy-area evidence was statistically weak. The return-aligned embedding benchmark is also a synthetic corpus whose outcomes are determined by a few words; under realistic outcome noise, the neighbour certificate certified nothing. Divergence between Say and Do is not evidence of deception and can arise from hedging, client flow, or different horizons.",
+          "reason": "The idea of determining signal direction by combining repeated financial text with revealed capital allocation, rather than taking text at face value, is relevant to both market microstructure and electronic signal construction. The paper usefully states theoretical conditions, reports failure cases, and acknowledges that incremental predictive power is small. Because empirical effectiveness remains unestablished, it is recommended as a set of hypotheses and measurement tools for real-data testing rather than as a production trading model.",
+          "tags": [
+            "strategic narratives",
+            "Say–Do covariance",
+            "news repetition",
+            "Hawkes process",
+            "financial text",
+            "return-aligned embeddings",
+            "Lévy area",
+            "simulation study"
+          ]
+        }
+      }
+    },
+    "2609.38765": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "本論文は、金利リスクと比例的な取引コストを考慮した、複数期間の債券ポートフォリオ最適化を扱う。Dynamic Nelson–SiegelモデルとVARによるイールドカーブ dynamics を有限状態Markov Decision Processに組み込み、後ろ向き帰納法で最適政策を求める。",
+        "mainResult": "報告された結果では、遷移カーネルの切 truncation は終端 wealth の平均をほぼ変えない一方、drawdown と tail statistics を大きく歪める。",
+        "practicalApplication": "銀行 treasury における債券の満期配分、リバランス方針、金利上昇局面のリスク管理に応用可能である。特に、期待収益だけでなく取引コストと流動性・下方リスクを含む動的な運用方針の検討に有用と考えられる。",
+        "methodology": "Dynamic Nelson–Siegel parameterization と Vector Autoregressive factor dynamics でイールドカーブをモデル化し、複数満期の joint yield process を近似する time-inhomogeneous discrete-state Markov chain を構築する。この状態空間上で有限期間MDPを定式化し、比例的な rebalancing costs を控除した期待終端 wealth を最大化する政策を backward induction で計算する。さらに、transition kernel の truncation による近似誤差を評価する。",
+        "limitations": "評価はsimulation-based frameworkに基づき、抽象からは実市場データでの out-of-sample 検証、モデル・パラメータの頑健性、取引コストや流動性制約の現実性は確認できない。近似による平均 wealth と drawdown・tail risk の乖離も示されており、tail riskを重視する実装では状態空間近似の検証が必要である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "債券ポートフォリオ最適化とイールドカーブ・金利モデルを直接結び付け、取引コストを含む動的な意思決定を扱っているため、対象サイトの rates および interest-rate models の範囲に適合する。実務上重要な tail statistics の近似誤差も報告しているが、抽象段階では実証的な有効性が限定的である。",
+        "tags": [
+          "bond portfolio optimization",
+          "transaction costs",
+          "interest-rate risk",
+          "yield curve",
+          "Dynamic Nelson-Siegel",
+          "VAR",
+          "Markov Decision Process",
+          "bank treasury",
+          "tail risk"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This paper studies multi-period bond portfolio optimization with interest-rate risk and proportional transaction costs. It embeds yield-curve dynamics from a Dynamic Nelson–Siegel model with VAR factors into a finite-state Markov Decision Process and obtains the optimal policy by backward induction.",
+          "mainResult": "The reported results show that truncating the transition kernel leaves mean terminal wealth almost unchanged but substantially distorts drawdown and tail statistics.",
+          "practicalApplication": "The framework can support bond-maturity allocation, rebalancing policies, and risk management for bank treasuries, including periods of rising interest rates. It is particularly relevant for dynamic policies that account for transaction costs and downside or liquidity-related risks rather than expected return alone.",
+          "methodology": "Yield-curve dynamics are modeled with a Dynamic Nelson–Siegel parameterization and Vector Autoregressive factor dynamics. A time-inhomogeneous discrete-state Markov chain approximates the joint yield process across maturities. A finite-horizon MDP is then formulated to maximize expected terminal wealth after proportional rebalancing costs, with the policy computed by backward induction. The approximation error from truncating the transition kernel is also evaluated.",
+          "limitations": "The study is presented as a simulation-based framework, and the abstract does not establish out-of-sample validation with market data, robustness to model and parameter choices, or the realism of transaction-cost and liquidity assumptions. Because the approximation can separate mean wealth from drawdown and tail-risk behavior, implementations that emphasize tail risk require careful validation of the state-space approximation.",
+          "reason": "The paper directly links bond portfolio optimization with yield-curve and interest-rate models while incorporating transaction costs into dynamic decisions, making it relevant to rates and interest-rate-model research. Its analysis of approximation errors in tail statistics is practically important, although the abstract provides limited evidence of empirical effectiveness.",
+          "tags": [
+            "bond portfolio optimization",
+            "transaction costs",
+            "interest-rate risk",
+            "yield curve",
+            "Dynamic Nelson-Siegel",
+            "VAR",
+            "Markov Decision Process",
+            "bank treasury",
+            "tail risk"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "mixed",
+        "summary": "Dynamic Nelson–Siegelで生成した利回り曲線を離散Markov chainで近似し、比例取引コスト下の複数期間債券配分を有限期間MDPとして解く研究である。2年・5年・10年ゼロクーポン債のシミュレーションでは、動的方策が静的benchmarkより平均・中央値の終端富を高める一方、下方リスクは一貫して改善しないと報告している。",
+        "mainResult": "著者らのモデル内シミュレーションでは、DP方策の静的MVOに対する平均終端富の優位性は6か月で約0.7–4.0 percentage points、12か月で約2.7–9.0 percentage pointsだった。ただし利益は初期イールドカーブと取引コストに強く依存し、100 bpのコストでは一部の初期曲線で優位性が0.05–0.10 percentage pointsまで縮小した。期待終端富を最大化するrisk-neutral目的のため、5パーセンタイル富や最大drawdownは体系的に改善しなかった。",
+        "practicalApplication": "銀行treasuryや債券運用で、イールドカーブ状態と既存保有を基に満期配分を動的に変更する方策設計に利用できる。取引コスト上昇時のturnover抑制や、満期間のrelative-value機会が再配分に値するかを評価する枠組みとして有用だが、実務利用には負債、流動性・資本制約、coupon、bid-ask spread、market impactを組み込む必要がある。",
+        "methodology": "DNSのlevel・slope・curvature因子を独立なAR(1)から成るVARで推移させ、シミュレーションされた利回りを40 bp幅で離散化する。各状態について上位25の遷移先を残した時点依存Markov chainを構築し、6種類のlong-only配分をactionとする有限期間MDPをbackward inductionで解く。2年・5年・10年債を月次で再配分し、equal-weight buy-and-holdおよび独立simulationで推定した静的MVOと、共通乱数を用いて比較している。",
+        "limitations": "結果は指定したDNS-VARが真のdata-generating processであるmodel-internal simulationに限られ、out-of-sample実証ではないため、実現可能な効果の上限に近い。状態・actionの粗い離散化、遷移kernelのtruncation、3本のゼロクーポン債、比例コスト、short禁止という単純化がある。特にtruncationは平均終端富への影響が小さくても条件付きvolatility、tail、drawdownを大きく歪め得る。負債、預金流出、LCR、HTM/AFS会計、信用リスク、coupon、bid-ask spread、market impact、parameter uncertaintyは扱っていない。またrisk-neutral目的は銀行の下方リスク管理と整合しない可能性がある。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "イールドカーブモデル、取引コスト、動的債券配分を一つのMDPに統合し、遷移kernel切り詰めがtail riskを歪める点まで定量化しているため関連性は高い。もっとも、優位性は完全にモデル内simulationから得られ、初期曲線やコストへの依存も大きいため、実務的な性能証拠ではなく方法論的研究として読むべきである。",
+        "tags": [
+          "複数期間債券配分",
+          "Markov Decision Process",
+          "Dynamic Nelson–Siegel",
+          "イールドカーブ",
+          "取引コスト",
+          "動的計画法",
+          "Markov chain近似",
+          "銀行treasury",
+          "金利リスク",
+          "portfolio optimization"
+        ],
+        "english": {
+          "classification": "mixed",
+          "summary": "The paper approximates a yield curve generated by Dynamic Nelson–Siegel with a discrete Markov chain and solves multiperiod bond allocation with proportional transaction costs as a finite-horizon MDP. In simulations with two-, five-, and ten-year zero-coupon bonds, the dynamic policy reportedly raises mean and median terminal wealth relative to static benchmarks but does not consistently improve downside risk.",
+          "mainResult": "In the authors’ model-internal simulations, the DP policy’s mean-terminal-wealth advantage over static MVO is approximately 0.7–4.0 percentage points over six months and 2.7–9.0 percentage points over twelve months. The gain nevertheless depends strongly on the initial yield curve and transaction costs; at a cost of 100 bp, it shrinks to 0.05–0.10 percentage points for some initial curves. Because the risk-neutral objective maximizes expected terminal wealth, fifth-percentile wealth and maximum drawdown do not improve systematically.",
+          "practicalApplication": "The framework can support policy design for bank treasuries and bond managers that dynamically alter maturity allocations based on the yield-curve state and current holdings. It is useful for evaluating turnover reductions as costs rise and whether relative-value opportunities across maturities justify reallocation, but practical use would require liabilities, liquidity and capital constraints, coupons, bid-ask spreads, and market impact.",
+          "methodology": "The study evolves DNS level, slope, and curvature factors through a VAR consisting of independent AR(1) processes and discretizes simulated yields on a 40 bp grid. It constructs a time-dependent Markov chain by retaining the 25 most probable successors per state, then solves a finite-horizon MDP by backward induction with six long-only allocations as actions. Monthly allocation among two-, five-, and ten-year bonds is compared with equal-weight buy-and-hold and static MVO estimated from an independent simulation, using common random numbers.",
+          "limitations": "The results are confined to model-internal simulations in which the specified DNS-VAR is the true data-generating process; there is no out-of-sample empirical test, so the results are closer to an upper bound on achievable performance. Simplifications include coarse state and action discretization, transition-kernel truncation, only three zero-coupon bonds, proportional costs, and no shorting. In particular, truncation may have little effect on mean terminal wealth while materially distorting conditional volatility, tails, and drawdowns. The model omits liabilities, deposit outflows, LCR constraints, HTM/AFS accounting, credit risk, coupons, bid-ask spreads, market impact, and parameter uncertainty. Its risk-neutral objective may also be inconsistent with bank downside-risk management.",
+          "reason": "The paper is highly relevant because it integrates a yield-curve model, transaction costs, and dynamic bond allocation in one MDP and quantifies how transition-kernel truncation distorts tail risk. However, the reported advantage comes entirely from model-internal simulations and is sensitive to the initial curve and costs, so it should be read as a methodological contribution rather than evidence of practical performance.",
+          "tags": [
+            "multiperiod bond allocation",
+            "Markov Decision Process",
+            "Dynamic Nelson–Siegel",
+            "yield curve",
+            "transaction costs",
+            "dynamic programming",
+            "Markov chain approximation",
+            "bank treasury",
+            "interest-rate risk",
+            "portfolio optimization"
+          ]
+        }
+      }
+    },
+    "2609.39256": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、European option smile が与える各満期のリスク中立周辺分布を、既存の stochastic volatility および path-dependent volatility モデルに適合させるための Stochastic Knothe–Rosenblatt 構成を提案する。対象は主に equity 型オプションの stochastic local volatility であり、電子取引、market microstructure、yield curve、または interest-rate model を直接扱う研究ではない。",
+        "mainResult": "抽象によれば、提案手法は指定された全ての marginal を厳密に一致させつつ、基準 dynamics に adapted Knothe–Rosenblatt の意味で近い martingale を再帰的に構成する。各 calibration step は Martingale Sinkhorn algorithm により効率的に計算でき、Bass martingale と同様に、離散満期での高速 calibration、局所ボラティリティへの収束、Heston と Bergomi のベンチマーク、および multi-asset 拡張を扱う。",
+        "practicalApplication": "既存の stochastic volatility や path-dependent volatility の dynamics を大きく変更せず、観測された option smile に厳密に整合する calibration overlay として利用できる可能性がある。特に Heston、Bergomi、multi-asset モデルでの高速な分布適合や pricing・risk simulation への応用が想定されるが、抽象だけでは実務上の精度、計算時間、安定性は確認できない。",
+        "methodology": "Bass martingale を出発点とし、所与の marginal laws を満たす martingale を、参照モデルに近い adapted Knothe–Rosenblatt 構成として満期ごとに再帰的に構築する。各段階で Martingale Sinkhorn algorithm を用い、理論的基礎、数値実装、SLV model への収束、Heston と Bergomi による数値ベンチマーク、multi-asset extension を検討する。",
+        "limitations": "評価は抽象に記載された範囲に限られ、数値結果、誤差指標、収束率、計算コスト、入力 smile のノイズへの頑健性は示されていない。また、証券市場の execution や microstructure、金利・yield-curve dynamics への適用は明示されていない。したがって、本サイトの主要対象との直接的な適合性は低い。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "確率的ボラティリティとオプション・キャリブレーションの方法論としては関連性があるが、本サイトが対象とする electronic execution、market microstructure、interest-rate models、yield curves、rates のいずれにも直接焦点を当てていないため、スコープ外と判定する。",
+        "tags": [
+          "stochastic volatility",
+          "stochastic local volatility",
+          "option calibration",
+          "martingale",
+          "Knothe-Rosenblatt",
+          "Martingale Sinkhorn",
+          "Heston",
+          "Bergomi",
+          "multi-asset"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a Stochastic Knothe–Rosenblatt construction for fitting the risk-neutral marginal distributions implied by European option smiles to existing stochastic and path-dependent volatility models. It mainly concerns equity-style stochastic local volatility rather than electronic trading, market microstructure, yield curves, or interest-rate models.",
+          "mainResult": "According to the abstract, the method recursively constructs a martingale that exactly matches all prescribed marginals while remaining close to the reference dynamics in an adapted Knothe–Rosenblatt sense. Each calibration step can be computed efficiently with a Martingale Sinkhorn algorithm. The paper addresses fast calibration at discrete maturities, convergence toward local-volatility and SLV models, benchmarks with Heston and Bergomi dynamics, and a multi-asset extension.",
+          "practicalApplication": "The method could serve as a calibration overlay for existing stochastic or path-dependent volatility models, preserving their dynamics while enforcing exact consistency with observed option smiles. Potential uses include distribution fitting and subsequent pricing or risk simulation for Heston, Bergomi, and multi-asset models, although the abstract does not establish practical accuracy, runtime, or stability.",
+          "methodology": "Starting from the Bass martingale construction, the authors recursively build a martingale satisfying the prescribed marginal laws while staying close to the reference model through an adapted Knothe–Rosenblatt construction. Martingale Sinkhorn is used at each step, alongside theoretical analysis, numerical implementation, convergence analysis toward an SLV model, Heston and Bergomi benchmarks, and a multi-asset extension.",
+          "limitations": "The abstract does not report numerical results, error metrics, convergence rates, computational costs, or robustness to noisy option smiles. It also does not explicitly address trading execution, market microstructure, interest-rate dynamics, or yield-curve modeling. Therefore, its direct relevance to this site’s core scope is limited.",
+          "reason": "The paper is methodologically relevant to stochastic-volatility and option-calibration research, but it does not directly focus on electronic execution, market microstructure, interest-rate models, yield curves, or rates. It is therefore classified as out of scope.",
+          "tags": [
+            "stochastic volatility",
+            "stochastic local volatility",
+            "option calibration",
+            "martingale",
+            "Knothe-Rosenblatt",
+            "Martingale Sinkhorn",
+            "Heston",
+            "Bergomi",
+            "multi-asset"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2609.39420": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本研究は、自然言語による取引戦略仕様をBacktrader向けの実行可能コードへ変換する言語モデルを、continued pretrainingとagent-validated request-to-code pairsによるSFTで専門化する方法を評価する。",
+        "mainResult": "400タスクのQuantCode-Benchなどで、continued pretrainingはJudge PassをQwen3.5-397B-A17Bで41.5%から47.5%、Qwen3.6-35B-A3Bで27.8%から33.0%へ改善した。さらにSFTを適用すると、後者でJudge Passが58.2%、successful backtestsが83.5%となり、agentic評価でもfirst-turn successが22.3%から58.3%、最大10ターン後のfinal successが47.5%から79.5%へ上昇した。一方、専門化はstructured tool callingの形式適合性を低下させる場合があり、回復用SFTは形式を改善したもののrepository-level agent performanceまでは回復しなかった。",
+        "practicalApplication": "取引戦略のプロトタイピング、Backtrader向けコード生成、バックテストの自動化、および取引コード生成エージェントの評価設計に応用できる可能性がある。ただし、これはコードの実行成功や仕様適合性の評価であり、ライブ取引での収益性、リスク、約定品質を直接検証するものではない。",
+        "methodology": "Qwenモデルに対して、アルゴリズム取引フレームワークのコードによるcontinued pretrainingと、agentにより検証された自然言語要求・コード対のSFTを比較した。評価には400タスクのQuantCode-Bench、repository-level SWE-bench-like track、単一ターン評価、最大10ターンのagentic修復評価、successful backtests、structured tool callingの能力保持評価を用いた。",
+        "limitations": "提供されたabstractだけでは、データセットの構成、要求の難易度、評価判定者の詳細、統計的有意性、計算コスト、モデル間の公平な比較条件が不明である。また、Backtrader中心の結果を他の取引フレームワークや実運用へ一般化できるかは確認されていない。バックテスト成功率も投資収益や実市場での頑健性を意味しない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子取引システムの戦略コード生成と検証に直接関係し、専門化手法だけでなくinstruction followingやtool callingなどの能力保持も評価しているため、対象サイトの電子取引・実行関連テーマに有用である。ただし、実際の注文執行、market microstructure、収益性を扱う研究ではないため、重要度は最高ではない。",
+        "tags": [
+          "algorithmic trading",
+          "executable code generation",
+          "Backtrader",
+          "continued pretraining",
+          "supervised fine-tuning",
+          "backtesting",
+          "agentic evaluation",
+          "tool calling",
+          "capability retention"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This study evaluates specializing language models to translate natural-language trading-strategy specifications into executable Backtrader code using continued pretraining and SFT on agent-validated request-to-code pairs.",
+          "mainResult": "On the 400-task QuantCode-Bench and related evaluations, continued pretraining increased Judge Pass from 41.5% to 47.5% for Qwen3.5-397B-A17B and from 27.8% to 33.0% for Qwen3.6-35B-A3B. Applying SFT afterward raised the latter model to 58.2% Judge Pass and 83.5% successful backtests; in agentic evaluation, first-turn success increased from 22.3% to 58.3% and final success after up to 10 turns from 47.5% to 79.5%. However, specialization could reduce structured tool-calling conformance, and recovery SFT restored tool-call formatting without restoring repository-level agent performance.",
+          "practicalApplication": "The approach could support trading-strategy prototyping, Backtrader code generation, automated backtesting, and evaluation of agents that generate trading code. However, the evaluations measure executable correctness and specification adherence rather than live-trading profitability, risk, or execution quality.",
+          "methodology": "The authors compare continued pretraining on algorithmic-trading framework code with SFT on agent-validated natural-language request and code pairs. They use QuantCode-Bench, a repository-level SWE-bench-like track, single-turn evaluation, up-to-10-turn agentic repair evaluation, successful backtests, and capability-retention tests for structured tool calling.",
+          "limitations": "The abstract does not specify dataset composition, task difficulty, evaluator details, statistical significance, compute cost, or fully comparable conditions across models. Generalization beyond Backtrader and into production trading is unestablished. Backtest success does not imply investment returns or robustness in live markets.",
+          "reason": "The paper is directly relevant to electronic-trading strategy code generation and validation, and it addresses capability retention in addition to specialization. It does not study actual order execution, market microstructure, or trading profitability, so it is highly relevant but not central to those narrower topics.",
+          "tags": [
+            "algorithmic trading",
+            "executable code generation",
+            "Backtrader",
+            "continued pretraining",
+            "supervised fine-tuning",
+            "backtesting",
+            "agentic evaluation",
+            "tool calling",
+            "capability retention"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "アルゴリズム取引戦略を自然言語から実行可能なBacktraderコードへ変換するLLMの特化手法を検証した研究である。取引コードによる継続事前学習はframework知識を改善し、実行検証済みのrequest-to-codeペアによるSFTは、実行可能性と要求への意味的一致をさらに大きく改善したと報告している。一方、特化によりstructured tool callingが劣化する能力保持上の問題も示された。",
+        "mainResult": "Qwen3.6-35B-A3Bでは、単一ターンのJudge Passがbaseの27.8%から継続事前学習後に33.0%、SFT後に58.2%へ上昇した。agentic評価でも、SFT後の初回成功率は58.3%、最大10ターン後は79.5%となり、baseの22.3%と47.5%を上回った。ただし継続事前学習だけでは最大10ターン後の成功率が47.5%から32.5%へ低下した。これらは著者らのbenchmark上の報告結果であり、収益性や実運用成績を示すものではない。",
+        "practicalApplication": "自然言語の売買ルールからBacktrader戦略を生成し、backtestの失敗を反復修正する開発支援モデルに応用できる。実運用では、コードの実行確認、注文・状態管理の検査、戦略仕様との一致確認に加え、tool-call構文とagent性能を別々に監視する必要がある。生成戦略の収益性、取引コスト、市場インパクト、リスク管理は別途検証しなければならない。",
+        "methodology": "400タスクのQuantCode-Benchを用い、backtest成功、1件以上の取引生成、LLM judgeによる意味的一致を段階的に評価した。約50億〜60億tokenのアルゴリズム取引repositoryコードでfull-parameter継続事前学習を行い、その後、約800件の実行検証済みrequest-to-codeペアでSFTした。単一ターンに加え、最大10回修正できるagentic設定、約200件のrepository-level課題、weight mergingおよびtool-use trajectoryによる回復SFTも評価した。生成はgreedy decodingで、意味判定にはGPT-5.4を使用した。",
+        "limitations": "SFTは35B系統のみで、継続事前学習なしのSFTとの比較や十分なscale ablationがない。semantic judgeは自動評価であり、微妙な売買ロジックの誤りやjudge biasを見逃し得る。学習データとbenchmarkは同じ広いdomainに由来するためcontaminationの懸念があり、完全な再現用データ、seed、versionも公開されていない。tool-call回復はparse成功率を定量保存しておらず、merge比率や初期checkpointのablationもない。さらに、収益性、regime robustness、取引コスト、市場インパクト、production riskは評価対象外である。",
+        "importance": 2,
+        "recommended": true,
+        "reason": "電子取引そのもののalphaやexecution qualityを扱う研究ではないが、取引戦略コード生成を実行、取引発生、意味的一致まで分解して評価しており、algorithmic-trading開発支援には直接的な関連がある。特化性能の向上とagent/tool-use能力の劣化を同時に示した点は実務上有用である。ただし成果は著者独自benchmarkと限定的なmodel lineageに依存し、収益性やproduction suitabilityを裏付けないため、重要度は限定的と評価する。",
+        "tags": [
+          "アルゴリズム取引",
+          "コード生成",
+          "大規模言語モデル",
+          "Backtrader",
+          "継続事前学習",
+          "教師あり微調整",
+          "agentic coding",
+          "実行ベース評価",
+          "tool calling",
+          "能力保持"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This study evaluates methods for specializing LLMs that translate natural-language algorithmic-trading strategies into executable Backtrader code. Continued pretraining on trading code reportedly improves framework knowledge, while SFT on execution-validated request-to-code pairs produces substantially larger gains in executability and semantic alignment. The paper also identifies a capability-retention problem in which specialization degrades structured tool calling.",
+          "mainResult": "For Qwen3.6-35B-A3B, single-turn Judge Pass increased from 27.8% for the base model to 33.0% after continued pretraining and 58.2% after SFT. In agentic evaluation, the SFT checkpoint reached 58.3% first-turn success and 79.5% success after up to 10 turns, compared with 22.3% and 47.5% for the base checkpoint. Continued pretraining alone, however, reduced success after up to 10 turns from 47.5% to 32.5%. These are reported benchmark results and do not demonstrate profitability or live-trading performance.",
+          "practicalApplication": "The approach can support development tools that generate Backtrader strategies from natural-language trading rules and iteratively repair backtest failures. Production use would require separate monitoring of code execution, order and state management, compliance with the requested strategy, tool-call syntax, and agent performance. Profitability, transaction costs, market impact, and risk controls must be validated independently.",
+          "methodology": "The authors use the 400-task QuantCode-Bench and evaluate backtest success, generation of at least one trade, and semantic alignment determined by an LLM judge. They perform full-parameter continued pretraining on approximately 5–6 billion tokens of algorithmic-trading repository code, followed by SFT on about 800 execution-validated request-to-code pairs. Evaluations include single-turn generation, an agentic setting with up to 10 repair attempts, roughly 200 repository-level tasks, weight merging, and recovery SFT using tool-use trajectories. Generation uses greedy decoding, and GPT-5.4 serves as the semantic judge.",
+          "limitations": "SFT is tested only in the 35B lineage, with no comparison against SFT without prior continued pretraining and no comprehensive scale ablation. The semantic judge is automated and may miss subtle trading-logic errors or introduce judge bias. Because training data and benchmarks come from the same broad domain, contamination remains a concern, and complete reproduction data, seeds, and versions are not provided. Tool-call recovery lacks a retained quantitative parse-success rate and does not ablate merge ratios or starting checkpoints. Profitability, regime robustness, transaction costs, market impact, and production risk are outside the evaluation.",
+          "reason": "The paper does not study alpha or execution quality directly, but it is materially relevant to algorithmic-trading development because it evaluates generated strategy code through execution, trade production, and semantic compliance. Its demonstration that domain gains can coincide with degraded agent and tool-use capabilities is practically useful. Nevertheless, the evidence depends on a proprietary benchmark setup and limited model lineages and does not establish profitability or production suitability.",
+          "tags": [
+            "algorithmic trading",
+            "code generation",
+            "large language models",
+            "Backtrader",
+            "continued pretraining",
+            "supervised fine-tuning",
+            "agentic coding",
+            "execution-based evaluation",
+            "tool calling",
+            "capability retention"
+          ]
+        }
+      }
+    },
+    "2609.39932": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本稿は、軍務経験が退役後の食料不安および栄養支援制度の利用に与える影響を分析する実証研究であり、電子取引、market microstructure、金利モデル、イールドカーブ、または金利市場を扱っていません。",
+        "mainResult": "PSIDデータによると、退役軍人世帯は非退役軍人世帯より食料不安が低く、連邦栄養支援制度の利用も少なかったと報告されています。ベトナム戦争期の徴兵抽選を用いた因果推論では、兵役が食料不安を悪化させる証拠は確認されませんでした。",
+        "practicalApplication": "政策面では、現役軍人や、伝統的な世帯の世帯主になりにくい退役軍人を対象とする支援が、食料不安対策として有効である可能性を示します。ただし、本サイトの対象領域への直接的な応用はありません。",
+        "methodology": "PSIDの新しいデータを用いて退役軍人世帯と非退役軍人世帯を比較し、ベトナム戦争期の徴兵抽選を識別変数として兵役の因果効果を推定しています。",
+        "limitations": "提示された抄録 בלבדでは、標本構成、推定仕様、識別仮定の妥当性、効果の大きさ、異質性、徴兵抽選の現代の退役軍人への外的妥当性を評価できません。また、観察された世帯差と因果効果の解釈には注意が必要です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "軍務経験、食料不安、社会政策を扱う研究であり、指定されたquantitative-financeおよび市場・金利関連の対象範囲から外れています。",
+        "tags": [
+          "food insecurity",
+          "military veterans",
+          "PSID",
+          "Vietnam-era draft lottery",
+          "social policy"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This empirical study analyzes how military service affects food insecurity and nutrition-assistance participation after service. It does not address electronic trading, market microstructure, interest-rate models, yield curves, or rates markets.",
+          "mainResult": "Using PSID data, the paper reports that military veteran-headed households experienced lower food insecurity and lower participation in federal nutrition-assistance programs than non-veteran-headed households. An instrumental-variables analysis based on the Vietnam-era draft lottery found no evidence that military service worsened food insecurity.",
+          "practicalApplication": "The findings suggest that policies targeting currently enlisted service members and veterans less likely to head traditional households may help address food insecurity. However, there is no direct application to this site's target areas.",
+          "methodology": "The study compares veteran-headed and non-veteran-headed households using new PSID data and estimates the causal effect of military service using the Vietnam-era draft lottery as an identification strategy.",
+          "limitations": "The abstract alone does not allow assessment of the sample composition, estimation specifications, identification assumptions, effect sizes, heterogeneity, or the external validity of the draft-lottery design for contemporary veterans. Interpretation of both household differences and causal effects therefore requires caution.",
+          "reason": "The paper concerns military service, food insecurity, and social policy, placing it outside the specified focus on quantitative finance, markets, and interest rates.",
+          "tags": [
+            "food insecurity",
+            "military veterans",
+            "PSID",
+            "Vietnam-era draft lottery",
+            "social policy"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 814,
+      "outputTokens": 1008,
+      "reasoningTokens": 68,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1822,
+      "estimatedCostUsd": 0.001372,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.38230v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 827,
+      "outputTokens": 979,
+      "reasoningTokens": 47,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1806,
+      "estimatedCostUsd": 0.00134,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.38459v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 908,
+      "outputTokens": 1246,
+      "reasoningTokens": 81,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2154,
+      "estimatedCostUsd": 0.001677,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.38545v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 34365,
+      "outputTokens": 1988,
+      "reasoningTokens": 307,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 34362,
+      "totalTokens": 36353,
+      "estimatedCostUsd": 0.211582,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 31,
+      "paperIds": [
+        "2609.38545v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 882,
+      "outputTokens": 1107,
+      "reasoningTokens": 80,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1989,
+      "estimatedCostUsd": 0.001505,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.38765v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 19467,
+      "outputTokens": 1789,
+      "reasoningTokens": 163,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 19464,
+      "totalTokens": 21256,
+      "estimatedCostUsd": 0.133112,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 27,
+      "paperIds": [
+        "2609.38765v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 833,
+      "outputTokens": 1280,
+      "reasoningTokens": 102,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2113,
+      "estimatedCostUsd": 0.001703,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.39256v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 1010,
+      "outputTokens": 1300,
+      "reasoningTokens": 82,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2310,
+      "estimatedCostUsd": 0.001762,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.39420v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-5.6-sol",
+      "requestedModel": "gpt-5.6-sol",
+      "effort": "medium",
+      "inputTokens": 14471,
+      "outputTokens": 1890,
+      "reasoningTokens": 224,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 14468,
+      "totalTokens": 16361,
+      "estimatedCostUsd": 0.110152,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 16,
+      "paperIds": [
+        "2609.39420v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-5.6-luna",
+      "requestedModel": "gpt-5.6-luna",
+      "effort": "low",
+      "inputTokens": 738,
+      "outputTokens": 822,
+      "reasoningTokens": 41,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1560,
+      "estimatedCostUsd": 0.001134,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.39932v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

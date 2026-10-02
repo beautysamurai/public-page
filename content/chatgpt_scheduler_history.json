@@ -4776,6 +4776,182 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-10-02-daily-openai-01",
+      "editionDate": "2026-10-02",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-10-02T13:03:44Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-10-02",
+      "observedBatchDate": "2026-10-02",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年10月2日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 21 | 17,834 | 22,449 (1,448) | 0.0305 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 7 | 137,178 | 18,783 (2,341) | 0.9331 | PDF全文・16ページ / PDF全文・12ページ / PDF全文・8ページ / PDF全文・30ページ / PDF全文・28ページ / PDF全文・44ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. A Multi-Venue Solana/DeFi Microstructure Data Corpus: The RED-2400 Family v2\n\n**[arXiv:2610.00005v1](https://arxiv.org/abs/2610.00005v1) — Arati Uday Kamat**\n\n### 概要\n\nSolanaとDeFiの市場構造を、価格oracle、Aave清算、現物・perpetual、CEX・DEX価格差、Wormhole bridgeの5層で記録した公開データ・コーパスである。著者は、約$57$日間のデータから、仲介主体の集中と非対称な分布が複数層で観察される一方、basisとfundingの短期的結合には有力な予測力がないと報告する。主な貢献は因果的発見ではなく、Solana中心の再現可能なbenchmark dataを提供する点にある。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 推奨 | Solana市場構造 / CEX・DEX価格差 / 価格オラクル / 永久先物 / DeFi清算 / クロスチェーンブリッジ / 公開データセット / 再現可能性 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** Solana、DEX、oracle、perpetual、DeFi lending、bridgeを横断するrecord-level corpusは、本サイトの市場構造研究に直接関連し、再現性を意識した公開設計にも実務的価値があるため、データ資源として条件付きで推奨する。ただし、論文のcross-layer synthesisは記述的類似をまとめた仮説生成にとどまり、一部の強い表現は図やfield completenessから支持されない。利用前にraw data、timestamp alignment、quote定義、重複処理、feeとnotionalの扱いを監査すべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 946 | 1,110 (71) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 15,497 | 7,151 (1,034) | 0.2205 | PDF全文・16ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 報告上、Pythのpublish lagとCEX価格からの絶対乖離には約$0.28$の正の相関があり、Solana DEX価格は約$91$パーセントの観測でOKX価格を下回る。best quoteは上位5 venueに$80$パーセント集中し、Aave清算も上位5 liquidatorが$46$パーセントを占める。Wormhole messageの$43.8$パーセントはSolana発である。一方、basisとfundingの1時間rolling correlationは平均約$0.01$から$0.02$で、regime shiftの予測結果は定義依存の弱いnullである。ただし、oracle driftの「単調増加」や「方向性」という解釈は掲載図とabsolute driftの使用から十分には裏付けられない。\n\n**手法:** 単一の観測者がpublic blockchain dataと無料のexchange endpointから5データセットを構築し、主として2026年5月8日から7月5日までを対象とした。各データはNDJSON形式で、固定seedの再現スクリプト、結果ファイル、SHA-256 manifest、schema、ライセンスを付す。分析は相関、分位・分布統計、HHI、Gini係数、bootstrap confidence interval、rolling correlation、条件付きregime-shift率などの記述・関連分析であり、因果推論は行っていない。\n\n**実務への応用:** CEX・DEX間のquote dispersionとvenue concentrationのbenchmarking、oracle遅延監視、DeFi清算主体の集中度分析、perpetual funding signalの検証、bridge source-chain構成の調査に利用できる。ただし、RED-ARBは約定記録やblock単位の板厚を含まないため、実行可能なarbitrage収益やexecution qualityの推定には直接使えない。\n\n**限界・注意点:** 観測期間は単一の約$57$日windowで、季節性やmarket regimeへの頑健性は検証されていない。public/free-tier dataのみで、signed trade、fee state、block単位の流動性、exchange内部情報を欠く。RED-LIQには2025年の欠損があり、utilization panelと対応する清算は約$3{,}750$件に限られる。RED-BRIDGEはsymbolが全件欠損し、destinationは約$29$パーセント、USD amountは$96{,}240$件だけに存在するため、完全なcross-chain flowやasset別分析を支持しない。RED-BASISのnullはregime-shift定義と高いbase rateに強く依存する。また、掲載図はoracle driftが全asset・全lag decileで単調増加するとの本文記述と整合しないように見え、absolute driftから方向性を主張することもできない。本レビューではdepositされたraw dataや再現スクリプトを独立検証していない。\n\n## 2. Price Discovery at the Boundary of Contractual Decidability: Terminal-Value Gaps, Trading Availability, and Venue Finality on Kalshi\n\n**[arXiv:2610.00173v1](https://arxiv.org/abs/2610.00173v1) — Maksym Nechepurenko**\n\n### 概要\n\nKalshiの予測市場について、公開情報により契約結果が初めて判定可能になる時点を独立に構築し、その前後の価格発見を測定する前向き研究プロトコルである。市場閉鎖を通常の欠測ではなく競合イベントとして扱い、判定前に閉鎖した市場をstale-terminal cohortとして分離する。ただし、価格抽出と推定はまだ開始されていない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 非推奨 | 予測市場 / Kalshi / 価格発見 / 市場マイクロストラクチャー / 契約上の判定可能性 / 競合リスク / 市場閉鎖 / イベントスタディ / terminal-value gap / 前向き研究設計 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 契約上の判定可能時点と取引停止を明示的に分離する設計は、予測市場のevent studyに有用であり、擬似反復、古い価格、synthetic candleへの配慮も適切である。一方、現段階では適格cohortも価格データもなく、主張の実証的妥当性や実務的な効果量を評価できないため、結果論文としては推奨しない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 928 | 1,043 (49) | 0.0014 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 6,098 | 1,617 (115) | 0.0628 | PDF全文・12ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 実証的な価格結果は報告されていない。著者が報告する現状は、過去データから契約上の判定可能時点を備えた適格cohortを構築できず、前向き登録基盤の試験には成功したものの、受理済み判定時刻も価格推定値もまだ存在しないというものである。本論文の成果は、venue determinationを判定時刻の代用とせず、市場閉鎖を価格収束との競合リスクとして分析する事前規定済み設計にある。\n\n**手法:** 前向き登録とblind adjudicationにより、初回判定可能時刻、terminal payoff、取引可能性、価格カバレッジを確定したbinary marketのみを対象とする。block tradeとsynthetic candleを主分析から除外し、source publication、first decidability、market close、venue determination、finalizationの各時計を区別する。価格反応は登録済みevent windowで測定し、収束と閉鎖の累積発生率にはAalen–Johansen推定量を使用する。推論はsource release単位のcluster bootstrapを予定し、最大20市場のpilotは取得・整合性検証だけに限定する。\n\n**実務への応用:** 将来のKalshi研究では、結果整合的な勝者側価格$W_i(t)$とterminal-value gap $g_i(t)=1-W_i(t)$を用い、契約上の初回判定可能時点を基準に価格反応を測定できる。取引継続市場ではgap縮小と収束時間を、判定前閉鎖市場では最終gapと価格経過時間を別々に評価し、venue determination基準による反応時刻のずれを検証する用途がある。\n\n**限界・注意点:** 本稿は研究設計であり、production price extraction、受理済み前向き判定時刻、価格推定、統計的検定結果を一切提示していない。取引価格は任意数量での執行可能価格ではなく、スプレッド、手数料、薄商い、資金拘束、異議申立てリスクを十分に表さない。最終payoff分析は解決済み市場に条件付けられ、exact clockを得られる市場への選択も生じる。提案するfunding adjustmentは評価モデルではなく、私的情報、参加者属性、操作、venue policyの因果効果も識別しない。\n\n## 3. Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games\n\n**[arXiv:2610.00619v1](https://arxiv.org/abs/2610.00619v1) — Christos Spyridon Koulouris, Carlo Campajola**\n\n### 概要\n\n本稿は、2主体の有限期間 Almgren–Chriss 最適執行ゲームで、独立に学習する PPO agent が Nash benchmark より低い執行コストを達成し、その状態を逸脱後の報復的な売却加速によって支える可能性を検証する。著者らは、この条件付き反応を単なる supra-competitive outcome を超えた collusive behaviour の行動的証拠と解釈している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 最適執行 / 市場マイクロストラクチャー / Almgren–Chriss / 深層強化学習 / PPO / マルチエージェント学習 / アルゴリズム共謀 / market impact / punishment / 逸脱実験 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 最適執行、market impact、multi-agent reinforcement learning、algorithmic collusion を直接結び付け、逸脱実験と経済的 deterrence check まで提示しているため、本サイトとの関連性は高い。特に、低コストという outcome だけでなく条件付き報復を識別しようとする点は有益である。ただし、単純化された低ノイズ環境と狭い逸脱集合のため、実務的な一般化には追加の robustness 検証が必要である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 886 | 1,134 (69) | 0.0015 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 15,262 | 1,912 (303) | 0.1145 | PDF全文・8ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らの実験では、10組すべての学習済み agent が Nash benchmark より低く joint TWAP より高いコストとなった。利益的な初回取引の逸脱を強制すると、相手は第2期以降の売却を前倒しし、全10組・両方の役割で逸脱利益を上回る損失を与えた一方、punisher 自身の平均 payoff は非報復時と実質的に変わらなかった。incentive check と price-impact に基づく total-variation bound も、検証した10,000件の paired cases で成立したと報告されている。\n\n**手法:** 集約的な一時的・恒久的 market impact を持つ、対称・risk-neutral な2主体 Almgren–Chriss 清算ゲームを用いる。各 agent は価格、自身の在庫、時刻、episode 内の価格・自己取引履歴を Transformer で処理し、独立した continuous-action PPO により40,000 episodes 学習する。10組を各500 episodes で評価し、平均学習スケジュールに対する best-response 学習から利益的な逸脱を作成した後、その初回取引だけを強制して相手の反応を測定する。さらに punishment の損失が逸脱利益を上回るかを確認し、売却時点の total variation と price-impact exposure から必要な行動変化の下限を導出して比較する。\n\n**実務への応用:** 最適執行 agent の model-risk 管理において、Nash benchmark との比較だけでなく、強制逸脱、相手の条件付き反応、逸脱利益と報復損失の比較を含む collusion stress test を設計する際に利用できる。複数の自律執行アルゴリズムが同一資産を取引する環境で、履歴依存の売却加速や暗黙の協調を監査する指標としても有用である。\n\n**限界・注意点:** 結果は高度に様式化された2主体・10期間の simulation に限定され、価格ノイズは $\\sigma=10^{-9}$ とほぼゼロである。学習済み組は10組のみで、主要な因果検証は平均スケジュールから構成した単一の first-step deviation に集中している。実際の limit order book、非対称在庫、risk aversion、複数資産、多数主体、transaction fees、部分約定や他の市場参加者は扱わない。したがって punitive response は検証対象内で collusive interpretation を支持するが、一般的な暗黙共謀の証明や実市場での発生証拠ではない。\n\n## 4. Negative Oil & Nickel Squeeze: A Feedback Model for Extreme Commodity Futures Prices\n\n**[arXiv:2610.00951v1](https://arxiv.org/abs/2610.00951v1) — Iosif Zimbidis, Ronnie Sircar**\n\n### 概要\n\n現物受渡し能力の異なる参加者を分離し、受渡し制約を持つ投資家の強制決済が商品先物価格を増幅する仕組みをモデル化する。制約付きロングの売却は下方歪み、制約付きショートの買い戻しは上方歪みを生み、そのコストを期近・期先間のロールオプションとして表現する。WTIの負価格とLMEニッケル・スクイーズへの適用は説明的かつ条件付きであり、因果関係の実証ではない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 商品先物 / 市場マイクロストラクチャー / 受渡し制約 / 強制決済 / 負の原油価格 / ニッケル・スクイーズ / 価格フィードバック / ロールオプション / 非線形PDE / Margrabeモデル / Bachelierモデル / ポジション不均衡 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 受渡し制約とポジション偏りを、負価格とshort squeezeを同一の非線形feedback構造で扱う点がmarket microstructure研究として興味深い。さらに非線形PDEを標準的なMargrabe/Bachelier式と一変数root findingへ落とすため、理論的な新規性と実装上の扱いやすさがある。一方、イベント推定はbenchmark依存が強く、特にニッケルでは構成データを使うため、実証結果よりも構造モデルとして読むべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 876 | 1,321 (99) | 0.0018 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 27,921 | 2,399 (366) | 0.1876 | PDF全文・30ページ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 27,921 | 2,232 (243) | 0.0558 | PDF全文・30ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 観測価格がロールオプション価値を左右し、その価値が再び観測価格を修正するため、価格付けPDEは非線形になる。著者らはlognormalモデルでhomogeneityと変数変換を用い、非線形問題をBlack-Scholes-Margrabe価格と一意なスカラー方程式へ還元した。normalモデルでもBachelier価格による同様の表現を得る。下方歪みでは、正のlognormal基準価格からでも観測価格がゼロを越えて負になり得る。仮定した基準価格の下で、WTI清算値には約$0.87$、ニッケル高値には約$0.9346$の不均衡率$\\varepsilon$が示される。\n\n**手法:** 総建玉を受渡し可能なlicensed traderと受渡し不可能なunlicensed traderに分け、純不均衡を総建玉比$\\varepsilon\\in[0,1)$で表す。観測先物価格をlicensed priceと歪んだ価格の加重平均とし、強制ロールのpayoffを期近・期先spread optionとして組み込む。GBM基準では自己参照的な価格関係から準線形PDEを導出し、calendar ratioによる一次元化と変数変換でMargrabe式に接続する。Arithmetic Brownian基準ではcalendar spreadへ還元してBachelier式を得る。WTIには同期した5分足を用いる一方、ニッケルには報告価格と構成した15カ月物シナリオを使用し、想定benchmarkから$\\varepsilon$を逆算する。Monte Carloは負価格へのcrossingを例示する。\n\n**実務への応用:** 期近限月の価格が期先や想定fundamental benchmarkから急激に乖離した際、価格差、calendar-spread volatility、残存期間から、受渡し制約付きポジションの条件付き不均衡率を逆算できる。商品デリバティブのstress testing、負価格リスク、short squeeze監視、限月交代時の流動性・受渡しリスク分析に利用可能である。ただし推定値は実ポジションの測定値ではなく、基準価格シナリオに依存する。\n\n**限界・注意点:** モデルは部分均衡的・説明的で、基準価格と不均衡を外生的かつ各評価時点で一定とする。価格、証拠金、流動性に反応する動学的な$\\varepsilon_t$、戦略的取引、order book、市場インパクト、在庫・保管能力の内生化は含まれない。aggregate open interestから受渡し制約の所有者を特定できず、実際の不均衡との独立検証もない。WTIのbenchmarkは6月限との初期比率を固定した仮定であり、ニッケルの15カ月物系列は観測値ではなく構成シナリオである。結果はvolatility、残存期間、benchmark、後限月価格に敏感で、両事件が本機構だけで生じたことを示さない。Monte Carloのdrift感応度も推定されたphysical-measureモデルではない。\n\n## 5. Social welfare and price discovery in double auction markets\n\n**[arXiv:2610.01562v1](https://arxiv.org/abs/2610.01562v1) — Teemu Pennanen**\n\n### 概要\n\n純粋交換経済の動的 double auction を、各参加者が現在の保有と凹効用から得る indifference price を提示するモデルとして分析する。論文は、double auction の均衡と Walras 均衡の関係を明らかにし、反復オークションによる配分・価格の価格発見を理論化している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | ダブルオークション / 価格発見 / 市場清算 / Walras均衡 / Pareto効率性 / 無差別価格 / 凸解析 / 動学的市場 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** double auction における配分効率性だけでなく、取引価格が競争均衡価格へ近づく仕組みを凸解析で結び付けた点は market microstructure と価格発見の研究に関連性が高い。一方、戦略的注文行動や実際の continuous limit-order book を省略しているため、実務的 execution への直接適用より理論的ベンチマークとして読むのが適切である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 688 | 925 (58) | 0.0012 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 21,282 | 1,521 (123) | 0.1368 | PDF全文・28ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 一定の正則性、成長条件、相対的連続性の下で、反復 double auction が生成する配分・清算価格列は存在して有界となり、その全ての集積点が対応する市場清算価格を伴う double-auction 均衡になると報告する。追加条件の下では、集積点は移転付き Walras 均衡であり、配分は Pareto 効率的である。また、残存 consumer surplus について $CS(x^t)\\leq \\gamma/t$ を示す。\n\n**手法:** 有限エージェント・複数資産の純粋交換経済を設定し、需要関数を効用ベースの indifference price として構成する。市場清算を凹最適化問題、その価格を双対問題の解として表現し、凸解析、KKT 条件、recession cone、福祉定理、Painlevé–Kuratowski 集合収束および Attouch theorem を用いて、存在性、有界性、余剰減少、配分と価格の集積点を証明する。数値表は既存研究の例の再掲であり、主結果は理論的である。\n\n**実務への応用:** 中央集約的な double-auction clearing が、分散した選好と保有から効率的配分および競争均衡価格を発見し得る理由を説明する理論的基準になる。取引所設計、call auction、limit-order market の価格発見評価に有用だが、直接的な execution algorithm や最適発注戦略を与えるものではない。\n\n**限界・注意点:** 完全収束ではなく、全ての集積点が均衡であることのみを示す。参加者が真の indifference function を提示する非戦略的仮定に依存し、bid shading、情報学習、在庫以外の戦略、価格インパクトは内生化されない。有限主体の反復清算モデルであり、非同期注文、注文キャンセル、queue priority、latency、spread など continuous limit-order book の制度的特徴を直接扱わない。さらに、結論には効用の凹性、numeraire の選好、成長・正則性・相対的連続性など複数の仮定が必要で、実証検証は提示されていない。\n\n## 6. Shared Models, Selective Trading, and Order Flow\n\n**[arXiv:2610.01897v1](https://arxiv.org/abs/2610.01897v1) — Victoria Ruojie Li, Arka Prava Bandyopadhyay**\n\n### 概要\n\n固定された3つのLLM family混合集団による合成市場で、ニュースの提示方法が、実際に注文を出すfamilyの構成とorder flowを大きく変えることを示した研究である。導入済みモデルの多様性と、active orderに現れる実効的な多様性を区別している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | LLM取引エージェント / 注文フロー / 市場参加 / モデル多様性 / アルゴリズム同質性 / ニュース提示 / 合成市場 / 片側注文フロー / 市場マイクロストラクチャー |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 電子執行とmarket microstructureにとって、installed model diversityがactive order-flow diversityを保証しないという測定上の論点は重要であり、AI trading systemのprovider concentration riskを考える上で有用である。ただし、強い結果は特定のsynthetic text bundlesに対する参加行動に限定され、経済的損失、価格効率性、実市場への一般化は示されていない。結論を限定して読むことを条件に推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-5.6-luna / low | 1 | 761 | 980 (60) | 0.0013 | Abstractのみ |\n| 論文解析 | gpt-5.6-sol / medium | 1 | 23,197 | 1,951 (157) | 0.1550 | PDF全文・44ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 30の対応付きconfigurationにおいて、financing eventではoriginal textとfactual textの間でQwenのactive shareが48.1 percentage points変化した一方、net buy-minus-sell countの差は市場当たり$-0.10$にとどまった。layoff eventではexplanatory textによりMistralのactive shareが17.5%から57.4%へ39.9 points上昇し、net flowは売り越しから買い越しへ反転した。homogeneous populationでは、original financing textの下でall-Mistralが買いのみ、all-Qwenが売りのみを提出し、mixed populationに存在した反対方向のflowが消えた。これらはsubmitted flowの結果であり、価格効率性の実証結果ではない。\n\n**手法:** 15体のLLM trading agentsを用いる25-roundのdouble-auction simulationを実施し、Llama 3.1 8B、Qwen 2.5 7B、Mistral 7Bを各5体配置した。financingとworkforce-reductionのニュースについてpresentation bundleを変更し、各contrastで30のmatched configurationsを比較したほか、all-Mistralおよびall-Qwenのhomogeneous armsも分析した。主要指標はannouncement-roundのparticipation、active-family share、conditional buy share、3-round windowのorder imbalanceおよびone-sidednessである。configuration単位のsign test、paired bootstrap、leave-one-out診断を用い、active compositionとconditional directionの記述的分解も行った。さらに、active weightsとvaluation errorsの関係を示す線形需要モデルを解析したが、これは実験データで推定されていない。\n\n**実務への応用:** 複数のAIモデルを採用するexecution systemでも、ニュース表現に応じた参加選択によって実際の注文が単一providerや単一方向へ偏り得る。したがって、モデル数やprovider数だけでなく、event別のparticipation rate、active-family share、conditional direction、order imbalanceを監視する必要がある。モデル構成の分散化は、active flowまで分散されているかを確認して初めてリスク管理上の意味を持つ。\n\n**限界・注意点:** ニュース処置は長さ、解釈、社会的手掛かり、実質的な命題を同時に変えるbundleであり、純粋なtoneまたはinformation-free framingの効果を識別しない。背景流動性が厚く価格を99.5から100.0の狭い範囲に制約するため、price discovery、market impact、mispricingは評価できない。結果はsubmitted decision countsであり、volume、execution、fundamental valueに対する正確性ではない。生成seed、sampling settings、context lengthが固定・記録されず、同じconfigurationでも厳密なcounterfactual comparisonではない。対象は2つの選択されたevent、3つの小型モデル、各30 configurationsに限られ、モデルversionもbatch間で異なる。homogeneous comparisonはfamily identityとpre-event historyも変更するため、品質一定のconcentration effectではない。提案されたStudy 2とknown-value validationにはLLM treatment resultがなく、価格精度に関する理論結果は仮定依存のbenchmarkにすぎない。",
+      "papers": [
+        {
+          "arxivId": "2610.00005v1",
+          "title": "A Multi-Venue Solana/DeFi Microstructure Data Corpus: The RED-2400 Family v2",
+          "authors": [
+            "Arati Uday Kamat"
+          ],
+          "submittedDate": "2026-07-09",
+          "updatedDate": "2026-07-09",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.00005v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.00005v1",
+          "schedulerRank": 1,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 10/10",
+          "schedulerSummary": "SolanaとDeFiの市場構造を、価格oracle、Aave清算、現物・perpetual、CEX・DEX価格差、Wormhole bridgeの5層で記録した公開データ・コーパスである。著者は、約$57$日間のデータから、仲介主体の集中と非対称な分布が複数層で観察される一方、basisとfundingの短期的結合には有力な予測力がないと報告する。主な貢献は因果的発見ではなく、Solana中心の再現可能なbenchmark dataを提供する点にある。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 946 / 出力 1,110（うち推論 71） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 15,497 / 出力 7,151（うち推論 1,034） · PDF 16 pages · 推定 $0.2205",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.00173v1",
+          "title": "Price Discovery at the Boundary of Contractual Decidability: Terminal-Value Gaps, Trading Availability, and Venue Finality on Kalshi",
+          "authors": [
+            "Maksym Nechepurenko"
+          ],
+          "submittedDate": "2026-09-16",
+          "updatedDate": "2026-09-16",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.00173v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.00173v1",
+          "schedulerRank": 2,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 10/10",
+          "schedulerSummary": "Kalshiの予測市場について、公開情報により契約結果が初めて判定可能になる時点を独立に構築し、その前後の価格発見を測定する前向き研究プロトコルである。市場閉鎖を通常の欠測ではなく競合イベントとして扱い、判定前に閉鎖した市場をstale-terminal cohortとして分離する。ただし、価格抽出と推定はまだ開始されていない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 928 / 出力 1,043（うち推論 49） · 推定 $0.0014\n論文解析: gpt-5.6-sol / medium · トークン 入力 6,098 / 出力 1,617（うち推論 115） · PDF 12 pages · 推定 $0.0628",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.00619v1",
+          "title": "Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games",
+          "authors": [
+            "Christos Spyridon Koulouris",
+            "Carlo Campajola"
+          ],
+          "submittedDate": "2026-09-30",
+          "updatedDate": "2026-09-30",
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.00619v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.00619v1",
+          "schedulerRank": 3,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "本稿は、2主体の有限期間 Almgren–Chriss 最適執行ゲームで、独立に学習する PPO agent が Nash benchmark より低い執行コストを達成し、その状態を逸脱後の報復的な売却加速によって支える可能性を検証する。著者らは、この条件付き反応を単なる supra-competitive outcome を超えた collusive behaviour の行動的証拠と解釈している。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 886 / 出力 1,134（うち推論 69） · 推定 $0.0015\n論文解析: gpt-5.6-sol / medium · トークン 入力 15,262 / 出力 1,912（うち推論 303） · PDF 8 pages · 推定 $0.1145",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.00951v1",
+          "title": "Negative Oil & Nickel Squeeze: A Feedback Model for Extreme Commodity Futures Prices",
+          "authors": [
+            "Iosif Zimbidis",
+            "Ronnie Sircar"
+          ],
+          "submittedDate": "2026-10-01",
+          "updatedDate": "2026-10-01",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.00951v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.00951v1",
+          "schedulerRank": 4,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "現物受渡し能力の異なる参加者を分離し、受渡し制約を持つ投資家の強制決済が商品先物価格を増幅する仕組みをモデル化する。制約付きロングの売却は下方歪み、制約付きショートの買い戻しは上方歪みを生み、そのコストを期近・期先間のロールオプションとして表現する。WTIの負価格とLMEニッケル・スクイーズへの適用は説明的かつ条件付きであり、因果関係の実証ではない。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 876 / 出力 1,321（うち推論 99） · 推定 $0.0018\n論文解析: gpt-5.6-sol / medium · トークン 入力 27,921 / 出力 2,399（うち推論 366） · PDF 30 pages · 推定 $0.1876\n論文解析: gpt-5.6-sol / medium · トークン 入力 27,921 / 出力 2,232（うち推論 243） · PDF 30 pages · 推定 $0.0558",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.01562v1",
+          "title": "Social welfare and price discovery in double auction markets",
+          "authors": [
+            "Teemu Pennanen"
+          ],
+          "submittedDate": "2026-10-01",
+          "updatedDate": "2026-10-01",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.01562v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.01562v1",
+          "schedulerRank": 5,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "純粋交換経済の動的 double auction を、各参加者が現在の保有と凹効用から得る indifference price を提示するモデルとして分析する。論文は、double auction の均衡と Walras 均衡の関係を明らかにし、反復オークションによる配分・価格の価格発見を理論化している。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 688 / 出力 925（うち推論 58） · 推定 $0.0012\n論文解析: gpt-5.6-sol / medium · トークン 入力 21,282 / 出力 1,521（うち推論 123） · PDF 28 pages · 推定 $0.1368",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.01897v1",
+          "title": "Shared Models, Selective Trading, and Order Flow",
+          "authors": [
+            "Victoria Ruojie Li",
+            "Arka Prava Bandyopadhyay"
+          ],
+          "submittedDate": "2026-10-01",
+          "updatedDate": "2026-10-01",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.01897v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.01897v1",
+          "schedulerRank": 6,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "固定された3つのLLM family混合集団による合成市場で、ニュースの提示方法が、実際に注文を出すfamilyの構成とorder flowを大きく変えることを示した研究である。導入済みモデルの多様性と、active orderに現れる実効的な多様性を区別している。\n\n一次判定: gpt-5.6-luna / low · トークン 入力 761 / 出力 980（うち推論 60） · 推定 $0.0013\n論文解析: gpt-5.6-sol / medium · トークン 入力 23,197 / 出力 1,951（うち推論 157） · PDF 44 pages · 推定 $0.1550",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

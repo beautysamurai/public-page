@@ -2,6 +2,89 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-10-02-daily-openai-01",
+      "date": "2026-10-02",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.00005v1",
+          "title": "A Multi-Venue Solana/DeFi Microstructure Data Corpus: The RED-2400 Family v2",
+          "authors": [
+            "Arati Uday Kamat"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.00173v1",
+          "title": "Price Discovery at the Boundary of Contractual Decidability: Terminal-Value Gaps, Trading Availability, and Venue Finality on Kalshi",
+          "authors": [
+            "Maksym Nechepurenko"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.00619v1",
+          "title": "Beyond Supra-Competitive Outcomes: Collusive Behaviour in Deep Reinforcement Learning for Optimal Execution Games",
+          "authors": [
+            "Christos Spyridon Koulouris",
+            "Carlo Campajola"
+          ],
+          "topics": [
+            "Cross-disciplinary finance"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.00951v1",
+          "title": "Negative Oil & Nickel Squeeze: A Feedback Model for Extreme Commodity Futures Prices",
+          "authors": [
+            "Iosif Zimbidis",
+            "Ronnie Sircar"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.01562v1",
+          "title": "Social welfare and price discovery in double auction markets",
+          "authors": [
+            "Teemu Pennanen"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.01897v1",
+          "title": "Shared Models, Selective Trading, and Order Flow",
+          "authors": [
+            "Victoria Ruojie Li",
+            "Arka Prava Bandyopadhyay"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-01-daily-openai-01",
       "date": "2026-10-01",
       "kind": "daily",

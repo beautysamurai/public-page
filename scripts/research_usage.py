@@ -9,7 +9,11 @@ from typing import Mapping
 PRICING_DATE = "2026-09-06"
 # Standard USD per million tokens; estimates, not billing records.
 RATES = {"gpt-5.6-luna": (.2, .02, 1.2), "gpt-5.6-terra": (2, .2, 12),
-         "gpt-5.6-sol": (4, .4, 20), "gpt-6-astra": (10, 1, 50)}
+         "gpt-5.6-sol": (4, .4, 20), "gpt-6-astra": (10, 1, 50),
+         "gpt-6-luna": (.1, .01, .5), "gpt-6.1-sol": (2, .1, 10)}
+# New model rates verified against their official model pages on this date.
+# Keep legacy rate dates (and already saved usage records) unchanged.
+PRICING_DATES = {"gpt-6-luna": "2026-10-03", "gpt-6.1-sol": "2026-10-03"}
 SCOPES = {"abstract", "full_text", "abstract_introduction", "stored_reviews"}
 FIELDS = {"stage", "model", "requestedModel", "effort", "inputTokens", "outputTokens",
           "reasoningTokens", "cachedInputTokens", "cacheWriteTokens", "totalTokens", "estimatedCostUsd",
@@ -46,7 +50,7 @@ def record(response, *, model, effort, stage, paper_ids, scope, pages):
                  reasoningTokens=count(attr(attr(usage, "output_tokens_details"), "reasoning_tokens")),
                  cachedInputTokens=cached, cacheWriteTokens=writes,
                  totalTokens=count(attr(usage, "total_tokens")), estimatedCostUsd=cost,
-                 pricingDate=PRICING_DATE, sourceScope=scope, pdfPages=pages, paperIds=list(paper_ids),
+                 pricingDate=PRICING_DATES.get(actual, PRICING_DATE), sourceScope=scope, pdfPages=pages, paperIds=list(paper_ids),
                  outcome="completed" if attr(response, "status") == "completed" else "unconfirmed")
     validate([value])
     return value

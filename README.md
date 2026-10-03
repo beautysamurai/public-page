@@ -344,9 +344,54 @@ Runtime safety limits also have optional local overrides:
 - `OPENAI_SYNTHESIS_CHUNK_MAX_ITEMS` and
   `OPENAI_SYNTHESIS_CHUNK_MAX_BYTES` bound each weekly/monthly request.
 
-The checked-in reasoning defaults are `low` for Luna screening, `medium` for
-Sol paper analysis and Astra weekly synthesis, and `high` for monthly Astra synthesis. Each
-has a matching `OPENAI_*_REASONING_EFFORT` override shown in `.env.example`.
+The token-efficient defaults (updated 2026-10-03) preserve reasoning depth by
+stage instead of lowering effort across all research:
+
+| Stage | Model | Reasoning effort |
+| --- | --- | --- |
+| Abstract screening | `gpt-6-luna` | `low` |
+| Full-paper analysis | `gpt-6.1-sol` | `medium` |
+| Weekly synthesis | `gpt-6.1-sol` | `medium` |
+| Monthly synthesis | `gpt-6-astra` | `high` |
+
+Each stage has a matching `OPENAI_*_REASONING_EFFORT` override shown in
+`.env.example`. Responses use `text.verbosity: low`; change `textVerbosity` in
+the public config or `OPENAI_TEXT_VERBOSITY=medium` (or `high`) locally if more
+detail is needed. Verbosity controls answer length, not reasoning effort. All
+required analysis fields, Japanese/English output, TeX, strict validation,
+output-token ceilings, PDF selection and the 50-page safeguard are unchanged.
+Pro mode is not enabled. Existing `.env` model/effort settings take precedence;
+remove obsolete overrides or update them to use these defaults. GitHub Actions
+reads the checked-in config; no new secret or schedule is required.
+
+Weekly/monthly requests send the primary Japanese analysis once, omitting only
+its duplicate English translation from the **input**. Every primary field,
+paper identity and source-coverage limitation is retained; both languages are
+still generated and stored in the output. The original bilingual files are
+not modified. JSON inputs also omit unnecessary serialization whitespace.
+There is no automatic re-review of completed daily papers after this change;
+existing checkpoints and completed reports remain reusable.
+
+For scale, the September 2026 daily files contained 64 paper records. Their
+serialized synthesis source shrank from 482,157 to 251,499 UTF-8 bytes (47.8%)
+when the duplicate translations were removed, excluding the instruction and
+schema overhead. **Bytes are not tokens:** this is an offline input-size
+comparison, not a measured model-token or quality benchmark. Check the saved
+actual input/output/reasoning usage and review quality on subsequent runs.
+The old vs new models have not been quality-benchmarked on this archive.
+
+Standard rates per million tokens verified on 2026-10-03 are $0.10 input /
+$0.50 output for [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna),
+and $2 input / $10 output for
+[GPT-6.1 Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol).
+Price reductions do not imply proportional token reductions. New model prices
+are recorded with their verification date; legacy prices and saved cost records
+are retained. See the official [verbosity guidance](https://developers.openai.com/api/docs/guides/deployment-checklist)
+for the distinction between answer length and reasoning effort.
+
+Before merging a model change, run **Check research model access (read-only)**
+on its branch in GitHub Actions. This verifies model access with the existing
+secret without generating research; it does not establish response quality.
 
 `OPENAI_SYNTHESIS_MODEL` remains a backward-compatible fallback when neither
 period-specific override is set.

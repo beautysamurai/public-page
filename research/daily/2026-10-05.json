@@ -1,0 +1,864 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-10-05",
+  "generatedAt": "2026-10-05T15:11:02Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-10-05 was confirmed with 4 relevant paper(s).",
+  "expectedBatchDate": "2026-10-05",
+  "observedBatchDate": "2026-10-05",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2610.02917v1",
+        "title": "Event History Over Scale: Compact Transformers for Low-Latency Limit Order Book Forecasting",
+        "authors": [
+          "David Schaurecker",
+          "Lasse B. Strand",
+          "Kevin O'Sullivan",
+          "Robert Jakob"
+        ],
+        "submittedDate": "2026-10-02",
+        "updatedDate": "2026-10-02",
+        "categories": [
+          "cs.CE",
+          "q-fin.CP"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "個別注文の投入・取消・約定を記録するL3履歴から、短期の仲値方向を予測する小型Transformerを提案する。株式2銘柄とEPEX電力市場で、L2スナップショット中心のモデルに対する予測性能と推論効率を比較した。",
+        "mainResult": "著者らは、MBOFormerとMBOFusionのいずれかが12設定中11設定で最高の平均macro-F1を得たと報告する。パラメータ数はそれぞれ7,203と14,371で、Apple M2の単一CPUスレッドにおける推論中央値は0.479ミリ秒と0.531ミリ秒だった。MBOFormerは百万パラメータ級の比較モデルより5.1～8.1倍高速だったが、最小遅延のモデルではない。",
+        "practicalApplication": "L3データを利用できる株式・電力取引システムで、低遅延の短期価格予測器を設計する際の参考になる。発注判断への組込みには、特徴量生成を含む実運用遅延と取引費用控除後の収益性を別途検証する必要がある。",
+        "methodology": "板を変化させるメッセージ10件ごとに判断時点を設け、4つのイベント時間予測期間で下落・横ばい・上昇を分類する。直近128イベントの7特徴量を因果Transformerで処理し、MBOFusionは低頻度の市場文脈を畳み込み分岐で追加する。日付順の学習・検証・テスト分割と3乱数シードでmacro-F1を評価し、同一判断時点・ラベルのL2ベースラインと比較した。",
+        "limitations": "ラベル閾値はテスト系列全体の将来価格変化分布から算出されるため、入力への先読みはないものの、絶対スコアをオンライン達成可能値とは解釈できない。対象は株式2銘柄と電力市場の短期間に限られ、3シードの結果はテスト期間間の統計的有意性を示さない。入力窓と構造が異なるため、L3表現だけの効果は分離できず、L3比較モデルLOBERTも未評価である。遅延は単一機種の合成入力によるモデル実行のみで、前処理・通信・注文執行を除外し、電力データも非公開である。取引収益や実測エネルギー消費は検証していない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "注文イベントの粒度とモデル規模のトレードオフを、容量を合わせた比較と遅延実測で検討しており、本サイトの市場マイクロストラクチャと電子取引領域に直接関連する。ただし、実運用上の優位性ではなく、限定されたデータでの予測・計算効率の結果として読むべきである。",
+        "tags": [
+          "市場マイクロストラクチャ",
+          "指値注文板",
+          "L3注文イベント",
+          "短期価格予測",
+          "小型Transformer",
+          "低遅延推論",
+          "日中電力市場"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper proposes compact Transformers that predict short-term mid-price direction from L3 histories of individual order submissions, cancellations, and executions. It compares predictive performance and inference efficiency against models centered on L2 snapshots using two equities and the EPEX electricity market.",
+          "mainResult": "The authors report that either MBOFormer or MBOFusion achieves the highest mean macro-F1 in 11 of 12 settings. They have 7,203 and 14,371 parameters, respectively, with median inference times of 0.479 and 0.531 milliseconds on one Apple M2 CPU thread. MBOFormer is 5.1–8.1 times faster than the million-parameter comparison models, but it is not the lowest-latency model.",
+          "practicalApplication": "The study informs the design of low-latency, short-term price predictors for equity and electricity trading systems with L3 data access. Integration into order-placement decisions requires separate validation of production latency, including feature generation, and profitability after transaction costs.",
+          "methodology": "Decision points occur after every ten book-changing messages, with down, flat, and up classifications at four event-time horizons. A causal Transformer processes seven features from the latest 128 events; MBOFusion adds a convolutional branch for slower market context. Macro-F1 is evaluated using chronological daily training, validation, and test splits and three random seeds, against L2 baselines sharing the same decision points and labels.",
+          "limitations": "Label thresholds use the distribution of future price changes across the entire test sequence. Although model inputs contain no look-ahead, absolute scores cannot be interpreted as achievable online. Coverage is limited to two equities and a short electricity-market sample, and three-seed results do not establish statistical significance across test periods. Different input windows and architectures prevent isolation of the L3 representation effect, and the L3 comparator LOBERT is not evaluated. Latency measures model execution alone on synthetic inputs on one device, excluding preprocessing, communication, and order execution; the electricity data are also private. Trading profitability and measured energy consumption are not evaluated.",
+          "reason": "The paper directly addresses market microstructure and electronic trading by examining the trade-off between event granularity and model scale through capacity-matched comparisons and measured latency. It should nevertheless be read as evidence about prediction and computational efficiency on limited data, not established production advantages.",
+          "tags": [
+            "Market microstructure",
+            "Limit order book",
+            "L3 order events",
+            "Short-term price prediction",
+            "Compact Transformer",
+            "Low-latency inference",
+            "Intraday electricity market"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 861,
+          "outputTokens": 891,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1752,
+          "estimatedCostUsd": 0.000532,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.02917v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 11541,
+          "outputTokens": 1544,
+          "reasoningTokens": 146,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 11538,
+          "totalTokens": 13085,
+          "estimatedCostUsd": 0.044291,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 11,
+          "paperIds": [
+            "2610.02917v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.03080v1",
+        "title": "MintEval: Do LLMs Implement the Trading Strategy You Asked For? A Behavioural-Equivalence Benchmark for Natural-Language-to-Strategy Code",
+        "authors": [
+          "Siyu Wang",
+          "Yifan Wang",
+          "Yuecheng He"
+        ],
+        "submittedDate": "2026-10-02",
+        "updatedDate": "2026-10-02",
+        "categories": [
+          "cs.CL",
+          "cs.LG",
+          "cs.SE",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "MintEvalは、自然言語の売買指示からLLMが生成したコードを参照実装と同じ条件で動かし、バー単位の行動一致を評価するベンチマークである。BTCUSDTの15分足を用いた800課題で、収益性や実行成功だけでは見えない、状態管理とリスク制御の実装誤りを検証する。",
+        "mainResult": "論文によると、低コストモデルの最高平均ActionMatchは実行成功例で0.544、全課題の完全一致率は8.7%だった。200課題の部分集合ではClaude Opus 5.5が0.889、完全一致率57.5%に達したが、27.5%は実行に成功してもActionMatchが0.9未満だった。仕様を完全に読み取った実行成功例でも79.2%がこの基準を下回り、適用したコード読解型LLM審査は審査対象の静かな失敗をすべて承認した。",
+        "practicalApplication": "LLM生成の売買コードを本番投入する前に、参照実装との行動比較を受入試験へ組み込む用途に有用である。損切りの再設定、クールダウン、上位時間足の参照などを検証し、コンパイル成功やもっともらしい損益曲線を正しさの証拠としない運用を支える。収益性や実市場での約定品質を保証する手法ではない。",
+        "methodology": "売買シグナル、フィルター、数量調整、リスク管理の部品から参照戦略を生成し、別のLLMで口語的な指示へ変換する。生成コードと参照コードを同一データ・取引コストで逐次実行し、どちらかがポジションを保有または要求するバーのActionMatch、取引単位のTradeF1、収益差などを測る。状態の保持期間と参照収益で層化し、部品一覧の有無による比較、固定効果回帰、将来情報アクセスの遮断、コード読解型審査との比較を行う。",
+        "limitations": "単一銘柄・単一期間の合成課題であり、実際の戦略分布や他市場への一般化は未検証である。各条件で生成は1回のみで、人間ベースラインもなく、LLM作成の指示には曖昧さが残る。最上位モデルの評価は200課題に限られ、参照ライブラリ作成に同系列モデルを使ったことによる有利さも否定できない。行動一致は観測した価格経路上の検査であり、全経路での同値性の証明ではない。バー内約定や遅延は十分に扱わず、状態保持期間の効果も完全な統制下では一部が境界的な有意性にとどまる。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子取引に直結する実装忠実度を、収益性とは分離して測る点が実務的に重要である。モデル順位や一般的な能力評価には慎重さが必要だが、LLM生成コードの検証設計を考える読者には推奨できる。",
+        "tags": [
+          "電子取引",
+          "LLMコード生成",
+          "行動同値性",
+          "状態管理",
+          "リスク制御",
+          "バックテスト検証"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "MintEval benchmarks LLM-generated trading code by running it under the same conditions as a reference implementation and measuring bar-level action agreement. Using 800 tasks on BTCUSDT 15-minute bars, it examines state-management and risk-control errors that profitability or successful execution alone can miss.",
+          "mainResult": "The paper reports that the best low-cost model achieved a mean ActionMatch of 0.544 among successful runs and exact agreement on 8.7% of all tasks. On a 200-task subset, Claude Opus 5.5 achieved 0.889 and 57.5% exact agreement, but 27.5% of tasks executed successfully with ActionMatch below 0.9. Even among successful runs with fully correct specification readings, 79.2% fell below this threshold, and the applied code-reading LLM judge accepted every silent failure it evaluated.",
+          "practicalApplication": "The benchmark is useful for incorporating behavioral comparisons against reference implementations into acceptance testing before deploying LLM-generated trading code. It supports checking stop updates, cooldowns, and higher-timeframe references rather than treating successful compilation or plausible equity curves as evidence of correctness. It does not guarantee profitability or real-market execution quality.",
+          "methodology": "Reference strategies are generated from signal, filter, sizing, and risk-management components, then translated into colloquial instructions by another LLM. Generated and reference code are executed sequentially on identical data and trading costs, measuring ActionMatch on bars where either program holds or requests a position, round-trip TradeF1, return differences, and other metrics. The study stratifies tasks by state span and reference return, compares settings with and without a component menu, uses fixed-effects regressions, blocks future-data access, and compares behavioral testing with code-reading evaluation.",
+          "limitations": "The synthetic tasks cover one instrument and one period; generalization to real strategy distributions or other markets remains untested. There is only one generation per condition, no human baseline, and residual ambiguity in LLM-written instructions. The frontier evaluation covers only 200 tasks, and using the same model family to help create the reference library may favor it. Behavioral agreement is tested on the observed price path, not proven for all paths. Intrabar execution and latency are not adequately covered, and some fully controlled state-span effects have only borderline statistical significance.",
+          "reason": "Separating implementation fidelity from profitability is practically important for electronic trading. Model rankings and broader capability claims require caution, but the paper is recommended for readers designing validation procedures for LLM-generated code.",
+          "tags": [
+            "Electronic trading",
+            "LLM code generation",
+            "Behavioral equivalence",
+            "State management",
+            "Risk controls",
+            "Backtest validation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 950,
+          "outputTokens": 1225,
+          "reasoningTokens": 141,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2175,
+          "estimatedCostUsd": 0.000708,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.03080v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 5,
+          "paperIds": [
+            "2610.03080v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 10593,
+          "outputTokens": 1631,
+          "reasoningTokens": 154,
+          "cachedInputTokens": 10590,
+          "cacheWriteTokens": 0,
+          "totalTokens": 12224,
+          "estimatedCostUsd": 0.017375,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 5,
+          "paperIds": [
+            "2610.03080v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.03598v1",
+        "title": "When a Correct Reward Is Not Enough: Diagnosing and Guiding PPO in an Analytically Solved Broker-Trader Game",
+        "authors": [
+          "Siu Tung Wong",
+          "Carlo Campajola"
+        ],
+        "submittedDate": "2026-10-02",
+        "updatedDate": "2026-10-02",
+        "categories": [
+          "cs.AI",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "解析解のあるbroker–traderモデルで、PPOによる執行速度の学習とコスト変更への適応を検証する。報酬の正確性だけでは戦略の回復を保証せず、解析解が学習診断と残差学習の基準として役立つと報告している。",
+        "mainResult": "非情報注文フローがない場合はPPO–FFNNが参照戦略に近づくが、確率的フロー下ではFFNNとLSTMがともに不正確だった。criticによる近傍行動の順位判定精度は51.7%で、報酬整形も安定した改善を示さない。部分情報下では確実性等価制御が参照収益に近く、執行コスト半減時の残差PPOは参照戦略との収益差を2.22%縮小した。",
+        "practicalApplication": "執行RLの評価では、収益だけでなく同一状態での行動誤差やcriticの局所的な順位判定を検査する設計に活用できる。既存の解析戦略を固定し、小さな残差だけを学習する方法も候補になるが、実市場での有効性は未検証である。",
+        "methodology": "連続時間の目的関数から有限刻み報酬を導き、厳密な一段階恒等式と格子細分化で検証する。離散LQ参照制御を用い、各設定で5学習シード、主実験で各400万遷移を実施し、独立した検証経路でチェックポイントを選択する。教師あり学習、Monte Carloによるcritic診断、potential-based shaping、因果的状態推定、解析戦略への残差PPOを比較する。",
+        "limitations": "実データのない限定的な線形・Gaussianシミュレーションで、PPOの設定と学習シードも限られる。相手は解析フィードバックを維持するため、PPOが逸脱した状態で新たな均衡を求めてはいない。教師あり容量検証は非情報フローなしの条件に限定され、clipped LQ参照は制約付き問題の厳密な最適解ではない。critic診断は失敗原因の因果的証明ではなく、残差学習の有意な改善もコスト半減時だけだった。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子執行RLを解析的ベンチマークで厳しく検証し、正しい報酬と有効な学習を区別する点で有用である。ただし、汎用的なPPOの限界や実運用での優位性を示す研究としては読めない。",
+        "tags": [
+          "最適執行",
+          "PPO",
+          "解析的ベンチマーク",
+          "critic診断",
+          "部分観測",
+          "確実性等価制御",
+          "残差強化学習"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper tests PPO learning of execution speed and adaptation to cost changes in an analytically solved broker–trader model. It reports that reward correctness alone does not ensure policy recovery, while analytical solutions provide benchmarks for learning diagnostics and residual learning.",
+          "mainResult": "PPO–FFNN approaches the reference strategy without uninformed order flow, but both FFNN and LSTM remain inaccurate with stochastic flow. The critic's nearby-action ranking accuracy is 51.7%, and reward shaping provides no reliable improvement. Under partial information, certainty-equivalent control achieves a payoff close to the reference; when execution cost is halved, residual PPO closes 2.22% of the payoff gap to the reference strategy.",
+          "practicalApplication": "The study informs execution-RL evaluation designs that inspect same-state action errors and the critic's local action rankings rather than payoff alone. Freezing an existing analytical strategy and learning only a small residual is another candidate approach, but its effectiveness in real markets remains untested.",
+          "methodology": "A finite-step reward is derived from the continuous-time objective and checked using an exact one-step identity and grid refinement. Using a discrete LQ reference controller, experiments employ five training seeds per configuration and four million transitions per seed in the main experiments, with checkpoint selection on separate validation paths. Comparisons include supervised learning, Monte Carlo critic diagnostics, potential-based shaping, causal state estimation, and residual PPO added to an analytical strategy.",
+          "limitations": "The study uses a limited linear–Gaussian simulation without real data, with limited PPO configurations and training seeds. The counterpart retains its analytical feedback, so no new equilibrium is solved when PPO deviates. Supervised capacity tests are restricted to the no-uninformed-flow setting, and the clipped LQ reference is not the exact optimum of the constrained problem. Critic diagnostics do not establish a causal explanation of failure, and significant residual-learning improvement occurs only when cost is halved.",
+          "reason": "The paper is useful for rigorously testing electronic-execution RL against analytical benchmarks and distinguishing correct rewards from effective learning. It should not, however, be read as establishing general limitations of PPO or superiority in live deployment.",
+          "tags": [
+            "Optimal execution",
+            "PPO",
+            "Analytical benchmarks",
+            "Critic diagnostics",
+            "Partial observability",
+            "Certainty-equivalent control",
+            "Residual reinforcement learning"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 907,
+          "outputTokens": 1062,
+          "reasoningTokens": 140,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1969,
+          "estimatedCostUsd": 0.000622,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.03598v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 19457,
+          "outputTokens": 1435,
+          "reasoningTokens": 153,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 19454,
+          "totalTokens": 20892,
+          "estimatedCostUsd": 0.062991,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 9,
+          "paperIds": [
+            "2610.03598v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.03369v1",
+        "title": "Mixture-of-Experts for Cryptocurrency Order Execution: Training Stability, Tail Risk, and Failure Modes",
+        "authors": [
+          "Alexander Ardaiz",
+          "Varun Budati",
+          "Ali Habibnia"
+        ],
+        "submittedDate": "2026-10-02",
+        "updatedDate": "2026-10-02",
+        "categories": [
+          "cs.LG",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "BTC/USDTの注文執行で、DDQLとMixture-of-Experts（MoE）を比較し、平均コスト、学習seed間の安定性、方策内のテールリスクを分けて検証する。論文の中心的価値は執行性能の向上ではなく、反復学習と仕様分解によって見かけのアーキテクチャ優位を再評価した点にある。",
+        "mainResult": "元の仕様では、どの学習モデルもDDQLに対する平均ISの有意な改善を示さず、TWAPと即時売却にも劣った。MoEの$K=8$ではDDQLとの差が$-0.03$ bps、95%信頼区間が$[-0.15,+0.09]$ bpsで、同等性も確立していない。一方、CVaR-95は11.5 bps悪化した。探索率の減衰だけでDDQLの取引停止型崩壊は100回中12回からゼロになったが、報酬変更との併用では30回中19回に再発した。MoEの$K=8$では検証した全6仕様で崩壊が観測されなかった。",
+        "practicalApplication": "RL執行モデルの検証手順に有用である。多数seed、容量を揃えた比較、単純執行ベンチマーク、方策内CVaR、報酬と探索の交互作用を確認すべきことを示す。探索率減衰後はTWAPを上回る結果も報告されるが、著者自身がシミュレータの診断結果と位置付けており、実運用の優位性を示すものではない。",
+        "methodology": "2023年1月のBinance由来10段板データを5分平均に集約し、学習期間と評価期間を時間分離した。20 BTCを10ステップで売却する環境で、DDQL、K-means分割MoE、容量を揃えた単一ネットワークを各100回学習し、共通の500評価区間で比較した。bootstrap、置換検定、崩壊率の検定を用い、CPU上の仕様分解では報酬、探索率減衰、replay保持を30または100seedで変更した。",
+        "limitations": "単一銘柄・短期間の履歴再生で、売買による価格・板への反応をモデル化しない。平均化した板、ほぼ無償の板外約定、終盤に良い気配を飛ばす人工的ペナルティが早期売却を有利にする。独立に開始するepisodeへの遅延routingは現在の市場レジームを識別できない。信頼区間は固定500区間に条件付けた学習seedの不確実性であり、市場期間の不確実性ではない。分散低下は多重比較補正後に有意でなく、検定群は事後設定である。仕様分解は不完全で、一部は30seedに限られ、CPUとGPUでも個別結果が異なる。",
+        "importance": 1,
+        "recommended": true,
+        "reason": "電子執行研究に直結し、学習の再現性と執行テールリスクを混同しないための有益な負の結果を提供する。実用的なMoE優位の証拠としてではなく、RL執行評価の設計と失敗診断に関する研究として推奨する。",
+        "tags": [
+          "暗号資産の注文執行",
+          "深層強化学習",
+          "Mixture-of-Experts",
+          "実装ショートフォール",
+          "学習seedの安定性",
+          "テールリスク",
+          "シミュレータの限界"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper compares DDQL and Mixture-of-Experts (MoE) for BTC/USDT order execution, separately examining mean costs, stability across training seeds, and within-policy tail risk. Its central value is not improved execution performance, but reassessing apparent architectural advantages through repeated training and specification decomposition.",
+          "mainResult": "Under the original specification, no learned model significantly improved mean IS over DDQL, and all underperformed TWAP and immediate liquidation. For MoE with $K=8$, the difference from DDQL was $-0.03$ bps, with a 95% confidence interval of $[-0.15,+0.09]$ bps; equivalence was not established either. Meanwhile, CVaR-95 worsened by 11.5 bps. Exploration annealing alone reduced DDQL's never-trade collapses from 12 out of 100 runs to zero, but combining it with the reward modification restored collapse in 19 out of 30 runs. No collapse was observed for MoE with $K=8$ under any of the six tested specifications.",
+          "practicalApplication": "The study is useful for designing validation procedures for RL execution models. It highlights the need for many seeds, capacity-matched comparisons, simple execution benchmarks, within-policy CVaR, and checks of reward–exploration interactions. Results exceeding TWAP are also reported after exploration annealing, but the authors explicitly interpret them as simulator diagnostics rather than evidence of live execution superiority.",
+          "methodology": "Binance-derived ten-level order book data from January 2023 were aggregated into five-minute means, with temporally separated training and evaluation periods. In an environment selling 20 BTC over ten steps, DDQL, K-means-partitioned MoE, and capacity-matched single networks were each trained 100 times and compared on 500 common evaluation windows. Bootstrap, permutation, and collapse-rate tests were used. CPU-based specification decomposition modified reward, exploration annealing, and replay retention using 30 or 100 seeds.",
+          "limitations": "The study uses short-period historical replay for one instrument without modelling trade feedback on prices or books. Averaged books, nearly costless fills beyond visible depth, and an artificial terminal penalty that skips better quotes favour early liquidation. Lagged routing across independently started episodes cannot identify the current market regime. Confidence intervals capture training-seed uncertainty conditional on 500 fixed windows, not uncertainty across market periods. The dispersion reduction is not significant after multiple-comparison adjustment, and test families were defined retrospectively. Specification decomposition is incomplete, some arms use only 30 seeds, and individual outcomes differ between CPU and GPU.",
+          "reason": "Directly relevant to electronic execution, the paper provides useful negative results that help prevent conflating training reproducibility with execution tail risk. It is recommended as research on RL execution evaluation design and failure diagnosis, not as evidence of a practical MoE advantage.",
+          "tags": [
+            "Cryptocurrency order execution",
+            "Deep reinforcement learning",
+            "Mixture-of-Experts",
+            "Implementation shortfall",
+            "Training-seed stability",
+            "Tail risk",
+            "Simulator limitations"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 1027,
+          "outputTokens": 1171,
+          "reasoningTokens": 101,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 1024,
+          "totalTokens": 2198,
+          "estimatedCostUsd": 0.000714,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.03369v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 15862,
+          "outputTokens": 16000,
+          "reasoningTokens": 139,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 15859,
+          "totalTokens": 31862,
+          "estimatedCostUsd": 0.199654,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 8,
+          "paperIds": [
+            "2610.03369v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 8,
+          "paperIds": [
+            "2610.03369v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 15862,
+          "outputTokens": 1826,
+          "reasoningTokens": 182,
+          "cachedInputTokens": 15859,
+          "cacheWriteTokens": 0,
+          "totalTokens": 17688,
+          "estimatedCostUsd": 0.019852,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 8,
+          "paperIds": [
+            "2610.03369v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 818,
+      "outputTokens": 915,
+      "reasoningTokens": 97,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1733,
+      "estimatedCostUsd": 0.000539,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.02290v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 874,
+      "outputTokens": 805,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1679,
+      "estimatedCostUsd": 0.00049,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.02492v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 918,
+      "outputTokens": 891,
+      "reasoningTokens": 119,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1809,
+      "estimatedCostUsd": 0.000537,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.02834v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 909,
+      "outputTokens": 1073,
+      "reasoningTokens": 144,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1982,
+      "estimatedCostUsd": 0.000627,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.02838v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 861,
+      "outputTokens": 891,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1752,
+      "estimatedCostUsd": 0.000532,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.02917v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 11541,
+      "outputTokens": 1544,
+      "reasoningTokens": 146,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 11538,
+      "totalTokens": 13085,
+      "estimatedCostUsd": 0.044291,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 11,
+      "paperIds": [
+        "2610.02917v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 876,
+      "outputTokens": 953,
+      "reasoningTokens": 157,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1829,
+      "estimatedCostUsd": 0.000564,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03076v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 950,
+      "outputTokens": 1225,
+      "reasoningTokens": 141,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2175,
+      "estimatedCostUsd": 0.000708,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03080v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": null,
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 5,
+      "paperIds": [
+        "2610.03080v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 10593,
+      "outputTokens": 1631,
+      "reasoningTokens": 154,
+      "cachedInputTokens": 10590,
+      "cacheWriteTokens": 0,
+      "totalTokens": 12224,
+      "estimatedCostUsd": 0.017375,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 5,
+      "paperIds": [
+        "2610.03080v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 909,
+      "outputTokens": 763,
+      "reasoningTokens": 81,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1672,
+      "estimatedCostUsd": 0.000472,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03161v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 880,
+      "outputTokens": 820,
+      "reasoningTokens": 87,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1700,
+      "estimatedCostUsd": 0.000498,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03174v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 789,
+      "outputTokens": 815,
+      "reasoningTokens": 62,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1604,
+      "estimatedCostUsd": 0.000486,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03250v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 1027,
+      "outputTokens": 1171,
+      "reasoningTokens": 101,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 1024,
+      "totalTokens": 2198,
+      "estimatedCostUsd": 0.000714,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03369v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 15862,
+      "outputTokens": 16000,
+      "reasoningTokens": 139,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 15859,
+      "totalTokens": 31862,
+      "estimatedCostUsd": 0.199654,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 8,
+      "paperIds": [
+        "2610.03369v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": null,
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 8,
+      "paperIds": [
+        "2610.03369v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 15862,
+      "outputTokens": 1826,
+      "reasoningTokens": 182,
+      "cachedInputTokens": 15859,
+      "cacheWriteTokens": 0,
+      "totalTokens": 17688,
+      "estimatedCostUsd": 0.019852,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 8,
+      "paperIds": [
+        "2610.03369v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 812,
+      "outputTokens": 677,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1489,
+      "estimatedCostUsd": 0.00042,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03406v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 907,
+      "outputTokens": 1062,
+      "reasoningTokens": 140,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1969,
+      "estimatedCostUsd": 0.000622,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03598v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 19457,
+      "outputTokens": 1435,
+      "reasoningTokens": 153,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 19454,
+      "totalTokens": 20892,
+      "estimatedCostUsd": 0.062991,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 9,
+      "paperIds": [
+        "2610.03598v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

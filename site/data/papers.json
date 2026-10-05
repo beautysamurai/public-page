@@ -2,6 +2,70 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-10-05-daily-openai-01",
+      "date": "2026-10-05",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.02917v1",
+          "title": "Event History Over Scale: Compact Transformers for Low-Latency Limit Order Book Forecasting",
+          "authors": [
+            "David Schaurecker",
+            "Lasse B. Strand",
+            "Kevin O'Sullivan",
+            "Robert Jakob"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.03080v1",
+          "title": "MintEval: Do LLMs Implement the Trading Strategy You Asked For? A Behavioural-Equivalence Benchmark for Natural-Language-to-Strategy Code",
+          "authors": [
+            "Siyu Wang",
+            "Yifan Wang",
+            "Yuecheng He"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.03598v1",
+          "title": "When a Correct Reward Is Not Enough: Diagnosing and Guiding PPO in an Analytically Solved Broker-Trader Game",
+          "authors": [
+            "Siu Tung Wong",
+            "Carlo Campajola"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.03369v1",
+          "title": "Mixture-of-Experts for Cryptocurrency Order Execution: Training Stability, Tail Risk, and Failure Modes",
+          "authors": [
+            "Alexander Ardaiz",
+            "Varun Budati",
+            "Ali Habibnia"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-04-daily-openai-01",
       "date": "2026-10-04",
       "kind": "daily",

@@ -1,0 +1,1054 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-10-05",
+  "fingerprint": "ab757a057b8b031dbdde6a0460e660c8154e6bfa10c504d396ed00d614c07cfc",
+  "candidateFingerprints": {
+    "2610.02290": "798241d578c8b76be909c22e6f4c8fa1fd2879b92e5745ab72816ec2ae12b209",
+    "2610.02492": "e86c10f9b1f7547a603addbcdeabf54b5296693a614ba4dc981cbf5f75337002",
+    "2610.02834": "31c2b83d598d255bb94cbbb5f7da4ffbaafc76debdc7ecfdc4371557fdce1459",
+    "2610.02838": "5ab491bc607a137e974065098034766315e70f4862e2b76f91f8d9d1a178b329",
+    "2610.02917": "dfe7be3c1f8d728d8bd97ff7a8eddfb5546243bae1560f5aea637ffdfe0dcc7b",
+    "2610.03076": "2a4d846780b9299911c26e47237c532360f2dbf6ca81eb48028960376d8e1ca8",
+    "2610.03080": "dd86a50367939ed8d23002eaf9a3798232d5656e1c35c4005fcd5e9b490685c9",
+    "2610.03161": "edbbc7902f0f8523824d71dc996f964c0555cb6135801294d7fb826e498d7cf3",
+    "2610.03174": "41ee1e53b0fc189edb8eabc19e6183b4511c98693a88d83d3a43b314341e9a19",
+    "2610.03250": "111f2b37f312e7ea1f1e5b2ac599c687b7c2e292cddb48900d136a9c5bbbe3c6",
+    "2610.03369": "57e8ac3eb0d251a91adb0270c40c8c01e12cc8a34706641cfeba34f4d42368ca",
+    "2610.03406": "cd37fe81bd5089a60abed0703c754beaafcc6a3e37cc142b3d29599631c2fde2",
+    "2610.03598": "cd540bcd85163abacb6ecfd91ecae31f683f2da41f9a6371b8796ffa269899e5"
+  },
+  "results": {
+    "2610.02290": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、データから選ぶポートフォリオの期待効用 regret を基準に、ポートフォリオの種類とウェイトを同時に決定する規則を提案する。",
+        "mainResult": "著者は、正則なパラメトリック収益モデルで、提案規則が事前分布を用いずにミニマックスおよびベイズの下界とその主要項定数を達成すると報告する。また、特定の条件下で平均分散法やリスクパリティ法との関係を示す。",
+        "practicalApplication": "期待効用に基づくポートフォリオ選択の理論的指針となり得るが、提示された要約からは実運用での性能や導入方法は判断できない。",
+        "methodology": "期待効用 regret の漸近最適化として規則を構成し、正則なパラメトリックモデルでミニマックス・ベイズ下界との関係を解析する。さらに平均分散法とリスクパリティ法が得られる条件を導く。",
+        "limitations": "評価は要約に記された理論結果に限られ、データによる検証は示されていない。結果は正則性、効用関数、超過収益や資産収益分布に関する条件に依存する。金利、イールドカーブ、執行、マーケットマイクロストラクチャとの直接的な関連は示されていない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "ポートフォリオ選択の統計的理論が中心であり、対象サイトの金利・イールドカーブ・電子執行・市場マイクロストラクチャの主題には直接該当しない。",
+        "tags": [
+          "ポートフォリオ選択",
+          "期待効用 regret",
+          "ミニマックス",
+          "ベイズ"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study proposes a rule that jointly selects a portfolio class and its weights, using expected utility regret for portfolios chosen from data.",
+          "mainResult": "The authors report that, in a regular parametric return model, the proposed rule attains the minimax and Bayes lower bounds, including their leading constants, without using a prior distribution. They also establish relationships to mean-variance and risk-parity methods under specified conditions.",
+          "practicalApplication": "The results may provide theoretical guidance for expected-utility-based portfolio choice, but the abstract does not establish real-world performance or explain how to implement the rule in practice.",
+          "methodology": "The rule is constructed through asymptotic optimization of expected utility regret, and its relation to minimax and Bayes lower bounds is analyzed in regular parametric models. The conditions under which mean-variance and risk-parity methods arise are also derived.",
+          "limitations": "The abstract reports theoretical results but no data-based validation. The results depend on assumptions about regularity, utility functions, excess returns, and the joint asset-return distribution. No direct connection to rates, yield curves, execution, or market microstructure is presented.",
+          "reason": "The paper primarily concerns statistical theory for portfolio choice and does not directly address the site's focus on rates, yield curves, electronic execution, or market microstructure.",
+          "tags": [
+            "portfolio choice",
+            "expected utility regret",
+            "minimax",
+            "Bayes"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.02492": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、職場タスクに対するAI出力を評価するLLM judgeの測定妥当性を、労働者評価との比較で監査している。",
+        "mainResult": "33構成の多くは応答の順位付けで一定の正解率を示した一方、受容率の推定は労働者基準の61.1%に対して3.0%から97.9%と大きく乖離した。校正後も個人評価の説明率は最大8.5%で、順位の一致だけでは職業別集計の妥当性を保証しないと報告する。",
+        "practicalApplication": "LLM judgeを職業別のAI適用可能性や受容率の推定に使う場合、ランキング精度だけでなく、用途に即した受容率・集計値との一致を検証する必要がある。",
+        "methodology": "45,796件の労働者評価に基づく監査ベンチマークを構築し、6モデル系列の既存judge構成33種を4,501件のテスト評価で比較した。順位精度、労働者の平均評価との一致、校正、予測補助推定を検討し、一部結果はタスク・労働者を分離した検証で再現した。",
+        "limitations": "要旨で示されるのは特定のベンチマーク、評価、モデル構成における結果であり、他の職種・評価基準・利用環境への一般化は不明である。個人評価の説明力や予測補助の利得も限定的と報告されている。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "LLM評価の測定妥当性に関する研究であり、電子取引、市場マイクロストラクチャー、金利モデル、イールドカーブ、金利を実質的に扱っていないため対象外。",
+        "tags": [
+          "LLM judge",
+          "測定妥当性",
+          "職業評価"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study audits the measurement validity of LLM judges for workplace AI outputs by comparing them with worker ratings.",
+          "mainResult": "Many of the 33 configurations achieved some ranking accuracy, yet estimated acceptance rates ranged from 3.0% to 97.9%, versus the worker benchmark of 61.1%. Even after calibration, scores explained at most 8.5% of individual rating variance; the abstract reports that ranking agreement alone does not establish valid occupational aggregates.",
+          "practicalApplication": "When using LLM judges to estimate occupational AI applicability or acceptance rates, validate agreement with the acceptance rates and aggregates relevant to the intended use, rather than relying only on ranking accuracy.",
+          "methodology": "The authors built an audit benchmark from 45,796 worker ratings and compared 33 pre-existing judge configurations from six model families on 4,501 test ratings. They assessed ranking accuracy, agreement with worker means, calibration, and prediction-assisted estimation; some findings were replicated on a task- and worker-disjoint validation split.",
+          "limitations": "The abstract reports results for a particular benchmark, ratings, and set of model configurations; generalization to other occupations, evaluation criteria, and deployment settings is unknown. It also reports limited explanatory power for individual ratings and only small gains from prediction-assisted estimation.",
+          "reason": "This concerns the measurement validity of LLM evaluation and does not materially address electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "LLM judge",
+            "measurement validity",
+            "occupational ratings"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.02834": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "レバレッジ型イベント市場プロトコルについて、状態の権威元を一元化し、金融処理と復旧を構成する設計を提示した研究です。電子執行、マーケットマイクロストラクチャ、金利モデル・イールドカーブを主題とするものではありません。",
+        "mainResult": "著者は、明示された仮定の下で、権威元の一意性、損失配分の優先順位、決済の冪等性、復旧時の金融処理再実行防止などを証明したと報告しています。また、12件のシナリオ記録を用いたローカル検証と、アーカイブの独立検証を報告しています。",
+        "practicalApplication": "スマートコントラクト型のイベント市場で、状態管理、決済、損失処理、権限管理、障害復旧を設計する際の参考になり得ます。ただし、実運用での有効性を示すものではありません。",
+        "methodology": "プロトコル構成を形式化し、複数の安全性・整合性特性を証明したうえで、金融相互作用アサーション12件とローカルの証拠記録・再生・検証を通じて評価しています。",
+        "limitations": "証明は明示された仮定に依存します。評価は記載されたローカルのシナリオ群に限られ、実環境での運用、外部システムとの連携、経済的成果や攻撃耐性は、この要旨からは確認できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "プロトコル設計としては具体的ですが、対象サイトの主要領域である電子取引、マーケットマイクロストラクチャ、金利・イールドカーブ研究には直接該当しません。",
+        "tags": [
+          "スマートコントラクト",
+          "イベント市場",
+          "プロトコル設計",
+          "形式検証",
+          "障害復旧"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study presents a design for a leveraged event-market protocol that centralizes authoritative state and composes financial operations and recovery. Its main subject is not electronic execution, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "The author reports proofs, under stated assumptions, of properties including unique state authority, loss-allocation priority, settlement idempotency, and prevention of financial re-execution during recovery. The abstract also reports local testing using 12 scenario records and independent archive verification.",
+          "practicalApplication": "The design may inform state management, settlement, loss handling, permissions, and fault recovery in smart-contract-based event markets. It does not demonstrate effectiveness in live operations.",
+          "methodology": "The protocol composition is formalized, several safety and consistency properties are proved, and the design is evaluated using 12 Financial Interaction Assertions and local evidence-record, replay, and verification procedures.",
+          "limitations": "The proofs depend on explicit assumptions. Evaluation is limited to the reported local scenarios; the abstract does not establish live-operation performance, integration with external systems, economic outcomes, or resistance to attacks.",
+          "reason": "The protocol design is specific, but it does not directly address the site’s primary areas of electronic trading, market microstructure, or interest-rate and yield-curve research.",
+          "tags": [
+            "Smart contracts",
+            "Event markets",
+            "Protocol design",
+            "Formal verification",
+            "Fault recovery"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.02838": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "オンチェーン金融プロトコルの証拠を、共通の実行マニフェストと相関IDに結び付け、検証可能な形で管理するアーキテクチャを提案する研究です。電子取引、マーケット・マイクロストラクチャ、金利モデルやイールドカーブを主題としていません。",
+        "mainResult": "報告されたローカル事例では、12件のFinancial Interaction Assertionについて、84件の証拠、2回の一致するマテリアライゼーション、独立検証器が受理したアーカイブ、およびそのアーカイブに結び付いたリプレイを記録しました。著者はこれを、金融上の主張から再現可能な証拠パッケージまでの監査可能な連鎖として示しています。",
+        "practicalApplication": "オンチェーン金融プロトコルの監査やレビューで、証拠の来歴、改ざん検知、再現性を整理する用途が考えられます。ただし、対象分野のサイト読者に直接有用な取引・金利分析ではありません。",
+        "methodology": "システムの識別情報、役割、スキーマ、リリースを実行マニフェストに固定し、7層の証拠を登録済みの導出関係と共通相関IDで連結します。来歴、条件別の根拠、否定対照、再現可能なパッケージ化、過去のリプレイ、独立レビューを要求する主張昇格ルールを定式化し、ローカル事例を示しています。",
+        "limitations": "要旨から確認できる実証は単一のローカル事例で、12件の主張に限られます。実運用での有効性や他システムへの一般化は示されておらず、取引執行や金利関連の成果も報告されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "金融プロトコルの証拠管理を扱いますが、電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブ、金利に対する実質的な貢献が要旨から確認できないため、対象範囲外と判定します。",
+        "tags": [
+          "オンチェーン金融プロトコル",
+          "証拠管理",
+          "監査可能性",
+          "再現性"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes an architecture for managing evidence from on-chain financial protocols by binding it to a common execution manifest and correlation identity. It does not focus on electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "In the reported local case study, the authors recorded 84 evidence positions for 12 Financial Interaction Assertions, two matching materializations, an archive accepted by an independent verifier, and a replay bound to that archive. They present this as an auditable chain from financial assertions to a reproducible evidence package.",
+          "practicalApplication": "The approach could help organize provenance, tamper detection, and reproducibility for audits and reviews of on-chain financial protocols. However, it does not directly address trading or interest-rate analysis relevant to this site's readership.",
+          "methodology": "The architecture seals system identities, roles, schemas, and release identity in an execution manifest, then links seven evidence layers through registered derivations and a common correlation identity. It formalizes a claim-promotion rule requiring provenance, predicate-specific conditions, negative controls, reproducible packaging, historical replay, and independent review, and reports a local case study.",
+          "limitations": "The abstract reports only one local case study, limited to 12 assertions. It does not establish effectiveness in production or generalizability to other systems, nor does it report results on trading execution or interest rates.",
+          "reason": "The paper concerns evidence management for financial protocols, but the abstract shows no material contribution to electronic trading, market microstructure, interest-rate models, yield curves, or rates; it is therefore out of scope.",
+          "tags": [
+            "on-chain financial protocols",
+            "evidence management",
+            "auditability",
+            "reproducibility"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.02917": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本研究は、株式および日中電力市場の短期価格トレンド予測に向け、注文単位のイベント履歴を扱う小型・低遅延モデルを提案する。",
+        "mainResult": "報告によれば、MBOFormerとMBOFusionは比較した12設定中11設定で平均macro-F1が最高となり、MBOFormerは予測品質が同程度の百万パラメータ級ベースラインより5.1～8.1倍高速だった。両モデルの単一Apple M2 CPUスレッドでの推論中央値は1ミリ秒未満で、モデルサイズは70 kB未満である。",
+        "practicalApplication": "短期予測を頻繁に更新する株式・日中電力市場のシステムで、計算資源や推論遅延を抑えた予測器として応用できる可能性がある。結果は予測タスク上の評価であり、実際の執行成績や収益性を示すものではない。",
+        "methodology": "注文の提出・取消・約定からなるmarket-by-order（level-3）履歴を入力する因果Transformer二種を構成し、スナップショット等を用いるlevel-2ベースラインと、三市場・四予測期間で比較した。",
+        "limitations": "提示された抄録だけでは市場名、データ期間・分割、統計的不確実性、特徴量や評価設定の詳細を確認できない。推論速度は単一Apple M2 CPUスレッドでの報告値であり、他のハードウェアや本番環境での性能、執行への有効性は未検証である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "低遅延の板情報予測という電子取引に関連する課題に対し、イベント履歴を活用した小型モデルの予測性能と推論速度を具体的に報告している。実運用上の効果は抄録から判断できないため、重要度は高めだが限定的とした。",
+        "tags": [
+          "電子取引",
+          "注文板",
+          "market-by-order",
+          "短期価格予測",
+          "低遅延",
+          "Transformer"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This study proposes compact, low-latency models that use order-level event histories for short-horizon price-trend prediction in equity and intraday electricity markets.",
+          "mainResult": "According to the abstract, MBOFormer and MBOFusion achieve the highest mean macro-F1 in 11 of 12 tested settings. MBOFormer is 5.1–8.1 times faster than million-parameter baselines with comparable predictive quality. Median inference latency is below one millisecond on a single Apple M2 CPU thread, and each model is under 70 kB.",
+          "practicalApplication": "The models may serve as resource- and latency-conscious predictors in systems that frequently update short-term forecasts for equity and intraday electricity markets. These are predictive-task results and do not demonstrate execution performance or profitability.",
+          "methodology": "The authors construct two causal transformers that process market-by-order (level-3) histories of submissions, cancellations, and executions, and compare them with level-2 baselines using snapshots and related inputs across three markets and four prediction horizons.",
+          "limitations": "The abstract does not identify the markets or provide details on data periods and splits, statistical uncertainty, features, or evaluation settings. The reported latency is for a single Apple M2 CPU thread; performance on other hardware and in production, as well as execution effectiveness, remains untested.",
+          "reason": "The paper addresses an electronic-trading-relevant problem—low-latency order-book prediction—and reports concrete predictive and inference-speed results for compact models using event histories. The abstract does not establish operational benefits, so importance is rated as relatively high but limited.",
+          "tags": [
+            "electronic trading",
+            "limit order book",
+            "market-by-order",
+            "short-horizon price prediction",
+            "low latency",
+            "Transformer"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "個別注文の投入・取消・約定を記録するL3履歴から、短期の仲値方向を予測する小型Transformerを提案する。株式2銘柄とEPEX電力市場で、L2スナップショット中心のモデルに対する予測性能と推論効率を比較した。",
+        "mainResult": "著者らは、MBOFormerとMBOFusionのいずれかが12設定中11設定で最高の平均macro-F1を得たと報告する。パラメータ数はそれぞれ7,203と14,371で、Apple M2の単一CPUスレッドにおける推論中央値は0.479ミリ秒と0.531ミリ秒だった。MBOFormerは百万パラメータ級の比較モデルより5.1～8.1倍高速だったが、最小遅延のモデルではない。",
+        "practicalApplication": "L3データを利用できる株式・電力取引システムで、低遅延の短期価格予測器を設計する際の参考になる。発注判断への組込みには、特徴量生成を含む実運用遅延と取引費用控除後の収益性を別途検証する必要がある。",
+        "methodology": "板を変化させるメッセージ10件ごとに判断時点を設け、4つのイベント時間予測期間で下落・横ばい・上昇を分類する。直近128イベントの7特徴量を因果Transformerで処理し、MBOFusionは低頻度の市場文脈を畳み込み分岐で追加する。日付順の学習・検証・テスト分割と3乱数シードでmacro-F1を評価し、同一判断時点・ラベルのL2ベースラインと比較した。",
+        "limitations": "ラベル閾値はテスト系列全体の将来価格変化分布から算出されるため、入力への先読みはないものの、絶対スコアをオンライン達成可能値とは解釈できない。対象は株式2銘柄と電力市場の短期間に限られ、3シードの結果はテスト期間間の統計的有意性を示さない。入力窓と構造が異なるため、L3表現だけの効果は分離できず、L3比較モデルLOBERTも未評価である。遅延は単一機種の合成入力によるモデル実行のみで、前処理・通信・注文執行を除外し、電力データも非公開である。取引収益や実測エネルギー消費は検証していない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "注文イベントの粒度とモデル規模のトレードオフを、容量を合わせた比較と遅延実測で検討しており、本サイトの市場マイクロストラクチャと電子取引領域に直接関連する。ただし、実運用上の優位性ではなく、限定されたデータでの予測・計算効率の結果として読むべきである。",
+        "tags": [
+          "市場マイクロストラクチャ",
+          "指値注文板",
+          "L3注文イベント",
+          "短期価格予測",
+          "小型Transformer",
+          "低遅延推論",
+          "日中電力市場"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper proposes compact Transformers that predict short-term mid-price direction from L3 histories of individual order submissions, cancellations, and executions. It compares predictive performance and inference efficiency against models centered on L2 snapshots using two equities and the EPEX electricity market.",
+          "mainResult": "The authors report that either MBOFormer or MBOFusion achieves the highest mean macro-F1 in 11 of 12 settings. They have 7,203 and 14,371 parameters, respectively, with median inference times of 0.479 and 0.531 milliseconds on one Apple M2 CPU thread. MBOFormer is 5.1–8.1 times faster than the million-parameter comparison models, but it is not the lowest-latency model.",
+          "practicalApplication": "The study informs the design of low-latency, short-term price predictors for equity and electricity trading systems with L3 data access. Integration into order-placement decisions requires separate validation of production latency, including feature generation, and profitability after transaction costs.",
+          "methodology": "Decision points occur after every ten book-changing messages, with down, flat, and up classifications at four event-time horizons. A causal Transformer processes seven features from the latest 128 events; MBOFusion adds a convolutional branch for slower market context. Macro-F1 is evaluated using chronological daily training, validation, and test splits and three random seeds, against L2 baselines sharing the same decision points and labels.",
+          "limitations": "Label thresholds use the distribution of future price changes across the entire test sequence. Although model inputs contain no look-ahead, absolute scores cannot be interpreted as achievable online. Coverage is limited to two equities and a short electricity-market sample, and three-seed results do not establish statistical significance across test periods. Different input windows and architectures prevent isolation of the L3 representation effect, and the L3 comparator LOBERT is not evaluated. Latency measures model execution alone on synthetic inputs on one device, excluding preprocessing, communication, and order execution; the electricity data are also private. Trading profitability and measured energy consumption are not evaluated.",
+          "reason": "The paper directly addresses market microstructure and electronic trading by examining the trade-off between event granularity and model scale through capacity-matched comparisons and measured latency. It should nevertheless be read as evidence about prediction and computational efficiency on limited data, not established production advantages.",
+          "tags": [
+            "Market microstructure",
+            "Limit order book",
+            "L3 order events",
+            "Short-term price prediction",
+            "Compact Transformer",
+            "Low-latency inference",
+            "Intraday electricity market"
+          ]
+        }
+      }
+    },
+    "2610.03076": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、Hestonおよびrough Hestonモデルのニューラル較正写像を、複数のShapley系説明手法で分析する。",
+        "mainResult": "短期満期とインプライド・ボラティリティのスマイル・ウィングがパラメータ推定に重要で、その帰属構造はアーキテクチャ間で定性的に安定したと報告する。また、rough Hestonでは入力を削減しても全入力時と同等の較正精度を維持できたという。",
+        "practicalApplication": "rough Hestonのニューラル較正で、冗長な入力を選別・削減する手掛かりになり得る。ただし、金利モデルやイールドカーブへの応用は抄録から確認できない。",
+        "methodology": "多層パーセプトロン、highway、softmax-parametrized highwayを用い、SHAPとνSHAPでHestonおよびrough Hestonの較正入力の寄与を比較する。",
+        "limitations": "抄録にはデータ設定、定量的な精度差、入力削減の規模、検証条件が記載されていない。対象は確率的ボラティリティモデルの較正であり、金利・イールドカーブ、電子取引、市場マイクロストラクチャを直接扱わない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "ニューラル較正の解釈可能性と特徴選択には有用そうだが、本サイトの金利・イールドカーブおよび電子取引・市場マイクロストラクチャの対象とは直接の関連がない。",
+        "tags": [
+          "ニューラル較正",
+          "確率的ボラティリティ",
+          "Heston",
+          "rough Heston",
+          "SHAP",
+          "特徴選択"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes neural calibration mappings for the Heston and rough Heston models using several Shapley-based explanation methods.",
+          "mainResult": "The authors report that short maturities and implied-volatility smile wings are important for parameter inference, with qualitatively stable attribution patterns across architectures. They also report that rough Heston calibration can retain accuracy comparable to using the full input while reducing inputs.",
+          "practicalApplication": "The findings may help identify and remove redundant inputs in neural calibration for rough Heston. The abstract does not establish applications to interest-rate models or yield curves.",
+          "methodology": "The study compares SHAP and νSHAP attributions for calibration inputs across Heston and rough Heston models, using multilayer perceptron, highway, and softmax-parametrized highway architectures.",
+          "limitations": "The abstract does not specify the data setup, quantitative accuracy differences, extent of input reduction, or validation conditions. The work concerns calibration of stochastic-volatility models and does not directly address rates, yield curves, electronic trading, or market microstructure.",
+          "reason": "The work appears useful for interpreting neural calibration and selecting features, but it is not directly relevant to the site's focus on rates, yield curves, electronic execution, or market microstructure.",
+          "tags": [
+            "Neural calibration",
+            "Stochastic volatility",
+            "Heston",
+            "Rough Heston",
+            "SHAP",
+            "Feature selection"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.03080": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "MintEvalは、自然言語で指示された取引戦略と、LLMが生成したコードの実際の売買行動が一致するかを測るベンチマークです。BTCUSDTの15分足データを用い、800件のタスクを評価します。",
+        "mainResult": "報告された評価では、低コストモデルのActionMatchは最大0.544、完全再現率は最大0.087でした。層化した200件でClaude Opus 5.5はそれぞれ0.889、0.575に達しましたが、タスクの0.275では指示と異なる動作が表面化せず、仕様を正しく読み取った実装でも79.2%が稼働バーの10%超で乖離しました。",
+        "practicalApplication": "取引戦略コード生成の検証に、損益やコード類似度ではなく、同一データ・取引摩擦下での売買行動の一致を使う方法を提示します。バックテスト結果だけでは見逃しうるリスクロジックの実装漏れを点検する補助評価として利用できます。",
+        "methodology": "合成した参照戦略を自然なトレーダー指示に変換し、モデルに再実装させます。参照コードと生成コードを同一の市場データおよび取引摩擦でバーごとに実行し、行動を比較します。タスクは実行時の状態スパン複雑度で層化されています。",
+        "limitations": "要旨で報告される対象はBTCUSDTの15分足と、部品を組み合わせて生成した戦略群に限られます。実市場での運用成績や、他資産・時間足・戦略形式への一般化は示されていません。モデル別の結果も一部の評価設定に限られ、ベンチマーク上の一致が本番環境での安全性を保証するわけではありません。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "自然言語から取引戦略コードを生成する際の、損益評価とは異なる実務上重要な失敗を定量化しています。電子取引の実装検証に直接関係しますが、現時点の根拠は限定されたベンチマーク設定に基づきます。",
+        "tags": [
+          "電子取引",
+          "LLM",
+          "戦略コード生成",
+          "行動同値性",
+          "バックテスト"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "MintEval is a benchmark for measuring whether the actual trading actions of code generated by an LLM match a strategy specified in natural language. It evaluates 800 tasks using BTCUSDT 15-minute data.",
+          "mainResult": "In the reported evaluation, low-cost models achieved an ActionMatch of at most 0.544 and an exact-reproduction rate of at most 0.087. On a stratified set of 200 tasks, Claude Opus 5.5 reached 0.889 and 0.575, respectively, but its behavior silently diverged from the instructions on 0.275 of tasks. Even among implementations that correctly read the specification, 79.2% diverged on more than 10% of active bars.",
+          "practicalApplication": "The paper proposes validating trading-strategy code generation by comparing trading actions under identical data and trading frictions, rather than relying on profitability or code similarity. This can help check for missing or misimplemented risk logic that backtest results alone may not reveal.",
+          "methodology": "Programmatically generated reference strategies are translated into colloquial trader instructions, then reimplemented by the models. The reference and generated programs are executed bar by bar on identical market data and with identical trading frictions, and their actions are compared. Tasks are stratified by execution-measured state-span complexity.",
+          "limitations": "The abstract reports results only for BTCUSDT 15-minute data and strategies generated from composable building blocks. It does not establish live-market performance or generalization to other assets, timeframes, or strategy forms. Model results are also limited to specific evaluation settings, and benchmark agreement does not guarantee safety in production.",
+          "reason": "The work quantifies a practically important failure mode in generating trading-strategy code from natural language that is distinct from profitability evaluation. It is directly relevant to electronic-trading implementation validation, although the evidence is currently limited to a constrained benchmark setting.",
+          "tags": [
+            "electronic trading",
+            "LLMs",
+            "strategy code generation",
+            "behavioral equivalence",
+            "backtesting"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "MintEvalは、自然言語の売買指示からLLMが生成したコードを参照実装と同じ条件で動かし、バー単位の行動一致を評価するベンチマークである。BTCUSDTの15分足を用いた800課題で、収益性や実行成功だけでは見えない、状態管理とリスク制御の実装誤りを検証する。",
+        "mainResult": "論文によると、低コストモデルの最高平均ActionMatchは実行成功例で0.544、全課題の完全一致率は8.7%だった。200課題の部分集合ではClaude Opus 5.5が0.889、完全一致率57.5%に達したが、27.5%は実行に成功してもActionMatchが0.9未満だった。仕様を完全に読み取った実行成功例でも79.2%がこの基準を下回り、適用したコード読解型LLM審査は審査対象の静かな失敗をすべて承認した。",
+        "practicalApplication": "LLM生成の売買コードを本番投入する前に、参照実装との行動比較を受入試験へ組み込む用途に有用である。損切りの再設定、クールダウン、上位時間足の参照などを検証し、コンパイル成功やもっともらしい損益曲線を正しさの証拠としない運用を支える。収益性や実市場での約定品質を保証する手法ではない。",
+        "methodology": "売買シグナル、フィルター、数量調整、リスク管理の部品から参照戦略を生成し、別のLLMで口語的な指示へ変換する。生成コードと参照コードを同一データ・取引コストで逐次実行し、どちらかがポジションを保有または要求するバーのActionMatch、取引単位のTradeF1、収益差などを測る。状態の保持期間と参照収益で層化し、部品一覧の有無による比較、固定効果回帰、将来情報アクセスの遮断、コード読解型審査との比較を行う。",
+        "limitations": "単一銘柄・単一期間の合成課題であり、実際の戦略分布や他市場への一般化は未検証である。各条件で生成は1回のみで、人間ベースラインもなく、LLM作成の指示には曖昧さが残る。最上位モデルの評価は200課題に限られ、参照ライブラリ作成に同系列モデルを使ったことによる有利さも否定できない。行動一致は観測した価格経路上の検査であり、全経路での同値性の証明ではない。バー内約定や遅延は十分に扱わず、状態保持期間の効果も完全な統制下では一部が境界的な有意性にとどまる。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子取引に直結する実装忠実度を、収益性とは分離して測る点が実務的に重要である。モデル順位や一般的な能力評価には慎重さが必要だが、LLM生成コードの検証設計を考える読者には推奨できる。",
+        "tags": [
+          "電子取引",
+          "LLMコード生成",
+          "行動同値性",
+          "状態管理",
+          "リスク制御",
+          "バックテスト検証"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "MintEval benchmarks LLM-generated trading code by running it under the same conditions as a reference implementation and measuring bar-level action agreement. Using 800 tasks on BTCUSDT 15-minute bars, it examines state-management and risk-control errors that profitability or successful execution alone can miss.",
+          "mainResult": "The paper reports that the best low-cost model achieved a mean ActionMatch of 0.544 among successful runs and exact agreement on 8.7% of all tasks. On a 200-task subset, Claude Opus 5.5 achieved 0.889 and 57.5% exact agreement, but 27.5% of tasks executed successfully with ActionMatch below 0.9. Even among successful runs with fully correct specification readings, 79.2% fell below this threshold, and the applied code-reading LLM judge accepted every silent failure it evaluated.",
+          "practicalApplication": "The benchmark is useful for incorporating behavioral comparisons against reference implementations into acceptance testing before deploying LLM-generated trading code. It supports checking stop updates, cooldowns, and higher-timeframe references rather than treating successful compilation or plausible equity curves as evidence of correctness. It does not guarantee profitability or real-market execution quality.",
+          "methodology": "Reference strategies are generated from signal, filter, sizing, and risk-management components, then translated into colloquial instructions by another LLM. Generated and reference code are executed sequentially on identical data and trading costs, measuring ActionMatch on bars where either program holds or requests a position, round-trip TradeF1, return differences, and other metrics. The study stratifies tasks by state span and reference return, compares settings with and without a component menu, uses fixed-effects regressions, blocks future-data access, and compares behavioral testing with code-reading evaluation.",
+          "limitations": "The synthetic tasks cover one instrument and one period; generalization to real strategy distributions or other markets remains untested. There is only one generation per condition, no human baseline, and residual ambiguity in LLM-written instructions. The frontier evaluation covers only 200 tasks, and using the same model family to help create the reference library may favor it. Behavioral agreement is tested on the observed price path, not proven for all paths. Intrabar execution and latency are not adequately covered, and some fully controlled state-span effects have only borderline statistical significance.",
+          "reason": "Separating implementation fidelity from profitability is practically important for electronic trading. Model rankings and broader capability claims require caution, but the paper is recommended for readers designing validation procedures for LLM-generated code.",
+          "tags": [
+            "Electronic trading",
+            "LLM code generation",
+            "Behavioral equivalence",
+            "State management",
+            "Risk controls",
+            "Backtest validation"
+          ]
+        }
+      }
+    },
+    "2610.03161": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "金融リスク検出における特徴選択について、古典的最適化、フォトニック計算機、シミュレーションを比較した研究です。",
+        "mainResult": "ULBデータでは13特徴を使うDirac-3手法が全特徴モデルに近いF1を示し、AmExでは高い性能にほぼ全特徴が必要だったと報告しています。手法間の差はULBで大きく、AmExでは比較的小さいとしています。",
+        "practicalApplication": "不均衡な金融分類における特徴選択手法や計算方式の比較に参考となる可能性がありますが、電子取引、マーケットマイクロストラクチャー、金利モデルへの直接的な応用は示されていません。",
+        "methodology": "13種類の特徴選択法を、Gurobi、QCI Dirac-3、Piquassoの各方式に対応付け、ULB不正検知データとAmEx消費者デフォルトデータで評価しています。",
+        "limitations": "要約に記載された評価は2データセットに限られ、ULBの平均値は5回の実行に基づきます。外部データでの再現性や実運用上の効果は要約から確認できず、報告された差が一般化するかは不明です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "金融データを扱いますが、主題は分類向け特徴選択と計算方式のベンチマークであり、対象サイトの主要領域には直接該当しません。",
+        "tags": [
+          "金融リスク検出",
+          "特徴選択",
+          "量子計算",
+          "機械学習"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study compares classical optimization, photonic computing, and simulation for feature selection in financial risk detection.",
+          "mainResult": "The authors report that a Dirac-3 method using 13 features on ULB achieved an F1 score close to the all-feature model, while AmEx required nearly all features for high performance. They report larger variation across methods on ULB and smaller variation on AmEx.",
+          "practicalApplication": "The results may inform comparisons of feature-selection methods and computing paradigms for imbalanced financial classification, but no direct application to electronic trading, market microstructure, or interest-rate models is shown.",
+          "methodology": "Thirteen feature-selection methods were matched to Gurobi, QCI Dirac-3, or Piquasso and evaluated on the ULB fraud-detection and AmEx consumer-default datasets.",
+          "limitations": "The abstract reports evaluations on only two datasets, and the ULB mean is based on five runs. Reproducibility on external data and operational impact cannot be established from the abstract; it is unclear whether the reported differences generalize.",
+          "reason": "Although it uses financial data, the paper focuses on feature selection and computing-paradigm benchmarking for classification, not the site's core subject areas.",
+          "tags": [
+            "financial risk detection",
+            "feature selection",
+            "quantum computing",
+            "machine learning"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.03174": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "金融リサーチ向けエージェントFinNextAssistを提案する研究であり、電子取引、マーケットマイクロストラクチャ、金利モデル、イールドカーブを主題としていません。",
+        "mainResult": "要旨によれば、複数の金融ベンチマークで既存のプロプライエタリおよびオープンソースの調査エージェントを上回り、構成要素の有効性もアブレーション実験で確認したと報告しています。具体的な改善幅は示されていません。",
+        "practicalApplication": "異種データの解釈や専門ツールを組み合わせた金融調査レポート作成の支援に利用できる可能性がありますが、対象分野との直接的な応用関係は限定的です。",
+        "methodology": "計画、証拠の整理、推論、レポート作成の4段階からなる枠組みを提案し、表形式データ向けのTabAgentと異種データ向けのHeteroAgentを組み込み、複数の金融ベンチマークで評価しています。",
+        "limitations": "要旨だけでは、評価指標、数値結果、データの範囲、実運用での信頼性や再現性を判断できません。また、電子取引や金利関連の課題への有効性は示されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "金融リサーチ支援エージェントとしては関連性がありますが、サイトの中心領域に対する直接的な貢献は要旨から確認できません。",
+        "tags": [
+          "金融リサーチ",
+          "AIエージェント",
+          "金融データ"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes FinNextAssist, an agent for financial research, rather than studying electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "The abstract reports that FinNextAssist outperforms existing proprietary and open-source research agents on several financial benchmarks, and that ablation studies confirm the contributions of its components. It does not provide the size of the improvements.",
+          "practicalApplication": "The framework may help produce financial research reports by combining heterogeneous data interpretation and specialized tools, but its direct application to the site's focus areas is limited.",
+          "methodology": "The proposed framework has four stages: planning, evidence compilation, reasoning, and report assembly. It includes TabAgent for tabular data and HeteroAgent for heterogeneous data, and is evaluated on multiple financial benchmarks.",
+          "limitations": "The abstract does not provide evaluation metrics, numerical results, data coverage, or evidence about reliability and reproducibility in real-world use. It also does not demonstrate effectiveness for electronic trading or rates-related tasks.",
+          "reason": "The paper is relevant to financial research assistance, but its abstract does not establish a direct contribution to the site's core topics.",
+          "tags": [
+            "financial research",
+            "AI agents",
+            "financial data"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.03250": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "イタリアの革新的中小企業を対象に、取締役会の女性比率と技術的・非技術的イノベーションの関係を分析した研究です。",
+        "mainResult": "著者らは、2SLS推定で女性取締役が技術的イノベーションに正の因果効果を持ち、非技術的イノベーションにも安定した正の影響があると報告しています。技術的イノベーションでは、基準モデルの負の係数が反転し、負の選択バイアスを示唆したとしています。",
+        "practicalApplication": "中小企業のガバナンスや女性の経営参画を促す政策に関する示唆はありますが、電子取引、マーケット・マイクロストラクチャー、金利モデルやイールドカーブへの直接的な応用はありません。",
+        "methodology": "2015～2024年のイタリアの革新的中小企業2,762社の縦断データを用い、2段階最小二乗法（2SLS）で因果効果を推定しています。",
+        "limitations": "評価は抄録の記述に限られます。操作変数や識別仮定の詳細が示されていないため、因果推定の妥当性を確認できず、結果の他国・他企業への一般化にも注意が必要です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "企業統治とイノベーションに関する研究であり、対象サイトの金融市場・金利分野には実質的に該当しません。",
+        "tags": [
+          "企業統治",
+          "女性取締役",
+          "中小企業",
+          "イノベーション",
+          "2SLS"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes the relationship between female board representation and technological and non-technological innovation in innovative Italian SMEs.",
+          "mainResult": "The authors report that 2SLS estimates show a positive causal effect of female board representation on technological innovation and a stable positive effect on non-technological innovation. For technological innovation, the negative baseline coefficient reverses, which they interpret as evidence of negative selection bias.",
+          "practicalApplication": "The findings may inform SME governance and policies that encourage women's participation in management, but they have no direct application to electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "methodology": "The study uses longitudinal data on 2,762 innovative Italian SMEs from 2015 to 2024 and estimates causal effects using two-stage least squares (2SLS).",
+          "limitations": "This assessment is based only on the abstract. The instrument and identification assumptions are not described, so the validity of the causal estimates cannot be assessed; generalization to other countries and firms also requires caution.",
+          "reason": "The paper concerns corporate governance and innovation and is not materially relevant to the site's financial-markets or interest-rate focus.",
+          "tags": [
+            "Corporate governance",
+            "Women on boards",
+            "SMEs",
+            "Innovation",
+            "2SLS"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.03369": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "BinanceのBTC/USDT板データを用い、Double DQNと混合専門家（MoE）による注文執行を比較し、性能・学習安定性・テールリスクを複数シードで評価した研究です。",
+        "mainResult": "報告された設定では、MoEはDDQLに対する平均実装ショートフォールの有意な改善を示しませんでした。専門家分割は学習崩壊を抑えましたが、アニーリング探索だけでも同様の抑制が得られ、MoE固有の優位性とは言えないと報告されています。$K=8$では試験した6設定すべてで崩壊がなく、シード間ばらつきは最小でしたが、調整後に頑健な差ではなく、ポリシー内テールリスクは$K$とともに悪化しました。",
+        "practicalApplication": "注文執行の強化学習を評価する際、複数シードでの反復、探索スケジュールや報酬設定の検証、平均成績とテールリスクの併記が重要であることを示唆します。",
+        "methodology": "5分平均化したBinance BTC/USDT板データ上で、DDQL、$K\\in\\{2,4,8\\}$のK-means分割MoE、およびパラメータ数を揃えた密結合ネットワークを比較し、複数の学習仕様とシード数で結果を分析しています。",
+        "limitations": "結果は摩擦のないリプレイと終端緊急度ペナルティを含む特定の環境・仕様に依存します。この環境では早期清算がほぼ無コストで、TWAPや即時清算より全学習構成の平均ショートフォールが高かったと報告されています。単一銘柄・取引所の集約データに基づくため、他市場への一般化は未確認です。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "注文執行に直接関係し、MoEの性能主張を複数シードと仕様変更で検証して、学習崩壊の原因帰属が不安定になり得る点を具体的に示すため、実験設計上有用です。",
+        "tags": [
+          "注文執行",
+          "強化学習",
+          "混合専門家",
+          "学習安定性",
+          "テールリスク",
+          "複数シード評価"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This study compares Double DQN and mixture-of-experts (MoE) approaches for order execution using Binance BTC/USDT order-book data, evaluating performance, training stability, and tail risk across multiple seeds.",
+          "mainResult": "Under the reported specification, MoE showed no significant improvement in mean implementation shortfall over DDQL. Expert partitioning suppressed training collapse, but annealed exploration alone achieved the same suppression, so the result does not establish an MoE-specific advantage. At $K=8$, no collapse occurred under any of the six tested specifications, and across-seed dispersion was lowest, but the difference was not robust after adjustment; within-policy tail risk worsened as $K$ increased.",
+          "practicalApplication": "The findings suggest evaluating reinforcement-learning execution strategies across multiple seeds, testing exploration schedules and reward specifications, and reporting tail risk alongside average performance.",
+          "methodology": "The study compares DDQL, K-means-partitioned MoE with $K\\in\\{2,4,8\\}$, and parameter-matched dense networks on 5-minute mean-aggregated Binance BTC/USDT order-book data, analyzing results across multiple training specifications and seed counts.",
+          "limitations": "The results depend on a specific environment and specification that include frictionless replay and a terminal-urgency penalty. In this environment, early liquidation is nearly costless, and all learned configurations reportedly have higher mean shortfall than TWAP or immediate liquidation. Generalization beyond aggregated data for a single asset and venue is untested.",
+          "reason": "The paper directly concerns order execution and tests MoE performance claims across seeds and specification changes, concretely showing that attribution of training collapse can be unstable. It is useful for experimental design.",
+          "tags": [
+            "Order execution",
+            "Reinforcement learning",
+            "Mixture of experts",
+            "Training stability",
+            "Tail risk",
+            "Multi-seed evaluation"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "BTC/USDTの注文執行で、DDQLとMixture-of-Experts（MoE）を比較し、平均コスト、学習seed間の安定性、方策内のテールリスクを分けて検証する。論文の中心的価値は執行性能の向上ではなく、反復学習と仕様分解によって見かけのアーキテクチャ優位を再評価した点にある。",
+        "mainResult": "元の仕様では、どの学習モデルもDDQLに対する平均ISの有意な改善を示さず、TWAPと即時売却にも劣った。MoEの$K=8$ではDDQLとの差が$-0.03$ bps、95%信頼区間が$[-0.15,+0.09]$ bpsで、同等性も確立していない。一方、CVaR-95は11.5 bps悪化した。探索率の減衰だけでDDQLの取引停止型崩壊は100回中12回からゼロになったが、報酬変更との併用では30回中19回に再発した。MoEの$K=8$では検証した全6仕様で崩壊が観測されなかった。",
+        "practicalApplication": "RL執行モデルの検証手順に有用である。多数seed、容量を揃えた比較、単純執行ベンチマーク、方策内CVaR、報酬と探索の交互作用を確認すべきことを示す。探索率減衰後はTWAPを上回る結果も報告されるが、著者自身がシミュレータの診断結果と位置付けており、実運用の優位性を示すものではない。",
+        "methodology": "2023年1月のBinance由来10段板データを5分平均に集約し、学習期間と評価期間を時間分離した。20 BTCを10ステップで売却する環境で、DDQL、K-means分割MoE、容量を揃えた単一ネットワークを各100回学習し、共通の500評価区間で比較した。bootstrap、置換検定、崩壊率の検定を用い、CPU上の仕様分解では報酬、探索率減衰、replay保持を30または100seedで変更した。",
+        "limitations": "単一銘柄・短期間の履歴再生で、売買による価格・板への反応をモデル化しない。平均化した板、ほぼ無償の板外約定、終盤に良い気配を飛ばす人工的ペナルティが早期売却を有利にする。独立に開始するepisodeへの遅延routingは現在の市場レジームを識別できない。信頼区間は固定500区間に条件付けた学習seedの不確実性であり、市場期間の不確実性ではない。分散低下は多重比較補正後に有意でなく、検定群は事後設定である。仕様分解は不完全で、一部は30seedに限られ、CPUとGPUでも個別結果が異なる。",
+        "importance": 1,
+        "recommended": true,
+        "reason": "電子執行研究に直結し、学習の再現性と執行テールリスクを混同しないための有益な負の結果を提供する。実用的なMoE優位の証拠としてではなく、RL執行評価の設計と失敗診断に関する研究として推奨する。",
+        "tags": [
+          "暗号資産の注文執行",
+          "深層強化学習",
+          "Mixture-of-Experts",
+          "実装ショートフォール",
+          "学習seedの安定性",
+          "テールリスク",
+          "シミュレータの限界"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper compares DDQL and Mixture-of-Experts (MoE) for BTC/USDT order execution, separately examining mean costs, stability across training seeds, and within-policy tail risk. Its central value is not improved execution performance, but reassessing apparent architectural advantages through repeated training and specification decomposition.",
+          "mainResult": "Under the original specification, no learned model significantly improved mean IS over DDQL, and all underperformed TWAP and immediate liquidation. For MoE with $K=8$, the difference from DDQL was $-0.03$ bps, with a 95% confidence interval of $[-0.15,+0.09]$ bps; equivalence was not established either. Meanwhile, CVaR-95 worsened by 11.5 bps. Exploration annealing alone reduced DDQL's never-trade collapses from 12 out of 100 runs to zero, but combining it with the reward modification restored collapse in 19 out of 30 runs. No collapse was observed for MoE with $K=8$ under any of the six tested specifications.",
+          "practicalApplication": "The study is useful for designing validation procedures for RL execution models. It highlights the need for many seeds, capacity-matched comparisons, simple execution benchmarks, within-policy CVaR, and checks of reward–exploration interactions. Results exceeding TWAP are also reported after exploration annealing, but the authors explicitly interpret them as simulator diagnostics rather than evidence of live execution superiority.",
+          "methodology": "Binance-derived ten-level order book data from January 2023 were aggregated into five-minute means, with temporally separated training and evaluation periods. In an environment selling 20 BTC over ten steps, DDQL, K-means-partitioned MoE, and capacity-matched single networks were each trained 100 times and compared on 500 common evaluation windows. Bootstrap, permutation, and collapse-rate tests were used. CPU-based specification decomposition modified reward, exploration annealing, and replay retention using 30 or 100 seeds.",
+          "limitations": "The study uses short-period historical replay for one instrument without modelling trade feedback on prices or books. Averaged books, nearly costless fills beyond visible depth, and an artificial terminal penalty that skips better quotes favour early liquidation. Lagged routing across independently started episodes cannot identify the current market regime. Confidence intervals capture training-seed uncertainty conditional on 500 fixed windows, not uncertainty across market periods. The dispersion reduction is not significant after multiple-comparison adjustment, and test families were defined retrospectively. Specification decomposition is incomplete, some arms use only 30 seeds, and individual outcomes differ between CPU and GPU.",
+          "reason": "Directly relevant to electronic execution, the paper provides useful negative results that help prevent conflating training reproducibility with execution tail risk. It is recommended as research on RL execution evaluation design and failure diagnosis, not as evidence of a practical MoE advantage.",
+          "tags": [
+            "Cryptocurrency order execution",
+            "Deep reinforcement learning",
+            "Mixture-of-Experts",
+            "Implementation shortfall",
+            "Training-seed stability",
+            "Tail risk",
+            "Simulator limitations"
+          ]
+        }
+      }
+    },
+    "2610.03406": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、顧客の助言評価から潜在的なリスク選好を推定し、将来の投資助言に反映する対話型ロボアドバイザーを提案する。",
+        "mainResult": "要旨によれば、CARA選好の下で、評価にノイズがあっても十分な回数の対話後に顧客の現在のリスク回避度を特定できる。推定した選好をPreFER過程で将来の市場条件に反映する。",
+        "practicalApplication": "顧客の評価を用いた投資助言の個人化に応用できる可能性があるが、電子取引、マーケットマイクロストラクチャー、金利モデルやイールドカーブへの直接的な関連は示されていない。",
+        "methodology": "助言へのスコアを受容確率と解釈し、von Neumannの棄却法に基づく逆学習で顧客の探索的投資分布を推定する。離散時間PreFER過程を定式化し、探索的投資戦略を導く。",
+        "limitations": "評価の仕組みやデータ、識別に必要な相互作用回数の条件、実データでの検証は要旨から分からない。報告された識別結果はCARA選好の仮定下に限られる。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "投資助言とリスク選好の推定を扱うが、対象サイトの中心分野との実質的な関連は要旨から確認できない。",
+        "tags": [
+          "ロボアドバイザー",
+          "逆強化学習",
+          "リスク選好",
+          "投資助言"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study proposes an interactive robo-advisor that infers latent risk preferences from client ratings and incorporates them into future investment advice.",
+          "mainResult": "According to the abstract, under CARA preferences, the advisor can identify a client's current risk aversion after sufficiently many interactions, even when ratings are noisy. The PreFER process carries the inferred preference forward to future market conditions.",
+          "practicalApplication": "The approach may support personalized investment advice based on client feedback, but no direct connection to electronic trading, market microstructure, interest-rate models, or yield curves is indicated.",
+          "methodology": "The study interprets advice scores as acceptance probabilities and uses inverse learning based on von Neumann's rejection method to infer the client's exploratory investment distribution. It formulates a discrete-time PreFER process and derives an exploratory investment strategy.",
+          "limitations": "The abstract does not specify the scoring mechanism, data, conditions on the number of interactions needed for identification, or empirical validation. The reported identification result is limited to the CARA-preference assumption.",
+          "reason": "The paper concerns investment advice and risk-preference inference, but its abstract does not establish a material connection to the site's core research areas.",
+          "tags": [
+            "robo-advisor",
+            "inverse reinforcement learning",
+            "risk preferences",
+            "investment advice"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.03598": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "解析解のある broker–trader ゲームを用いて、PPOによる取引速度の学習を検証し、学習結果を解析的な基準解と比較した研究です。",
+        "mainResult": "無情報注文フローがない場合、PPOは基準アクションに近づきました。一方、確率的な注文フロー下ではPPOの方策・価値関数の精度が不十分で、部分情報下でも解析解に基づく certainty-equivalent 制御がPPOを上回りました。解析的方策を初期方策として取引コスト変更に適応させる実験では、変更後の基準解とのギャップの2.22%を埋めました。",
+        "practicalApplication": "解析解を学習方策の検証基準や初期方策として活用し、PPOの診断や取引コスト変更への適応に役立てる可能性を示します。",
+        "methodology": "連続時間 broker–trader ゲームから有限時間ステップの報酬を導出し、格子細分化と1ステップの恒等式で離散実装を検証しました。PPOのFFNN・LSTM、教師あり学習、Monte Carlo診断、報酬 shaping、部分情報制御、コスト変更への適応を比較しました。",
+        "limitations": "要旨で報告されたのは解析的に解ける特定のゲームでの実験です。確率的注文フロー下ではPPOの精度が低く、報酬 shaping による改善も確認されていません。コスト適応の改善も基準解とのギャップの一部にとどまり、他の市場環境への一般化は示されていません。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "取引執行に直接関係し、解析解を使ったRLの評価という実務・研究上の示唆があります。ただし対象は限定的なゲーム設定であり、成果の一般化には追加検証が必要です。",
+        "tags": [
+          "取引執行",
+          "強化学習",
+          "PPO",
+          "解析解",
+          "部分情報"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This study tests PPO for choosing trading speed in an analytically solved broker–trader game, comparing learned policies with the analytical benchmark.",
+          "mainResult": "Without uninformed order flow, PPO approached the reference action. With stochastic order flow, the tested PPO policies and critics were insufficiently accurate; under partial information, an analytical certainty-equivalent controller also outperformed PPO. When an analytical policy was used as the starting policy to adapt to a transaction-cost change, the experiment closed 2.22% of the gap to the changed-cost reference.",
+          "practicalApplication": "The study suggests using analytical solutions as benchmarks for learned policies and as starting policies for diagnosing PPO or adapting to transaction-cost changes.",
+          "methodology": "The authors derived a finite-step reward from the continuous-time broker–trader game and checked its discrete implementation through grid refinement and an exact one-step identity. They compared PPO with FFNN and LSTM actors, supervised learning, Monte Carlo diagnostics, reward shaping, partial-information control, and adaptation to a cost change.",
+          "limitations": "The abstract reports experiments in a particular analytically solvable game. PPO accuracy was low with stochastic order flow, and reward shaping did not yield reliable improvement. Cost adaptation closed only part of the gap to the reference; generalization to other market settings is not demonstrated.",
+          "reason": "The paper directly concerns trading execution and offers research and practical insights into evaluating RL against analytical solutions. However, it studies a limited game setting, so broader generalization requires further validation.",
+          "tags": [
+            "Execution",
+            "Reinforcement learning",
+            "PPO",
+            "Analytical solutions",
+            "Partial information"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "解析解のあるbroker–traderモデルで、PPOによる執行速度の学習とコスト変更への適応を検証する。報酬の正確性だけでは戦略の回復を保証せず、解析解が学習診断と残差学習の基準として役立つと報告している。",
+        "mainResult": "非情報注文フローがない場合はPPO–FFNNが参照戦略に近づくが、確率的フロー下ではFFNNとLSTMがともに不正確だった。criticによる近傍行動の順位判定精度は51.7%で、報酬整形も安定した改善を示さない。部分情報下では確実性等価制御が参照収益に近く、執行コスト半減時の残差PPOは参照戦略との収益差を2.22%縮小した。",
+        "practicalApplication": "執行RLの評価では、収益だけでなく同一状態での行動誤差やcriticの局所的な順位判定を検査する設計に活用できる。既存の解析戦略を固定し、小さな残差だけを学習する方法も候補になるが、実市場での有効性は未検証である。",
+        "methodology": "連続時間の目的関数から有限刻み報酬を導き、厳密な一段階恒等式と格子細分化で検証する。離散LQ参照制御を用い、各設定で5学習シード、主実験で各400万遷移を実施し、独立した検証経路でチェックポイントを選択する。教師あり学習、Monte Carloによるcritic診断、potential-based shaping、因果的状態推定、解析戦略への残差PPOを比較する。",
+        "limitations": "実データのない限定的な線形・Gaussianシミュレーションで、PPOの設定と学習シードも限られる。相手は解析フィードバックを維持するため、PPOが逸脱した状態で新たな均衡を求めてはいない。教師あり容量検証は非情報フローなしの条件に限定され、clipped LQ参照は制約付き問題の厳密な最適解ではない。critic診断は失敗原因の因果的証明ではなく、残差学習の有意な改善もコスト半減時だけだった。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子執行RLを解析的ベンチマークで厳しく検証し、正しい報酬と有効な学習を区別する点で有用である。ただし、汎用的なPPOの限界や実運用での優位性を示す研究としては読めない。",
+        "tags": [
+          "最適執行",
+          "PPO",
+          "解析的ベンチマーク",
+          "critic診断",
+          "部分観測",
+          "確実性等価制御",
+          "残差強化学習"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper tests PPO learning of execution speed and adaptation to cost changes in an analytically solved broker–trader model. It reports that reward correctness alone does not ensure policy recovery, while analytical solutions provide benchmarks for learning diagnostics and residual learning.",
+          "mainResult": "PPO–FFNN approaches the reference strategy without uninformed order flow, but both FFNN and LSTM remain inaccurate with stochastic flow. The critic's nearby-action ranking accuracy is 51.7%, and reward shaping provides no reliable improvement. Under partial information, certainty-equivalent control achieves a payoff close to the reference; when execution cost is halved, residual PPO closes 2.22% of the payoff gap to the reference strategy.",
+          "practicalApplication": "The study informs execution-RL evaluation designs that inspect same-state action errors and the critic's local action rankings rather than payoff alone. Freezing an existing analytical strategy and learning only a small residual is another candidate approach, but its effectiveness in real markets remains untested.",
+          "methodology": "A finite-step reward is derived from the continuous-time objective and checked using an exact one-step identity and grid refinement. Using a discrete LQ reference controller, experiments employ five training seeds per configuration and four million transitions per seed in the main experiments, with checkpoint selection on separate validation paths. Comparisons include supervised learning, Monte Carlo critic diagnostics, potential-based shaping, causal state estimation, and residual PPO added to an analytical strategy.",
+          "limitations": "The study uses a limited linear–Gaussian simulation without real data, with limited PPO configurations and training seeds. The counterpart retains its analytical feedback, so no new equilibrium is solved when PPO deviates. Supervised capacity tests are restricted to the no-uninformed-flow setting, and the clipped LQ reference is not the exact optimum of the constrained problem. Critic diagnostics do not establish a causal explanation of failure, and significant residual-learning improvement occurs only when cost is halved.",
+          "reason": "The paper is useful for rigorously testing electronic-execution RL against analytical benchmarks and distinguishing correct rewards from effective learning. It should not, however, be read as establishing general limitations of PPO or superiority in live deployment.",
+          "tags": [
+            "Optimal execution",
+            "PPO",
+            "Analytical benchmarks",
+            "Critic diagnostics",
+            "Partial observability",
+            "Certainty-equivalent control",
+            "Residual reinforcement learning"
+          ]
+        }
+      }
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 818,
+      "outputTokens": 915,
+      "reasoningTokens": 97,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1733,
+      "estimatedCostUsd": 0.000539,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.02290v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 874,
+      "outputTokens": 805,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1679,
+      "estimatedCostUsd": 0.00049,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.02492v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 918,
+      "outputTokens": 891,
+      "reasoningTokens": 119,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1809,
+      "estimatedCostUsd": 0.000537,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.02834v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 909,
+      "outputTokens": 1073,
+      "reasoningTokens": 144,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1982,
+      "estimatedCostUsd": 0.000627,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.02838v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 861,
+      "outputTokens": 891,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1752,
+      "estimatedCostUsd": 0.000532,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.02917v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 11541,
+      "outputTokens": 1544,
+      "reasoningTokens": 146,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 11538,
+      "totalTokens": 13085,
+      "estimatedCostUsd": 0.044291,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 11,
+      "paperIds": [
+        "2610.02917v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 876,
+      "outputTokens": 953,
+      "reasoningTokens": 157,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1829,
+      "estimatedCostUsd": 0.000564,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03076v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 950,
+      "outputTokens": 1225,
+      "reasoningTokens": 141,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2175,
+      "estimatedCostUsd": 0.000708,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03080v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": null,
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 5,
+      "paperIds": [
+        "2610.03080v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 10593,
+      "outputTokens": 1631,
+      "reasoningTokens": 154,
+      "cachedInputTokens": 10590,
+      "cacheWriteTokens": 0,
+      "totalTokens": 12224,
+      "estimatedCostUsd": 0.017375,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 5,
+      "paperIds": [
+        "2610.03080v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 909,
+      "outputTokens": 763,
+      "reasoningTokens": 81,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1672,
+      "estimatedCostUsd": 0.000472,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03161v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 880,
+      "outputTokens": 820,
+      "reasoningTokens": 87,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1700,
+      "estimatedCostUsd": 0.000498,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03174v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 789,
+      "outputTokens": 815,
+      "reasoningTokens": 62,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1604,
+      "estimatedCostUsd": 0.000486,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03250v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 1027,
+      "outputTokens": 1171,
+      "reasoningTokens": 101,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 1024,
+      "totalTokens": 2198,
+      "estimatedCostUsd": 0.000714,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03369v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 15862,
+      "outputTokens": 16000,
+      "reasoningTokens": 139,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 15859,
+      "totalTokens": 31862,
+      "estimatedCostUsd": 0.199654,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 8,
+      "paperIds": [
+        "2610.03369v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": null,
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 8,
+      "paperIds": [
+        "2610.03369v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 15862,
+      "outputTokens": 1826,
+      "reasoningTokens": 182,
+      "cachedInputTokens": 15859,
+      "cacheWriteTokens": 0,
+      "totalTokens": 17688,
+      "estimatedCostUsd": 0.019852,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 8,
+      "paperIds": [
+        "2610.03369v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 812,
+      "outputTokens": 677,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1489,
+      "estimatedCostUsd": 0.00042,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03406v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 907,
+      "outputTokens": 1062,
+      "reasoningTokens": 140,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1969,
+      "estimatedCostUsd": 0.000622,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03598v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 19457,
+      "outputTokens": 1435,
+      "reasoningTokens": 153,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 19454,
+      "totalTokens": 20892,
+      "estimatedCostUsd": 0.062991,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 9,
+      "paperIds": [
+        "2610.03598v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

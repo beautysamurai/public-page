@@ -5840,6 +5840,108 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-10-07-daily-openai-01",
+      "editionDate": "2026-10-07",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-10-07T13:46:21Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-10-07",
+      "observedBatchDate": "2026-10-07",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年10月7日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 20 | 16,717 | 16,846 (1,436) | 0.0101 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | PDF全文・6ページ・未完了の試行 |\n| 論文解析 | gpt-6.1-sol / medium | 2 | 41,043 | 2,759 (269) | 0.1065 | PDF全文・6ページ / PDF全文・15ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. A Finite Bid--Ask Spread from Replenishment Displaced from the Quote\n\n**[arXiv:2610.07985v1](https://arxiv.org/abs/2610.07985v1) — Christopher Angstmann, Derick Diana, Tim Gebbie**\n\n### 概要\n\n売買両側の注文密度を保持する反応拡散モデルで、気配から離れた位置への補充が有限のbid–ask spreadを生む仕組みを解析する。反対側への補充待ち総量を注文配置の間隔に結び付け、配置境界と観測気配を区別する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 市場マイクロストラクチャー / ビッド・アスク・スプレッド / 反応拡散注文板 / マーケットメイキング / 流動性補充 / 注文取消 / 操作時間 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 注文配置と観測気配、局所的な消費と離れた補充を明確に区別する点が、スプレッドと流動性回復の理論研究に有用である。ただし、実証済みの予測モデルではなく、仮定付きの機構モデルとして読むべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 815 | 1,035 (70) | 0.0006 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | PDF全文・6ページ・未完了の試行 |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 9,878 | 1,369 (132) | 0.0147 | PDF全文・6ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 準定常・弱重複近似で、対数価格上のスプレッドを $s\\simeq\\Sigma-d_A^*-d_B^*$、浸透深さを $d_i^*=\\sqrt{D_i/\\nu_i}\\ln(\\rho_i^q/\\epsilon_i)$ と導く。離れた補充の気配密度応答はoperational timeで遅れ、時間積分した応答は同位置への供給に比べて $\\epsilon_i/\\rho_i^q$ に減衰する。\n\n**手法:** 二つの注文密度の反応拡散方程式を構築し、拡散・取消係数が等しい場合に不均衡場と総密度へ分解する。配置間隔を補充待ち総量に連動させ、指数型定常密度、Green関数、気配のlevel-set線形化からスプレッドと応答核を解析する。密度応答と初到達分布も区別する。\n\n**実務への応用:** 補充待ち、注文配置距離、取消率がスプレッドと流動性回復に及ぼす影響を、マーケットメイキングや執行シミュレーションで分解する枠組みとなる。実務利用には執行閾値、補充完了則、暦時間への変換の較正が必要である。\n\n**限界・注意点:** 主要なスプレッド式は分離した気配、準定常性、弱い反応損失に依存し、浸透層が重なる領域へは延長できない。線形応答核は気配と配置位置を固定する。執行閾値と配置則は外生的で、逆選択はモデル化しない。提示本文に実市場での検証はなく、暦時間の遅延も別途指定する時計に依存する。\n\n## 2. Modelling Regime Shifts in Continuous Intraday Electricity Markets with State-dependent Hawkes Processes\n\n**[arXiv:2610.08169v1](https://arxiv.org/abs/2610.08169v1) — Ayoub Jhabli, Tarek AlSkaif, Kwabena E. Bennin, Bedir Tekinerdogan, Axel Naumann, Joost M. E. Pennings**\n\n### 概要\n\nオランダの電力時間前連続市場を対象に、流動性状態に応じて注文到着をモデル化する研究。2024年1～3月の2,161契約、約2,469万イベントに、契約別の状態依存Hawkes過程を推定している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 市場マイクロストラクチャー / 電力時間前市場 / 状態依存Hawkes過程 / 流動性ストレス / 注文フロー / 残差診断 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 流動性レジームを条件とする注文フローモデルの実証例として有用で、残差診断と比較検証も充実している。ただし、完成した執行モデルではなく、適合不足と本文の解釈上の過大主張に注意して読むことを推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 949 | 901 (0) | 0.0005 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 31,165 | 1,390 (137) | 0.0918 | PDF全文・15ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 報告された残差Wasserstein距離は、単一状態モデルの0.371から提案モデルの0.308へ改善した。ストレス時には基底強度と約定の自己励起が増える一方、状態別の平均スペクトル半径は約0.89～0.92で、ストレスに伴う単調増加はない。なお、平均励起行列では約定から反対側の注文への励起も相応にあり、『クロスサイド効果は無視できる』という本文の説明は限定的に解釈すべきである。\n\n**手法:** スプレッド、板数量、直近10分のミッド価格変動を標準化してLSIを構築し、契約別分位点で3状態に分類する。売買別の注文追加と約定の4系列に、状態依存の基底強度と単一指数カーネルを設定する。スペクトル半径へのペナルティ付き最尤推定を行い、時間変換残差、KS検定、Ljung–Box検定、指標構成・状態分割の比較で評価する。\n\n**実務への応用:** 電力市場の注文フロー分析や、流動性状態別のシミュレーション設計に参考となる。LSIは契約全体の統計量を使う事後分類であり、リアルタイム執行への利用には逐次的な状態推定と外部検証が必要である。執行コスト削減は検証されていない。\n\n**限界・注意点:** 約定系列のKS検定通過率は約2～9%と低く、注文追加系列にも強い残差自己相関が残る。契約ごとの108パラメータに対して約定データが乏しく、取消イベントもモデル対象外である。検証は標本内に限られ、事後的な状態分類のため予測性能は示されていない。安定性ペナルティはハード制約ではなく、励起係数は因果効果を証明しない。\n\n## 3. The Agentic ETF: How Agentic Trading Becomes an Asset Class\n\n**[arXiv:2610.06856v1](https://arxiv.org/abs/2610.06856v1) — Amandeep Singh**\n\n### 概要\n\n論文は、大規模言語モデルを用いる自律型取引エージェントを運用するETFを「Agentic ETF」と定義し、その取引基盤を論じる。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 推奨 | 自律型取引 / ETF / 取引インフラ / 大規模言語モデル |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 自律型取引の実行基盤と市場構想を扱い、電子取引分野には関連する。一方、資産規模の主張は仮定依存で、実証的な執行・市場マイクロ構造分析ではないため重要度は限定的。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 817 | 923 (95) | 0.0005 | Abstractのみ |\n| 一次判定 | gpt-6-luna / low | 1 | 817 | 834 (136) | 0.0005 | Abstractのみ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者は、明示した仮定に基づく試算から、Agentic ETFの運用資産が2030年までに数千億ドルから数兆ドル弱に達し得ると主張する。これは予測であり、実証結果ではない。\n\n**手法:** エージェント取引を既存のアルゴリズム取引やロボアドバイスと区別し、インフラを6層に分解して、各層の既存事業者や構造的な不足を論じる。独自スタックの実装例も提示する。\n\n**実務への応用:** マルチベニュー執行、エージェントの分離、ブローカー照合などの基盤構成を整理しており、自律型取引システムの設計検討に参考となる。\n\n**限界・注意点:** 要旨からは、実運用成績や執行品質を検証する実証分析は確認できない。市場規模の試算は仮定に依存し、著者が紹介する実装例も独立評価されたものとは示されていない。",
+      "papers": [
+        {
+          "arxivId": "2610.07985v1",
+          "title": "A Finite Bid--Ask Spread from Replenishment Displaced from the Quote",
+          "authors": [
+            "Christopher Angstmann",
+            "Derick Diana",
+            "Tim Gebbie"
+          ],
+          "submittedDate": "2026-10-06",
+          "updatedDate": "2026-10-06",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.07985v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.07985v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "売買両側の注文密度を保持する反応拡散モデルで、気配から離れた位置への補充が有限のbid–ask spreadを生む仕組みを解析する。反対側への補充待ち総量を注文配置の間隔に結び付け、配置境界と観測気配を区別する。\n\n一次判定: gpt-6-luna / low · トークン 入力 815 / 出力 1,035（うち推論 70） · 推定 $0.0006\n論文解析: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · PDF 6 pages · 未完了の試行\n論文解析: gpt-6.1-sol / medium · トークン 入力 9,878 / 出力 1,369（うち推論 132） · PDF 6 pages · 推定 $0.0147",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.08169v1",
+          "title": "Modelling Regime Shifts in Continuous Intraday Electricity Markets with State-dependent Hawkes Processes",
+          "authors": [
+            "Ayoub Jhabli",
+            "Tarek AlSkaif",
+            "Kwabena E. Bennin",
+            "Bedir Tekinerdogan",
+            "Axel Naumann",
+            "Joost M. E. Pennings"
+          ],
+          "submittedDate": "2026-10-06",
+          "updatedDate": "2026-10-06",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.08169v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.08169v1",
+          "schedulerRank": 2,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "オランダの電力時間前連続市場を対象に、流動性状態に応じて注文到着をモデル化する研究。2024年1～3月の2,161契約、約2,469万イベントに、契約別の状態依存Hawkes過程を推定している。\n\n一次判定: gpt-6-luna / low · トークン 入力 949 / 出力 901（うち推論 0） · 推定 $0.0005\n論文解析: gpt-6.1-sol / medium · トークン 入力 31,165 / 出力 1,390（うち推論 137） · PDF 15 pages · 推定 $0.0918",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.06856v1",
+          "title": "The Agentic ETF: How Agentic Trading Becomes an Asset Class",
+          "authors": [
+            "Amandeep Singh"
+          ],
+          "submittedDate": "2026-06-02",
+          "updatedDate": "2026-06-02",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.06856v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.06856v1",
+          "schedulerRank": 3,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 4/10",
+          "schedulerSummary": "論文は、大規模言語モデルを用いる自律型取引エージェントを運用するETFを「Agentic ETF」と定義し、その取引基盤を論じる。\n\n一次判定: gpt-6-luna / low · トークン 入力 817 / 出力 923（うち推論 95） · 推定 $0.0005\n一次判定: gpt-6-luna / low · トークン 入力 817 / 出力 834（うち推論 136） · 推定 $0.0005",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

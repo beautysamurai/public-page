@@ -2,6 +2,57 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-10-07-daily-openai-01",
+      "date": "2026-10-07",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.07985v1",
+          "title": "A Finite Bid--Ask Spread from Replenishment Displaced from the Quote",
+          "authors": [
+            "Christopher Angstmann",
+            "Derick Diana",
+            "Tim Gebbie"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.08169v1",
+          "title": "Modelling Regime Shifts in Continuous Intraday Electricity Markets with State-dependent Hawkes Processes",
+          "authors": [
+            "Ayoub Jhabli",
+            "Tarek AlSkaif",
+            "Kwabena E. Bennin",
+            "Bedir Tekinerdogan",
+            "Axel Naumann",
+            "Joost M. E. Pennings"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.06856v1",
+          "title": "The Agentic ETF: How Agentic Trading Becomes an Asset Class",
+          "authors": [
+            "Amandeep Singh"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-05-daily-openai-01",
       "date": "2026-10-05",
       "kind": "daily",

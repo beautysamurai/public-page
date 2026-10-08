@@ -2,6 +2,55 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-10-08-daily-openai-01",
+      "date": "2026-10-08",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.10053v1",
+          "title": "On Bonart's interpretation of the Square-Root Impact Law",
+          "authors": [
+            "J. -P. Bouchaud",
+            "I. Mastromatteo",
+            "B. Toth"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.10407v1",
+          "title": "SOTA: Stock Options Trading Agents Guided by Option-Implied Return Distributions",
+          "authors": [
+            "Yizhen Xie",
+            "Mengyang Liu"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.10525v1",
+          "title": "A Hawkes Microfoundation for Multitype Inverse Gaussian Subordinators",
+          "authors": [
+            "Yingli Wang",
+            "Wei Xu",
+            "Lingjiong Zhu"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-07-daily-openai-01",
       "date": "2026-10-07",
       "kind": "daily",

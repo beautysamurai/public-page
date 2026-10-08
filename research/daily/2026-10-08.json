@@ -1,0 +1,725 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-10-08",
+  "generatedAt": "2026-10-08T13:54:19Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-10-08 was confirmed with 3 relevant paper(s).",
+  "expectedBatchDate": "2026-10-08",
+  "observedBatchDate": "2026-10-08",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2610.10053v1",
+        "title": "On Bonart's interpretation of the Square-Root Impact Law",
+        "authors": [
+          "J. -P. Bouchaud",
+          "I. Mastromatteo",
+          "B. Toth"
+        ],
+        "submittedDate": "2026-10-07",
+        "updatedDate": "2026-10-07",
+        "categories": [
+          "cond-mat.stat-mech",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "市場インパクトの平方根則を価格の拡散性から説明するBonartの議論を再検討した理論論文。著者らは、インパクトの分散が加法的に増えることだけでは、平均インパクトの平方根形状や参加率に依存しない振幅は導けないと論じる。",
+        "mainResult": "LMF型の線形モデルでは、価格が拡散的でも孤立メタオーダーのインパクトは $I\\propto\\phi^{(1-\\gamma)/2}Q^{(1+\\gamma)/2}$ となる。提案した参加者別モデルでは、参加率に依存しない平方根則に知覚相関の plateau $C^{*}\\propto\\phi$ が必要となる。また、平均インパクトが日次分散の有限割合を担い、係数がメタオーダー数に依存しないという条件下では、出来高保存と分散収支が指数 $\\delta=1/2$ を選ぶと示す。",
+        "practicalApplication": "執行コストモデルでは、価格の拡散性を再現するだけでなく、平均インパクト、参加率依存性、執行後の減衰を別々に検証する必要がある。定常的な注文系列内のメタオーダーと時間的に孤立したメタオーダーを比較することは、系列の whitening による説明を検証する手掛かりになる。",
+        "methodology": "反実仮想価格との差によるインパクト分解、LMFモデルの解析的反例、参加者別の適応的 propagator、注文符号からの検出閾値、all-pass filter の長期応答、出来高保存に基づく分散収支を検討する。独立で情報中立な注文系列を主な前提とする。",
+        "limitations": "新規の体系的な実証検証はなく、孤立注文も平方根則に従うというCFMデータへの言及は未検証の所見である。孤立注文が平方根則に従わないという予測は、系列を excursion と読む場合に限られる。検出閾値は注文符号中心の推定器に対するもので、他の市場情報を使う検出能力を否定しない。出来高保存の議論は独立性、分散収支の閉鎖、平均インパクトの有限な分散寄与を仮定し、その微視的理由は未解決である。all-pass の批判も特定の線形フィルター構成に依存する。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "平方根則の形状と振幅、平均と分散を明確に区別し、執行モデルの検証条件を整理するため重要である。ただし、代替的な機械的説明を実証的に確立した論文ではない。",
+        "tags": [
+          "市場インパクト",
+          "平方根則",
+          "メタオーダー",
+          "参加率",
+          "注文フローの長期記憶",
+          "プロパゲーターモデル",
+          "出来高保存"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This theoretical paper reassesses Bonart's explanation of the square-root impact law through price diffusivity. The authors argue that additive growth of impact variance alone cannot establish the square-root shape of mean impact or its participation-independent amplitude.",
+          "mainResult": "In an LMF-type linear model, prices can be diffusive while an isolated metaorder has impact $I\\propto\\phi^{(1-\\gamma)/2}Q^{(1+\\gamma)/2}$. In the proposed participant-specific model, a participation-independent square-root law requires a perceived correlation plateau $C^{*}\\propto\\phi$. The authors also show that volume conservation and variance accounting select $\\delta=1/2$, conditional on mean impact carrying a finite share of daily variance and its coefficient being independent of the metaorder count.",
+          "practicalApplication": "Execution-cost models should separately validate mean impact, participation dependence, and post-execution decay rather than merely reproduce price diffusivity. Comparing metaorders within stationary trading streams with temporally isolated metaorders can help test explanations based on stream whitening.",
+          "methodology": "The paper examines an impact decomposition using counterfactual prices, an analytical LMF counterexample, participant-specific adaptive propagators, detection thresholds from trade signs, long-run all-pass filter responses, and variance accounting based on volume conservation. Independent, information-neutral trading streams are central assumptions.",
+          "limitations": "There is no new systematic empirical validation; the reference to CFM data suggesting that isolated orders also follow the square-root law remains an unverified observation. The prediction that isolated orders should violate the law applies only to the excursion interpretation of trading streams. Detection thresholds concern estimators focused on trade signs and do not rule out detection using other market information. The volume argument assumes independence, variance-budget closure, and a finite variance contribution from mean impact, whose microscopic explanation remains unresolved. The all-pass critique also depends on a particular linear-filter construction.",
+          "reason": "The paper is important for distinguishing the law's shape from its amplitude and mean impact from variance, thereby clarifying execution-model validation requirements. However, it does not empirically establish an alternative mechanical explanation.",
+          "tags": [
+            "Market impact",
+            "Square-root law",
+            "Metaorders",
+            "Participation rate",
+            "Long-memory order flow",
+            "Propagator models",
+            "Volume conservation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 1010,
+          "outputTokens": 1049,
+          "reasoningTokens": 127,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2059,
+          "estimatedCostUsd": 0.000625,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.10053v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 17169,
+          "outputTokens": 1463,
+          "reasoningTokens": 155,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 17166,
+          "totalTokens": 18632,
+          "estimatedCostUsd": 0.057551,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 19,
+          "paperIds": [
+            "2610.10053v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.10407v1",
+        "title": "SOTA: Stock Options Trading Agents Guided by Option-Implied Return Distributions",
+        "authors": [
+          "Yizhen Xie",
+          "Mengyang Liu"
+        ],
+        "submittedDate": "2026-10-07",
+        "updatedDate": "2026-10-07",
+        "categories": [
+          "cs.AI",
+          "cs.LG",
+          "q-fin.PM",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "SOTAは、LLMが9種類の株式オプション戦略とパラメータを選び、決定論的な処理が契約選択・数量・ヘッジを担う自動売買フレームワークである。名称の「分布」は完全な確率密度の推定ではなく、主にIV水準・スキュー・曲率などの特徴量で表現される。",
+        "mainResult": "米国大型株9銘柄とSPYの2025年3〜8月のバックテストで、著者は総収益率$18.32\\%$、年率Sharpe比$1.60$、最大ドローダウン$8.96\\%$を報告し、比較対象はすべて負の収益だった。RL中もニュースを使用すると収益率は$-2.72\\%$となった。ただし、全RLチェックポイントをテスト期間で評価しており、厳密な未使用データでの検証とは言い切れない。",
+        "practicalApplication": "大量のオプション契約を戦略単位の意思決定へ圧縮し、LLMの判断と実装・リスク制約を分離する設計は、自動売買システムの試作に参考になる。実運用への採用には、独立した評価期間と現実的な約定モデルによる再検証が必要である。",
+        "methodology": "市場特徴量10種類と保有状態を入力とし、候補戦略だけを価格照会する二段階の選択を行う。匿名化した教師モデルの1,000軌跡からSharpe比で144軌跡を選別し、Qwen3.8-27BをSFT後にGRPOで学習する。報酬は費用控除後の資産価値の対数変化で、最終モデルのRLではニュースを除外する。比較手法には共通の実装規則とポートフォリオ制約を適用する。",
+        "limitations": "テスト期間で複数チェックポイントを評価し、そのうちステップ20を報告しているため、テスト依存のモデル選択を排除できない。評価は6か月・10原資産・単一seedに限られ、統計的不確実性や相場局面を跨ぐ頑健性は示されていない。本文のmidpoint約定と付録のhalf-spread設定、理論的ヘッジ帯と固定帯の記述には不整合があり、費用とヘッジ実装の確認が必要である。ニュースなしのSFT-only比較がなく、教師へのニュースの効用も直接比較が十分に示されていない。",
+        "importance": 3,
+        "recommended": false,
+        "reason": "戦略選択と契約実装を分離する設計は関連性が高いが、テスト期間を使ったチェックポイント評価と実装記述の不整合により、収益性の証拠として優先推薦するには不十分である。",
+        "tags": [
+          "株式オプション",
+          "自動売買",
+          "大規模言語モデル",
+          "強化学習",
+          "戦略選択",
+          "インプライド・ボラティリティ",
+          "テスト依存のモデル選択"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "SOTA is an automated trading framework in which an LLM selects among nine equity-option strategy families and their parameters, while deterministic components handle contract selection, sizing, and hedging. The title's “distributions” are represented primarily by features such as IV level, skew, and curvature, rather than by estimation of a complete probability density.",
+          "mainResult": "For a March–August 2025 backtest on nine large-cap U.S. stocks and SPY, the authors report a total return of $18.32\\%$, an annualized Sharpe ratio of $1.60$, and maximum drawdown of $8.96\\%$; every comparison policy had negative returns. Retaining news during RL reduced return to $-2.72\\%$. However, all RL checkpoints were evaluated on the test period, so the results cannot confidently be treated as validation on strictly untouched data.",
+          "practicalApplication": "Compressing a large option-contract universe into strategy-level decisions and separating LLM judgment from implementation and risk constraints provides a useful design for automated trading prototypes. Live deployment requires revalidation using an independent evaluation period and a realistic execution model.",
+          "methodology": "The policy uses ten market features and portfolio holdings, with a two-stage selection process that requests prices only for candidate strategies. From 1,000 anonymized teacher-model trajectories, 144 are selected by Sharpe ratio to train Qwen3.8-27B through SFT followed by GRPO. Rewards are changes in log portfolio value after costs, and news is excluded during RL for the final model. Comparison methods share implementation rules and portfolio constraints.",
+          "limitations": "Multiple checkpoints were evaluated on the test period, with step 20 reported, so test-dependent model selection cannot be ruled out. Evaluation covers only six months, ten underlyings, and one seed, without demonstrated statistical uncertainty or robustness across market regimes. Midpoint execution in the main text conflicts with half-spread settings in the appendix, and the theoretical hedge-band description conflicts with a fixed-band specification; costs and hedge implementation require clarification. There is no news-free SFT-only comparison, and direct evidence for the benefit of news to the teacher is insufficiently presented.",
+          "reason": "Separating strategy selection from contract implementation is highly relevant, but checkpoint evaluation on the test period and inconsistent implementation descriptions make the profitability evidence insufficient for priority recommendation.",
+          "tags": [
+            "Equity options",
+            "Automated trading",
+            "Large language models",
+            "Reinforcement learning",
+            "Strategy selection",
+            "Implied volatility",
+            "Test-dependent model selection"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 883,
+          "outputTokens": 928,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1811,
+          "estimatedCostUsd": 0.000552,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.10407v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 16634,
+          "outputTokens": 1578,
+          "reasoningTokens": 192,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 16631,
+          "totalTokens": 18212,
+          "estimatedCostUsd": 0.057363,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 19,
+          "paperIds": [
+            "2610.10407v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.10525v1",
+        "title": "A Hawkes Microfoundation for Multitype Inverse Gaussian Subordinators",
+        "authors": [
+          "Yingli Wang",
+          "Wei Xu",
+          "Lingjiong Zhu"
+        ],
+        "submittedDate": "2026-10-07",
+        "updatedDate": "2026-10-07",
+        "categories": [
+          "math.PR",
+          "q-fin.MF",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本研究は、ほぼ臨界な多変量Hawkes過程から、多タイプ逆ガウス確率時計への極限を導出する理論研究です。",
+        "mainResult": "有限平均の再生遅延と適切な移民率の条件下で、イベント数と積分強度が結合した純ジャンプ過程に収束すると報告しています。極限の座標間依存は交差励起に由来し、Brownian additive-fieldの初通過表現を持ちます。",
+        "practicalApplication": "Hawkes型イベント過程から確率時計を構成する理論的基盤となり得ますが、取引データによる検証や執行戦略への応用は要旨に示されていません。",
+        "methodology": "近臨界多変量Hawkes過程をクラスター分解し、分岐クラスターのスケーリング極限を解析しています。さらに一意性やRiccati方程式による同定を扱い、有限分散の年齢依存クラスターにも結果を拡張しています。",
+        "limitations": "結果は漸近的な理論であり、実データでの適合性、パラメータ推定、予測力、実務上の性能は要旨から判断できません。成立には遅延、移民率、安定性などの条件が必要です。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "Hawkes過程とイベント単位のマイクロファウンデーションは市場マイクロ構造に関連し得ますが、中心的貢献は確率過程の理論で、電子執行や市場データへの直接的な含意は要旨では確認できません。",
+        "tags": [
+          "Hawkes過程",
+          "多変量確率時計",
+          "逆ガウス劣加法過程",
+          "近臨界分岐過程",
+          "スケーリング極限"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This theoretical study derives a limit from nearly critical multivariate Hawkes processes to a multitype inverse-Gaussian stochastic clock.",
+          "mainResult": "Under finite-mean reproduction delays and suitable immigration rates, the authors report joint convergence of event counts and integrated intensities to a pure-jump process. Dependence across limiting coordinates arises from cross-excitation, and the limit has a Brownian additive-field first-passage representation.",
+          "practicalApplication": "The work may provide a theoretical basis for constructing stochastic clocks from Hawkes-type event processes, but the abstract reports no validation on trading data or application to execution strategies.",
+          "methodology": "The authors use a cluster decomposition of nearly critical multivariate Hawkes processes and analyze the scaling limit of branching clusters. They also address uniqueness and identification via a Riccati equation, and extend results to finite-variance age-dependent clusters.",
+          "limitations": "The results are asymptotic and theoretical; the abstract does not establish fit to real data, parameter-estimation performance, predictive power, or practical performance. The conclusions require conditions on delays, immigration rates, stability, and related quantities.",
+          "reason": "Hawkes processes and an event-level microfoundation may be relevant to market microstructure, but the central contribution is stochastic-process theory, and the abstract establishes no direct implications for electronic execution or market data.",
+          "tags": [
+            "Hawkes processes",
+            "multivariate stochastic clocks",
+            "inverse-Gaussian subordinators",
+            "nearly critical branching processes",
+            "scaling limits"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 959,
+          "outputTokens": 937,
+          "reasoningTokens": 163,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1896,
+          "estimatedCostUsd": 0.000564,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.10525v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 816,
+      "outputTokens": 679,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1495,
+      "estimatedCostUsd": 0.000421,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.08797v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 881,
+      "outputTokens": 796,
+      "reasoningTokens": 124,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1677,
+      "estimatedCostUsd": 0.000486,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.08798v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 831,
+      "outputTokens": 1017,
+      "reasoningTokens": 159,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1848,
+      "estimatedCostUsd": 0.000592,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.08799v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 971,
+      "outputTokens": 994,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1965,
+      "estimatedCostUsd": 0.000594,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.08801v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 38917,
+      "outputTokens": 1541,
+      "reasoningTokens": 197,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 38914,
+      "totalTokens": 40458,
+      "estimatedCostUsd": 0.112701,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 43,
+      "paperIds": [
+        "2610.08801v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 916,
+      "outputTokens": 861,
+      "reasoningTokens": 142,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1777,
+      "estimatedCostUsd": 0.000522,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.08803v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 937,
+      "outputTokens": 958,
+      "reasoningTokens": 105,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1895,
+      "estimatedCostUsd": 0.000573,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.08804v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 935,
+      "outputTokens": 809,
+      "reasoningTokens": 149,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1744,
+      "estimatedCostUsd": 0.000498,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.08806v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 789,
+      "outputTokens": 956,
+      "reasoningTokens": 81,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1745,
+      "estimatedCostUsd": 0.000557,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.08821v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 973,
+      "outputTokens": 1099,
+      "reasoningTokens": 155,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2072,
+      "estimatedCostUsd": 0.000647,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.08869v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 933,
+      "outputTokens": 781,
+      "reasoningTokens": 115,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1714,
+      "estimatedCostUsd": 0.000484,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.09246v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 762,
+      "outputTokens": 627,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1389,
+      "estimatedCostUsd": 0.00039,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.09622v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 911,
+      "outputTokens": 927,
+      "reasoningTokens": 130,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1838,
+      "estimatedCostUsd": 0.000555,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.09654v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 832,
+      "outputTokens": 849,
+      "reasoningTokens": 100,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1681,
+      "estimatedCostUsd": 0.000508,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.10046v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 1010,
+      "outputTokens": 1049,
+      "reasoningTokens": 127,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2059,
+      "estimatedCostUsd": 0.000625,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.10053v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 17169,
+      "outputTokens": 1463,
+      "reasoningTokens": 155,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 17166,
+      "totalTokens": 18632,
+      "estimatedCostUsd": 0.057551,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 19,
+      "paperIds": [
+        "2610.10053v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 711,
+      "outputTokens": 789,
+      "reasoningTokens": 94,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1500,
+      "estimatedCostUsd": 0.000466,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.10069v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 877,
+      "outputTokens": 964,
+      "reasoningTokens": 103,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1841,
+      "estimatedCostUsd": 0.00057,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.10356v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 883,
+      "outputTokens": 928,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1811,
+      "estimatedCostUsd": 0.000552,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.10407v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 16634,
+      "outputTokens": 1578,
+      "reasoningTokens": 192,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 16631,
+      "totalTokens": 18212,
+      "estimatedCostUsd": 0.057363,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 19,
+      "paperIds": [
+        "2610.10407v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 845,
+      "outputTokens": 921,
+      "reasoningTokens": 91,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1766,
+      "estimatedCostUsd": 0.000545,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.10506v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 959,
+      "outputTokens": 937,
+      "reasoningTokens": 163,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1896,
+      "estimatedCostUsd": 0.000564,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.10525v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

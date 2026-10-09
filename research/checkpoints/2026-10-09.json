@@ -1,0 +1,546 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-10-09",
+  "fingerprint": "7c43889529fcc53239e21bd343dcb7aa64cca44a9d5e39dc1c4d31bdcbda0016",
+  "candidateFingerprints": {
+    "2610.10606": "05511e9ba1b08992781b8cb65aececc3a60a52885d005a24d028885180a205dc",
+    "2610.10727": "1f903802f69618ac41303799ec65df432408517fda0f6ee1eebd7ad6c9889c25",
+    "2610.11093": "bf9e02605648f853e8a6fe3f4f55ddd2334d86ef3436c2793c3e7b96c9d9cb1d",
+    "2610.11256": "9853b0a92d8e170c14d732b36991929ef765497c1c5b6e07fe310d6ea4ee7ae4",
+    "2610.11691": "aa2b2956813a3885eb5e1b9e51fc8e9cc3b367b8a1194a1997afc6d2899a8745",
+    "2610.11917": "71a0f30cb072124bbfd190d030f58867f7aea20f0c012d6fb41804b8c5524ff9",
+    "2610.12049": "5d328b8ad42838fbaa8e036957e14f63036060a0a54efbde33c57b91d30799fc",
+    "2610.12186": "64e1167fcdf9bf48fb27ab7557ed4fa7210abb5e547ed2669215e63e5a35669e"
+  },
+  "results": {
+    "2610.10606": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、1870～1940年の米国国勢調査データを用い、アフリカ系米国人の肌の色の認識と経済・婚姻上の成果との関係を分析します。",
+        "mainResult": "同じ性別のきょうだい間比較では、黒人と分類された女性はムラートと分類された女性より教育達成度や婚姻率が低く、夫の教育達成度も低い傾向でした。一方、男性では分類間に同様の差が見られなかったと報告されています。",
+        "practicalApplication": "歴史的な人種差別やジェンダー格差の研究に資する知見ですが、電子取引、市場ミクロ構造、金利モデル、イールドカーブ、金利の実務への直接的な応用は示されていません。",
+        "methodology": "全数国勢調査データで個人を複数時点にわたり追跡し、同じ性別のきょうだいで分類が異なる35,992家族を特定して成果を比較しています。",
+        "limitations": "提示された要旨だけでは、推定方法の詳細や分類誤差への対処を評価できません。きょうだい比較で観察されない家族内要因をどこまで分離できるかも不明であり、歴史的な結果の現代への一般化には注意が必要です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "人種・ジェンダーと歴史的な社会経済的成果を扱う研究であり、対象サイトの金融・市場分野とは実質的な関連がありません。",
+        "tags": [
+          "人種差別",
+          "ジェンダー格差",
+          "歴史経済学",
+          "米国国勢調査"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes the relationship between perceived skin tone and economic and marital outcomes among African Americans using U.S. census data from 1870 to 1940.",
+          "mainResult": "In within-family comparisons of same-gender siblings, women classified as Black had lower educational attainment and marriage rates, and had husbands with lower educational attainment, than women classified as Mulatto. The abstract reports no comparable differences between classifications among men.",
+          "practicalApplication": "The findings may inform research on historical racial discrimination and gender inequality, but no direct application to electronic trading, market microstructure, interest-rate models, yield curves, or rates is indicated.",
+          "methodology": "The authors link individuals across full-count census data and identify 35,992 families with same-gender siblings assigned different classifications, then compare their outcomes.",
+          "limitations": "Based on the abstract alone, the estimation details and treatment of classification errors cannot be assessed. It is also unclear how fully sibling comparisons separate unobserved within-family factors; generalizing historical findings to the present requires caution.",
+          "reason": "The paper concerns race, gender, and historical socioeconomic outcomes, with no material connection to the site's finance and markets scope.",
+          "tags": [
+            "racial discrimination",
+            "gender inequality",
+            "economic history",
+            "U.S. census"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.10727": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "中古電子機器の再販価格を複数期間で予測する統計モデルと深層学習モデルのベンチマーク研究です。",
+        "mainResult": "報告によると、30日を超える予測ではN-BEATSが最良で、365日先のMAPEは8.51%でした。短期では各モデルの性能はほぼ同等で、単純なナイーブ予測も競争力を示しました。",
+        "practicalApplication": "中古電子機器の価格設定やサブスクリプション事業のリスク管理に参考となる可能性がありますが、金融市場の執行や金利分析への直接的な適用は限定的です。",
+        "methodology": "ポーランドのオンライン市場における100超のスマートフォン・ノートPC機種の日次掲載価格を用い、11モデルを1日から365日の6予測期間で比較しています。評価では軌跡適合、単一時点の精度、期間間の転移を扱っています。",
+        "limitations": "要旨だけでは、データの収集・前処理、検証設計、統計的不確実性、掲載価格と実取引価格の差を評価できません。データは特定国・商品群に限られ、他市場への一般化は確認されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "再販価格予測の研究であり、対象サイトの電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブには実質的な関連がありません。",
+        "tags": [
+          "中古電子機器",
+          "価格予測",
+          "深層学習",
+          "ベンチマーク"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study benchmarks statistical and deep-learning models for multi-horizon resale-price forecasting of used electronics.",
+          "mainResult": "The abstract reports that N-BEATS performs best beyond 30 days, with an 8.51% MAPE at 365 days. At short horizons, model performance is similar, and a naive forecast remains competitive.",
+          "practicalApplication": "The findings may inform pricing and risk management for used-electronics resale or subscription businesses, but have limited direct application to financial-market execution or rates analysis.",
+          "methodology": "The study compares 11 models over six horizons from 1 to 365 days using daily listing prices for more than 100 smartphone and laptop models on Polish online marketplaces. Evaluation covers trajectory fit, one-shot endpoint accuracy, and cross-horizon transfer.",
+          "limitations": "The abstract does not permit assessment of data collection and preprocessing, validation design, statistical uncertainty, or the gap between listing and transaction prices. The data cover a specific country and product set, so generalizability to other markets is unestablished.",
+          "reason": "This is a resale-price forecasting study with no material relevance to the site's focus on electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "used electronics",
+            "price forecasting",
+            "deep learning",
+            "benchmark"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.11093": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "AI安全研究の生産性が不確実な状況で、規制当局がリスク上限と開発期限を同時に保証できる条件を分析する。",
+        "mainResult": "要旨によれば、弱い研究成果を排除できる場合に限り、両方の保証が可能となる。安全研究を先行させて開発過程を再現し、安全計算資源に余裕を持たせる方法は、必要な下限を上回る生産性が較正例で3.3%にとどまる。顧客向けサービスが保証コストを負担し、計算資源配分を固定する規則はリスクではなく日程を定める。",
+        "practicalApplication": "AI開発に関する安全規制や計算資源配分の設計への示唆はあるが、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブまたは金利分析への直接的な応用は示されていない。",
+        "methodology": "安全知識の蓄積とモデル開発の関係を理論的に分析し、状態リスクのみ、一定の安全研究生産性、知識の完全移転を仮定した較正例を示す。",
+        "limitations": "評価は強い仮定を置いた較正例に依存する。安全研究の生産性が不確実な場合の一般化や、現実の金融市場・金利への妥当性は要旨から確認できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "AI安全規制に関する研究であり、対象となる定量金融分野との実質的な関連がない。",
+        "tags": [
+          "AI安全",
+          "規制",
+          "研究生産性",
+          "対象外"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes when regulators can guarantee both a risk ceiling and a development deadline when AI safety research productivity is uncertain.",
+          "mainResult": "According to the abstract, both guarantees are possible only if weak research outcomes can be ruled out. A strategy that conducts safety research first and then replays development, with spare compute allocated to safety, requires only 3.3% more productivity than the necessary bound in the calibration. Customer-facing services bear the cost of the guarantee, while rules fixing compute allocation determine dates rather than risk.",
+          "practicalApplication": "The findings may inform AI development safety regulation and compute-allocation design, but no direct application to electronic trading, market microstructure, interest-rate models, yield curves, or rates is indicated.",
+          "methodology": "The paper theoretically analyzes the relationship between safety-knowledge accumulation and model development, and presents a calibration assuming only state risk, constant safety productivity, and full knowledge transfer.",
+          "limitations": "The assessment depends on a calibration with strong assumptions. The abstract does not establish generalizability under uncertain safety-research productivity or relevance to real financial markets and interest rates.",
+          "reason": "This concerns AI safety regulation and has no material connection to the quantitative-finance areas in scope.",
+          "tags": [
+            "AI safety",
+            "regulation",
+            "research productivity",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.11256": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "4社の異なる言語モデルを価格設定者とする4社ロジット・ベルトラン市場のシミュレーションで、モデルの組み合わせと価格戦略が協調的な価格形成や利潤分配にどう関係するかを調べている。",
+        "mainResult": "報告によれば、協調の程度はモデルごとに異なり、ClaudeとGeminiの同質市場では独占利潤の72〜79％、DeepSeekでは24％に達した一方、GPT市場では協調が見られなかった。異種混合だけでは協調は弱まらず、Geminiの参加は協調を強め、Claudeの参加は弱める傾向があった。また、価格を先導するモデルが最も少ない利潤を得るという結果を示した。",
+        "practicalApplication": "LLMを用いた自動価格設定の研究や監査に、モデルの組み合わせや参加者の安定性を考慮する必要性を示唆する。ただし、金融市場の執行や市場設計への直接的な適用は、この要旨からは確認できない。",
+        "methodology": "4モデルの最安料金版を用い、通信なしの4社ロジット・ベルトラン市場を構成。同質、2モデル混合、全モデル混合の計11条件で、20回の実験を各200期間実施した。",
+        "limitations": "要旨に記載されたのは限定されたモデル、料金プラン、市場構造におけるシミュレーション結果であり、現実の企業行動や市場への一般化は確認されていない。実験の詳細や統計的検定の方法も要旨だけでは評価できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "LLMによるアルゴリズム価格設定と協調行動を扱うが、対象は一般的なベルトラン市場であり、電子執行、金融市場の市場ミクロ構造、金利モデルまたはイールドカーブへの直接的な関連は要旨から確認できない。",
+        "tags": [
+          "アルゴリズム価格設定",
+          "アルゴリズム協調",
+          "大規模言語モデル",
+          "ベルトラン競争"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This simulation studies how model combinations and pricing strategies relate to coordinated pricing and profit allocation in a four-firm logit Bertrand market where four different language models set prices.",
+          "mainResult": "The abstract reports that coordination varies by model: homogeneous Claude and Gemini markets attain 72–79% of monopoly profit, DeepSeek markets attain 24%, and GPT markets show no collusion. Mixing models does not by itself weaken coordination; Gemini's presence tends to strengthen it, while Claude's tends to weaken it. The results also indicate that the model leading on price earns the least profit.",
+          "practicalApplication": "The study suggests that research and audits of LLM-based automated pricing should account for model composition and participant stability. However, the abstract does not establish a direct application to financial-market execution or market design.",
+          "methodology": "The authors use the cheapest tier of four models in non-communicating four-firm logit Bertrand markets. They run 11 conditions—homogeneous, two-model mixtures, and a fully mixed market—with 20 runs of 200 periods each.",
+          "limitations": "The abstract reports simulation results for a limited set of models, pricing tiers, and market structures; it does not establish generalizability to real firms or markets. The experimental details and statistical testing methods cannot be assessed from the abstract alone.",
+          "reason": "The paper concerns algorithmic pricing and collusive behavior using LLMs, but the abstract describes a general Bertrand market and shows no direct connection to electronic execution, financial-market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "Algorithmic pricing",
+            "Algorithmic collusion",
+            "Large language models",
+            "Bertrand competition"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.11691": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本論文は、情報中立な取引戦略が生む拡散的なマーケットインパクトを、取引者と裁定者の経済モデルから導出する。",
+        "mainResult": "集約的な私的情報が完全となり、定常極限への収束などの条件が満たされると、インパクト収益は白色となると報告する。また、取引フローを生むフィルターに最も近いインパクト位相を選ぶと、インパクトコストは常に正となる。最も単純な二指数フローでは、インパクトの減衰は50～60%の狭い範囲に収まる。",
+        "practicalApplication": "マーケットインパクトの減衰やコストを説明する理論的枠組みとして、インパクトモデルの設計・解釈に役立つ可能性がある。実運用での予測性能や執行改善効果は要旨からは確認できない。",
+        "methodology": "取引者と、実現収益およびファンダメンタル収益の一部に関する私的シグナルを観測する多数の裁定者からなる理論モデルを構築し、情報集約と定常極限のもとでインパクトの性質を分析する。",
+        "limitations": "結果は情報集約や定常極限などの仮定に依存する。50～60%という減衰幅は最も単純な二指数フローに限られ、より複雑なフローでは異なりうる。長期テールの歪みと弱い平均回帰は実市場についての推論として述べられており、要旨からは実証的な検証や定量的な一般性を評価できない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "マーケットインパクトの主要な経験則を裁定者の情報処理と結びつける、対象分野に直接関係する理論研究である。実証検証や実務性能は要旨だけでは判断できない。",
+        "tags": [
+          "マーケットインパクト",
+          "市場マイクロストラクチャー",
+          "裁定",
+          "情報集約",
+          "インパクト減衰"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper derives diffusive market impact from an economic model of a trader and arbitrageurs, in which an information-neutral trading strategy generates a diffusive impact state.",
+          "mainResult": "The paper reports that impact returns are white under conditions including complete aggregate private information and convergence to a stationary limit. It also finds that choosing the impact phase closest to the filter generating trade flow guarantees positive impact costs. For the simplest biexponential flow, impact decay falls within a narrow 50–60% range.",
+          "practicalApplication": "The framework may help design and interpret market-impact models, including their decay and costs. The abstract does not establish predictive performance or improvements to execution in practice.",
+          "methodology": "The authors construct a theoretical model with a trader and many arbitrageurs who observe realized returns and private signals about part of fundamental returns, then analyze impact under information aggregation and a stationary limit.",
+          "limitations": "The results depend on assumptions including information aggregation and a stationary limit. The 50–60% decay range applies only to the simplest biexponential flow and may differ for more complex flows. Distorted long-term tails and weak mean reversion are presented as arguments about real markets; the abstract does not establish empirical validation or quantitative generality.",
+          "reason": "This theoretical study directly connects major empirical regularities of market impact to arbitrageurs' information processing. Empirical validation and practical performance cannot be assessed from the abstract alone.",
+          "tags": [
+            "market impact",
+            "market microstructure",
+            "arbitrage",
+            "information aggregation",
+            "impact decay"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "分散した私的情報を持つ裁定者が、取引者を識別せずに価格の予測可能性を除去し、情報中立な注文フローのインパクトを拡散的にする理論モデルを提示する。インパクトの位相が取引コストと減衰を左右することを分析し、固定したインパクト則を異なる執行戦略へ外挿する慣行に疑問を提起する。",
+        "mainResult": "有限観測窓では裁定過程の収束部分列が存在し、その集積点でリターンは時間的に無相関となる。集合的な情報完全性と追加の定常極限仮定の下で、インパクトは因果的all-passフィルターによる $j=cU\\cdot w$ となる。また、正の期待インパクトコストを生む位相の存在を示し、最小歪み基準の最大化解も正のコストを持つ。二重指数型フローでは、条件付き累積インパクトがピークから50～60%減衰し、40～50%が残ると導出する。",
+        "practicalApplication": "執行コスト推定やバックテストで、注文フローの自己相関が変わっても既存のインパクトモデルが不変とは限らないことを示唆する。参加者別フロー統計に応じたモデル検証や、インパクト減衰の感度分析に役立つ理論的枠組みであり、即利用できる執行アルゴリズムではない。",
+        "methodology": "線形・Gaussianモデルで、外生的取引者と私的なファンダメンタル情報を持つ複数裁定者を設定する。逐次裁定を条件付き期待値の射影として表し、加重markoutの分散減少から有限次元で集積点を特徴づける。追加の定常性仮定からall-pass表現を導き、フローフィルターとの重なり最大化と二重指数型の解析解でコストと減衰を評価する。",
+        "limitations": "実データによる検証はなく、平方根則の説明は主に先行枠組みに依存する。有限窓で証明するのは部分列の収束であり、全過程の収束や定常極限の存在ではない。集合的な情報完全性は強い仮定で、裁定が最小歪み位相へ到達することも未証明である。50～60%の減衰は特定のフローと位相選択に限定され、長期の完全緩和はall-passからの追加的な変形で導入する。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "市場インパクトの参加者依存性と正の取引コストを、分散情報と裁定から結びつける点で本サイトに直接関連する。実証済みの執行モデルではなく、重要な未証明条件を伴う理論研究として読む価値がある。",
+        "tags": [
+          "市場インパクト",
+          "分散情報",
+          "裁定",
+          "因果的all-passフィルター",
+          "注文フロー自己相関",
+          "インパクト減衰",
+          "執行コスト"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper presents a theoretical model in which arbitrageurs with dispersed private information remove price predictability without identifying the trader, making the impact of information-neutral order flow diffusive. It analyzes how impact phase determines trading costs and decay, questioning the practice of extrapolating a fixed impact law across different execution strategies.",
+          "mainResult": "On a finite observation window, the arbitrage process admits convergent subsequences whose accumulation points have temporally uncorrelated returns. Under aggregate informational completeness and additional stationary-limit assumptions, impact takes the form $j=cU\\cdot w$ with a causal all-pass filter. The paper also establishes the existence of positive-expected-cost phases and shows that any maximizer of the minimum-distortion criterion has positive costs. For biexponential flow, it derives a 50–60% decline in conditional cumulative impact from its peak, leaving 40–50% remaining.",
+          "practicalApplication": "The framework suggests that execution-cost estimation and backtesting should not assume an existing impact model remains invariant when order-flow autocorrelation changes. It provides a theoretical basis for validating models against participant-level flow statistics and analyzing sensitivity to impact decay, rather than a ready-to-use execution algorithm.",
+          "methodology": "A linear Gaussian model combines an exogenous trader with multiple arbitrageurs holding private fundamental information. Sequential arbitrage is represented through conditional-expectation projections, and decreasing weighted-markout variance is used to characterize accumulation points in finite dimensions. Additional stationarity assumptions yield the all-pass representation; overlap maximization with the flow filter and an analytical biexponential solution determine costs and decay.",
+          "limitations": "There is no empirical validation, and the explanation of square-root impact mainly relies on the preceding framework. The finite-window proof establishes subsequential convergence, not convergence of the entire process or existence of a stationary limit. Aggregate informational completeness is a strong assumption, and convergence of arbitrage to the minimum-distortion phase is unproved. The 50–60% decay applies only to the specified flow and phase selection; complete long-run relaxation is introduced through an additional distortion of the all-pass filter.",
+          "reason": "The paper directly fits the site's scope by linking participant-dependent impact and positive trading costs to dispersed information and arbitrage. It is worth reading as theoretical research with important unproved conditions, not as an empirically validated execution model.",
+          "tags": [
+            "Market impact",
+            "Dispersed information",
+            "Arbitrage",
+            "Causal all-pass filters",
+            "Order-flow autocorrelation",
+            "Impact decay",
+            "Execution costs"
+          ]
+        }
+      }
+    },
+    "2610.11917": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "Wasserstein曖昧集合の下での多期間平均・expectileポートフォリオ最適化を扱う研究です。",
+        "mainResult": "最悪ケースexpectileを二片アフィン関数による最悪ケース期待値の根として表す定理を示し、問題を制約付きのパラメトリック線形計画に再定式化しています。報告された実験では、90銘柄・3,341日のデータで、比較した全9設定においてexpectileモデルが対応するCVaRモデルを上回りました。",
+        "practicalApplication": "曖昧性を考慮したポートフォリオ構築や、リスク尺度・Wasserstein基準の選択への応用が考えられます。ただし、電子執行、マーケットマイクロストラクチャ、金利モデルやイールドカーブを直接扱う研究ではありません。",
+        "methodology": "最悪ケースexpectileの包絡定理とWasserstein双対性を用いた再定式化を提示し、モデルの構造特性を導出しています。FTSE構成銘柄90銘柄のアウト・オブ・サンプルデータでCVaRモデルと比較しています。",
+        "limitations": "要約だけでは、実験の統計的有意性、取引コストや執行制約の扱い、他市場・期間への一般化可能性を確認できません。結果は報告されたデータと設定に限られます。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "定量的ポートフォリオ最適化としては関連性がありますが、サイトの中心領域である電子取引、マーケットマイクロストラクチャ、金利・イールドカーブには実質的に該当しません。",
+        "tags": [
+          "ポートフォリオ最適化",
+          "expectile",
+          "Wasserstein曖昧性",
+          "CVaR"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines multi-period mean-expectile portfolio optimization under Wasserstein ambiguity sets.",
+          "mainResult": "It establishes a theorem representing the worst-case expectile as a root of a worst-case expectation with a two-piece affine integrand, and reformulates the problem as constrained parametric linear programs. In the reported experiment using 90 constituents and 3,341 days, the expectile model outperformed the matched CVaR model in all nine tested settings.",
+          "practicalApplication": "Potential applications include portfolio construction under ambiguity and the selection of risk measures and Wasserstein ground metrics. However, the study does not directly address electronic execution, market microstructure, interest-rate models, or yield curves.",
+          "methodology": "The study presents a reformulation using an envelope theorem for worst-case expectiles and Wasserstein duality, derives structural properties, and compares the model with a CVaR model using out-of-sample data for 90 FTSE constituents.",
+          "limitations": "The abstract does not establish the statistical significance of the experiments, whether transaction costs or execution constraints are included, or how well the findings generalize to other markets and periods. Results are limited to the reported data and settings.",
+          "reason": "The work is relevant to quantitative portfolio optimization but does not materially address the site's core areas of electronic trading, market microstructure, interest rates, or yield curves.",
+          "tags": [
+            "portfolio optimization",
+            "expectile",
+            "Wasserstein ambiguity",
+            "CVaR"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.12049": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "ドイツ企業の団体交渉制度からの離脱後に、労働時間がどう変化するかを調べた研究です。",
+        "mainResult": "離脱後、週労働時間は約0.3～0.6％（週8～13分）増加しましたが、土日勤務の増加は確認されませんでした。",
+        "practicalApplication": "労働時間規制や団体交渉制度の評価には参考となりますが、金融市場や金融モデルへの直接的な応用は示されていません。",
+        "methodology": "2008～2024年のIAB事業所パネルを用い、固定効果モデルとイベントスタディで離脱後の調整を分析しています。",
+        "limitations": "要旨だけでは、離脱の因果効果を識別する仮定や推定の頑健性を評価できません。また、対象はドイツの事業所であり、結果の一般化には限界があります。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "労働経済学の研究であり、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利を主題としていません。",
+        "tags": [
+          "労働経済学",
+          "団体交渉",
+          "労働時間",
+          "ドイツ"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines how working hours change after German firms leave collective bargaining coverage.",
+          "mainResult": "After exit, weekly working hours increased by about 0.3–0.6% (eight to thirteen minutes per week), while no increase in Saturday or Sunday work was found.",
+          "practicalApplication": "The findings may inform assessments of working-time regulation and collective bargaining, but no direct application to financial markets or financial models is presented.",
+          "methodology": "The study uses the IAB Establishment Panel for 2008–2024 and fixed-effects and event-study models to analyze adjustments after exit.",
+          "limitations": "The abstract does not provide enough information to assess the assumptions needed to identify causal effects or the robustness of the estimates. The study concerns German establishments, limiting generalizability.",
+          "reason": "This is a labor economics study, not materially focused on electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "labor economics",
+            "collective bargaining",
+            "working hours",
+            "Germany"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.12186": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "マイクロファイナンス機関（MFI）と金貸しの競争・共存を、理論モデルとバングラデシュの村落実験で分析した研究です。",
+        "mainResult": "村落レベルの無作為化拡大実験では、MFIが1機関増えると、2〜3年後の金貸し融資件数が約30〜40%減少しました。一方、MFI融資額や借入総額には検出可能な影響がありませんでした。",
+        "practicalApplication": "MFIの参入効果を評価する際、融資総量だけでなく、緊急資金を提供する金貸しからの借入減少も考慮する政策的示唆があります。",
+        "methodology": "返済後のモラルハザードと、ショック時に返済を支える金貸しのつなぎ融資を含む動学モデルを構築し、バングラデシュで村落単位の無作為化拡大実験を行っています。",
+        "limitations": "要旨からは、結果の外的妥当性や効果の長期持続性、推定の詳細は判断できません。また、融資額などへの「検出可能な影響なし」は、影響がないことの証明ではありません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "融資市場の競争とマイクロファイナンスを扱う研究であり、電子取引、金融市場のミクロ構造、金利モデル、イールドカーブ、または市場金利を主題としていません。",
+        "tags": [
+          "マイクロファイナンス",
+          "融資競争",
+          "バングラデシュ",
+          "無作為化実験"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines competition and coexistence between microfinance institutions (MFIs) and moneylenders using a theoretical model and a village-level experiment in Bangladesh.",
+          "mainResult": "In the village-level randomized expansion, one additional MFI reduced the number of moneylender loans by roughly 30–40% two to three years later. No detectable effects were found on MFI lending or total borrowing.",
+          "practicalApplication": "The findings suggest that evaluations of MFI entry may consider reduced borrowing from moneylenders who provide emergency finance, not only changes in total lending.",
+          "methodology": "The study develops a dynamic model with ex post moral hazard and bridge loans from moneylenders to support repayment after shocks, and conducts a village-level randomized expansion in Bangladesh.",
+          "limitations": "The abstract does not establish the external validity or long-term persistence of the results, or provide details of the estimation. Moreover, finding no detectable effect on lending amounts does not prove that there is no effect.",
+          "reason": "The paper concerns lending-market competition and microfinance, rather than electronic trading, market microstructure, interest-rate models, yield curves, or market rates.",
+          "tags": [
+            "microfinance",
+            "lending competition",
+            "Bangladesh",
+            "randomized experiment"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 871,
+      "outputTokens": 687,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1558,
+      "estimatedCostUsd": 0.000431,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.10606v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 924,
+      "outputTokens": 746,
+      "reasoningTokens": 76,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1670,
+      "estimatedCostUsd": 0.000465,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.10727v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 707,
+      "outputTokens": 760,
+      "reasoningTokens": 60,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1467,
+      "estimatedCostUsd": 0.000451,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.11093v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 863,
+      "outputTokens": 1043,
+      "reasoningTokens": 167,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1906,
+      "estimatedCostUsd": 0.000608,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.11256v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 946,
+      "outputTokens": 1057,
+      "reasoningTokens": 127,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2003,
+      "estimatedCostUsd": 0.000623,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.11691v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": null,
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 28,
+      "paperIds": [
+        "2610.11691v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 18933,
+      "outputTokens": 1564,
+      "reasoningTokens": 169,
+      "cachedInputTokens": 18930,
+      "cacheWriteTokens": 0,
+      "totalTokens": 20497,
+      "estimatedCostUsd": 0.017539,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 28,
+      "paperIds": [
+        "2610.11691v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 892,
+      "outputTokens": 871,
+      "reasoningTokens": 112,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1763,
+      "estimatedCostUsd": 0.000525,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.11917v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 753,
+      "outputTokens": 683,
+      "reasoningTokens": 79,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1436,
+      "estimatedCostUsd": 0.000417,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.12049v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 822,
+      "outputTokens": 835,
+      "reasoningTokens": 91,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1657,
+      "estimatedCostUsd": 0.0005,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.12186v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

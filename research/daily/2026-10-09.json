@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-10-09",
+  "generatedAt": "2026-10-09T13:38:38Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-10-09 was confirmed with 1 relevant paper(s).",
+  "expectedBatchDate": "2026-10-09",
+  "observedBatchDate": "2026-10-09",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2610.11691v1",
+        "title": "Diffusive Market Impact: A Consistent Microfoundation",
+        "authors": [
+          "Julius F. Bonart"
+        ],
+        "submittedDate": "2026-10-08",
+        "updatedDate": "2026-10-08",
+        "categories": [
+          "q-fin.MF",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "分散した私的情報を持つ裁定者が、取引者を識別せずに価格の予測可能性を除去し、情報中立な注文フローのインパクトを拡散的にする理論モデルを提示する。インパクトの位相が取引コストと減衰を左右することを分析し、固定したインパクト則を異なる執行戦略へ外挿する慣行に疑問を提起する。",
+        "mainResult": "有限観測窓では裁定過程の収束部分列が存在し、その集積点でリターンは時間的に無相関となる。集合的な情報完全性と追加の定常極限仮定の下で、インパクトは因果的all-passフィルターによる $j=cU\\cdot w$ となる。また、正の期待インパクトコストを生む位相の存在を示し、最小歪み基準の最大化解も正のコストを持つ。二重指数型フローでは、条件付き累積インパクトがピークから50～60%減衰し、40～50%が残ると導出する。",
+        "practicalApplication": "執行コスト推定やバックテストで、注文フローの自己相関が変わっても既存のインパクトモデルが不変とは限らないことを示唆する。参加者別フロー統計に応じたモデル検証や、インパクト減衰の感度分析に役立つ理論的枠組みであり、即利用できる執行アルゴリズムではない。",
+        "methodology": "線形・Gaussianモデルで、外生的取引者と私的なファンダメンタル情報を持つ複数裁定者を設定する。逐次裁定を条件付き期待値の射影として表し、加重markoutの分散減少から有限次元で集積点を特徴づける。追加の定常性仮定からall-pass表現を導き、フローフィルターとの重なり最大化と二重指数型の解析解でコストと減衰を評価する。",
+        "limitations": "実データによる検証はなく、平方根則の説明は主に先行枠組みに依存する。有限窓で証明するのは部分列の収束であり、全過程の収束や定常極限の存在ではない。集合的な情報完全性は強い仮定で、裁定が最小歪み位相へ到達することも未証明である。50～60%の減衰は特定のフローと位相選択に限定され、長期の完全緩和はall-passからの追加的な変形で導入する。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "市場インパクトの参加者依存性と正の取引コストを、分散情報と裁定から結びつける点で本サイトに直接関連する。実証済みの執行モデルではなく、重要な未証明条件を伴う理論研究として読む価値がある。",
+        "tags": [
+          "市場インパクト",
+          "分散情報",
+          "裁定",
+          "因果的all-passフィルター",
+          "注文フロー自己相関",
+          "インパクト減衰",
+          "執行コスト"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper presents a theoretical model in which arbitrageurs with dispersed private information remove price predictability without identifying the trader, making the impact of information-neutral order flow diffusive. It analyzes how impact phase determines trading costs and decay, questioning the practice of extrapolating a fixed impact law across different execution strategies.",
+          "mainResult": "On a finite observation window, the arbitrage process admits convergent subsequences whose accumulation points have temporally uncorrelated returns. Under aggregate informational completeness and additional stationary-limit assumptions, impact takes the form $j=cU\\cdot w$ with a causal all-pass filter. The paper also establishes the existence of positive-expected-cost phases and shows that any maximizer of the minimum-distortion criterion has positive costs. For biexponential flow, it derives a 50–60% decline in conditional cumulative impact from its peak, leaving 40–50% remaining.",
+          "practicalApplication": "The framework suggests that execution-cost estimation and backtesting should not assume an existing impact model remains invariant when order-flow autocorrelation changes. It provides a theoretical basis for validating models against participant-level flow statistics and analyzing sensitivity to impact decay, rather than a ready-to-use execution algorithm.",
+          "methodology": "A linear Gaussian model combines an exogenous trader with multiple arbitrageurs holding private fundamental information. Sequential arbitrage is represented through conditional-expectation projections, and decreasing weighted-markout variance is used to characterize accumulation points in finite dimensions. Additional stationarity assumptions yield the all-pass representation; overlap maximization with the flow filter and an analytical biexponential solution determine costs and decay.",
+          "limitations": "There is no empirical validation, and the explanation of square-root impact mainly relies on the preceding framework. The finite-window proof establishes subsequential convergence, not convergence of the entire process or existence of a stationary limit. Aggregate informational completeness is a strong assumption, and convergence of arbitrage to the minimum-distortion phase is unproved. The 50–60% decay applies only to the specified flow and phase selection; complete long-run relaxation is introduced through an additional distortion of the all-pass filter.",
+          "reason": "The paper directly fits the site's scope by linking participant-dependent impact and positive trading costs to dispersed information and arbitrage. It is worth reading as theoretical research with important unproved conditions, not as an empirically validated execution model.",
+          "tags": [
+            "Market impact",
+            "Dispersed information",
+            "Arbitrage",
+            "Causal all-pass filters",
+            "Order-flow autocorrelation",
+            "Impact decay",
+            "Execution costs"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 946,
+          "outputTokens": 1057,
+          "reasoningTokens": 127,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2003,
+          "estimatedCostUsd": 0.000623,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.11691v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 28,
+          "paperIds": [
+            "2610.11691v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 18933,
+          "outputTokens": 1564,
+          "reasoningTokens": 169,
+          "cachedInputTokens": 18930,
+          "cacheWriteTokens": 0,
+          "totalTokens": 20497,
+          "estimatedCostUsd": 0.017539,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 28,
+          "paperIds": [
+            "2610.11691v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 871,
+      "outputTokens": 687,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1558,
+      "estimatedCostUsd": 0.000431,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.10606v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 924,
+      "outputTokens": 746,
+      "reasoningTokens": 76,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1670,
+      "estimatedCostUsd": 0.000465,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.10727v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 707,
+      "outputTokens": 760,
+      "reasoningTokens": 60,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1467,
+      "estimatedCostUsd": 0.000451,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.11093v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 863,
+      "outputTokens": 1043,
+      "reasoningTokens": 167,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1906,
+      "estimatedCostUsd": 0.000608,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.11256v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 946,
+      "outputTokens": 1057,
+      "reasoningTokens": 127,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2003,
+      "estimatedCostUsd": 0.000623,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.11691v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": null,
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 28,
+      "paperIds": [
+        "2610.11691v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 18933,
+      "outputTokens": 1564,
+      "reasoningTokens": 169,
+      "cachedInputTokens": 18930,
+      "cacheWriteTokens": 0,
+      "totalTokens": 20497,
+      "estimatedCostUsd": 0.017539,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 28,
+      "paperIds": [
+        "2610.11691v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 892,
+      "outputTokens": 871,
+      "reasoningTokens": 112,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1763,
+      "estimatedCostUsd": 0.000525,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.11917v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 753,
+      "outputTokens": 683,
+      "reasoningTokens": 79,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1436,
+      "estimatedCostUsd": 0.000417,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.12049v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 822,
+      "outputTokens": 835,
+      "reasoningTokens": 91,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1657,
+      "estimatedCostUsd": 0.0005,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.12186v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

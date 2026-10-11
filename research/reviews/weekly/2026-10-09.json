@@ -1,0 +1,1148 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "weekly",
+  "reportDate": "2026-10-09",
+  "generatedAt": "2026-10-11T01:31:55Z",
+  "status": "UPDATE_NOT_CONFIRMED",
+  "message": "Coverage is incomplete: missing confirmed batches (2026-10-06); synthesis was not run.",
+  "expectedBatchDate": null,
+  "observedBatchDate": null,
+  "periodStart": "2026-10-03",
+  "periodEnd": "2026-10-09",
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2610.02917v1",
+        "title": "Event History Over Scale: Compact Transformers for Low-Latency Limit Order Book Forecasting",
+        "authors": [
+          "David Schaurecker",
+          "Lasse B. Strand",
+          "Kevin O'Sullivan",
+          "Robert Jakob"
+        ],
+        "submittedDate": "2026-10-02",
+        "updatedDate": "2026-10-02",
+        "categories": [
+          "cs.CE",
+          "q-fin.CP"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "個別注文の投入・取消・約定を記録するL3履歴から、短期の仲値方向を予測する小型Transformerを提案する。株式2銘柄とEPEX電力市場で、L2スナップショット中心のモデルに対する予測性能と推論効率を比較した。",
+        "mainResult": "著者らは、MBOFormerとMBOFusionのいずれかが12設定中11設定で最高の平均macro-F1を得たと報告する。パラメータ数はそれぞれ7,203と14,371で、Apple M2の単一CPUスレッドにおける推論中央値は0.479ミリ秒と0.531ミリ秒だった。MBOFormerは百万パラメータ級の比較モデルより5.1～8.1倍高速だったが、最小遅延のモデルではない。",
+        "practicalApplication": "L3データを利用できる株式・電力取引システムで、低遅延の短期価格予測器を設計する際の参考になる。発注判断への組込みには、特徴量生成を含む実運用遅延と取引費用控除後の収益性を別途検証する必要がある。",
+        "methodology": "板を変化させるメッセージ10件ごとに判断時点を設け、4つのイベント時間予測期間で下落・横ばい・上昇を分類する。直近128イベントの7特徴量を因果Transformerで処理し、MBOFusionは低頻度の市場文脈を畳み込み分岐で追加する。日付順の学習・検証・テスト分割と3乱数シードでmacro-F1を評価し、同一判断時点・ラベルのL2ベースラインと比較した。",
+        "limitations": "ラベル閾値はテスト系列全体の将来価格変化分布から算出されるため、入力への先読みはないものの、絶対スコアをオンライン達成可能値とは解釈できない。対象は株式2銘柄と電力市場の短期間に限られ、3シードの結果はテスト期間間の統計的有意性を示さない。入力窓と構造が異なるため、L3表現だけの効果は分離できず、L3比較モデルLOBERTも未評価である。遅延は単一機種の合成入力によるモデル実行のみで、前処理・通信・注文執行を除外し、電力データも非公開である。取引収益や実測エネルギー消費は検証していない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "注文イベントの粒度とモデル規模のトレードオフを、容量を合わせた比較と遅延実測で検討しており、本サイトの市場マイクロストラクチャと電子取引領域に直接関連する。ただし、実運用上の優位性ではなく、限定されたデータでの予測・計算効率の結果として読むべきである。",
+        "tags": [
+          "市場マイクロストラクチャ",
+          "指値注文板",
+          "L3注文イベント",
+          "短期価格予測",
+          "小型Transformer",
+          "低遅延推論",
+          "日中電力市場"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper proposes compact Transformers that predict short-term mid-price direction from L3 histories of individual order submissions, cancellations, and executions. It compares predictive performance and inference efficiency against models centered on L2 snapshots using two equities and the EPEX electricity market.",
+          "mainResult": "The authors report that either MBOFormer or MBOFusion achieves the highest mean macro-F1 in 11 of 12 settings. They have 7,203 and 14,371 parameters, respectively, with median inference times of 0.479 and 0.531 milliseconds on one Apple M2 CPU thread. MBOFormer is 5.1–8.1 times faster than the million-parameter comparison models, but it is not the lowest-latency model.",
+          "practicalApplication": "The study informs the design of low-latency, short-term price predictors for equity and electricity trading systems with L3 data access. Integration into order-placement decisions requires separate validation of production latency, including feature generation, and profitability after transaction costs.",
+          "methodology": "Decision points occur after every ten book-changing messages, with down, flat, and up classifications at four event-time horizons. A causal Transformer processes seven features from the latest 128 events; MBOFusion adds a convolutional branch for slower market context. Macro-F1 is evaluated using chronological daily training, validation, and test splits and three random seeds, against L2 baselines sharing the same decision points and labels.",
+          "limitations": "Label thresholds use the distribution of future price changes across the entire test sequence. Although model inputs contain no look-ahead, absolute scores cannot be interpreted as achievable online. Coverage is limited to two equities and a short electricity-market sample, and three-seed results do not establish statistical significance across test periods. Different input windows and architectures prevent isolation of the L3 representation effect, and the L3 comparator LOBERT is not evaluated. Latency measures model execution alone on synthetic inputs on one device, excluding preprocessing, communication, and order execution; the electricity data are also private. Trading profitability and measured energy consumption are not evaluated.",
+          "reason": "The paper directly addresses market microstructure and electronic trading by examining the trade-off between event granularity and model scale through capacity-matched comparisons and measured latency. It should nevertheless be read as evidence about prediction and computational efficiency on limited data, not established production advantages.",
+          "tags": [
+            "Market microstructure",
+            "Limit order book",
+            "L3 order events",
+            "Short-term price prediction",
+            "Compact Transformer",
+            "Low-latency inference",
+            "Intraday electricity market"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 861,
+          "outputTokens": 891,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1752,
+          "estimatedCostUsd": 0.000532,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.02917v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 11541,
+          "outputTokens": 1544,
+          "reasoningTokens": 146,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 11538,
+          "totalTokens": 13085,
+          "estimatedCostUsd": 0.044291,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 11,
+          "paperIds": [
+            "2610.02917v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.03080v1",
+        "title": "MintEval: Do LLMs Implement the Trading Strategy You Asked For? A Behavioural-Equivalence Benchmark for Natural-Language-to-Strategy Code",
+        "authors": [
+          "Siyu Wang",
+          "Yifan Wang",
+          "Yuecheng He"
+        ],
+        "submittedDate": "2026-10-02",
+        "updatedDate": "2026-10-02",
+        "categories": [
+          "cs.CL",
+          "cs.LG",
+          "cs.SE",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "MintEvalは、自然言語の売買指示からLLMが生成したコードを参照実装と同じ条件で動かし、バー単位の行動一致を評価するベンチマークである。BTCUSDTの15分足を用いた800課題で、収益性や実行成功だけでは見えない、状態管理とリスク制御の実装誤りを検証する。",
+        "mainResult": "論文によると、低コストモデルの最高平均ActionMatchは実行成功例で0.544、全課題の完全一致率は8.7%だった。200課題の部分集合ではClaude Opus 5.5が0.889、完全一致率57.5%に達したが、27.5%は実行に成功してもActionMatchが0.9未満だった。仕様を完全に読み取った実行成功例でも79.2%がこの基準を下回り、適用したコード読解型LLM審査は審査対象の静かな失敗をすべて承認した。",
+        "practicalApplication": "LLM生成の売買コードを本番投入する前に、参照実装との行動比較を受入試験へ組み込む用途に有用である。損切りの再設定、クールダウン、上位時間足の参照などを検証し、コンパイル成功やもっともらしい損益曲線を正しさの証拠としない運用を支える。収益性や実市場での約定品質を保証する手法ではない。",
+        "methodology": "売買シグナル、フィルター、数量調整、リスク管理の部品から参照戦略を生成し、別のLLMで口語的な指示へ変換する。生成コードと参照コードを同一データ・取引コストで逐次実行し、どちらかがポジションを保有または要求するバーのActionMatch、取引単位のTradeF1、収益差などを測る。状態の保持期間と参照収益で層化し、部品一覧の有無による比較、固定効果回帰、将来情報アクセスの遮断、コード読解型審査との比較を行う。",
+        "limitations": "単一銘柄・単一期間の合成課題であり、実際の戦略分布や他市場への一般化は未検証である。各条件で生成は1回のみで、人間ベースラインもなく、LLM作成の指示には曖昧さが残る。最上位モデルの評価は200課題に限られ、参照ライブラリ作成に同系列モデルを使ったことによる有利さも否定できない。行動一致は観測した価格経路上の検査であり、全経路での同値性の証明ではない。バー内約定や遅延は十分に扱わず、状態保持期間の効果も完全な統制下では一部が境界的な有意性にとどまる。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子取引に直結する実装忠実度を、収益性とは分離して測る点が実務的に重要である。モデル順位や一般的な能力評価には慎重さが必要だが、LLM生成コードの検証設計を考える読者には推奨できる。",
+        "tags": [
+          "電子取引",
+          "LLMコード生成",
+          "行動同値性",
+          "状態管理",
+          "リスク制御",
+          "バックテスト検証"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "MintEval benchmarks LLM-generated trading code by running it under the same conditions as a reference implementation and measuring bar-level action agreement. Using 800 tasks on BTCUSDT 15-minute bars, it examines state-management and risk-control errors that profitability or successful execution alone can miss.",
+          "mainResult": "The paper reports that the best low-cost model achieved a mean ActionMatch of 0.544 among successful runs and exact agreement on 8.7% of all tasks. On a 200-task subset, Claude Opus 5.5 achieved 0.889 and 57.5% exact agreement, but 27.5% of tasks executed successfully with ActionMatch below 0.9. Even among successful runs with fully correct specification readings, 79.2% fell below this threshold, and the applied code-reading LLM judge accepted every silent failure it evaluated.",
+          "practicalApplication": "The benchmark is useful for incorporating behavioral comparisons against reference implementations into acceptance testing before deploying LLM-generated trading code. It supports checking stop updates, cooldowns, and higher-timeframe references rather than treating successful compilation or plausible equity curves as evidence of correctness. It does not guarantee profitability or real-market execution quality.",
+          "methodology": "Reference strategies are generated from signal, filter, sizing, and risk-management components, then translated into colloquial instructions by another LLM. Generated and reference code are executed sequentially on identical data and trading costs, measuring ActionMatch on bars where either program holds or requests a position, round-trip TradeF1, return differences, and other metrics. The study stratifies tasks by state span and reference return, compares settings with and without a component menu, uses fixed-effects regressions, blocks future-data access, and compares behavioral testing with code-reading evaluation.",
+          "limitations": "The synthetic tasks cover one instrument and one period; generalization to real strategy distributions or other markets remains untested. There is only one generation per condition, no human baseline, and residual ambiguity in LLM-written instructions. The frontier evaluation covers only 200 tasks, and using the same model family to help create the reference library may favor it. Behavioral agreement is tested on the observed price path, not proven for all paths. Intrabar execution and latency are not adequately covered, and some fully controlled state-span effects have only borderline statistical significance.",
+          "reason": "Separating implementation fidelity from profitability is practically important for electronic trading. Model rankings and broader capability claims require caution, but the paper is recommended for readers designing validation procedures for LLM-generated code.",
+          "tags": [
+            "Electronic trading",
+            "LLM code generation",
+            "Behavioral equivalence",
+            "State management",
+            "Risk controls",
+            "Backtest validation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 950,
+          "outputTokens": 1225,
+          "reasoningTokens": 141,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2175,
+          "estimatedCostUsd": 0.000708,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.03080v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 5,
+          "paperIds": [
+            "2610.03080v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 10593,
+          "outputTokens": 1631,
+          "reasoningTokens": 154,
+          "cachedInputTokens": 10590,
+          "cacheWriteTokens": 0,
+          "totalTokens": 12224,
+          "estimatedCostUsd": 0.017375,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 5,
+          "paperIds": [
+            "2610.03080v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.03369v1",
+        "title": "Mixture-of-Experts for Cryptocurrency Order Execution: Training Stability, Tail Risk, and Failure Modes",
+        "authors": [
+          "Alexander Ardaiz",
+          "Varun Budati",
+          "Ali Habibnia"
+        ],
+        "submittedDate": "2026-10-02",
+        "updatedDate": "2026-10-02",
+        "categories": [
+          "cs.LG",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "BTC/USDTの注文執行で、DDQLとMixture-of-Experts（MoE）を比較し、平均コスト、学習seed間の安定性、方策内のテールリスクを分けて検証する。論文の中心的価値は執行性能の向上ではなく、反復学習と仕様分解によって見かけのアーキテクチャ優位を再評価した点にある。",
+        "mainResult": "元の仕様では、どの学習モデルもDDQLに対する平均ISの有意な改善を示さず、TWAPと即時売却にも劣った。MoEの$K=8$ではDDQLとの差が$-0.03$ bps、95%信頼区間が$[-0.15,+0.09]$ bpsで、同等性も確立していない。一方、CVaR-95は11.5 bps悪化した。探索率の減衰だけでDDQLの取引停止型崩壊は100回中12回からゼロになったが、報酬変更との併用では30回中19回に再発した。MoEの$K=8$では検証した全6仕様で崩壊が観測されなかった。",
+        "practicalApplication": "RL執行モデルの検証手順に有用である。多数seed、容量を揃えた比較、単純執行ベンチマーク、方策内CVaR、報酬と探索の交互作用を確認すべきことを示す。探索率減衰後はTWAPを上回る結果も報告されるが、著者自身がシミュレータの診断結果と位置付けており、実運用の優位性を示すものではない。",
+        "methodology": "2023年1月のBinance由来10段板データを5分平均に集約し、学習期間と評価期間を時間分離した。20 BTCを10ステップで売却する環境で、DDQL、K-means分割MoE、容量を揃えた単一ネットワークを各100回学習し、共通の500評価区間で比較した。bootstrap、置換検定、崩壊率の検定を用い、CPU上の仕様分解では報酬、探索率減衰、replay保持を30または100seedで変更した。",
+        "limitations": "単一銘柄・短期間の履歴再生で、売買による価格・板への反応をモデル化しない。平均化した板、ほぼ無償の板外約定、終盤に良い気配を飛ばす人工的ペナルティが早期売却を有利にする。独立に開始するepisodeへの遅延routingは現在の市場レジームを識別できない。信頼区間は固定500区間に条件付けた学習seedの不確実性であり、市場期間の不確実性ではない。分散低下は多重比較補正後に有意でなく、検定群は事後設定である。仕様分解は不完全で、一部は30seedに限られ、CPUとGPUでも個別結果が異なる。",
+        "importance": 1,
+        "recommended": true,
+        "reason": "電子執行研究に直結し、学習の再現性と執行テールリスクを混同しないための有益な負の結果を提供する。実用的なMoE優位の証拠としてではなく、RL執行評価の設計と失敗診断に関する研究として推奨する。",
+        "tags": [
+          "暗号資産の注文執行",
+          "深層強化学習",
+          "Mixture-of-Experts",
+          "実装ショートフォール",
+          "学習seedの安定性",
+          "テールリスク",
+          "シミュレータの限界"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper compares DDQL and Mixture-of-Experts (MoE) for BTC/USDT order execution, separately examining mean costs, stability across training seeds, and within-policy tail risk. Its central value is not improved execution performance, but reassessing apparent architectural advantages through repeated training and specification decomposition.",
+          "mainResult": "Under the original specification, no learned model significantly improved mean IS over DDQL, and all underperformed TWAP and immediate liquidation. For MoE with $K=8$, the difference from DDQL was $-0.03$ bps, with a 95% confidence interval of $[-0.15,+0.09]$ bps; equivalence was not established either. Meanwhile, CVaR-95 worsened by 11.5 bps. Exploration annealing alone reduced DDQL's never-trade collapses from 12 out of 100 runs to zero, but combining it with the reward modification restored collapse in 19 out of 30 runs. No collapse was observed for MoE with $K=8$ under any of the six tested specifications.",
+          "practicalApplication": "The study is useful for designing validation procedures for RL execution models. It highlights the need for many seeds, capacity-matched comparisons, simple execution benchmarks, within-policy CVaR, and checks of reward–exploration interactions. Results exceeding TWAP are also reported after exploration annealing, but the authors explicitly interpret them as simulator diagnostics rather than evidence of live execution superiority.",
+          "methodology": "Binance-derived ten-level order book data from January 2023 were aggregated into five-minute means, with temporally separated training and evaluation periods. In an environment selling 20 BTC over ten steps, DDQL, K-means-partitioned MoE, and capacity-matched single networks were each trained 100 times and compared on 500 common evaluation windows. Bootstrap, permutation, and collapse-rate tests were used. CPU-based specification decomposition modified reward, exploration annealing, and replay retention using 30 or 100 seeds.",
+          "limitations": "The study uses short-period historical replay for one instrument without modelling trade feedback on prices or books. Averaged books, nearly costless fills beyond visible depth, and an artificial terminal penalty that skips better quotes favour early liquidation. Lagged routing across independently started episodes cannot identify the current market regime. Confidence intervals capture training-seed uncertainty conditional on 500 fixed windows, not uncertainty across market periods. The dispersion reduction is not significant after multiple-comparison adjustment, and test families were defined retrospectively. Specification decomposition is incomplete, some arms use only 30 seeds, and individual outcomes differ between CPU and GPU.",
+          "reason": "Directly relevant to electronic execution, the paper provides useful negative results that help prevent conflating training reproducibility with execution tail risk. It is recommended as research on RL execution evaluation design and failure diagnosis, not as evidence of a practical MoE advantage.",
+          "tags": [
+            "Cryptocurrency order execution",
+            "Deep reinforcement learning",
+            "Mixture-of-Experts",
+            "Implementation shortfall",
+            "Training-seed stability",
+            "Tail risk",
+            "Simulator limitations"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 1027,
+          "outputTokens": 1171,
+          "reasoningTokens": 101,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 1024,
+          "totalTokens": 2198,
+          "estimatedCostUsd": 0.000714,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.03369v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 15862,
+          "outputTokens": 16000,
+          "reasoningTokens": 139,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 15859,
+          "totalTokens": 31862,
+          "estimatedCostUsd": 0.199654,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 8,
+          "paperIds": [
+            "2610.03369v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 8,
+          "paperIds": [
+            "2610.03369v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 15862,
+          "outputTokens": 1826,
+          "reasoningTokens": 182,
+          "cachedInputTokens": 15859,
+          "cacheWriteTokens": 0,
+          "totalTokens": 17688,
+          "estimatedCostUsd": 0.019852,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 8,
+          "paperIds": [
+            "2610.03369v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.03598v1",
+        "title": "When a Correct Reward Is Not Enough: Diagnosing and Guiding PPO in an Analytically Solved Broker-Trader Game",
+        "authors": [
+          "Siu Tung Wong",
+          "Carlo Campajola"
+        ],
+        "submittedDate": "2026-10-02",
+        "updatedDate": "2026-10-02",
+        "categories": [
+          "cs.AI",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "解析解のあるbroker–traderモデルで、PPOによる執行速度の学習とコスト変更への適応を検証する。報酬の正確性だけでは戦略の回復を保証せず、解析解が学習診断と残差学習の基準として役立つと報告している。",
+        "mainResult": "非情報注文フローがない場合はPPO–FFNNが参照戦略に近づくが、確率的フロー下ではFFNNとLSTMがともに不正確だった。criticによる近傍行動の順位判定精度は51.7%で、報酬整形も安定した改善を示さない。部分情報下では確実性等価制御が参照収益に近く、執行コスト半減時の残差PPOは参照戦略との収益差を2.22%縮小した。",
+        "practicalApplication": "執行RLの評価では、収益だけでなく同一状態での行動誤差やcriticの局所的な順位判定を検査する設計に活用できる。既存の解析戦略を固定し、小さな残差だけを学習する方法も候補になるが、実市場での有効性は未検証である。",
+        "methodology": "連続時間の目的関数から有限刻み報酬を導き、厳密な一段階恒等式と格子細分化で検証する。離散LQ参照制御を用い、各設定で5学習シード、主実験で各400万遷移を実施し、独立した検証経路でチェックポイントを選択する。教師あり学習、Monte Carloによるcritic診断、potential-based shaping、因果的状態推定、解析戦略への残差PPOを比較する。",
+        "limitations": "実データのない限定的な線形・Gaussianシミュレーションで、PPOの設定と学習シードも限られる。相手は解析フィードバックを維持するため、PPOが逸脱した状態で新たな均衡を求めてはいない。教師あり容量検証は非情報フローなしの条件に限定され、clipped LQ参照は制約付き問題の厳密な最適解ではない。critic診断は失敗原因の因果的証明ではなく、残差学習の有意な改善もコスト半減時だけだった。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子執行RLを解析的ベンチマークで厳しく検証し、正しい報酬と有効な学習を区別する点で有用である。ただし、汎用的なPPOの限界や実運用での優位性を示す研究としては読めない。",
+        "tags": [
+          "最適執行",
+          "PPO",
+          "解析的ベンチマーク",
+          "critic診断",
+          "部分観測",
+          "確実性等価制御",
+          "残差強化学習"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper tests PPO learning of execution speed and adaptation to cost changes in an analytically solved broker–trader model. It reports that reward correctness alone does not ensure policy recovery, while analytical solutions provide benchmarks for learning diagnostics and residual learning.",
+          "mainResult": "PPO–FFNN approaches the reference strategy without uninformed order flow, but both FFNN and LSTM remain inaccurate with stochastic flow. The critic's nearby-action ranking accuracy is 51.7%, and reward shaping provides no reliable improvement. Under partial information, certainty-equivalent control achieves a payoff close to the reference; when execution cost is halved, residual PPO closes 2.22% of the payoff gap to the reference strategy.",
+          "practicalApplication": "The study informs execution-RL evaluation designs that inspect same-state action errors and the critic's local action rankings rather than payoff alone. Freezing an existing analytical strategy and learning only a small residual is another candidate approach, but its effectiveness in real markets remains untested.",
+          "methodology": "A finite-step reward is derived from the continuous-time objective and checked using an exact one-step identity and grid refinement. Using a discrete LQ reference controller, experiments employ five training seeds per configuration and four million transitions per seed in the main experiments, with checkpoint selection on separate validation paths. Comparisons include supervised learning, Monte Carlo critic diagnostics, potential-based shaping, causal state estimation, and residual PPO added to an analytical strategy.",
+          "limitations": "The study uses a limited linear–Gaussian simulation without real data, with limited PPO configurations and training seeds. The counterpart retains its analytical feedback, so no new equilibrium is solved when PPO deviates. Supervised capacity tests are restricted to the no-uninformed-flow setting, and the clipped LQ reference is not the exact optimum of the constrained problem. Critic diagnostics do not establish a causal explanation of failure, and significant residual-learning improvement occurs only when cost is halved.",
+          "reason": "The paper is useful for rigorously testing electronic-execution RL against analytical benchmarks and distinguishing correct rewards from effective learning. It should not, however, be read as establishing general limitations of PPO or superiority in live deployment.",
+          "tags": [
+            "Optimal execution",
+            "PPO",
+            "Analytical benchmarks",
+            "Critic diagnostics",
+            "Partial observability",
+            "Certainty-equivalent control",
+            "Residual reinforcement learning"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 907,
+          "outputTokens": 1062,
+          "reasoningTokens": 140,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1969,
+          "estimatedCostUsd": 0.000622,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.03598v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 19457,
+          "outputTokens": 1435,
+          "reasoningTokens": 153,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 19454,
+          "totalTokens": 20892,
+          "estimatedCostUsd": 0.062991,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 9,
+          "paperIds": [
+            "2610.03598v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.06856v1",
+        "title": "The Agentic ETF: How Agentic Trading Becomes an Asset Class",
+        "authors": [
+          "Amandeep Singh"
+        ],
+        "submittedDate": "2026-06-02",
+        "updatedDate": "2026-06-02",
+        "categories": [
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "論文は、大規模言語モデルを用いる自律型取引エージェントを運用するETFを「Agentic ETF」と定義し、その取引基盤を論じる。",
+        "mainResult": "著者は、明示した仮定に基づく試算から、Agentic ETFの運用資産が2030年までに数千億ドルから数兆ドル弱に達し得ると主張する。これは予測であり、実証結果ではない。",
+        "practicalApplication": "マルチベニュー執行、エージェントの分離、ブローカー照合などの基盤構成を整理しており、自律型取引システムの設計検討に参考となる。",
+        "methodology": "エージェント取引を既存のアルゴリズム取引やロボアドバイスと区別し、インフラを6層に分解して、各層の既存事業者や構造的な不足を論じる。独自スタックの実装例も提示する。",
+        "limitations": "要旨からは、実運用成績や執行品質を検証する実証分析は確認できない。市場規模の試算は仮定に依存し、著者が紹介する実装例も独立評価されたものとは示されていない。",
+        "importance": 2,
+        "recommended": true,
+        "reason": "自律型取引の実行基盤と市場構想を扱い、電子取引分野には関連する。一方、資産規模の主張は仮定依存で、実証的な執行・市場マイクロ構造分析ではないため重要度は限定的。",
+        "tags": [
+          "自律型取引",
+          "ETF",
+          "取引インフラ",
+          "大規模言語モデル"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper defines an ETF operated by autonomous trading agents using large language models as an “Agentic ETF” and discusses the infrastructure for such trading.",
+          "mainResult": "Based on a sizing exercise with stated assumptions, the authors argue that Agentic ETFs could reach hundreds of billions to low trillions of dollars in assets under management by 2030. This is a projection, not an empirical result.",
+          "practicalApplication": "Its overview of infrastructure components—including multi-venue execution, isolated agents, and broker reconciliation—may inform the design of autonomous trading systems.",
+          "methodology": "The paper distinguishes agentic trading from conventional algorithmic trading and robo-advice, decomposes its infrastructure into six layers, and discusses incumbent providers and structural gaps. It also presents an example implementation stack.",
+          "limitations": "The abstract reports no empirical analysis validating live performance or execution quality. The market-sizing estimate depends on assumptions, and the implementation example is not presented as independently evaluated.",
+          "reason": "The paper is relevant to electronic trading through its discussion of autonomous trading infrastructure. However, its asset-size claim is assumption-dependent, and it does not present empirical execution or market-microstructure analysis, so its importance is limited.",
+          "tags": [
+            "Autonomous trading",
+            "ETFs",
+            "Trading infrastructure",
+            "Large language models"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 817,
+          "outputTokens": 923,
+          "reasoningTokens": 95,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1740,
+          "estimatedCostUsd": 0.000543,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.06856v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 817,
+          "outputTokens": 834,
+          "reasoningTokens": 136,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1651,
+          "estimatedCostUsd": 0.000499,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.06856v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.07985v1",
+        "title": "A Finite Bid--Ask Spread from Replenishment Displaced from the Quote",
+        "authors": [
+          "Christopher Angstmann",
+          "Derick Diana",
+          "Tim Gebbie"
+        ],
+        "submittedDate": "2026-10-06",
+        "updatedDate": "2026-10-06",
+        "categories": [
+          "physics.soc-ph",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "売買両側の注文密度を保持する反応拡散モデルで、気配から離れた位置への補充が有限のbid–ask spreadを生む仕組みを解析する。反対側への補充待ち総量を注文配置の間隔に結び付け、配置境界と観測気配を区別する。",
+        "mainResult": "準定常・弱重複近似で、対数価格上のスプレッドを $s\\simeq\\Sigma-d_A^*-d_B^*$、浸透深さを $d_i^*=\\sqrt{D_i/\\nu_i}\\ln(\\rho_i^q/\\epsilon_i)$ と導く。離れた補充の気配密度応答はoperational timeで遅れ、時間積分した応答は同位置への供給に比べて $\\epsilon_i/\\rho_i^q$ に減衰する。",
+        "practicalApplication": "補充待ち、注文配置距離、取消率がスプレッドと流動性回復に及ぼす影響を、マーケットメイキングや執行シミュレーションで分解する枠組みとなる。実務利用には執行閾値、補充完了則、暦時間への変換の較正が必要である。",
+        "methodology": "二つの注文密度の反応拡散方程式を構築し、拡散・取消係数が等しい場合に不均衡場と総密度へ分解する。配置間隔を補充待ち総量に連動させ、指数型定常密度、Green関数、気配のlevel-set線形化からスプレッドと応答核を解析する。密度応答と初到達分布も区別する。",
+        "limitations": "主要なスプレッド式は分離した気配、準定常性、弱い反応損失に依存し、浸透層が重なる領域へは延長できない。線形応答核は気配と配置位置を固定する。執行閾値と配置則は外生的で、逆選択はモデル化しない。提示本文に実市場での検証はなく、暦時間の遅延も別途指定する時計に依存する。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "注文配置と観測気配、局所的な消費と離れた補充を明確に区別する点が、スプレッドと流動性回復の理論研究に有用である。ただし、実証済みの予測モデルではなく、仮定付きの機構モデルとして読むべきである。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "ビッド・アスク・スプレッド",
+          "反応拡散注文板",
+          "マーケットメイキング",
+          "流動性補充",
+          "注文取消",
+          "操作時間"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper analyzes how replenishment placed away from quotes produces a finite bid–ask spread in a reaction–diffusion model retaining both bid and ask densities. It links total pending opposite-side replenishment to placement spacing and distinguishes placement boundaries from observed quotes.",
+          "mainResult": "Under quasistationary and weak-overlap approximations, it derives the log-price spread $s\\simeq\\Sigma-d_A^*-d_B^*$, with penetration depths $d_i^*=\\sqrt{D_i/\\nu_i}\\ln(\\rho_i^q/\\epsilon_i)$. Displaced replenishment produces a delayed quote-density response in operational time, whose time-integrated magnitude is attenuated by $\\epsilon_i/\\rho_i^q$ relative to colocated supply.",
+          "practicalApplication": "The framework can separate the effects of pending replenishment, placement distance, and cancellation rates on spreads and liquidity recovery in market-making or execution simulations. Practical use requires calibration of execution thresholds, completion laws, and the mapping to calendar time.",
+          "methodology": "The paper constructs reaction–diffusion equations for two order densities and decomposes them into imbalance and total density when diffusion and cancellation coefficients are equal. It links placement spacing to total pending replenishment and analyzes spreads and response kernels using exponential stationary profiles, Green functions, and quote level-set linearization. It also distinguishes density response from first-passage distributions.",
+          "limitations": "The main spread formula relies on separated quotes, quasistationarity, and weak reaction losses, and cannot be extended into the overlapping-penetration regime. The linear response kernels hold quote and placement locations fixed. Execution thresholds and the placement law are exogenous, and adverse selection is not modeled. The supplied text contains no real-market validation; calendar-time delays also depend on a separately specified clock.",
+          "reason": "The clear distinctions between placement and observed quotes, and between local depletion and displaced replenishment, are useful for theoretical research on spreads and liquidity recovery. However, this should be read as an assumption-dependent mechanism model rather than an empirically validated predictive model.",
+          "tags": [
+            "Market microstructure",
+            "Bid–ask spread",
+            "Reaction–diffusion order book",
+            "Market making",
+            "Liquidity replenishment",
+            "Order cancellation",
+            "Operational time"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 815,
+          "outputTokens": 1035,
+          "reasoningTokens": 70,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1850,
+          "estimatedCostUsd": 0.000599,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.07985v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 6,
+          "paperIds": [
+            "2610.07985v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 9878,
+          "outputTokens": 1369,
+          "reasoningTokens": 132,
+          "cachedInputTokens": 9875,
+          "cacheWriteTokens": 0,
+          "totalTokens": 11247,
+          "estimatedCostUsd": 0.014684,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 6,
+          "paperIds": [
+            "2610.07985v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.08169v1",
+        "title": "Modelling Regime Shifts in Continuous Intraday Electricity Markets with State-dependent Hawkes Processes",
+        "authors": [
+          "Ayoub Jhabli",
+          "Tarek AlSkaif",
+          "Kwabena E. Bennin",
+          "Bedir Tekinerdogan",
+          "Axel Naumann",
+          "Joost M. E. Pennings"
+        ],
+        "submittedDate": "2026-10-06",
+        "updatedDate": "2026-10-06",
+        "categories": [
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "オランダの電力時間前連続市場を対象に、流動性状態に応じて注文到着をモデル化する研究。2024年1～3月の2,161契約、約2,469万イベントに、契約別の状態依存Hawkes過程を推定している。",
+        "mainResult": "報告された残差Wasserstein距離は、単一状態モデルの0.371から提案モデルの0.308へ改善した。ストレス時には基底強度と約定の自己励起が増える一方、状態別の平均スペクトル半径は約0.89～0.92で、ストレスに伴う単調増加はない。なお、平均励起行列では約定から反対側の注文への励起も相応にあり、『クロスサイド効果は無視できる』という本文の説明は限定的に解釈すべきである。",
+        "practicalApplication": "電力市場の注文フロー分析や、流動性状態別のシミュレーション設計に参考となる。LSIは契約全体の統計量を使う事後分類であり、リアルタイム執行への利用には逐次的な状態推定と外部検証が必要である。執行コスト削減は検証されていない。",
+        "methodology": "スプレッド、板数量、直近10分のミッド価格変動を標準化してLSIを構築し、契約別分位点で3状態に分類する。売買別の注文追加と約定の4系列に、状態依存の基底強度と単一指数カーネルを設定する。スペクトル半径へのペナルティ付き最尤推定を行い、時間変換残差、KS検定、Ljung–Box検定、指標構成・状態分割の比較で評価する。",
+        "limitations": "約定系列のKS検定通過率は約2～9%と低く、注文追加系列にも強い残差自己相関が残る。契約ごとの108パラメータに対して約定データが乏しく、取消イベントもモデル対象外である。検証は標本内に限られ、事後的な状態分類のため予測性能は示されていない。安定性ペナルティはハード制約ではなく、励起係数は因果効果を証明しない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "流動性レジームを条件とする注文フローモデルの実証例として有用で、残差診断と比較検証も充実している。ただし、完成した執行モデルではなく、適合不足と本文の解釈上の過大主張に注意して読むことを推奨する。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "電力時間前市場",
+          "状態依存Hawkes過程",
+          "流動性ストレス",
+          "注文フロー",
+          "残差診断"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study models order arrivals conditional on liquidity states in the Dutch continuous intraday electricity market. It estimates contract-specific state-dependent Hawkes processes for 2,161 contracts and approximately 24.69 million events from January–March 2024.",
+          "mainResult": "The reported residual Wasserstein distance improves from 0.371 for the single-state benchmark to 0.308 for the proposed model. Baseline intensities and transaction self-excitation increase under stress, whereas mean state-specific spectral radii remain around 0.89–0.92 without increasing monotonically with stress. The average excitation matrices also show appreciable excitation from transactions to opposite-side orders, so the paper's claim that cross-side effects are negligible requires qualification.",
+          "practicalApplication": "The framework informs electricity-market order-flow analysis and liquidity-conditioned simulation design. Because the LSI is an ex-post classification using contract-wide statistics, real-time execution applications require sequential state estimation and external validation. Execution-cost reductions are not tested.",
+          "methodology": "The LSI combines standardized spread, displayed book volume, and mid-price variability over the preceding ten minutes, with contract-specific quantiles defining three states. Four streams—buy and sell order additions and transactions—have state-dependent baselines and single-exponential kernels. Estimation uses maximum likelihood with a spectral-radius penalty; evaluation uses time-rescaled residuals, KS and Ljung–Box tests, and comparisons across index compositions and state partitions.",
+          "limitations": "Transaction streams have low KS pass rates of approximately 2–9%, while order-addition streams retain substantial residual autocorrelation. Transaction data are sparse relative to the 108 parameters per contract, and cancellations are excluded from the model. Validation is in-sample, and ex-post state classification does not establish predictive performance. The stability penalty is not a hard constraint, and excitation coefficients do not establish causal effects.",
+          "reason": "Recommended as a useful empirical example of liquidity-regime-conditioned order-flow modeling, with extensive residual diagnostics and comparative checks. It should not be treated as a finished execution model, and readers should note its fit deficiencies and overstated interpretations.",
+          "tags": [
+            "Market microstructure",
+            "Intraday electricity markets",
+            "State-dependent Hawkes processes",
+            "Liquidity stress",
+            "Order flow",
+            "Residual diagnostics"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 949,
+          "outputTokens": 901,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1850,
+          "estimatedCostUsd": 0.000545,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.08169v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 31165,
+          "outputTokens": 1390,
+          "reasoningTokens": 137,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 31162,
+          "totalTokens": 32555,
+          "estimatedCostUsd": 0.091811,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 15,
+          "paperIds": [
+            "2610.08169v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.10053v1",
+        "title": "On Bonart's interpretation of the Square-Root Impact Law",
+        "authors": [
+          "J. -P. Bouchaud",
+          "I. Mastromatteo",
+          "B. Toth"
+        ],
+        "submittedDate": "2026-10-07",
+        "updatedDate": "2026-10-07",
+        "categories": [
+          "cond-mat.stat-mech",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "市場インパクトの平方根則を価格の拡散性から説明するBonartの議論を再検討した理論論文。著者らは、インパクトの分散が加法的に増えることだけでは、平均インパクトの平方根形状や参加率に依存しない振幅は導けないと論じる。",
+        "mainResult": "LMF型の線形モデルでは、価格が拡散的でも孤立メタオーダーのインパクトは $I\\propto\\phi^{(1-\\gamma)/2}Q^{(1+\\gamma)/2}$ となる。提案した参加者別モデルでは、参加率に依存しない平方根則に知覚相関の plateau $C^{*}\\propto\\phi$ が必要となる。また、平均インパクトが日次分散の有限割合を担い、係数がメタオーダー数に依存しないという条件下では、出来高保存と分散収支が指数 $\\delta=1/2$ を選ぶと示す。",
+        "practicalApplication": "執行コストモデルでは、価格の拡散性を再現するだけでなく、平均インパクト、参加率依存性、執行後の減衰を別々に検証する必要がある。定常的な注文系列内のメタオーダーと時間的に孤立したメタオーダーを比較することは、系列の whitening による説明を検証する手掛かりになる。",
+        "methodology": "反実仮想価格との差によるインパクト分解、LMFモデルの解析的反例、参加者別の適応的 propagator、注文符号からの検出閾値、all-pass filter の長期応答、出来高保存に基づく分散収支を検討する。独立で情報中立な注文系列を主な前提とする。",
+        "limitations": "新規の体系的な実証検証はなく、孤立注文も平方根則に従うというCFMデータへの言及は未検証の所見である。孤立注文が平方根則に従わないという予測は、系列を excursion と読む場合に限られる。検出閾値は注文符号中心の推定器に対するもので、他の市場情報を使う検出能力を否定しない。出来高保存の議論は独立性、分散収支の閉鎖、平均インパクトの有限な分散寄与を仮定し、その微視的理由は未解決である。all-pass の批判も特定の線形フィルター構成に依存する。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "平方根則の形状と振幅、平均と分散を明確に区別し、執行モデルの検証条件を整理するため重要である。ただし、代替的な機械的説明を実証的に確立した論文ではない。",
+        "tags": [
+          "市場インパクト",
+          "平方根則",
+          "メタオーダー",
+          "参加率",
+          "注文フローの長期記憶",
+          "プロパゲーターモデル",
+          "出来高保存"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This theoretical paper reassesses Bonart's explanation of the square-root impact law through price diffusivity. The authors argue that additive growth of impact variance alone cannot establish the square-root shape of mean impact or its participation-independent amplitude.",
+          "mainResult": "In an LMF-type linear model, prices can be diffusive while an isolated metaorder has impact $I\\propto\\phi^{(1-\\gamma)/2}Q^{(1+\\gamma)/2}$. In the proposed participant-specific model, a participation-independent square-root law requires a perceived correlation plateau $C^{*}\\propto\\phi$. The authors also show that volume conservation and variance accounting select $\\delta=1/2$, conditional on mean impact carrying a finite share of daily variance and its coefficient being independent of the metaorder count.",
+          "practicalApplication": "Execution-cost models should separately validate mean impact, participation dependence, and post-execution decay rather than merely reproduce price diffusivity. Comparing metaorders within stationary trading streams with temporally isolated metaorders can help test explanations based on stream whitening.",
+          "methodology": "The paper examines an impact decomposition using counterfactual prices, an analytical LMF counterexample, participant-specific adaptive propagators, detection thresholds from trade signs, long-run all-pass filter responses, and variance accounting based on volume conservation. Independent, information-neutral trading streams are central assumptions.",
+          "limitations": "There is no new systematic empirical validation; the reference to CFM data suggesting that isolated orders also follow the square-root law remains an unverified observation. The prediction that isolated orders should violate the law applies only to the excursion interpretation of trading streams. Detection thresholds concern estimators focused on trade signs and do not rule out detection using other market information. The volume argument assumes independence, variance-budget closure, and a finite variance contribution from mean impact, whose microscopic explanation remains unresolved. The all-pass critique also depends on a particular linear-filter construction.",
+          "reason": "The paper is important for distinguishing the law's shape from its amplitude and mean impact from variance, thereby clarifying execution-model validation requirements. However, it does not empirically establish an alternative mechanical explanation.",
+          "tags": [
+            "Market impact",
+            "Square-root law",
+            "Metaorders",
+            "Participation rate",
+            "Long-memory order flow",
+            "Propagator models",
+            "Volume conservation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 1010,
+          "outputTokens": 1049,
+          "reasoningTokens": 127,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2059,
+          "estimatedCostUsd": 0.000625,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.10053v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 17169,
+          "outputTokens": 1463,
+          "reasoningTokens": 155,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 17166,
+          "totalTokens": 18632,
+          "estimatedCostUsd": 0.057551,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 19,
+          "paperIds": [
+            "2610.10053v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.10407v1",
+        "title": "SOTA: Stock Options Trading Agents Guided by Option-Implied Return Distributions",
+        "authors": [
+          "Yizhen Xie",
+          "Mengyang Liu"
+        ],
+        "submittedDate": "2026-10-07",
+        "updatedDate": "2026-10-07",
+        "categories": [
+          "cs.AI",
+          "cs.LG",
+          "q-fin.PM",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "SOTAは、LLMが9種類の株式オプション戦略とパラメータを選び、決定論的な処理が契約選択・数量・ヘッジを担う自動売買フレームワークである。名称の「分布」は完全な確率密度の推定ではなく、主にIV水準・スキュー・曲率などの特徴量で表現される。",
+        "mainResult": "米国大型株9銘柄とSPYの2025年3〜8月のバックテストで、著者は総収益率$18.32\\%$、年率Sharpe比$1.60$、最大ドローダウン$8.96\\%$を報告し、比較対象はすべて負の収益だった。RL中もニュースを使用すると収益率は$-2.72\\%$となった。ただし、全RLチェックポイントをテスト期間で評価しており、厳密な未使用データでの検証とは言い切れない。",
+        "practicalApplication": "大量のオプション契約を戦略単位の意思決定へ圧縮し、LLMの判断と実装・リスク制約を分離する設計は、自動売買システムの試作に参考になる。実運用への採用には、独立した評価期間と現実的な約定モデルによる再検証が必要である。",
+        "methodology": "市場特徴量10種類と保有状態を入力とし、候補戦略だけを価格照会する二段階の選択を行う。匿名化した教師モデルの1,000軌跡からSharpe比で144軌跡を選別し、Qwen3.8-27BをSFT後にGRPOで学習する。報酬は費用控除後の資産価値の対数変化で、最終モデルのRLではニュースを除外する。比較手法には共通の実装規則とポートフォリオ制約を適用する。",
+        "limitations": "テスト期間で複数チェックポイントを評価し、そのうちステップ20を報告しているため、テスト依存のモデル選択を排除できない。評価は6か月・10原資産・単一seedに限られ、統計的不確実性や相場局面を跨ぐ頑健性は示されていない。本文のmidpoint約定と付録のhalf-spread設定、理論的ヘッジ帯と固定帯の記述には不整合があり、費用とヘッジ実装の確認が必要である。ニュースなしのSFT-only比較がなく、教師へのニュースの効用も直接比較が十分に示されていない。",
+        "importance": 3,
+        "recommended": false,
+        "reason": "戦略選択と契約実装を分離する設計は関連性が高いが、テスト期間を使ったチェックポイント評価と実装記述の不整合により、収益性の証拠として優先推薦するには不十分である。",
+        "tags": [
+          "株式オプション",
+          "自動売買",
+          "大規模言語モデル",
+          "強化学習",
+          "戦略選択",
+          "インプライド・ボラティリティ",
+          "テスト依存のモデル選択"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "SOTA is an automated trading framework in which an LLM selects among nine equity-option strategy families and their parameters, while deterministic components handle contract selection, sizing, and hedging. The title's “distributions” are represented primarily by features such as IV level, skew, and curvature, rather than by estimation of a complete probability density.",
+          "mainResult": "For a March–August 2025 backtest on nine large-cap U.S. stocks and SPY, the authors report a total return of $18.32\\%$, an annualized Sharpe ratio of $1.60$, and maximum drawdown of $8.96\\%$; every comparison policy had negative returns. Retaining news during RL reduced return to $-2.72\\%$. However, all RL checkpoints were evaluated on the test period, so the results cannot confidently be treated as validation on strictly untouched data.",
+          "practicalApplication": "Compressing a large option-contract universe into strategy-level decisions and separating LLM judgment from implementation and risk constraints provides a useful design for automated trading prototypes. Live deployment requires revalidation using an independent evaluation period and a realistic execution model.",
+          "methodology": "The policy uses ten market features and portfolio holdings, with a two-stage selection process that requests prices only for candidate strategies. From 1,000 anonymized teacher-model trajectories, 144 are selected by Sharpe ratio to train Qwen3.8-27B through SFT followed by GRPO. Rewards are changes in log portfolio value after costs, and news is excluded during RL for the final model. Comparison methods share implementation rules and portfolio constraints.",
+          "limitations": "Multiple checkpoints were evaluated on the test period, with step 20 reported, so test-dependent model selection cannot be ruled out. Evaluation covers only six months, ten underlyings, and one seed, without demonstrated statistical uncertainty or robustness across market regimes. Midpoint execution in the main text conflicts with half-spread settings in the appendix, and the theoretical hedge-band description conflicts with a fixed-band specification; costs and hedge implementation require clarification. There is no news-free SFT-only comparison, and direct evidence for the benefit of news to the teacher is insufficiently presented.",
+          "reason": "Separating strategy selection from contract implementation is highly relevant, but checkpoint evaluation on the test period and inconsistent implementation descriptions make the profitability evidence insufficient for priority recommendation.",
+          "tags": [
+            "Equity options",
+            "Automated trading",
+            "Large language models",
+            "Reinforcement learning",
+            "Strategy selection",
+            "Implied volatility",
+            "Test-dependent model selection"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 883,
+          "outputTokens": 928,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1811,
+          "estimatedCostUsd": 0.000552,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.10407v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 16634,
+          "outputTokens": 1578,
+          "reasoningTokens": 192,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 16631,
+          "totalTokens": 18212,
+          "estimatedCostUsd": 0.057363,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 19,
+          "paperIds": [
+            "2610.10407v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.10525v1",
+        "title": "A Hawkes Microfoundation for Multitype Inverse Gaussian Subordinators",
+        "authors": [
+          "Yingli Wang",
+          "Wei Xu",
+          "Lingjiong Zhu"
+        ],
+        "submittedDate": "2026-10-07",
+        "updatedDate": "2026-10-07",
+        "categories": [
+          "math.PR",
+          "q-fin.MF",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本研究は、ほぼ臨界な多変量Hawkes過程から、多タイプ逆ガウス確率時計への極限を導出する理論研究です。",
+        "mainResult": "有限平均の再生遅延と適切な移民率の条件下で、イベント数と積分強度が結合した純ジャンプ過程に収束すると報告しています。極限の座標間依存は交差励起に由来し、Brownian additive-fieldの初通過表現を持ちます。",
+        "practicalApplication": "Hawkes型イベント過程から確率時計を構成する理論的基盤となり得ますが、取引データによる検証や執行戦略への応用は要旨に示されていません。",
+        "methodology": "近臨界多変量Hawkes過程をクラスター分解し、分岐クラスターのスケーリング極限を解析しています。さらに一意性やRiccati方程式による同定を扱い、有限分散の年齢依存クラスターにも結果を拡張しています。",
+        "limitations": "結果は漸近的な理論であり、実データでの適合性、パラメータ推定、予測力、実務上の性能は要旨から判断できません。成立には遅延、移民率、安定性などの条件が必要です。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "Hawkes過程とイベント単位のマイクロファウンデーションは市場マイクロ構造に関連し得ますが、中心的貢献は確率過程の理論で、電子執行や市場データへの直接的な含意は要旨では確認できません。",
+        "tags": [
+          "Hawkes過程",
+          "多変量確率時計",
+          "逆ガウス劣加法過程",
+          "近臨界分岐過程",
+          "スケーリング極限"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This theoretical study derives a limit from nearly critical multivariate Hawkes processes to a multitype inverse-Gaussian stochastic clock.",
+          "mainResult": "Under finite-mean reproduction delays and suitable immigration rates, the authors report joint convergence of event counts and integrated intensities to a pure-jump process. Dependence across limiting coordinates arises from cross-excitation, and the limit has a Brownian additive-field first-passage representation.",
+          "practicalApplication": "The work may provide a theoretical basis for constructing stochastic clocks from Hawkes-type event processes, but the abstract reports no validation on trading data or application to execution strategies.",
+          "methodology": "The authors use a cluster decomposition of nearly critical multivariate Hawkes processes and analyze the scaling limit of branching clusters. They also address uniqueness and identification via a Riccati equation, and extend results to finite-variance age-dependent clusters.",
+          "limitations": "The results are asymptotic and theoretical; the abstract does not establish fit to real data, parameter-estimation performance, predictive power, or practical performance. The conclusions require conditions on delays, immigration rates, stability, and related quantities.",
+          "reason": "Hawkes processes and an event-level microfoundation may be relevant to market microstructure, but the central contribution is stochastic-process theory, and the abstract establishes no direct implications for electronic execution or market data.",
+          "tags": [
+            "Hawkes processes",
+            "multivariate stochastic clocks",
+            "inverse-Gaussian subordinators",
+            "nearly critical branching processes",
+            "scaling limits"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 959,
+          "outputTokens": 937,
+          "reasoningTokens": 163,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1896,
+          "estimatedCostUsd": 0.000564,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.10525v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.11691v1",
+        "title": "Diffusive Market Impact: A Consistent Microfoundation",
+        "authors": [
+          "Julius F. Bonart"
+        ],
+        "submittedDate": "2026-10-08",
+        "updatedDate": "2026-10-08",
+        "categories": [
+          "q-fin.MF",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "分散した私的情報を持つ裁定者が、取引者を識別せずに価格の予測可能性を除去し、情報中立な注文フローのインパクトを拡散的にする理論モデルを提示する。インパクトの位相が取引コストと減衰を左右することを分析し、固定したインパクト則を異なる執行戦略へ外挿する慣行に疑問を提起する。",
+        "mainResult": "有限観測窓では裁定過程の収束部分列が存在し、その集積点でリターンは時間的に無相関となる。集合的な情報完全性と追加の定常極限仮定の下で、インパクトは因果的all-passフィルターによる $j=cU\\cdot w$ となる。また、正の期待インパクトコストを生む位相の存在を示し、最小歪み基準の最大化解も正のコストを持つ。二重指数型フローでは、条件付き累積インパクトがピークから50～60%減衰し、40～50%が残ると導出する。",
+        "practicalApplication": "執行コスト推定やバックテストで、注文フローの自己相関が変わっても既存のインパクトモデルが不変とは限らないことを示唆する。参加者別フロー統計に応じたモデル検証や、インパクト減衰の感度分析に役立つ理論的枠組みであり、即利用できる執行アルゴリズムではない。",
+        "methodology": "線形・Gaussianモデルで、外生的取引者と私的なファンダメンタル情報を持つ複数裁定者を設定する。逐次裁定を条件付き期待値の射影として表し、加重markoutの分散減少から有限次元で集積点を特徴づける。追加の定常性仮定からall-pass表現を導き、フローフィルターとの重なり最大化と二重指数型の解析解でコストと減衰を評価する。",
+        "limitations": "実データによる検証はなく、平方根則の説明は主に先行枠組みに依存する。有限窓で証明するのは部分列の収束であり、全過程の収束や定常極限の存在ではない。集合的な情報完全性は強い仮定で、裁定が最小歪み位相へ到達することも未証明である。50～60%の減衰は特定のフローと位相選択に限定され、長期の完全緩和はall-passからの追加的な変形で導入する。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "市場インパクトの参加者依存性と正の取引コストを、分散情報と裁定から結びつける点で本サイトに直接関連する。実証済みの執行モデルではなく、重要な未証明条件を伴う理論研究として読む価値がある。",
+        "tags": [
+          "市場インパクト",
+          "分散情報",
+          "裁定",
+          "因果的all-passフィルター",
+          "注文フロー自己相関",
+          "インパクト減衰",
+          "執行コスト"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper presents a theoretical model in which arbitrageurs with dispersed private information remove price predictability without identifying the trader, making the impact of information-neutral order flow diffusive. It analyzes how impact phase determines trading costs and decay, questioning the practice of extrapolating a fixed impact law across different execution strategies.",
+          "mainResult": "On a finite observation window, the arbitrage process admits convergent subsequences whose accumulation points have temporally uncorrelated returns. Under aggregate informational completeness and additional stationary-limit assumptions, impact takes the form $j=cU\\cdot w$ with a causal all-pass filter. The paper also establishes the existence of positive-expected-cost phases and shows that any maximizer of the minimum-distortion criterion has positive costs. For biexponential flow, it derives a 50–60% decline in conditional cumulative impact from its peak, leaving 40–50% remaining.",
+          "practicalApplication": "The framework suggests that execution-cost estimation and backtesting should not assume an existing impact model remains invariant when order-flow autocorrelation changes. It provides a theoretical basis for validating models against participant-level flow statistics and analyzing sensitivity to impact decay, rather than a ready-to-use execution algorithm.",
+          "methodology": "A linear Gaussian model combines an exogenous trader with multiple arbitrageurs holding private fundamental information. Sequential arbitrage is represented through conditional-expectation projections, and decreasing weighted-markout variance is used to characterize accumulation points in finite dimensions. Additional stationarity assumptions yield the all-pass representation; overlap maximization with the flow filter and an analytical biexponential solution determine costs and decay.",
+          "limitations": "There is no empirical validation, and the explanation of square-root impact mainly relies on the preceding framework. The finite-window proof establishes subsequential convergence, not convergence of the entire process or existence of a stationary limit. Aggregate informational completeness is a strong assumption, and convergence of arbitrage to the minimum-distortion phase is unproved. The 50–60% decay applies only to the specified flow and phase selection; complete long-run relaxation is introduced through an additional distortion of the all-pass filter.",
+          "reason": "The paper directly fits the site's scope by linking participant-dependent impact and positive trading costs to dispersed information and arbitrage. It is worth reading as theoretical research with important unproved conditions, not as an empirically validated execution model.",
+          "tags": [
+            "Market impact",
+            "Dispersed information",
+            "Arbitrage",
+            "Causal all-pass filters",
+            "Order-flow autocorrelation",
+            "Impact decay",
+            "Execution costs"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 946,
+          "outputTokens": 1057,
+          "reasoningTokens": 127,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2003,
+          "estimatedCostUsd": 0.000623,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.11691v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 28,
+          "paperIds": [
+            "2610.11691v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 18933,
+          "outputTokens": 1564,
+          "reasoningTokens": 169,
+          "cachedInputTokens": 18930,
+          "cacheWriteTokens": 0,
+          "totalTokens": 20497,
+          "estimatedCostUsd": 0.017539,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 28,
+          "paperIds": [
+            "2610.11691v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ]
+}

@@ -2,6 +2,41 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-10-12-daily-openai-01",
+      "date": "2026-10-12",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.12537v1",
+          "title": "Market Impact Estimation via Causal Foundation Models",
+          "authors": [
+            "Dennis Thumm",
+            "Ying Chen"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.13044v1",
+          "title": "FOMO: FLEX Options and Market Outcomes",
+          "authors": [
+            "Shivesh Prakash",
+            "Frank Ferstler",
+            "Nicholas Pezolano"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-11-daily-openai-01",
       "date": "2026-10-11",
       "kind": "daily",

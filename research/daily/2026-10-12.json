@@ -1,0 +1,673 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-10-12",
+  "generatedAt": "2026-10-12T15:56:59Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-10-12 was confirmed with 2 relevant paper(s).",
+  "expectedBatchDate": "2026-10-12",
+  "observedBatchDate": "2026-10-12",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2610.12537v1",
+        "title": "Market Impact Estimation via Causal Foundation Models",
+        "authors": [
+          "Dennis Thumm",
+          "Ying Chen"
+        ],
+        "submittedDate": "2026-10-08",
+        "updatedDate": "2026-10-08",
+        "categories": [
+          "cs.CE",
+          "cs.LG",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "情報を持つ注文フローが価格と取引量を同時に動かす交絡を扱い、因果的な市場インパクトを推定するPFNの概念実証である。合成市場で学習し、ABIDES、暗号資産先物、Nasdaq株式へ転移を検証する。因果識別を支えるのは観測データだけではなく、学習時の市場事前分布である。",
+        "mainResult": "合成市場では、単純回帰による最大68%の過大推定を報告し、Transformer型PFNは強い交絡下で真のパラメータを用いる参照モデルに近いバイアスを示した。ABIDESの未使用1,000エピソードでは、介入入力の有無による予測差が事前標準偏差の0.38倍となり、反実仮想インパクトと同程度の平均スケールを示した。再帰型は実データの12セル平均に対する相関を0.68から0.92〜0.96へ改善したが、合成市場での交絡補正は弱まった。",
+        "practicalApplication": "執行コスト推定で、情報による価格変化と取引自体の効果を分けるための研究基盤として有用である。導入には、注文を価格固定ではなく追加フローとして符号化し、単位・ドメイン別スケール・予測区間を校正する必要がある。現段階では、本番の執行最適化モデルというより検証用プロトタイプとして適している。",
+        "methodology": "隠れた情報フロー、観測注文フロー、価格からなる連続時間の線形確率モデルで、交絡強度を制御した学習データを生成する。共通ノイズの介入・非介入ペアを用いた分位点学習、介入入力を除いた対応モデル、古典的インパクトモデルとの比較を行う。ABIDESでは同一シード再実行による反実仮想を使い、実市場では検出フローバーストの事実的価格予測と集計インパクトを評価する。",
+        "limitations": "隠れた交絡下の因果効果は観測データだけでは識別できず、結果は事前分布の仮定に依存する。実市場のバーストは外生性が確認されておらず、予測バイアス改善は因果的転移の証明ではない。実データでは平方根則がTransformer型より良好で、再帰型の高相関も個別注文ではなくセル平均の評価である。ゼロショット転移で名目80%区間の被覆率はABIDESで32%へ低下し、再校正を要する。構造と学習レシピが同時に変わる比較、ドメイン別スケール、誤った介入ラベルへの感応性も実用上の制約である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "市場インパクトの因果推定を、解析的交絡バイアス、介入入力の除去実験、反実仮想シミュレーションで検証しており、本サイトの中核テーマに直結する。実市場での因果識別と既存手法に対する優位性は未確立だが、事前分布と介入符号化の重要性を示す研究として推奨する。",
+        "tags": [
+          "市場インパクト",
+          "因果推論",
+          "注文執行",
+          "市場マイクロストラクチャー",
+          "事前データ適合ネットワーク",
+          "反実仮想シミュレーション",
+          "ゼロショット転移",
+          "予測区間校正"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This proof of concept uses a PFN to estimate causal market impact under confounding, where informed order flow drives both prices and trading volume. It trains on synthetic markets and tests transfer to ABIDES, cryptocurrency perpetuals, and Nasdaq equities. Causal identification is supplied by the training market prior, not observational data alone.",
+          "mainResult": "In synthetic markets, the paper reports up to 68% overestimation by naive regression, while the transformer PFN achieves bias close to a true-parameter reference model under strong confounding. Across 1,000 held-out ABIDES episodes, the prediction difference attributable to intervention inputs is 0.38 pre-onset standard deviations, matching the approximate average scale of counterfactual impact. The recurrent variant improves correlation with 12 real-data cell means from 0.68 to 0.92–0.96, but weakens synthetic-market deconfounding.",
+          "practicalApplication": "The framework is useful as a research platform for separating information-driven price changes from trading effects in execution-cost estimation. Deployment requires encoding orders as added flow rather than a price clamp, and calibrating units, domain-specific scale, and prediction intervals. It is currently better suited to a validation prototype than a production execution-optimization model.",
+          "methodology": "A continuous-time linear stochastic model of hidden informational flow, observable order flow, and price generates training data with controlled confounding. Evaluation combines quantile learning on shared-noise intervention/no-intervention pairs, matched models without intervention inputs, and classical impact baselines. ABIDES supplies counterfactuals through same-seed replay; real-market tests evaluate factual price predictions around detected flow bursts and aggregate impact.",
+          "limitations": "Causal effects under hidden confounding are not identified from observational data alone, so results depend on prior assumptions. Real-market bursts have unverified exogeneity, and reduced prediction bias does not prove causal transfer. On real data, the square-root law outperforms the transformer, while the recurrent model's high correlation concerns cell means rather than individual orders. Under zero-shot transfer, nominal 80% interval coverage falls to 32% in ABIDES, requiring recalibration. Comparisons that change architecture and training recipe together, domain-specific scale, and sensitivity to incorrect intervention labels also constrain practical use.",
+          "reason": "The paper directly addresses the site's core themes by testing causal market-impact estimation using analytic confounding bias, intervention-input ablations, and counterfactual simulation. Real-market causal identification and superiority over existing methods remain unestablished, but the findings on market priors and intervention encoding make it worth recommending.",
+          "tags": [
+            "Market impact",
+            "Causal inference",
+            "Order execution",
+            "Market microstructure",
+            "Prior-data fitted networks",
+            "Counterfactual simulation",
+            "Zero-shot transfer",
+            "Prediction interval calibration"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 1016,
+          "outputTokens": 1023,
+          "reasoningTokens": 71,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2039,
+          "estimatedCostUsd": 0.000613,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.12537v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 17099,
+          "outputTokens": 1769,
+          "reasoningTokens": 194,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 17096,
+          "totalTokens": 18868,
+          "estimatedCostUsd": 0.060436,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 8,
+          "paperIds": [
+            "2610.12537v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.13044v1",
+        "title": "FOMO: FLEX Options and Market Outcomes",
+        "authors": [
+          "Shivesh Prakash",
+          "Frank Ferstler",
+          "Nicholas Pezolano"
+        ],
+        "submittedDate": "2026-10-09",
+        "updatedDate": "2026-10-09",
+        "categories": [
+          "q-fin.PR",
+          "q-fin.ST",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "個別株FLEXオプションの活動と、通常の上場オプション市場・原株の関係を検証する実証研究。本文の証拠は、FLEXを持続的な株価予測シグナルではなく、機関投資家のボラティリティ需要とポジショニングの観測指標として捉える解釈を支持している。",
+        "mainResult": "マッチング後のDiDでは、通常オプションの建玉対数に正の係数を報告する（$\\beta=0.3061$、BH調整後$p=0.0168$）。これは初回FLEXイベント以降の持続的な水準差であり、短期イベント窓の効果ではない。中価格帯のATM IVはFLEX銘柄で高い（$\\beta=0.1235$、$p=0.0030$）一方、全価格帯では有意でない。株式の異常収益差は当日のみで、広範な高IVストラドル売りの代理損益は費用控除後に有意でなく、1営業日の遅延で平均が負になる。",
+        "practicalApplication": "FLEX情報は、建玉形成の監視や、IVと実現ボラティリティの乖離が大きい銘柄の調査候補抽出に利用できる可能性がある。方向性売買や実運用への直接採用ではなく、脚別気配と情報公開時刻を用いた追加検証が必要である。",
+        "methodology": "2025年3月31日から2026年3月27日までの250営業日について、FLEX記録、通常オプション集計、株価、企業行動調整を結合する。指数・ETF・ETN・S&P 500構成銘柄を除いた41のFLEX銘柄、53イベントを対象に、対応標本検定、マッチング付き二方向固定効果DiD、動的事前トレンド検定、価格帯別IV回帰、調整済みCAR比較を実施する。戦略分析はスプレッド・手数料・遅延を仮定した代理損益である。",
+        "limitations": "標本が小さく、イベント時点は非ランダムで、決算などの交絡要因や処置効果の異質性に対するTWFEの懸念が残る。IVには事前トレンドの注意信号があり、ヘッジ需要による因果効果は識別されていない。戦略には実際のオプション価格・脚別約定がなく、遅延版もイベント日の古いプレミアムを使用する。流動性選別は全期間情報に基づき、良好な部分標本は11取引にすぎない。さらにIVは代理損益の定義にも入るため、IVと実現ボラティリティの差による回帰結果を独立した収益予測の証拠とはみなせない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "カスタマイズされた取引所オプションと通常市場の接点を扱い、市場構造の読者に関連性が高い。建玉の結果と執行費用・遅延による戦略劣化は参考になるが、因果推論や収益性の確証としてではなく探索的研究として推奨する。",
+        "tags": [
+          "FLEXオプション",
+          "オプション市場構造",
+          "建玉",
+          "インプライド・ボラティリティ",
+          "差の差分析",
+          "執行費用",
+          "ボラティリティ・キャリー"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This empirical study examines single-name FLEX activity in relation to regular listed-option markets and underlying equities. The full-text evidence supports interpreting FLEX as an observable marker of institutional volatility demand and positioning, rather than a persistent stock-return prediction signal.",
+          "mainResult": "Matched DiD reports a positive coefficient for regular-option log open interest ($\\beta=0.3061$, BH-adjusted $p=0.0168$). This measures a sustained level difference after the first FLEX event, not a short-window event effect. ATM IV is higher among FLEX names in the mid-price tier ($\\beta=0.1235$, $p=0.0030$), but the pooled result across tiers is insignificant. Equity abnormal-return differences appear only on the event day; the broad rich-IV short-straddle proxy is insignificant after costs and has a negative mean with a one-trading-day delay.",
+          "practicalApplication": "FLEX information may help monitor position formation and identify names warranting investigation for large gaps between implied and realized volatility. It requires further validation using leg-level quotes and information-release timestamps, rather than direct adoption for directional trading or production deployment.",
+          "methodology": "The study links FLEX records, regular-option aggregates, equity prices, and corporate-action adjustments over 250 trading days from March 31, 2025, to March 27, 2026. After excluding indices, ETFs, ETNs, and S&P 500 constituents, it analyzes 41 FLEX names and 53 events using paired tests, matched two-way fixed-effects DiD, dynamic pre-trend tests, price-tier IV regressions, and adjusted CAR comparisons. Strategy analysis uses proxy P&Ls with assumed spreads, fees, and latency.",
+          "limitations": "The sample is small, event timing is nonrandom, and concerns remain about confounders such as earnings and TWFE sensitivity to heterogeneous treatment effects. IV shows a pre-trend warning, and a causal hedging-demand effect is not identified. Strategies lack actual option prices and leg-level executions; the latency version also uses stale event-day premium. Liquidity screening uses full-period information, and the attractive subset contains only 11 trades. Moreover, IV enters the proxy P&L definition itself, so the implied-minus-realized-volatility regression cannot be treated as independent evidence of return predictability.",
+          "reason": "The paper addresses links between customized exchange-traded options and regular markets, making it relevant to market-structure readers. Its open-interest findings and strategy deterioration under costs and latency are informative, but it is recommended as exploratory research rather than confirmation of causality or profitability.",
+          "tags": [
+            "FLEX options",
+            "Option market structure",
+            "Open interest",
+            "Implied volatility",
+            "Difference-in-differences",
+            "Execution costs",
+            "Volatility carry"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 912,
+          "outputTokens": 791,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1703,
+          "estimatedCostUsd": 0.000487,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.13044v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 21,
+          "paperIds": [
+            "2610.13044v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 27826,
+          "outputTokens": 16000,
+          "reasoningTokens": 161,
+          "cachedInputTokens": 27823,
+          "cacheWriteTokens": 0,
+          "totalTokens": 43826,
+          "estimatedCostUsd": 0.162788,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 21,
+          "paperIds": [
+            "2610.13044v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 21,
+          "paperIds": [
+            "2610.13044v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 27826,
+          "outputTokens": 1659,
+          "reasoningTokens": 127,
+          "cachedInputTokens": 27823,
+          "cacheWriteTokens": 0,
+          "totalTokens": 29485,
+          "estimatedCostUsd": 0.019378,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 21,
+          "paperIds": [
+            "2610.13044v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 893,
+      "outputTokens": 893,
+      "reasoningTokens": 65,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1786,
+      "estimatedCostUsd": 0.000536,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.12477v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 1016,
+      "outputTokens": 1023,
+      "reasoningTokens": 71,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2039,
+      "estimatedCostUsd": 0.000613,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.12537v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 17099,
+      "outputTokens": 1769,
+      "reasoningTokens": 194,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 17096,
+      "totalTokens": 18868,
+      "estimatedCostUsd": 0.060436,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 8,
+      "paperIds": [
+        "2610.12537v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 776,
+      "outputTokens": 721,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1497,
+      "estimatedCostUsd": 0.000438,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.12587v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 795,
+      "outputTokens": 835,
+      "reasoningTokens": 123,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1630,
+      "estimatedCostUsd": 0.000497,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.12594v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 738,
+      "outputTokens": 649,
+      "reasoningTokens": 62,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1387,
+      "estimatedCostUsd": 0.000398,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.12718v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 745,
+      "outputTokens": 912,
+      "reasoningTokens": 110,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1657,
+      "estimatedCostUsd": 0.000531,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.12875v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 844,
+      "outputTokens": 856,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1700,
+      "estimatedCostUsd": 0.000512,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.12917v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 912,
+      "outputTokens": 791,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1703,
+      "estimatedCostUsd": 0.000487,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.13044v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": null,
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 21,
+      "paperIds": [
+        "2610.13044v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 27826,
+      "outputTokens": 16000,
+      "reasoningTokens": 161,
+      "cachedInputTokens": 27823,
+      "cacheWriteTokens": 0,
+      "totalTokens": 43826,
+      "estimatedCostUsd": 0.162788,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 21,
+      "paperIds": [
+        "2610.13044v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": null,
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 21,
+      "paperIds": [
+        "2610.13044v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 27826,
+      "outputTokens": 1659,
+      "reasoningTokens": 127,
+      "cachedInputTokens": 27823,
+      "cacheWriteTokens": 0,
+      "totalTokens": 29485,
+      "estimatedCostUsd": 0.019378,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 21,
+      "paperIds": [
+        "2610.13044v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 805,
+      "outputTokens": 934,
+      "reasoningTokens": 149,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1739,
+      "estimatedCostUsd": 0.000548,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.13126v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 880,
+      "outputTokens": 672,
+      "reasoningTokens": 58,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1552,
+      "estimatedCostUsd": 0.000424,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.13199v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 756,
+      "outputTokens": 702,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1458,
+      "estimatedCostUsd": 0.000427,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.13446v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 796,
+      "outputTokens": 749,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1545,
+      "estimatedCostUsd": 0.000454,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.13543v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 938,
+      "outputTokens": 923,
+      "reasoningTokens": 116,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1861,
+      "estimatedCostUsd": 0.000555,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.13574v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 886,
+      "outputTokens": 735,
+      "reasoningTokens": 103,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1621,
+      "estimatedCostUsd": 0.000456,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.13606v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 750,
+      "outputTokens": 822,
+      "reasoningTokens": 121,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1572,
+      "estimatedCostUsd": 0.000486,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.13785v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

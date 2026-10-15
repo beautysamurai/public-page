@@ -1,0 +1,291 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-10-15",
+  "generatedAt": "2026-10-15T11:57:49Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-10-15 was confirmed with 1 relevant paper(s).",
+  "expectedBatchDate": "2026-10-15",
+  "observedBatchDate": "2026-10-15",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2610.20366v1",
+        "title": "Regime Detection in Latent Factor Models -- A Bayesian Decision-Theoretic Approach",
+        "authors": [
+          "Karl Kristian Engelund"
+        ],
+        "submittedDate": "2026-10-14",
+        "updatedDate": "2026-10-14",
+        "categories": [
+          "q-fin.MF",
+          "q-fin.ST"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "潜在因子と隠れたレジームを持つ金融モデルで、誤警報・検出遅延・誤分類の損失を考慮して検出時点を選ぶ研究。事後分布を状態とする最適停止問題を構築し、レジーム依存の金利リスク価格を持つVasicekモデルと、単一変化点のHestonモデルで数値検証する。",
+        "mainResult": "Heston実験では、PFMCDPの推定損失は$0.424$で、同じ事後確率推定を使うPF plug-inの$0.433$より低かった。対応のある検定では$p=0.007319$だが、有意性は学習済みルールを固定した評価に限られる。真の分散を観測するoracleの損失は$0.412$だった。",
+        "practicalApplication": "債券価格から金利リスク価格のレジームを推定し、誤警報と対応の遅れを勘案して警報を出す仕組みに応用できる。ヘッジ変更やリバランスの判断支援が想定されるが、検出後の行動や運用収益は評価していない。",
+        "methodology": "潜在因子とレジームの条件付き分布をMarkov状態として、Bayesian最適停止問題を定式化する。bootstrap particle filterと回帰Monte Carlo動的計画法を組み合わせ、ridge回帰とcross-fittingで継続価値を近似する。分散観測下のHeston問題では、二次元の自由境界を導出してPSORで計算する。",
+        "limitations": "検証は未較正の模擬データに限定され、実市場での有効性や計算遅延は未検証。Hestonのconditional-likelihood事後確率は離散観測下では近似であり、信頼区間と比較検定は学習変動を含まない。理想的な連続観測では分散が価格から識別できるため、潜在情報の実務的な意義は離散観測にある。一般モデルでの近似精度や高次元での性能も確立していない。",
+        "importance": 1,
+        "recommended": true,
+        "reason": "Vasicek型金利モデルにおいて、レジーム推定と実際の警報判断を分ける方法を具体化しており、金利リスク管理の研究に有用。ただし、新しい金利期間構造モデルや実証的な執行改善を示す論文ではない。",
+        "tags": [
+          "レジーム検出",
+          "Bayesian意思決定",
+          "潜在因子",
+          "最適停止",
+          "粒子フィルタ",
+          "Vasicekモデル",
+          "Hestonモデル"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "The paper studies when to detect regimes in financial models with latent factors and hidden regimes, accounting for false-alarm, detection-delay, and misclassification losses. It constructs an optimal stopping problem with the posterior distribution as its state and tests it numerically in a Vasicek model with a regime-dependent market price of interest-rate risk and a single-change-point Heston model.",
+          "mainResult": "In the Heston experiment, PFMCDP achieved an estimated loss of $0.424$, below the PF plug-in loss of $0.433$ using the same posterior-probability estimate. A paired test gave $p=0.007319$, but significance is conditional on the fitted rules. The oracle observing true variance achieved a loss of $0.412$.",
+          "practicalApplication": "The approach could support alarms that infer interest-rate risk-price regimes from bond prices while balancing false alarms against delayed responses. Hedging adjustments and rebalancing are potential decision-support applications, but post-detection actions and investment returns are not evaluated.",
+          "methodology": "The conditional distribution of latent factors and regimes serves as the Markov state of a Bayesian optimal stopping problem. A bootstrap particle filter is combined with regression Monte Carlo dynamic programming, using ridge regression and cross-fitting to approximate continuation values. For Heston with observed variance, a two-dimensional free boundary is derived and computed using PSOR.",
+          "limitations": "Validation is restricted to uncalibrated simulated data; effectiveness in real markets and computational latency remain untested. The Heston conditional-likelihood posterior is approximate under discrete observation, and confidence intervals and comparison tests exclude training variability. Under ideal continuous observation, variance is identifiable from prices, so the practical relevance of latent information lies in discrete observation. Approximation accuracy in general models and high-dimensional performance are also not established.",
+          "reason": "The paper provides a concrete way to separate regime inference from alarm decisions in a Vasicek-type interest-rate model, making it useful for interest-rate risk-management research. It does not introduce a new term-structure model or demonstrate empirical execution improvements.",
+          "tags": [
+            "Regime detection",
+            "Bayesian decision-making",
+            "Latent factors",
+            "Optimal stopping",
+            "Particle filtering",
+            "Vasicek model",
+            "Heston model"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 751,
+          "outputTokens": 841,
+          "reasoningTokens": 154,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1592,
+          "estimatedCostUsd": 0.000496,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.20366v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 24502,
+          "outputTokens": 1447,
+          "reasoningTokens": 224,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 24499,
+          "totalTokens": 25949,
+          "estimatedCostUsd": 0.075723,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 25,
+          "paperIds": [
+            "2610.20366v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 731,
+      "outputTokens": 809,
+      "reasoningTokens": 84,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1540,
+      "estimatedCostUsd": 0.000478,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.18921v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 858,
+      "outputTokens": 816,
+      "reasoningTokens": 123,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1674,
+      "estimatedCostUsd": 0.000494,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.19045v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 796,
+      "outputTokens": 880,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1676,
+      "estimatedCostUsd": 0.00052,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.19254v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 40647,
+      "outputTokens": 1441,
+      "reasoningTokens": 172,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 40644,
+      "totalTokens": 42088,
+      "estimatedCostUsd": 0.116026,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 30,
+      "paperIds": [
+        "2610.19254v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 827,
+      "outputTokens": 872,
+      "reasoningTokens": 145,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1699,
+      "estimatedCostUsd": 0.000519,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.19720v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 806,
+      "outputTokens": 815,
+      "reasoningTokens": 80,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1621,
+      "estimatedCostUsd": 0.000488,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.20000v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 861,
+      "outputTokens": 744,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1605,
+      "estimatedCostUsd": 0.000458,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.20125v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 751,
+      "outputTokens": 841,
+      "reasoningTokens": 154,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1592,
+      "estimatedCostUsd": 0.000496,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.20366v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 24502,
+      "outputTokens": 1447,
+      "reasoningTokens": 224,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 24499,
+      "totalTokens": 25949,
+      "estimatedCostUsd": 0.075723,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 25,
+      "paperIds": [
+        "2610.20366v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

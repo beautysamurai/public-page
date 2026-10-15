@@ -1,0 +1,526 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-10-15",
+  "fingerprint": "cb0a29457c075fedc9167d3c82cb883acba87269cb88f4c18ff1555d1919f3f2",
+  "candidateFingerprints": {
+    "2610.18921": "4c0e486fe9df119c7c6c5e3f9e85e05c08035c8e025be81cff9157313bdd8555",
+    "2610.19045": "04079d5caaec9e0a60c2bbb47e6fb1876bd11dbdafbc7567c2df25c89a2ed2bb",
+    "2610.19254": "d0fe90bb699da2ab510733f77a1e4d61a5a35d2752d0483d1fcd5d482cd5ab7a",
+    "2610.19720": "6b26a29771369a9f162e6e3e1946374802d6f379a97fd7d3ad54f90eecb914a1",
+    "2610.20000": "dab0950b2996ad5818a611290f75d55bef90fa34d2cad3a39da97ac20a590f3d",
+    "2610.20125": "c86cd484dbf3fbbb647a439ec4543453a2d593d69e0650adb1b62bd0524bfff9",
+    "2610.20366": "a66a43a8e58eccab169a87f0daaa186dead7dfec681e47e794416914b129dd46"
+  },
+  "results": {
+    "2610.18921": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、AIと人間の創作物を比較する実験市場を通じて、人間が生産に関わることで優位性や消費者の選好を得るかを検証する。金融市場や電子取引を扱う研究ではない。",
+        "mainResult": "3つの研究（参加者合計1,025人）では、人間に味覚上の優位性があるという仮説も、人間の関与自体を消費者が好むという仮説も支持されなかった。AI単独で設計したゲームは、人間のアマチュアやプロの制作者によるゲームを上回り、人間制作者はこの優位性を予測できず、人間が設計したと明かしても消費者の支払意思額は増えなかった。",
+        "practicalApplication": "創作分野でのAI活用や消費者への制作主体の表示を考える際の参考にはなるが、金融実務への直接的な適用可能性は低い。",
+        "methodology": "参加者がAIコーディングエージェントとともにコンピューターゲームを制作する役割と、それらを購入する消費者の役割を担う実験を、3つの研究で実施した。",
+        "limitations": "抄録だけでは実験条件、効果量、統計的不確実性の詳細を確認できない。ゲーム制作と実験参加者の結果が、他の創作分野や実際の市場にも一般化するかは不明である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "実験市場を扱うものの、金融市場、電子取引、マーケットマイクロストラクチャー、金利モデルまたはイールドカーブとの実質的な関連がないため、対象範囲外。",
+        "tags": [
+          "AI",
+          "実験経済学",
+          "創作市場"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study uses an experimental market comparing AI- and human-created products to test whether human involvement provides a production advantage or attracts consumer preference. It does not study financial markets or electronic trading.",
+          "mainResult": "Across three studies with 1,025 participants, the results did not support either a human advantage in taste or a consumer preference for human involvement. Games designed by AI alone outperformed those made by amateur and professional human producers; human producers did not anticipate this advantage, and disclosing human authorship did not increase consumers’ willingness to pay.",
+          "practicalApplication": "The findings may inform AI use and disclosure of authorship in creative industries, but have little direct application to financial practice.",
+          "methodology": "Participants took the roles of producers designing computer games with an AI coding agent and consumers buying those games, in three experimental studies.",
+          "limitations": "The abstract does not provide details on experimental conditions, effect sizes, or statistical uncertainty. It is unclear whether results from game design and experimental participants generalize to other creative fields or real-world markets.",
+          "reason": "Although the study concerns an experimental market, it has no material connection to financial markets, electronic trading, market microstructure, interest-rate models, or yield curves, so it is out of scope.",
+          "tags": [
+            "AI",
+            "experimental economics",
+            "creative markets"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.19045": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "低・中所得国向け小児ワクチンの複数年調達入札と数量割引を最適化する研究である。",
+        "mainResult": "報告された分析では、入札目的が費用と日程の複雑さを左右し、数量割引は大規模生産者への集中と供給網の脆弱性を高める。割引への反応はワクチンの市場成熟度によって異なり、HPV・PCVでは価格競争力が不十分とされる。",
+        "practicalApplication": "調達計画者が目的の選択、割引設計、配合ワクチンへのアクセス維持を検討する際の参考となり得る。",
+        "methodology": "UNICEFの10年需要予測と30通りの需要反復を用い、6種類の割引シナリオの下で、調整主体の均衡目的、接種漏れを最小化する社会便益目的、生産者利益最大化目的を比較した。",
+        "limitations": "要旨からはモデルの仮定、費用・効果の定量値、感度分析の詳細を確認できない。結果は提示された予測、反復、割引シナリオに基づき、他の市場への一般化は不明である。金融市場、電子取引、金利・イールドカーブ研究には直接該当しない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "調達最適化とワクチン市場の研究であり、本サイトの金融・市場構造・金利分野との実質的な関連性がない。",
+        "tags": [
+          "ワクチン調達",
+          "数量割引",
+          "最適化",
+          "サプライチェーン"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study optimizes multi-year vaccine procurement tenders and quantity discounts for pediatric vaccines in low- and lower-middle-income countries.",
+          "mainResult": "The reported analysis finds that procurement objectives drive costs and schedule complexity, while quantity discounts favor large producers and increase supply-chain vulnerability. Responses to discounts vary with market maturity; HPV and PCV are reported to remain insufficiently price-competitive.",
+          "practicalApplication": "The findings may inform procurement planners considering objective selection, discount design, and access to combination vaccines.",
+          "methodology": "The study uses UNICEF ten-year demand forecasts and 30 demand replications to compare three procurement objectives across six discount scenarios: a balanced coordinating-entity objective, a social-benefit objective minimizing missed doses, and producer-profit maximization.",
+          "limitations": "The abstract does not provide model assumptions, quantitative cost or effect estimates, or details of sensitivity analyses. The findings depend on the stated forecasts, replications, and discount scenarios, and their generalizability to other markets is unclear. The work is not directly about financial markets, electronic trading, interest rates, or yield curves.",
+          "reason": "This is a study of procurement optimization and vaccine markets, with no material connection to the site's finance, market microstructure, or interest-rate topics.",
+          "tags": [
+            "vaccine procurement",
+            "quantity discounts",
+            "optimization",
+            "supply chain"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.19254": {
+      "status": "pdf_out_of_scope",
+      "screenAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "本研究は、Heston確率ボラティリティPDEの解と感応度を学習する構造化条件付きニューラルソルバーBeTINNを提案する。複数方向の時間・パラメータ条件付けと共同残差経路を用い、オプション価格と主要感応度の同時精度を評価した。",
+        "mainResult": "要旨によれば、BeTINNは比較対象のベースラインより、正規化オプション価格と主要感応度の同時精度を改善した。また、検証時の物理損失だけでは微分精度を十分に判定できず、価格値が正確でも局所的な微分誤差が残り得ると報告する。",
+        "practicalApplication": "Hestonモデルに基づく価格・感応度計算の近似や、条件の異なるパラメータ領域にわたるPDEソルバー構築に応用できる可能性がある。下流で感応度を使う場合、価格誤差だけでなく微分誤差も評価する必要性を示唆する。",
+        "methodology": "Heston確率ボラティリティPDEを対象に、BeTINNを既存ベースラインと比較し、アーキテクチャ要素の制御アブレーションと物理損失・微分精度の関係を評価したと要旨は述べる。",
+        "limitations": "要旨には、データ範囲、比較対象の詳細、定量的な改善幅、計算コスト、実運用環境での検証が示されていない。報告はHeston PDEの評価に限られ、他モデルや市場データへの一般化は確認できない。",
+        "importance": 3,
+        "recommended": false,
+        "reason": "確率ボラティリティ価格付けにおけるニューラルPDEソルバーと感応度評価には関連するが、主題は金利モデル・イールドカーブ・電子取引・市場マイクロストラクチャではなく、対象サイトの中核領域との直接性は低い。",
+        "tags": [
+          "Hestonモデル",
+          "確率ボラティリティ",
+          "ニューラルPDEソルバー",
+          "オプション価格",
+          "感応度評価"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This study proposes BeTINN, a structured conditional neural solver for learning solutions and sensitivities of the Heston stochastic-volatility PDE. It uses multidirectional time-parameter conditioning and a joint residual pathway, evaluating joint accuracy for option values and key sensitivities.",
+          "mainResult": "According to the abstract, BeTINN improves joint accuracy for normalized option values and key sensitivities relative to the baselines. It also reports that validation physics loss does not fully determine differential fidelity, and that accurate values may coexist with localized derivative errors.",
+          "practicalApplication": "The approach may be applicable to approximating prices and sensitivities under the Heston model and building PDE solvers across varying parameter regimes. When sensitivities are downstream quantities of interest, the abstract suggests evaluating derivative errors in addition to value errors.",
+          "methodology": "The abstract reports comparisons of BeTINN with baselines on the Heston stochastic-volatility PDE, controlled ablations of architectural components, and an assessment of the relationship between physics loss and differential accuracy.",
+          "limitations": "The abstract does not specify the data range, baseline details, quantitative improvement, computational cost, or validation in production settings. The evaluation is limited to the Heston PDE, so generalization to other models or market data is unestablished.",
+          "reason": "The work is relevant to neural PDE solvers and sensitivity evaluation for stochastic-volatility pricing, but its focus is not interest-rate models, yield curves, electronic trading, or market microstructure, making it peripheral to the site's core scope.",
+          "tags": [
+            "Heston model",
+            "stochastic volatility",
+            "neural PDE solver",
+            "option pricing",
+            "sensitivity evaluation"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "BeTINNは、時間とモデルパラメータによる多方向の重み変調に残差ネットワークを組み合わせた、教師データ不要のPDE近似器である。Hestonモデルの欧州コール価格とGreeksを評価し、価格精度や物理損失だけでは微分精度を判断できないと報告している。",
+        "mainResult": "6シードの容量整合比較で、BeTINNは正規化価格、Delta、行使価格でスケールしたGamma、分散感応度の平均MAEが最小だった。価格MAEはBeTINNが$0.00746$、PINNが$0.00857$だった。ただしGammaのRMSEはPINNが最小で、局所領域でも一様な優位性はなかった。",
+        "practicalApplication": "Heston価格と感応度を繰り返し計算する代理モデルとして、ヘッジやリスク分析への応用が考えられる。ただし、実際のヘッジ成績、較正性能、金利商品の価格付けは検証していない。",
+        "methodology": "8次元の状態・時間・パラメータ領域で、PDE残差、満期ペイオフ、価格方向の境界条件を用いて学習する。学習可能パラメータ数を近づけたTINN、PINN、PI-DeepONetと共通の最適化条件で比較し、独立した固定1万点と半解析Heston解で評価した。構成要素のアブレーション、領域別誤差、形状制約違反、計算コストも調べている。",
+        "limitations": "有限領域の境界近似は長期・高分散で誤差を生み、分散方向には明示的な境界条件がない。満期近傍のATM部分集合は8点と小さく、局所的なGamma誤差や形状・符号制約違反も残る。無裁定性の保証はなく、BeTINNの順伝播コストは比較モデル中で最大だった。Wave方程式では優位性がなく、別手順で学習したDeepSVM-adaptedとの比較は元手法全般への優越を示さない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "微分精度を重視した代理モデル評価は有用だが、中心課題はHestonオプション価格付けである。金利は入力パラメータと感応度として扱うのみで、電子執行、市場マイクロストラクチャー、金利モデル、イールドカーブへの実質的な貢献は示されていない。",
+        "tags": [
+          "Hestonモデル",
+          "確率的ボラティリティ",
+          "物理情報ニューラルネットワーク",
+          "条件付き重み変調",
+          "オプション価格付け",
+          "Greeks精度",
+          "無裁定性の限界"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "BeTINN is a PDE surrogate requiring no labeled solution data, combining multidirectional weight modulation conditioned on time and model parameters with a residual network. The paper evaluates European call prices and Greeks under Heston and reports that price accuracy or physics loss alone cannot determine derivative accuracy.",
+          "mainResult": "In capacity-matched comparisons across six seeds, BeTINN achieved the lowest mean MAE for normalized price, Delta, strike-scaled Gamma, and variance sensitivity. Price MAE was $0.00746$ for BeTINN versus $0.00857$ for PINN. However, PINN achieved the lowest Gamma RMSE, and BeTINN did not uniformly outperform in local regions.",
+          "practicalApplication": "The surrogate could support hedging and risk analysis requiring repeated Heston price and sensitivity calculations. However, actual hedging performance, calibration performance, and interest-rate instrument pricing were not tested.",
+          "methodology": "Training over an eight-dimensional state–time–parameter domain uses PDE residuals, the maturity payoff, and price-direction boundary conditions. TINN, PINN, and PI-DeepONet with similar trainable parameter counts are compared under shared optimization conditions, using an independent frozen 10,000-point panel and a semi-analytic Heston solution for evaluation. Component ablations, regional errors, shape-constraint violations, and computational costs are also examined.",
+          "limitations": "Finite-domain boundary approximations introduce errors at long maturities and high variance, and no explicit variance-direction boundary conditions are imposed. The near-maturity ATM subset contains only eight points, while localized Gamma errors and shape and sign violations remain. There is no arbitrage-consistency guarantee, and BeTINN has the highest forward-inference cost among the compared models. It shows no advantage on the Wave equation, and comparison with the separately trained DeepSVM-adapted implementation does not establish superiority over the original method generally.",
+          "reason": "Derivative-aware surrogate evaluation is useful, but the central topic is Heston option pricing. Interest rates appear only as an input parameter and sensitivity; no material contribution to electronic execution, market microstructure, interest-rate models, or yield curves is demonstrated.",
+          "tags": [
+            "Heston model",
+            "Stochastic volatility",
+            "Physics-informed neural networks",
+            "Conditional weight modulation",
+            "Option pricing",
+            "Greeks accuracy",
+            "Arbitrage-consistency limitations"
+          ]
+        }
+      }
+    },
+    "2610.19720": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "テキストから作る説明変数の選択と、効果を線形・非線形のどちらで扱うかを同時に決める手法を提案し、ECBの記者会見と専門家のインフレ期待を用いて例示する研究です。",
+        "mainResult": "224回のECB記者会見から作成した45指標のうち、少数の指標が選択され、一般的に使われる代替指標や検討された非線形効果には追加的な情報がなかったと報告しています。",
+        "practicalApplication": "テキスト指標を用いる実証分析で、指標の選択や関数形に関するモデル不確実性を扱う用途が想定されます。金利予測や執行への直接的な応用は、要旨からは示されていません。",
+        "methodology": "共変量の選択と効果の線形・非線形性を同時に扱う spike-and-slab generalized additive model（SSGAM）を提案し、2002年末から2025年半ばまでのECB記者会見と専門家のインフレ期待に適用しています。",
+        "limitations": "要旨のみでは推定の詳細、指標選択の頑健性、予測性能や他の中央銀行・期間への一般化を評価できません。結果は対象としたECB資料と期待指標に限られます。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "モデル選択手法は関連性がありますが、研究の中心はテキスト分析と中央銀行コミュニケーションであり、電子取引、市場マイクロ構造、金利モデル、イールドカーブを直接扱っていません。",
+        "tags": [
+          "テキスト分析",
+          "モデル不確実性",
+          "中央銀行コミュニケーション",
+          "インフレ期待"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study proposes a method that jointly selects text-derived covariates and determines whether to model their effects as linear or nonlinear, illustrating it with ECB press conferences and professional inflation expectations.",
+          "mainResult": "Among 45 indicators constructed from 224 ECB press conferences, a small subset was selected; commonly used alternatives and the tested nonlinear effects reportedly added no information.",
+          "practicalApplication": "The method may help empirical analyses using text indicators address uncertainty about covariate selection and functional form. The abstract does not indicate direct applications to interest-rate forecasting or execution.",
+          "methodology": "The authors propose spike-and-slab generalized additive models (SSGAMs), which jointly handle covariate selection and linear versus nonlinear effects, and apply them to ECB press conferences from late 2002 to mid-2025 and professional inflation expectations.",
+          "limitations": "The abstract does not provide enough detail to assess estimation procedures, robustness of indicator selection, predictive performance, or generalizability to other central banks and periods. The reported findings are limited to the ECB material and expectations measure studied.",
+          "reason": "Although the model-selection method is relevant, the study primarily concerns text analysis and central-bank communication; it does not directly address electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "text analysis",
+            "model uncertainty",
+            "central-bank communication",
+            "inflation expectations"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.20000": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "Feller条件を仮定しないHestonモデルの有限満期アメリカン・プットについて、正の分散領域とゼロ分散境界における行使境界の滑らかさや接触性を解析する研究です。",
+        "mainResult": "抄録によれば、正の分散では行使境界は滑らかで、残存満期と分散に対して狭義単調減少します。ゼロ分散軸では境界が連続に延長され、分散方向のsmooth fitが破れることなどを示しています。",
+        "practicalApplication": "Hestonモデルのアメリカン・プット価格付けにおける行使境界の理論的理解に資する可能性がありますが、電子取引、マーケット・マイクロストラクチャー、金利モデルやイールドカーブへの直接的な応用は抄録から確認できません。",
+        "methodology": "有限満期Hestonモデルの行使境界と継続価値を解析し、境界の正則性、ゼロ分散軸での挙動、定量的な境界ギャップ評価を導いています。",
+        "limitations": "評価は抄録の記述に限られます。境界ギャップの厳密な漸近同値は未解決と記載されています。また、数値検証や実務性能については抄録に情報がありません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "確率ボラティリティ下のオプション理論としては専門的な結果ですが、対象サイトの中心分野である電子執行、マイクロストラクチャー、金利・イールドカーブには直接該当しません。",
+        "tags": [
+          "Hestonモデル",
+          "アメリカン・プット",
+          "行使境界",
+          "確率ボラティリティ"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes the smoothness and contact behavior of the exercise boundary for finite-maturity American puts in the Heston model without the Feller condition, including at zero variance.",
+          "mainResult": "According to the abstract, the boundary is smooth and strictly decreasing in remaining maturity and variance at positive variance. It extends continuously to the zero-variance axis, where the paper reports, among other results, failure of smooth fit in the variance direction.",
+          "practicalApplication": "The results may support theoretical understanding of exercise boundaries in American-put pricing under the Heston model. The abstract does not establish direct applications to electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "methodology": "The paper analytically studies the exercise boundary and continuation premium in the finite-maturity Heston model, deriving boundary regularity, behavior at the zero-variance axis, and quantitative boundary-gap bounds.",
+          "limitations": "This assessment is based only on the abstract. Exact asymptotic equivalents for the boundary gap remain open, as stated in the abstract. The abstract provides no information on numerical validation or practical performance.",
+          "reason": "This is a specialized result in stochastic-volatility option theory, but it does not directly address the site's core areas of electronic execution, market microstructure, interest rates, or yield curves.",
+          "tags": [
+            "Heston model",
+            "American puts",
+            "exercise boundary",
+            "stochastic volatility"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.20125": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、容量制約のあるネットワークでガス輸送ルートを割り当てるオークション機構と支払規則を分析します。",
+        "mainResult": "供給源が全参加者に共通の条件ではVCG支払がコア安定となる一方、供給源へのアクセスが参加者ごとに異なる一般モデルではVCG支払がコアの外に出る場合があります。一般モデル向けに提案する双対価格規則は常にコア安定ですが、支配戦略誘因適合性を失います。",
+        "practicalApplication": "容量制約のあるガス輸送ネットワークのルート配分や決済設計に応用できる可能性がありますが、金融市場の電子執行や金利分析への直接的な適用は示されていません。",
+        "methodology": "OD入札言語を定義し、ネットワークフロー最適化による落札者決定問題を分析します。制約付きモデルではフロー構造と劣モジュラ性を用いてVCGの性質を示し、一般モデルではフロー保存制約の双対価格に基づく規則を提案しています。",
+        "limitations": "提示された要旨では、結果は理論分析と例示に基づき、実ネットワークでの実証や運用評価は報告されていません。また、主要な性質は供給源へのアクセス条件に依存します。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "オークション理論とネットワーク配分を扱う研究ですが、対象はガス輸送であり、当サイトの電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブとの実質的な関連はありません。",
+        "tags": [
+          "オークション設計",
+          "ネットワークフロー",
+          "ガス輸送",
+          "コア安定性"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes auction mechanisms and payment rules for allocating gas transport routes in capacity-constrained networks.",
+          "mainResult": "With common source conditions for all participants, VCG payments are core-stable; in the general model, where source access can vary by participant, VCG payments may fall outside the core. The proposed dual-pricing rule for the general model is always core-stable but loses dominant-strategy incentive compatibility.",
+          "practicalApplication": "The results may apply to route allocation and settlement design in capacity-constrained gas networks, but no direct application to electronic execution or interest-rate analysis is shown.",
+          "methodology": "The paper defines an OD bidding language and analyzes a winner-determination problem based on network-flow optimization. It uses flow structure and submodularity to establish VCG properties in a restricted model, and proposes a rule based on dual prices of flow-conservation constraints for the general model.",
+          "limitations": "According to the abstract, the results rely on theoretical analysis and illustrative examples; empirical or operational evaluation on real networks is not reported. The main properties also depend on assumptions about source access.",
+          "reason": "The research concerns auction theory and network allocation, but its focus is gas transport and it has no material connection to the site's areas of electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "auction design",
+            "network flow",
+            "gas transport",
+            "core stability"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.20366": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "潜在因子と隠れたレジームを含むモデルで、誤警報・検出遅延・誤分類の費用を考慮したオンライン検出をベイズ意思決定問題として定式化する。",
+        "mainResult": "Hestonモデルとレジーム転換Vasicekモデルの数値実験では、潜在情報に基づく手法が実行可能なプラグイン則を上回る場合が報告されている。",
+        "practicalApplication": "金利やボラティリティのモデルで、推定されたレジーム変化にいつ対応するかを判断する枠組みになり得る。ただし、実運用での有効性は示されていない。",
+        "methodology": "事後レジーム確率が一般に非マルコフ的である点に対処し、測度値最適停止問題として定式化する。粒子フィルタとモンテカルロ動的計画法で近似し、観測分散・潜在分散のHeston設定およびVasicekモデルで評価する。",
+        "limitations": "提示された抄録には、性能差の定量値、比較条件、感度分析や実データでの検証が記載されていない。結果は数値実験に基づく報告であり、一般的な優位性は確認できない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "レジーム検出を具体的な意思決定問題として扱い、金利モデルを含む応用例を示すため、金利モデル研究の読者に関連する。",
+        "tags": [
+          "レジーム検出",
+          "ベイズ意思決定",
+          "粒子フィルタ",
+          "Hestonモデル",
+          "Vasicekモデル"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "The paper formulates online detection in models with latent factors and hidden regimes as a Bayesian decision problem that accounts for false alarms, detection delay, and misclassification costs.",
+          "mainResult": "Numerical experiments in Heston and regime-switching Vasicek models report cases in which the latent-information procedure outperforms feasible plug-in rules.",
+          "practicalApplication": "The framework could help determine when to act on inferred regime changes in interest-rate or volatility models. Its effectiveness in real-world deployment is not established.",
+          "methodology": "To address the generally non-Markovian posterior regime probabilities, the problem is formulated as measure-valued optimal stopping. It is approximated with particle filtering and Monte Carlo dynamic programming, and evaluated in Heston settings with observed or latent variance and in a Vasicek model.",
+          "limitations": "The abstract provides no quantitative performance differences, comparison details, sensitivity analyses, or real-data validation. The reported results are based on numerical experiments and do not establish general superiority.",
+          "reason": "The paper treats regime detection as a concrete decision problem and includes applications to interest-rate models, making it relevant to readers interested in rates models.",
+          "tags": [
+            "regime detection",
+            "Bayesian decision theory",
+            "particle filtering",
+            "Heston model",
+            "Vasicek model"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "潜在因子と隠れたレジームを持つ金融モデルで、誤警報・検出遅延・誤分類の損失を考慮して検出時点を選ぶ研究。事後分布を状態とする最適停止問題を構築し、レジーム依存の金利リスク価格を持つVasicekモデルと、単一変化点のHestonモデルで数値検証する。",
+        "mainResult": "Heston実験では、PFMCDPの推定損失は$0.424$で、同じ事後確率推定を使うPF plug-inの$0.433$より低かった。対応のある検定では$p=0.007319$だが、有意性は学習済みルールを固定した評価に限られる。真の分散を観測するoracleの損失は$0.412$だった。",
+        "practicalApplication": "債券価格から金利リスク価格のレジームを推定し、誤警報と対応の遅れを勘案して警報を出す仕組みに応用できる。ヘッジ変更やリバランスの判断支援が想定されるが、検出後の行動や運用収益は評価していない。",
+        "methodology": "潜在因子とレジームの条件付き分布をMarkov状態として、Bayesian最適停止問題を定式化する。bootstrap particle filterと回帰Monte Carlo動的計画法を組み合わせ、ridge回帰とcross-fittingで継続価値を近似する。分散観測下のHeston問題では、二次元の自由境界を導出してPSORで計算する。",
+        "limitations": "検証は未較正の模擬データに限定され、実市場での有効性や計算遅延は未検証。Hestonのconditional-likelihood事後確率は離散観測下では近似であり、信頼区間と比較検定は学習変動を含まない。理想的な連続観測では分散が価格から識別できるため、潜在情報の実務的な意義は離散観測にある。一般モデルでの近似精度や高次元での性能も確立していない。",
+        "importance": 1,
+        "recommended": true,
+        "reason": "Vasicek型金利モデルにおいて、レジーム推定と実際の警報判断を分ける方法を具体化しており、金利リスク管理の研究に有用。ただし、新しい金利期間構造モデルや実証的な執行改善を示す論文ではない。",
+        "tags": [
+          "レジーム検出",
+          "Bayesian意思決定",
+          "潜在因子",
+          "最適停止",
+          "粒子フィルタ",
+          "Vasicekモデル",
+          "Hestonモデル"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "The paper studies when to detect regimes in financial models with latent factors and hidden regimes, accounting for false-alarm, detection-delay, and misclassification losses. It constructs an optimal stopping problem with the posterior distribution as its state and tests it numerically in a Vasicek model with a regime-dependent market price of interest-rate risk and a single-change-point Heston model.",
+          "mainResult": "In the Heston experiment, PFMCDP achieved an estimated loss of $0.424$, below the PF plug-in loss of $0.433$ using the same posterior-probability estimate. A paired test gave $p=0.007319$, but significance is conditional on the fitted rules. The oracle observing true variance achieved a loss of $0.412$.",
+          "practicalApplication": "The approach could support alarms that infer interest-rate risk-price regimes from bond prices while balancing false alarms against delayed responses. Hedging adjustments and rebalancing are potential decision-support applications, but post-detection actions and investment returns are not evaluated.",
+          "methodology": "The conditional distribution of latent factors and regimes serves as the Markov state of a Bayesian optimal stopping problem. A bootstrap particle filter is combined with regression Monte Carlo dynamic programming, using ridge regression and cross-fitting to approximate continuation values. For Heston with observed variance, a two-dimensional free boundary is derived and computed using PSOR.",
+          "limitations": "Validation is restricted to uncalibrated simulated data; effectiveness in real markets and computational latency remain untested. The Heston conditional-likelihood posterior is approximate under discrete observation, and confidence intervals and comparison tests exclude training variability. Under ideal continuous observation, variance is identifiable from prices, so the practical relevance of latent information lies in discrete observation. Approximation accuracy in general models and high-dimensional performance are also not established.",
+          "reason": "The paper provides a concrete way to separate regime inference from alarm decisions in a Vasicek-type interest-rate model, making it useful for interest-rate risk-management research. It does not introduce a new term-structure model or demonstrate empirical execution improvements.",
+          "tags": [
+            "Regime detection",
+            "Bayesian decision-making",
+            "Latent factors",
+            "Optimal stopping",
+            "Particle filtering",
+            "Vasicek model",
+            "Heston model"
+          ]
+        }
+      }
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 731,
+      "outputTokens": 809,
+      "reasoningTokens": 84,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1540,
+      "estimatedCostUsd": 0.000478,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.18921v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 858,
+      "outputTokens": 816,
+      "reasoningTokens": 123,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1674,
+      "estimatedCostUsd": 0.000494,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.19045v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 796,
+      "outputTokens": 880,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1676,
+      "estimatedCostUsd": 0.00052,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.19254v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 40647,
+      "outputTokens": 1441,
+      "reasoningTokens": 172,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 40644,
+      "totalTokens": 42088,
+      "estimatedCostUsd": 0.116026,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 30,
+      "paperIds": [
+        "2610.19254v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 827,
+      "outputTokens": 872,
+      "reasoningTokens": 145,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1699,
+      "estimatedCostUsd": 0.000519,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.19720v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 806,
+      "outputTokens": 815,
+      "reasoningTokens": 80,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1621,
+      "estimatedCostUsd": 0.000488,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.20000v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 861,
+      "outputTokens": 744,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1605,
+      "estimatedCostUsd": 0.000458,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.20125v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 751,
+      "outputTokens": 841,
+      "reasoningTokens": 154,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1592,
+      "estimatedCostUsd": 0.000496,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.20366v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 24502,
+      "outputTokens": 1447,
+      "reasoningTokens": 224,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 24499,
+      "totalTokens": 25949,
+      "estimatedCostUsd": 0.075723,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 25,
+      "paperIds": [
+        "2610.20366v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

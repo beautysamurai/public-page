@@ -2,6 +2,123 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-10-16-daily-openai-01",
+      "date": "2026-10-16",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.21057v1",
+          "title": "Loss-versus-rebalancing with external proportional transaction costs",
+          "authors": [
+            "Masaaki Fukasawa"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21442v1",
+          "title": "Fundamental Theorem of Discrete Asset Pricing",
+          "authors": [
+            "Masaaki Fukasawa"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21491v1",
+          "title": "NEST: Stale-Robust Tokenized-Stock Measurement for a Crypto-Treasury LETF Stack",
+          "authors": [
+            "Doohwi Cha",
+            "Minsuk Sung",
+            "Minjae Lee",
+            "Hyeonjun Yeo",
+            "Hanhee Kim",
+            "Seunghan Son",
+            "Donghwa Seo",
+            "Juyeong Lee"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21510v1",
+          "title": "How Much Screening Buys a Second? Speed, Selection, and the Maker's Spread",
+          "authors": [
+            "Aleksei Adadurov",
+            "Eduard Airapetian",
+            "Anton Chtepine",
+            "Antero Eloranta",
+            "Boris Pletenev",
+            "Andrei Sebyakin",
+            "Arsenii Valitov"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21846v1",
+          "title": "Where Backtests and Live Trading Part Ways: Six Defects from One Intraday System",
+          "authors": [
+            "Alex Vidovich",
+            "Zivana Zerjal"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21081v1",
+          "title": "StochLOB: Heavy-Tailed Score Matching for Robust Limit Order Book Trend Prediction",
+          "authors": [
+            "Arshia Abolghasemi",
+            "Seyed Reza Tavakoli",
+            "Parsa Naderi",
+            "Nazanin Mirzaei",
+            "Behrad Jahani",
+            "Saba Yousefzadeh",
+            "Tahereh Javaheri",
+            "Mohammad Hosein Rohban",
+            "Gholamali Aminian",
+            "Ali Habibnia"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21841v1",
+          "title": "Feeling the generalised rough SABR boundary",
+          "authors": [
+            "Masaaki Fukasawa",
+            "Antoine Jacquier",
+            "Mugad Oumgari"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-15-daily-openai-01",
       "date": "2026-10-15",
       "kind": "daily",

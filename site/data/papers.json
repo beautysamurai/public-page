@@ -2,6 +2,47 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-10-22-daily-openai-01",
+      "date": "2026-10-22",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.28753v1",
+          "title": "Understanding the Inner Workings of a State-Space Foundation Model for Limit Order Books",
+          "authors": [
+            "Valentin Mohl",
+            "Alexandre Bismuth",
+            "Aramis Marti-Shahandeh",
+            "George Nigmatulin",
+            "Kang Li",
+            "Stefan Zohren",
+            "Jakob Foerster",
+            "Mihai Cucuringu",
+            "Anisoara Calinescu"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.28863v1",
+          "title": "A game-theoretic analysis of the market microstructure in decentralized exchanges with concentrated liquidity",
+          "authors": [
+            "Mikhail Belokon",
+            "Rostislav Berezovskiy"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-18-daily-openai-01",
       "date": "2026-10-18",
       "kind": "daily",

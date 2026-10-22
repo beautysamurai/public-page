@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-10-22-daily-openai-01",
+  "editionDate": "2026-10-22",
+  "editionKind": "daily",
+  "sourceKind": "openai-responses-api",
+  "sourceLabel": "OpenAI Responses API · automated research pipeline",
+  "importedAt": "2026-10-22T12:16:38Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXivの更新を確認し、対象論文を評価しました。",
+  "expectedBatchDate": "2026-10-22",
+  "observedBatchDate": "2026-10-22",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年10月22日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 11 | 9,906 | 9,341 (852) | 0.0057 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | PDF全文・9ページ・未完了の試行 |\n| 論文解析 | gpt-6.1-sol / medium | 4 | 85,597 | 35,020 (602) | 0.4219 | PDF全文・9ページ・未完了の試行 / PDF全文・9ページ / PDF全文・30ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Understanding the Inner Workings of a State-Space Foundation Model for Limit Order Books\n\n**[arXiv:2610.28753v1](https://arxiv.org/abs/2610.28753v1) — Valentin Mohl, Alexandre Bismuth, Aramis Marti-Shahandeh, George Nigmatulin, Kang Li, Stefan Zohren, Jakob Foerster, Mihai Cucuringu, Anisoara Calinescu**\n\n### 概要\n\n注文メッセージのみで学習した820万パラメータのMamba-3を解析し、注文フロー不均衡（OFI）、出来高、実現ボラティリティが主に再帰状態に表現されると報告している。内部状態の操作は次メッセージの予測分布を変えるが、生成市場の制御や将来価格の予測力は限定的である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 市場マイクロストラクチャー / 指値注文板 / 状態空間モデル / 機構的解釈可能性 / 注文フロー不均衡 / 内部状態への介入 / 市場シミュレーション |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** LOB生成モデルの内部表現を、復元精度だけでなく介入と対照実験で検証しており、市場シミュレータの診断に有益である。表現の豊かさ、生成市場の制御可能性、将来予測力を区別した点を評価する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 892 | 974 (150) | 0.0006 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | PDF全文・9ページ・未完了の試行 |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 19,764 | 16,000 (124) | 0.1620 | PDF全文・9ページ・未完了の試行 |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 19,764 | 16,000 (162) | 0.1620 | PDF全文・9ページ・未完了の試行 |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 19,764 | 1,517 (148) | 0.0172 | PDF全文・9ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 500メッセージのOFIは再帰状態から$R^2=0.59$で復元され、時系列順の交差検証では$R^2=0.53$、現在の板スナップショットでは$R^2=0.12$だった。特徴方向への状態操作は予測分布を単調に変化させた一方、生成経路の価格・ボラティリティ制御は確認できなかった。将来25メッセージのミッド価格変化は$R^2\\approx0.04$で、板情報と同程度にとどまった。\n\n**手法:** 米国大型株8銘柄の2022～2025年のメッセージ列で自己回帰学習し、2026年1月のGOOGの2,014窓を中心に評価した。再帰状態と残差ストリームをridge probeで比較し、日単位の入れ子交差検証、時系列順交差検証、日ブロックbootstrap、ランダム重みモデル、板情報ベースラインで検証した。再帰計算の厳密な分解によるメッセージ寄与分析と、特徴方向への介入・matching engineでの再生も実施した。\n\n**実務への応用:** 内部状態から市場統計を直接読み出す特徴量抽出や、状態操作によるシナリオ生成の研究に有用である。ただし、低遅延運用の実測、執行コストの改善、取引収益の検証はなく、そのまま実運用可能な予測・執行モデルとは評価できない。\n\n**限界・注意点:** 主評価は20営業日で、単一モデル構成と米国株に限られる。未学習2銘柄でも復元可能だったが、固定probeの銘柄間転移を示したわけではなく、OFIの極端値では性能が低下した。裾を抑える評価の改善は極端値の再現性を保証しない。介入が示すのはモデル内部の因果効果であり、現実市場の因果関係や整合的な世界モデルの確立ではない。\n\n## 2. A game-theoretic analysis of the market microstructure in decentralized exchanges with concentrated liquidity\n\n**[arXiv:2610.28863v1](https://arxiv.org/abs/2610.28863v1) — Mikhail Belokon, Rostislav Berezovskiy**\n\n### 概要\n\n集中流動性DEXにおけるLPのレンジ幅選択と再配置を、手数料獲得競争を伴う平均場ゲームとして分析する。均衡の一般理論と、境界到達時に再配置する戦略の収益性分析を区別している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 市場マイクロストラクチャー / 分散型取引所 / 集中流動性 / 平均場ゲーム / 流動性供給 / 再配置費用 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** DEXの手数料競争と再配置費用を解析可能な枠組みで結び、観測可能な収益性指標を提示するため推薦する。ただし、実証は均衡機構や運用利益を確証しておらず、戦略設計の基礎研究として読むべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 923 | 1,038 (144) | 0.0006 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 26,305 | 1,503 (168) | 0.0808 | PDF全文・30ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 平均化ゲームでは均衡の存在と集計流動性・価値関数の一意性を示す。境界再配置に限定した定常モデルでは、臨界ボラティリティ$\\sigma_c^2=4f\\bar V/(\\sqrt{\\bar q}\\bar L)$、最適幅の近似式、自由参入条件を導く。Ethereumの0.3%プールでは$\\sigma/\\sigma_c=0.983$、95%信頼区間は$[0.945,1.023]$と報告するが、収益性や自由参入の因果的証拠ではない。\n\n**手法:** 有限状態の連続時間Markov制御をHJB–KFE系で定式化し、固定点と手数料希薄化の単調性で均衡を分析する。実際の価格への再配置はoffset過程と更新報酬法で別途解析し、2024年1月から2026年7月の5つのWETH/USDCプールについて、時間足データとblock bootstrapで検証する。\n\n**実務への応用:** 手数料、出来高、active-tick流動性からLPの収益余地を点検し、再配置費用を含むレンジ幅・最低参入資本の感応度分析に使える。ただし、参入判定は戦略と費用の仮定に依存し、そのまま売買判断には使えない。\n\n**限界・注意点:** 平均化ゲームと実際の再配置ゲームを結ぶ極限定理はなく、一般的な存在・一意性の結果を後者へ移せない。定常解は境界再配置、高速執行、外生的な価格・注文フロー、リスク中立性に依存する。対数価格の無ドリフト仮定が重要で、価格をマルチンゲールにすると厳格な参入上限は失われる。観測された比率は裁定取引だけでも説明可能で、複数プールは理論上限を超え、バックテストにも損失が残る。ジャンプによる境界超過や費用設定の不確実性から、資本閾値の精度は限定的である。",
+  "papers": [
+    {
+      "arxivId": "2610.28753v1",
+      "title": "Understanding the Inner Workings of a State-Space Foundation Model for Limit Order Books",
+      "authors": [
+        "Valentin Mohl",
+        "Alexandre Bismuth",
+        "Aramis Marti-Shahandeh",
+        "George Nigmatulin",
+        "Kang Li",
+        "Stefan Zohren",
+        "Jakob Foerster",
+        "Mihai Cucuringu",
+        "Anisoara Calinescu"
+      ],
+      "submittedDate": "2026-10-20",
+      "updatedDate": "2026-10-20",
+      "topics": [
+        "Market microstructure"
+      ],
+      "absUrl": "https://arxiv.org/abs/2610.28753v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.28753v1",
+      "schedulerRank": 1,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・テーマ重要度 8/10",
+      "schedulerSummary": "注文メッセージのみで学習した820万パラメータのMamba-3を解析し、注文フロー不均衡（OFI）、出来高、実現ボラティリティが主に再帰状態に表現されると報告している。内部状態の操作は次メッセージの予測分布を変えるが、生成市場の制御や将来価格の予測力は限定的である。\n\n一次判定: gpt-6-luna / low · トークン 入力 892 / 出力 974（うち推論 150） · 推定 $0.0006\n論文解析: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · PDF 9 pages · 未完了の試行\n論文解析: gpt-6.1-sol / medium · トークン 入力 19,764 / 出力 16,000（うち推論 124） · PDF 9 pages · 未完了の試行 · 推定 $0.1620\n論文解析: gpt-6.1-sol / medium · トークン 入力 19,764 / 出力 16,000（うち推論 162） · PDF 9 pages · 未完了の試行 · 推定 $0.1620\n論文解析: gpt-6.1-sol / medium · トークン 入力 19,764 / 出力 1,517（うち推論 148） · PDF 9 pages · 推定 $0.0172",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2610.28863v1",
+      "title": "A game-theoretic analysis of the market microstructure in decentralized exchanges with concentrated liquidity",
+      "authors": [
+        "Mikhail Belokon",
+        "Rostislav Berezovskiy"
+      ],
+      "submittedDate": "2026-10-20",
+      "updatedDate": "2026-10-20",
+      "topics": [
+        "Market microstructure"
+      ],
+      "absUrl": "https://arxiv.org/abs/2610.28863v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.28863v1",
+      "schedulerRank": 2,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・テーマ重要度 8/10",
+      "schedulerSummary": "集中流動性DEXにおけるLPのレンジ幅選択と再配置を、手数料獲得競争を伴う平均場ゲームとして分析する。均衡の一般理論と、境界到達時に再配置する戦略の収益性分析を区別している。\n\n一次判定: gpt-6-luna / low · トークン 入力 923 / 出力 1,038（うち推論 144） · 推定 $0.0006\n論文解析: gpt-6.1-sol / medium · トークン 入力 26,305 / 出力 1,503（うち推論 168） · PDF 30 pages · 推定 $0.0808",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    }
+  ]
+}

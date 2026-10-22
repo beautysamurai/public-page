@@ -1,0 +1,592 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-10-22",
+  "generatedAt": "2026-10-22T12:16:38Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-10-22 was confirmed with 2 relevant paper(s).",
+  "expectedBatchDate": "2026-10-22",
+  "observedBatchDate": "2026-10-22",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2610.28753v1",
+        "title": "Understanding the Inner Workings of a State-Space Foundation Model for Limit Order Books",
+        "authors": [
+          "Valentin Mohl",
+          "Alexandre Bismuth",
+          "Aramis Marti-Shahandeh",
+          "George Nigmatulin",
+          "Kang Li",
+          "Stefan Zohren",
+          "Jakob Foerster",
+          "Mihai Cucuringu",
+          "Anisoara Calinescu"
+        ],
+        "submittedDate": "2026-10-20",
+        "updatedDate": "2026-10-20",
+        "categories": [
+          "cs.LG",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "注文メッセージのみで学習した820万パラメータのMamba-3を解析し、注文フロー不均衡（OFI）、出来高、実現ボラティリティが主に再帰状態に表現されると報告している。内部状態の操作は次メッセージの予測分布を変えるが、生成市場の制御や将来価格の予測力は限定的である。",
+        "mainResult": "500メッセージのOFIは再帰状態から$R^2=0.59$で復元され、時系列順の交差検証では$R^2=0.53$、現在の板スナップショットでは$R^2=0.12$だった。特徴方向への状態操作は予測分布を単調に変化させた一方、生成経路の価格・ボラティリティ制御は確認できなかった。将来25メッセージのミッド価格変化は$R^2\\approx0.04$で、板情報と同程度にとどまった。",
+        "practicalApplication": "内部状態から市場統計を直接読み出す特徴量抽出や、状態操作によるシナリオ生成の研究に有用である。ただし、低遅延運用の実測、執行コストの改善、取引収益の検証はなく、そのまま実運用可能な予測・執行モデルとは評価できない。",
+        "methodology": "米国大型株8銘柄の2022～2025年のメッセージ列で自己回帰学習し、2026年1月のGOOGの2,014窓を中心に評価した。再帰状態と残差ストリームをridge probeで比較し、日単位の入れ子交差検証、時系列順交差検証、日ブロックbootstrap、ランダム重みモデル、板情報ベースラインで検証した。再帰計算の厳密な分解によるメッセージ寄与分析と、特徴方向への介入・matching engineでの再生も実施した。",
+        "limitations": "主評価は20営業日で、単一モデル構成と米国株に限られる。未学習2銘柄でも復元可能だったが、固定probeの銘柄間転移を示したわけではなく、OFIの極端値では性能が低下した。裾を抑える評価の改善は極端値の再現性を保証しない。介入が示すのはモデル内部の因果効果であり、現実市場の因果関係や整合的な世界モデルの確立ではない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "LOB生成モデルの内部表現を、復元精度だけでなく介入と対照実験で検証しており、市場シミュレータの診断に有益である。表現の豊かさ、生成市場の制御可能性、将来予測力を区別した点を評価する。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "指値注文板",
+          "状態空間モデル",
+          "機構的解釈可能性",
+          "注文フロー不均衡",
+          "内部状態への介入",
+          "市場シミュレーション"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper analyzes an 8.2-million-parameter Mamba-3 trained only on order messages and reports that order-flow imbalance (OFI), traded volume, and realized volatility are represented primarily in its recurrent state. Interventions change the next-message predictive distribution, but control of generated markets and future-price predictability remain limited.",
+          "mainResult": "OFI over 500 messages was decoded from the recurrent state at $R^2=0.59$, versus $R^2=0.53$ under forward-chaining cross-validation and $R^2=0.12$ from the current book snapshot. Feature-direction interventions changed predictive distributions monotonically, but control over prices and volatility in generated paths was not established. The next-25-message mid-price change achieved only $R^2\\approx0.04$, comparable to book information.",
+          "practicalApplication": "The approach is useful for research on extracting market features directly from internal states and generating scenarios through state interventions. However, the paper does not measure low-latency deployment performance, execution-cost improvements, or trading profitability, so it does not establish a deployment-ready prediction or execution model.",
+          "methodology": "The model was trained autoregressively on message streams from eight large-cap US equities during 2022–2025, with evaluation centered on 2,014 GOOG windows from January 2026. Ridge probes compared recurrent states with residual streams, using day-grouped nested cross-validation, forward-chaining cross-validation, day-block bootstrap, random-weight controls, and book-information baselines. The study also performed exact message-contribution decomposition, feature-direction interventions, and matching-engine replay.",
+          "limitations": "The main evaluation covers 20 trading days and is limited to one model configuration and US equities. Features remained decodable on two unseen stocks, but this does not demonstrate cross-stock transfer of a fixed probe, and performance deteriorated on extreme OFI observations. Improvements under tail-robust metrics do not guarantee reproduction of extremes. Interventions establish causal effects within the model, not causality in real markets or a fully coherent world model.",
+          "reason": "The paper tests internal representations of an LOB generator through interventions and controls rather than decoding accuracy alone, making it useful for diagnosing market simulators. Its distinction between representation richness, generated-market controllability, and future predictability is valuable.",
+          "tags": [
+            "Market microstructure",
+            "Limit order book",
+            "State-space models",
+            "Mechanistic interpretability",
+            "Order-flow imbalance",
+            "Internal-state interventions",
+            "Market simulation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 892,
+          "outputTokens": 974,
+          "reasoningTokens": 150,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1866,
+          "estimatedCostUsd": 0.000576,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.28753v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 9,
+          "paperIds": [
+            "2610.28753v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 19764,
+          "outputTokens": 16000,
+          "reasoningTokens": 124,
+          "cachedInputTokens": 19761,
+          "cacheWriteTokens": 0,
+          "totalTokens": 35764,
+          "estimatedCostUsd": 0.161982,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 9,
+          "paperIds": [
+            "2610.28753v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 19764,
+          "outputTokens": 16000,
+          "reasoningTokens": 162,
+          "cachedInputTokens": 19761,
+          "cacheWriteTokens": 0,
+          "totalTokens": 35764,
+          "estimatedCostUsd": 0.161982,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 9,
+          "paperIds": [
+            "2610.28753v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 19764,
+          "outputTokens": 1517,
+          "reasoningTokens": 148,
+          "cachedInputTokens": 19761,
+          "cacheWriteTokens": 0,
+          "totalTokens": 21281,
+          "estimatedCostUsd": 0.017152,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 9,
+          "paperIds": [
+            "2610.28753v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.28863v1",
+        "title": "A game-theoretic analysis of the market microstructure in decentralized exchanges with concentrated liquidity",
+        "authors": [
+          "Mikhail Belokon",
+          "Rostislav Berezovskiy"
+        ],
+        "submittedDate": "2026-10-20",
+        "updatedDate": "2026-10-20",
+        "categories": [
+          "q-fin.MF"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "集中流動性DEXにおけるLPのレンジ幅選択と再配置を、手数料獲得競争を伴う平均場ゲームとして分析する。均衡の一般理論と、境界到達時に再配置する戦略の収益性分析を区別している。",
+        "mainResult": "平均化ゲームでは均衡の存在と集計流動性・価値関数の一意性を示す。境界再配置に限定した定常モデルでは、臨界ボラティリティ$\\sigma_c^2=4f\\bar V/(\\sqrt{\\bar q}\\bar L)$、最適幅の近似式、自由参入条件を導く。Ethereumの0.3%プールでは$\\sigma/\\sigma_c=0.983$、95%信頼区間は$[0.945,1.023]$と報告するが、収益性や自由参入の因果的証拠ではない。",
+        "practicalApplication": "手数料、出来高、active-tick流動性からLPの収益余地を点検し、再配置費用を含むレンジ幅・最低参入資本の感応度分析に使える。ただし、参入判定は戦略と費用の仮定に依存し、そのまま売買判断には使えない。",
+        "methodology": "有限状態の連続時間Markov制御をHJB–KFE系で定式化し、固定点と手数料希薄化の単調性で均衡を分析する。実際の価格への再配置はoffset過程と更新報酬法で別途解析し、2024年1月から2026年7月の5つのWETH/USDCプールについて、時間足データとblock bootstrapで検証する。",
+        "limitations": "平均化ゲームと実際の再配置ゲームを結ぶ極限定理はなく、一般的な存在・一意性の結果を後者へ移せない。定常解は境界再配置、高速執行、外生的な価格・注文フロー、リスク中立性に依存する。対数価格の無ドリフト仮定が重要で、価格をマルチンゲールにすると厳格な参入上限は失われる。観測された比率は裁定取引だけでも説明可能で、複数プールは理論上限を超え、バックテストにも損失が残る。ジャンプによる境界超過や費用設定の不確実性から、資本閾値の精度は限定的である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "DEXの手数料競争と再配置費用を解析可能な枠組みで結び、観測可能な収益性指標を提示するため推薦する。ただし、実証は均衡機構や運用利益を確証しておらず、戦略設計の基礎研究として読むべきである。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "分散型取引所",
+          "集中流動性",
+          "平均場ゲーム",
+          "流動性供給",
+          "再配置費用"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper analyzes LP range selection and rebalancing in concentrated-liquidity DEXs as a mean-field game with competition for fees. It distinguishes general equilibrium theory from profitability analysis of strategies that rebalance at range boundaries.",
+          "mainResult": "The averaged game admits an equilibrium with unique aggregate liquidity and value function. The stationary model restricted to boundary rebalancing yields critical volatility $\\sigma_c^2=4f\\bar V/(\\sqrt{\\bar q}\\bar L)$, an approximate optimal width, and free-entry conditions. For the Ethereum 0.3% pool, the paper reports $\\sigma/\\sigma_c=0.983$ with a 95% confidence interval of $[0.945,1.023]$, but this does not establish profitability or causally identify free entry.",
+          "practicalApplication": "Fees, volume, and active-tick liquidity can help screen LP profitability and analyze the sensitivity of range widths and minimum entry capital to rebalancing costs. Entry decisions depend on strategy and cost assumptions, however, and are not directly actionable trading signals.",
+          "methodology": "The paper formulates finite-state continuous-time Markov control through an HJB–KFE system and analyzes equilibrium using a fixed point and fee-dilution monotonicity. Rebalancing at the actual price is analyzed separately through an offset process and renewal-reward methods, with hourly data and block-bootstrap evaluation across five WETH/USDC pools from January 2024 to July 2026.",
+          "limitations": "No limit theorem connects the averaged game to actual rebalancing, so the general existence and uniqueness results cannot be transferred to the latter. Stationary solutions depend on boundary rebalancing, fast execution, exogenous prices and order flow, and risk neutrality. The driftless log-price assumption is important: making the price a martingale removes the strict entry cutoff. Arbitrage alone can explain the observed ratio, several pools exceed the theoretical cutoff, and backtests still incur losses. Jump overshoots and uncertain cost assumptions limit the precision of capital thresholds.",
+          "reason": "Recommended for connecting DEX fee competition and rebalancing costs in a tractable framework with an observable profitability indicator. The evidence does not establish the equilibrium mechanism or trading profits, so the paper is best read as foundational research for strategy design.",
+          "tags": [
+            "Market microstructure",
+            "Decentralized exchanges",
+            "Concentrated liquidity",
+            "Mean-field games",
+            "Liquidity provision",
+            "Rebalancing costs"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 923,
+          "outputTokens": 1038,
+          "reasoningTokens": 144,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1961,
+          "estimatedCostUsd": 0.000611,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.28863v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 26305,
+          "outputTokens": 1503,
+          "reasoningTokens": 168,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26302,
+          "totalTokens": 27808,
+          "estimatedCostUsd": 0.080791,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 30,
+          "paperIds": [
+            "2610.28863v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 921,
+      "outputTokens": 781,
+      "reasoningTokens": 72,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1702,
+      "estimatedCostUsd": 0.000483,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28639v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 892,
+      "outputTokens": 974,
+      "reasoningTokens": 150,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1866,
+      "estimatedCostUsd": 0.000576,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28753v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": null,
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 9,
+      "paperIds": [
+        "2610.28753v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 19764,
+      "outputTokens": 16000,
+      "reasoningTokens": 124,
+      "cachedInputTokens": 19761,
+      "cacheWriteTokens": 0,
+      "totalTokens": 35764,
+      "estimatedCostUsd": 0.161982,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 9,
+      "paperIds": [
+        "2610.28753v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 19764,
+      "outputTokens": 16000,
+      "reasoningTokens": 162,
+      "cachedInputTokens": 19761,
+      "cacheWriteTokens": 0,
+      "totalTokens": 35764,
+      "estimatedCostUsd": 0.161982,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 9,
+      "paperIds": [
+        "2610.28753v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 19764,
+      "outputTokens": 1517,
+      "reasoningTokens": 148,
+      "cachedInputTokens": 19761,
+      "cacheWriteTokens": 0,
+      "totalTokens": 21281,
+      "estimatedCostUsd": 0.017152,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 9,
+      "paperIds": [
+        "2610.28753v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 1093,
+      "outputTokens": 743,
+      "reasoningTokens": 57,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 1090,
+      "totalTokens": 1836,
+      "estimatedCostUsd": 0.000508,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28793v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 861,
+      "outputTokens": 816,
+      "reasoningTokens": 121,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1677,
+      "estimatedCostUsd": 0.000494,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28847v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 923,
+      "outputTokens": 1038,
+      "reasoningTokens": 144,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1961,
+      "estimatedCostUsd": 0.000611,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28863v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 26305,
+      "outputTokens": 1503,
+      "reasoningTokens": 168,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 26302,
+      "totalTokens": 27808,
+      "estimatedCostUsd": 0.080791,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 30,
+      "paperIds": [
+        "2610.28863v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 866,
+      "outputTokens": 881,
+      "reasoningTokens": 87,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1747,
+      "estimatedCostUsd": 0.000527,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28907v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 971,
+      "outputTokens": 833,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1804,
+      "estimatedCostUsd": 0.000514,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28965v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 792,
+      "outputTokens": 694,
+      "reasoningTokens": 53,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1486,
+      "estimatedCostUsd": 0.000426,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.29199v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 814,
+      "outputTokens": 811,
+      "reasoningTokens": 66,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1625,
+      "estimatedCostUsd": 0.000487,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.29344v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 859,
+      "outputTokens": 868,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1727,
+      "estimatedCostUsd": 0.00052,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.29652v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 914,
+      "outputTokens": 902,
+      "reasoningTokens": 102,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1816,
+      "estimatedCostUsd": 0.000542,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.29663v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

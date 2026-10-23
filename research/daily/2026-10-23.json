@@ -1,0 +1,607 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-10-23",
+  "generatedAt": "2026-10-23T11:58:08Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-10-23 was confirmed with 3 relevant paper(s).",
+  "expectedBatchDate": "2026-10-23",
+  "observedBatchDate": "2026-10-23",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2610.30539v1",
+        "title": "Dynamics of the Liquidity Profile in Concentrated Liquidity Provision: An SPIDE Approach",
+        "authors": [
+          "Cheuk Yin Lee",
+          "Jimmy Risk",
+          "Shen-Ning Tung",
+          "Tai-Ho Wang"
+        ],
+        "submittedDate": "2026-10-21",
+        "updatedDate": "2026-10-21",
+        "categories": [
+          "math.PR",
+          "q-fin.MF",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "要旨と提供されたIntroduction冒頭のみの限定レビューであり、55ページの本文は未提供である。著者らは、Uniswap V3などの集中流動性AMMにおける流動性プロファイルをSPIDEでモデル化し、その動学、評価、予測を統一的に扱えると主張する。",
+        "mainResult": "本文未提供のため、以下は要旨とIntroduction冒頭に基づく著者の主張である。重み付き$L^2$空間でのマイルド解の存在・一意性、線形SDE系への還元、準備資産・プール価値・loss-versus-rebalancingの計算可能な表現を示したという。3プールへの較正では、定常仕様と整合的な2プールで、マルチンゲール基準よりアクティブ帯域の予測誤差が低下したと報告する。",
+        "practicalApplication": "集中流動性AMMの流動性分布予測やLPのリスク評価への応用候補となる。低次モードによる水準・傾き・曲率の表現は、流動性状態の監視にも有用と考えられるが、運用上の有効性は提供資料から確認できない。",
+        "methodology": "著者らの手法は、価格周辺への平均回帰的集中を表す退化Sturm–Liouville作用素と、LPのポジション再配置による非局所的な再分配を表すHilbert–Schmidt積分作用素を組み合わせる。Gegenbauer固有関数系でモード展開し、価格過程との結合にはOrnstein–Uhlenbeck型およびBlack–Scholes型ノイズを用いる。実証部分では固定参照座標系で有限ランク較正を行うという。",
+        "limitations": "利用できるのは要旨とIntroduction冒頭のみで、55ページの本文、証明、実験詳細、付録は未提供・未検証である。著者らは3番目のプールの標本外診断が非定常性と整合的だと報告しており、定常仕様の適用範囲には制約がある。予測改善幅、標本期間、統計的頑健性、実運用上の利益は提供資料から判断できない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "集中流動性AMMの市場構造を直接扱い、流動性分布の動学とLP評価を結び付ける点で関連性が高い。ただし、採用判断には本文による理論条件と予測検証の確認が必要である。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "集中流動性AMM",
+          "Uniswap V3",
+          "確率偏積分微分方程式",
+          "流動性予測",
+          "リバランス対比損失"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This limited-source review uses only the abstract and the supplied opening of the Introduction; the 55-page full text was not provided. The authors claim that a SPIDE model provides a unified treatment of liquidity-profile dynamics, valuation, and forecasting in concentrated-liquidity AMMs such as Uniswap V3.",
+          "mainResult": "Because the full text was not provided, the following are author claims based on the abstract and opening of the Introduction. They claim existence and uniqueness of a mild solution in a weighted $L^2$ space, reduction to a linear SDE system, and tractable expressions for reserves, pool value, and loss-versus-rebalancing. For calibration to three pools, they report lower active-band forecast errors than a martingale benchmark in the two pools compatible with the stationary specification.",
+          "practicalApplication": "Potential applications include forecasting liquidity distributions in concentrated-liquidity AMMs and assessing LP risk. Representing level, slope, and curvature through low-order modes could also support liquidity-state monitoring, but operational effectiveness cannot be verified from the supplied material.",
+          "methodology": "The authors' approach combines a degenerate Sturm–Liouville operator representing mean-reverting concentration around price with a Hilbert–Schmidt integral operator representing nonlocal redistribution through LP repositioning. They use a Gegenbauer eigenfunction expansion and couple the profile to a price process with Ornstein–Uhlenbeck-type and Black–Scholes-type noise. The empirical component reportedly uses finite-rank calibration in a fixed reference frame.",
+          "limitations": "Only the abstract and opening of the Introduction are available; the 55-page full text, proofs, experimental details, and appendices were neither provided nor verified. The authors report that out-of-sample diagnostics for the third pool are consistent with nonstationarity, limiting the applicability of the stationary specification. The supplied material does not establish the magnitude of forecast improvements, sample period, statistical robustness, or operational profitability.",
+          "reason": "The paper is highly relevant because it directly addresses concentrated-liquidity AMM market structure and connects liquidity-distribution dynamics with LP valuation. Adoption decisions nevertheless require checking the theoretical conditions and forecast validation in the full text.",
+          "tags": [
+            "Market microstructure",
+            "Concentrated-liquidity AMMs",
+            "Uniswap V3",
+            "Stochastic partial integro-differential equations",
+            "Liquidity forecasting",
+            "Loss-versus-rebalancing"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 883,
+          "outputTokens": 942,
+          "reasoningTokens": 120,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1825,
+          "estimatedCostUsd": 0.000559,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.30539v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 1259,
+          "outputTokens": 1440,
+          "reasoningTokens": 169,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 1256,
+          "totalTokens": 2699,
+          "estimatedCostUsd": 0.017546,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 55,
+          "paperIds": [
+            "2610.30539v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.30891v1",
+        "title": "Equilibria and Learning in Competitive Market Making",
+        "authors": [
+          "Matteo Onger",
+          "Luigi Foscari"
+        ],
+        "submittedDate": "2026-10-22",
+        "updatedDate": "2026-10-22",
+        "categories": [
+          "cs.GT",
+          "cs.LG",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "複数のマーケットメーカーが、資産価値を知り必ず売買するトレーダーに気配を提示する競争ゲームを分析する。純粋戦略均衡の存在、ボラティリティとスプレッドの関係、内部後悔を消失させる学習の漸近的性質を示す理論研究である。",
+        "mainResult": "論文は、連続な非退化の有界資産価値分布の下で、各売買側の期待利益がゼロとなる純粋戦略Nash均衡の存在を証明する。同じ位置尺度族の対応する均衡では、スプレッドは資産価値の標準偏差に比例する。追加の正則性条件下では、刻み幅をゼロに近づけると格子ゲームの全相関均衡の市場価格がNash価格の矩形包絡域に近づく。",
+        "practicalApplication": "競争的な気配形成を評価する理論ベンチマークとして利用できる。特に、スプレッドの同時拡大だけで談合を判断せず、ボラティリティ変化を考慮する必要性を示唆するが、実市場向けの検知手法を検証したものではない。",
+        "methodology": "条件付き期待値による損益分岐気配から中値写像を構成し、Tarskiの不動点定理と片側逸脱の分析で均衡を示す。価格格子上の相関均衡を評価し、内部後悔の消失から時間平均の期待距離に関する保証を導く。数値実験では、メーカー２者に対しBlum–Mansour還元とExp3を組み合わせる。",
+        "limitations": "完全情報のトレーダーが必ず取引する特殊な設定であり、在庫、遅延、異質な注文フローを含まない。学習保証には正の連続密度と$a'(m)+b'(m)\\leq 2$が必要で、固定格子で長時間極限を取った後に刻み幅を縮小する。一般には均衡価格曲線や各時点の行動への収束、収束速度を保証しない。検証は実データではなく、学習スプレッドは理論値を一貫して上回り、端点で切り詰めた正規分布も連続分布の仮定に厳密には一致しない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "両側気配の相互依存と学習を同じ競争モデルで扱い、競争的スプレッドの基準を与えるため掲載を推奨する。ただし、実務的な収益性や談合検知の有効性を示す研究としては扱わない。",
+        "tags": [
+          "マーケットメイキング",
+          "市場マイクロストラクチャー",
+          "Nash均衡",
+          "相関均衡",
+          "内部後悔",
+          "呼値刻み",
+          "アルゴリズム談合"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This theoretical study analyzes competing market makers quoting to a trader who knows the asset value and always trades. It establishes pure-strategy equilibrium existence, the relationship between volatility and spreads, and asymptotic properties of learning with vanishing internal regret.",
+          "mainResult": "The paper proves the existence of a pure-strategy Nash equilibrium with zero expected profit on each side for continuous, nondegenerate, bounded asset-value distributions. At corresponding equilibria within the same location-scale family, spreads are proportional to the asset value's standard deviation. Under additional regularity, market prices in all correlated equilibria of the grid game approach the rectangular Nash price envelope as tick size vanishes.",
+          "practicalApplication": "The model provides a theoretical benchmark for assessing competitive quote formation. In particular, it suggests accounting for volatility changes rather than inferring collusion from simultaneous spread widening alone, but it does not validate a detection method for real markets.",
+          "methodology": "The authors construct a midpoint operator from conditional-expectation break-even quotes and establish equilibria using Tarski's fixed-point theorem and one-sided deviation analysis. They bound correlated equilibria on price grids and derive a time-averaged expected-distance guarantee from vanishing internal regret. Simulations combine the Blum–Mansour reduction with Exp3 for two makers.",
+          "limitations": "The specialized setting forces a fully informed trader to trade and excludes inventory, latency, and heterogeneous order flow. The learning guarantee requires a positive continuous density and $a'(m)+b'(m)\\leq 2$, taking the long-run limit on a fixed grid before shrinking tick size. It generally guarantees neither convergence to the equilibrium price curve or individual-period actions nor a convergence rate. Validation uses simulations rather than market data; learned spreads consistently exceed theoretical values, and the endpoint-clamped Gaussian does not strictly satisfy the continuous-distribution assumption.",
+          "reason": "Recommended because it addresses two-sided quote interdependence and learning within one competitive model and provides a benchmark for competitive spreads. It should not be presented as evidence of practical profitability or effective collusion detection.",
+          "tags": [
+            "Market making",
+            "Market microstructure",
+            "Nash equilibrium",
+            "Correlated equilibrium",
+            "Internal regret",
+            "Tick size",
+            "Algorithmic collusion"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 771,
+          "outputTokens": 921,
+          "reasoningTokens": 121,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1692,
+          "estimatedCostUsd": 0.000538,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.30891v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 27148,
+          "outputTokens": 1400,
+          "reasoningTokens": 123,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 27145,
+          "totalTokens": 28548,
+          "estimatedCostUsd": 0.081868,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 35,
+          "paperIds": [
+            "2610.30891v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.31141v1",
+        "title": "Intraday Forecasting Ability and Liquidity Provision of Institutional Traders",
+        "authors": [
+          "Xinlei Hao",
+          "Jiajun Guo",
+          "Jussi Keppo",
+          "Xianhua Peng"
+        ],
+        "submittedDate": "2026-10-22",
+        "updatedDate": "2026-10-22",
+        "categories": [
+          "q-fin.GN",
+          "q-fin.ST",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "全141ページの本文は提供されておらず、要旨とIntroductionのみの限定レビューである。著者らは、機関投資家の自己勘定取引について、日中の価格予測能力の持続性と、予測能力・受動的約定の双方と実現損益との正の関連を報告している。",
+        "mainResult": "要旨とIntroductionに記載された著者らの主張であり、未提供の本文による検証はしていない。著者らは、3日間の検証期間で、選別した投資家の約定フローを追随する仮想戦略の費用控除前年率Sharpe比が$16$–$63$だったと報告する。また、予測能力指標の1標準偏差上昇に対して対応付けポジション当たり損益が$1.02$–$1.19$通貨単位高く、受動的約定がゼロから1件になると$1.28$–$1.31$、1件から2件になるとさらに$3.79$–$3.82$高いという条件付きの関連を報告する。",
+        "practicalApplication": "保有時間に対応する予測指標と売買両側の流動性供給・需要区分を、約定ペア単位の損益分析に統合する設計が参考になる。執行戦略の診断に応用できるが、費用控除後収益や約定フローのリアルタイム利用可能性は別途検証が必要である。",
+        "methodology": "著者らは、2010年11月22～26日の5銘柄の注文板イベントデータを用いる。1秒～30分の26時間軸で、正規化約定フローと翌区間のVWAP変化の相関を予測能力指標とし、最初の2日で選別して残り3日で持続性を検証する。自己勘定約定をFIFOで対応付け、同日連続取引内で完結するペアの損益を、保有時間に対応する予測指標、受動的約定数、取引・注文板統制変数、投資家・銘柄固定効果に回帰する。",
+        "limitations": "全141ページの本文は未提供で、要旨とIntroductionのみを使用した。著者らが報告する結果について、詳細な推定、実験、頑健性検証、付録は確認していない。単一取引所・5銘柄・5日間で、検証期間も3日間と短く、年率換算Sharpe比の安定性や他市場への一般化には制約がある。提示されたSharpe比は費用控除前であり、費用感応度分析の詳細も未確認である。回帰上の関連は因果効果を示さず、FIFOによる損益配分や完結ペアへの限定にも依存し得る。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "予測能力と売買両側の流動性供給を同じ損益単位で比較する設計は、市場マイクロストラクチャーと執行評価に直接関連する。ただし、推奨は分析設計の参考資料としてであり、収益性の実証確認を意味しない。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "機関投資家の自己勘定取引",
+          "日中価格予測",
+          "流動性供給",
+          "FIFO約定対応付け",
+          "限定ソースレビュー"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The full 141-page paper was not provided; this limited-source review uses only the abstract and Introduction. The authors report persistence in institutional proprietary traders’ intraday price-forecasting ability and positive associations of realized P&L with both forecasting ability and passive executions.",
+          "mainResult": "These are author claims stated in the abstract and Introduction, not findings verified against the unavailable full paper. The authors report annualized pre-cost Sharpe ratios of $16$–$63$ for hypothetical strategies following selected traders’ execution flows during a three-day validation period. They also report conditional associations of a one-standard-deviation increase in the forecasting proxy with $1.02$–$1.19$ currency units higher P&L per matched position, an increase from zero to one passive execution with $1.28$–$1.31$ higher P&L, and an increase from one to two passive executions with a further $3.79$–$3.82$ higher P&L.",
+          "practicalApplication": "The design offers a useful way to integrate holding-period-matched forecasting measures and the liquidity-supplying or liquidity-demanding roles of both executions into execution-pair P&L analysis. It could support execution-strategy diagnostics, but net-of-cost profitability and real-time availability of execution flows require separate validation.",
+          "methodology": "The authors use order-book event data for five stocks from November 22–26, 2010. Across 26 horizons from one second to 30 minutes, they measure forecasting ability using correlations between normalized execution flows and subsequent-interval VWAP changes, selecting traders over the first two days and testing persistence over the remaining three. They match proprietary executions using FIFO and regress P&L for pairs completed within same-day continuous trading on holding-period-matched forecasting proxies, passive execution counts, trade and order-book controls, and trader and stock fixed effects.",
+          "limitations": "The full 141-page paper was unavailable, and only the abstract and Introduction were used. Detailed estimation, experiments, robustness checks, and appendices underlying the authors’ reported results were not checked. The sample covers one exchange, five stocks, and five days, with only three validation days, limiting confidence in annualized Sharpe stability and generalization to other markets. The quoted Sharpe ratios are pre-cost, and details of the transaction-cost sensitivity analysis were not available for review. Regression associations do not establish causality and may depend on FIFO profit allocation and restriction to completed pairs.",
+          "reason": "Comparing forecasting ability and liquidity provision on both sides of a trade within a common P&L unit is directly relevant to market microstructure and execution evaluation. The recommendation concerns its analytical design, not independent confirmation of profitability.",
+          "tags": [
+            "Market microstructure",
+            "Institutional proprietary trading",
+            "Intraday price forecasting",
+            "Liquidity provision",
+            "FIFO execution matching",
+            "Limited-source review"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 844,
+          "outputTokens": 1085,
+          "reasoningTokens": 132,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1929,
+          "estimatedCostUsd": 0.000627,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.31141v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 5525,
+          "outputTokens": 1778,
+          "reasoningTokens": 240,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 5522,
+          "totalTokens": 7303,
+          "estimatedCostUsd": 0.031591,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 141,
+          "paperIds": [
+            "2610.31141v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 878,
+      "outputTokens": 850,
+      "reasoningTokens": 135,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1728,
+      "estimatedCostUsd": 0.000513,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2609.31570v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 883,
+      "outputTokens": 774,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1657,
+      "estimatedCostUsd": 0.000475,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.30307v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 829,
+      "outputTokens": 804,
+      "reasoningTokens": 69,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1633,
+      "estimatedCostUsd": 0.000485,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.30527v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 883,
+      "outputTokens": 942,
+      "reasoningTokens": 120,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1825,
+      "estimatedCostUsd": 0.000559,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.30539v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 1259,
+      "outputTokens": 1440,
+      "reasoningTokens": 169,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 1256,
+      "totalTokens": 2699,
+      "estimatedCostUsd": 0.017546,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 55,
+      "paperIds": [
+        "2610.30539v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 760,
+      "outputTokens": 907,
+      "reasoningTokens": 70,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1667,
+      "estimatedCostUsd": 0.00053,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.30637v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 1017,
+      "outputTokens": 939,
+      "reasoningTokens": 108,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1956,
+      "estimatedCostUsd": 0.000571,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.30752v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 1064,
+      "outputTokens": 929,
+      "reasoningTokens": 78,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 1061,
+      "totalTokens": 1993,
+      "estimatedCostUsd": 0.000597,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.30858v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 814,
+      "outputTokens": 755,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1569,
+      "estimatedCostUsd": 0.000459,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.30886v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 771,
+      "outputTokens": 921,
+      "reasoningTokens": 121,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1692,
+      "estimatedCostUsd": 0.000538,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.30891v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 27148,
+      "outputTokens": 1400,
+      "reasoningTokens": 123,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 27145,
+      "totalTokens": 28548,
+      "estimatedCostUsd": 0.081868,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 35,
+      "paperIds": [
+        "2610.30891v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 819,
+      "outputTokens": 896,
+      "reasoningTokens": 150,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1715,
+      "estimatedCostUsd": 0.00053,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.31038v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 844,
+      "outputTokens": 1085,
+      "reasoningTokens": 132,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1929,
+      "estimatedCostUsd": 0.000627,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.31141v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 5525,
+      "outputTokens": 1778,
+      "reasoningTokens": 240,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 5522,
+      "totalTokens": 7303,
+      "estimatedCostUsd": 0.031591,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 141,
+      "paperIds": [
+        "2610.31141v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 722,
+      "outputTokens": 712,
+      "reasoningTokens": 64,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1434,
+      "estimatedCostUsd": 0.000428,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.31159v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

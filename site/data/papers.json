@@ -2,6 +2,57 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-10-23-daily-openai-01",
+      "date": "2026-10-23",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.30539v1",
+          "title": "Dynamics of the Liquidity Profile in Concentrated Liquidity Provision: An SPIDE Approach",
+          "authors": [
+            "Cheuk Yin Lee",
+            "Jimmy Risk",
+            "Shen-Ning Tung",
+            "Tai-Ho Wang"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.30891v1",
+          "title": "Equilibria and Learning in Competitive Market Making",
+          "authors": [
+            "Matteo Onger",
+            "Luigi Foscari"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.31141v1",
+          "title": "Intraday Forecasting Ability and Liquidity Provision of Institutional Traders",
+          "authors": [
+            "Xinlei Hao",
+            "Jiajun Guo",
+            "Jussi Keppo",
+            "Xianhua Peng"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-22-daily-openai-01",
       "date": "2026-10-22",
       "kind": "daily",

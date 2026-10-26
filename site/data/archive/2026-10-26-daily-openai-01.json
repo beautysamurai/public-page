@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-10-26-daily-openai-01",
+  "editionDate": "2026-10-26",
+  "editionKind": "daily",
+  "sourceKind": "openai-responses-api",
+  "sourceLabel": "OpenAI Responses API · automated research pipeline",
+  "importedAt": "2026-10-26T13:28:59Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXivの更新を確認し、対象論文を評価しました。",
+  "expectedBatchDate": "2026-10-26",
+  "observedBatchDate": "2026-10-26",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年10月26日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 11 | 9,064 | 9,609 (1,001) | 0.0057 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 3 | 60,180 | 4,430 (423) | 0.1947 | PDF全文・40ページ / 全71ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 / PDF全文・28ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Optimal Size in Market Making under State-Dependent Hawkes Process\n\n**[arXiv:2610.31903v1](https://arxiv.org/abs/2610.31903v1) — Jonathan Chávez Casillas, Li Gan**\n\n### 概要\n\n状態依存Hawkes過程を用い、マーケットメイクの約定数量を平均注文量、指数型需要関数、Prony級数の積で表す研究。数量モデルと提示価格を在庫制約付き動的計画法で組み合わせるが、実証は将来の注文フローを利用した事後的評価であり、実行可能な取引戦略の検証ではない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 非推奨 | マーケットメイク / 約定数量モデル / 状態依存Hawkes過程 / 在庫制御 / Prony級数 / 先読みバイアス |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 数量と在庫管理を結ぶ構造は対象分野に直接関連するが、主要成績が先読み付きのモデル内評価に依存する。実装可能な優位性や最適数量の閉形式解が確立された研究としては推奨しない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 791 | 832 (105) | 0.0005 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 27,268 | 1,641 (143) | 0.0846 | PDF全文・40ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** MSFTの評価日について、在庫制約付きで再推定したモデルの終端効用は10,460ドル、定数倍率の基準モデルは8,559ドルと報告される。別の制約なし学習によるパラメータでは119,707ドルを報告するが、いずれも実現注文フロー全体に条件付けたモデル内の評価値であり、実運用利益を示さない。理論面では有限Prony和の一様近似可能性を示すが、実装する2項近似の精度や大域的最適性は保証しない。\n\n**手法:** 2014年11月のMSFT板データを4日間の学習と1日間の評価に分割する。秒次注文数を売買別の6区分、最良気配の不均衡を5状態に分類し、1,452個の強度パラメータを近似的な確率的最小二乗更新で推定する。需要曲線を制約付き最小二乗法で推定し、各側2項のProny係数をCMA-ESと在庫グリッド上の後退再帰で調整する。\n\n**実務への応用:** 注文フローと提示深度に応じた数量モデルを、既存のクオート規則に接続する設計案として参考になる。在庫上限と終端ペナルティの役割を分ける分析にも使えるが、導入には未来情報を排除した方策と独立した約定シミュレータによる再検証が必要である。\n\n**限界・注意点:** 評価日の提示方策も当日の全注文フローを用いた後退再帰で決まり、先読みがある。約定数量モデル自体を効用最大化で調整し、そのモデル内で成績を測るため、数量予測の妥当性は独立に確認されていない。需要推定はキュー先頭を仮定し、キャンセル、手数料、市場インパクトの実装効果も検証しない。ゼロ注文区間を含む同期レコードのHawkes推定は連続時間の到着モデルとの対応に注意が必要で、推定更新には履歴の微分省略と一般に不偏でない重み付けがある。単一銘柄・評価1日、局所解への強い依存、一般の近似定理から最適数量を導く論証の不足があり、数量調整やHawkes状態依存性の独立した寄与も確立されていない。\n\n## 2. Jawboning the Fed: Do Markets Listen When Administrations Talk?\n\n**[arXiv:2610.32300v1](https://arxiv.org/abs/2610.32300v1) — Michela Baretti, Umberto Collodel, Jacopo Zacché**\n\n### 概要\n\n71ページの論文のうち、提供された要旨とIntroductionのみを対象とする限定レビューである。著者らは、1988～2025年のReuters記事からFRBへの政治的圧力を測定し、ハト派的圧力が短期金利予想の低下と関連すると主張する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 短期金利 / 金融政策期待 / 政治的圧力 / 中央銀行の独立性 / ニュース分類 / 大規模言語モデル |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 政治的コミュニケーションと短期金利予想の関係は、政策イベント分析と金利リスク管理に直接関係する。全文で識別戦略とニュース分類の信頼性を確認する価値がある。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 819 | 818 (0) | 0.0005 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 1,958 | 1,438 (181) | 0.0193 | 全71ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 要旨とIntroductionに限れば、著者らはハト派的圧力1件につき近い将来の金利予想が約$1\\,\\mathrm{bp}$低下し、3か月を超える予想期間では効果が検出されなくなると報告する。タカ派的圧力の効果は検出されず、トランプ政権期を除いても結果は弱まらないという。ドル下落を伴う一方、インフレ補償と市場ボラティリティには反応がなく、著者らは信認低下より金融緩和予想の織り込みと解釈する。本文全体による検証は行っていない。\n\n**手法:** 著者らは、米国の政治当局者とFRBの金融政策に言及するReuters記事を抽出し、オープンウェイトLLMのアンサンブルで圧力をハト派・タカ派に分類する。日次変動を用い、予定されたFOMC発表、景気関連統制、Bauer–Swansonの直交化変数を条件として資産価格の反応を推定する。政権とFRB理事会の政治的整合性による反応差も検討する。\n\n**実務への応用:** 短期金利・政策金利先物のイベント監視に、政治発言の方向別指標を追加する着想となる。ただし、この資料だけでは売買戦略の収益性や取引コスト控除後の有効性は判断できない。\n\n**限界・注意点:** 提供資料は要旨とIntroductionのみで、71ページの全文、推定表、分類精度、実証仕様、頑健性検証、付録は確認できていない。記載した結果はすべて著者らの主張である。政治的圧力と景気悪化の同時発生という内生性は、著者らも日次統制では完全に排除できないと認める。理事会との政治的整合性に関する分析も、実際の政策変更や市場経由の因果経路を単独で確立するものとは扱えない。\n\n## 3. On the continuity of conditional distributions and stratification for derivative pricing\n\n**[arXiv:2610.32970v1](https://arxiv.org/abs/2610.32970v1) — Aleksandar Arandjelovic, Patrick Cheridito**\n\n### 概要\n\n比例配分による層化Monte Carloの因子をニューラルネットで学習する研究。Gaussian条件付け因子の近似に対する条件付き期待値・分布の連続性を示し、G2++のCMSレンジアクルーアルとWishartモデルのworst-of autocallableで検証する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 層化Monte Carlo / 分散削減 / 条件付き分布の連続性 / ニューラルネットワーク / G2++金利モデル / CMSレンジアクルーアル / Wishartモデル |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 金利モデル自体の改良ではないが、CMS商品のMonte Carlo評価に直接関係し、学習した層化因子の安定性を理論で裏付ける。実務導入には計算費用込みの追加検証が必要である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 846 | 1,106 (165) | 0.0006 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 30,954 | 1,351 (99) | 0.0909 | PDF全文・28ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 積分核が収束し、因子共分散の階数が最終的に保存される場合、条件付き期待値の平均二乗収束と条件付き分布の弱位相での確率収束を証明する。これに基づき、非退化な許容Gaussian因子の説明分散をニューラル因子で任意精度に近似できると示す。数値実験では、通常のMonte Carloに対する分散削減倍率がCMS商品で最大5.448倍、autocallableで最大2.870倍と報告される。\n\n**手法:** ネットワークで時間依存の決定論的積分核を表現し、駆動Gaussianノイズの線形汎関数として層化因子を構成する。因子ネットワークと条件付き平均の回帰ネットワークを二乗誤差で共同学習する。因子次元を1〜3、層数を4096、評価パス数を524288に固定し、GHS法や商品・モデルに基づく因子と比較する。\n\n**実務への応用:** 多因子金利モデルにおける経路依存型CMS商品の価格推定で、シミュレーション本数を増やさず標準誤差を抑える用途がある。ただし、学習費用を含む実時間の短縮は実証されていない。\n\n**限界・注意点:** 理論はGaussian線形因子と階数保存に依存し、階数が低下する極限では連続性が破れる反例がある。普遍近似は非構成的で、有限ネットワークや非凸学習の最適性・収束を保証しない。実験は各モデルの単一設定に限られ、学習費用、反復学習のばらつき、離散化誤差の検証は不足する。autocallableでは因子次元を2から3へ増やしても実際の分散削減は改善しない。\n\n## 4. Financial Context-Rich Strategy for Actor-Critic based Agents: A Deep Reinforcement Learning Approach for Stock Trading\n\n**[arXiv:2610.32237v1](https://arxiv.org/abs/2610.32237v1) — Hrishikesh Singh, Aarti Sharma, Millie Pant**\n\n### 概要\n\n株式取引向けActor-Critic型深層強化学習エージェントに、市場センチメント情報を部分的または深く統合する手法を提案する研究です。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 非推奨 | 深層強化学習 / アルゴリズム取引 / センチメント分析 / Actor-Critic / 株式取引 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 自動売買とDRLに関連しますが、主張を評価するための実験条件や定量結果が要旨に示されておらず、優先度は限定的です。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 872 | 712 (70) | 0.0004 | Abstractのみ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 要旨によれば、Q-learningの原理も組み合わせるエージェント（DDPG、TD3、SAC）は、センチメント情報の深い統合により、利益最大化とリスク抑制の両面で一貫して性能が向上しました。\n\n**手法:** A2C、PPO、DDPG、TD3、SACを用い、センチメント情報を部分的または深く統合するActor-Critic型DRLエージェントを比較しています。\n\n**実務への応用:** ニュースや社会的センチメントを取引判断に反映する自動売買戦略の設計に応用できる可能性がありますが、実運用での有効性は要旨から確認できません。\n\n**限界・注意点:** 要旨には、対象市場・データ、評価期間、比較ベンチマーク、性能指標や統計的有意性の詳細がありません。取引コストやアウトオブサンプル評価、実運用上の頑健性も判断できません。",
+  "papers": [
+    {
+      "arxivId": "2610.31903v1",
+      "title": "Optimal Size in Market Making under State-Dependent Hawkes Process",
+      "authors": [
+        "Jonathan Chávez Casillas",
+        "Li Gan"
+      ],
+      "submittedDate": "2026-10-22",
+      "updatedDate": "2026-10-22",
+      "topics": [
+        "Electronic trading"
+      ],
+      "absUrl": "https://arxiv.org/abs/2610.31903v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.31903v1",
+      "schedulerRank": 1,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "非推奨・テーマ重要度 8/10",
+      "schedulerSummary": "状態依存Hawkes過程を用い、マーケットメイクの約定数量を平均注文量、指数型需要関数、Prony級数の積で表す研究。数量モデルと提示価格を在庫制約付き動的計画法で組み合わせるが、実証は将来の注文フローを利用した事後的評価であり、実行可能な取引戦略の検証ではない。\n\n一次判定: gpt-6-luna / low · トークン 入力 791 / 出力 832（うち推論 105） · 推定 $0.0005\n論文解析: gpt-6.1-sol / medium · トークン 入力 27,268 / 出力 1,641（うち推論 143） · PDF 40 pages · 推定 $0.0846",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2610.32300v1",
+      "title": "Jawboning the Fed: Do Markets Listen When Administrations Talk?",
+      "authors": [
+        "Michela Baretti",
+        "Umberto Collodel",
+        "Jacopo Zacché"
+      ],
+      "submittedDate": "2026-10-23",
+      "updatedDate": "2026-10-23",
+      "topics": [
+        "Rates"
+      ],
+      "absUrl": "https://arxiv.org/abs/2610.32300v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.32300v1",
+      "schedulerRank": 2,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・テーマ重要度 8/10",
+      "schedulerSummary": "71ページの論文のうち、提供された要旨とIntroductionのみを対象とする限定レビューである。著者らは、1988～2025年のReuters記事からFRBへの政治的圧力を測定し、ハト派的圧力が短期金利予想の低下と関連すると主張する。\n\n一次判定: gpt-6-luna / low · トークン 入力 819 / 出力 818（うち推論 0） · 推定 $0.0005\n論文解析: gpt-6.1-sol / medium · トークン 入力 1,958 / 出力 1,438（うち推論 181） · 全71ページ（50ページ超）：abstractとIntroductionのみ。全文未解析 · 推定 $0.0193",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2610.32970v1",
+      "title": "On the continuity of conditional distributions and stratification for derivative pricing",
+      "authors": [
+        "Aleksandar Arandjelovic",
+        "Patrick Cheridito"
+      ],
+      "submittedDate": "2026-10-23",
+      "updatedDate": "2026-10-23",
+      "topics": [
+        "Interest-rate models"
+      ],
+      "absUrl": "https://arxiv.org/abs/2610.32970v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.32970v1",
+      "schedulerRank": 3,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・テーマ重要度 8/10",
+      "schedulerSummary": "比例配分による層化Monte Carloの因子をニューラルネットで学習する研究。Gaussian条件付け因子の近似に対する条件付き期待値・分布の連続性を示し、G2++のCMSレンジアクルーアルとWishartモデルのworst-of autocallableで検証する。\n\n一次判定: gpt-6-luna / low · トークン 入力 846 / 出力 1,106（うち推論 165） · 推定 $0.0006\n論文解析: gpt-6.1-sol / medium · トークン 入力 30,954 / 出力 1,351（うち推論 99） · PDF 28 pages · 推定 $0.0909",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2610.32237v1",
+      "title": "Financial Context-Rich Strategy for Actor-Critic based Agents: A Deep Reinforcement Learning Approach for Stock Trading",
+      "authors": [
+        "Hrishikesh Singh",
+        "Aarti Sharma",
+        "Millie Pant"
+      ],
+      "submittedDate": "2026-10-23",
+      "updatedDate": "2026-10-23",
+      "topics": [
+        "Electronic trading"
+      ],
+      "absUrl": "https://arxiv.org/abs/2610.32237v1",
+      "pdfUrl": "https://arxiv.org/pdf/2610.32237v1",
+      "schedulerRank": 4,
+      "schedulerRating": 4,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "非推奨・テーマ重要度 4/10",
+      "schedulerSummary": "株式取引向けActor-Critic型深層強化学習エージェントに、市場センチメント情報を部分的または深く統合する手法を提案する研究です。\n\n一次判定: gpt-6-luna / low · トークン 入力 872 / 出力 712（うち推論 70） · 推定 $0.0004",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 4,
+          "scale": 10
+        }
+      ]
+    }
+  ]
+}

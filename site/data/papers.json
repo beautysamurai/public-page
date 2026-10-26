@@ -2,6 +2,68 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-10-26-daily-openai-01",
+      "date": "2026-10-26",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.31903v1",
+          "title": "Optimal Size in Market Making under State-Dependent Hawkes Process",
+          "authors": [
+            "Jonathan Chávez Casillas",
+            "Li Gan"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.32300v1",
+          "title": "Jawboning the Fed: Do Markets Listen When Administrations Talk?",
+          "authors": [
+            "Michela Baretti",
+            "Umberto Collodel",
+            "Jacopo Zacché"
+          ],
+          "topics": [
+            "Rates"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.32970v1",
+          "title": "On the continuity of conditional distributions and stratification for derivative pricing",
+          "authors": [
+            "Aleksandar Arandjelovic",
+            "Patrick Cheridito"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.32237v1",
+          "title": "Financial Context-Rich Strategy for Actor-Critic based Agents: A Deep Reinforcement Learning Approach for Stock Trading",
+          "authors": [
+            "Hrishikesh Singh",
+            "Aarti Sharma",
+            "Millie Pant"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-25-daily-openai-01",
       "date": "2026-10-25",
       "kind": "daily",

@@ -2,6 +2,42 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-10-27-daily-openai-01",
+      "date": "2026-10-27",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.33400v1",
+          "title": "Tracking High-Frequency Trading Activity in China and Its Effects on Market Quality",
+          "authors": [
+            "Li Guo",
+            "Frank Weikai Li",
+            "Ding Qi",
+            "Lijian Sun"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.34787v1",
+          "title": "Do Round Numbers Hold Prices? Occupation Densities and Depth-Conditioned Hazards in the Limit Order Book",
+          "authors": [
+            "Jiwon Jung",
+            "Kiseop Lee"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-26-daily-openai-01",
       "date": "2026-10-26",
       "kind": "daily",

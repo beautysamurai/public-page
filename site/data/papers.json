@@ -2,6 +2,65 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-10-30-daily-openai-01",
+      "date": "2026-10-30",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.38275v1",
+          "title": "Negative Convexity in Pass-Through MBS: Mechanisms and Conditions",
+          "authors": [
+            "Kaname Imagawa"
+          ],
+          "topics": [
+            "Rates"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.38442v1",
+          "title": "Calibration of Passive Market Impact with a Queue-Sensitive Propagator Model",
+          "authors": [
+            "Yadh Hafsi",
+            "Fabrizio Lillo",
+            "Grégoire Szymanski"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.38988v1",
+          "title": "Mean Field Games of Optimal Trading with an SPDE Model of the Limit Order Book",
+          "authors": [
+            "Hanchao Liu",
+            "Dena Firoozi"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.39458v1",
+          "title": "Early-Buyer Groups and Fast-Wallet Teams on a Bonding-Curve Launchpad: A Prospective Measurement Study of pump.fun on Solana",
+          "authors": [
+            "Fail Gafarov"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-27-daily-openai-01",
       "date": "2026-10-27",
       "kind": "daily",

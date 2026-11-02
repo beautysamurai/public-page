@@ -8818,6 +8818,22 @@
       "periodEnd": null,
       "sourceText": "## 2026年11月1日 — 日次レビュー\n\n通常の公開スケジュール上、新しいarXivバッチは予定されていません。\n\n### この号の利用状況\n\nモデル・effort・トークン数：未記録。\n\n\n**推薦論文: なし**",
       "papers": []
+    },
+    {
+      "editionId": "2026-11-02-daily-openai-01",
+      "editionDate": "2026-11-02",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-11-02T16:28:39Z",
+      "status": "NO_RELEVANT_PAPERS",
+      "message": "arXivの更新を確認しましたが、今回の条件に合う推薦論文はありませんでした。",
+      "expectedBatchDate": "2026-11-02",
+      "observedBatchDate": "2026-11-02",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年11月2日 — 日次レビュー\n\narXivの更新を確認しましたが、今回の条件に合う推薦論文はありませんでした。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 8 | 6,915 | 7,014 (693) | 0.0042 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 15,368 | 1,497 (109) | 0.0534 | PDF全文・8ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n**推薦論文: なし**",
+      "papers": []
     }
   ]
 }

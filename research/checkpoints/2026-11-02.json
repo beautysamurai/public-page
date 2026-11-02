@@ -1,0 +1,532 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-11-02",
+  "fingerprint": "3d600101e6723c969c51e6fa7f866962c821bf08bddb196b71b3a3afacd05ec8",
+  "candidateFingerprints": {
+    "2610.41019": "8462d1250e080a49f7b86f45c22ffda438c596ddf295fa18a2793edf2c6edf4e",
+    "2610.41103": "dc2182f09a09859a123a9188e95921da0b3cbf07e9cdfdc309cf15d050f71a4c",
+    "2610.41447": "34acf5e10190125a1fe6eb650f8cd2a57ab4ca574bc679eb51d70da78b0ee79a",
+    "2610.41624": "ae57e4ac0532ea17fb20c735f9de5a922b96ebeda754b381d1f9a0d32c612058",
+    "2610.41689": "897527cbf9f74bf9e3906d629e7d87497168b56de54e9c41bca3a3307815b87a",
+    "2610.41740": "a3f7aacec5e2b2f7a453bb873e525372a3376f20c86fb7891c8af6a296c6eb4a",
+    "2610.41990": "8918ab941b38c362a866665a0d712a6610920f898de851cfae9341c81b13e033",
+    "2610.42119": "e4e6bc068db60b83b8661cd3a30eb5ac3e499982c93be05ba74280ee7e7d02bf"
+  },
+  "results": {
+    "2610.41019": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "取引コストを含む高次元Black–Scholes方程式を2BSDEとして定式化し、ResNetで解く手法を提案している。",
+        "mainResult": "幾何バスケット上のコールおよびバタフライ・スプレッドについて、$D=10,100$の双方で時間平均RMSEが$0.1$未満だったと報告している。",
+        "practicalApplication": "取引コストを考慮した高次元デリバティブ価格の数値計算への応用を意図するが、対象サイトの主要領域との関連は限定的である。",
+        "methodology": "曲率の符号を含むLeland取引コストモデルの偏微分方程式を2BSDEで表し、解と曲率行列の自由度を単一のResNetで学習する。",
+        "limitations": "要旨だけでは、誤差の定義や基準値、比較手法、計算コスト、他の設定への一般化可能性を評価できない。報告された精度は要旨記載の条件に限られる。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "高次元デリバティブ計算の手法としては関連性があるが、電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブを主題とするサイトの対象からは外れる。",
+        "tags": [
+          "デリバティブ価格評価",
+          "取引コスト",
+          "2BSDE",
+          "ニューラルネットワーク",
+          "高次元数値計算"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper formulates a high-dimensional Black–Scholes equation with transaction costs as a 2BSDE and proposes solving it with a ResNet.",
+          "mainResult": "It reports time-averaged RMSE below $0.1$ for calls and butterfly spreads on geometric baskets at both $D=10$ and $D=100$.",
+          "practicalApplication": "The method is intended for numerical pricing of high-dimensional derivatives with transaction costs, but its relevance to the site's core topics is limited.",
+          "methodology": "The authors express the PDE with the Leland transaction-cost model, including the sign of curvature, as a 2BSDE and use one ResNet to learn both the solution and the degrees of freedom in the curvature matrix.",
+          "limitations": "The abstract does not establish how the error is defined or the reference values, comparison methods, computational cost, or generalizability to other settings. The reported accuracy applies only to the stated conditions.",
+          "reason": "Although relevant to high-dimensional derivative pricing, the paper falls outside a site focused on electronic execution, market microstructure, interest-rate models, and yield curves.",
+          "tags": [
+            "derivative pricing",
+            "transaction costs",
+            "2BSDE",
+            "neural networks",
+            "high-dimensional numerical methods"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.41103": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、電力市場の長期契約の不完備性が最適な気候政策に及ぼす影響を、ガス価格と需要の不確実性を含むゲーム理論モデルで分析する。",
+        "mainResult": "報告された例示的分析では、市場の不完備性により再生可能エネルギー投資が減り、消費者が電力価格の年々の変動リスクを負う。そのため再エネ補助金や炭素価格の最適水準が上昇し、不完備性の下では補助金が炭素価格より効率的となる場合もある。",
+        "practicalApplication": "電力・気候政策の設計で、契約市場の不完備性と消費者の価格リスクを考慮するための概念的示唆を与える。金融市場の執行、金利モデル、イールドカーブ分析への直接的な応用は示されていない。",
+        "methodology": "ガス価格と需要の不確実性、および長期契約の不完備性を組み込んだ政策決定のゲーム理論モデルを構築し、例示的な実験で政策効果を比較する。",
+        "limitations": "結果は要旨で報告された例示的実験に基づき、一般的な実証的結論とは限らない。モデルの仮定、定量的な規模、実データによる検証は要旨から確認できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "気候政策と電力市場設計が主題であり、対象サイトの電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利研究には実質的に該当しない。",
+        "tags": [
+          "電力市場",
+          "気候政策",
+          "契約不完備性",
+          "再生可能エネルギー"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes how incomplete long-term contracts in electricity markets affect optimal climate policy, using a game-theoretic model with gas-price and demand uncertainty.",
+          "mainResult": "In the reported illustrative experiments, market incompleteness reduces renewable investment and leaves consumers exposed to year-to-year electricity-price risk. Renewable subsidies and carbon prices therefore have higher optimal levels; under incompleteness, subsidies can sometimes be more economically efficient than carbon pricing.",
+          "practicalApplication": "The paper offers conceptual guidance for electricity and climate-policy design that accounts for contract incompleteness and consumer price risk. It does not identify direct applications to financial-market execution, interest-rate models, or yield-curve analysis.",
+          "methodology": "The authors develop a game-theoretic policy model incorporating uncertainty in gas prices and demand as well as incomplete long-term contracting, and compare policy effects in illustrative experiments.",
+          "limitations": "The results are based on illustrative experiments reported in the abstract and may not constitute general empirical conclusions. The abstract does not establish the model assumptions, quantitative magnitudes, or validation using real-world data.",
+          "reason": "The paper focuses on climate policy and electricity-market design and is not materially relevant to the site's focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "Electricity markets",
+            "Climate policy",
+            "Incomplete contracts",
+            "Renewable energy"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.41447": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、81地域の世界水素市場モデルを用い、地域別の水素調達コストと限界的な市場価格の差を分析する。",
+        "mainResult": "2045年には78地域で価格がコストを上回り、需要加重平均の差は63 EUR/MWhと報告された。そのうち51 EUR/MWhは、世界市場価格と調達ポートフォリオの平均コストとの差による。",
+        "practicalApplication": "水素の長期価格想定では、平均的な供給コストを市場価格の代理として扱わず、両者を区別する必要があると示唆する。",
+        "methodology": "81地域の世界水素市場モデルで、単一地域のみが需要を持つ場合と全地域が需要を持つ場合のコスト・価格を比較する。",
+        "limitations": "評価はモデルに基づく2045年のシナリオ結果であり、抄録からは仮定や感度分析、予測の不確実性を確認できない。金融市場、金利、電子取引、または市場マイクロストラクチャーを直接扱わない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "水素市場の価格形成に関するエネルギー経済研究であり、本サイトの金融・金利分野には実質的に該当しない。",
+        "tags": [
+          "水素市場",
+          "エネルギー経済",
+          "市場価格",
+          "供給コスト"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study uses an 81-region global hydrogen-market model to analyze the gap between regional hydrogen procurement costs and marginal market prices.",
+          "mainResult": "In 2045, prices reportedly exceed costs in 78 regions, with a demand-weighted average gap of 63 EUR/MWh. Of this, 51 EUR/MWh is attributed to the difference between the global-market price and the average cost of the delivered portfolio.",
+          "practicalApplication": "The study suggests distinguishing long-term hydrogen market-price expectations from average supply costs rather than using the latter as a proxy for the former.",
+          "methodology": "The 81-region global hydrogen-market model compares costs and prices when only one region has demand with those when all regions have demand.",
+          "limitations": "The findings are model-based scenario results for 2045; assumptions, sensitivity analyses, and forecast uncertainty cannot be assessed from the abstract. The study does not directly address financial markets, interest rates, electronic trading, or market microstructure.",
+          "reason": "This is an energy-economics study of hydrogen-market pricing and is not materially within the site's finance or interest-rate scope.",
+          "tags": [
+            "Hydrogen markets",
+            "Energy economics",
+            "Market prices",
+            "Supply costs"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.41624": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "重複する複数日リターンから作成したP&Lシナリオを用いると、独立標本を前提とするExpected Shortfall（ES）推定が下方に偏り、資本カバレッジが弱まる影響を分析している。",
+        "mainResult": "シミュレーションと市場データでは、重複サンプリングにより推定資本が実損失をカバーする信頼水準の中央値が、各推定量でおおむね倍増した。系列依存は下方偏りを強め、裾の重い分布は両者の影響を拡大した。保守的な重み付けは過小評価を緩和するが、解消はしなかった。",
+        "practicalApplication": "FRTBの履歴シミュレーション型資本モデルの検証・監視で、シミュレーションによる推定誤差評価とカバレッジ診断を組み合わせる方法を示している。",
+        "methodology": "6種類の順序統計量ベースES推定量を、適合度、バイアス、資本カバレッジで比較した。FRTBを意識した1年の推定窓とES水準$2.5\\%$を基準に、シミュレーションおよび12のリスク要因と99の株式ポートフォリオの市場データを用いた。",
+        "limitations": "要旨から確認できる実証範囲は、記載されたリスク要因・株式ポートフォリオと基準設定に限られる。効果の大きさや他の資産・市場・標本設計への一般化、各推定量の詳細は要旨だけでは評価できない。",
+        "importance": 3,
+        "recommended": false,
+        "reason": "ES推定と規制資本の評価には関連するが、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利を主題とする研究ではないため、対象範囲外と判定する。",
+        "tags": [
+          "Expected Shortfall",
+          "資本カバレッジ",
+          "重複サンプリング",
+          "FRTB",
+          "リスク管理"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper analyzes how using P&L scenarios built from overlapping multi-day returns can bias Expected Shortfall (ES) estimates downward when the estimators assume independent observations, weakening capital coverage.",
+          "mainResult": "In simulations and market data, overlapping sampling roughly doubled the median confidence level at which estimated capital covered realized losses across the estimators. Serial dependence reinforced the downward bias, while heavy tails amplified both effects. Conservative weighting mitigated but did not eliminate the underestimation.",
+          "practicalApplication": "It proposes combining simulation-based estimation-risk assessment with coverage diagnostics to validate and monitor FRTB historical-simulation capital models.",
+          "methodology": "The study compares six order-statistic-based ES estimators by fit, bias, and capital coverage. Using a one-year estimation window and an ES level of $2.5\\%$ as an FRTB-oriented benchmark, it combines simulations with market data on 12 risk factors and 99 equity portfolios.",
+          "limitations": "The empirical scope reported in the abstract is limited to the stated risk factors, equity portfolios, and benchmark setup. The abstract alone does not establish the magnitude of effects or their generalizability to other assets, markets, or sampling designs, nor does it provide details of the individual estimators.",
+          "reason": "The paper is relevant to ES estimation and regulatory capital assessment, but it does not primarily concern electronic trading, market microstructure, interest-rate models, yield curves, or rates, so it is outside the review's scope.",
+          "tags": [
+            "Expected Shortfall",
+            "capital coverage",
+            "overlapping sampling",
+            "FRTB",
+            "risk management"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.41689": {
+      "status": "pdf_out_of_scope",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本研究は、検証可能なアルファプログラムを定義・評価するコンパイラQBXを提案する。登録済みの語彙と型付き表現の範囲で、プログラムの妥当性、再利用性、探索効率を改善する。",
+        "mainResult": "中国A株パネルで、評価可能な提案の割合は自由記述の26.8%、文法のみの対照群の36.4%に対し、型付きプログラムでは97.7%だった。増分評価は数値的な一致を保ちながら探索履歴の再生を7.5倍高速化し、23,342件の候補で登録契約違反を検出しなかった。",
+        "practicalApplication": "アルファ候補の生成・評価パイプラインにおいて、先読みを防ぎ、候補の監査可能性や重複排除、評価の再利用を高める用途が考えられる。",
+        "methodology": "有限かつ版管理されたブロック登録簿と、ポートDAG形式の戦略言語に基づくコンパイラを構築。型、時間的利用可能性、実行可能なリンク情報などを含む中間表現を生成し、中国A株パネル上で妥当性、再生速度、探索効率を評価した。",
+        "limitations": "結果は登録済み語彙の範囲内での妥当性、再利用性、探索効率に関するもので、市場パネルから得られる情報量の増加を示さない。別の市場や語彙・契約への一般化、実運用での収益性は要旨から確認できない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "アルファ探索の監査性と評価効率に関する実務的な貢献があり、電子取引・定量的な戦略開発に関連する。一方、収益性や市場情報の改善を示す研究ではないため、重要度は中程度とする。",
+        "tags": [
+          "アルファ探索",
+          "コンパイラ",
+          "監査可能性",
+          "先読み防止",
+          "増分評価"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This study proposes QBX, a compiler for defining and evaluating verifiable alpha programs. Within a registered vocabulary and typed representation, it improves program validity, reuse, and search efficiency.",
+          "mainResult": "On Chinese A-share panels, the share of evaluation-valid proposals was 97.7% for typed programs, versus 26.8% for free strings and 36.4% for a grammar-only control. Incremental evaluation replayed search lineages 7.5 times faster with numerical parity, and no registered-contract violations were detected among 23,342 candidates.",
+          "practicalApplication": "The system could be used in alpha-candidate generation and evaluation pipelines to prevent look-ahead and improve auditability, deduplication, and evaluation reuse.",
+          "methodology": "The authors built a compiler based on a finite, versioned block registry and a port-DAG strategy language. It emits an intermediate representation containing types, time-availability effects, and executable linkage, and evaluates validity, replay speed, and search efficiency on Chinese A-share panels.",
+          "limitations": "The results concern validity, reuse, and search efficiency within the registered vocabulary; they do not show an increase in information available from the market panel. The abstract does not establish generalization to other markets, vocabularies, or contracts, or profitability in live deployment.",
+          "reason": "The paper makes a practical contribution to auditability and evaluation efficiency in alpha search, relevant to electronic trading and quantitative strategy development. Since it does not demonstrate profitability or improved market information, its importance is moderate.",
+          "tags": [
+            "alpha search",
+            "compiler",
+            "auditability",
+            "look-ahead prevention",
+            "incremental evaluation"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "QBXは、数式型アルファ探索を対象に、型・情報利用時点・実行可能性を検査するコンパイラ基盤である。プログラムの構造的同一性を、差分評価、重複排除、探索試行の監査に共用する。主題はアルファ研究の計算・監査基盤であり、電子執行や市場マイクロストラクチャの分析ではない。",
+        "mainResult": "著者らは、評価可能な候補の比率が自由文字列の26.8%、文法制約の36.4%から型付き探索の97.7%へ上昇し、探索履歴の再評価が7.5倍高速化したと報告する。採用候補23,342件では登録契約上の将来情報参照違反がゼロだった。ただし、これはデータ漏洩全般の排除を意味しない。LLM呼出し削減は候補集合内の診断的上限に対する結果であり、強化した文字列探索との予測性能差は頑健ではない。",
+        "practicalApplication": "アルファ探索システムで、不正候補の事前排除、共通部分計算の再利用、重複候補と試行履歴の一貫した管理に利用できる。実運用の執行品質や取引費用控除後の収益改善は検証していない。",
+        "methodology": "95種類の登録ブロックを型付きport-DAGで接続し、構造、型、情報利用時点、実装への接続を検査して証拠付き中間表現を生成する。ノードとプログラム全体の内容ハッシュを、それぞれキャッシュと試行識別に使用する。中国A株の日次パネルで共通評価器と予算をそろえた探索比較を行い、AAPL時間足と人工グラフで計算機構を検証する。",
+        "limitations": "予測評価は中国A株の20日先リターンに限られ、費用・容量・執行を扱わず、拡張データには現時点の構成銘柄を使用している。探索効率の一部はテスト期間で選んだ診断的上限に基づき、強化対照と混合探索の実験は各3シードの探索的分析である。将来情報検査は入力時刻と登録契約の正確性に依存し、キャッシュも純粋性と評価文脈の完全性を仮定する。Qlibや共有構造を持つhash-consed ASTとの対応比較がなく、高速化の要因分解は未完了で、型付き探索のみでは候補の多様性と合成指標の性能が低下した。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "アルファ研究基盤として参考になるが、執行ブロックを備えることと電子執行を研究することは異なる。執行、市場構造、金利モデル、イールドカーブに関する実証的・理論的成果がなく、当サイトの重点領域から外れる。",
+        "tags": [
+          "アルファ探索",
+          "型付きDSL",
+          "コンパイラ",
+          "将来情報参照",
+          "差分評価",
+          "試行監査"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "QBX is a compiler infrastructure for formulaic alpha mining that checks types, information availability, and executability. It shares structural program identity across incremental evaluation, deduplication, and search-trial auditing. Its subject is computational and audit infrastructure for alpha research, not electronic execution or market microstructure analysis.",
+          "mainResult": "The authors report that evaluation-valid candidates increase from 26.8% for free strings and 36.4% for grammar-constrained search to 97.7% for typed search, while search-lineage replay becomes 7.5 times faster. No registered-contract future-read violations remained among 23,342 admitted candidates. This does not establish the elimination of all data leakage. LLM-call reductions concern diagnostic bounds within the candidate pools, and predictive-performance differences against a strengthened string-search control are not robust.",
+          "practicalApplication": "Alpha-mining systems could use the infrastructure to reject invalid candidates before evaluation, reuse shared computations, and consistently manage duplicate candidates and trial histories. Improvements in live execution quality or returns after transaction costs are not tested.",
+          "methodology": "The system connects 95 registered blocks through typed port DAGs and checks structure, types, information availability, and implementation linkage to produce evidence-carrying intermediate representations. Content hashes for nodes and whole programs serve as cache keys and trial identities, respectively. Search comparisons use a common evaluator and matched budgets on Chinese A-share daily panels, while AAPL hourly data and synthetic graphs test computational mechanisms.",
+          "limitations": "Predictive evaluation is limited to 20-day-ahead returns in Chinese A-shares, excludes costs, capacity, and execution, and uses current-membership snapshots in the extended data. Some search-efficiency results rely on test-selected diagnostic bounds, while the strengthened-control and hybrid-search studies are exploratory analyses with three seeds each. Availability checking depends on accurate source timestamps and registered contracts; caching also assumes purity and complete evaluation context. There are no matched comparisons with Qlib or a hash-consed AST with shared structure, leaving the sources of speedup unresolved, and typed-only search reduces candidate diversity and composite-signal performance.",
+          "reason": "The paper is useful as alpha-research infrastructure, but including execution blocks is not equivalent to studying electronic execution. It provides no empirical or theoretical results on execution, market structure, interest-rate models, or yield curves, placing it outside the site's focus.",
+          "tags": [
+            "Alpha mining",
+            "Typed DSL",
+            "Compiler",
+            "Look-ahead leakage",
+            "Incremental evaluation",
+            "Trial auditing"
+          ]
+        }
+      }
+    },
+    "2610.41740": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "論文は、金融市場間の危機時の波及・伝染を時間軸に沿って検定する手法を実装したGAUSS用ソフトウェアを紹介する。",
+        "mainResult": "レバレッジ・ブートストラップで臨界値を生成する動的検定のソフトウェア部品を開発し、株式市場データによる利用例を示したと報告している。実証例の検定結果自体は要約に記載されていない。",
+        "practicalApplication": "GUIを通じて実務家が動的な市場間波及検定を実行する用途が想定される。ただし、対象は金融市場の伝染分析であり、電子取引、金利モデル、イールドカーブへの直接的な貢献は示されていない。",
+        "methodology": "固定日を仮定せず、潜在的な伝染効果を期間全体で測定する検定を実装し、レバレッジ・ブートストラップにより臨界値を求める。株式市場データの例でソフトウェアの利用方法を説明する。",
+        "limitations": "要約だけでは検定の数式や仮定、ブートストラップの詳細、性能比較、実証例の結果を評価できない。提示情報の範囲では、対象分野への直接的な関連性も限定的である。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "市場間伝染の検定用ソフトウェアとして応用可能性はあるが、サイトの重点領域である電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究には直接該当しない。",
+        "tags": [
+          "金融市場の伝染",
+          "動的検定",
+          "レバレッジ・ブートストラップ",
+          "GAUSS"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper presents GAUSS software implementing tests that measure contagion or spillovers between financial markets over time during crises.",
+          "mainResult": "It reports developing a software component for dynamic tests that generate critical values using a leverage bootstrap, and demonstrates its use with stock-market data. The abstract does not report the empirical test results themselves.",
+          "practicalApplication": "The GUI is intended to let practitioners run dynamic tests of spillovers between markets. However, the stated application is financial contagion analysis, with no direct contribution to electronic trading, interest-rate models, or yield curves.",
+          "methodology": "The implemented tests measure potential contagion effects across a time span rather than assuming a fixed date, and use a leverage bootstrap to obtain critical values. A stock-market data example illustrates how to use the software.",
+          "limitations": "The abstract does not provide enough detail to assess the test equations and assumptions, bootstrap implementation, performance comparisons, or empirical findings. Based on the supplied information, relevance to the site's focus areas is also limited.",
+          "reason": "The software may be useful for testing contagion between markets, but the paper does not directly address the site's core areas: electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "Financial contagion",
+            "Dynamic tests",
+            "Leverage bootstrap",
+            "GAUSS"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.41990": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "正の有限平均を持つ独立同分布増分のランダムウォークについて、最深ドローダウンと最長ドローダウンの順位関係を調べた研究です。",
+        "mainResult": "損失が軽い裾の場合、最深と最長のエピソードは漸近的に異なる一方、正則変動する重い裾の場合は、両者が一致する確率が高まると報告しています。",
+        "practicalApplication": "ドローダウンの深さと継続時間を別々に評価すべきかを考えるリスク分析に参考となる可能性があります。ただし、対象分野の電子取引、金利、イールドカーブへの直接的な応用は示されていません。",
+        "methodology": "増分の裾の性質ごとに、ドローダウンの深さ・期間・順位の漸近的な関係を解析しています。完了したドローダウンについても、決定論的な観測期間内で結果が成り立つと述べています。",
+        "limitations": "評価は抽象に基づきます。結論は指定されたランダムウォークの仮定と裾の分類に依存し、実データでの検証や金融市場への適用は示されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "確率論的なドローダウン順位の研究であり、対象サイトが扱う電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利研究との実質的な関連がありません。",
+        "tags": [
+          "ドローダウン",
+          "ランダムウォーク",
+          "裾の挙動",
+          "リスク分析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines the ranking relationship between the deepest and longest drawdowns in random walks with iid increments and positive finite mean.",
+          "mainResult": "It reports that the deepest and longest episodes are asymptotically distinct under light-tailed losses, while they are increasingly likely to coincide under regularly varying heavy-tailed losses.",
+          "practicalApplication": "The results may inform risk analysis on whether drawdown depth and duration should be assessed separately. However, no direct application to electronic trading, interest rates, or yield curves is presented.",
+          "methodology": "The study analyzes asymptotic relationships among drawdown depth, duration, and rank according to the tail behavior of increments. It also states that the results hold for completed drawdowns within a deterministic observation horizon.",
+          "limitations": "This assessment is based on the abstract. The conclusions depend on the stated random-walk assumptions and tail classifications; empirical validation and applications to financial markets are not described.",
+          "reason": "This is a probability-theoretic study of drawdown rankings and has no material connection to the site's focus on electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "drawdowns",
+            "random walks",
+            "tail behavior",
+            "risk analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.42119": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、worst-of autocallableの高次Greeksと将来エクスポージャー尾部を、hp-FTTによる決定論的価格計算で評価する手法を提案する。",
+        "mainResult": "著者らの比較では、精度1%ではMonte Carloがデルタで10倍超安価な一方、hp-FTTはすべての三次Greeksでより安価となり、最大で約2桁の差を示す。精度0.1%では、検証したすべてのGreeksとエクスポージャーでhp-FTTが安価だったと報告する。",
+        "practicalApplication": "高次Greeksや高精度のエクスポージャー評価で、Monte Carloの代替候補となり得る。低次Greeksをパーセント精度で評価する場合や、資産数が多い場合はMonte Carloが有利となり得る。",
+        "methodology": "後ろ向き価格再帰を解き、障壁で区分した区分多項式コアを持つhp-functional tensor trainに継続価値を保存する。保存値を用いてGreeksと将来エクスポージャーを評価し、月次観測・3～5資産のworst-of autocallableでMonte Carlo推定法と比較する。",
+        "limitations": "比較対象は著者らが構築または既報から選んだ推定法で、対象は月次観測の3～5資産商品に限られる。結論は精度やGreekの次数に依存し、抄録からは計算環境、具体的な商品条件、より多くの資産へのスケーリング性能を確認できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "定量的な金融計算手法の研究だが、主題は構造化商品の価格評価であり、電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利の対象領域には実質的に該当しない。",
+        "tags": [
+          "構造化商品",
+          "高次Greeks",
+          "worst-of autocallable",
+          "functional tensor train",
+          "Monte Carlo",
+          "エクスポージャー尾部"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study proposes a deterministic pricing method using hp-FTT to evaluate high-order Greeks and future exposure tails for worst-of autocallables.",
+          "mainResult": "In the authors’ comparisons, at 1% accuracy Monte Carlo is over ten times cheaper for deltas, while hp-FTT is cheaper for all third-order Greeks, by up to about two orders of magnitude. They report that at 0.1% accuracy hp-FTT is cheaper for every Greek and exposure measure they tested.",
+          "practicalApplication": "The method may be an alternative to Monte Carlo for high-order Greeks or high-accuracy exposure evaluation. Monte Carlo may be preferable for low-order Greeks at percent accuracy or when the number of assets is large.",
+          "methodology": "The method solves the backward pricing recursion and stores continuation values in an hp-functional tensor train with piecewise-polynomial cores split at barriers. It evaluates Greeks and future exposure from the stored values and compares against Monte Carlo estimators for monthly observed worst-of autocallables with three to five assets.",
+          "limitations": "The comparison is limited to estimators built by the authors or selected from prior work, and to monthly observed products with three to five assets. Results depend on the accuracy target and Greek order; the abstract does not specify the computational environment, detailed product terms, or scaling to larger asset counts.",
+          "reason": "This is a quantitative financial-computation study, but its subject is structured-product pricing and does not materially address electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "structured products",
+            "high-order Greeks",
+            "worst-of autocallable",
+            "functional tensor train",
+            "Monte Carlo",
+            "exposure tails"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 746,
+      "outputTokens": 805,
+      "reasoningTokens": 108,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1551,
+      "estimatedCostUsd": 0.000477,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.41019v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 833,
+      "outputTokens": 741,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1574,
+      "estimatedCostUsd": 0.000454,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.41103v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 803,
+      "outputTokens": 733,
+      "reasoningTokens": 61,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1536,
+      "estimatedCostUsd": 0.000447,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.41447v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 964,
+      "outputTokens": 1056,
+      "reasoningTokens": 183,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2020,
+      "estimatedCostUsd": 0.000624,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.41624v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 881,
+      "outputTokens": 918,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1799,
+      "estimatedCostUsd": 0.000547,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.41689v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 15368,
+      "outputTokens": 1497,
+      "reasoningTokens": 109,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 15365,
+      "totalTokens": 16865,
+      "estimatedCostUsd": 0.053388,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 8,
+      "paperIds": [
+        "2610.41689v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 791,
+      "outputTokens": 887,
+      "reasoningTokens": 90,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1678,
+      "estimatedCostUsd": 0.000523,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.41740v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 883,
+      "outputTokens": 848,
+      "reasoningTokens": 109,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1731,
+      "estimatedCostUsd": 0.000512,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.41990v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 1014,
+      "outputTokens": 1026,
+      "reasoningTokens": 142,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2040,
+      "estimatedCostUsd": 0.000614,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.42119v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

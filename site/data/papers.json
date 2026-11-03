@@ -2,6 +2,87 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-11-03-daily-openai-01",
+      "date": "2026-11-03",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2611.00338v1",
+          "title": "Reading the Count: Prediction Markets and Brazil's 2026 Presidential Election",
+          "authors": [
+            "Raphael Coelho"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.00466v1",
+          "title": "Security and Derivative Pricing with Fast Regime Switches",
+          "authors": [
+            "Peter Cotton"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.00502v1",
+          "title": "Non-Convex Market Makers: Coherence without Convexity, Friction, and Parallel Composition",
+          "authors": [
+            "Peter Cotton"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.01656v1",
+          "title": "AIDA: An AI Outage Registry with Evidence from On-Chain MEV",
+          "authors": [
+            "Wenbin Wu"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.01799v1",
+          "title": "Learning AI Agents, Market Makers, and Stress in Automated Markets",
+          "authors": [
+            "Irene Aldridge"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.02616v1",
+          "title": "Herding or Racing? Decomposing Cross-Account Order-Flow Persistence in On-Chain Markets",
+          "authors": [
+            "Yichong Bai",
+            "Dingyue Kan"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-11-02-daily-openai-01",
       "date": "2026-11-02",
       "kind": "daily",

@@ -2,6 +2,56 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-11-04-daily-openai-01",
+      "date": "2026-11-04",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2611.03660v1",
+          "title": "Behavioral Prior Elicitation via LLM for Heterogeneous-Agent Bitcoin Flash-Crash Simulation",
+          "authors": [
+            "Tran Phuong Linh Pham",
+            "Thi Minh Phuong Ngo",
+            "Phuong Thao Nguyen",
+            "Quang Minh Nguyen",
+            "Thai Hoa Ngo",
+            "Trong Nghia Nguyen"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.05218v1",
+          "title": "Beyond Anonymous Order Flow: Wallet Identity as a Feature for Short-Horizon Return Prediction",
+          "authors": [
+            "Jingqiu Ding",
+            "Daojing Zhai"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.01855v1",
+          "title": "Long-term yields of short-rate models as Feynman-Kac ground states: a variational quantum eigensolver with single-setting energy estimation on two NISQ platforms",
+          "authors": [
+            "Doyeol \"David\" Ahn"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-11-03-daily-openai-01",
       "date": "2026-11-03",
       "kind": "daily",

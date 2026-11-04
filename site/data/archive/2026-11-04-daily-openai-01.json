@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 2,
+  "editionId": "2026-11-04-daily-openai-01",
+  "editionDate": "2026-11-04",
+  "editionKind": "daily",
+  "sourceKind": "openai-responses-api",
+  "sourceLabel": "OpenAI Responses API · automated research pipeline",
+  "importedAt": "2026-11-04T14:48:42Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXivの更新を確認し、対象論文を評価しました。",
+  "expectedBatchDate": "2026-11-04",
+  "observedBatchDate": "2026-11-04",
+  "periodStart": null,
+  "periodEnd": null,
+  "sourceText": "## 2026年11月4日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 11 | 9,266 | 8,942 (508) | 0.0054 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | PDF全文・24ページ・未完了の試行 |\n| 論文解析 | gpt-6.1-sol / medium | 3 | 58,716 | 4,734 (442) | 0.1265 | PDF全文・24ページ / PDF全文・15ページ / PDF全文・8ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Behavioral Prior Elicitation via LLM for Heterogeneous-Agent Bitcoin Flash-Crash Simulation\n\n**[arXiv:2611.03660v1](https://arxiv.org/abs/2611.03660v1) — Tran Phuong Linh Pham, Thi Minh Phuong Ngo, Phuong Thao Nguyen, Quang Minh Nguyen, Thai Hoa Ngo, Trong Nghia Nguyen**\n\n### 概要\n\nBTCUSDT無期限先物の実測データで条件付けしたLLMから行動パラメータの事前分布を抽出し、異質エージェントによるフラッシュクラッシュシミュレーションに用いる研究である。無情報の事前分布に対する改善は報告されるが、文献ベースの設定に対する一貫した優位性や、実市場の因果関係は示されていない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 推奨 | 市場マイクロストラクチャ / Bitcoin無期限先物 / フラッシュクラッシュ / エージェントベースモデル / LLMによる事前分布抽出 / 流動性撤退 / 合成データの因果探索 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** LLMを実時間の売買主体ではなく、実測値で制約した事前分布の生成器として使う設計は、市場マイクロストラクチャのシミュレーション研究に有用である。ただし、推薦対象は方法論の探索であり、クラッシュ予測性能や政策的な因果効果の実証としてではない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 888 | 913 (0) | 0.0005 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 13,251 | 1,830 (216) | 0.0514 | PDF全文・15ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 500回のシミュレーションで、クラッシュ発生率はLLM条件で$17.6\\%$、一様事前分布で$0.8\\%$、文献ベースで$15.2\\%$だった。固定した合成パネル上の回帰感度分析では、レバレッジ代理変数の局所的な引下げにより予測発生率が$17.6\\%$から$13.58\\%$へ低下した一方、方向性注文圧力の引下げでは$17.43\\%$にとどまった。因果グラフの回復は部分的で、手法間の一致も限定的だった。\n\n**手法:** 2020年6月から2024年12月の66イベントを100ミリ秒間隔で整理し、局面別の注文フロー、スプレッド、価格インパクトなどをMistral-7Bへの入力とする。検証済み出力から行動パラメータの周辺分布を推定し、4類型・100エージェントのシミュレータを構築する。一様分布・文献ベースの設定と比較し、試行単位の要約データにDAGMA、DirectLiNGAM、ロジスティック回帰による局所感度分析を適用する。\n\n**実務への応用:** 暗号資産の執行・マーケットメイクにおける流動性消失シナリオの生成や、行動パラメータ設定の比較実験に参考となる。実運用のリスク閾値やレバレッジ規制効果の推定に直接使うのではなく、探索的なストレステスト基盤として位置付けるべきである。\n\n**限界・注意点:** 66イベント中23件は完全な回復条件を満たさず、実測イベントの抽出条件と合成試行のクラッシュ判定条件も異なる。発生率の比較対象は実測頻度ではなく目標帯であり、実市場の発生確率への較正は示されない。リターンの裾厚指標は実測参照の約295分の1で、比較対象の条件付けも一致しない。板不均衡は注文フロー由来の代替指標であり、レバレッジも実際の借入倍率ではなく価格動態から作る代理変数である。反実仮想はシミュレータ再実行や構造的介入ではなく固定データ上の回帰感度であり、実市場の因果効果を示さない。単一LLMによる評価で、未実施のアブレーションも残り、価格更新式のresilience項と本文の説明にも整合性の疑問がある。\n\n## 2. Beyond Anonymous Order Flow: Wallet Identity as a Feature for Short-Horizon Return Prediction\n\n**[arXiv:2611.05218v1](https://arxiv.org/abs/2611.05218v1) — Jingqiu Ding, Daojing Zhai**\n\n### 概要\n\nHyperliquidの公開Level-4データを用い、持続的なウォレット識別子が匿名の板・注文フロー特徴量を超える短期リターン予測力を持つか検証する。BTC・ETH・SOLで改善を報告するが、事後的な仕様選択を含む探索的な結果である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 市場マイクロストラクチャー / ウォレット識別情報 / Level-4注文板 / 短期リターン予測 / 逆選択 / 無期限先物 / Hyperliquid |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 公開された持続的識別子の追加的な予測価値を、板再構築と複数の比較実験で直接評価しており、市場マイクロストラクチャー研究として有用である。確証的な証拠や即時導入可能な戦略ではなく、前向き検証の設計材料として推薦する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 788 | 945 (114) | 0.0006 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 17,276 | 1,459 (120) | 0.0578 | PDF全文・8ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 隣接する10日間のウォレットmarkout順位相関は$\\rho=0.52$だった。1秒先予測の標本外$R^2$は、識別情報の追加によりridgeで10.88%から12.31%、勾配ブースティング木で19.48%から20.65%へ上昇した。ridgeの改善幅は10秒先まで活動量を対応させた200比較群すべてを上回ったが、比較群の人数は同一ではない。\n\n**手法:** コンセンサス順のメッセージから板とウォレット別注文履歴を再構築する。2026年7月1～10日の10秒markoutで上位10%のウォレットを固定し、7月11～20日に学習、21～27日に評価した。100ミリ秒間隔で匿名特徴量10個と識別情報特徴量11個を比較し、活動量対応群、特徴量遅延、2025年12月標本による感応度分析も行った。\n\n**実務への応用:** ウォレット別の気配更新や売買参加の広がりは、短期予測や逆選択リスクを考慮した気配提示の候補特徴量となる。ただし、実装には受信時刻、待ち行列順位、約定確率、手数料、在庫制約を含む検証が必要で、取引収益は実証されていない。\n\n**限界・注意点:** 対象は単一取引所の3市場、主要評価期間は7日間で、コホート閾値・ボラティリティ調整・評価期間は結果確認後に選ばれている。欠損区間での状態持ち越し、粗い板検証、未監査の受信時刻、比較群の人数不足、限定的な匿名ベースラインが残り、統計量は記述的に解釈すべきである。12月の改善は仕様依存で、最新仕様の再監査も未完了である。ウォレットは実在の個人を識別せず、私的情報の存在も証明しない。\n\n## 3. Long-term yields of short-rate models as Feynman-Kac ground states: a variational quantum eigensolver with single-setting energy estimation on two NISQ platforms\n\n**[arXiv:2611.01855v1](https://arxiv.org/abs/2611.01855v1) — Doyeol \"David\" Ahn**\n\n### 概要\n\n短期金利モデルの長期利回りをFeynman–Kac作用素の基底エネルギーとして表し、VQEで計算する研究。Vasicek、CIR、Black–Karasinskiを対象に、単一測定設定の推定法と量子実機での誤差緩和を検証している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | 短期金利モデル / 長期利回り / Feynman–Kac作用素 / 変分量子固有値ソルバー / 単一設定エネルギー推定 / 量子誤差緩和 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 金利モデルの既存のスペクトル表現を量子基底状態計算へ接続する方法論として有用である。実務導入の推奨ではなく、補正の事前構造依存性と多因子拡張の条件を吟味する研究者向けに推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 941 | 1,098 (0) | 0.0006 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | PDF全文・24ページ・未完了の試行 |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 28,189 | 1,445 (106) | 0.0173 | PDF全文・24ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者は長期利回りと基底エネルギーの関係 $y_\\infty=E_0$ を利用し、非負振幅を確率分布から再構成する推定法を提示した。無雑音の6量子ビットVasicekでは格子解との差が0.058 bp、IBMの4量子ビット実験では補正後33–125 bpと報告する。Pauli測定との約10倍の誤差差は、測定予算と補正手順が異なる条件下の比較である。\n\n**手法:** Lamperti変換と相似変換で債券価格方程式をHermitian作用素へ変換し、有限差分格子を量子ビットへ符号化する。Stoquastic性を利用した単一設定推定に、読出し補正、WKB裾制約、bit-flip逆畳み込み、zero-noise extrapolationを組み合わせ、古典解、IBM、IonQおよび米国債カーブ較正で評価する。\n\n**実務への応用:** モデル整合的な超長期利回りや終局フォワードレートの推定を検討する際の研究基盤となる。ただし、現状では安価な古典固有値計算を置き換える実務上の優位性は示されていない。\n\n**限界・注意点:** 検証は一因子モデル中心で、量子計算優位性は未実証である。4量子ビットの誤差は同じ格子の解に対する値であり、連続モデルへの離散化誤差も無視できない。補正効果の大半はWKB裾集合によるもので、逆畳み込みは単純な裾切断を一貫して上回らず、6量子ビットでは外挿後も518 bpの誤差が残る。米国債30年利回りとの相関0.98はインサンプルで、長期外挿と平均回帰速度の制約に依存する。実験範囲は限定的で、生データとコードの公開は出版時の予定とされている。",
+  "papers": [
+    {
+      "arxivId": "2611.03660v1",
+      "title": "Behavioral Prior Elicitation via LLM for Heterogeneous-Agent Bitcoin Flash-Crash Simulation",
+      "authors": [
+        "Tran Phuong Linh Pham",
+        "Thi Minh Phuong Ngo",
+        "Phuong Thao Nguyen",
+        "Quang Minh Nguyen",
+        "Thai Hoa Ngo",
+        "Trong Nghia Nguyen"
+      ],
+      "submittedDate": "2026-09-22",
+      "updatedDate": "2026-09-22",
+      "topics": [
+        "Market microstructure"
+      ],
+      "absUrl": "https://arxiv.org/abs/2611.03660v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.03660v1",
+      "schedulerRank": 1,
+      "schedulerRating": 10,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・テーマ重要度 10/10",
+      "schedulerSummary": "BTCUSDT無期限先物の実測データで条件付けしたLLMから行動パラメータの事前分布を抽出し、異質エージェントによるフラッシュクラッシュシミュレーションに用いる研究である。無情報の事前分布に対する改善は報告されるが、文献ベースの設定に対する一貫した優位性や、実市場の因果関係は示されていない。\n\n一次判定: gpt-6-luna / low · トークン 入力 888 / 出力 913（うち推論 0） · 推定 $0.0005\n論文解析: gpt-6.1-sol / medium · トークン 入力 13,251 / 出力 1,830（うち推論 216） · PDF 15 pages · 推定 $0.0514",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 10,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2611.05218v1",
+      "title": "Beyond Anonymous Order Flow: Wallet Identity as a Feature for Short-Horizon Return Prediction",
+      "authors": [
+        "Jingqiu Ding",
+        "Daojing Zhai"
+      ],
+      "submittedDate": "2026-11-03",
+      "updatedDate": "2026-11-03",
+      "topics": [
+        "Market microstructure"
+      ],
+      "absUrl": "https://arxiv.org/abs/2611.05218v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.05218v1",
+      "schedulerRank": 2,
+      "schedulerRating": 8,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・テーマ重要度 8/10",
+      "schedulerSummary": "Hyperliquidの公開Level-4データを用い、持続的なウォレット識別子が匿名の板・注文フロー特徴量を超える短期リターン予測力を持つか検証する。BTC・ETH・SOLで改善を報告するが、事後的な仕様選択を含む探索的な結果である。\n\n一次判定: gpt-6-luna / low · トークン 入力 788 / 出力 945（うち推論 114） · 推定 $0.0006\n論文解析: gpt-6.1-sol / medium · トークン 入力 17,276 / 出力 1,459（うち推論 120） · PDF 8 pages · 推定 $0.0578",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 8,
+          "scale": 10
+        }
+      ]
+    },
+    {
+      "arxivId": "2611.01855v1",
+      "title": "Long-term yields of short-rate models as Feynman-Kac ground states: a variational quantum eigensolver with single-setting energy estimation on two NISQ platforms",
+      "authors": [
+        "Doyeol \"David\" Ahn"
+      ],
+      "submittedDate": "2026-11-01",
+      "updatedDate": "2026-11-01",
+      "topics": [
+        "Interest-rate models"
+      ],
+      "absUrl": "https://arxiv.org/abs/2611.01855v1",
+      "pdfUrl": "https://arxiv.org/pdf/2611.01855v1",
+      "schedulerRank": 3,
+      "schedulerRating": 6,
+      "schedulerRatingScale": 10,
+      "schedulerLabel": "推奨・テーマ重要度 6/10",
+      "schedulerSummary": "短期金利モデルの長期利回りをFeynman–Kac作用素の基底エネルギーとして表し、VQEで計算する研究。Vasicek、CIR、Black–Karasinskiを対象に、単一測定設定の推定法と量子実機での誤差緩和を検証している。\n\n一次判定: gpt-6-luna / low · トークン 入力 941 / 出力 1,098（うち推論 0） · 推定 $0.0006\n論文解析: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · PDF 24 pages · 未完了の試行\n論文解析: gpt-6.1-sol / medium · トークン 入力 28,189 / 出力 1,445（うち推論 106） · PDF 24 pages · 推定 $0.0173",
+      "ratings": [
+        {
+          "label": "テーマ重要度",
+          "value": 6,
+          "scale": 10
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,843 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-11-04",
+  "fingerprint": "d8096c52e099d5569555f9f737c9fa395b7f6b07098364e97718619ee72836af",
+  "candidateFingerprints": {
+    "2611.01855": "1169f904c2d00adaa83c3d5535b0a0c0c50b226e2b8dfd08194132c16a04b8c7",
+    "2611.03660": "e3db420c4a17cd1b4f2b44407aa91d5b256c940461ec0e0352ddabd3340aebe6",
+    "2611.03938": "b08e88e54296b14cd4d3f2d7ba963c3bf4f014aac1b6e36047e7271790b69d05",
+    "2611.04021": "3050a93f8912eade339b9d09aae27930bb6b87612dbfc20fa327fa2318a6a917",
+    "2611.04119": "18a5d1dd5c8707bd69a2d8ffb07ee0406c2fc651c4544ff19d2dee91cf0a6358",
+    "2611.04266": "d444b93e50a8b8d505673126108ad80aabc6e17ffefd7e3b436c0b2f84ffa1db",
+    "2611.04272": "a158afa33ad85aed2c96054b91ce09f3980aca3f9c04fe922928ed2c523380d6",
+    "2611.04555": "3fcb1b5b62ca559627d3392580894ee173b23673ddecce6d348e3c3feb51298e",
+    "2611.04826": "1185a0cb1b93bfbeb0417717c1656689845490ad994d73b7f737222f9d8285a4",
+    "2611.05218": "5986f3702fd4bc3a38e2dfae84ca3b7d4774f22ebedf7469b30a8a683b063249",
+    "2611.05342": "067dc4fa5c35dccfe3c8adb34755bae1b36136a1a0ff9d980f7653555b7ef323"
+  },
+  "results": {
+    "2611.01855": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "短期金利モデルの長期利回りを、Feynman–Kac 方程式に由来する Schrödinger 演算子の基底エネルギーとして定式化し、量子変分固有値ソルバーで推定する手法を報告している。",
+        "mainResult": "Vasicek、CIR、Black–Karasinski の各モデルで、計算基底サンプルを用いる単一測定設定の推定器は、従来の Pauli 測定 VQE より誤差を約 10 分の 1 に抑えたと報告する。米国債利回りに較正した場合、グリッド上の基底エネルギーとの差は 23–67 bp で、長期利回りと 30 年債利回りの標本内相関は 0.98 だった。",
+        "practicalApplication": "短期金利モデルの長期利回りを量子デバイス上で推定する実験的手法として参考になる。現状では誤差が数十 bp 以上であり、実務的な価格付けやリスク管理への適用可能性は抄録からは確認できない。",
+        "methodology": "Feynman–Kac の債券価格方程式から得る stoquastic Hamiltonian の基底エネルギーを VQE で推定し、ビット反転デコンボリューション、読出し誤差緩和、ゼロノイズ外挿を適用した。IBM と IonQ の量子デバイスで、単一設定の測定法を Pauli 測定法と比較している。",
+        "limitations": "評価は4量子ビットの実験で、抄録には較正・検証の詳細、標本外性能、計算資源や誤差の統計的不確実性が示されていない。30年債との相関は標本内の結果であり、予測力や因果関係を示すものではない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "金利モデルと量子計算を直接結び付け、長期利回り推定の具体的なデバイス実験とベースライン比較を示すため、量子金融や金利モデルに関心のある読者には有用。ただし、誤差水準と抄録で確認できる検証範囲から、実務導入の証拠としては限定的。",
+        "tags": [
+          "短期金利モデル",
+          "長期利回り",
+          "Feynman–Kac",
+          "変分量子固有値ソルバー",
+          "量子計算",
+          "Vasicek",
+          "CIR",
+          "Black–Karasinski"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "The paper formulates the long-term yield of short-rate models as the ground-state energy of a Schrödinger operator derived from the Feynman–Kac equation, and reports a variational quantum eigensolver method for estimating it.",
+          "mainResult": "For the Vasicek, CIR, and Black–Karasinski models, the authors report that an estimator using computational-basis samples with a single measurement setting reduces error to about one tenth of that of conventional Pauli-measurement VQE. For Treasury-calibrated parameters, the reported difference from grid ground-state energies is 23–67 bp, and the in-sample correlation between long-term yield and the 30-year Treasury yield is 0.98.",
+          "practicalApplication": "The method is relevant as an experimental approach to estimating short-rate-model long-term yields on quantum devices. Errors remain at tens of basis points or more, and the abstract does not establish applicability to practical pricing or risk management.",
+          "methodology": "The authors use VQE to estimate the ground-state energy of a stoquastic Hamiltonian derived from the Feynman–Kac bond-pricing equation, applying bit-flip deconvolution, readout mitigation, and zero-noise extrapolation. They compare the single-setting estimator with Pauli-measurement methods on IBM and IonQ quantum devices.",
+          "limitations": "The evaluation uses four qubits; the abstract does not provide details on calibration and validation, out-of-sample performance, computational resources, or statistical uncertainty in the errors. The correlation with the 30-year Treasury yield is an in-sample result and does not establish predictive power or causality.",
+          "reason": "The paper directly connects interest-rate models with quantum computing and presents concrete device experiments and a baseline comparison for long-term-yield estimation, making it useful to readers interested in quantum finance or rates models. However, the reported error levels and the scope of validation described in the abstract provide limited evidence for practical deployment.",
+          "tags": [
+            "short-rate models",
+            "long-term yield",
+            "Feynman–Kac",
+            "variational quantum eigensolver",
+            "quantum computing",
+            "Vasicek",
+            "CIR",
+            "Black–Karasinski"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "短期金利モデルの長期利回りをFeynman–Kac作用素の基底エネルギーとして表し、VQEで計算する研究。Vasicek、CIR、Black–Karasinskiを対象に、単一測定設定の推定法と量子実機での誤差緩和を検証している。",
+        "mainResult": "著者は長期利回りと基底エネルギーの関係 $y_\\infty=E_0$ を利用し、非負振幅を確率分布から再構成する推定法を提示した。無雑音の6量子ビットVasicekでは格子解との差が0.058 bp、IBMの4量子ビット実験では補正後33–125 bpと報告する。Pauli測定との約10倍の誤差差は、測定予算と補正手順が異なる条件下の比較である。",
+        "practicalApplication": "モデル整合的な超長期利回りや終局フォワードレートの推定を検討する際の研究基盤となる。ただし、現状では安価な古典固有値計算を置き換える実務上の優位性は示されていない。",
+        "methodology": "Lamperti変換と相似変換で債券価格方程式をHermitian作用素へ変換し、有限差分格子を量子ビットへ符号化する。Stoquastic性を利用した単一設定推定に、読出し補正、WKB裾制約、bit-flip逆畳み込み、zero-noise extrapolationを組み合わせ、古典解、IBM、IonQおよび米国債カーブ較正で評価する。",
+        "limitations": "検証は一因子モデル中心で、量子計算優位性は未実証である。4量子ビットの誤差は同じ格子の解に対する値であり、連続モデルへの離散化誤差も無視できない。補正効果の大半はWKB裾集合によるもので、逆畳み込みは単純な裾切断を一貫して上回らず、6量子ビットでは外挿後も518 bpの誤差が残る。米国債30年利回りとの相関0.98はインサンプルで、長期外挿と平均回帰速度の制約に依存する。実験範囲は限定的で、生データとコードの公開は出版時の予定とされている。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "金利モデルの既存のスペクトル表現を量子基底状態計算へ接続する方法論として有用である。実務導入の推奨ではなく、補正の事前構造依存性と多因子拡張の条件を吟味する研究者向けに推奨する。",
+        "tags": [
+          "短期金利モデル",
+          "長期利回り",
+          "Feynman–Kac作用素",
+          "変分量子固有値ソルバー",
+          "単一設定エネルギー推定",
+          "量子誤差緩和"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "The paper represents long-term yields in short-rate models as ground-state energies of Feynman–Kac operators and computes them using VQE. It examines Vasicek, CIR, and Black–Karasinski models, testing a single-setting estimator and error mitigation on quantum hardware.",
+          "mainResult": "The author uses the relationship $y_\\infty=E_0$ and proposes an estimator that reconstructs nonnegative amplitudes from a probability distribution. Reported errors relative to grid solutions are 0.058 bp for noiseless six-qubit Vasicek and 33–125 bp after mitigation in four-qubit IBM experiments. The approximately tenfold error difference against Pauli measurements compares pipelines with different shot budgets and mitigation procedures.",
+          "practicalApplication": "The work provides a research foundation for investigating model-consistent ultra-long-term yields and ultimate forward rates. However, it demonstrates no practical advantage over inexpensive classical eigensolvers.",
+          "methodology": "Lamperti and similarity transforms convert the bond-pricing equation into a Hermitian operator, whose finite-difference grid is encoded in qubits. A single-setting estimator exploiting stoquasticity is combined with readout mitigation, WKB tail constraints, bit-flip deconvolution, and zero-noise extrapolation, and evaluated against classical solutions, IBM and IonQ hardware, and U.S. Treasury curve calibrations.",
+          "limitations": "Tests primarily cover one-factor models and establish no quantum computational advantage. Four-qubit errors are measured against the same grid solution, while discretization errors relative to the continuous model are also material. Most mitigation comes from the WKB tail set; deconvolution does not consistently outperform simple tail truncation and leaves a 518 bp error after extrapolation at six qubits. The 0.98 correlation with 30-year Treasury yields is in sample and depends on long-horizon extrapolation and constraints on mean reversion. Experimental coverage is limited, and raw data and code are scheduled for release upon publication.",
+          "reason": "The methodology usefully connects established spectral representations of interest-rate models to quantum ground-state computation. It is recommended for researchers assessing the mitigation's dependence on structural priors and the conditions for multifactor extensions, rather than for practical deployment.",
+          "tags": [
+            "Short-rate models",
+            "Long-term yields",
+            "Feynman–Kac operators",
+            "Variational quantum eigensolver",
+            "Single-setting energy estimation",
+            "Quantum error mitigation"
+          ]
+        }
+      }
+    },
+    "2611.03660": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本研究は、BTCUSDT無期限先物のフラッシュクラッシュを模擬するため、LLMによる行動事前分布の elicitation と異質エージェント型の指値注文板シミュレーションを組み合わせる。",
+        "mainResult": "報告上、LLM由来の事前分布では500回のシミュレーションにおけるクラッシュ率が0.176となり、一様事前分布の0.008を上回り、リターンの裾も厚くなった。凍結した反実仮想分析では、レバレッジ増幅を標準偏差1つ分下げると予測クラッシュ率が0.176から0.136へ低下した一方、方向性圧力の低下による変化は小さかった。",
+        "practicalApplication": "実データで十分な注文板履歴を得にくい状況で、経験的アンカーに基づくエージェント行動設定や、クラッシュ増幅要因の仮説検討に使える可能性がある。",
+        "methodology": "66件の検出イベントから100ミリ秒間隔のパネルを構築し、オフラインLLMで4種類のエージェントの行動事前分布を elicitation する。検証済み事前分布を指値注文板シミュレータに組み込み、合成データに因果探索と反実仮想分析を適用した。",
+        "limitations": "結果は合成シミュレーション上のもので、実市場での因果効果や予測性能を示すものではない。要旨には、事前分布の検証方法、モデル感度、イベント選定の代表性、反実仮想の識別仮定に関する詳細がない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "指値注文板と短時間スケールの市場クラッシュを直接扱い、LLMによるパラメータ設定をシミュレーションで評価しているため、マーケット・マイクロストラクチャ研究として関連性が高い。ただし、実市場への外的妥当性は要旨から確認できない。",
+        "tags": [
+          "マーケット・マイクロストラクチャ",
+          "指値注文板",
+          "エージェントベース・シミュレーション",
+          "フラッシュクラッシュ",
+          "暗号資産先物",
+          "LLM"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study combines LLM-based behavioral-prior elicitation with a heterogeneous-agent limit order book simulator to model flash crashes in BTCUSDT perpetual futures.",
+          "mainResult": "In the reported 500 simulations, LLM-derived priors yielded a crash rate of 0.176, compared with 0.008 under uniform priors, and produced heavier return tails. In a frozen counterfactual analysis, reducing leverage amplification by one within-sample standard deviation lowered the predicted crash rate from 0.176 to 0.136, while reducing directional pressure had only a marginal effect.",
+          "practicalApplication": "Where comprehensive order book histories are difficult to obtain, empirically anchored agent settings may support simulator design and hypothesis testing about crash-amplification mechanisms.",
+          "methodology": "The authors construct a 100 ms panel from 66 detected events, elicit behavioral priors for four agent archetypes using an offline LLM, instantiate a limit order book simulator with validated priors, and apply causal discovery and counterfactual analysis to synthetic data.",
+          "limitations": "The results come from synthetic simulations and do not establish causal effects or predictive performance in live markets. The abstract does not detail prior validation, model sensitivity, event representativeness, or assumptions underlying counterfactual identification.",
+          "reason": "The paper directly studies limit order books and short-horizon market crashes, evaluating LLM-based parameterization through simulation, making it relevant to market microstructure. Its external validity for real markets cannot be assessed from the abstract.",
+          "tags": [
+            "market microstructure",
+            "limit order book",
+            "agent-based simulation",
+            "flash crash",
+            "crypto futures",
+            "LLM"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "BTCUSDT無期限先物の実測データで条件付けしたLLMから行動パラメータの事前分布を抽出し、異質エージェントによるフラッシュクラッシュシミュレーションに用いる研究である。無情報の事前分布に対する改善は報告されるが、文献ベースの設定に対する一貫した優位性や、実市場の因果関係は示されていない。",
+        "mainResult": "500回のシミュレーションで、クラッシュ発生率はLLM条件で$17.6\\%$、一様事前分布で$0.8\\%$、文献ベースで$15.2\\%$だった。固定した合成パネル上の回帰感度分析では、レバレッジ代理変数の局所的な引下げにより予測発生率が$17.6\\%$から$13.58\\%$へ低下した一方、方向性注文圧力の引下げでは$17.43\\%$にとどまった。因果グラフの回復は部分的で、手法間の一致も限定的だった。",
+        "practicalApplication": "暗号資産の執行・マーケットメイクにおける流動性消失シナリオの生成や、行動パラメータ設定の比較実験に参考となる。実運用のリスク閾値やレバレッジ規制効果の推定に直接使うのではなく、探索的なストレステスト基盤として位置付けるべきである。",
+        "methodology": "2020年6月から2024年12月の66イベントを100ミリ秒間隔で整理し、局面別の注文フロー、スプレッド、価格インパクトなどをMistral-7Bへの入力とする。検証済み出力から行動パラメータの周辺分布を推定し、4類型・100エージェントのシミュレータを構築する。一様分布・文献ベースの設定と比較し、試行単位の要約データにDAGMA、DirectLiNGAM、ロジスティック回帰による局所感度分析を適用する。",
+        "limitations": "66イベント中23件は完全な回復条件を満たさず、実測イベントの抽出条件と合成試行のクラッシュ判定条件も異なる。発生率の比較対象は実測頻度ではなく目標帯であり、実市場の発生確率への較正は示されない。リターンの裾厚指標は実測参照の約295分の1で、比較対象の条件付けも一致しない。板不均衡は注文フロー由来の代替指標であり、レバレッジも実際の借入倍率ではなく価格動態から作る代理変数である。反実仮想はシミュレータ再実行や構造的介入ではなく固定データ上の回帰感度であり、実市場の因果効果を示さない。単一LLMによる評価で、未実施のアブレーションも残り、価格更新式のresilience項と本文の説明にも整合性の疑問がある。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "LLMを実時間の売買主体ではなく、実測値で制約した事前分布の生成器として使う設計は、市場マイクロストラクチャのシミュレーション研究に有用である。ただし、推薦対象は方法論の探索であり、クラッシュ予測性能や政策的な因果効果の実証としてではない。",
+        "tags": [
+          "市場マイクロストラクチャ",
+          "Bitcoin無期限先物",
+          "フラッシュクラッシュ",
+          "エージェントベースモデル",
+          "LLMによる事前分布抽出",
+          "流動性撤退",
+          "合成データの因果探索"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper elicits behavioral parameter priors from an LLM conditioned on empirical BTCUSDT perpetual-futures data and uses them in a heterogeneous-agent flash-crash simulator. It reports improvements over uninformative priors, but does not establish consistent superiority over literature-based settings or causal relationships in real markets.",
+          "mainResult": "Across 500 simulations, crash incidence was $17.6\\%$ with LLM priors, $0.8\\%$ with uniform priors, and $15.2\\%$ with literature-based priors. Regression sensitivity analysis on the frozen synthetic panel reduced predicted incidence from $17.6\\%$ to $13.58\\%$ after a local reduction in the leverage proxy, versus $17.43\\%$ after reducing directional pressure. Causal-graph recovery was partial, with limited agreement between methods.",
+          "practicalApplication": "The approach can inform liquidity-withdrawal scenario generation and comparative experiments with behavioral parameters for crypto execution and market making. It should be treated as an exploratory stress-testing framework, not used directly to estimate operational risk thresholds or the effects of leverage regulation.",
+          "methodology": "The authors organize 66 events from June 2020 through December 2024 at 100-millisecond resolution and provide phase-specific order flow, spreads, price impact, and related features to Mistral-7B. Validated outputs are fitted into marginal behavioral parameter distributions for a simulator containing 100 agents across four archetypes. Uniform and literature-based settings provide comparisons, while run-level summaries are analyzed using DAGMA, DirectLiNGAM, and logistic-regression local sensitivity analysis.",
+          "limitations": "Of the 66 events, 23 do not satisfy the full recovery criterion, and empirical event selection differs from simulated crash classification. Crash incidence is evaluated against a target band rather than an observed frequency, so calibration to real-market crash probabilities is not established. The return-tail statistic is approximately 295 times smaller than the empirical reference, with mismatched conditioning between the comparisons. Book imbalance is a trade-flow-derived substitute, and leverage is a price-dynamics proxy rather than actual borrowing leverage. Counterfactuals are regression sensitivities on frozen data, not simulator reruns or structural interventions, and do not establish real-market causal effects. Evaluation uses a single LLM, some ablations remain unavailable, and the resilience term in the price-update equation raises a consistency concern relative to the accompanying explanation.",
+          "reason": "Using an LLM as an empirically constrained prior generator rather than a real-time trading agent is a useful design for market-microstructure simulation research. The recommendation concerns methodological exploration, not evidence of validated crash prediction or causal policy effects.",
+          "tags": [
+            "Market microstructure",
+            "Bitcoin perpetual futures",
+            "Flash crashes",
+            "Agent-based models",
+            "LLM prior elicitation",
+            "Liquidity withdrawal",
+            "Causal discovery on synthetic data"
+          ]
+        }
+      }
+    },
+    "2611.03938": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "米国の税記録と機械学習を用いて、職業訓練の所得効果を推定し、37件のRCTと比較した研究です。",
+        "mainResult": "機械学習による推定はRCTの推定値に近く、誤差はRCT自体と同程度だったと報告しています。従来のパラメトリック推定に比べRMSEを60%削減し、訓練の効果は地域や時期で異なるほか、対象業種への就職を促すプログラムほど所得増加が大きいとしています。",
+        "practicalApplication": "職業訓練の評価や改善に観察データを活用する方法を示しますが、電子取引、金融市場のミクロ構造、金利・イールドカーブ研究への直接的な応用はありません。",
+        "methodology": "1999～2025年の米国成人の匿名化税記録と、就業履歴・属性・居住地の情報を用いて反実仮想を機械学習で推定し、37件のRCTを基準に推定誤差の分布を評価しています。",
+        "limitations": "評価は抄録の記述に限られ、モデル設計や検証の詳細、推定の不確実性は確認できません。結果は米国の職業訓練と所得に関するもので、他の制度や国への一般化も抄録からは判断できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "プログラム評価に関する研究であり、対象サイトの金融・市場関連テーマには実質的に該当しません。",
+        "tags": [
+          "機械学習",
+          "プログラム評価",
+          "RCT",
+          "職業訓練"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The study uses U.S. tax records and machine learning to estimate the earnings effects of workforce training and compares the estimates with 37 RCTs.",
+          "mainResult": "The paper reports that the machine-learning estimates closely match RCT estimates, with error comparable to that of the RCTs themselves. It reports a 60% reduction in RMSE relative to prior parametric estimators, and finds that effects vary by location and time while programs that increase employment in target-sector jobs yield larger earnings gains.",
+          "practicalApplication": "The study offers an approach to evaluating and improving workforce training with observational data, but has no direct application to electronic trading, market microstructure, or interest-rate and yield-curve research.",
+          "methodology": "The authors use anonymized tax records for U.S. adults from 1999–2025 and information on work histories, demographics, and residence to estimate counterfactuals with machine learning, evaluating the distribution of estimation errors against 37 RCTs.",
+          "limitations": "This assessment is based only on the abstract; model design, validation details, and estimation uncertainty cannot be assessed. The findings concern U.S. workforce training and earnings, and their applicability to other systems or countries cannot be determined from the abstract.",
+          "reason": "The paper concerns program evaluation and is not materially relevant to the site's finance and markets topics.",
+          "tags": [
+            "machine learning",
+            "program evaluation",
+            "RCT",
+            "workforce training"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.04021": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、Bregman–Wasserstein近傍における一般化歪度リスク指標の最悪値を理論的に解析する。",
+        "mainResult": "一定の凸性・成長条件の下で最悪値の一次元双対表現を導き、最適分位関数を最小凹上界またはアイソトニック射影で特徴付ける。また、複数のBregman–Wasserstein球の共通部分へ解析を拡張する。",
+        "practicalApplication": "複数の意思決定者が許容する分布の範囲を考慮した頑健なリスク評価に応用できる可能性がある。",
+        "methodology": "凸解析に基づく双対表現を導出し、分位関数の最適化、形状制約、および複数の制約集合を理論的に分析し、数値例を示す。",
+        "limitations": "抄録からは数値例の規模や実データでの検証、実務上の性能は確認できない。主要な結果は生成関数や歪度関数に関する条件に依存する。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "頑健リスク測度に関する理論研究であり、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利の主要対象から外れる。",
+        "tags": [
+          "頑健リスク測度",
+          "歪度リスク指標",
+          "Bregman–Wasserstein距離",
+          "分位関数",
+          "双対表現"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper theoretically analyzes worst-case generalized distortion riskmetrics over Bregman–Wasserstein neighborhoods.",
+          "mainResult": "Under specified convexity and growth conditions, the authors derive a one-dimensional dual representation of the worst-case value and characterize the optimal quantile function using a least concave majorant or isotonic projection. They also extend the analysis to intersections of multiple Bregman–Wasserstein balls.",
+          "practicalApplication": "The results may support robust risk assessment that accounts for distributions acceptable to multiple decision-makers.",
+          "methodology": "The paper derives a dual representation using convex analysis and theoretically studies quantile-function optimization, shape constraints, and multiple constraint sets, with numerical illustrations.",
+          "limitations": "The abstract does not establish the scale of the numerical examples, validation on real data, or practical performance. The main results depend on conditions on the generators and distortion functions.",
+          "reason": "This is theoretical research on robust risk measures, outside the site's primary focus on electronic trading, market microstructure, interest-rate models, yield curves, and rates.",
+          "tags": [
+            "Robust risk measures",
+            "Distortion riskmetrics",
+            "Bregman–Wasserstein distance",
+            "Quantile functions",
+            "Dual representation"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.04119": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、アナリストレポートから投資判断の複数側面を質問形式のスコアとして抽出するLLM手法を提案する。",
+        "mainResult": "要旨によれば、抽出スコアは改定モメンタムやセクター差を超えて将来の目標株価改定を予測し、金融辞書やFinBERTによるセンチメント指標を上回った。",
+        "practicalApplication": "目標株価シグナルを補完する分析に利用できる可能性があるが、電子執行、マーケット・マイクロストラクチャー、金利・イールドカーブ研究との直接的な関連は示されていない。",
+        "methodology": "アナリストレポートの文章を、業績、バリュエーション、業界状況などの投資観点に対応する質問別スコアと根拠に変換し、ウォークフォワード評価で予測性能を比較した。",
+        "limitations": "要旨には標本、対象期間、評価指標、効果の大きさ、LLMの詳細、頑健性検証が示されておらず、実運用での有効性は判断できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "アナリスト行動の予測を扱う研究であり、対象サイトの主要領域との実質的な関連が乏しい。",
+        "tags": [
+          "LLM",
+          "アナリスト予測",
+          "目標株価改定",
+          "センチメント分析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study proposes an LLM method that extracts multiple dimensions of investment views from analyst reports as question-based scores.",
+          "mainResult": "According to the abstract, the extracted scores predict subsequent target-price revisions beyond revision momentum and sector differences, and outperform financial-dictionary and FinBERT sentiment measures.",
+          "practicalApplication": "The method may complement target-price signals, but no direct relevance to electronic execution, market microstructure, interest rates, or yield-curve research is demonstrated.",
+          "methodology": "Text from analyst reports is converted into question-based scores and supporting evidence for investment dimensions such as earnings, valuation, and industry conditions; predictive performance is compared in a walk-forward evaluation.",
+          "limitations": "The abstract does not specify the sample, period, evaluation metrics, effect sizes, LLM details, or robustness tests, so effectiveness in real-world use cannot be assessed.",
+          "reason": "The paper studies prediction of analyst actions and has little substantive relevance to the site's core research areas.",
+          "tags": [
+            "LLM",
+            "analyst forecasts",
+            "target-price revisions",
+            "sentiment analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.04266": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、AI研究機関間の競争と共有される破局リスクを扱う較正モデルを提示している。",
+        "mainResult": "著者のモデルでは、3機関の競争下で離陸期間は18か月となり、研究配分の共通ルールでは69か月となる。競争の除去は、比較条件に応じて両者の破局確率差の44～90％超を説明すると報告されている。",
+        "practicalApplication": "AI研究の速度制限や機関間協調ルールを検討する概念的示唆はあるが、金融市場、電子取引、金利モデルへの直接的な適用は示されていない。",
+        "methodology": "共有ハザードと競争上の先行利益を組み込んだ、較正済みのAI開発離陸モデルを用いている。",
+        "limitations": "評価は要旨に記された較正モデルに基づく。較正の詳細、仮定の妥当性、実証的検証や結果の頑健性は要旨から確認できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "AI政策・産業競争の研究であり、対象サイトの金融・市場構造・金利分野には実質的に該当しない。",
+        "tags": [
+          "AI競争",
+          "共有ハザード",
+          "政策モデル"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper presents a calibrated model of competition among AI labs and their shared risk of catastrophe.",
+          "mainResult": "In the authors’ model, competition among three labs yields an 18-month takeoff period, compared with 69 months under a common rule for research shares. Removing competition is reported to explain 44% to over 90% of the catastrophe-probability gap, depending on the comparison.",
+          "practicalApplication": "The paper offers conceptual implications for AI research speed limits and coordination rules, but no direct application to financial markets, electronic trading, or interest-rate models is indicated.",
+          "methodology": "The paper uses a calibrated AI-development takeoff model incorporating shared hazard and the competitive benefit of arriving earlier.",
+          "limitations": "The assessment is based on the calibrated model described in the abstract. The abstract does not establish the calibration details, validity of assumptions, empirical validation, or robustness of the results.",
+          "reason": "This is research on AI policy and industry competition, not materially relevant to the site’s finance, market-structure, or interest-rate scope.",
+          "tags": [
+            "AI competition",
+            "shared hazard",
+            "policy model"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.04272": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "論文は、AI研究の一時停止協定が監視や秘密裏の技術進歩にどう左右されるかを理論的に分析する。",
+        "mainResult": "モデル上、計算資源の増加は秘密の進歩が停止中の最先端水準に追いつく時期を早め、協定の維持可能期間を縮める。例では協力可能期間は18.9か月で、安全性研究の検証により25.5か月、監視費用の半減により31.8か月に延びる。",
+        "practicalApplication": "AI開発の国際協定における監視設計や協力期間の検討に関係するが、電子取引、マーケットマイクロストラクチャー、金利モデル・イールドカーブの実務への直接的応用は示されていない。",
+        "methodology": "追随国の独自研究と先行国からの知識拡散を含む枠組みで、任意参加、費用のかかる監視、秘密の技術進歩、信頼できる対応を組み込んだ協定ゲームを解く。",
+        "limitations": "評価は要旨に記された理論モデルと数値例に基づく。校正、実証的検証、現実のAI協定への適用可能性は要旨から確認できず、金融分野への関連も見当たらない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "AIガバナンスの理論研究であり、対象サイトの定める金融分野とは実質的な関連がない。",
+        "tags": [
+          "AIガバナンス",
+          "国際協定",
+          "監視",
+          "理論モデル"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper theoretically analyzes how monitoring and covert technological progress affect temporary agreements to pause AI research.",
+          "mainResult": "In the model, compute growth hastens the point at which secret progress catches up with the frozen frontier, shortening the period for which an agreement can be sustained. In the example, cooperation is supportable for 18.9 months, extended to 25.5 months by verified safety research and to 31.8 months by halving monitoring costs.",
+          "practicalApplication": "The analysis may inform monitoring design and the duration of international agreements on AI development, but no direct application to electronic trading, market microstructure, interest-rate models, or yield-curve practice is indicated.",
+          "methodology": "The paper solves an agreement game incorporating voluntary participation, costly monitoring, secret technological advances, and credible responses, within a framework where the follower conducts independent research and receives knowledge diffusion from the leader.",
+          "limitations": "The assessment is based on the theoretical model and numerical example described in the abstract. Calibration, empirical validation, and applicability to real-world AI agreements are not established in the abstract; no financial-domain relevance is apparent.",
+          "reason": "This is a theoretical study of AI governance with no material connection to the financial fields covered by the site.",
+          "tags": [
+            "AI governance",
+            "international agreements",
+            "monitoring",
+            "theoretical model"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.04555": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "LLMによる金融アルファ因子探索で、因子間の関係をグラフ化し、多目的探索に利用する手法を提案する研究です。",
+        "mainResult": "要旨によれば、CSI 300とCSI 500で、提案手法は7つの予測・ポートフォリオ指標の平均順位が最良で、比較対象のMCTS手法を全指標で上回りました。",
+        "practicalApplication": "因子候補の生成・選別を支援する用途が考えられますが、電子取引、マーケットマイクロストラクチャ、金利モデル、イールドカーブへの直接的な貢献は示されていません。",
+        "methodology": "生成系譜、数式構造の類似性、横断面エクスポージャー相関を表す多関係グラフを構築し、グラフ上の効用伝播と品質・生成性・多様性を考慮するパレート選択を組み合わせています。",
+        "limitations": "要旨だけでは、評価期間、データ処理、統計的有意性、取引コストや実運用での頑健性を確認できません。報告された比較結果の範囲もCSI 300とCSI 500に限られます。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "アルファ因子発見という計量金融上の応用はありますが、サイトの主要対象分野との直接的な関連が薄いため、対象外と判定します。",
+        "tags": [
+          "LLM",
+          "アルファ因子探索",
+          "グラフ探索",
+          "多目的最適化"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a method for LLM-driven financial alpha-factor search that represents relationships among factors as a graph and uses them in multi-objective exploration.",
+          "mainResult": "According to the abstract, on CSI 300 and CSI 500 the proposed method achieved the best mean rank across seven predictive and portfolio metrics, outperforming the MCTS comparison on every reported metric.",
+          "practicalApplication": "It may support the generation and selection of candidate factors, but no direct contribution to electronic trading, market microstructure, interest-rate models, or yield curves is demonstrated.",
+          "methodology": "The method builds a multi-relational graph encoding generation lineage, expression-structure similarity, and cross-sectional exposure correlation, then combines graph-based utility propagation with Pareto selection over quality, fertility, and diversity.",
+          "limitations": "The abstract does not establish the evaluation period, data processing, statistical significance, transaction costs, or robustness in live use. The reported comparison is also limited to CSI 300 and CSI 500.",
+          "reason": "The work has an application in quantitative-finance alpha discovery, but its direct relevance to the site's main subject areas is limited, so it is classified as out of scope.",
+          "tags": [
+            "LLM",
+            "alpha-factor discovery",
+            "graph search",
+            "multi-objective optimization"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.04826": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、方向や信頼性が不明な予測を使うポートフォリオ運用に対し、安全性を保ちながら行動を適応させる制御方式を提案する。",
+        "mainResult": "報告された82銘柄のホールドアウト検証では、事前指定のReverse戦略はEqual Weightを上回らず、事後診断のFollow戦略もリターン優位を示さなかった。一方、保護資産はSafeベンチマークから最大15.9ベーシスポイント以内に保たれた。",
+        "practicalApplication": "予測の向きや信頼性が不確かな状況で、Safeへの退避、遅延報酬への適応、担保予算による損失制限を組み合わせた運用設計の参考になりうる。",
+        "methodology": "Safe・Follow・Reverseの行動を選ぶ適応型マスターを用い、成熟したSafe相対報酬で確率を更新する。証拠ゲート、遅延担保予算、適応判断に触れられる資本を制限する保護口座を組み合わせ、遅延下の後悔と担保安全性に関する証明を提示する。",
+        "limitations": "提示された実証は株式ポートフォリオの24銘柄開発ユニバースと82銘柄ホールドアウトに限られる。ホールドアウトでは超過リターンが確認されず、報告された結果だけでは他市場・期間への一般化や運用上の有効性は判断できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "安全な予測利用という方法論的貢献はあるが、電子執行、マーケットマイクロストラクチャ、金利モデル、イールドカーブ、金利研究を主題とせず、実証上もアルファは示されていない。",
+        "tags": [
+          "ポートフォリオ学習",
+          "予測の不確実性",
+          "リスク制約",
+          "株式ポートフォリオ"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study proposes a control method for adapting portfolio actions while preserving safety when prediction direction and reliability are unknown.",
+          "mainResult": "In the reported 82-stock holdout, the pre-specified Reverse strategy did not outperform Equal Weight, and a post-holdout diagnostic of Follow also showed no return advantage. Protected wealth, however, stayed within 15.9 basis points of the Safe benchmark.",
+          "practicalApplication": "The design may inform portfolio systems that combine retreat to Safe, adaptation to delayed rewards, and loss limits through a collateral budget when prediction direction or reliability is uncertain.",
+          "methodology": "An adaptive master selects among Safe, Follow, and Reverse actions, updating probabilities from matured Safe-relative rewards. It combines an evidence gate, a delayed collateral budget, and a protected account limiting capital exposed to adaptive decisions, and presents certificates for regret under delay and collateral safety.",
+          "limitations": "The reported empirical study is limited to a 24-stock development universe and an 82-stock holdout. No excess return was demonstrated on the holdout, and the reported results do not establish generalizability to other markets or periods or operational effectiveness.",
+          "reason": "The methodological contribution concerns safe use of predictions, but the paper does not primarily address electronic execution, market microstructure, interest-rate models, yield curves, or rates; it also reports no empirical alpha.",
+          "tags": [
+            "portfolio learning",
+            "prediction uncertainty",
+            "risk constraints",
+            "equity portfolio"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.05218": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本研究は、Hyperliquidの公開された擬似匿名ウォレット識別子を用い、短期リターン予測への有用性を検証する。",
+        "mainResult": "2026年7月1〜27日のデータで、ウォレット別の10秒マークアウト順位は隣接する10日間の期間間で相関し、共変量調整後の検証マークアウトは上位5%で3.11ベーシスポイントだった。既採点の上位ウォレットに関する特徴量を加えると、1秒先予測のアウト・オブ・サンプル$R^2$は10.88%から上昇したが、抄録が途中で切れており最終値は不明である。",
+        "practicalApplication": "ウォレット別の過去の取引成績を短期予測や注文執行判断の特徴量として利用する可能性を示す。ただし、実際の取引収益への結び付きは抄録から確認できない。",
+        "methodology": "コンセンサス順序付きメッセージからフルデプスの注文板を再構築し、10市場のデータを分析した。3市場で隣接期間のウォレット別マークアウト順位を比較し、ウォレット履歴特徴量を用いた1秒先予測を評価した。",
+        "limitations": "対象は単一取引所の約1か月分で、予測評価の詳細や最終的な$R^2$値は抄録にない。手数料、スリッページ、容量、他市場への一般化も示されていない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "ウォレット識別情報と注文フローを結び付けた短期予測研究であり、マーケットマイクロストラクチャ分野に関連する。一方、適用範囲と実運用上の有効性は抄録だけでは判断できない。",
+        "tags": [
+          "マーケットマイクロストラクチャ",
+          "注文フロー",
+          "ウォレット識別",
+          "短期リターン予測",
+          "暗号資産"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study tests whether publicly observable pseudonymous wallet identifiers on Hyperliquid are useful for short-horizon return prediction.",
+          "mainResult": "Using data from July 1–27, 2026, wallet-level 10-second markout rankings were correlated across adjacent ten-day windows, and covariate-adjusted validation markouts reached 3.11 basis points in the top 5%. Adding features about previously scored top wallets raised one-second out-of-sample $R^2$ from 10.88%, but the abstract is truncated, so the final value is unknown.",
+          "practicalApplication": "The findings suggest that historical wallet-level trading performance could be used as a feature for short-term prediction or execution decisions. The abstract does not establish whether this translates into realized trading profits.",
+          "methodology": "The authors reconstructed full-depth order books from consensus-ordered messages and analyzed data from ten markets. In three markets, they compared wallet-level markout rankings across adjacent windows and evaluated one-second-ahead prediction using wallet-history features.",
+          "limitations": "The study covers about one month on a single exchange; the abstract omits prediction-evaluation details and the final $R^2$ value. It does not report fees, slippage, capacity, or generalizability to other markets.",
+          "reason": "This short-horizon prediction study links wallet identity to order flow and is relevant to market microstructure. However, its scope and operational effectiveness cannot be determined from the abstract alone.",
+          "tags": [
+            "market microstructure",
+            "order flow",
+            "wallet identity",
+            "short-horizon return prediction",
+            "crypto assets"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "Hyperliquidの公開Level-4データを用い、持続的なウォレット識別子が匿名の板・注文フロー特徴量を超える短期リターン予測力を持つか検証する。BTC・ETH・SOLで改善を報告するが、事後的な仕様選択を含む探索的な結果である。",
+        "mainResult": "隣接する10日間のウォレットmarkout順位相関は$\\rho=0.52$だった。1秒先予測の標本外$R^2$は、識別情報の追加によりridgeで10.88%から12.31%、勾配ブースティング木で19.48%から20.65%へ上昇した。ridgeの改善幅は10秒先まで活動量を対応させた200比較群すべてを上回ったが、比較群の人数は同一ではない。",
+        "practicalApplication": "ウォレット別の気配更新や売買参加の広がりは、短期予測や逆選択リスクを考慮した気配提示の候補特徴量となる。ただし、実装には受信時刻、待ち行列順位、約定確率、手数料、在庫制約を含む検証が必要で、取引収益は実証されていない。",
+        "methodology": "コンセンサス順のメッセージから板とウォレット別注文履歴を再構築する。2026年7月1～10日の10秒markoutで上位10%のウォレットを固定し、7月11～20日に学習、21～27日に評価した。100ミリ秒間隔で匿名特徴量10個と識別情報特徴量11個を比較し、活動量対応群、特徴量遅延、2025年12月標本による感応度分析も行った。",
+        "limitations": "対象は単一取引所の3市場、主要評価期間は7日間で、コホート閾値・ボラティリティ調整・評価期間は結果確認後に選ばれている。欠損区間での状態持ち越し、粗い板検証、未監査の受信時刻、比較群の人数不足、限定的な匿名ベースラインが残り、統計量は記述的に解釈すべきである。12月の改善は仕様依存で、最新仕様の再監査も未完了である。ウォレットは実在の個人を識別せず、私的情報の存在も証明しない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "公開された持続的識別子の追加的な予測価値を、板再構築と複数の比較実験で直接評価しており、市場マイクロストラクチャー研究として有用である。確証的な証拠や即時導入可能な戦略ではなく、前向き検証の設計材料として推薦する。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "ウォレット識別情報",
+          "Level-4注文板",
+          "短期リターン予測",
+          "逆選択",
+          "無期限先物",
+          "Hyperliquid"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "Using Hyperliquid’s public Level-4 data, the paper tests whether persistent wallet identifiers improve short-horizon return prediction beyond anonymous order-book and flow features. It reports improvements for BTC, ETH, and SOL, but the findings are exploratory and involve retrospective specification selection.",
+          "mainResult": "Wallet markout rankings across adjacent ten-day windows had a correlation of $\\rho=0.52$. Adding identity features raised one-second out-of-sample $R^2$ from 10.88% to 12.31% for ridge and from 19.48% to 20.65% for gradient-boosted trees. The ridge increment exceeded all 200 activity-matched comparison cohorts through ten seconds, although cohort sizes were unequal.",
+          "practicalApplication": "Wallet-specific quote updates and trading breadth are candidate features for short-horizon forecasting and adverse-selection-aware quoting. Deployment nevertheless requires validation incorporating receipt times, queue priority, fill probabilities, fees, and inventory constraints; trading profitability is not demonstrated.",
+          "methodology": "The authors reconstruct order books and wallet-level order histories from consensus-ordered messages. They freeze the top-decile wallet cohort using ten-second markouts from July 1–10, 2026, fit models on July 11–20, and evaluate on July 21–27. On a 100-millisecond grid, they compare ten anonymous features with eleven additional identity features and conduct sensitivity analyses using activity-matched cohorts, feature delays, and a December 2025 sample.",
+          "limitations": "The study covers three markets on one venue, with seven primary evaluation days; cohort thresholds, volatility scaling, and the evaluation window were selected after examining results. Carried-forward states during gaps, coarse reconstruction checks, unaudited receipt times, undersized comparison cohorts, and a limited anonymous baseline remain concerns, so the statistics should be interpreted descriptively. December improvements depend on the specification, and a fresh audit of the latest specification remains incomplete. Wallets do not identify natural persons, and the findings do not establish private information.",
+          "reason": "The paper directly evaluates the incremental predictive value of publicly observable persistent identifiers through order-book reconstruction and multiple comparison exercises, making it useful microstructure research. It is recommended as input to prospective validation design, not as confirmatory evidence or a deployment-ready strategy.",
+          "tags": [
+            "Market microstructure",
+            "Wallet identity",
+            "Level-4 order book",
+            "Short-horizon return prediction",
+            "Adverse selection",
+            "Perpetual futures",
+            "Hyperliquid"
+          ]
+        }
+      }
+    },
+    "2611.05342": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、整数価格で需要が大きく低下する左端数字バイアスを、注意閾値を用いたランダム効用モデルで説明する。",
+        "mainResult": "税実験データではモデルが行動上の観測量に適合し、支払意思額と注意閾値の相対分布を部分識別したと報告する。また、需要反応が弱くても税の超過負担が小さいとは限らないと論じる。",
+        "practicalApplication": "税の厚生分析では、需要反応の大きさだけから超過負担を推定せず、消費者の注意メカニズムを考慮する必要があるという示唆を与える。金融市場や金利モデルへの直接的な応用は、要旨からは確認できない。",
+        "methodology": "注意閾値が異なる消費者を含むランダム効用モデルを構築し、税実験データに照らして行動上の観測量との適合と分布の部分識別を検討する。",
+        "limitations": "提示された要旨には、実験の設計・標本、推定の詳細、識別仮定や定量的な結果が記載されていない。報告内容は特定の税実験に基づき、他の状況への一般化は要旨だけでは評価できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "税制と消費者行動の研究であり、電子取引、市場マイクロストラクチャー、金利モデル、イールドカーブへの実質的な関連が要旨から認められないため、対象外と判定する。",
+        "tags": [
+          "左端数字バイアス",
+          "注意閾値",
+          "税実験",
+          "需要",
+          "厚生分析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper explains sharp demand drops at integer prices, known as left-digit bias, with a random utility model featuring attention thresholds.",
+          "mainResult": "The authors report that the model fits behavioral moments in tax-experiment data and partially identifies the relative distribution of willingness to pay and attention thresholds. They also argue that a weak demand response does not necessarily imply a small excess burden of taxation.",
+          "practicalApplication": "The paper suggests that welfare analyses of taxation should account for consumer attention mechanisms rather than infer excess burden from demand-response magnitude alone. The abstract indicates no direct application to financial markets or interest-rate models.",
+          "methodology": "The authors develop a random utility model with heterogeneous consumer attention thresholds and assess its fit to behavioral moments and its partial identification of distributions using tax-experiment data.",
+          "limitations": "The abstract does not specify the experiment's design or sample, estimation details, identification assumptions, or quantitative results. The findings are based on a particular tax experiment, and their generalizability cannot be assessed from the abstract alone.",
+          "reason": "This is research on taxation and consumer behavior, with no material relevance to electronic trading, market microstructure, interest-rate models, or yield curves evident from the abstract.",
+          "tags": [
+            "left-digit bias",
+            "attention thresholds",
+            "tax experiment",
+            "demand",
+            "welfare analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 941,
+      "outputTokens": 1098,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2039,
+      "estimatedCostUsd": 0.000643,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.01855v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": null,
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "full_text",
+      "pdfPages": 24,
+      "paperIds": [
+        "2611.01855v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 28189,
+      "outputTokens": 1445,
+      "reasoningTokens": 106,
+      "cachedInputTokens": 28186,
+      "cacheWriteTokens": 0,
+      "totalTokens": 29634,
+      "estimatedCostUsd": 0.017275,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 24,
+      "paperIds": [
+        "2611.01855v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 888,
+      "outputTokens": 913,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1801,
+      "estimatedCostUsd": 0.000545,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.03660v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 13251,
+      "outputTokens": 1830,
+      "reasoningTokens": 216,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 13248,
+      "totalTokens": 15081,
+      "estimatedCostUsd": 0.051426,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 15,
+      "paperIds": [
+        "2611.03660v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 919,
+      "outputTokens": 866,
+      "reasoningTokens": 71,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1785,
+      "estimatedCostUsd": 0.000525,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.03938v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 834,
+      "outputTokens": 836,
+      "reasoningTokens": 119,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1670,
+      "estimatedCostUsd": 0.000501,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.04021v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 770,
+      "outputTokens": 756,
+      "reasoningTokens": 92,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1526,
+      "estimatedCostUsd": 0.000455,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.04119v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 848,
+      "outputTokens": 572,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1420,
+      "estimatedCostUsd": 0.000371,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.04266v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 770,
+      "outputTokens": 687,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1457,
+      "estimatedCostUsd": 0.00042,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.04272v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 910,
+      "outputTokens": 770,
+      "reasoningTokens": 112,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1680,
+      "estimatedCostUsd": 0.000476,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.04555v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 882,
+      "outputTokens": 793,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1675,
+      "estimatedCostUsd": 0.000485,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.04826v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 788,
+      "outputTokens": 945,
+      "reasoningTokens": 114,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1733,
+      "estimatedCostUsd": 0.000551,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.05218v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 17276,
+      "outputTokens": 1459,
+      "reasoningTokens": 120,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 17273,
+      "totalTokens": 18735,
+      "estimatedCostUsd": 0.057779,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 8,
+      "paperIds": [
+        "2611.05218v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 716,
+      "outputTokens": 706,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1422,
+      "estimatedCostUsd": 0.000425,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.05342v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

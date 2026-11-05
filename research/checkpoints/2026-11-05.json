@@ -1,0 +1,528 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-11-05",
+  "fingerprint": "9310f3b18403c199151120402c339683b01e83d6b150ce3a2cc8804c29c1d479",
+  "candidateFingerprints": {
+    "2611.05553": "c481ba96636ec19e1a87f2d7d4f85b0206ac7a4721a8a7703cef5070f6d3731b",
+    "2611.05640": "65c5999bbf050f7a5f581e7c042691e92bb8a850cd77f5a03f2709df6275e52b",
+    "2611.05714": "caee3c4f7c56a2af44da8db5db2c6168d63402361a7437fe0bbfc7991145aa14",
+    "2611.05767": "0483817f0182b90b5b5cd724084b430fd5aedd7b3351aa01aed65f38c13d7369",
+    "2611.06126": "6e56a6fced4bc66c424cadd7c74360ecefd5f24d42fc0f542b18f7045831ac94",
+    "2611.06607": "7874ea6dde559a4dfa2d02dcd0c2394b1b56d9a1d1e7d3a05844f23c69f5df3d",
+    "2611.06629": "90a0a0492743b7c071a33cdb4400703935835f5ae46700e0bc08dcd3547e1c2d",
+    "2611.06696": "e7eea4b8538ed4bed06194f6837d102988b9a98c58200b85f20e3ba87d168bed",
+    "2611.06888": "6e53f5b06061df491a4b0ea14419d22702405c628334c56a00fa02a0b6e61497"
+  },
+  "results": {
+    "2611.05553": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、経済シミュレーションや調査で人間の意思決定を模擬するDecision Models（DMs）を、LLMsと比較評価している。電子取引、マーケットマイクロストラクチャ、金利モデル、イールドカーブを主題とする研究ではない。",
+        "mainResult": "要旨によると、評価対象の3設定すべてで、ベンチマーク成績が高いDMsはLLMsより人間の回答のばらつきをよく再現した。一方、消費調査では最頻回答の再現がLLMsと同程度、経済ゲームでは劣り、速度は最速のLLMの約10倍、費用は100分の1未満と報告されている。",
+        "practicalApplication": "大規模な経済シミュレーションや調査で、人間の異質性を模擬する低コストな代替手段となる可能性がある。金融市場の執行や金利分析への直接的な応用は要旨から確認できない。",
+        "methodology": "10種類のDMsと8種類のLLMsを、家計消費調査、複数の古典的経済ゲーム、労働市場のフィールド実験の3設定で比較した。",
+        "limitations": "評価は要旨に示された3設定に限られ、対象モデル、評価指標、標本、費用・速度の測定条件などの詳細は不明である。結果は、人間行動全般や金融市場への適用を確立するものではない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "人間行動のシミュレーションに関する研究としては関連性があるが、対象サイトの主要領域である電子取引、マーケットマイクロストラクチャ、金利モデル、イールドカーブとの実質的な関連が示されていない。",
+        "tags": [
+          "意思決定モデル",
+          "人間行動のシミュレーション",
+          "大規模言語モデル",
+          "経済実験"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study evaluates Decision Models (DMs) as surrogates for human decision-making in economic simulations and surveys, comparing them with LLMs. It does not focus on electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "According to the abstract, across all three settings, the DMs with the strongest benchmark performance reproduced variation in human responses better than LLMs. They matched LLMs in reproducing the modal response in the consumption survey but performed less well in economic games; they were reported to be about 10 times faster than the fastest LLM and over 100 times cheaper.",
+          "practicalApplication": "DMs may offer a lower-cost way to represent human heterogeneity in large-scale economic simulations and surveys. The abstract does not establish direct applications to trade execution or interest-rate analysis.",
+          "methodology": "The study compared 10 DMs with 8 LLMs in three settings: a household consumption survey, several classic economic games, and a labour-market field experiment.",
+          "limitations": "The evaluation covers only the three settings described in the abstract; details on the models, metrics, samples, and measurement conditions for cost and speed are not provided. The findings do not establish performance across human behaviour generally or applicability to financial markets.",
+          "reason": "The study is relevant to simulation of human behaviour, but it shows no substantive connection to the site's core areas of electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "Decision Models",
+            "human-behaviour simulation",
+            "large language models",
+            "economic experiments"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.05640": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、新聞記事に基づくポーランドの月次経済政策不確実性（EPU）指数を2000年1月から2026年6月まで構築する。",
+        "mainResult": "論文の報告では、指数は国内の政策動向に主に反応し、米国・世界のEPUとの月次変化の相関はそれぞれ0.26、0.25だった。",
+        "practicalApplication": "ポーランドの政策不確実性を分析するマクロ経済研究に利用できる可能性があるが、電子取引、マーケットマイクロストラクチャー、金利モデルやイールドカーブへの直接的な応用は示されていない。",
+        "methodology": "6紙の記事量で調整した指標を作成し、2000～2024年を基準期間として標準化・指数化する。新聞の参入時点による構成変化の影響を抑えるため、重複期間で水準とばらつきを合わせる後ろ向きのチェーン・スプライスを適用する。",
+        "limitations": "評価は提示された要旨に限られ、指数の再現性、頑健性検証、新聞選定や記事分類の詳細は確認できない。また、報告された相関や事例だけでは国内要因が主因との解釈を十分に確立できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "政策不確実性指数の構築研究であり、対象サイトの電子取引・市場構造・金利関連分野との直接的な関連性が乏しい。",
+        "tags": [
+          "経済政策不確実性",
+          "ポーランド",
+          "新聞ベース指数",
+          "マクロ経済"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study constructs a monthly newspaper-based Economic Policy Uncertainty (EPU) index for Poland covering January 2000 through June 2026.",
+          "mainResult": "The paper reports that the index responds mainly to domestic policy developments, with month-on-month correlations of 0.26 and 0.25 with the US and global EPU indices, respectively.",
+          "practicalApplication": "The index may support macroeconomic research on policy uncertainty in Poland, but the abstract does not show direct applications to electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "methodology": "The authors create article-volume-adjusted measures from six newspapers, standardize and index them using 2000–2024 as the baseline, and apply a backward chain splice matching levels and dispersion over overlap periods to reduce composition effects from newspaper entry dates.",
+          "limitations": "Assessment is limited to the abstract; reproducibility, robustness tests, and details of newspaper selection and article classification cannot be assessed. The reported correlations and examples alone do not establish that domestic factors are the primary driver.",
+          "reason": "This is a study of constructing a policy-uncertainty index, with little direct relevance to the site's focus on electronic trading, market microstructure, or interest rates.",
+          "tags": [
+            "Economic policy uncertainty",
+            "Poland",
+            "Newspaper-based index",
+            "Macroeconomics"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.05714": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、電子送信への関税とデジタルサービス税がデジタル製品貿易および税収に与える影響を比較する。",
+        "mainResult": "著者らは、DST導入先ではデジタル貿易が少ない一方、導入後の域内貿易減少は一時的と報告する。2024年の条件付きシナリオでは、DSTに関税相当額を追加すると税収は27億ドルから69億ドルに増え、貿易は約1.4%減少する。",
+        "practicalApplication": "デジタル製品への課税制度を検討する政策分析に参考となるが、金融市場の執行や金利・イールドカーブ分析への直接的な応用は示されていない。",
+        "methodology": "2016～2024年の31カテゴリの二国間デジタル貿易データ、DST率、物理的類似品への関税を用いて重力モデルを推定し、代替的な財政制度をシミュレーションする。",
+        "limitations": "税収・貿易への数値は2024年に関する条件付きシナリオであり、要旨だけではモデル仮定や推定の不確実性を評価できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "財政政策とデジタル製品貿易を扱う研究であり、対象サイトの電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究とは実質的な関連がない。",
+        "tags": [
+          "デジタル製品貿易",
+          "関税",
+          "デジタルサービス税",
+          "重力モデル",
+          "財政政策"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study compares how tariffs on electronic transmissions and digital services taxes affect digital-product trade and tax revenue.",
+          "mainResult": "The authors report lower digital trade in destinations with a DST, while the within-destination decline after adoption is temporary. In conditional scenarios for 2024, adding tariff equivalents to DSTs raises revenue from USD 2.7 billion to USD 6.9 billion and reduces trade by about 1.4%.",
+          "practicalApplication": "The study may inform policy analysis of tax regimes for digital products, but it presents no direct application to financial-market execution or interest-rate and yield-curve analysis.",
+          "methodology": "The authors estimate gravity models and simulate alternative fiscal regimes using 2016–2024 bilateral trade data for 31 digital-product categories, DST rates, and tariffs on physical analogues.",
+          "limitations": "The reported revenue and trade figures are conditional scenarios for 2024; the abstract alone does not allow assessment of model assumptions or estimation uncertainty.",
+          "reason": "The paper concerns fiscal policy and digital-product trade, with no material connection to the site's focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "digital-product trade",
+            "tariffs",
+            "digital services taxes",
+            "gravity model",
+            "fiscal policy"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.05767": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本稿は、ソウルの学習塾へのアクセスが住宅売買価格とチョンセ保証金にどう反映されるかを分析する研究です。",
+        "mainResult": "2015～2026年の取引データを用いた比較では、高校受験向け塾へのアクセスが良い地域ほど売買価格と保証金が高い一方、同一住戸・団地・月で比較した価格対保証金比率には検出可能な変化がありませんでした。著者は、塾アクセスの価値が期待値上昇ではなく現行の便益として資本化されると解釈しています。",
+        "practicalApplication": "教育環境の住宅価格評価や、教育競争に伴う家計負担の測定に参考となり得ますが、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブに直接適用する研究ではありません。",
+        "methodology": "ソウルのアパート売買とチョンセ契約約219万件を用い、同一中学校学区・月内の比較や住戸タイプ・団地・月をそろえた比較を実施し、近隣の塾や店舗へのアクセスと価格等の関連を推定しています。",
+        "limitations": "提供された抄録だけでは、推定の識別仮定、頑健性検証、データの網羅性や因果解釈の妥当性を評価できません。結果はソウルの特定期間・住宅制度に関するもので、他市場への一般化も不明です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "住宅市場と教育サービスの評価を扱う研究であり、対象サイトの定量金融・電子取引の中心領域とは実質的な関連がありません。",
+        "tags": [
+          "住宅市場",
+          "教育経済",
+          "韓国",
+          "家賃・保証金"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper examines how access to private tutoring academies in Seoul is reflected in apartment sale prices and jeonse deposits.",
+          "mainResult": "Comparisons using 2015–2026 transaction data find higher sale prices and deposits where access to high-school-exam academies is better, but no detectable change in the price-to-deposit ratio for the same unit, complex, and month. The authors interpret the academy-access value as being capitalized as a current amenity rather than expected appreciation.",
+          "practicalApplication": "The analysis may inform housing valuation around educational amenities and measurement of household costs associated with educational competition, but it does not directly apply to electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "methodology": "The study uses about 2.19 million Seoul apartment sale and jeonse contracts, comparing within middle-school assignment zones and months, as well as matching unit type, complex, and month, to estimate associations with nearby academies and shops.",
+          "limitations": "The abstract alone does not permit assessment of identifying assumptions, robustness checks, data coverage, or the validity of causal interpretations. The findings concern a specific period and housing system in Seoul, and generalizability to other markets is unclear.",
+          "reason": "The paper studies housing markets and educational services, with no material connection to the site's core areas of quantitative finance and electronic trading.",
+          "tags": [
+            "Housing market",
+            "Education economics",
+            "South Korea",
+            "Rent and deposits"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.06126": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、事故年度間の依存性を組み込んだ状態空間版チェーンラダー保険準備金モデルを提案する。",
+        "mainResult": "事故年度軸上の状態空間ダイナミクスから指数的な経過年数重み付けが導かれ、解析的な尤度表現により準備金と予測不確実性を算出できると報告する。1年不確実性は閉形式で、総不確実性は尤度表現からのモンテカルロ・シミュレーションで評価する。",
+        "practicalApplication": "保険会社の保険金準備金推定と予測不確実性評価に利用できる可能性があるが、対象サイトの電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ研究には直接該当しない。",
+        "methodology": "事故年度軸に状態空間ダイナミクスを置くチェーンラダー・モデルを構成し、尤度表現を用いて準備金および不確実性を評価する。",
+        "limitations": "抄録のみでは、実データでの検証、既存手法との比較、予測性能や適用条件の詳細は確認できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "保険数理の準備金推定が主題であり、対象分野との実質的な関連性がない。",
+        "tags": [
+          "保険数理",
+          "チェーンラダー",
+          "保険準備金",
+          "状態空間モデル"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper proposes a state-space version of the chain-ladder reserving model that incorporates dependence across accident years.",
+          "mainResult": "The authors report that state-space dynamics along the accident-year axis yields exponential seniority weighting and an analytical likelihood representation for calculating reserves and predictive uncertainty. One-year uncertainty is available in closed form, while total uncertainty is evaluated using Monte Carlo simulation from the likelihood representation.",
+          "practicalApplication": "The method may support insurers’ reserve estimation and predictive uncertainty assessment, but it does not directly address the site’s focus areas of electronic execution, market microstructure, interest-rate models, or yield curves.",
+          "methodology": "The authors construct a chain-ladder model with state-space dynamics on the accident-year axis and use a likelihood representation to evaluate reserves and uncertainty.",
+          "limitations": "The abstract does not provide details on empirical validation, comparison with existing methods, predictive performance, or conditions for applicability.",
+          "reason": "The paper concerns actuarial reserving and has no material connection to the target research areas.",
+          "tags": [
+            "actuarial science",
+            "chain-ladder",
+            "insurance reserves",
+            "state-space model"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.06607": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本稿は、LLMによる取引戦略研究の過剰適合や偽発見を抑える、制約付き実験ループを提案し、実施した全キャンペーンを報告する。",
+        "mainResult": "多数の仮説が失敗し、事前登録した基準を通過した結果は二つと報告する。特に、検証段階でSharpe比が約3だったLLM提案戦略は、唯一のホールドアウト評価で0.26に低下した。",
+        "practicalApplication": "固定語彙の宣言的提案、時系列分割、コスト・安定性ゲート、重複拒否、追記専用ログを備えた仕組みは、定量取引研究の監査可能性と偽発見抑制に応用できる可能性がある。",
+        "methodology": "提案を制限したJSON形式で受け付け、変更不能な時系列データの発見・検証・一度限りのホールドアウトで評価する。コスト控除後の損益、週単位クラスターブートストラップ下限、コスト上昇への耐性、年次安定性、標本数など複数の絶対基準を課す。",
+        "limitations": "要旨だけではキャンペーンごとの詳細、データ期間、基準設定、比較対象、二つの通過結果の内容を確認できない。ホールドアウトが一度限りであることや報告された結果は、独立した再現性を示すものではない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "偽発見を抑える取引研究ワークフローとして参考になるが、電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブを主題とする研究ではない。",
+        "tags": [
+          "定量取引研究",
+          "LLM",
+          "バックテスト",
+          "過剰適合",
+          "ホールドアウト",
+          "再現性"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper proposes a constrained experimental loop to reduce overfitting and false discoveries in LLM-driven trading research, and reports all campaigns conducted.",
+          "mainResult": "The authors report that most hypotheses failed and that two results passed their preregistered criteria. In the clearest example, an LLM-proposed strategy with a Sharpe ratio near 3 in validation fell to 0.26 on its single holdout evaluation.",
+          "practicalApplication": "A workflow combining declarative proposals from a fixed vocabulary, chronological data splits, cost and stability gates, duplicate rejection, and an append-only log could help make quantitative trading research more auditable and reduce false discoveries.",
+          "methodology": "Proposals are submitted in restricted JSON and evaluated on immutable chronological data divided into discovery, validation, and a one-time holdout. Multiple absolute criteria are applied, including net performance after costs, a weekly-cluster bootstrap lower bound, resilience to higher costs, year-by-year stability, and minimum sample sizes.",
+          "limitations": "The abstract does not provide campaign-level details, data periods, gate settings, comparators, or the specifics of the two passing results. A single-use holdout and the reported outcomes do not establish independent reproducibility.",
+          "reason": "The work may inform workflows for reducing false discoveries in trading research, but its main subject is not electronic execution, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "quantitative trading research",
+            "LLMs",
+            "backtesting",
+            "overfitting",
+            "holdout",
+            "reproducibility"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.06629": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究はProject Glasswingによる脆弱性発見AIへの早期アクセスが、企業の脆弱性開示、外部研究者の活動、攻撃者による悪用に与えた影響を分析する。",
+        "mainResult": "アクセス企業では開示件数が2倍超、高影響の脆弱性が約150%増え、修正速度は従来と同程度だったと報告する。開示後1か月以内の悪用割合は約3分の2低下したが、悪用件数自体は変わらなかった。",
+        "practicalApplication": "脆弱性発見AIが防御能力を高める可能性と、アクセス制限が国・企業間のセキュリティ格差を生む懸念を示す。金融市場の取引執行や市場構造、金利モデルへの直接的な応用は示されていない。",
+        "methodology": "Project Glasswingへのアクセス企業を、アクセスのない中国・ロシアのテック企業と比較し、公開脆弱性データを用いて変化を調べる。",
+        "limitations": "要旨だけでは識別戦略や統計的不確実性、企業群の比較可能性を評価できない。対象は特定の企業・モデル・プログラムであり、他の環境への一般化には限界がある。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "サイバーセキュリティとAIの研究であり、対象サイトの電子取引、マーケットマイクロストラクチャー、金利・イールドカーブ研究には実質的に該当しない。",
+        "tags": [
+          "サイバーセキュリティ",
+          "生成AI",
+          "脆弱性開示",
+          "因果評価"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes how early access to vulnerability-finding AI through Project Glasswing affected firms’ vulnerability disclosures, external researchers, and attacker exploitation.",
+          "mainResult": "The abstract reports that access firms more than doubled disclosures and disclosed about 150% more high-impact vulnerabilities, while fixing flaws at about the same speed as before. The share exploited within one month after disclosure fell by about two thirds, but the number exploited did not change.",
+          "practicalApplication": "The findings suggest vulnerability-finding AI may strengthen defense, while restricted access may widen security gaps across countries and firms. No direct application to financial-market execution, market structure, or interest-rate models is reported.",
+          "methodology": "The study compares firms with access to Project Glasswing against tech firms in China and Russia without access, using publicly disclosed vulnerability data to examine changes.",
+          "limitations": "The abstract does not permit assessment of the identification strategy, statistical uncertainty, or comparability of the firm groups. The study concerns a specific set of firms, model, and program, limiting generalization to other settings.",
+          "reason": "This is research on cybersecurity and AI, not materially related to the site’s focus on electronic trading, market microstructure, interest rates, or yield curves.",
+          "tags": [
+            "cybersecurity",
+            "generative AI",
+            "vulnerability disclosure",
+            "causal evaluation"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.06696": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "MovieLensの利用者が未視聴映画の評価を予測する能力を、推薦システムの予測と比較した研究。",
+        "mainResult": "後に評価を投稿した予測では、本人の予測が4種類の機械予測を上回り、全予測と特徴量に加えるとテストデータの平均二乗誤差が26%低下したと報告する。",
+        "practicalApplication": "推薦システムで本人に評価予測を尋ねる設計や、選好情報の収集方法を考える際の参考になり得るが、金融取引や金利市場への直接的な応用は示されていない。",
+        "methodology": "MovieLens Beliefsデータから、未視聴映画への予測のうち少なくとも1日後に実評価が得られた551件を抽出し、プラットフォーム予測、協調フィルタリング2種、スタッキングモデルと比較した。",
+        "limitations": "予測の98.8%は無回答で、分析対象は277人による551件に限られる。映画推薦の特定データに基づく結果であり、応答者選択や他領域への一般化には不確実性がある。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "推薦システムと選好予測を扱うが、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブには実質的に関係しない。",
+        "tags": [
+          "推薦システム",
+          "選好予測",
+          "映画評価"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study compares MovieLens users’ predictions of their ratings for unseen films with predictions from recommender systems.",
+          "mainResult": "For predictions followed by a later rating, users’ forecasts outperformed four machine forecasts; adding them to all predictions and features reportedly reduced test-set mean squared error by 26%.",
+          "practicalApplication": "The findings may inform how recommender systems elicit preference information, but no direct application to financial trading or rates markets is presented.",
+          "methodology": "The study selected 551 predictions from the MovieLens Beliefs dataset that received an actual rating at least a day later, and compared them with the platform forecast, two collaborative-filtering models, and a stacked model.",
+          "limitations": "98.8% of prompts went unanswered, and the analysis covers only 551 observations from 277 members. The results rely on a specific movie-recommendation dataset, leaving uncertainty about respondent selection and generalization to other domains.",
+          "reason": "The paper concerns recommender systems and preference prediction, but is not materially relevant to electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "recommender systems",
+            "preference prediction",
+            "movie ratings"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.06888": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、米国754職種の労働条件と職業別AI曝露度の関連を、O*NETの21項目を用いて分析している。金融市場や金利モデルを対象とする研究ではない。",
+        "mainResult": "未調整では、AI曝露度が高い職種ほど労働条件スコアが低い関連が報告された。職業特性を調整すると、LLM曝露度の複合的な関連は統計的に明確でなくなり、AIOEの関連は負のままだった。",
+        "practicalApplication": "職業プロフィールは、AIと労働条件の関係を調べる研究対象の選定に利用できるが、金融の電子執行や市場分析への直接的な応用は示されていない。",
+        "methodology": "O*NETの21項目を754の米国職種について用い、LLMベースの曝露度とAIOEを、職種均等・雇用者数加重の双方で比較した。身体的要求、教育、訓練・経験、賃金を調整した。",
+        "limitations": "要旨からは関連分析であり、因果効果や実際の労働負担軽減を確立したとはいえない。項目のまとめ方で解釈が変わり、従業員の希望や具体的介入の証拠も必要とされる。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "職業とAI曝露に関する研究であり、対象サイトの電子取引、マーケット・マイクロストラクチャー、金利・イールドカーブ研究には実質的に該当しない。",
+        "tags": [
+          "AI曝露",
+          "職業",
+          "労働条件",
+          "関連分析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes the association between working conditions and occupation-level AI exposure across 754 US occupations using 21 O*NET items. It does not address financial markets or interest-rate models.",
+          "mainResult": "In unadjusted comparisons, higher AI exposure was associated with lower working-condition scores. After adjustment for occupational characteristics, the composite association was not statistically clear for LLM exposure, while the AIOE association remained negative.",
+          "practicalApplication": "Occupational profiles may help select settings for research on AI and working conditions, but the abstract shows no direct application to financial execution or market analysis.",
+          "methodology": "The study uses 21 O*NET items for 754 US occupations and compares LLM-based exposure and AIOE with equal occupation weights and employment weights. It adjusts for physical demands, education, training and experience, and wages.",
+          "limitations": "The abstract describes associations, not established causal effects or realized reductions in work burdens. Interpretation changes with item groupings, and evidence on worker preferences and specific interventions is also needed.",
+          "reason": "The research concerns occupations and AI exposure, not the site's core areas of electronic trading, market microstructure, interest rates, or yield curves.",
+          "tags": [
+            "AI exposure",
+            "occupations",
+            "working conditions",
+            "association analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 833,
+      "outputTokens": 883,
+      "reasoningTokens": 67,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1716,
+      "estimatedCostUsd": 0.000525,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.05553v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 967,
+      "outputTokens": 774,
+      "reasoningTokens": 77,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1741,
+      "estimatedCostUsd": 0.000484,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.05640v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 828,
+      "outputTokens": 689,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1517,
+      "estimatedCostUsd": 0.000427,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.05714v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 919,
+      "outputTokens": 755,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1674,
+      "estimatedCostUsd": 0.000469,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.05767v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 698,
+      "outputTokens": 612,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1310,
+      "estimatedCostUsd": 0.000376,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.06126v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 983,
+      "outputTokens": 886,
+      "reasoningTokens": 90,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1869,
+      "estimatedCostUsd": 0.000541,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.06607v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 814,
+      "outputTokens": 694,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1508,
+      "estimatedCostUsd": 0.000428,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.06629v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 967,
+      "outputTokens": 695,
+      "reasoningTokens": 68,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1662,
+      "estimatedCostUsd": 0.000444,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.06696v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 765,
+      "outputTokens": 694,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1459,
+      "estimatedCostUsd": 0.000423,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.06888v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

@@ -3369,6 +3369,12 @@
       "message": "The arXiv update was confirmed, but no papers met the recommendation criteria.",
       "sourceText": "## November 5, 2026 — Daily review\n\nThe arXiv update was confirmed, but no papers met the recommendation criteria.\n\n### Usage for this edition\n\n| Stage | Model / effort | Calls | Input | Output (reasoning) | Estimated cost (USD) | Source / scope |\n| --- | --- | --- | --- | --- | --- | --- |\n| screen | gpt-6-luna / low | 9 | 7,774 | 6,682 (302) | 0.0041 | Abstract |\n\nReported retries are included. Unknown is not zero. Reasoning is included in output; costs are estimates, not billing records.\n\n\n**Recommended papers: None**",
       "papers": []
+    },
+    {
+      "editionId": "2026-11-06-daily-openai-01",
+      "message": "The arXiv update was confirmed, but no papers met the recommendation criteria.",
+      "sourceText": "## November 6, 2026 — Daily review\n\nThe arXiv update was confirmed, but no papers met the recommendation criteria.\n\n### Usage for this edition\n\n| Stage | Model / effort | Calls | Input | Output (reasoning) | Estimated cost (USD) | Source / scope |\n| --- | --- | --- | --- | --- | --- | --- |\n| screen | gpt-6-luna / low | 8 | 6,688 | 6,611 (647) | 0.0040 | Abstract |\n| paper | gpt-6.1-sol / medium | 1 | 55,690 | 1,456 (171) | 0.1538 | Full PDF · 47 pages |\n\nReported retries are included. Unknown is not zero. Reasoning is included in output; costs are estimates, not billing records.\n\n\n**Recommended papers: None**",
+      "papers": []
     }
   ]
 }

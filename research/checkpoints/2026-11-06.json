@@ -1,0 +1,536 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-11-06",
+  "fingerprint": "0cc56ab6d472f85877b30936851ac2a737a52cd843ad0f6cdb10013b5660a996",
+  "candidateFingerprints": {
+    "2611.07083": "1fb6508e6e3d171e200c197cc604181ec5f18c6b3ac764282be6b947350687a9",
+    "2611.07110": "568cf0770a77a432702aee86dcd307a0193fd00f70034f828025ef534757f638",
+    "2611.07120": "fe8368329bc33a46fa00795606b0b1814ec0655cb9fd623718be9fa255269ba3",
+    "2611.07457": "ac6b168626014e8dd8e39f0ebe6340c0bc77f033f04214791aa2488d431572bf",
+    "2611.07464": "267ca8a6e6ba4d71644aa3b028386f29b11b00e8faf53d56780b80d968169ed5",
+    "2611.07699": "ab97a32c7fe02cbcef1a3a3ddc4321eb94dccd19862e792bff4dfc55b02132de",
+    "2611.08031": "c4357729def77f55626152b1a6f4d82abccb5adb9082d22489caf74792b07158",
+    "2611.08430": "7adf06672232f79595b3d9e0a97ea285f8b03b9544b585677479f426874bfbb0"
+  },
+  "results": {
+    "2611.07083": {
+      "status": "pdf_out_of_scope",
+      "screenAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "多次元拡散に駆動される確率指数が真のマルチンゲールとなるための必要十分条件を、境界退出の分析に基づいて示す研究です。",
+        "mainResult": "滑らかな境界では、正則性・非爆発性などの仮定の下、シフト後のFicheraドリフトの非正性と、ドリフトがゼロかつ被積分過程が非有界となる点での局所条件を特徴づけとして提示します。無限遠では、特定の一次元化が可能な場合のFeller判定や、一般的な十分条件を示し、逆CIRモデルおよび相関因子を持つ4/2モデルの例で臨界ケースを含む条件を導いています。",
+        "practicalApplication": "確率指数のマルチンゲール性を確認し、関連する評価方程式の一意性を検討する際に役立つ可能性があります。逆CIR・4/2モデルの例は、特異な確率積分や因子間相関を含むモデルの分析に関連します。",
+        "methodology": "Girsanov変換後の拡散が領域から退出しない条件へ問題を還元し、滑らかな境界、無限遠、非滑らかな境界を分けて解析します。Ficheraドリフト、Feller判定、動径・射影テストを用い、モデル例に適用しています。",
+        "limitations": "要旨だけでは、仮定の詳細や条件の適用範囲を確認できません。一般的な動径・射影テストは十分条件にとどまる場合があり、個別モデルへの適用可能性は係数や境界構造に依存します。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "マルチンゲール性と評価方程式の一意性という金融モデル分析に関わる問題を、逆CIR・4/2モデルを含む具体例で扱っています。ただし中心的な貢献は確率論的な境界判定で、金利市場や実務的な取引への直接的な結果は要旨からは確認できません。",
+        "tags": [
+          "確率指数",
+          "マルチンゲール性",
+          "拡散過程",
+          "境界退出",
+          "Ficheraドリフト",
+          "Feller判定",
+          "逆CIRモデル",
+          "4/2モデル",
+          "評価方程式"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This study derives necessary and sufficient conditions for stochastic exponentials driven by multidimensional diffusions to be true martingales by analyzing boundary exits.",
+          "mainResult": "For smooth boundaries, under regularity, non-explosion, and related hypotheses, it characterizes martingality using nonpositivity of the shifted Fichera drift together with a local condition where the drift vanishes and the integrand is unbounded. At infinity, it gives Feller criteria when a suitable one-dimensional reduction is possible, as well as general sufficient conditions, and derives conditions including critical cases for inverse-CIR and correlated-factor 4/2 models.",
+          "practicalApplication": "The results may help verify martingality of stochastic exponentials and assess uniqueness of associated valuation equations. The inverse-CIR and 4/2 examples are relevant to analyzing models with singular stochastic integrands and correlated factors.",
+          "methodology": "The problem is reduced to non-exit of the diffusion under the Girsanov-shifted drift, then analyzed separately at smooth boundaries, infinity, and nonsmooth boundaries. The analysis uses the Fichera drift, Feller tests, radial and projection tests, and applications to model examples.",
+          "limitations": "The abstract does not provide enough detail to assess the assumptions or full scope of the criteria. General radial and projection tests may only provide sufficient conditions, and applicability to a particular model depends on its coefficients and boundary structure.",
+          "reason": "The paper addresses martingality and valuation-equation uniqueness, issues relevant to financial model analysis, and includes concrete inverse-CIR and 4/2 examples. Its main contribution is nevertheless a probabilistic boundary test, and the abstract does not establish direct results for rates markets or practical trading.",
+          "tags": [
+            "stochastic exponentials",
+            "martingality",
+            "diffusions",
+            "boundary exits",
+            "Fichera drift",
+            "Feller test",
+            "inverse-CIR model",
+            "4/2 model",
+            "valuation equations"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "多次元拡散で駆動される確率指数の真のマルチンゲール性を、Girsanov変換後の拡散の非退出問題として分析する理論論文である。滑らかな境界、無限遠、非平滑な境界を分け、相関付き確率ボラティリティモデルと評価方程式の一意性へ応用している。",
+        "mainResult": "著者らは、境界の正則性、無限遠での非爆発性、臨界境界での追加条件の下で、シフト後のFichera driftの非正値性とマルチンゲール性の同値を示す。相関付きCIR因子を用いた変調型モデルでは、厳密な条件 $2\\alpha_1-\\eta_1^2\\geq 2\\eta_1(\\rho_1v)^-\\sup g$ を導き、等号と上限が達成されない場合も含める。ここで $q^-=\\max\\{-q,0\\}$ である。",
+        "practicalApplication": "逆CIR型や4/2型の確率ボラティリティモデルについて、割引資産価格の厳密局所マルチンゲール化と、資産価格に関する線形成長クラスでの評価PDEの非一意性を判定できる。金利モデルへの直接適用や執行戦略の検証は行っていない。",
+        "methodology": "停止したGirsanov変換による期待値と生存確率の恒等式を出発点とし、Fichera境界分類、Lyapunov関数、Feller検定、スカラー比較、時間変更を組み合わせる。相関因子の特異な接線方向ドリフトは占有時間評価で制御し、PDEの一意性は局所化とDoob変換で結び付ける。",
+        "limitations": "一般の多次元拡散に対する完全な必要十分条件ではない。Fichera driftがゼロの境界に課す条件は十分条件であって必要ではなく、一般の境界交差部やスカラー比較に還元できない爆発問題は未解決である。吸収・反射の境界仕様も判定に不可欠で、実証分析や数値的な性能評価はない。",
+        "importance": 3,
+        "recommended": false,
+        "reason": "測度変更とモデル整合性の理論として有用だが、本文の主対象は確率ボラティリティと拡散の境界挙動である。CIRやWishart過程は扱うものの、金利・イールドカーブ・市場構造・電子執行への具体的貢献は示しておらず、本サイトの対象外と判断する。",
+        "tags": [
+          "確率指数",
+          "真のマルチンゲール",
+          "Fichera境界分類",
+          "確率ボラティリティ",
+          "評価PDEの一意性"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This theoretical paper analyzes when stochastic exponentials driven by multidimensional diffusions are true martingales through non-exit of the Girsanov-shifted diffusion. It separates smooth boundaries, infinity, and nonsmooth boundaries, with applications to correlated stochastic volatility models and uniqueness of valuation equations.",
+          "mainResult": "Under boundary regularity, non-explosion at infinity, and additional conditions at critical boundaries, the authors establish equivalence between martingality and nonpositivity of the shifted Fichera drift. For modulated models with correlated CIR factors, they derive the exact condition $2\\alpha_1-\\eta_1^2\\geq 2\\eta_1(\\rho_1v)^-\\sup g$, including equality and an unattained supremum. Here $q^-=\\max\\{-q,0\\}$.",
+          "practicalApplication": "For inverse-CIR and 4/2-type stochastic volatility models, the criteria identify strict local martingality of discounted asset prices and non-uniqueness of valuation PDEs in the class of linear growth in the asset price. The paper does not directly apply the results to interest-rate models or test execution strategies.",
+          "methodology": "Starting from an identity linking expectation to survival probability through stopped Girsanov transformations, the paper combines Fichera boundary classification, Lyapunov functions, Feller tests, scalar comparison, and time changes. Occupation-time estimates control singular tangential drifts in correlated factors, while localization and Doob transforms connect the results to PDE uniqueness.",
+          "limitations": "The paper does not provide a complete necessary-and-sufficient classification for general multidimensional diffusions. Its condition at zero-Fichera-drift boundaries is sufficient but not necessary; general boundary intersections and explosion problems without scalar comparison remain unresolved. Absorbing or reflecting boundary specifications are essential, and there is no empirical analysis or numerical performance evaluation.",
+          "reason": "The paper is useful for measure-change theory and model consistency, but primarily concerns stochastic volatility and diffusion boundary behavior. Although it treats CIR and Wishart processes, it demonstrates no concrete contribution to interest rates, yield curves, market microstructure, or electronic execution, placing it outside this site's scope.",
+          "tags": [
+            "Stochastic exponentials",
+            "True martingales",
+            "Fichera boundary classification",
+            "Stochastic volatility",
+            "Valuation PDE uniqueness"
+          ]
+        }
+      }
+    },
+    "2611.07110": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "団体生命保険の被保険者集団をリスク群に割り当てるため、信頼度重み付きクラスタリング手法を提案する研究です。電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブの対象ではありません。",
+        "mainResult": "欧州の大手保険会社の実データで、提案手法は比較対象の2種類のk-meansより、実用性、時間的安定性、統計的信頼性の考慮で優れていたと報告されています。",
+        "practicalApplication": "保険者が経験料率設定に用いるリスク群の割り当てを自動化し、経験データの統計的信頼度を反映する用途が想定されます。対象サイトの重点領域への直接的な応用は限定的です。",
+        "methodology": "多次元Bühlmann–Straubモデルの信頼度重みとk-meansクラスタリングを組み合わせ、実際の団体生命保険データで2種類のk-meansと比較しています。",
+        "limitations": "要旨から確認できる実証は単一の欧州保険会社のデータに基づき、比較対象も2種類のk-meansに限られます。定量的な改善幅や他社・他保険種への一般化可能性は要旨では示されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "保険数理に関する研究であり、サイトの電子取引、マーケットマイクロストラクチャー、金利・イールドカーブ分野との関連が薄いため、対象外と判断します。",
+        "tags": [
+          "保険数理",
+          "経験料率",
+          "信頼度理論",
+          "クラスタリング"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study proposes a credibility-weighted clustering method for allocating insured collectives to risk groups in group life insurance. It does not address electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "Using real-world data from a major European insurer, the proposed method reportedly outperformed the two k-means variants considered in viability, temporal stability, and accounting for statistical reliability.",
+          "practicalApplication": "Insurers could use the method to automate risk-group allocation for experience rating while reflecting the statistical credibility of experience data. Direct application to the site's focus areas is limited.",
+          "methodology": "The approach combines credibility weights from a multidimensional Bühlmann–Straub model with k-means clustering and compares the result with two k-means variants using group life insurance data.",
+          "limitations": "The abstract reports empirical evidence from one European insurer and comparisons with only two k-means variants. It does not provide quantitative effect sizes or establish generalizability to other insurers or insurance lines.",
+          "reason": "This is an actuarial insurance study with little relevance to the site's focus on electronic trading, market microstructure, interest rates, and yield curves.",
+          "tags": [
+            "insurance actuarial science",
+            "experience rating",
+            "credibility theory",
+            "clustering"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.07120": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、fractional memoryを導入したrough instantaneous squared VIXモデルを提案し、VIXの期間構造とVIXオプション価格を扱う。",
+        "mainResult": "2018年1月から2025年6月の日次データで、Markovモデルより期間構造の適合が改善し、オプション価格のout-of-sample MSEとMAEがそれぞれ13.06%と6.33%低下したと報告する。改善は高ボラティリティ時や短期オプションで大きい。",
+        "practicalApplication": "VIX期間構造からモデルの記憶・平均回帰・初期状態を推定し、その後VIXオプション価格に合わせて残りのパラメータを校正する手順を示す。VIXデリバティブの分析には応用可能だが、本サイトの金利・イールドカーブ・電子取引の主題とは直接関係しない。",
+        "methodology": "Mittag-Leffler減衰による期間構造の明示表現と、affine Fourier–Laplace transformに基づく準閉形式のオプション価格式を導出し、二段階校正でMarkovモデルおよび先行研究のベンチマークと比較する。",
+        "limitations": "評価対象、期間、比較モデル、誤差指標は要旨に記載された範囲に限られ、実運用での取引コストやヘッジ性能は示されていない。結果は要旨による報告であり、頑健性の詳細は確認できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "VIXボラティリティ・デリバティブのモデル研究であり、金利モデルや電子取引を中心とする対象範囲から外れる。",
+        "tags": [
+          "VIX",
+          "ボラティリティモデル",
+          "fractional memory",
+          "オプション価格",
+          "期間構造"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes a rough instantaneous squared VIX model with fractional memory to model the VIX term structure and VIX option prices.",
+          "mainResult": "Using daily data from January 2018 to June 2025, the authors report better term-structure fit than a Markovian model and out-of-sample reductions of 13.06% in option-pricing MSE and 6.33% in MAE. Gains are larger in high-volatility periods and for short-maturity options.",
+          "practicalApplication": "The paper presents a procedure that estimates memory, mean reversion, and initial states from the VIX term structure, then calibrates the remaining parameters to VIX option prices. It may be useful for VIX derivatives, but is not directly related to this site's main topics of rates, yield curves, or electronic trading.",
+          "methodology": "The authors derive an explicit term-structure representation with Mittag-Leffler decay and a semi-closed-form option-pricing formula based on an affine Fourier–Laplace transform, then use two-step calibration to compare against a Markovian model and benchmarks from prior literature.",
+          "limitations": "The abstract provides only limited details on the evaluation setup, sample, benchmarks, and error metrics, and does not report real-world trading costs or hedging performance. The findings are reported in the abstract; further robustness details are unavailable here.",
+          "reason": "This is a model study of VIX volatility derivatives, outside the site's primary scope of interest-rate models and electronic trading.",
+          "tags": [
+            "VIX",
+            "volatility models",
+            "fractional memory",
+            "option pricing",
+            "term structure"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.07457": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "株式の成長最適ポートフォリオを情報理論に基づいてモデル化し、その活動時間とリターン分布を検討する研究です。",
+        "mainResult": "活動時間の導関数は取引行動の過剰反応を捉え、高速で準定常なスカラー拡散に従うとし、ベンチマークの対数リターンは自由度が4をわずかに下回るStudentの$t$分布に従うと予測して実証検証すると報告しています。",
+        "practicalApplication": "ベンチマークをニュメレールとする中立的な価格付けとヘッジの枠組みを提示していますが、電子執行、金利、イールドカーブへの直接的な応用は示されていません。",
+        "methodology": "成長最適株式ポートフォリオの代理を構築・モデル化し、活動時間の変動を拡散過程で表現し、予測したリターン分布を実証的に検証する設計です。",
+        "limitations": "提供された抄録には、データ、推定・検定方法、実証結果の詳細や比較対象が記載されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "ポートフォリオ理論とベンチマーク中立の価格付けが中心で、対象分野との関連は取引行動への言及に限られるため、スコープ外と判断します。",
+        "tags": [
+          "成長最適ポートフォリオ",
+          "株式リターン",
+          "活動時間",
+          "ベンチマーク中立価格付け"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study models a growth-optimal portfolio of stocks using information-theoretic principles and examines its activity time and return distribution.",
+          "mainResult": "It reports that the derivative of activity time captures overreactions in trading behavior and follows a fast-moving, quasi-stationary scalar diffusion; it predicts benchmark log-returns follow a Student's $t$ distribution with degrees of freedom slightly below four and says this prediction is tested empirically.",
+          "practicalApplication": "It presents a framework for benchmark-neutral pricing and hedging using the benchmark as numeraire, but does not show direct applications to electronic execution, interest rates, or yield curves.",
+          "methodology": "The study constructs and models a proxy for the growth-optimal stock portfolio, represents changes in activity time with a diffusion process, and empirically tests the predicted return distribution.",
+          "limitations": "The supplied abstract does not provide details on the data, estimation or testing methods, empirical results, or comparators.",
+          "reason": "The paper focuses on portfolio theory and benchmark-neutral pricing; its relevance to the target areas is limited to a reference to trading behavior, so it is classified as out of scope.",
+          "tags": [
+            "growth-optimal portfolio",
+            "stock returns",
+            "activity time",
+            "benchmark-neutral pricing"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.07464": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "FINCOSMOSは、Webからのデータ取得やユーザーへの確認を含む金融エージェントのオープンワールド評価手法を提案する。",
+        "mainResult": "報告された150セッションでは合格はなく、ユーザーが承認したセッションもすべてプログラム検査に失敗した。エージェントは未提示の詳細の54〜64%しか質問せず、失敗の88.33%はエージェントに起因すると専門家が評価した。永続メモリを用いたエージェントは、フィードバック後に10タスクすべてを習得した。",
+        "practicalApplication": "金融エージェントのデータ取得、戦略確認、バックテストの時点整合性、報告指標を検査する評価設計に利用できる。ただし、電子取引や金利分析の手法を直接提示する研究ではない。",
+        "methodology": "隠れた戦略を持つ模擬ユーザーとの課題で、Webデータ取得、データ締切に基づくバックテスト、検証可能な報告を評価する。参照解答を使わず、プログラム検査とユーザー承認などを組み合わせ、4つのコーディングエージェントとツールなしモデルを150セッションで比較した。",
+        "limitations": "要旨の結果は模擬ユーザー、限られたエージェントとセッションに基づき、実運用での性能や一般化を示すものではない。永続メモリによる習得の詳細や、評価課題の代表性も要旨からは判断できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "金融エージェントの評価としては関連性があるが、対象サイトの中心である電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利の研究ではないため、対象外と判定する。",
+        "tags": [
+          "金融エージェント",
+          "評価ベンチマーク",
+          "バックテスト",
+          "データ検証"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "FINCOSMOS proposes an open-world evaluation method for financial agents, including Web data acquisition and clarification with users.",
+          "mainResult": "Across the reported 150 sessions, none was accepted, and every session approved by the user failed a program check. Agents asked about only 54–64% of unspecified details, while experts attributed 88.33% of failures to the agents. An agent with persistent memory learned all ten tasks after receiving feedback.",
+          "practicalApplication": "The framework could inform evaluations that check financial agents’ data acquisition, strategy clarification, point-in-time backtesting, and reported metrics. The paper does not directly present methods for electronic trading or rates analysis.",
+          "methodology": "The study evaluates tasks involving a simulated user with a hidden strategy, Web data acquisition, backtesting under a data cutoff, and verifiable reporting. It combines programmatic checks and user approval without a reference answer, and evaluates four coding agents and a model without tools across 150 sessions.",
+          "limitations": "The abstract’s results are based on simulated users and a limited set of agents and sessions, and do not establish performance or generalization in live use. The abstract also does not provide enough detail to assess the persistent-memory learning results or how representative the tasks are.",
+          "reason": "The paper is relevant to evaluating financial agents, but it does not concern the site’s core topics of electronic execution, market microstructure, interest-rate models, yield curves, or rates, so it is out of scope.",
+          "tags": [
+            "financial agents",
+            "evaluation benchmark",
+            "backtesting",
+            "data validation"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.07699": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "電動ロボタクシー fleet の充電状態を考慮した運行・再配置・充電制御を、連続時間流体モデルで分析する研究です。",
+        "mainResult": "著者らは、充電状態に応じた depot 帰還と再配置に閾値構造があると報告しています。充電状態を無視する方策との性能差は、条件によっては無制限に大きくなり得る一方、単純な閾値ヒューリスティックでも最適解の価値の大部分を回収できるとしています。",
+        "practicalApplication": "ロボタクシー fleet の運行・充電計画への応用が想定されますが、電子取引、market microstructure、金利モデルやイールドカーブ研究への直接的な応用は示されていません。",
+        "methodology": "車両の位置と充電状態を表す連続時間流体モデルを構築し、充電状態を考慮する方策と考慮しない方策を比較しています。2025年のニューヨーク市タクシー記録に基づく数値事例も示しています。",
+        "limitations": "評価は要旨に記載されたモデルと数値事例に基づき、実運用での検証や定量的な性能改善幅は要旨から確認できません。主題も本サイトの対象領域とは異なります。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "ロボタクシー fleet の充電・再配置最適化が主題であり、本サイトが対象とする金融市場の執行、market microstructure、金利・イールドカーブ研究には実質的に該当しません。",
+        "tags": [
+          "ロボタクシー",
+          "fleet運用",
+          "充電制御",
+          "再配置"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes operational, repositioning, and charging decisions for electric robotaxi fleets while accounting for vehicle state of charge, using a continuous-time fluid model.",
+          "mainResult": "The authors report threshold structures for depot return and repositioning based on state of charge. The performance gap versus policies that ignore charge can be unbounded under some conditions, while simple threshold heuristics recover most of the value of the optimal solution.",
+          "practicalApplication": "The work may inform robotaxi fleet operations and charging plans, but the abstract establishes no direct application to electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "methodology": "The authors construct a continuous-time fluid model of vehicle location and charge states, and compare charge-aware with charge-oblivious policies. They also present a numerical case study based on 2025 New York City taxi records.",
+          "limitations": "The evaluation described in the abstract is based on a model and numerical case study; real-world operational validation and the quantitative size of performance gains cannot be determined from the abstract. The topic also differs from this site's target areas.",
+          "reason": "The paper focuses on charging and repositioning optimization for robotaxi fleets and is not materially about financial-market execution, market microstructure, interest rates, or yield curves.",
+          "tags": [
+            "robotaxis",
+            "fleet operations",
+            "charging control",
+            "repositioning"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.08031": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、バングラデシュ農村部の水道接続を対象に、料金設定と規模の経済が公平性・費用対効果に与える影響を分析する。",
+        "mainResult": "著者らは、費用対効果を最大化する接続料金はゼロであり、規模の経済が利用料収入を上回ると報告する。",
+        "practicalApplication": "公共インフラの料金設計に示唆を与えるが、電子取引、市場ミクロ構造、金利モデル、イールドカーブ、金利への直接的な応用はない。",
+        "methodology": "新設パイプラインへの接続機会を用いて世帯の支払意思額を誘因整合的に測定し、事業費データと組み合わせて規模の経済を評価する。",
+        "limitations": "提供された要旨だけでは、推定方法の詳細、効果の大きさ、外的妥当性を評価できない。結論は対象地域・インフラの条件に依存する可能性がある。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "公共インフラ経済学の研究であり、対象サイトの金融・市場関連分野には実質的に該当しない。",
+        "tags": [
+          "公共インフラ",
+          "料金設計",
+          "規模の経済",
+          "費用対効果",
+          "バングラデシュ"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes how pricing and economies of scale affect equity and cost-effectiveness for piped water connections in rural Bangladesh.",
+          "mainResult": "The authors report that a zero connection fee maximizes cost-effectiveness, with economies of scale outweighing revenue from user fees.",
+          "practicalApplication": "The findings inform public-infrastructure pricing, but have no direct application to electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "methodology": "The authors use the opportunity to connect to a newly constructed pipeline to elicit incentivized household willingness to pay, and combine it with project cost data to assess economies of scale.",
+          "limitations": "The abstract alone does not provide enough detail to assess estimation methods, effect magnitudes, or external validity. The conclusion may depend on the setting and infrastructure conditions studied.",
+          "reason": "This is a study in public-infrastructure economics and is not materially relevant to the site's finance and market-related areas.",
+          "tags": [
+            "public infrastructure",
+            "pricing",
+            "economies of scale",
+            "cost-effectiveness",
+            "Bangladesh"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.08430": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "論文は、リチウム供給網における越境所有権と鉱石アクセスが、各国の政策により供給や生産へ及ぼす影響を分析する。",
+        "mainResult": "要旨によれば、海外生産者の中国持分の売却はスポット鉱石供給を増やす一方、リチウム生産量をほぼ変えず、鉱石輸出禁止は中国の生産減を他地域の精製能力で補えず世界供給を減らす。",
+        "practicalApplication": "重要鉱物の所有権移転や輸出規制を検討する政策担当者に、供給確保策と供給コストのトレードオフを評価する材料を与える。電子取引、金利、イールドカーブへの直接的な応用は示されていない。",
+        "methodology": "世界の鉱山・精製所データを用い、所有権が精製業者の実効鉱石費用、鉱山のスポット販売、競争に及ぼす影響を含むモデルを推定し、政策シナリオを分析する。",
+        "limitations": "評価は要旨に記されたモデルと政策シナリオに基づく。推定方法の詳細、不確実性、データ範囲や感度分析は要旨から確認できず、結果を他の市場へ一般化できるかも不明である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "重要鉱物の産業組織・貿易政策研究であり、対象サイトの電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利研究とは実質的な関連がない。",
+        "tags": [
+          "リチウム",
+          "重要鉱物",
+          "供給網",
+          "越境所有権",
+          "輸出規制"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper analyzes how cross-border ownership and ore access in the lithium supply chain affect supply and production under national policies.",
+          "mainResult": "According to the abstract, divestiture of Chinese stakes in overseas producers increases spot ore supply while leaving lithium output nearly unchanged; an ore export ban reduces global supply because other regions’ refining capacity cannot offset lost Chinese production.",
+          "practicalApplication": "The findings may inform policymakers considering ownership transfers or export restrictions on critical minerals by highlighting trade-offs between supply security and supply costs. No direct application to electronic trading, interest rates, or yield curves is indicated.",
+          "methodology": "The study estimates a model using global mine and refinery data, incorporating effects of ownership on refiners’ effective ore costs, mines’ spot sales, and competition, and analyzes policy scenarios.",
+          "limitations": "The assessment is based on the model and policy scenarios described in the abstract. The abstract does not provide details on estimation, uncertainty, data coverage, or sensitivity analyses, and the generalizability of the results to other markets is unclear.",
+          "reason": "This is a study of critical-mineral industrial organization and trade policy, with no material connection to the site’s focus on electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "lithium",
+            "critical minerals",
+            "supply chain",
+            "cross-border ownership",
+            "export restrictions"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 846,
+      "outputTokens": 1131,
+      "reasoningTokens": 150,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1977,
+      "estimatedCostUsd": 0.00065,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.07083v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 55690,
+      "outputTokens": 1456,
+      "reasoningTokens": 171,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 55687,
+      "totalTokens": 57146,
+      "estimatedCostUsd": 0.153783,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 47,
+      "paperIds": [
+        "2611.07083v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 787,
+      "outputTokens": 755,
+      "reasoningTokens": 71,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1542,
+      "estimatedCostUsd": 0.000456,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.07110v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 910,
+      "outputTokens": 883,
+      "reasoningTokens": 83,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1793,
+      "estimatedCostUsd": 0.000532,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.07120v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 691,
+      "outputTokens": 799,
+      "reasoningTokens": 140,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1490,
+      "estimatedCostUsd": 0.000469,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.07457v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 974,
+      "outputTokens": 952,
+      "reasoningTokens": 132,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1926,
+      "estimatedCostUsd": 0.000573,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.07464v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 925,
+      "outputTokens": 793,
+      "reasoningTokens": 71,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1718,
+      "estimatedCostUsd": 0.000489,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.07699v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 821,
+      "outputTokens": 562,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1383,
+      "estimatedCostUsd": 0.000363,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.08031v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 734,
+      "outputTokens": 736,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1470,
+      "estimatedCostUsd": 0.000441,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.08430v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

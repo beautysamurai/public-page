@@ -1,0 +1,1181 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "weekly",
+  "reportDate": "2026-11-06",
+  "generatedAt": "2026-11-08T02:00:45Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "Synthesized 9 selected paper(s) from 9 stored paper(s) across 1 bounded request(s) and 7 daily report(s).",
+  "expectedBatchDate": null,
+  "observedBatchDate": null,
+  "periodStart": "2026-10-31",
+  "periodEnd": "2026-11-06",
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2611.00338v1",
+        "title": "Reading the Count: Prediction Markets and Brazil's 2026 Presidential Election",
+        "authors": [
+          "Raphael Coelho"
+        ],
+        "submittedDate": "2026-10-30",
+        "updatedDate": "2026-10-30",
+        "categories": [
+          "econ.EM",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "ブラジル大統領選の開票情報と予測市場の価格を比較する実証研究である。決選投票では市場の反応がライブ予測より遅れた一方、第１回投票では市場が著者の予測を上回ったと報告する。",
+        "mainResult": "ライブ予測の勝利確率が $0.998$ に達してから、市場価格が $0.9$ を継続的に上回るまで約 $69$ 分を要した。Kalshiの手数料控除後期待利益はモデル次第で１契約当たり $3.8$–$18.0$ セントだが、単純な州別外挿では $0.3$ セントにとどまった。",
+        "practicalApplication": "イベント契約の監視では、開票率だけでなく投票区単位の得票変化を利用する余地がある。ただし、予測誤差、板の厚さ、資金拘束、決済リスクを含む執行評価が必要である。",
+        "methodology": "投票区の受信時刻から分単位の開票状況を再構築し、Kalshi・Polymarketの取引と照合する。階層的な得票予測、過去選挙による誤差較正、価格が示唆する不確実性、モデル依存の期待利益を比較する。",
+        "limitations": "中心結果は単一の決選投票と予測モデルに依存し、事後公開記録と当時利用可能な情報を区別する必要がある。較正誤差は乖離と期待利益を過大評価し得るうえ、価格だけでは期待得票差と不確実性を識別できない。保存レビューに基づく整理であり、原データは再検証していない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "公開情報の到着と価格発見を対応付ける点で関連性が高い。市場の優位性が逆転する事例やモデル感応度も含め、情報効率性を慎重に評価する資料として推奨する。",
+        "tags": [
+          "予測市場",
+          "価格発見",
+          "情報効率性",
+          "イベント契約",
+          "モデルリスク"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This empirical study compares Brazilian presidential election-count information with prediction-market prices. It reports that markets lagged the live forecast in the runoff, whereas markets outperformed the author's forecast in the first round.",
+          "mainResult": "Approximately $69$ minutes elapsed between the live forecast reaching a victory probability of $0.998$ and market prices remaining above $0.9$. Model-dependent expected profits after Kalshi fees were $3.8$–$18.0$ cents per contract, but only $0.3$ cents under simple state-level extrapolation.",
+          "practicalApplication": "Event-contract monitoring could use precinct-level voting changes rather than vote-count progress alone. Execution assessment must nevertheless incorporate forecast errors, market depth, capital lockup, and settlement risk.",
+          "methodology": "The study reconstructs minute-level counting progress from precinct receipt timestamps and matches it to Kalshi and Polymarket trades. It compares hierarchical vote forecasts, error calibration using past elections, price-implied uncertainty, and model-dependent expected profits.",
+          "limitations": "The central findings depend on one runoff and the forecasting model, and retrospectively released records must be distinguished from information available at the time. Calibration errors could overstate discrepancies and expected profits, while prices alone cannot identify both expected vote margins and uncertainty. This synthesis relies on the stored review; the underlying data were not revalidated.",
+          "reason": "The paper is highly relevant because it links public-information arrival to price discovery. It is recommended for a cautious assessment of informational efficiency, including cases where markets outperform and sensitivity to modeling choices.",
+          "tags": [
+            "Prediction markets",
+            "Price discovery",
+            "Informational efficiency",
+            "Event contracts",
+            "Model risk"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 853,
+          "outputTokens": 984,
+          "reasoningTokens": 101,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1837,
+          "estimatedCostUsd": 0.000577,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.00338v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 11033,
+          "outputTokens": 1602,
+          "reasoningTokens": 152,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 11030,
+          "totalTokens": 12635,
+          "estimatedCostUsd": 0.043601,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 14,
+          "paperIds": [
+            "2611.00338v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 8602,
+          "outputTokens": 9305,
+          "reasoningTokens": 291,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 8599,
+          "totalTokens": 17907,
+          "estimatedCostUsd": 0.114554,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.00338v1",
+            "2611.00466v1",
+            "2611.00502v1",
+            "2611.01656v1",
+            "2611.01799v1",
+            "2611.01855v1",
+            "2611.02616v1",
+            "2611.03660v1",
+            "2611.05218v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.00466v1",
+        "title": "Security and Derivative Pricing with Fast Regime Switches",
+        "authors": [
+          "Peter Cotton"
+        ],
+        "submittedDate": "2026-10-30",
+        "updatedDate": "2026-10-30",
+        "categories": [
+          "q-fin.MF",
+          "q-fin.PR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "高速なMarkovレジーム切替を伴う金利・株式・信用モデルの価格計算を扱う。適用条件を満たすモデルを線形常微分方程式に帰着し、漸近展開と直接数値解を組み合わせる。",
+        "mainResult": "一次補正をGreen–Kubo項と開始レジームの記憶項に分解し、初期層を含む高次展開を提示する。Vasicekスワップションの例では、平均滞在時間 $0.05$ 年で、相対誤差が平均化モデルの約 $0.72\\%$ から二次展開の約 $1.1\\times10^{-7}$ に低下したと報告する。",
+        "practicalApplication": "レジーム依存の債券、スワップション、キャップ、CDSの評価と感応度計算の実装資料になる。展開が不適切な領域を直接数値解に切り替える設計が有用だが、一律の計算高速化は示されていない。",
+        "methodology": "共通のRiccati解を持つモデルを $a'=(Q+\\operatorname{diag}g)a$ に帰着する。定常分布、生成行列の群逆行列、初期層による特異摂動展開を構成し、反転積分、Jamshidian分解、PDEなどで商品価格を評価する。",
+        "limitations": "展開は漸近的で、高次化による改善は単調ではなく、高周波や遅い切替では直接数値解が必要になる。一般終端条件や多因子への拡張には追加確認が必要で、市場較正・ヘッジ性能も未検証である。保存レビューに基づく整理であり、公開コードは実行していない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "レジーム切替の価格補正から商品実装までを扱うため、今期の金利モデル研究として優先度が高い。一般性と速度の主張を独立検証する前提で推奨する。",
+        "tags": [
+          "金利モデル",
+          "レジーム切替",
+          "漸近展開",
+          "Green–Kubo補正",
+          "スワップション",
+          "数値価格評価"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "The paper studies pricing in interest-rate, equity, and credit models with fast Markov regime switching. Models satisfying the applicability conditions are reduced to linear ordinary differential equations, combining asymptotic expansions with direct numerical solutions.",
+          "mainResult": "The first-order correction is decomposed into a Green–Kubo term and an initial-regime memory term, with higher-order expansions including an initial layer. In a Vasicek swaption example with mean sojourn time $0.05$ years, the reported relative error falls from approximately $0.72\\%$ for the averaged model to approximately $1.1\\times10^{-7}$ for the second-order expansion.",
+          "practicalApplication": "The paper provides implementation material for pricing and sensitivities of regime-dependent bonds, swaptions, caps, and CDS. Switching to direct numerical solutions where expansions are unsuitable is useful, but a universal computational speedup is not demonstrated.",
+          "methodology": "Models sharing a Riccati solution are reduced to $a'=(Q+\\operatorname{diag}g)a$. Singular perturbation expansions use the stationary distribution, the generator's group inverse, and an initial layer; product pricing employs inversion integrals, Jamshidian decomposition, and PDEs.",
+          "limitations": "The expansions are asymptotic, higher orders do not improve accuracy monotonically, and high frequencies or slow switching require direct numerical solutions. General terminal conditions and multifactor extensions need further checking, while market calibration and hedging performance remain untested. This synthesis relies on the stored review; the public code was not executed.",
+          "reason": "Its coverage from regime-switching price corrections to product implementation makes it a priority interest-rate modeling paper for this period. It is recommended subject to independent verification of generality and speed claims.",
+          "tags": [
+            "Interest-rate models",
+            "Regime switching",
+            "Asymptotic expansions",
+            "Green–Kubo correction",
+            "Swaptions",
+            "Numerical pricing"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 805,
+          "outputTokens": 1004,
+          "reasoningTokens": 138,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1809,
+          "estimatedCostUsd": 0.000583,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.00466v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 12,
+          "paperIds": [
+            "2611.00466v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 10860,
+          "outputTokens": 1542,
+          "reasoningTokens": 174,
+          "cachedInputTokens": 10857,
+          "cacheWriteTokens": 0,
+          "totalTokens": 12402,
+          "estimatedCostUsd": 0.016512,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 12,
+          "paperIds": [
+            "2611.00466v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 8602,
+          "outputTokens": 9305,
+          "reasoningTokens": 291,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 8599,
+          "totalTokens": 17907,
+          "estimatedCostUsd": 0.114554,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.00338v1",
+            "2611.00466v1",
+            "2611.00502v1",
+            "2611.01656v1",
+            "2611.01799v1",
+            "2611.01855v1",
+            "2611.02616v1",
+            "2611.03660v1",
+            "2611.05218v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.00502v1",
+        "title": "Non-Convex Market Makers: Coherence without Convexity, Friction, and Parallel Composition",
+        "authors": [
+          "Peter Cotton"
+        ],
+        "submittedDate": "2026-10-31",
+        "updatedDate": "2026-10-31",
+        "categories": [
+          "q-fin.MF",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "非凸な費用関数型マーケットメーカーについて、無裁定性と価格反応の単調性を分離する理論研究である。比例手数料、複数メーカーへの注文配分、流動性追加による平滑化を扱う。",
+        "mainResult": "経路独立なメーカーの無裁定条件を費用の弦に関する条件として示し、ペイオフが $[-1,1]$ の場合は $1$-Lipschitz条件に対応するとする。最大の単位数量当たり裁定余地以上の比例手数料で無裁定性を回復でき、凸なメーカー群への配分は単一価格の単調求根に帰着する。",
+        "practicalApplication": "予測市場やAMMの価格整合性検査、手数料下限の設計、費用込みの注文ルーティングに示唆を与える。実装済みの収益改善策ではなく、設計原理として利用すべきである。",
+        "methodology": "弦条件、Fenchel双対性、下側凸包絡、infimal convolution、Moreau包絡を用いて命題を証明する。解析例と反例により、凸性、整合性、流動性集約の成立条件を切り分ける。",
+        "limitations": "無裁定の定義は全状態で厳密に正の利益が出る取引の不在であり、通常の弱い裁定概念とは異なる。価値比較は無制約・近視眼的・リスク中立の取引者に依存し、単調求根も一般の非凸配分には適用できない。実証分析はなく、保存レビューに基づく理論的評価である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "無裁定性と凸性を混同せず、手数料と注文配分まで接続する点が有用である。マーケットメーカー設計に直接関連する理論研究として推奨する。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "自動マーケットメーカー",
+          "非凸費用関数",
+          "比例取引費用",
+          "注文配分",
+          "無裁定性"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This theoretical paper separates no-arbitrage from monotonic price responses in nonconvex cost-function market makers. It addresses proportional fees, order allocation across makers, and smoothing through additional liquidity.",
+          "mainResult": "The paper characterizes no-arbitrage for path-independent makers through a chord condition on costs, corresponding to a $1$-Lipschitz condition when payoffs lie in $[-1,1]$. Proportional fees at least as large as the maximum per-unit arbitrage opportunity can restore no-arbitrage, while allocation across convex makers reduces to monotone root-finding for a single price.",
+          "practicalApplication": "The results inform price-consistency checks for prediction markets and AMMs, fee-floor design, and cost-inclusive order routing. They should be used as design principles rather than demonstrated profit-improvement techniques.",
+          "methodology": "The propositions use chord conditions, Fenchel duality, lower convex envelopes, infimal convolution, and Moreau envelopes. Analytical examples and counterexamples distinguish the conditions for convexity, coherence, and liquidity aggregation.",
+          "limitations": "No-arbitrage means the absence of trades earning strictly positive profits in every state, differing from the usual weak-arbitrage concept. Value comparisons depend on unconstrained, myopic, risk-neutral traders, and monotone root-finding does not solve general nonconvex allocation. There is no empirical analysis; this theoretical assessment relies on the stored review.",
+          "reason": "The distinction between no-arbitrage and convexity, connected to fees and order allocation, is useful. The paper is recommended as theory directly relevant to market-maker design.",
+          "tags": [
+            "Market microstructure",
+            "Automated market makers",
+            "Nonconvex cost functions",
+            "Proportional transaction costs",
+            "Order allocation",
+            "No-arbitrage"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 842,
+          "outputTokens": 854,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1696,
+          "estimatedCostUsd": 0.000511,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.00502v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 17251,
+          "outputTokens": 1514,
+          "reasoningTokens": 181,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 17248,
+          "totalTokens": 18765,
+          "estimatedCostUsd": 0.058266,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 17,
+          "paperIds": [
+            "2611.00502v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 8602,
+          "outputTokens": 9305,
+          "reasoningTokens": 291,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 8599,
+          "totalTokens": 17907,
+          "estimatedCostUsd": 0.114554,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.00338v1",
+            "2611.00466v1",
+            "2611.00502v1",
+            "2611.01656v1",
+            "2611.01799v1",
+            "2611.01855v1",
+            "2611.02616v1",
+            "2611.03660v1",
+            "2611.05218v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.01656v1",
+        "title": "AIDA: An AI Outage Registry with Evidence from On-Chain MEV",
+        "authors": [
+          "Wenbin Wu"
+        ],
+        "submittedDate": "2026-11-01",
+        "updatedDate": "2026-11-01",
+        "categories": [
+          "cs.CE",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "AIサービス障害の台帳をオンチェーンデータに結合し、MEVシステムの開発と本番執行を分けて分析する。障害時に新規executorの配備が減る一方、既存botの執行量は多くの仕様で維持されると報告する。",
+        "mainResult": "Ethereumでは $8$ 時間の障害に対応する配備アドレス数の推定比率が当日 $0.67$、２日後 $0.66$ だった。ただし、４日累積減少はblock bootstrapでゼロを排除せず、Baseの一部仕様では裁定執行比率が $0.95$ と有意に低かった。",
+        "practicalApplication": "AI依存を開発・テスト・配備と本番執行に分け、即時の売買停止だけでなく戦略更新の遅延も監視する設計に役立つ。個別botのAI非依存性を保証する結果ではない。",
+        "methodology": "重複除去した障害記録とEthereum・Baseの取引およびコントラクト作成記録を結合する。固定効果付きPPML、対応窓比較、クラスタ推論、block bootstrap、代替bot定義による頑健性検証を行う。",
+        "limitations": "API利用や代替サービスへの切替を観測できず、アドレスも企業やコード更新全体を表さない。清算機会の変化との分離や、本文と付録の裁定件数の整合性にも課題が残る。保存レビューに基づく整理であり、因果解釈と執行不変の一般化には留保が必要である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子取引の開発依存と執行依存を区別する枠組みと障害台帳が有用である。運用レジリエンス研究として推奨するが、有意でない結果を影響の不存在とは解釈しない。",
+        "tags": [
+          "電子取引",
+          "MEV",
+          "AIサービス障害",
+          "取引システム開発",
+          "運用レジリエンス",
+          "イベントスタディ"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The study combines an AI-service outage registry with on-chain data to distinguish MEV system development from production execution. It reports fewer new executor deployments during outages, while existing bot execution remains broadly stable in many specifications.",
+          "mainResult": "On Ethereum, an $8$-hour outage corresponds to estimated deploying-address count ratios of $0.67$ on the same day and $0.66$ two days later. However, the four-day cumulative decline does not exclude zero under block bootstrap, and one Base specification finds a significantly lower arbitrage execution ratio of $0.95$.",
+          "practicalApplication": "The study informs monitoring that separates AI dependencies in development, testing, and deployment from production execution, tracking delayed strategy updates as well as immediate trading interruptions. It does not establish that individual bots are independent of AI.",
+          "methodology": "Deduplicated outage records are combined with Ethereum and Base transactions and contract-creation records. The analysis uses fixed-effects PPML, matched-window comparisons, clustered inference, block bootstrap, and robustness checks with alternative bot definitions.",
+          "limitations": "API usage and switching to alternative services are unobserved, and addresses do not represent firms or all code updates. Separating liquidation-opportunity changes and reconciling arbitrage counts between the main text and appendix remain issues. This synthesis relies on the stored review; causal interpretations and general claims of unchanged execution require caution.",
+          "reason": "The framework distinguishing development dependence from execution dependence, together with the outage registry, is useful. The paper is recommended for operational-resilience research, without interpreting insignificant findings as evidence of no effect.",
+          "tags": [
+            "Electronic trading",
+            "MEV",
+            "AI-service outages",
+            "Trading-system development",
+            "Operational resilience",
+            "Event study"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 952,
+          "outputTokens": 879,
+          "reasoningTokens": 100,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1831,
+          "estimatedCostUsd": 0.000535,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.01656v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 36190,
+          "outputTokens": 1566,
+          "reasoningTokens": 212,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 36187,
+          "totalTokens": 37756,
+          "estimatedCostUsd": 0.106134,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 27,
+          "paperIds": [
+            "2611.01656v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 8602,
+          "outputTokens": 9305,
+          "reasoningTokens": 291,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 8599,
+          "totalTokens": 17907,
+          "estimatedCostUsd": 0.114554,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.00338v1",
+            "2611.00466v1",
+            "2611.00502v1",
+            "2611.01656v1",
+            "2611.01799v1",
+            "2611.01855v1",
+            "2611.02616v1",
+            "2611.03660v1",
+            "2611.05218v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.01799v1",
+        "title": "Learning AI Agents, Market Makers, and Stress in Automated Markets",
+        "authors": [
+          "Irene Aldridge"
+        ],
+        "submittedDate": "2026-11-01",
+        "updatedDate": "2026-11-01",
+        "categories": [
+          "cs.LG",
+          "econ.EM",
+          "econ.TH",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "学習エージェントの取引目的がAMMの価格フィードバックとストレス持続性に与える影響を分析する。群集追随への便乗、流動性供給による安定化、流動性退出の履歴依存性を理論化する。",
+        "mainResult": "線形インパクトと対称な独立ノイズの下では、正負のフィードバックが同じ単期リターン分布と出来高を持っても、ストレス持続時間は異なり得る。参加ゲームでは複数均衡と流動性崩壊のヒステリシスを導く。",
+        "practicalApplication": "AMMの監視で、ボラティリティやVaRに加え、リターンの符号持続率とストレス継続時間を測る動機になる。料金政策や流動性供給能力のストレステストにも示唆がある。",
+        "methodology": "定積AMMの価格インパクトを線形化し、符号のMarkov連鎖、統計的識別限界、人口ゲームを組み合わせる。解析結果をMonte Carloで確認し、別研究の暗号資産実験と定性的に比較する。",
+        "limitations": "独立・対称ノイズ、固定フロー、線形インパクトなどの仮定が強く、厳密な定積AMMでは単期分布の同一性は近似にとどまる。料金条件や拡張モデルの一部主張には論証上の留保があり、実市場での相互作用や流動性崩壊は直接検証されていない。保存レビューに基づく評価である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "単期リスクとストレス持続性の違いは市場監視に重要である。料金設計の確立した処方箋ではなく、動的な流動性リスクを考える理論資料として推奨する。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "自動マーケットメーカー",
+          "学習エージェント",
+          "ストレス持続性",
+          "流動性ヒステリシス",
+          "Maker–taker料金"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper analyzes how learning agents' trading objectives affect AMM price feedback and stress persistence. It models riding herding flows, stabilization through liquidity provision, and history dependence in liquidity withdrawal.",
+          "mainResult": "Under linear impact and symmetric independent noise, positive and negative feedback can produce identical one-period return distributions and volume while generating different stress durations. The participation game yields multiple equilibria and hysteresis in liquidity collapse.",
+          "practicalApplication": "The results motivate monitoring return-sign persistence and stress duration alongside volatility and VaR in AMMs. They also inform stress tests of fee policies and liquidity-provision capacity.",
+          "methodology": "The study linearizes constant-product AMM price impact and combines a sign Markov chain, statistical identification limits, and population games. Analytical findings are checked with Monte Carlo and qualitatively compared with crypto experiments from another study.",
+          "limitations": "Assumptions including independent symmetric noise, fixed flows, and linear impact are restrictive; identical one-period distributions hold only approximately for an exact constant-product AMM. Some fee conditions and extended-model claims require theoretical qualification, and real-market interactions or liquidity collapse are not directly tested. This assessment relies on the stored review.",
+          "reason": "The distinction between one-period risk and stress persistence matters for market surveillance. The paper is recommended as theoretical material on dynamic liquidity risk, not as an established prescription for fee design.",
+          "tags": [
+            "Market microstructure",
+            "Automated market makers",
+            "Learning agents",
+            "Stress persistence",
+            "Liquidity hysteresis",
+            "Maker–taker fees"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 791,
+          "outputTokens": 1077,
+          "reasoningTokens": 139,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1868,
+          "estimatedCostUsd": 0.000618,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.01799v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 13988,
+          "outputTokens": 1551,
+          "reasoningTokens": 310,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 13985,
+          "totalTokens": 15539,
+          "estimatedCostUsd": 0.050479,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 15,
+          "paperIds": [
+            "2611.01799v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 8602,
+          "outputTokens": 9305,
+          "reasoningTokens": 291,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 8599,
+          "totalTokens": 17907,
+          "estimatedCostUsd": 0.114554,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.00338v1",
+            "2611.00466v1",
+            "2611.00502v1",
+            "2611.01656v1",
+            "2611.01799v1",
+            "2611.01855v1",
+            "2611.02616v1",
+            "2611.03660v1",
+            "2611.05218v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.02616v1",
+        "title": "Herding or Racing? Decomposing Cross-Account Order-Flow Persistence in On-Chain Markets",
+        "authors": [
+          "Yichong Bai",
+          "Dingyue Kan"
+        ],
+        "submittedDate": "2026-11-02",
+        "updatedDate": "2026-11-02",
+        "categories": [
+          "cs.CE",
+          "q-fin.CP"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "オンチェーン注文フローの持続性を同一口座と異口座の成分に分解する。従来のherding比率は口座構成に左右され、異口座の共変動も模倣より外部価格への共通反応と整合的な場合があると報告する。",
+        "mainResult": "同一口座ペア比率を $p$、異口座と同一口座の条件付き符号共分散比を $\\kappa$ とすると、herding比率は $h=(1-p)\\kappa/[p+(1-p)\\kappa]$ となる。Binance情報によるフィルターは注文板の異口座共分散を $73$–$84\\%$ 除去し、競争的フローはmaker損失の $70$–$91\\%$ を担ったと報告する。",
+        "practicalApplication": "市場比較ではherding比率と $\\kappa$ を併記し、口座構成と共通信号への反応を分けることが有用である。外部価格への反応度は流動性供給の逆選択リスク評価にも応用候補となる。",
+        "methodology": "オンチェーン注文板とUniswapの短期間データを用い、注文符号の自己共分散を口座別に分解する。Binance特徴量を使う勾配ブースティング、時間単位の交差適合、block bootstrap、$60$ 秒markoutで評価する。",
+        "limitations": "対象市場と期間が限定され、口座は投資主体と一致しない。共分散の除去は裁定競争の因果的証明ではなく、最大 $100$ ミリ秒先の外部情報混入の可能性もある。交差適合は将来期間の検証ではなく、markoutは手数料・gasを除く。保存レビューに基づく整理である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "herding指標の構成依存性を明示し、共通信号と流動性供給損失を接続する点で有用である。今期の注文フロー分析では優先的に読む価値がある。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "注文フローの持続性",
+          "注文分割",
+          "レイテンシー裁定",
+          "逆選択",
+          "交差適合"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper decomposes on-chain order-flow persistence into same-account and cross-account components. It reports that conventional herding ratios depend on account composition, and cross-account comovement can be consistent with common responses to external prices rather than imitation.",
+          "mainResult": "With same-account pair share $p$ and the ratio of cross-account to same-account conditional sign covariance $\\kappa$, the herding ratio is $h=(1-p)\\kappa/[p+(1-p)\\kappa]$. A Binance-information filter reportedly removes $73$–$84\\%$ of order-book cross-account covariance, while competitive flow accounts for $70$–$91\\%$ of maker losses.",
+          "practicalApplication": "Reporting both the herding ratio and $\\kappa$ can help distinguish account composition from responses to common signals in cross-market comparisons. Responsiveness to external prices is also a candidate input for evaluating adverse-selection risk in liquidity provision.",
+          "methodology": "The study decomposes order-sign autocovariance by account using short samples from an on-chain order book and Uniswap. Evaluation uses gradient boosting with Binance features, hourly cross-fitting, block bootstrap, and $60$-second markouts.",
+          "limitations": "Markets and sample periods are limited, and accounts do not identify economic actors. Covariance removal is not causal proof of arbitrage competition, and external information up to $100$ milliseconds ahead may enter the inputs. Cross-fitting is not forward-period validation, and markouts exclude fees and gas. This synthesis relies on the stored review.",
+          "reason": "The paper usefully exposes composition dependence in herding measures and connects common signals to liquidity-provider losses. It merits priority reading among this period's order-flow studies.",
+          "tags": [
+            "Market microstructure",
+            "Order-flow persistence",
+            "Order splitting",
+            "Latency arbitrage",
+            "Adverse selection",
+            "Cross-fitting"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 950,
+          "outputTokens": 1206,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2156,
+          "estimatedCostUsd": 0.000698,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.02616v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 11814,
+          "outputTokens": 1684,
+          "reasoningTokens": 147,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 11811,
+          "totalTokens": 13498,
+          "estimatedCostUsd": 0.046373,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 6,
+          "paperIds": [
+            "2611.02616v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 8602,
+          "outputTokens": 9305,
+          "reasoningTokens": 291,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 8599,
+          "totalTokens": 17907,
+          "estimatedCostUsd": 0.114554,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.00338v1",
+            "2611.00466v1",
+            "2611.00502v1",
+            "2611.01656v1",
+            "2611.01799v1",
+            "2611.01855v1",
+            "2611.02616v1",
+            "2611.03660v1",
+            "2611.05218v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.05218v1",
+        "title": "Beyond Anonymous Order Flow: Wallet Identity as a Feature for Short-Horizon Return Prediction",
+        "authors": [
+          "Jingqiu Ding",
+          "Daojing Zhai"
+        ],
+        "submittedDate": "2026-11-03",
+        "updatedDate": "2026-11-03",
+        "categories": [
+          "q-fin.ST",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "Hyperliquidの公開Level-4データを使い、持続的なウォレット識別情報が匿名の板・注文フローを超える短期予測力を持つか調べる。BTC・ETH・SOLで改善を報告するが、事後的な仕様選択を含む探索的研究である。",
+        "mainResult": "１秒先の標本外 $R^2$ は、識別情報の追加によりridgeで $10.88\\%$ から $12.31\\%$、勾配ブースティング木で $19.48\\%$ から $20.65\\%$ に上昇した。隣接するウォレット評価期間の順位相関は $\\rho=0.52$ だった。",
+        "practicalApplication": "ウォレット別の注文更新や参加状況は、短期予測と逆選択を考慮した気配提示の候補特徴量となる。実用化には受信遅延、待ち行列、約定確率、手数料、在庫制約を含む検証が必要である。",
+        "methodology": "メッセージから板とウォレット別履歴を再構築し、過去markoutで選んだウォレット群を固定して学習・評価する。匿名特徴量と識別情報付き特徴量を比較し、活動量対応群、特徴量遅延、別期間による感応度を検証する。",
+        "limitations": "単一取引所と短い評価期間に限られ、閾値や評価期間などに結果確認後の選択がある。受信時刻、欠損処理、比較群の人数、匿名ベースラインにも課題があり、収益性は実証されていない。ウォレットは実在の個人や私的情報を識別しない。保存レビューに基づく整理である。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "公開された持続的識別子の追加価値を直接検証しており、短期予測研究として関連性が高い。確証的な売買戦略ではなく、事前登録した将来期間検証の設計材料として推奨する。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "ウォレット識別情報",
+          "Level-4注文板",
+          "短期リターン予測",
+          "逆選択",
+          "Hyperliquid"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "Using public Hyperliquid Level-4 data, the paper tests whether persistent wallet identity adds short-horizon predictive power beyond anonymous order-book and order-flow features. It reports improvements for BTC, ETH, and SOL, but the study is exploratory and includes ex-post specification choices.",
+          "mainResult": "Adding identity information raises one-second out-of-sample $R^2$ from $10.88\\%$ to $12.31\\%$ for ridge regression and from $19.48\\%$ to $20.65\\%$ for gradient-boosted trees. Wallet rankings across adjacent evaluation windows have correlation $\\rho=0.52$.",
+          "practicalApplication": "Wallet-specific order updates and participation are candidate features for short-term prediction and adverse-selection-aware quoting. Practical use requires validation incorporating receipt latency, queue position, fill probabilities, fees, and inventory constraints.",
+          "methodology": "The study reconstructs order books and wallet histories from messages, fixes a wallet cohort selected by historical markouts, and then trains and evaluates models. It compares anonymous and identity-enhanced features, with sensitivity checks using activity-matched groups, delayed features, and another period.",
+          "limitations": "The evidence comes from one exchange and a short evaluation period, with thresholds and evaluation dates partly selected after inspecting results. Receipt timestamps, missing-data handling, comparison-group sizes, and the anonymous baseline remain concerns, and profitability is not demonstrated. Wallets do not identify real individuals or establish private information. This synthesis relies on the stored review.",
+          "reason": "The direct test of incremental value from public persistent identifiers is highly relevant to short-horizon prediction. It is recommended as material for designing preregistered forward-period validation, not as a confirmed trading strategy.",
+          "tags": [
+            "Market microstructure",
+            "Wallet identity",
+            "Level-4 order book",
+            "Short-horizon return prediction",
+            "Adverse selection",
+            "Hyperliquid"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 788,
+          "outputTokens": 945,
+          "reasoningTokens": 114,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1733,
+          "estimatedCostUsd": 0.000551,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.05218v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 17276,
+          "outputTokens": 1459,
+          "reasoningTokens": 120,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 17273,
+          "totalTokens": 18735,
+          "estimatedCostUsd": 0.057779,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 8,
+          "paperIds": [
+            "2611.05218v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 8602,
+          "outputTokens": 9305,
+          "reasoningTokens": 291,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 8599,
+          "totalTokens": 17907,
+          "estimatedCostUsd": 0.114554,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.00338v1",
+            "2611.00466v1",
+            "2611.00502v1",
+            "2611.01656v1",
+            "2611.01799v1",
+            "2611.01855v1",
+            "2611.02616v1",
+            "2611.03660v1",
+            "2611.05218v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.01855v1",
+        "title": "Long-term yields of short-rate models as Feynman-Kac ground states: a variational quantum eigensolver with single-setting energy estimation on two NISQ platforms",
+        "authors": [
+          "Doyeol \"David\" Ahn"
+        ],
+        "submittedDate": "2026-11-01",
+        "updatedDate": "2026-11-01",
+        "categories": [
+          "cs.CE",
+          "q-fin.CP",
+          "q-fin.MF",
+          "quant-ph"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "短期金利モデルの長期利回りをFeynman–Kac作用素の基底エネルギーとして表し、VQEで推定する研究である。Vasicek、CIR、Black–Karasinskiを対象に、単一測定設定と量子実機の誤差緩和を検討する。",
+        "mainResult": "関係 $y_\\infty=E_0$ を利用し、非負振幅を測定確率から再構成する。無雑音の $6$ 量子ビットVasicekでは格子解との差が $0.058\\,\\mathrm{bp}$、IBMの $4$ 量子ビット実験では補正後も $33$–$125\\,\\mathrm{bp}$ と報告する。",
+        "practicalApplication": "モデル整合的な長期利回りや終局フォワードレートを扱う計算研究の基盤となる。ただし、古典固有値計算に対する実務上の優位性は示されていない。",
+        "methodology": "Lamperti変換と相似変換で価格方程式をHermitian作用素に変換し、有限差分格子を量子ビットへ符号化する。単一設定のエネルギー推定に読出し補正、WKB裾制約、逆畳み込み、zero-noise extrapolationを組み合わせる。",
+        "limitations": "一因子・小規模実験が中心で、離散化誤差と量子計算優位性は未解決である。改善の多くはWKB裾制約に依存し、$6$ 量子ビット実機では外挿後も $518\\,\\mathrm{bp}$ の誤差が残る。米国債との高相関はインサンプルであり、保存レビューに基づく本整理では実験を再現していない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "金利モデルのスペクトル表現と量子計算を接続する方法論として注目できる。実務導入ではなく、誤差緩和の事前構造依存性と拡張可能性を検討する研究者向けに推奨する。",
+        "tags": [
+          "短期金利モデル",
+          "長期利回り",
+          "Feynman–Kac作用素",
+          "変分量子固有値ソルバー",
+          "量子誤差緩和"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "The paper expresses long-term yields in short-rate models as the ground-state energy of a Feynman–Kac operator and estimates them with VQE. It examines single-setting measurement and quantum-hardware error mitigation for Vasicek, CIR, and Black–Karasinski models.",
+          "mainResult": "Using $y_\\infty=E_0$, the method reconstructs nonnegative amplitudes from measurement probabilities. The reported difference from the grid solution is $0.058\\,\\mathrm{bp}$ for a noiseless $6$-qubit Vasicek calculation, while corrected IBM $4$-qubit experiments still show errors of $33$–$125\\,\\mathrm{bp}$.",
+          "practicalApplication": "The approach provides a computational research foundation for model-consistent long-term yields and ultimate forward rates. However, practical advantages over classical eigensolvers have not been demonstrated.",
+          "methodology": "Lamperti and similarity transformations convert the pricing equation into a Hermitian operator, with a finite-difference grid encoded in qubits. Single-setting energy estimation is combined with readout correction, WKB tail constraints, deconvolution, and zero-noise extrapolation.",
+          "limitations": "Experiments mainly involve small, one-factor settings, leaving discretization error and quantum advantage unresolved. Much of the improvement depends on WKB tail constraints, and $6$-qubit hardware retains an error of $518\\,\\mathrm{bp}$ after extrapolation. The high correlation with Treasury yields is in-sample; this synthesis relies on the stored review and does not reproduce the experiments.",
+          "reason": "The methodological connection between spectral representations of rate models and quantum computing is noteworthy. It is recommended for researchers examining structural assumptions in error mitigation and scalability, rather than for practical deployment.",
+          "tags": [
+            "Short-rate models",
+            "Long-term yields",
+            "Feynman–Kac operators",
+            "Variational quantum eigensolver",
+            "Quantum error mitigation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 941,
+          "outputTokens": 1098,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 2039,
+          "estimatedCostUsd": 0.000643,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.01855v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "full_text",
+          "pdfPages": 24,
+          "paperIds": [
+            "2611.01855v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 28189,
+          "outputTokens": 1445,
+          "reasoningTokens": 106,
+          "cachedInputTokens": 28186,
+          "cacheWriteTokens": 0,
+          "totalTokens": 29634,
+          "estimatedCostUsd": 0.017275,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 24,
+          "paperIds": [
+            "2611.01855v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 8602,
+          "outputTokens": 9305,
+          "reasoningTokens": 291,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 8599,
+          "totalTokens": 17907,
+          "estimatedCostUsd": 0.114554,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.00338v1",
+            "2611.00466v1",
+            "2611.00502v1",
+            "2611.01656v1",
+            "2611.01799v1",
+            "2611.01855v1",
+            "2611.02616v1",
+            "2611.03660v1",
+            "2611.05218v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.03660v1",
+        "title": "Behavioral Prior Elicitation via LLM for Heterogeneous-Agent Bitcoin Flash-Crash Simulation",
+        "authors": [
+          "Tran Phuong Linh Pham",
+          "Thi Minh Phuong Ngo",
+          "Phuong Thao Nguyen",
+          "Quang Minh Nguyen",
+          "Thai Hoa Ngo",
+          "Trong Nghia Nguyen"
+        ],
+        "submittedDate": "2026-09-22",
+        "updatedDate": "2026-09-22",
+        "categories": [
+          "cs.AI",
+          "q-fin.TR",
+          "stat.AP"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "実測データで条件付けしたLLMから行動パラメータの事前分布を抽出し、Bitcoinのフラッシュクラッシュシミュレーションに使う。無情報の設定に対する改善は報告するが、文献ベース設定への一貫した優位性は示していない。",
+        "mainResult": "$500$ 回のシミュレーションで、クラッシュ発生率はLLM条件で $17.6\\%$、一様事前分布で $0.8\\%$、文献ベースで $15.2\\%$ だった。レバレッジ代理変数に対する回帰感度は大きかったが、これは固定した合成データ上の分析であり、構造的介入ではない。",
+        "practicalApplication": "流動性消失シナリオの生成や、エージェントの行動設定を比較する探索的ストレステストに参考となる。実市場のクラッシュ確率や規制効果の推定へ直接転用すべきではない。",
+        "methodology": "BTCUSDT無期限先物のイベント特徴量をMistral-7Bへ入力し、出力からパラメータ分布を推定する。異質エージェントのシミュレーションを事前分布別に比較し、DAGMA、DirectLiNGAM、ロジスティック回帰で合成結果を分析する。",
+        "limitations": "実測イベントと合成クラッシュの定義が異なり、発生率は実市場頻度に較正されていない。裾厚の再現も弱く、レバレッジは借入倍率ではなく代理変数である。因果グラフの回復は部分的で、単一LLM、未実施のアブレーション、価格更新式の説明との不整合も残る。保存レビューに基づく評価である。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "LLMを売買主体ではなく行動事前分布の生成器として使う設計は興味深い。ただし、検証上の不足が大きいため、今期の優先度は探索的方法論として中程度とする。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "Bitcoin無期限先物",
+          "フラッシュクラッシュ",
+          "エージェントベースモデル",
+          "LLMによる事前分布抽出",
+          "探索的ストレステスト"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper extracts behavioral parameter priors from an LLM conditioned on observed data and uses them in Bitcoin flash-crash simulations. It reports improvements over an uninformative configuration, but not consistent superiority over literature-based settings.",
+          "mainResult": "Across $500$ simulations, crash incidence was $17.6\\%$ with LLM priors, $0.8\\%$ with uniform priors, and $15.2\\%$ with literature-based priors. Regression sensitivity to a leverage proxy was substantial, but this analysis used a fixed synthetic dataset rather than structural interventions.",
+          "practicalApplication": "The approach can inform exploratory stress tests that generate liquidity-loss scenarios or compare agent behavior settings. It should not be directly used to estimate real-market crash probabilities or regulatory effects.",
+          "methodology": "Event features from BTCUSDT perpetual futures are supplied to Mistral-7B to estimate parameter distributions. Heterogeneous-agent simulations are compared across priors, and synthetic outcomes are analyzed using DAGMA, DirectLiNGAM, and logistic regression.",
+          "limitations": "Observed events and simulated crashes use different definitions, and incidence is not calibrated to real-market frequencies. Tail behavior is poorly reproduced, and leverage is a proxy rather than an actual borrowing ratio. Causal-graph recovery is partial; a single LLM, missing ablations, and inconsistencies between the price-update equation and its explanation remain concerns. This assessment relies on the stored review.",
+          "reason": "Using an LLM as a generator of behavioral priors rather than a trading agent is interesting. However, substantial validation gaps warrant only moderate priority this period as an exploratory methodology.",
+          "tags": [
+            "Market microstructure",
+            "Bitcoin perpetual futures",
+            "Flash crashes",
+            "Agent-based models",
+            "LLM-based prior elicitation",
+            "Exploratory stress testing"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 888,
+          "outputTokens": 913,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1801,
+          "estimatedCostUsd": 0.000545,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.03660v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 13251,
+          "outputTokens": 1830,
+          "reasoningTokens": 216,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 13248,
+          "totalTokens": 15081,
+          "estimatedCostUsd": 0.051426,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 15,
+          "paperIds": [
+            "2611.03660v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 8602,
+          "outputTokens": 9305,
+          "reasoningTokens": 291,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 8599,
+          "totalTokens": 17907,
+          "estimatedCostUsd": 0.114554,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.00338v1",
+            "2611.00466v1",
+            "2611.00502v1",
+            "2611.01656v1",
+            "2611.01799v1",
+            "2611.01855v1",
+            "2611.02616v1",
+            "2611.03660v1",
+            "2611.05218v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "weekly",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 8602,
+      "outputTokens": 9305,
+      "reasoningTokens": 291,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 8599,
+      "totalTokens": 17907,
+      "estimatedCostUsd": 0.114554,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "stored_reviews",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.00338v1",
+        "2611.00466v1",
+        "2611.00502v1",
+        "2611.01656v1",
+        "2611.01799v1",
+        "2611.01855v1",
+        "2611.02616v1",
+        "2611.03660v1",
+        "2611.05218v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

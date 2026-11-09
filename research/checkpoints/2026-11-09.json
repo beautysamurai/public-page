@@ -1,0 +1,815 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-11-09",
+  "fingerprint": "0651e61d1de5b90c7a2894cffe23689cc520ab9a6818453a60e8304e2b30467d",
+  "candidateFingerprints": {
+    "2611.08528": "8e189e243209d3a1215cfb9faed3939f25562c6d6596b27e3a0b4a24069eb84e",
+    "2611.08701": "c69469fe38b6b669441cc9f29a062407a9b4695015a4b839061339b133e36c4d",
+    "2611.08968": "b1c00023c5467d62b4e3674dda0d27c56f0bb0d8f36df8575f19584db2a5e9ef",
+    "2611.09012": "cf35320d34f08563d9455c64b54c86305b6370b9c06ba13bdaac825d60f2d737",
+    "2611.09208": "3e7ddf440299a94b9411716f1a1c17d4f3c3ab24a14fbf5f20d4e80d99a64101",
+    "2611.09213": "82fdc11496846c792fc94c1d41ead300cc56c5599582e2a32a859ab3c64a2dc6",
+    "2611.09286": "b7db2e89d7e23eb5b9bc4536f370072d790eefec67e090b40fc8876d65281bd5",
+    "2611.09337": "0ada53c250d122094c262e272d9838b9f29e2466bb5b2dec8cda6de64e910b22",
+    "2611.09751": "5311d6c9a8790e4c886be7da387dbb0ebc47c3d8e81eee282762df42e7e77847"
+  },
+  "results": {
+    "2611.08528": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本論文は、連続取引の価格と出来高の相関を経験的に計算する一般的手法に、定義との不整合があると主張する。",
+        "mainResult": "著者によれば、対象とする計算方法では価格・出来高相関が常にゼロとなり、報告されてきた正負の相関は、出来高加重平均価格と単純平均価格との差などを反映している。価格と出来高の統計的依存を調べる代替として、価格と出来高の二乗、または価格の二乗と出来高の二乗の相関を提案し、その経験的計算式を導出する。",
+        "practicalApplication": "価格・出来高関係を分析する実証研究で、相関指標の定義と計算方法を再点検する際の参考となる。",
+        "methodology": "相関の定義と出来高加重平均価格の性質を検討し、従来の経験的計算式を批判したうえで、二乗値を用いる代替相関の計算式を導出している。",
+        "limitations": "提示された情報は要旨に限られ、主張の導出の詳細や実データによる検証は確認できない。提案された二乗値の相関が、目的とする依存関係をどの程度捉えるかも要旨からは評価できない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "価格と取引出来高の関係を測る方法への再検討を促すため、マーケット・マイクロストラクチャーの実証分析に関連する。ただし、要旨だけでは主張の妥当性や実証上の有用性を判断しきれない。",
+        "tags": [
+          "価格・出来高関係",
+          "相関",
+          "出来高加重平均価格",
+          "実証手法"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper argues that commonly used empirical methods for correlating prices and volumes of consecutive trades are inconsistent with the definition of correlation.",
+          "mainResult": "According to the author, the calculation method considered always yields zero price-volume correlation, while previously reported positive or negative correlations reflect, among other things, the difference between volume-weighted and simple average prices. As alternatives for examining statistical dependence between prices and volumes, the paper proposes correlations between prices and squared volumes, or between squared prices and squared volumes, and derives empirical calculation expressions.",
+          "practicalApplication": "It may inform empirical studies of price-volume relationships by prompting a review of the definitions and calculations used for correlation measures.",
+          "methodology": "The paper examines the definition of correlation and properties of volume-weighted average price, critiques conventional empirical calculations, and derives alternative correlation calculations using squared values.",
+          "limitations": "Only the abstract is available, so the derivation and validation on real data cannot be assessed. The abstract also does not establish how well the proposed squared-value correlations capture the dependence of interest.",
+          "reason": "The paper calls for reconsidering methods used to measure the relationship between prices and trading volumes, making it relevant to empirical market microstructure. However, the abstract alone is insufficient to assess the validity of its claims or its empirical usefulness.",
+          "tags": [
+            "Price-volume relationship",
+            "Correlation",
+            "Volume-weighted average price",
+            "Empirical methods"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "取引価格・数量・金額の関係とVWAPから、価格と数量の相関は常にゼロになると主張する理論論文である。ただし、本文の導出は異なる重み付けの期待値を混在させており、通常の価格・数量相関を否定する証明にはなっていない。",
+        "mainResult": "著者は価格平均をVWAPと定義し、平均取引金額からVWAPと平均数量の積を引けばゼロになることを示す。しかし、これは定義による恒等式である。論文が誤った相関と呼ぶ量は、等重みの標本共分散として正しく、$\\widehat{\\operatorname{Cov}}(p,U)=\\bar U(p_{\\mathrm{VWAP}}-\\bar p)$と表せる。",
+        "practicalApplication": "執行分析では、取引件数ベースの平均と数量加重平均を区別する必要性を確認できる。ただし、本論文を根拠に価格・数量相関をゼロと仮定したり、既存の推定値を棄却したりすることは推奨できない。",
+        "methodology": "取引金額の恒等式$C_i=p_iU_i$とVWAPの定義を用いた代数的導出である。通常の共分散計算との比較に加え、価格と数量の二乗、および価格の二乗と数量の二乗について独自のモーメント式を提示する。市場データによる検証はない。",
+        "limitations": "価格には数量加重平均、数量と積には等重み平均を使うため、単一の確率測度に基づく共分散の定義と整合しない。また、相関と呼ぶ式は標準偏差で正規化されておらず、実際には共分散の形式である。数量一定の場合、共分散はゼロだがPearson相関係数は未定義となる。付録の高次モーメントの結論も独自の価格分散式に依存し、実証的な裏付けは示されない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "市場マイクロストラクチャーとの関連はあるが、中心命題は重み付けの不整合に依存する。通常の相関推定を置き換える理論的・実証的根拠としては不十分である。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "VWAP",
+          "価格・数量関係",
+          "共分散",
+          "重み付けの整合性"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This theoretical paper argues that price–volume correlation is always zero using the relationship among trade prices, quantities, and values and the definition of VWAP. However, its derivation mixes expectations with different weightings and does not establish that conventional price–volume correlation is invalid.",
+          "mainResult": "The author defines the mean price as VWAP and shows that subtracting VWAP times mean volume from mean trade value yields zero. This is a definitional identity. The quantity the paper calls an erroneous correlation is a valid equally weighted sample covariance, expressible as $\\widehat{\\operatorname{Cov}}(p,U)=\\bar U(p_{\\mathrm{VWAP}}-\\bar p)$.",
+          "practicalApplication": "For execution analysis, the paper highlights the need to distinguish trade-count averages from volume-weighted averages. However, it should not be used to justify assuming zero price–volume correlation or rejecting existing estimates.",
+          "methodology": "The paper uses algebraic derivations based on the trade-value identity $C_i=p_iU_i$ and the definition of VWAP. Alongside comparisons with conventional covariance calculations, it presents nonstandard moment formulas for price versus squared volume and squared price versus squared volume. There is no validation using market data.",
+          "limitations": "Using a volume-weighted average for price but equally weighted averages for volume and the product is inconsistent with covariance defined under a single probability measure. Moreover, the expressions called correlations are not normalized by standard deviations and instead have the form of covariances. With constant volume, covariance is zero but the Pearson correlation coefficient is undefined. The appendix's higher-moment conclusions also depend on a nonstandard price-variance formula and lack empirical support.",
+          "reason": "The topic is relevant to market microstructure, but the central proposition depends on inconsistent weighting. The paper provides insufficient theoretical or empirical grounds for replacing conventional correlation estimation.",
+          "tags": [
+            "Market microstructure",
+            "VWAP",
+            "Price–volume relationship",
+            "Covariance",
+            "Weighting consistency"
+          ]
+        }
+      }
+    },
+    "2611.08701": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本研究は、キューで待つかスプレッドを横切るかを選ぶ執行ポリシーの、異なる資産・市場へのゼロショット移転を検証する。",
+        "mainResult": "著者らのリプレイ実験では、最近の取引率・取引サイズ・スプレッド・ティックを入力するポリシーは、対象銘柄を含めて学習したポリシーに近いコストを達成した。不変単位は他の表現より平均コストがわずかに低かったが、その優位幅は1ベーシスポイント未満で、未見のスプレッド環境への外挿はどの表現でもできなかった。",
+        "practicalApplication": "銘柄ごとの再学習を減らす執行ポリシー設計や、資産間で共有する特徴量・コスト尺度の評価に示唆がある。ただし、実運用での効果は手数料込みの検証が必要である。",
+        "methodology": "2019年の954銘柄で強化学習ポリシーを学習し、2020～21年と2025～26年の未見銘柄、暗号資産ペア、別取引所の注文単位リプレイで、変更せずに評価した。合成市場と振り子環境も比較に用いた。",
+        "limitations": "根拠は提示された要旨に限られる。報告されたコストは手数料前であり、未見のスプレッド環境への一般化も確認されていない。実運用の性能や市場環境全般への適用可能性は、この要旨だけでは判断できない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "執行アルゴリズムの資産間移転という直接的な課題を扱い、マイクロストラクチャ不変性の実用上の利点と限界を具体的に比較している。",
+        "tags": [
+          "電子取引",
+          "執行アルゴリズム",
+          "強化学習",
+          "マイクロストラクチャ不変性",
+          "ゼロショット移転"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This study tests zero-shot transfer of execution policies that choose whether to wait in the queue or cross the spread across assets and markets.",
+          "mainResult": "In the authors’ replay experiments, a policy using recent trade rate, trade size, spread, and tick achieved costs close to those of a policy trained on the target stock. Invariant units produced slightly lower mean costs than other representations, but the advantage was below one basis point, and none of the representations extrapolated to unseen spread regimes.",
+          "practicalApplication": "The findings may inform execution-policy designs that reduce per-stock retraining and the evaluation of shared features and cost scales across assets. However, real-world effectiveness requires validation including fees.",
+          "methodology": "The authors trained reinforcement-learning policies on 954 stocks from 2019, then evaluated them unchanged in order-by-order replays on unseen stocks from 2020–21 and 2025–26, crypto pairs, and a second exchange. Synthetic markets and pendulum environments were also used for comparison.",
+          "limitations": "The assessment is based only on the supplied abstract. Reported costs are before fees, and generalization to unseen spread regimes was not demonstrated. Real-world performance and applicability across market conditions cannot be determined from the abstract alone.",
+          "reason": "The paper addresses the directly relevant challenge of transferring execution algorithms across assets and concretely compares the practical benefits and limits of microstructure invariance.",
+          "tags": [
+            "electronic trading",
+            "execution algorithms",
+            "reinforcement learning",
+            "microstructure invariance",
+            "zero-shot transfer"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "Microstructure invarianceに基づく正規化が、強化学習による執行方策の銘柄間・市場間転移を改善するか検証する。2019年のNasdaq株954銘柄で学習し、未見銘柄、後年、Coinbase、IEXに再学習なしで適用した。中心的な示唆は、既知の市場スケール内では直近の取引統計とtick情報が有効だが、小さな転移ギャップだけでは表現の良さを判断できないことである。",
+        "mainResult": "著者らは、MS+tick方策と対象銘柄を学習に含む比較方策の費用差が、両テスト期間で一株当たり平均スプレッドの$0.015$という同等性マージン内だったと報告する。ただし比較は過去データがある銘柄の部分集合に限られる。正規化の平均費用上の優位は小さく、探索的分析では共通の報酬尺度と窓内統計の入力でraw表現の劣後の大半が解消した。未知のスプレッド領域への外挿は成功せず、手数料後や中央値ではraw表現が同等以上になる場合もあった。",
+        "practicalApplication": "複数銘柄で共有するmake-or-take方策の設計に役立つ。直近30分の取引間隔、約定サイズ、スプレッドとtick情報を使い、報酬尺度を揃えることで、銘柄別学習への依存を減らせる可能性がある。導入時には訓練データのスプレッド範囲、手数料後費用、裾野リスクを確認し、転移ギャップだけでなく表現間の費用と銘柄・エピソード別の集計を比較すべきである。",
+        "methodology": "注文単位データからキュー順位と遅延を追跡する非介入型replayを構築し、10回の判断時点で待機、指値変更、取消、即時約定を選ばせる。主手法は木モデルのfitted Q-iterationで、ニューラル版とPPOでも検証する。不変単位、raw、標準正規化を同一経路上で比較し、bootstrap区間と事前設定した同等性マージンで評価する。理論命題、人工板市場、振り子実験により転移ギャップの診断力も調べる。",
+        "limitations": "単一市場の表示板のみを再生し、市場インパクト、他参加者の反応、ルーティング、注文保護、隠れ流動性を扱わない。このため即時約定費用と方策間の差を過大評価し得て、特にIEXでは極端な一件と集計方法が結果を左右する。主目的は手数料前の平均費用であり、公開標本日は少なく、暗号資産も16ペアに限られる。ゼロショットでも対象の直近30分データは必要である。追加分析の多くは探索的で、pooled比較方策に関する理論の滑らかさ等の仮定は主力の木モデルには成立せず、適用はheuristicにとどまる。",
+        "importance": 1,
+        "recommended": true,
+        "reason": "共有執行方策の設計と転移評価の落とし穴を、広い銘柄検証と対照実験で具体化しており、電子執行研究に直接関連する。実取引での費用削減の証明ではなく、正規化・評価設計の研究として読む価値が高い。",
+        "tags": [
+          "電子執行",
+          "市場マイクロストラクチャー不変性",
+          "強化学習",
+          "ゼロショット転移",
+          "指値注文板",
+          "報酬正規化",
+          "転移評価"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper tests whether normalization based on microstructure invariance improves cross-asset and cross-market transfer of reinforcement-learning execution policies. Policies trained on 954 Nasdaq stocks in 2019 are applied without retraining to unseen stocks, later years, Coinbase, and IEX. The central implication is that recent trading statistics and tick information help within familiar market scales, but a small transfer gap alone does not establish representation quality.",
+          "mainResult": "The authors report that cost differences between MS+tick and a comparator whose training included the target stock fall within an equivalence margin of $0.015$ mean spreads per share in both test periods. However, this comparison covers only subsets of stocks with historical data. Normalization's mean-cost advantage is small; exploratory analysis finds that a common reward scale and window statistics as inputs remove most of raw features' disadvantage. Extrapolation to unseen spread regimes fails, and raw features sometimes perform equally well or better after fees or at the median.",
+          "practicalApplication": "The findings inform shared make-or-take policies across stocks. Using the preceding 30 minutes' intertrade times, trade sizes, spreads, and tick information, with a common reward scale, may reduce dependence on per-stock training. Deployment should check training coverage of spread regimes, net-of-fee costs, and tail risk, and compare costs across representations and both stock- and episode-weighted aggregates rather than relying only on transfer gaps.",
+          "methodology": "A non-intrusive order-by-order replay tracks queue position and latency, allowing waiting, limit-order changes, cancellation, and immediate execution at ten decision times. The main learner is tree-based fitted Q-iteration, with neural fitted Q-iteration and PPO checks. Invariant units, raw features, and standard normalizations are compared on identical paths using bootstrap intervals and prespecified equivalence margins. Theoretical propositions, synthetic order books, and pendulum experiments also examine the diagnostic power of transfer gaps.",
+          "limitations": "The replay covers only one venue's displayed book, excluding market impact, other participants' reactions, routing, order protection, and hidden liquidity. Consequently, it can overstate crossing costs and policy differences; on IEX especially, an extreme episode and aggregation choices affect results. The main objective is mean cost before fees, public sample days are sparse, and crypto coverage is limited to 16 pairs. Zero-shot deployment still requires 30 minutes of recent target data. Many additional analyses are exploratory, and assumptions such as smoothness in the pooled-comparator theory do not hold for the main tree learner, making that application heuristic.",
+          "reason": "Broad stock-level tests and controlled experiments concretely illustrate both shared execution-policy design and pitfalls in transfer evaluation, making the paper directly relevant to electronic execution. It is valuable as research on normalization and evaluation design, not as proof of live trading cost savings.",
+          "tags": [
+            "Electronic execution",
+            "Microstructure invariance",
+            "Reinforcement learning",
+            "Zero-shot transfer",
+            "Limit order book",
+            "Reward normalization",
+            "Transfer evaluation"
+          ]
+        }
+      }
+    },
+    "2611.08968": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "Lloyd's保険シンジケートの保険金準備金変動について、ポートフォリオ規模を考慮したシナリオ移転を検討する研究です。",
+        "mainResult": "632シンジケート年の分析では、準備金規模に応じたスケーリングが単一の市場スケールより保留データへの適合を改善しました。一方、最小規模群では移転後の99.5%分位を超える観測が想定より多く、上側テールを過小評価しました。",
+        "practicalApplication": "保険準備金シナリオの規模間比較には参考となりますが、金利、イールドカーブ、電子執行、市場マイクロストラクチャーへの直接的な適用は示されていません。",
+        "methodology": "2015～2024年の117シンジケートによる632シンジケート年を用い、保険金見積りの変動を準備金規模で調整し、保留データで予測性能とテール超過を評価しています。",
+        "limitations": "測定値は期首準備金の純粋な悪化を表さず、報告された分位点は較正済み資本分位点でも翌年予測でもありません。最小規模群のテール過小評価も報告されています。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "保険準備金リスクの研究であり、本サイトが対象とする電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利分野との関連は限定的です。",
+        "tags": [
+          "保険リスク",
+          "準備金",
+          "シナリオ移転",
+          "ポートフォリオ規模"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines scenario transfer across portfolio sizes for claims-reserve movements at Lloyd's syndicates.",
+          "mainResult": "In an analysis of 632 syndicate-years, size-based scaling improved fit to held-out data over a single market scale. However, the transferred 99.5th percentile was exceeded more often than expected in the smallest-size group, indicating understatement of the upper tail.",
+          "practicalApplication": "The findings may inform comparisons of insurance-reserve scenarios across portfolio sizes, but no direct application to rates, yield curves, electronic execution, or market microstructure is shown.",
+          "methodology": "Using 632 syndicate-years from 117 syndicates over 2015–2024, the study scales claims-estimate movements by reserve size and evaluates held-out performance and tail exceedances.",
+          "limitations": "The measured quantity is not pure deterioration of opening reserves, and the reported quantiles are neither calibrated capital quantiles nor next-year forecasts. The study also reports understatement of the tail for the smallest-size group.",
+          "reason": "This is research on insurance reserve risk, with limited relevance to the site's focus on electronic execution, market microstructure, interest-rate models, yield curves, and rates.",
+          "tags": [
+            "insurance risk",
+            "reserves",
+            "scenario transfer",
+            "portfolio size"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.09012": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本研究は、強化学習によるマーケットメイキングで、損失関数の違いがリスク管理行動に及ぼす影響を実証的に比較する。",
+        "mainResult": "要旨によれば、在庫と現金管理へのペナルティを加えると、利益最大化のみを重視する戦略よりも、頑健で適応的なマーケットメイキング戦略が得られた。",
+        "practicalApplication": "強化学習ベースのマーケットメイカー設計で、利益目標と在庫・現金リスクのペナルティを調整する際の参考になりうる。",
+        "methodology": "複数の損失関数を用いた実証評価により、利益最大化型とリスク回避型の戦略を比較したと要旨に記載されている。",
+        "limitations": "要旨には、データや市場環境、評価指標、比較設定、効果の定量値が示されていないため、結果の一般化や実運用での有効性は判断できない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "電子取引における強化学習マーケットメイキングのリスク設計を直接扱う一方、要旨だけでは実証の詳細や適用範囲を評価できない。",
+        "tags": [
+          "マーケットメイキング",
+          "強化学習",
+          "損失関数",
+          "在庫リスク",
+          "リスク管理"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This study empirically compares how different loss functions affect risk-management behavior in reinforcement-learning market making.",
+          "mainResult": "According to the abstract, penalties for inventory and cash management produced more resilient and adaptable market-making strategies than approaches focused solely on profit maximization.",
+          "practicalApplication": "The findings may inform the calibration of profit objectives and inventory or cash-risk penalties when designing reinforcement-learning market makers.",
+          "methodology": "The abstract reports an empirical comparison of profit-maximizing and risk-averse strategies using multiple loss-function formulations.",
+          "limitations": "The abstract does not specify the data, market settings, evaluation metrics, comparison design, or quantitative effect sizes, so generalizability and real-world effectiveness cannot be assessed.",
+          "reason": "The paper directly addresses risk design for reinforcement-learning market making in electronic trading, but the abstract does not provide enough detail to assess the evidence or scope of application.",
+          "tags": [
+            "market making",
+            "reinforcement learning",
+            "loss functions",
+            "inventory risk",
+            "risk management"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "強化学習によるマーケットメイクで、利益のみの損失関数と、過剰在庫・現金不足への罰則を加えた損失関数を比較する。単一資産の簡易シミュレーションでは罰則付きモデルの累積報酬が高いが、実市場での頑健性やリスク低減は実証されていない。",
+        "mainResult": "著者らは、罰則付きモデルで累積実現利益が増え、概してスプレッドが狭まり、学習につれて終了までのステップ数が増えたと報告する。ただし、エピソード報酬は大きく散発的に上昇しており、「安定した報酬」という本文の解釈を図から十分に裏付けることは難しい。",
+        "practicalApplication": "在庫上限と最低現金残高を意識した目的関数を、マーケットメイクの学習設計で比較する際の出発点になる。実装への採用には、実データ、取引費用、約定条件を含めた独立評価が必要である。",
+        "methodology": "一定ドリフト・一定ボラティリティの幾何ブラウン運動で単一資産価格を生成し、前期価格を平均とする正規分布で売買相手の価格を模擬する。3層の全結合Actorを持つActor–Critic方式で、利益のみと在庫・現金罰則付きの損失を比較する。実現利益を報酬とし、各エピソード最大200ステップ、合計400エピソードで報酬、継続ステップ数、スプレッドを観察する。",
+        "limitations": "実データや独立した評価期間、複数乱数シード、統計的検定は報告されていない。注文板、待ち行列、逆選択、取引費用の扱いは十分に示されず、Criticや更新手順、主要パラメータの説明も不足する。時価評価損益、在庫リスク、ドローダウンを直接評価していないため、累積実現利益や狭いスプレッドだけではリスク低減を確認できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "電子マーケットメイクとの関連は明確だが、簡易環境での探索的比較にとどまる。再現性と評価設計の情報が不足し、頑健性を裏付ける証拠も限定的なため、実務判断の主要資料としては推奨しない。",
+        "tags": [
+          "マーケットメイク",
+          "強化学習",
+          "Actor–Critic",
+          "損失関数設計",
+          "在庫管理",
+          "シミュレーション"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper compares profit-only and inventory- and cash-penalized loss functions for reinforcement-learning market making. The penalized model earns higher cumulative rewards in a simplified single-asset simulation, but real-market robustness and risk reduction are not demonstrated.",
+          "mainResult": "The authors report that the penalized model achieves higher cumulative realized profits, generally narrower spreads, and increasing episode lengths during learning. However, episode rewards exhibit large, sporadic spikes, making the text's interpretation of stable rewards difficult to substantiate from the figures.",
+          "practicalApplication": "The study provides a starting point for comparing market-making learning objectives that account for inventory limits and minimum cash reserves. Adoption requires independent evaluation incorporating real data, transaction costs, and execution conditions.",
+          "methodology": "A single asset follows geometric Brownian motion with constant drift and volatility, while counterparty prices are simulated using normal distributions centered on the previous asset price. An Actor–Critic approach with a three-layer fully connected actor compares profit-only and inventory- and cash-penalized losses. Realized profits serve as rewards; rewards, episode lengths, and spreads are examined over 400 episodes of at most 200 steps each.",
+          "limitations": "The paper reports no real-data evaluation, independent evaluation period, multiple random seeds, or statistical tests. Treatment of the order book, queueing, adverse selection, and transaction costs is insufficiently documented, as are the critic, update procedure, and key parameters. Without direct evaluation of marked-to-market performance, inventory risk, or drawdowns, cumulative realized profits and narrower spreads alone cannot establish risk reduction.",
+          "reason": "The paper is clearly relevant to electronic market making but remains an exploratory comparison in a simplified environment. Insufficient reproducibility and evaluation details, together with limited evidence of robustness, prevent recommending it as a primary basis for practical decisions.",
+          "tags": [
+            "Market making",
+            "Reinforcement learning",
+            "Actor–Critic",
+            "Loss function design",
+            "Inventory management",
+            "Simulation"
+          ]
+        }
+      }
+    },
+    "2611.09208": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "論文は、株式指数と商品先物の情報伝播ネットワークを分析し、市場効率性との関係を論じる新たな仮説を提案する。",
+        "mainResult": "報告によれば、日本は情報ハブ、米国は情報発信主体として現れ、危機期のネットワークスペクトル半径は必ずしも上昇しない。連結性はスペクトル半径よりネットワークのモジュラリティと関連し、地理や資産クラスが効率性区分より強く関係する。",
+        "practicalApplication": "市場間の情報伝播や危機時の連結性を解釈する枠組みになり得るが、執行戦略や金利モデルへの直接的な応用は示されていない。",
+        "methodology": "2001～2026年のG20株価指数と5つの商品先物を対象に、長期記憶に基づく予測可能性と市場間情報伝達をネットワークとして分析したと要旨は述べる。",
+        "limitations": "要旨だけでは、推定手法、危機期間の定義、頑健性検証や因果識別の詳細を確認できず、結果の一般化可能性も判断できない。対象は株式・商品市場のネットワーク分析であり、本サイトの重点領域との直接的な関連は限定的である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "市場ネットワークと効率性に関する知見はあるが、電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブを主題としていないため、対象範囲外と判定する。",
+        "tags": [
+          "市場効率性",
+          "情報伝播ネットワーク",
+          "株式指数",
+          "商品先物"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper proposes a new hypothesis relating market efficiency to information-transmission networks, analyzing equity indices and commodity futures.",
+          "mainResult": "The abstract reports Japan as an information hub and the United States as an information broadcaster, while network spectral radius does not necessarily rise during crises. Connectedness is more closely associated with network modularity than with spectral radius, and geography and asset class matter more than efficiency-based groupings.",
+          "practicalApplication": "The framework could help interpret cross-market information transmission and crisis-period connectedness, but no direct application to execution strategies or interest-rate models is presented.",
+          "methodology": "The abstract describes a network analysis of long-memory predictability and cross-market information transmission using G20 equity indices and five commodity futures from 2001 to 2026.",
+          "limitations": "The abstract does not provide enough detail to assess the estimation methods, crisis-period definitions, robustness checks, or causal identification, and the generalizability of the results is unclear. The focus is on equity and commodity market networks, with limited direct relevance to this site's core areas.",
+          "reason": "The paper offers findings on market networks and efficiency but does not focus on electronic execution, market microstructure, interest-rate models, or yield curves, so it is outside the target scope.",
+          "tags": [
+            "market efficiency",
+            "information-transmission networks",
+            "equity indices",
+            "commodity futures"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.09213": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、自動車保険請求の費用と修理由来の炭素排出量を、BINAR(1)依存構造を用いて共同モデル化する枠組みを提案する。",
+        "mainResult": "要旨によれば、再利用部品（PIEC）の採用率を高めるシナリオでは、平均請求費用と期待排出量の双方が低下し、その効果の大きさは系列の持続性と両者の依存構造に左右される。",
+        "practicalApplication": "保険会社が修理方針の変更による費用・排出量の共同影響をシナリオ分析し、脱炭素施策を評価する用途が想定される。電子取引、金融市場のミクロ構造、金利モデル、イールドカーブ分析への直接的な応用は示されていない。",
+        "methodology": "外部情報による部品の費用・排出係数を用い、新品部品と再利用部品の修理経路を設定する。時間的持続性と二変量間の依存を表すBINAR(1)枠組みで、再利用部品の受容率を変えたシナリオを比較する。",
+        "limitations": "提示された要旨には、データの詳細、推定・検証方法、数値的な効果量や不確実性の評価が記載されていない。結果はシナリオ分析として報告されており、実際の保険請求への適用可能性や因果効果は要旨だけでは判断できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "保険請求の費用・環境影響を扱う研究であり、対象サイトの金融市場、電子執行、金利・イールドカーブ分野とは実質的な関連がない。",
+        "tags": [
+          "保険請求",
+          "BINAR(1)",
+          "炭素排出量",
+          "再利用部品",
+          "シナリオ分析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study proposes a framework using a BINAR(1) dependence structure to jointly model motor insurance claim costs and repair-related carbon emissions.",
+          "mainResult": "According to the abstract, scenarios with higher acceptance of reused parts (PIEC) reduce both average claim costs and expected emissions; the size of the effect depends on persistence and the dependence structure between the two dimensions.",
+          "practicalApplication": "Insurers could use the framework to analyze the joint cost and emissions impact of repair-policy changes and evaluate decarbonization measures. No direct application to electronic trading, financial-market microstructure, interest-rate models, or yield-curve analysis is indicated.",
+          "methodology": "The study uses externally sourced part-cost and emissions factors and considers repair pathways using new or reused parts. It compares scenarios with varying reused-part acceptance rates under a BINAR(1) framework for temporal persistence and bivariate dependence.",
+          "limitations": "The abstract does not provide data details, estimation or validation procedures, numerical effect sizes, or uncertainty assessments. Results are reported as scenario analyses; real-world applicability to insurance claims and causal effects cannot be assessed from the abstract alone.",
+          "reason": "The paper concerns insurance claim costs and environmental impacts, with no material connection to the site's focus on financial markets, electronic execution, interest rates, or yield curves.",
+          "tags": [
+            "insurance claims",
+            "BINAR(1)",
+            "carbon emissions",
+            "reused parts",
+            "scenario analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.09286": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本研究は、S&P 500銘柄の日中リターン反転が2019年以降も続くか、事前登録した検証で調べる。対象は過去に検討した売買の多い約80銘柄を除いた構成銘柄である。",
+        "mainResult": "終値オークション直前までのドル出来高加重反転は、2016～2019年に1日3.13 bps、2023～2026年に3.05 bpsと報告された。一方、2020～2022年には反転が確認できず、2023年以降の推定は主に2023年に支えられている。全指数では反転が3.40 bpsから0.74 bpsへ低下したが、事前登録した低下基準には届かなかった。",
+        "practicalApplication": "報告結果は、終盤の逆張り執行や短期売買シグナルの持続性を評価する際、銘柄選定・期間・オークション前の測定時点を区別すべきことを示唆する。ただし、費用や実行可能性を踏まえた取引収益は要約から判断できない。",
+        "methodology": "点-in-timeのS&P 500構成銘柄を対象に、先行研究の符号を2016～2019年データで再現してから、後続期間の主標本に関する統計量を計算する私的な事前登録テストを実施した。ドル出来高加重の終盤反転を期間別に推定し、後から追加した代理標本も報告する。",
+        "limitations": "私的な事前登録であり、独立に検証可能な事前登録かは要約から分からない。2023～2026年の推定は2023年への依存が大きく、2020～2022年には効果が確認されていない。全指数での反転は弱く、検証したメカニズムは事前登録基準を通過しなかった。取引費用、執行品質、統計推定の詳細も要約には示されていない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "株式の短期リターン反転と期間・銘柄規模による差を事前登録の枠組みで調べており、市場マイクロストラクチャーおよび執行研究に関連する。ただし、効果の期間依存性と実装面の情報不足から重要度は中程度とする。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "日中リターン反転",
+          "事前登録",
+          "S&P 500",
+          "短期売買"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study uses a preregistered test to examine whether intraday return reversal in S&P 500 stocks persisted after 2019, excluding about 80 heavily traded constituents examined previously.",
+          "mainResult": "The reported dollar-volume-weighted reversal measured through the last trade before the closing auction was 3.13 bps per day in 2016–2019 and 3.05 bps in 2023–2026. No reversal was distinguishable from zero in 2020–2022, and the estimate after 2023 was largely driven by 2023. For the full index, reversal fell from 3.40 bps to 0.74 bps, but did not meet the preregistered threshold for a decline.",
+          "practicalApplication": "The findings suggest that assessments of late-day contrarian execution or short-term trading signals should distinguish stock selection, sample period, and the measurement time before the auction. The abstract does not establish trading profitability after costs or feasibility of execution.",
+          "methodology": "The authors use point-in-time S&P 500 constituents and a private preregistration requiring the prior-study sign to be reproduced in 2016–2019 data before calculating statistics for the later primary sample. They estimate dollar-volume-weighted late-day reversal by period and also report a proxy sample added afterward.",
+          "limitations": "The abstract does not establish whether the private preregistration was independently verifiable. The 2023–2026 estimate depends substantially on 2023, and no effect is distinguishable from zero in 2020–2022. Reversal is weaker for the full index, and no tested mechanism passed the preregistered criterion. The abstract also omits details on transaction costs, execution quality, and statistical estimation.",
+          "reason": "The study examines short-horizon stock return reversal and variation across periods and stock sizes using a preregistered framework, making it relevant to market microstructure and execution research. Its period dependence and limited implementation evidence warrant moderate importance.",
+          "tags": [
+            "Market microstructure",
+            "Intraday return reversal",
+            "Preregistration",
+            "S&P 500",
+            "Short-term trading"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "米国株の引け前リバーサルを、当時点のS&P 500構成銘柄から既調査の高売買代金銘柄約80社を除いて再検証した研究。著者らは2023〜2026年の反転を報告するが、持続性の評価は対象銘柄、期間、加重方法に強く依存する。",
+        "mainResult": "主標本の順位回帰による反転推定値は、2016〜2019年の1日3.13 bpから2023〜2026年の3.05 bp（$t=2.98$）となった。ただし低下率の片側95%上限は61%で、不変性を立証したわけではない。2020〜2022年はゼロと区別できず、2024〜2026年だけでは1.80 bp（$t=1.37$）にとどまる。全指数の売買代金加重推定値は3.40 bpから0.74 bpへ低下したが、変化は登録済み基準を満たさず、事前登録したメカニズム検定もすべて不通過だった。",
+        "practicalApplication": "引け前執行の評価で、日中リターン、銘柄規模、売買代金への集中を分けて検証する参考になる。連続取引とクロージング・オークションを区別する重要性も示すが、推定値は通常の投資元本当たり収益ではなく、取引費用控除後の戦略収益も検証していない。",
+        "methodology": "AlpacaのSIP価格バーと当時点の指数構成を用い、2016年から2026年10月までを分析する。前日終値から15時までのリターン順位に対し、15時30分から16時直前の最終約定までのリターンを、前月売買代金で加重して日次回帰する。5ラグのNewey–West標準誤差、五分位スプレッド、再現確認後の検証手順を採用し、メカニズム検定にはHolm補正を適用した。",
+        "limitations": "除外リストが非公開で主標本を厳密に再構築できず、その選定は過去期間に対して先読みを含む。私的事前登録の日時は外部検証できず、公開可能な代替標本は事後追加で主標本との重複も大きい。後期結果は2023年への依存が強く、低下検出力が弱いうえ、持続と低下の判定基準が非対称である。単一ベンダーの約定価格を使用し、気配仲値、スプレッド、執行費用は未検証で、主標本では翌朝の反落確認も失敗した。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "引け前の予測可能性と大型株への加重集中を考えるうえで有用で、再現設計の弱点も具体的に開示している。ただし、安定した収益機会やオプション・ETFフローの因果効果を示す証拠としては推奨しない。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "引け前リバーサル",
+          "クロージング・オークション",
+          "標本外検証",
+          "事前登録",
+          "売買代金加重",
+          "レバレッジETF",
+          "0DTEオプション"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study retests the U.S. end-of-day reversal using point-in-time S&P 500 constituents, excluding approximately 80 heavily traded stocks previously studied by the authors. The authors report a reversal in 2023–2026, but its persistence depends strongly on the universe, period, and weighting.",
+          "mainResult": "The primary sample's rank-regression reversal estimate was 3.13 bp per day in 2016–2019 and 3.05 bp in 2023–2026 ($t=2.98$). However, the one-sided 95% upper bound on the decline was 61%, so stability was not established. The reversal was indistinguishable from zero in 2020–2022 and was only 1.80 bp in 2024–2026 ($t=1.37$). The full-index dollar-volume-weighted estimate fell from 3.40 bp to 0.74 bp, but the change did not meet the registered threshold, and none of the preregistered mechanism tests passed.",
+          "practicalApplication": "The study informs evaluations of late-day execution that distinguish intraday returns, stock size, and dollar-volume concentration. It also highlights the importance of separating continuous trading from the closing auction, but its estimates are not conventional returns on invested capital, and strategy returns after trading costs are not tested.",
+          "methodology": "The analysis uses Alpaca SIP price bars and point-in-time index membership from 2016 through October 2026. Daily regressions relate returns from 3:30 p.m. to the last trade before 4 p.m. to ranks of returns from the previous close to 3 p.m., weighted by prior-month dollar volume. The design uses five-lag Newey–West standard errors, quintile spreads, a reproduction gate before the later-period test, and Holm correction for mechanism tests.",
+          "limitations": "The undisclosed exclusion list prevents exact reconstruction of the primary sample, and its selection introduces look-ahead into the earlier period. The private preregistration timestamps cannot be externally verified, while the reconstructible proxy sample was added post hoc and overlaps substantially with the primary sample. Later results depend heavily on 2023, power to detect deterioration is weak, and persistence and deterioration face asymmetric decision thresholds. The study uses trade prices from one vendor without testing quote midpoints, spreads, or execution costs; the primary sample also fails the next-morning give-back check.",
+          "reason": "Useful for studying late-day predictability and weighting concentration in large stocks, with unusually explicit disclosure of replication-design weaknesses. It should not be treated as evidence of a stable profit opportunity or causal effects from options and ETF flows.",
+          "tags": [
+            "Market microstructure",
+            "End-of-day reversal",
+            "Closing auction",
+            "Out-of-sample testing",
+            "Preregistration",
+            "Dollar-volume weighting",
+            "Leveraged ETFs",
+            "0DTE options"
+          ]
+        }
+      }
+    },
+    "2611.09337": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、クイーンズランド州の速度違反制裁強化を利用し、罰金と違反点数が再違反および運転者の責任転嫁に与える影響を推定する。",
+        "mainResult": "違反点数の増加は他者への違反責任の転嫁を増やす傾向があり、罰金のみの引き上げによる再違反抑制は小さい。一方、罰金と違反点数をともに引き上げると、再違反率は4.6パーセントポイント低下したと報告されている。",
+        "practicalApplication": "交通違反への制裁設計や抑止政策の検討に参考となりうるが、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利を扱う研究ではない。",
+        "methodology": "クイーンズランド州での制裁の大幅な引き上げを利用し、その後の違反と他の運転者の名義を挙げる行動への因果効果を推定している。",
+        "limitations": "提示された抄録だけでは、推定方法の詳細、標本や効果の不確実性、他の地域への一般化可能性は確認できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "交通違反への制裁と再違反を扱う研究であり、本サイトの対象分野との実質的な関連がない。",
+        "tags": [
+          "交通違反",
+          "制裁",
+          "抑止"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study uses a strengthening of speeding sanctions in Queensland to estimate how fines and demerit points affect reoffending and the transfer of liability to other drivers.",
+          "mainResult": "Higher demerit points are associated with more nomination of other drivers, while higher fines alone have only a small reported deterrent effect. When fines and penalty points both increase, the reoffending rate reportedly falls by 4.6 percentage points.",
+          "practicalApplication": "The findings may inform the design of traffic-violation sanctions and deterrence policies, but the study does not address electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "methodology": "The study exploits a large increase in sanctions in Queensland to estimate causal effects on subsequent offending and the nomination of other drivers.",
+          "limitations": "The abstract does not provide details of the estimation method, sample, uncertainty around the effects, or generalizability to other settings.",
+          "reason": "The paper concerns sanctions for traffic violations and reoffending, with no material connection to the site's research areas.",
+          "tags": [
+            "traffic violations",
+            "sanctions",
+            "deterrence"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.09751": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "本論文は、カーネルリッジ回帰で推定した割引曲線の空間がリスク中立ドリフトの下で不変となる条件を調べる。",
+        "mainResult": "高々2次元の例外を除き、任意のキャッシュフロー日付グリッドで不変性が成り立つ必要十分条件は、カーネルが $k(x,y)=e^{b(x+y)}(c e^{axy}+1-c)$ の形であることと示す。この場合、推定曲線は一定の連続複利利回りに対応するフラットな割引曲線のアフィン結合となり、割引係数は線形なリスク中立ダイナミクスを持つ。",
+        "practicalApplication": "カーネル選択を通じて、割引曲線推定と連続時間の裁定なしモデルを整合させる設計に利用できる可能性がある。",
+        "methodology": "表現定理により得られる有限次元の推定空間について、キャッシュフロー日付グリッドごとのリスク中立ドリフト不変性を理論的に特徴づける。",
+        "limitations": "提示された抄録からは、実データでの検証、推定性能の比較、結果が依拠する追加の仮定や適用範囲の詳細は分からない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "割引曲線推定のカーネル構造と裁定なし金利モデルの適合性を結びつける理論結果であり、金利モデル研究に関連性が高い。",
+        "tags": [
+          "割引曲線",
+          "カーネルリッジ回帰",
+          "リスク中立ドリフト",
+          "裁定なしモデル",
+          "連続複利利回り"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This paper studies when the space of discount curves estimated by kernel ridge regression is invariant under the risk-neutral drift.",
+          "mainResult": "The paper shows that, apart from exceptions with dimension at most two, invariance for every grid of cash flow dates holds if and only if the kernel has the form $k(x,y)=e^{b(x+y)}(c e^{axy}+1-c)$. In this case, an estimated curve is an affine combination of flat discount curves corresponding to constant continuously compounded yields, and the discounted coefficients have linear risk-neutral dynamics.",
+          "practicalApplication": "The result may help design kernel choices that make discount-curve estimation consistent with continuous-time arbitrage-free models.",
+          "methodology": "The paper theoretically characterizes risk-neutral drift invariance, for each cash-flow-date grid, of the finite-dimensional estimation space obtained from the representer theorem.",
+          "limitations": "The abstract does not report validation on real data or comparisons of estimation performance, nor does it specify further assumptions or the detailed scope of the results.",
+          "reason": "The theoretical result connects the kernel structure used for discount-curve estimation with compatibility in arbitrage-free interest-rate models, making it highly relevant to interest-rate modeling.",
+          "tags": [
+            "discount curves",
+            "kernel ridge regression",
+            "risk-neutral drift",
+            "arbitrage-free models",
+            "continuously compounded yields"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "割引曲線のkernel ridge regression（KRR）が生成する有限次元アフィン空間について、リスク中立ドリフトに対する不変性を解析した理論研究。静的な曲線推定と連続時間の金利モデルを整合させるカーネルを特徴付ける。",
+        "mainResult": "著者らは、RKHSの次元が高々2の例外的な場合を除き、すべてのキャッシュフロー日程でドリフト不変となるカーネルが $k(x,y)=e^{b(x+y)}(ce^{axy}+1-c)$、$a,c>0$、$b\\in\\mathbb{R}$ に限られると証明する。推定曲線は一定利回りの割引曲線のアフィン結合となり、固定した事前曲線を共有する不変部分空間は日程の部分集合に対応する。係数のリスク中立ドリフトは二次式だが、割引後の係数では線形になる。",
+        "practicalApplication": "曲線推定と動的金利モデルで共通の曲線族を使う際のカーネル選択に役立つ。対象空間の次元削減ではPCAではなく部分日程の選択が必要となり、割引後の係数にボラティリティを設定するモデル構築の指針も得られる。",
+        "methodology": "Representer theoremと原点で条件付けたRKHSを用いてKRRの推定空間を導く。無裁定ドリフト $\\eta(f)=f'-f'(0)f$ の不変性を線形作用素の不変部分空間問題へ還元し、カーネルの対称性・正半定値性と解析性から分類する。Itô計算により係数ダイナミクスとlinear-rationalモデルへの接続を導く。",
+        "limitations": "実証評価や推定精度・次元削減手法の比較は行っていない。すべての日程に対する連続時間の不変性は強い条件で、固定日程や離散時間での弱い整合性は未解決である。ドリフト不変性だけでは正の債券価格や大域解は保証されず、正の状態価格密度などの追加条件が必要となる。小さいカーネルパラメータによる悪条件化や長期端の有界性にも制約がある。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "割引曲線の機械学習推定と無裁定ダイナミクスの整合性を必要十分条件で整理しており、金利モデル設計に直接関係する。即時の運用導入より、カーネル選択とモデル構造の理論的検証に有用である。",
+        "tags": [
+          "割引曲線",
+          "金利モデル",
+          "カーネルリッジ回帰",
+          "再生核ヒルベルト空間",
+          "ドリフト不変性",
+          "無裁定整合性",
+          "次元削減",
+          "線形有理型期間構造モデル"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This theoretical paper studies invariance under the risk-neutral drift of finite-dimensional affine spaces generated by kernel ridge regression (KRR) for discount curves. It characterizes kernels that reconcile static curve estimation with continuous-time interest-rate models.",
+          "mainResult": "The authors prove that, apart from exceptional cases with RKHS dimension at most two, the kernels that are drift-invariant for every cash-flow grid are exactly $k(x,y)=e^{b(x+y)}(ce^{axy}+1-c)$, with $a,c>0$ and $b\\in\\mathbb{R}$. Estimated curves are affine combinations of constant-yield discount curves, and invariant subspaces sharing the fixed prior curve correspond to subsets of the grid. The coefficients have quadratic risk-neutral drift, while their discounted counterparts have linear drift.",
+          "practicalApplication": "The results guide kernel selection when curve estimation and dynamic interest-rate modeling must share a curve family. Dimension reduction within the specified space requires selecting sub-grids rather than PCA, and the paper also guides model construction by specifying volatility for discounted coefficients.",
+          "methodology": "The representer theorem and an RKHS conditioned at the origin establish the KRR hypothesis space. Invariance under the no-arbitrage drift $\\eta(f)=f'-f'(0)f$ is reduced to an invariant-subspace problem for a linear operator; kernel symmetry, positive semidefiniteness, and analyticity yield the classification. Itô calculus establishes coefficient dynamics and the connection to linear-rational models.",
+          "limitations": "The paper provides no empirical evaluation or comparison of estimation accuracy and dimension-reduction methods. Continuous-time invariance for every grid is restrictive; weaker consistency for a fixed grid or discrete time remains unresolved. Drift-invariance alone guarantees neither positive bond prices nor global solutions; additional conditions, including a positive state price density, are needed. Small kernel parameters can cause ill-conditioning, and long-end boundedness imposes further restrictions.",
+          "reason": "The paper provides necessary and sufficient conditions linking machine-learning discount-curve estimation with arbitrage-free dynamics, making it directly relevant to interest-rate model design. Its main value is theoretical validation of kernel choices and model structure rather than immediate operational deployment.",
+          "tags": [
+            "Discount curves",
+            "Interest-rate models",
+            "Kernel ridge regression",
+            "Reproducing kernel Hilbert spaces",
+            "Drift-invariance",
+            "No-arbitrage consistency",
+            "Dimension reduction",
+            "Linear-rational term structure models"
+          ]
+        }
+      }
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 820,
+      "outputTokens": 927,
+      "reasoningTokens": 118,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1747,
+      "estimatedCostUsd": 0.000545,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.08528v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 13130,
+      "outputTokens": 1267,
+      "reasoningTokens": 148,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 13127,
+      "totalTokens": 14397,
+      "estimatedCostUsd": 0.045493,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 12,
+      "paperIds": [
+        "2611.08528v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 957,
+      "outputTokens": 1015,
+      "reasoningTokens": 107,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1972,
+      "estimatedCostUsd": 0.000603,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.08701v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 43097,
+      "outputTokens": 1783,
+      "reasoningTokens": 117,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 43094,
+      "totalTokens": 44880,
+      "estimatedCostUsd": 0.125571,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 33,
+      "paperIds": [
+        "2611.08701v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 875,
+      "outputTokens": 808,
+      "reasoningTokens": 113,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1683,
+      "estimatedCostUsd": 0.000491,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.08968v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 721,
+      "outputTokens": 561,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1282,
+      "estimatedCostUsd": 0.000353,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.09012v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 6581,
+      "outputTokens": 1298,
+      "reasoningTokens": 134,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 6578,
+      "totalTokens": 7879,
+      "estimatedCostUsd": 0.029431,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 7,
+      "paperIds": [
+        "2611.09012v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 796,
+      "outputTokens": 811,
+      "reasoningTokens": 90,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1607,
+      "estimatedCostUsd": 0.000485,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.09208v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 841,
+      "outputTokens": 780,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1621,
+      "estimatedCostUsd": 0.000474,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.09213v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 941,
+      "outputTokens": 1100,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2041,
+      "estimatedCostUsd": 0.000644,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.09286v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 27174,
+      "outputTokens": 1679,
+      "reasoningTokens": 137,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 27171,
+      "totalTokens": 28853,
+      "estimatedCostUsd": 0.084723,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 15,
+      "paperIds": [
+        "2611.09286v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 713,
+      "outputTokens": 699,
+      "reasoningTokens": 79,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1412,
+      "estimatedCostUsd": 0.000421,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.09337v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 809,
+      "outputTokens": 1064,
+      "reasoningTokens": 266,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1873,
+      "estimatedCostUsd": 0.000613,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.09751v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 17115,
+      "outputTokens": 1474,
+      "reasoningTokens": 134,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 17112,
+      "totalTokens": 18589,
+      "estimatedCostUsd": 0.057526,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 16,
+      "paperIds": [
+        "2611.09751v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

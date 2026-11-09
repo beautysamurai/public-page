@@ -2,6 +2,80 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-11-09-daily-openai-01",
+      "date": "2026-11-09",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2611.09751v1",
+          "title": "Drift-invariant kernels for discount curve models",
+          "authors": [
+            "Andreas Celary",
+            "Zehra Eksi-Altay",
+            "Damir Filipovic",
+            "Paul Krühner"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.09286v1",
+          "title": "The End-of-Day Reversal After 2019: A Pre-Registered Test on S&P 500 Stocks Excluding Heavily Traded Names",
+          "authors": [
+            "Alex Vidovich",
+            "Zivana Zerjal"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.08528v1",
+          "title": "Price-Volume Correlations Are Always Zero",
+          "authors": [
+            "Victor Olkhov"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.09012v1",
+          "title": "Towards Robust Reinforcement Learning Market Making: Lessons from Loss Function Experimentation",
+          "authors": [
+            "Siddharth Nand",
+            "Bora Guney"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.08701v1",
+          "title": "Does a Trading Policy Need to Know What It Trades? Microstructure Invariance and Zero-Shot Transfer of Execution Policies",
+          "authors": [
+            "Hieu Tran",
+            "Hong Yu"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-11-08-daily-openai-01",
       "date": "2026-11-08",
       "kind": "daily",

@@ -2,6 +2,66 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-11-11-daily-openai-01",
+      "date": "2026-11-11",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2611.13616v1",
+          "title": "Optimal Trading Speed on Blockchain",
+          "authors": [
+            "Ruizhe Jia",
+            "Shihao Yu"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.14117v1",
+          "title": "Fine-Tuning an Order-Flow Foundation Model for Sub-Second Forecasting",
+          "authors": [
+            "Fedor Shabashev"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.14245v1",
+          "title": "Deep Learning for Operator Maps in Optimal Liquidation",
+          "authors": [
+            "Ryan Donnelly",
+            "Luca Galimberti",
+            "Brian Healy",
+            "Siqi Zhang"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.13365v1",
+          "title": "Making sense of rule 605",
+          "authors": [
+            "Peter B. Lerner"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-11-09-daily-openai-01",
       "date": "2026-11-09",
       "kind": "daily",

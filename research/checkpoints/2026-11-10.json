@@ -1,0 +1,380 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-11-10",
+  "fingerprint": "d7c1c1f14bafe320c41f4aac044a09fc3cdf44ea22b542308518b51691dcb9bf",
+  "candidateFingerprints": {
+    "2611.10155": "1f4c99c202bdd200ad9f01476a4c29597e29fbef3bab1bd0be2e8f4d53717a4a",
+    "2611.10333": "c52b72ce60638e699bffee4f45629b8fdbaf0f841956c13a4087a86e6c15fb08",
+    "2611.10414": "47da8c14fa332b9b4aeb65af448a617c96e0ebf40e8a29d5a19666728349a28c",
+    "2611.10531": "692611b42534ba5242ea59485390be70eb937aed8a8d4382ac2babf57829bfd4",
+    "2611.10574": "3014d19d1262c6e6096da7c06445ca932766ce52527c4bc105ddf4a32ff2e09b",
+    "2611.10607": "ffb0c056d072446ad0b834165a2d43f477c5abe5ca956eaadd130fb71d6e7145",
+    "2611.10731": "898e8f7f87b6d1874c77ca8d3037e900e885975be8ea8182495a34fcadd796e2",
+    "2611.10791": "95db85d2f99d0455cd1788e6ebdc912c458a8812618e478c471cca16b1754ccb",
+    "2611.10801": "0b95551b2a8dad804dbcb20bdb32371a1122dfd6349b848823543ac69a6b7bb0",
+    "2611.10928": "a18494ce99269327e2c507c0013254bb6b8d0196567a53184758766a4aa1e5da",
+    "2611.10956": "cc4821bb6b0c2b40ba08d634c44835b8c484b5d0d25bba96aa435b3ee992145b",
+    "2611.10972": "71267d53ae8f8726024e8cc121d945d36d9c004932a902f496478c73847d1690",
+    "2611.11112": "b8c617f9f8226f08eb2e1b64b299907edf7f50b2cbdee56408c79c5e660fa471",
+    "2611.11373": "6e09d21701dd8525f72061aa5585ae09c65b00d59db2dcdf17d277d66c23afe4",
+    "2611.11436": "eef2ab771cf2223ea3f08ff6a78afb25c8a4303aaac5fabacbcc6b566bec9bcc",
+    "2611.11490": "f36fb3cdfdd5d71d62ae3ca149866cd8e3747ffa097ce4ea6e8b5a91410350da",
+    "2611.11652": "6826b3ba7d8bfcb4dfbdb5054a4f685182b7282c101bb7765f904de23027f433",
+    "2611.11783": "c650bc7b215552ec4626daff60e16a75d97523676cf7091b66244e9bfe5a3ac6",
+    "2611.11803": "864faf0ecae0a9be43f3e959eba6b4f4d3d02805b595bdb29d406ba9998704db",
+    "2611.12117": "9e98f1f419035c329ffaf0c6fe5af9168d64937503b9720870e6696388f499cb",
+    "2611.12347": "3e53424db5db0c9816db091fcd7921ee68446935e5ab4704521f77d079675d22",
+    "2611.12389": "7224e517764708c81a13d51b23a9e6724d7059ca12cf35d3ebf2166f42e310a6",
+    "2611.12459": "b15c1405302a7dc5b1945ab87a1cb074cbf6381d66909bfb80ac363fd8159bb4",
+    "2611.12565": "ed2d5a2e278e38df56e6abafde23012f760a87c130a2fd09a8c295627bdc0fbc"
+  },
+  "results": {
+    "2611.10155": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、共感的な視点取得が意思決定時間と向社会的選択の関連をどう調整するかを、実験で検討している。",
+        "mainResult": "652人の実験参加者では、視点取得が高い場合、選択時間が長いほど向社会性がやや低い関連が見られたが、低い場合の正の関連は統計的に有意でなかった。認知的熟慮テスト成績では同様の調整効果は確認されなかった。",
+        "practicalApplication": "向社会的選択の研究では、一般的な熟慮能力と選択時の処理時間を区別し、共感的視点取得も考慮する示唆がある。金融市場、執行、金利分析への直接的な応用は示されていない。",
+        "methodology": "652人を対象とする実験で、総利得を一定に保った4人分配ゲームの選択を測定し、視点取得尺度、5項目の認知的熟慮テスト、選択時の反応時間と関連づけた。",
+        "limitations": "抄録からは、単一の実験課題に基づく関連分析であり、因果関係や他の状況への一般化は確立されていない。効果の大きさや追加の頑健性検証も記載されていない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "向社会的行動と心理的特性を扱う研究であり、対象サイトの電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究には実質的に該当しない。",
+        "tags": [
+          "向社会的行動",
+          "実験経済学",
+          "共感的視点取得",
+          "意思決定時間"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study experimentally examines how empathic perspective taking moderates the association between decision time and prosocial choice.",
+          "mainResult": "Among 652 participants, higher perspective taking was associated with modestly lower prosociality as choice time increased, while the positive association at low levels was not statistically significant. No comparable moderation was found for Cognitive Reflection Test performance.",
+          "practicalApplication": "The study suggests that research on prosocial choice should distinguish general reflective ability from processing time at the point of choice and consider empathic perspective taking. It establishes no direct application to financial markets, execution, or interest-rate analysis.",
+          "methodology": "An experiment with 652 participants measured choices in a four-player distribution game with constant aggregate payoffs, and related them to a perspective-taking scale, a five-item Cognitive Reflection Test, and response time at choice.",
+          "limitations": "Based on the abstract, the findings are associations from a single experimental task; causality and generalizability to other settings are not established. Effect sizes and further robustness checks are not reported.",
+          "reason": "The paper concerns prosocial behavior and psychological traits, and is not materially relevant to the site's focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "Prosocial behavior",
+            "Experimental economics",
+            "Empathic perspective taking",
+            "Decision time"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.10333": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は株式と市場リターンを用いた動的ヘッジ比率の組み合わせを検討し、金利モデル、イールドカーブ、電子取引、または市場マイクロ構造を主題としていません。",
+        "mainResult": "要旨によると、複数の目的別ヘッジ比率を等加重またはExtraTreesで適応的に組み合わせる手法が、16通りすべての目的・期間の比較で対応する損失を改善しました。等加重だけでも下方リスク・分位点目的のヘッジが改善したと報告されています。",
+        "practicalApplication": "ヘッジ運用で複数の推定目的を併用し、最終的な評価目的に応じて重み付けする設計の参考になり得ます。ただし、本サイトの中心領域への直接的な応用は限定的です。",
+        "methodology": "同一の過去の株式・市場リターンから、分散、LAD、下方半分散、下側分位点、Expected Shortfallに基づくローリング推定量を作成し、等加重と目的別ExtraTreesモデルによる適応的重み付けを比較しています。評価期間は60、90、120、180日です。",
+        "limitations": "根拠は要旨のみで、標本、統計的有意性、取引コスト、外部標本での頑健性などは確認できません。報告された改善を実運用での優位性とみなすことはできません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "ヘッジとリスク評価に関する定量研究ですが、電子執行、マイクロ構造、金利モデル、イールドカーブ、金利のいずれにも実質的に該当しないため、対象外と判断します。",
+        "tags": [
+          "動的ヘッジ",
+          "リスク最小化",
+          "ExtraTrees",
+          "株式"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines combinations of dynamic hedge ratios using stock and market returns. Its main subject is not electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "mainResult": "According to the abstract, equally or adaptively combining hedge ratios estimated under multiple objectives improves the corresponding loss in all 16 objective-window comparisons. Equal weighting alone is also reported to improve downside and quantile hedging.",
+          "practicalApplication": "The approach may inform hedge design that combines estimates from multiple objectives and weights them for a fixed evaluation objective. Its direct relevance to this site's core areas is limited.",
+          "methodology": "Using the same historical stock and market returns, the authors construct rolling estimators based on variance, LAD, downside semivariance, a lower-tail quantile, and Expected Shortfall. They compare equal weighting with objective-specific ExtraTrees adaptive weighting over 60-, 90-, 120-, and 180-day windows.",
+          "limitations": "Only the abstract is available, so the sample, statistical significance, transaction costs, and out-of-sample robustness cannot be assessed. The reported improvements do not establish an advantage in live implementation.",
+          "reason": "This is a quantitative study of hedging and risk objectives, but it does not materially concern electronic execution, market microstructure, interest-rate models, yield curves, or rates, so it is out of scope.",
+          "tags": [
+            "dynamic hedging",
+            "risk minimization",
+            "ExtraTrees",
+            "equities"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.10414": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本研究は、LLMが企業ニュースの内容を評価しているのか、すでに起きた市場反応を追認しているのかを検証するマルチエージェント取引システムを提案する。",
+        "mainResult": "著者らのテストでは、ニュース評価と発表時点周辺の異常リターンに週次スピアマン相関0.119があり、ニュース公開後の初回取引以降では相関が0.023に低下した。週次ではコードのみの特徴量を超える順位情報は確認されなかった。",
+        "practicalApplication": "ニュース駆動型取引システムやLLM評価の検証で、イベント発生時点だけでなくニュース公開時点からの市場反応を基準にする設計が参考になる。",
+        "methodology": "時点情報を限定したデータストアを共有するエージェント群と、位置サイズに上限を設けた取引システムを構築し、ハッシュコミット方式のテストでLLM由来のニュース判断を異常リターンや8-K提出書類と比較した。",
+        "limitations": "要旨は週次の確認的検定でコードのみの特徴量に対する追加的な順位情報を報告しておらず、相関も小さい。結果は著者らのテスト設定に基づき、別市場・期間への一般化や実運用での収益性は示されていない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "ニュース公開と市場反応の時間差を考慮したLLM評価は電子取引に直接関係する一方、確認的な予測優位性は要旨からは確認できない。",
+        "tags": [
+          "LLM",
+          "ニュース駆動型取引",
+          "イベント取引",
+          "時間的先行性",
+          "市場反応"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This study proposes a multi-agent trading system to test whether LLMs assess corporate news content or merely echo market reactions that have already occurred.",
+          "mainResult": "In the authors’ test, news judgments had a weekly Spearman correlation of 0.119 with announcement-window abnormal returns; the correlation fell to 0.023 from the first trade after publication. At a weekly horizon, no rank information beyond code-only features was detected.",
+          "practicalApplication": "The approach may inform the evaluation of news-driven trading systems and LLM judgments by using market reactions since publication, not only since the event, as the criterion.",
+          "methodology": "The authors built agents sharing point-in-time data stores and a trading system with bounded position sizes, then compared LLM-derived news judgments with abnormal returns and issuer 8-K filings in a hash-committed test.",
+          "limitations": "The abstract reports no incremental rank information over code-only features in the weekly confirmatory test, and the reported correlation is small. The findings are based on the authors’ test setting; generalization to other markets or periods and profitability in live trading are not established.",
+          "reason": "Accounting for the time gap between news publication and market reaction is directly relevant to electronic trading, although the abstract does not establish confirmatory predictive advantage.",
+          "tags": [
+            "LLM",
+            "news-driven trading",
+            "event trading",
+            "temporal precedence",
+            "market reaction"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "金融ニュースを読むLLMの判断が将来収益を予測するのか、既に生じた値動きを追認するのかを検証する研究。著者らは、時点整合的なマルチエージェント売買システムを構築し、ニュース判断の妥当性、週次運用への追加価値、偽情報への耐性を評価している。",
+        "mainResult": "報告された発表窓リターンとの週次Spearman相関は $0.119$、95%信頼区間は $[0.098, 0.140]$ だった。一方、公開後から測る探索的相関は $0.023$ に縮小した。週次予測ではコードのみの比較対象に対するIC差が $-0.016$、95%信頼区間が $[-0.029, -0.002]$ で、改善仮説は支持されなかった。記事別読解の攻撃成功率は10.5%で、一括読解の0.1%より高かったが、成功した攻撃の88%で仕込まれた記事を特定できた。",
+        "practicalApplication": "ニュース戦略の検証では、発表窓との一致だけでなく、記事公開後かつ実際の約定可能時点以降の収益を評価すべきである。時点別データ管理、判断の来歴記録、コードによる銘柄候補とポジション変更の制限は、LLM売買システムの監査・リスク管理に応用できる。収益性のある売買戦略を実証した研究ではない。",
+        "methodology": "米国大型株100銘柄を対象に115週間を評価し、主要検証には27,556件の記事・企業ペアを用いた。固定LLMの選択肢確率を構造化判断に変換し、市場調整後リターンとSECの8-K項目に照合した。ハッシュで事前確定した3仮説をHolm補正し、週次統計にはNewey–West標準誤差を使用した。モデル公開後の期間、匿名化、プラセボ窓、偽記事攻撃も検証した。",
+        "limitations": "単一ニュース配信元の見出し・要約、主に単一LLM、大型株の週次ロング運用に限定される。公開時点に合わせた分析は探索的で、弱い学習器による追加価値の不検出を情報自体の不存在とは解釈できない。Jevの結果は549件・3週間の記述的評価であり、記載された主要評価期間はJev公開前に終了しているため、別パネルの対象日付が不明瞭である。影響上限の証明は信頼済み入力を攻撃者が変更できないという仮定に依存し、累積損失を保証しない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "ニュースの理解精度と取引可能な予測力を明確に分け、公開時刻による評価の歪みを具体的に示している。執行最適化や金利モデルへの直接的貢献はないが、LLM売買研究の検証設計と安全管理の参考として推薦できる。",
+        "tags": [
+          "LLM売買",
+          "金融ニュース",
+          "公開時刻",
+          "先読みバイアス",
+          "時点整合的バックテスト",
+          "敵対的攻撃",
+          "ポジション制約"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This study tests whether LLM judgments of financial news predict future returns or merely confirm price moves that have already occurred. The authors build a point-in-time multi-agent trading system to evaluate judgment validity, incremental value for weekly trading, and resistance to fabricated information.",
+          "mainResult": "The reported weekly Spearman correlation with announcement-window returns was $0.119$, with a 95% confidence interval of $[0.098, 0.140]$. The exploratory correlation measured from publication fell to $0.023$. For weekly prediction, the IC difference against the code-only comparator was $-0.016$, with a 95% confidence interval of $[-0.029, -0.002]$, providing no support for the improvement hypothesis. Attack success was higher for per-item reading, at 10.5%, than for holistic reading, at 0.1%, but the planted item was identified in 88% of successful attacks.",
+          "practicalApplication": "News-strategy evaluation should measure returns after publication and actual feasible execution, rather than relying only on announcement-window agreement. Point-in-time data management, judgment provenance, and code-enforced limits on eligible names and position changes can support auditing and risk management for LLM trading systems. The study does not establish a profitable trading strategy.",
+          "methodology": "The evaluation covers 100 large-cap US stocks over 115 weeks, with 27,556 article–firm pairs in the primary validity test. Option probabilities from a pinned LLM are converted into structured judgments and compared with market-adjusted returns and SEC 8-K item codes. Three hash-committed hypotheses receive Holm correction, with Newey–West standard errors for weekly statistics. Additional checks cover post-model-release periods, anonymization, placebo windows, and fabricated-news attacks.",
+          "limitations": "The study is limited to headlines and summaries from one news feed, primarily one LLM, and weekly long-only trading in large-cap stocks. Publication-aligned analyses are exploratory, and failure to extract incremental value with a weak learner does not establish that the judgments contain no information. Jev results are descriptive, covering 549 items over three weeks; the stated main evaluation period ends before Jev's release, leaving the separate panel's dates unclear. The influence-bound proof assumes attackers cannot alter trusted inputs and does not guarantee a bound on cumulative losses.",
+          "reason": "The paper clearly separates news-understanding accuracy from tradable predictive power and concretely demonstrates publication-timing distortions in evaluation. It does not directly advance execution optimization or interest-rate modeling, but is recommended as a reference for evaluation design and safety controls in LLM trading research.",
+          "tags": [
+            "LLM trading",
+            "Financial news",
+            "Publication timing",
+            "Look-ahead bias",
+            "Point-in-time backtesting",
+            "Adversarial attacks",
+            "Position constraints"
+          ]
+        }
+      }
+    },
+    "2611.10531": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、対数正規確率変数の和について、初期の comonotonic 近似からの Pearson deformation を最小化しつつ、指定した有限次数のモーメントを一致させる近似法を提案する。",
+        "mainResult": "存在・一意性に関する結果と、ステップ分位点・重みの決定法を示す。ステップ数がモーメント一致次数より一つ多い場合、同時最適化を分割点だけの最適化に帰着できると報告する。数値実験では、Pearson deformation の最小化がリスク指標の近似精度を必ずしも改善しない。",
+        "practicalApplication": "対数正規変数の和の分布やリスク指標を近似する際、指定したモーメントを一致させる手法として利用できる可能性がある。ただし、実務的な有効性は要約からは確認できない。",
+        "methodology": "step-weighted distribution に基づき、comonotonic 近似の Pearson deformation をモーメント一致制約の下で最小化する。任意の有限次数を扱う枠組みを示し、最初の五つのモーメントを一致させる数値実験を行う。",
+        "limitations": "要約によれば、リスク指標の近似精度は初期近似、分割点、補正重みに依存し、deformation の最小化だけでは精度向上を保証しない。数値実験の詳細や比較対象、対象範囲は要約に記載されていない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "確率分布近似に関する数理的研究であり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利を主要対象としていないため、対象範囲外と判定する。",
+        "tags": [
+          "対数正規変数の和",
+          "comonotonic近似",
+          "モーメント一致",
+          "Pearson deformation",
+          "リスク指標"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper proposes approximations for sums of lognormal random variables that match specified finite-order moments while minimizing Pearson deformation from a starting comonotonic approximation.",
+          "mainResult": "It reports results on existence and uniqueness and a method for determining step quantiles and weights. When the number of steps is one greater than the moment-matching order, joint optimization can be reduced to optimization over partition points. Numerical experiments show that minimizing Pearson deformation does not necessarily improve risk-measure approximation accuracy.",
+          "practicalApplication": "The method may be used to approximate distributions or risk measures for sums of lognormal variables while matching specified moments. The abstract does not establish its practical effectiveness.",
+          "methodology": "Using step-weighted distributions, the paper minimizes Pearson deformation of a comonotonic approximation subject to moment-matching constraints. It presents a framework for any prescribed finite order and numerical experiments matching the first five moments.",
+          "limitations": "According to the abstract, risk-measure approximation accuracy depends on the starting approximation, partition points, and correction weights; minimizing deformation alone does not guarantee greater accuracy. Details of the numerical experiments, comparators, and scope are not provided in the abstract.",
+          "reason": "This is a mathematical study of probability-distribution approximation, not materially focused on electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "sums of lognormal variables",
+            "comonotonic approximation",
+            "moment matching",
+            "Pearson deformation",
+            "risk measures"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.10574": {
+      "status": "awaiting_pdf",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "長期記憶を持つ注文フローの下で、拡散的な価格から推定した propagator の減衰は、真の価格インパクトが減衰しなくても生じ得ると示す。",
+        "mainResult": "Wiener–Hopf 型の推定では、真のインパクトが永続的でも推定 propagator は必ず一時的となり、一定の条件下で減衰指数は注文フローの自己相関だけで定まるとする。したがって、推定された細かな釣り合いは真のインパクト減衰の証拠とは限らない。",
+        "practicalApplication": "注文フローと価格インパクトを分析する際、推定カーネルの減衰を実際のインパクト減衰と直結させず、推定手法による見かけの効果を検証する必要がある。",
+        "methodology": "長期記憶下の Wiener–Hopf デコンボリューションに関する一般定理を提示し、注文分割と平方根則を保ちながら真のインパクトを永続的とする可解な帰無モデルで人工的減衰を示す。",
+        "limitations": "要旨に基づく評価であり、定理の仮定や証明の詳細、実データでの検証範囲は確認できない。非線形推定への適用も、真のメタ注文が長期記憶を持つ場合という条件付きで述べられている。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "価格インパクト推定の解釈に対する理論的な識別可能性の警告であり、注文フローの記憶と価格形成を扱う市場マイクロ構造研究に直接関係する。",
+        "tags": [
+          "市場マイクロ構造",
+          "価格インパクト",
+          "注文フロー",
+          "長期記憶",
+          "propagator",
+          "識別可能性"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper argues that a decaying propagator inferred from diffusive prices and long-memory order flow can arise even when the true price impact does not decay.",
+          "mainResult": "For Wiener–Hopf-type estimation, the inferred propagator is necessarily transient even if true impact is permanent; under a stated mild condition, its decay exponent is determined by order-flow autocorrelation alone. Thus, the inferred fine balance is not necessarily evidence of true impact decay.",
+          "practicalApplication": "When analyzing order flow and price impact, researchers should not equate decay in an estimated kernel with actual impact decay, and should test for apparent effects induced by the estimation method.",
+          "methodology": "The paper presents general theorems for Wiener–Hopf deconvolution under long memory and demonstrates artificial decay using an exactly solvable null model that retains order splitting and the square-root law while having permanent true impact.",
+          "limitations": "This assessment is based on the abstract; the theorem assumptions, proof details, and extent of empirical validation cannot be assessed. Applicability to nonlinear estimation is stated conditionally, when true metaorders have long memory.",
+          "reason": "This theoretical warning about identifiability affects interpretation of price-impact estimates and directly concerns market-microstructure research on order-flow memory and price formation.",
+          "tags": [
+            "market microstructure",
+            "price impact",
+            "order flow",
+            "long memory",
+            "propagator",
+            "identifiability"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 867,
+      "outputTokens": 867,
+      "reasoningTokens": 73,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1734,
+      "estimatedCostUsd": 0.00052,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.10155v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 837,
+      "outputTokens": 774,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1611,
+      "estimatedCostUsd": 0.000471,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.10333v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 942,
+      "outputTokens": 733,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1675,
+      "estimatedCostUsd": 0.000461,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.10414v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 29114,
+      "outputTokens": 1699,
+      "reasoningTokens": 194,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 29111,
+      "totalTokens": 30813,
+      "estimatedCostUsd": 0.089774,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 13,
+      "paperIds": [
+        "2611.10414v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 798,
+      "outputTokens": 810,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1608,
+      "estimatedCostUsd": 0.000485,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.10531v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 923,
+      "outputTokens": 839,
+      "reasoningTokens": 75,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1762,
+      "estimatedCostUsd": 0.000512,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.10574v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

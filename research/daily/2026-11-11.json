@@ -1,0 +1,762 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-11-11",
+  "generatedAt": "2026-11-11T14:39:59Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-11-11 was confirmed with 4 relevant paper(s).",
+  "expectedBatchDate": "2026-11-11",
+  "observedBatchDate": "2026-11-11",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2611.13616v1",
+        "title": "Optimal Trading Speed on Blockchain",
+        "authors": [
+          "Ruizhe Jia",
+          "Shihao Yu"
+        ],
+        "submittedDate": "2026-11-10",
+        "updatedDate": "2026-11-10",
+        "categories": [
+          "econ.GN",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "要旨とIntroductionのみを対象とする限定レビューであり、全114ページの本文は未提供。著者らは、ブロック高速化が優先手数料競争を弱め、裁定利益をシーケンサーから裁定業者へ移転すると主張する。また、能動的LPによる逆選択回避が受動的資本を圧迫し、高速化が流動性を悪化させ得るとしている。",
+        "mainResult": "要旨とIntroductionによれば、著者らは均衡流動性が中間的なブロック速度で最大になると主張する。Base Flashblocks導入の分析では、最大取引規模十分位のガス入札価格が73%低下し、裁定の純マークアウトが2.73 bps上昇、プール深度が約19%低下したと報告する。全文は未提供であり、これらは著者の報告として扱う。",
+        "practicalApplication": "ブロック間隔やAMM執行設計では、価格追随の改善だけでなく、優先手数料、受動的LPの収益性、深度、実効スプレッドを併せて評価する視点を提供する。最速化を流動性改善と同一視しないための設計仮説として有用である。",
+        "methodology": "著者らは、裁定業者、流動性需要者、能動的・受動的LP、シーケンサーの均衡モデルを構築したと説明する。実証は2025年7月のBase Flashblocks導入を用いた差の差分析で、Arbitrumを比較対象とする。対象はUniswap v3のWETH–USDC、5 bp手数料プールで、2025年5〜9月のオンチェーン取引とBinance板情報を対応させるとしている。",
+        "limitations": "要旨とIntroductionのみのレビューで、全114ページの本文、証明、詳細な推定結果、付録は未提供。著者が主張する因果効果について、平行トレンド、同時期の交絡要因、頑健性を検証できない。単一アップグレードと限定されたプールの分析から、他チェーンやトークン化株式へ一般化できるかは不明である。また、導入前後の比較だけでは、流動性を最大化する中間的速度そのものを実証したとは判断できない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "執行速度、優先順位競争、LP間の利益配分を結び付ける点で市場マイクロストラクチャーとの関連が強い。限定資料に基づく暫定評価として、全文で識別戦略とモデル条件を確認する価値がある。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "ブロックチェーン",
+          "AMM",
+          "ブロック速度",
+          "優先手数料",
+          "流動性供給",
+          "逆選択",
+          "差の差分析",
+          "限定資料レビュー"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This limited-source review covers only the abstract and Introduction; the full 114-page paper was not supplied. The authors claim that faster blocks weaken priority-fee competition and transfer arbitrage rents from the sequencer to arbitrageurs. They also argue that active LPs’ avoidance of adverse selection crowds out passive capital, so faster execution can worsen liquidity.",
+          "mainResult": "According to the abstract and Introduction, the authors claim that equilibrium liquidity peaks at an intermediate block speed. Their analysis of Base Flashblocks reports a 73% decline in gas bids in the largest trade-size decile, a 2.73 bps increase in net arbitrage markout, and an approximately 19% decline in pool depth. The full paper was not supplied, so these are treated as author-reported results.",
+          "practicalApplication": "The paper offers a framework for evaluating priority fees, passive LP profitability, depth, and effective spreads alongside improved price tracking when designing block intervals and AMM execution. It provides a useful design hypothesis against equating maximum speed with better liquidity.",
+          "methodology": "The authors describe an equilibrium model involving arbitrageurs, liquidity traders, active and passive LPs, and a sequencer. Their empirical approach uses a difference-in-differences design around the July 2025 Base Flashblocks launch, with Arbitrum as the comparison chain. They state that the analysis matches on-chain transactions in Uniswap v3 WETH–USDC pools with a 5 bp fee to Binance order-book data from May through September 2025.",
+          "limitations": "This review uses only the abstract and Introduction; the full 114-page paper, proofs, detailed estimates, and appendices were not supplied. Parallel trends, contemporaneous confounders, and robustness underlying the authors’ claimed causal effects cannot be assessed. Generalizability from one upgrade and a limited pool setting to other chains or tokenized equities remains unclear. A before-and-after comparison alone also does not establish that the intermediate liquidity-maximizing speed has been empirically identified.",
+          "reason": "The connection between execution speed, priority competition, and rent allocation across LPs makes this highly relevant to market microstructure. As a provisional assessment based on limited material, it merits full-text review of the identification strategy and model conditions.",
+          "tags": [
+            "Market microstructure",
+            "Blockchain",
+            "AMM",
+            "Block speed",
+            "Priority fees",
+            "Liquidity provision",
+            "Adverse selection",
+            "Difference-in-differences",
+            "Limited-source review"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 708,
+          "outputTokens": 913,
+          "reasoningTokens": 112,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1621,
+          "estimatedCostUsd": 0.000527,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.13616v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 5053,
+          "outputTokens": 1487,
+          "reasoningTokens": 164,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 5050,
+          "totalTokens": 6540,
+          "estimatedCostUsd": 0.027501,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 114,
+          "paperIds": [
+            "2611.13616v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.14117v1",
+        "title": "Fine-Tuning an Order-Flow Foundation Model for Sub-Second Forecasting",
+        "authors": [
+          "Fedor Shabashev"
+        ],
+        "submittedDate": "2026-11-10",
+        "updatedDate": "2026-11-10",
+        "categories": [
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "暗号資産のLevel-3注文フローで事前学習した3億パラメータのTransformerを、BTC/USDのmicropriceリターンと実現ボラティリティの予測へLoRAで適応する研究。著者は、主に200～500ミリ秒先の予測で古典的手法を上回ると報告している。",
+        "mainResult": "初回評価の200ミリ秒、500ミリ秒、1秒先のリターン予測相関は、それぞれ $0.44, 0.45, 0.39$。勾配ブースティングに対する相関差は $0.05, 0.07, 0.08$ で、対応付き95%信頼区間はいずれもゼロを含まない。5評価期間と3予測期間の全15組で同手法を上回った。ボラティリティでは200・500ミリ秒先で5期間中4期間においてGARCHを上回るが、優位性は市場状態に依存する。ETH・SOLへの追加微調整なしの転用も報告するが、両資産は事前学習済みである。",
+        "practicalApplication": "執行時の逆選択回避やマーケットメイクの気配調整への応用候補となる。ただし予測変動幅はスプレッドと手数料を下回り、収益性は検証されていない。H100での最適化後の推論中央値は4ミリ秒だが、通信・発注処理を含まず、イベント急増時の全件処理にも対応できない。",
+        "methodology": "Bitstamp・Bitfinexの73資産ストリームから約27.6億トークンを用いて次トークン予測を事前学習し、BTC/USDでリターンと実現ボラティリティをHuber損失により共同学習する。真の取引所タイムスタンプ、purge・embargo付き時系列分割、対応付きmoving-block bootstrapを使用する。固定adapterを後続期間へ適用し、再推定した古典的基準、凍結probe、事前学習なしモデルと比較する。",
+        "limitations": "微調整は単一取引所のBTC/USDの短期間に限られ、主要な方向予測評価も計約37時間と市場局面が狭い。数秒以上では優位性が弱まり、ボラティリティはGARCHに劣る場合が多い。最新の教師あり板情報ニューラルモデルとの比較や実運用の損益検証はない。資産転用は未見資産への一般化ではなく、生成rolloutには稀な過大価格変動も残る。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "注文フローの生成的事前学習が短期予測に役立つことを、複数期間評価、事前学習の除去実験、時刻整合性の検証で具体的に示しており、執行研究に有用。ただし、一般化と実際の執行改善は未確立である。",
+        "tags": [
+          "注文フロー",
+          "Level-3データ",
+          "基盤モデル",
+          "LoRA微調整",
+          "超短期価格予測",
+          "暗号資産",
+          "執行・逆選択"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study adapts a 300-million-parameter Transformer pretrained on cryptocurrency Level-3 order flow using LoRA to forecast BTC/USD microprice returns and realized volatility. The author reports improvements over classical methods primarily at 200–500 millisecond horizons.",
+          "mainResult": "Return forecast correlations on the initial evaluation are $0.44, 0.45, 0.39$ at 200 milliseconds, 500 milliseconds, and 1 second. Correlation gains over gradient boosting are $0.05, 0.07, 0.08$, with all paired 95% confidence intervals excluding zero. The model outperforms that baseline in all 15 combinations of five evaluation windows and three horizons. For volatility, it beats GARCH at 200 and 500 milliseconds in four of five windows, but the advantage is regime-dependent. Transfer to ETH and SOL without additional fine-tuning is also reported, although both assets were included in pretraining.",
+          "practicalApplication": "Potential applications include avoiding adverse selection during execution and adjusting market-making quotes. However, predicted moves are smaller than spreads and fees, and profitability is not tested. Optimized median inference latency on an H100 is 4 milliseconds, excluding networking and order submission, and the system cannot process every event during bursts.",
+          "methodology": "Next-token pretraining uses approximately 2.76 billion tokens from 73 asset streams on Bitstamp and Bitfinex, followed by joint BTC/USD return and realized-volatility training with Huber losses. The study uses true exchange timestamps, purged and embargoed chronological splits, and paired moving-block bootstrap inference. A fixed adapter is carried into later windows and compared with refitted classical baselines, a frozen probe, and models without pretraining.",
+          "limitations": "Fine-tuning covers a short period of BTC/USD on one exchange, and the main directional evaluation totals only about 37 hours with narrow regime coverage. Advantages weaken beyond a few seconds, and volatility forecasts often trail GARCH. There is no comparison with modern supervised order-book neural models or live profitability evaluation. Asset transfer does not establish generalization to unseen assets, and generative rollouts retain rare excessive price moves.",
+          "reason": "Multiple evaluation windows, pretraining ablations, and timestamp-alignment checks provide concrete evidence that generative order-flow pretraining can support short-horizon forecasting, making the paper useful for execution research. Broader generalization and actual execution improvements remain unestablished.",
+          "tags": [
+            "Order flow",
+            "Level-3 data",
+            "Foundation models",
+            "LoRA fine-tuning",
+            "Ultra-short-horizon price forecasting",
+            "Cryptocurrencies",
+            "Execution and adverse selection"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 823,
+          "outputTokens": 865,
+          "reasoningTokens": 96,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1688,
+          "estimatedCostUsd": 0.000515,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.14117v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 21964,
+          "outputTokens": 1670,
+          "reasoningTokens": 241,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 21961,
+          "totalTokens": 23634,
+          "estimatedCostUsd": 0.071609,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 20,
+          "paperIds": [
+            "2611.14117v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.14245v1",
+        "title": "Deep Learning for Operator Maps in Optimal Liquidation",
+        "authors": [
+          "Ryan Donnelly",
+          "Luca Galimberti",
+          "Brian Healy",
+          "Siqi Zhang"
+        ],
+        "submittedDate": "2026-11-10",
+        "updatedDate": "2026-11-10",
+        "categories": [
+          "math.PR",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "一般的な一過性価格インパクトを持つ最適清算問題について、モデル入力から最適売買速度への写像の安定性を解析する。カーネルを有限次元で符号化したGRUで戦略を近似し、指数カーネルへの誤指定が執行成績に与える影響をシミュレーションで評価する。",
+        "mainResult": "最適戦略と最適目的関数値の入力に関する局所Lipschitz連続性を証明し、インパクト条件を固定した場合には価格過程と初期在庫に関する大域Lipschitz連続性も示す。カーネルとOUシグナルを含む実験では、売買速度の正規化RMSEは8.20～11.00%、在庫は1.13～1.86%と報告する。指数カーネルへの誤指定実験では平均regretは各条件で0.93 bps未満だが、カーネルの$L^2$適合度改善は経済的損失の改善に直結しなかった。",
+        "practicalApplication": "異なるインパクト形状に対応する執行戦略の代理モデルや、カーネル推定精度の経済価値を比較する検証基盤に使える。在庫とシグナルの厳密なスケーリング関係を利用すれば、在庫量ごとの再学習を減らせる可能性がある。ただし、推論高速化の実測値は提示されていない。",
+        "methodology": "Volterra方程式の作用素評価とGrönwall型不等式で安定性を証明する。非負測度のLaplace変換で許容カーネルを生成し、三角関数基底の30係数をGRUに入力する。離散化した執行目的関数を直接最適化して学習し、Nyström法による数値参照戦略と比較する。誤指定評価では指数近似から得た戦略を真のカーネル下で採点する。",
+        "limitations": "実市場データによる較正・検証はなく、主実験では一時的インパクト係数などを固定し、感応度分析では設定ごとに再学習するため、全パラメータを横断する単一モデルの性能は未検証である。生成カーネルは許容クラスの一部に限られ、有限係数表現と学習済みGRUの誤差保証は示されていない。普遍近似定理は近似の存在を支えるが、実際の学習成功や一様精度を保証しない。誤指定regretにはネットワーク近似誤差と数値・標本誤差も混在し、負値も報告されるため、純粋な誤指定コストとは解釈できない。清算は終端在庫への罰則方式であり、完全清算を強制しない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "電子執行に直接関係し、関数入力に対する理論的安定性と戦略学習を結び付ける点が有用である。実運用性能の証拠ではなく、代理モデル設計とインパクト誤指定の評価方法として読むことを推奨する。",
+        "tags": [
+          "最適執行",
+          "最適清算",
+          "一過性価格インパクト",
+          "作用素学習",
+          "GRU",
+          "カーネル誤指定",
+          "在庫スケーリング"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper analyzes the stability of the map from model inputs to optimal trading speed in a liquidation problem with general transient price impact. It approximates strategies using a GRU with finite-dimensional kernel encodings and evaluates the execution consequences of misspecifying kernels as exponentials in simulations.",
+          "mainResult": "The paper proves local Lipschitz continuity of the optimal strategy and optimal objective value with respect to inputs, and global Lipschitz continuity in the price process and initial inventory when impact specifications are fixed. Experiments with kernels and an OU signal report normalized RMSEs of 8.20–11.00% for trading speed and 1.13–1.86% for inventory. Exponential-kernel misspecification experiments report mean regret below 0.93 bps in each configuration, but improved kernel fit in $L^2$ did not necessarily improve economic performance.",
+          "practicalApplication": "The approach can support execution-strategy surrogates across impact shapes and provide a testing framework for comparing the economic value of kernel estimation accuracy. Exploiting the exact inventory–signal scaling relationship may reduce retraining across inventory sizes. However, measured inference speedups are not provided.",
+          "methodology": "Stability is proved through Volterra operator estimates and Grönwall-type inequalities. Admissible kernels are generated as Laplace transforms of nonnegative measures, and 30 trigonometric basis coefficients are supplied to a GRU. Training directly optimizes the discretized execution objective, with evaluation against numerical reference strategies obtained using a Nyström method. Misspecification tests evaluate strategies generated from exponential approximations under the true kernels.",
+          "limitations": "There is no calibration or validation using real market data. Main experiments fix parameters such as temporary impact, while sensitivity tests retrain for each setting, leaving a single model spanning all parameters untested. Generated kernels cover only part of the admissible class, and no error guarantee is established for the finite-coefficient representation and trained GRU. Universal approximation establishes existence, not successful training or uniform accuracy of the implementation. Misspecification regret also includes neural approximation, numerical, and sampling errors, with negative values reported, so it cannot be interpreted as pure misspecification cost. Liquidation uses a terminal inventory penalty rather than enforcing complete liquidation.",
+          "reason": "The paper is directly relevant to electronic execution and usefully connects theoretical stability for functional inputs with strategy learning. It is recommended as a reference for surrogate design and impact-misspecification evaluation, not as evidence of live execution performance.",
+          "tags": [
+            "Optimal execution",
+            "Optimal liquidation",
+            "Transient price impact",
+            "Operator learning",
+            "GRU",
+            "Kernel misspecification",
+            "Inventory scaling"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 791,
+          "outputTokens": 937,
+          "reasoningTokens": 94,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1728,
+          "estimatedCostUsd": 0.000548,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.14245v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 54063,
+          "outputTokens": 1610,
+          "reasoningTokens": 111,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 54060,
+          "totalTokens": 55673,
+          "estimatedCostUsd": 0.151256,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 48,
+          "paperIds": [
+            "2611.14245v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.13365v1",
+        "title": "Making sense of rule 605",
+        "authors": [
+          "Peter B. Lerner"
+        ],
+        "submittedDate": "2026-11-09",
+        "updatedDate": "2026-11-09",
+        "categories": [
+          "q-fin.GN",
+          "q-fin.ST",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "VirtuとSoHoのRule 605月次報告から16指標を抽出し、分布と相関構造の安定性、スプレッド予測、構造変化を分析した実証研究である。対象は主に2021〜2024年だが、SoHoの観測終了時期には本文内で不一致がある。",
+        "mainResult": "著者は翌月の相関水準について$R^2\\approx0.98$〜$0.99$、月次変化について約28%の説明力を報告する。一方、出来高指標からスプレッドを予測するOLSの説明力は掲載例で概ね1%以下、LSTMはほぼゼロだった。Virtuの2023年8月とSoHoの2022年1月に構造変化を報告するが、アルゴリズム変更という解釈は未検証である。",
+        "practicalApplication": "Rule 605指標の相関ネットワークを、執行品質の月次監視や異常検知の候補として利用できる。ただし、売買シグナルや発注先選択への有効性は実証されていない。",
+        "methodology": "注文・株数、執行時間帯、スプレッド、価格改善などの16指標について、分布推定、OLS、LSTM、相関グラフの中心性分析、Chow検定を実施する。さらに、graph Laplacianとグラフ距離を用いた線形モデルで月次相関行列の変化を推定する。",
+        "limitations": "2社の短い月次系列に依存し、一部データの破損と観測期間・表記の不整合がある。銘柄・注文区分をまとめた分析で、構成変化の影響を分離していない。学習・評価分割や持続性ベンチマークとの比較が不明瞭で、高い相関水準の適合度だけでは予測上の優位性を確認できない。付録のrealized spreadと本文の「平均スプレッド」の対応が不明確であり、effective spreadの非負性からマーケットメーカーの利益を結論することもできない。相関からの因果推論やマルチンゲール性の示唆にも証拠が不足する。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "執行品質データの監視というテーマは関連性が高いが、指標解釈、予測検証、統計的推論に重要な不明点がある。実務的な予測手法や収益性の証拠としては推奨しない。",
+        "tags": [
+          "Rule 605",
+          "市場マイクロストラクチャー",
+          "執行品質",
+          "相関ネットワーク",
+          "構造変化",
+          "スプレッド"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This empirical study extracts 16 measures from monthly Rule 605 reports for Virtu and SoHo to analyze distributional and correlation stability, spread prediction, and structural breaks. Coverage is mainly 2021–2024, but the text gives inconsistent end dates for SoHo.",
+          "mainResult": "The author reports $R^2\\approx0.98$–$0.99$ for next-month correlation levels and approximately 28% explanatory power for monthly changes. In contrast, OLS predictions of spreads from volume measures generally explain 1% or less in the reported examples, while LSTM explanatory power is nearly zero. Structural breaks are reported in August 2023 for Virtu and January 2022 for SoHo, but their interpretation as algorithm changes is unverified.",
+          "practicalApplication": "Correlation networks of Rule 605 measures could be considered for monthly execution-quality monitoring and anomaly detection. However, effectiveness for trading signals or execution-venue selection is not demonstrated.",
+          "methodology": "The study applies distribution estimation, OLS, LSTM, correlation-graph centrality analysis, and Chow tests to 16 measures covering orders and shares, execution-time buckets, spreads, and price improvement. It also estimates monthly correlation-matrix changes using a linear model incorporating a graph Laplacian and graph distances.",
+          "limitations": "The study relies on short monthly series from two firms, with some corrupted data and inconsistencies in coverage and labeling. Pooling securities and order categories leaves composition effects unresolved. Training/evaluation splits and comparisons against persistence benchmarks are unclear, so high fit for correlation levels alone does not establish predictive advantage. The correspondence between realized spread in the appendix and the text's “average spread” is unclear, and nonnegative effective spreads do not establish market-maker profitability. Evidence is also insufficient for causal inference from correlations or the suggested martingale behavior.",
+          "reason": "Execution-quality monitoring is highly relevant, but important uncertainties remain in metric interpretation, predictive validation, and statistical inference. The paper is not recommended as evidence of a practical forecasting method or profitability.",
+          "tags": [
+            "Rule 605",
+            "Market microstructure",
+            "Execution quality",
+            "Correlation networks",
+            "Structural breaks",
+            "Spreads"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 696,
+          "outputTokens": 803,
+          "reasoningTokens": 120,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1499,
+          "estimatedCostUsd": 0.000471,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.13365v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 27422,
+          "outputTokens": 1307,
+          "reasoningTokens": 98,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 27419,
+          "totalTokens": 28729,
+          "estimatedCostUsd": 0.081624,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 34,
+          "paperIds": [
+            "2611.13365v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 899,
+      "outputTokens": 727,
+      "reasoningTokens": 132,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1626,
+      "estimatedCostUsd": 0.000453,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.12899v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 876,
+      "outputTokens": 742,
+      "reasoningTokens": 46,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1618,
+      "estimatedCostUsd": 0.000459,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.12987v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 711,
+      "outputTokens": 628,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1339,
+      "estimatedCostUsd": 0.000385,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.13194v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 772,
+      "outputTokens": 608,
+      "reasoningTokens": 48,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1380,
+      "estimatedCostUsd": 0.000381,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.13230v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 767,
+      "outputTokens": 690,
+      "reasoningTokens": 41,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1457,
+      "estimatedCostUsd": 0.000422,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.13259v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 696,
+      "outputTokens": 803,
+      "reasoningTokens": 120,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1499,
+      "estimatedCostUsd": 0.000471,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.13365v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 27422,
+      "outputTokens": 1307,
+      "reasoningTokens": 98,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 27419,
+      "totalTokens": 28729,
+      "estimatedCostUsd": 0.081624,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 34,
+      "paperIds": [
+        "2611.13365v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 799,
+      "outputTokens": 755,
+      "reasoningTokens": 89,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1554,
+      "estimatedCostUsd": 0.000457,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.13550v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 708,
+      "outputTokens": 913,
+      "reasoningTokens": 112,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1621,
+      "estimatedCostUsd": 0.000527,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.13616v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 5053,
+      "outputTokens": 1487,
+      "reasoningTokens": 164,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 5050,
+      "totalTokens": 6540,
+      "estimatedCostUsd": 0.027501,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 114,
+      "paperIds": [
+        "2611.13616v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 811,
+      "outputTokens": 806,
+      "reasoningTokens": 60,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1617,
+      "estimatedCostUsd": 0.000484,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.13715v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 783,
+      "outputTokens": 726,
+      "reasoningTokens": 93,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1509,
+      "estimatedCostUsd": 0.000441,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.13841v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 850,
+      "outputTokens": 721,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1571,
+      "estimatedCostUsd": 0.000445,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.13866v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 823,
+      "outputTokens": 865,
+      "reasoningTokens": 96,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1688,
+      "estimatedCostUsd": 0.000515,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.14117v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 21964,
+      "outputTokens": 1670,
+      "reasoningTokens": 241,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 21961,
+      "totalTokens": 23634,
+      "estimatedCostUsd": 0.071609,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 20,
+      "paperIds": [
+        "2611.14117v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 840,
+      "outputTokens": 708,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1548,
+      "estimatedCostUsd": 0.000438,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.14146v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 791,
+      "outputTokens": 937,
+      "reasoningTokens": 94,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1728,
+      "estimatedCostUsd": 0.000548,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.14245v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 54063,
+      "outputTokens": 1610,
+      "reasoningTokens": 111,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 54060,
+      "totalTokens": 55673,
+      "estimatedCostUsd": 0.151256,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 48,
+      "paperIds": [
+        "2611.14245v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

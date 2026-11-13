@@ -2,6 +2,56 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-11-13-daily-openai-01",
+      "date": "2026-11-13",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2611.17170v1",
+          "title": "Improving Algorithmic Trading for BESS on Intraday Electricity Markets through Distributional Price Forecasts",
+          "authors": [
+            "Simon Hirsch",
+            "David Schaurecker",
+            "David Wozabal"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.17247v1",
+          "title": "Price-impact Martingale optimal transport",
+          "authors": [
+            "Erhan Bayraktar",
+            "Shuoqing Deng",
+            "Daxin Huang",
+            "Dominykas Norgilas"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.15564v1",
+          "title": "A high-order recombination algorithm with adaptive scale selection for weak approximation of stochastic differential equations",
+          "authors": [
+            "Yuming Ma",
+            "Syoiti Ninomiya"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-11-11-daily-openai-01",
       "date": "2026-11-11",
       "kind": "daily",

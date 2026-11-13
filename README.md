@@ -461,6 +461,45 @@ The API boundary follows OpenAI's [Structured Outputs](https://developers.openai
 and [file inputs](https://developers.openai.com/api/docs/guides/file-inputs)
 contracts.
 
+### Jev × Luna: prospective 100-paper shadow trial (not a publication gate)
+
+The independent [shadow workflow](.github/workflows/jev-shadow.yml) reads Luna's
+saved **screenAnalysis**, including screened-out candidates, from main after
+the normal research workflow ends. It never calls OpenAI, influences selection,
+downloads PDFs, or writes to main, Pages, daily research or checkpoints.
+See the [live comparison and human-review queue](https://github.com/beautysamurai/public-page/blob/experiment/jev-shadow-100/review.md)
+and [machine-readable ledger](https://github.com/beautysamurai/public-page/blob/experiment/jev-shadow-100/state.json).
+This branch and the Actions summaries are **public**, separate from the website.
+
+- **Activation:** add the repository Actions secret `TYPESAFE_API_KEY`.
+  Without it, enrollments continue; no Jev request is sent. To process waiting
+  slots immediately, run **Jev shadow (first 100 new papers)** on **main**.
+- **Cohort:** take the first 100 distinct base IDs with a recorded Luna screen
+  in newly observed new/cross listings starting 2026-11-13. Within a scan use
+  batch date then base ID; do not admit replacements, pre-trial backfills or
+  duplicate versions. All results, including exclusions and failed comparisons,
+  occupy their original slots. No replacement or automatic reset at 100.
+- **What is sent:** retrieve public arXiv metadata, verify the exact version and
+  production fingerprint (including abstract). Send only title, abstract and
+  categories to the [official Jev endpoint](https://docs.typesafe.ai/api/system-one).
+  Never send Luna's verdict or PDF. Pin `jev-1.14.0` and three independent
+  [Noul questions](https://docs.typesafe.ai/primitives/noul) for rates, execution,
+  and practical relevance. The maximum of the two topic probabilities ≥ 0.8
+  means include; both < 0.2 and practical < 0.8 means exclude; otherwise
+  uncertain. These are trial rules, not calibrated truth or publication scores.
+- **Review:** inspect both disagreement directions, all uncertain cases, and
+  a deterministic sample of up to ten double exclusions (lowest seeded ID
+  hashes). Follow the versioned arXiv links and record your own keep/drop/unsure
+  and reason separately. Agreement with Luna does not measure actual recall.
+- **Durability:** one serialized job, durable slot reservation and an attempt
+  commit pushed **before** each POST. A lost response/crash is unconfirmed, not
+  retried or treated as an exclusion. Source changes are marked input mismatch.
+  ArXiv outages leave waiting slots intact; Jev failures stop that run. After a
+  configuration/billing error fix the secret/account and manually dispatch with
+  `resume_after_fix=true`; the failed slot remains visible, only untouched
+  slots proceed. Do not delete/reset the ledger. Completed experiments perform
+  no further arXiv/Jev calls. No model switch is automatic.
+
 ### Model, effort, tokens, and cost provenance
 
 New daily/weekly/monthly JSON and Markdown records include allowlisted `usage`

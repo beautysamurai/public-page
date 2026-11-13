@@ -1,0 +1,51 @@
+name: Jev shadow (first 100 new papers)
+
+on:
+  workflow_run:
+    workflows: ["Automated arXiv research"]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      resume_after_fix:
+        description: "Resume remaining slots after fixing a Jev configuration/billing error"
+        type: boolean
+        default: false
+
+# Independent of the research/Pages jobs. Never read PR code or artifacts.
+permissions: {}
+concurrency:
+  group: jev-shadow-100-v1
+  cancel-in-progress: false
+jobs:
+  compare:
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || github.event.workflow_run.head_repository.full_name == github.repository)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          path: source
+          persist-credentials: false
+      - uses: actions/checkout@v7
+        with:
+          ref: experiment/jev-shadow-100
+          path: ledger
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Compare the fixed cohort without running OpenAI research
+        env:
+          TYPESAFE_API_KEY: ${{ secrets.TYPESAFE_API_KEY }}
+          RESUME: ${{ github.event_name == 'workflow_dispatch' && inputs.resume_after_fix }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git -C ledger config user.name "github-actions[bot]"
+          git -C ledger config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          args=()
+          if [[ "$RESUME" == "true" ]]; then args+=(--resume-after-fix); fi
+          python source/scripts/jev_shadow.py --ledger ledger "${args[@]}"

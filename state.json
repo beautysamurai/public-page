@@ -3,5 +3,502 @@
   "firstBatch": "2026-11-13",
   "limit": 100,
   "model": "jev-1.14.0",
-  "rows": {}
+  "rows": {
+    "2611.14699": {
+      "batch": "2026-11-13",
+      "id": "2611.14699v1",
+      "fingerprint": "27e8e872e0cf99a67ed9d7d7e1f504960a836b6177bb8a2adf117dee468eed88",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.RM"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.14708": {
+      "batch": "2026-11-13",
+      "id": "2611.14708v1",
+      "fingerprint": "4939963aa4e557c125ce5ba2982995828e7e1af34edb814541e399391d47d6fb",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.14938": {
+      "batch": "2026-11-13",
+      "id": "2611.14938v1",
+      "fingerprint": "80c03ce2936afda516d0a896b0bf4805754a42bbd1217dcb48904d87b166d7eb",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.15017": {
+      "batch": "2026-11-13",
+      "id": "2611.15017v1",
+      "fingerprint": "20073a89ed5cf1fe2676eb7588eb802597b3b0f477708e679ece9c4eee7e7d36",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.15211": {
+      "batch": "2026-11-13",
+      "id": "2611.15211v1",
+      "fingerprint": "fa50aaa158702da2a95ce8b728421cde7f388f51384f8043f75eb48291de0475",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.RM"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.15371": {
+      "batch": "2026-11-13",
+      "id": "2611.15371v1",
+      "fingerprint": "1e072e75279b1d6ad92f47248d2df0b2e8b891cbd6c797656f31f206a38710e8",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.15391": {
+      "batch": "2026-11-13",
+      "id": "2611.15391v1",
+      "fingerprint": "e63f27679ccbe82ddf9751e44d7d513f070c05d956f58a76de81ac920f969dc8",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.MF"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.15430": {
+      "batch": "2026-11-13",
+      "id": "2611.15430v1",
+      "fingerprint": "5f3f0d9426d18cfaf838fe8f80da731a588d47144f135665792575b3b5671080",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.15564": {
+      "batch": "2026-11-13",
+      "id": "2611.15564v1",
+      "fingerprint": "6bdebb588398316c122471e790f597ca5da614023676dab7ecad54b5659ffda8",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.CP"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "interest_rate_models",
+        "importance": 3,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.15646": {
+      "batch": "2026-11-13",
+      "id": "2611.15646v1",
+      "fingerprint": "58e753e89fd47a9b3b2f4c49dafd63478493d316f0e11042688011872b031fc6",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.MF"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.15657": {
+      "batch": "2026-11-13",
+      "id": "2611.15657v1",
+      "fingerprint": "7073e68c68264a86ff2356ee1ee2cbd0adaa7001191a3b65ffe39eb5c782f9dd",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.MF"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.15747": {
+      "batch": "2026-11-13",
+      "id": "2611.15747v1",
+      "fingerprint": "e85207884262098b8470edb5ccb58e6b395e5a217b218d0d9ffbc993fa497149",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.16058": {
+      "batch": "2026-11-13",
+      "id": "2611.16058v1",
+      "fingerprint": "7f9c8352b22a692f951bc69251f7595067800dceaecd16f7eb4f182a18ff34ef",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.16087": {
+      "batch": "2026-11-13",
+      "id": "2611.16087v1",
+      "fingerprint": "5401049d0fe3161c2e8b0be17d70e7014fa9a544b997f440ba5e929848548c69",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.MF"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.16095": {
+      "batch": "2026-11-13",
+      "id": "2611.16095v1",
+      "fingerprint": "faf96d9e9cd6024a0e0cdf88ff336c840624a0bf8e90da96adace1b58d4ad4fb",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.16129": {
+      "batch": "2026-11-13",
+      "id": "2611.16129v1",
+      "fingerprint": "9cdcac0c974fb9172cf4d6fa32ed57e6d1912d1bea57e02fc97a3da1d4df868f",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.MF"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.16429": {
+      "batch": "2026-11-13",
+      "id": "2611.16429v1",
+      "fingerprint": "3b24fb89633aecfab9bbc2c734d76ea39a33ce0deb6057d8fa92f50640a77d07",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.MF"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.16471": {
+      "batch": "2026-11-13",
+      "id": "2611.16471v1",
+      "fingerprint": "158d7227b6aa8ab5d9dc5ec9b5c65eacaf58d237f03b4af8a1db9797fcb97b99",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.CP",
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.16484": {
+      "batch": "2026-11-13",
+      "id": "2611.16484v1",
+      "fingerprint": "8d0d73be2f9647df13035c684a5a32f6475fbeeae3d6c3eb6f307de241a356f2",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.CP"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.16495": {
+      "batch": "2026-11-13",
+      "id": "2611.16495v1",
+      "fingerprint": "dec6d24ede45f21e27ca6eedfffc4838550e7a211a9187ccee405b9573cf55a1",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.TR"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.16540": {
+      "batch": "2026-11-13",
+      "id": "2611.16540v1",
+      "fingerprint": "202526f29f3441c7b50be73c182b03e85a4fb42c1dbfe2be7514937799adcae6",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.RM"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.16657": {
+      "batch": "2026-11-13",
+      "id": "2611.16657v1",
+      "fingerprint": "05d76d8b21ffc9af811b0b578fe32736b9ecd4da5b0c9dc809daf3f337b3dc46",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.16747": {
+      "batch": "2026-11-13",
+      "id": "2611.16747v1",
+      "fingerprint": "2402c9297361da1de583460f63484a7135932a401d608062914cd229252ddded",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.16992": {
+      "batch": "2026-11-13",
+      "id": "2611.16992v1",
+      "fingerprint": "31596ed9b4dce6d9d0310c86fd9de381b80b647c4d0a3f23b3cc36b04aa74396",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.MF"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "electronic_trading",
+        "importance": 3,
+        "recommended": true
+      },
+      "status": "waiting"
+    },
+    "2611.17170": {
+      "batch": "2026-11-13",
+      "id": "2611.17170v1",
+      "fingerprint": "881f1041032aeae74dd197d77f6702156c18f40cfccd6289689781caf0d68a3c",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.CP",
+        "q-fin.TR"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "electronic_trading",
+        "importance": 4,
+        "recommended": true
+      },
+      "status": "waiting"
+    },
+    "2611.17247": {
+      "batch": "2026-11-13",
+      "id": "2611.17247v1",
+      "fingerprint": "ec522f4a47ff22eee8af3ddcd6cf37bd96141b64f3d478c3afd0b33e0d2a5b42",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.MF"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "market_microstructure",
+        "importance": 4,
+        "recommended": true
+      },
+      "status": "waiting"
+    }
+  }
 }

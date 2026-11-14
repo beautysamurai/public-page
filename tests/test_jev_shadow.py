@@ -23,7 +23,7 @@ class ShadowTests(unittest.TestCase):
         self.entries = {}
         self.saved = []
         self.save = lambda state: self.saved.append(copy.deepcopy(state))
-        self.fetch = lambda ids: {k: self.entries[k] for k in ids}
+        self.fetch = lambda vid: self.entries[s.research._base_arxiv_id(vid)]
         self.judge = Mock(return_value=self.verdict())
 
     @staticmethod
@@ -143,3 +143,21 @@ class ShadowTests(unittest.TestCase):
         for invalid in (-1, 1.1, float("nan"), True, "0.1"):
             with self.subTest(invalid=invalid), self.assertRaises(ValueError):
                 self.verdict(rates=invalid)
+
+    def test_version_page_uses_submission_history_and_subjects_of_that_version(self):
+        html = b"""<strong>arXiv:2611.00001v1</strong>
+        <meta name="citation_title" content=" A title ">
+        <meta property="og:description" content="Rates &amp; execution.">
+        <div class="authors"><a>Author A</a>, <a>Author B</a></div>
+        <td class="tablecell subjects"><span>Trading (q-fin.TR)</span>; Probability (math.PR)</td>
+        <strong>[v1]</strong> Sat, 7 Nov 2026 11:12:13 UTC (10 KB)<br/>
+        <strong>[v2]</strong> Mon, 9 Nov 2026 23:45:12 UTC (15 KB)<br/>"""
+        opener = Mock(side_effect=lambda *a, **kw: io.BytesIO(html))
+        entry = s.fetch_version("2611.00001v1", opener)
+        self.assertEqual(entry.updated_at, entry.submitted_at)
+        self.assertEqual(entry.updated_at.day, 7)
+        self.assertEqual(entry.abstract, "Rates & execution.")
+        self.assertEqual(entry.categories, ("math.PR", "q-fin.TR"))
+        self.assertEqual(entry.authors, ("Author A", "Author B"))
+        with self.assertRaisesRegex(ValueError, "identity mismatch"):
+            s.fetch_version("2611.00001v2", opener)

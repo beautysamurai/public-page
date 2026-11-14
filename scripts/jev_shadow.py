@@ -7,7 +7,9 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
+from datetime import datetime, timezone
 import hashlib
+from html.parser import HTMLParser
 import json
 import math
 import os
@@ -35,6 +37,73 @@ QUESTIONS = {
 }
 LOW, HIGH = 0.2, 0.8
 STATES = {"waiting", "attempted", "error", "input_mismatch", "compared"}
+
+
+class AbstractPage(HTMLParser):
+    """Read public metadata from the requested version's arXiv abstract page."""
+
+    def __init__(self):
+        super().__init__()
+        self.meta = {}
+        self.subjects = []
+        self.byline = []
+        self.in_subjects = self.in_authors = self.in_author = False
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        classes = (attrs.get("class") or "").split()
+        if tag == "meta":
+            name = attrs.get("name") or attrs.get("property")
+            if name in {"citation_title", "og:description"}:
+                self.meta[name] = attrs.get("content", "")
+        if tag == "td" and "subjects" in classes:
+            self.in_subjects = True
+        if tag == "div" and "authors" in classes:
+            self.in_authors = True
+        if tag == "a" and self.in_authors:
+            self.byline.append("")
+            self.in_author = True
+
+    def handle_data(self, data):
+        if self.in_subjects:
+            self.subjects.append(data)
+        if self.in_author:
+            self.byline[-1] += data
+
+    def handle_endtag(self, tag):
+        if tag == "td":
+            self.in_subjects = False
+        if tag == "div":
+            self.in_authors = False
+        if tag == "a":
+            self.in_author = False
+
+
+def fetch_version(version_id, opener):
+    if not research.digest.ARXIV_ID_RE.fullmatch(version_id) or not re.search(r"v[1-9]\d*$", version_id):
+        raise ValueError("invalid versioned identifier")
+    url = "https://arxiv.org/abs/" + version_id
+    request = urllib.request.Request(url, headers={"User-Agent": research.USER_AGENT})
+    with opener(request, timeout=25) as response:
+        raw = response.read(research.MAX_LIST_BYTES + 1)
+    if len(raw) > research.MAX_LIST_BYTES:
+        raise ValueError("abstract page exceeds size limit")
+    html = raw.decode("utf-8")
+    if f"<strong>arXiv:{version_id}</strong>" not in html:
+        raise ValueError("versioned page identity mismatch")
+    page = AbstractPage()
+    page.feed(html)
+    dates = {v: datetime.strptime(d, "%d %b %Y %H:%M:%S").replace(tzinfo=timezone.utc)
+             for v, d in re.findall(r"<strong>\[(v\d+)\]</strong>\s*[A-Za-z]{3}, (\d{1,2} [A-Za-z]{3} \d{4} [\d:]+) (?:UTC|GMT)", html)}
+    subjects = re.findall(r"\(([^()\s]+)\)", "".join(page.subjects))
+    clean = lambda text: " ".join(text.split())
+    entry = research.digest.AtomEntry(
+        version_id, clean(page.meta["citation_title"]), tuple(clean(a) for a in page.byline),
+        dates["v1"], dates["v" + version_id.rsplit("v", 1)[1]],
+        tuple(sorted(set(subjects), key=str.casefold)), clean(page.meta["og:description"]))
+    if not entry.abstract or not entry.authors or not entry.categories:
+        raise ValueError("incomplete abstract page")
+    return entry
 
 
 def initial():
@@ -200,31 +269,30 @@ def run(state, root, persist, key, fetch, judge, *, resume=False):
         return "100 slots closed; experiment stopped"
     if not key:
         return "waiting for TYPESAFE_API_KEY"
-    for i in range(0, len(waiting), 10):
-        keys = waiting[i:i+10]
+    for k in waiting:
+        r = state["rows"][k]
         try:
-            entries = fetch(keys)
-        except Exception:
-            return "arXiv metadata unavailable; slots retained"
-        for k in keys:
-            r = state["rows"][k]
-            entry = entries[k]
+            entry = fetch(r["id"])
             candidate = research.PaperCandidate(entry, tuple(r["listing"]), tuple(r["categories"]))
-            if entry.arxiv_id != r["id"] or research._candidate_resume_fingerprint(candidate) != r["fingerprint"]:
-                r["status"] = "input_mismatch"
-                persist(state)
-                continue
-            r["status"] = "attempted"
-            persist(state)  # Remote acknowledgement required before the POST.
-            try:
-                r["jev"] = judge(key, entry)
-            except Exception as exc:
-                r["status"] = "error"
-                r["error"] = f"http_{exc.code}" if isinstance(exc, urllib.error.HTTPError) else "unconfirmed_response"
-                persist(state)
-                return "provider error; see ledger"
-            r["status"] = "compared"
+            matches = entry.arxiv_id == r["id"] and research._candidate_resume_fingerprint(candidate) == r["fingerprint"]
+        except (OSError, ValueError, KeyError, research.PipelineError) as exc:
+            research._failure_diagnostic("shadow_metadata", exc)
+            return "arXiv metadata unavailable; slots retained"
+        if not matches:
+            r["status"] = "input_mismatch"
             persist(state)
+            continue
+        r["status"] = "attempted"
+        persist(state)  # Remote acknowledgement required before the POST.
+        try:
+            r["jev"] = judge(key, entry)
+        except Exception as exc:
+            r["status"] = "error"
+            r["error"] = f"http_{exc.code}" if isinstance(exc, urllib.error.HTTPError) else "unconfirmed_response"
+            persist(state)
+            return "provider error; see ledger"
+        r["status"] = "compared"
+        persist(state)
     return "no more waiting inputs"
 
 
@@ -260,7 +328,7 @@ def main():
             git("push", "origin", "HEAD:refs/heads/" + BRANCH)
     pacer = research.ArxivRequestPacer()
     reason = run(state, root, persist, os.environ.get("TYPESAFE_API_KEY", "").strip(),
-                 lambda ids: research.fetch_metadata(ids, opener=pacer.open, retries=0), ask,
+                 lambda vid: research._retry(lambda: fetch_version(vid, pacer.open), 2, pacer.sleep_fn), ask,
                  resume=args.resume_after_fix)
     print(reason)
     if summary := os.getenv("GITHUB_STEP_SUMMARY"):

@@ -479,7 +479,9 @@ This branch and the Actions summaries are **public**, separate from the website.
   batch date then base ID; do not admit replacements, pre-trial backfills or
   duplicate versions. All results, including exclusions and failed comparisons,
   occupy their original slots. No replacement or automatic reset at 100.
-- **What is sent:** retrieve public arXiv metadata, verify the exact version and
+- **What is sent:** read the version-specific public arXiv abstract page with
+  paced requests and bounded retries. Use that version's submission history
+  and subject list, verify the exact version and
   production fingerprint (including abstract). Send only title, abstract and
   categories to the [official Jev endpoint](https://docs.typesafe.ai/api/system-one).
   Never send Luna's verdict or PDF. Pin `jev-1.14.0` and three independent

@@ -773,6 +773,277 @@
       "papers": []
     },
     {
+      "editionId": "2026-10-16-weekly-openai-01",
+      "date": "2026-10-16",
+      "kind": "weekly",
+      "periodEnd": "2026-10-16",
+      "papers": [
+        {
+          "arxivId": "2610.14948v1",
+          "title": "Exact Phase-Type Point Processes for Certified Measurement and Prediction of Event Streams",
+          "authors": [
+            "Sayak Dutta"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.12537v1",
+          "title": "Market Impact Estimation via Causal Foundation Models",
+          "authors": [
+            "Dennis Thumm",
+            "Ying Chen"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.14584v1",
+          "title": "Tail Instability and Scale Control in Conditional Normalizing Flows for Treasury Yield-Curve Scenarios",
+          "authors": [
+            "Arin Mohanty"
+          ],
+          "topics": [
+            "Yield curves"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.16151v1",
+          "title": "Neural Estimation of Irreversibility in Real and Simulated Limit Order Book Paths",
+          "authors": [
+            "Hyeonjun Yeo",
+            "Doohwi Cha",
+            "Yoontae Hwang"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.16524v1",
+          "title": "Reinforcement Learning with Hawkes-Structured Networks for Market Making",
+          "authors": [
+            "Fernando Acero",
+            "Philipp Plank",
+            "Yufei Zhang"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21057v1",
+          "title": "Loss-versus-rebalancing with external proportional transaction costs",
+          "authors": [
+            "Masaaki Fukasawa"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21491v1",
+          "title": "NEST: Stale-Robust Tokenized-Stock Measurement for a Crypto-Treasury LETF Stack",
+          "authors": [
+            "Doohwi Cha",
+            "Minsuk Sung",
+            "Minjae Lee",
+            "Hyeonjun Yeo",
+            "Hanhee Kim",
+            "Seunghan Son",
+            "Donghwa Seo",
+            "Juyeong Lee"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21510v1",
+          "title": "How Much Screening Buys a Second? Speed, Selection, and the Maker's Spread",
+          "authors": [
+            "Aleksei Adadurov",
+            "Eduard Airapetian",
+            "Anton Chtepine",
+            "Antero Eloranta",
+            "Boris Pletenev",
+            "Andrei Sebyakin",
+            "Arsenii Valitov"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21846v1",
+          "title": "Where Backtests and Live Trading Part Ways: Six Defects from One Intraday System",
+          "authors": [
+            "Alex Vidovich",
+            "Zivana Zerjal"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.13044v1",
+          "title": "FOMO: FLEX Options and Market Outcomes",
+          "authors": [
+            "Shivesh Prakash",
+            "Frank Ferstler",
+            "Nicholas Pezolano"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.20366v1",
+          "title": "Regime Detection in Latent Factor Models -- A Bayesian Decision-Theoretic Approach",
+          "authors": [
+            "Karl Kristian Engelund"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21081v1",
+          "title": "StochLOB: Heavy-Tailed Score Matching for Robust Limit Order Book Trend Prediction",
+          "authors": [
+            "Arshia Abolghasemi",
+            "Seyed Reza Tavakoli",
+            "Parsa Naderi",
+            "Nazanin Mirzaei",
+            "Behrad Jahani",
+            "Saba Yousefzadeh",
+            "Tahereh Javaheri",
+            "Mohammad Hosein Rohban",
+            "Gholamali Aminian",
+            "Ali Habibnia"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21442v1",
+          "title": "Fundamental Theorem of Discrete Asset Pricing",
+          "authors": [
+            "Masaaki Fukasawa"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.16588v1",
+          "title": "Demand Under a Mechanical Price: Elasticity and Welfare in Ethereum's Data-Availability Market",
+          "authors": [
+            "Farbod Ghasemlu"
+          ],
+          "topics": [
+            "Out of scope"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.17231v1",
+          "title": "The Buffett Effect",
+          "authors": [
+            "Pawel Robert Smolinski",
+            "Siddharth Saridevi"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.21841v1",
+          "title": "Feeling the generalised rough SABR boundary",
+          "authors": [
+            "Masaaki Fukasawa",
+            "Antoine Jacquier",
+            "Mugad Oumgari"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.14524v1",
+          "title": "Consumption adjustment with mean-reverting risk premia: A singular stochastic control approach",
+          "authors": [
+            "Gugyum Ha",
+            "Junkee Jeon",
+            "Jehan Oh"
+          ],
+          "topics": [
+            "Out of scope"
+          ],
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.15256v1",
+          "title": "Do Rollups Self-Organize? Multi-Agent Reinforcement Learning in the EIP-4844 Blob Fee Market",
+          "authors": [
+            "Alessio Brini"
+          ],
+          "topics": [
+            "Out of scope"
+          ],
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.18706v1",
+          "title": "A GLE-LSV model with state-dependent leverage and colored noise",
+          "authors": [
+            "Andrey Itkin"
+          ],
+          "topics": [
+            "Out of scope"
+          ],
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-16-daily-openai-01",
       "date": "2026-10-16",
       "kind": "daily",
@@ -905,6 +1176,129 @@
             "Interest-rate models"
           ],
           "schedulerRating": 2,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-10-14-daily-openai-01",
+      "date": "2026-10-14",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.14948v1",
+          "title": "Exact Phase-Type Point Processes for Certified Measurement and Prediction of Event Streams",
+          "authors": [
+            "Sayak Dutta"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.14584v1",
+          "title": "Tail Instability and Scale Control in Conditional Normalizing Flows for Treasury Yield-Curve Scenarios",
+          "authors": [
+            "Arin Mohanty"
+          ],
+          "topics": [
+            "Yield curves"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.16151v1",
+          "title": "Neural Estimation of Irreversibility in Real and Simulated Limit Order Book Paths",
+          "authors": [
+            "Hyeonjun Yeo",
+            "Doohwi Cha",
+            "Yoontae Hwang"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.16524v1",
+          "title": "Reinforcement Learning with Hawkes-Structured Networks for Market Making",
+          "authors": [
+            "Fernando Acero",
+            "Philipp Plank",
+            "Yufei Zhang"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.16588v1",
+          "title": "Demand Under a Mechanical Price: Elasticity and Welfare in Ethereum's Data-Availability Market",
+          "authors": [
+            "Farbod Ghasemlu"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.14524v1",
+          "title": "Consumption adjustment with mean-reverting risk premia: A singular stochastic control approach",
+          "authors": [
+            "Gugyum Ha",
+            "Junkee Jeon",
+            "Jehan Oh"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.15256v1",
+          "title": "Do Rollups Self-Organize? Multi-Agent Reinforcement Learning in the EIP-4844 Blob Fee Market",
+          "authors": [
+            "Alessio Brini"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.17231v1",
+          "title": "The Buffett Effect",
+          "authors": [
+            "Pawel Robert Smolinski",
+            "Siddharth Saridevi"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.18706v1",
+          "title": "A GLE-LSV model with state-dependent leverage and colored noise",
+          "authors": [
+            "Andrey Itkin"
+          ],
+          "topics": [
+            "Rates"
+          ],
+          "schedulerRating": 4,
           "schedulerRatingScale": 10
         }
       ]

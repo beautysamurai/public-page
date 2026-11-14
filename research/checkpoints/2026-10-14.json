@@ -1125,6 +1125,227 @@
         }
       },
       "finalAnalysis": null
+    },
+    "2610.17681": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "損失データとES予測のみを用いる逐次バックテスト手法を提案し、独立同分布損失向けとAR-GARCH型の時系列向けの方法を検討する。",
+        "mainResult": "所定の仮定の下で、両手法は任意の停止時点で誤棄却を制御すると報告する。時系列手法では、固定されたパラメータ・分位点ペアと正の報告マージンが必要であり、グリッド近似の収束も示す。",
+        "practicalApplication": "ES予測の逐次監視や、VaR予測を別途用意できない状況でのリスク報告評価に利用できる可能性がある。NASDAQ損失への適用と既存手法との数値比較が示されている。",
+        "methodology": "e-backtesting手法を構成し、時系列手法では候補パラメータとVaR値に関する下限を計算する。賭け過程は候補パラメータ全体で平均した経験的成長率を最大化するよう選び、シミュレーションと日次NASDAQ損失への適用で比較する。",
+        "limitations": "妥当性はモデル仮定、固定されたパラメータ・分位点ペア、正の報告マージンに依存する。数値的なプロファイリングは有限グリッドに基づき、要旨からは実データでの頑健性や他の市場・モデルへの一般化は判断できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "逐次ESバックテストの手法としては関連性があるが、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利を主題としていないため、対象範囲外と判定する。",
+        "tags": [
+          "Expected Shortfall",
+          "逐次バックテスト",
+          "e-process",
+          "リスク管理",
+          "AR-GARCH"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper proposes sequential backtesting methods using only observed losses and ES forecasts, one for iid losses and another for AR-GARCH-type time series.",
+          "mainResult": "Under stated assumptions, both methods are reported to control false rejections at any stopping time. The time-series method requires a fixed parameter-quantile pair and a positive report margin, and convergence of the grid approximation is also established.",
+          "practicalApplication": "The methods may support sequential monitoring of ES forecasts and evaluation of risk reports when separate VaR forecasts are unavailable. The abstract reports an application to NASDAQ losses and numerical comparisons with existing methods.",
+          "methodology": "The paper constructs e-backtesting methods. For the time-series method, it computes an infimum over candidate parameters and VaR values, choosing the betting process to maximize empirical growth averaged across candidate parameters. Comparisons use simulations and daily NASDAQ losses.",
+          "limitations": "Validity depends on model assumptions, a fixed parameter-quantile pair, and a positive report margin. Numerical profiling uses a finite grid, and the abstract does not establish robustness on real data or generalizability to other markets or models.",
+          "reason": "The work is relevant to sequential ES backtesting, but its main subject is not electronic trading, market microstructure, interest-rate models, yield curves, or rates, so it is outside the site's scope.",
+          "tags": [
+            "Expected Shortfall",
+            "sequential backtesting",
+            "e-process",
+            "risk management",
+            "AR-GARCH"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.18332": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、企業の炭素強度や移行状態が不確実な状況で、累積排出量へのペナルティを考慮した動的ポートフォリオ選択を分析します。",
+        "mainResult": "数値分析では、事前信念が適切なら不完全情報による厚生や目標達成への影響は小さい一方、信念の偏りは厚生損失を生み、楽観・悲観の別によって排出目標を超過する確率への影響が異なると報告しています。",
+        "practicalApplication": "炭素情報が不完全な状況での投資配分や排出目標管理の分析枠組みとして参考になり得ますが、金融市場の執行、マイクロストラクチャー、金利モデルやイールドカーブへの直接的な応用は示されていません。",
+        "methodology": "確率的な移行要因に依存する資産収益率と炭素強度を設定し、投資家が市場観測や定期的なノイズを含む開示から状態などを学習する動的ポートフォリオ問題を定式化し、数値例で検討しています。",
+        "limitations": "提示された要約のみからは、モデルの詳細、数値設定、頑健性検証、実データによる検証の有無を確認できません。結果は数値例に基づく報告であり、一般的な実証的事実とは判断できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "気候情報下のポートフォリオ選択が主題であり、本サイトの電子執行、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利の対象とは実質的に異なります。",
+        "tags": [
+          "動的ポートフォリオ選択",
+          "脱炭素化",
+          "不完全情報",
+          "ベイズ学習",
+          "気候ファイナンス"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes dynamic portfolio choice with a penalty on cumulative emissions when firms’ carbon intensities and the transition state are uncertain.",
+          "mainResult": "The numerical analysis reports that incomplete information has limited effects on welfare and target attainment when prior beliefs are well specified. Biased beliefs cause welfare losses, while optimism and pessimism have different effects on the probability of exceeding the emissions target.",
+          "practicalApplication": "The framework may inform portfolio allocation and emissions-target management under incomplete carbon information, but no direct application to execution, market microstructure, interest-rate models, or yield curves is indicated.",
+          "methodology": "The paper formulates a dynamic portfolio problem in which asset returns and carbon intensities depend on a stochastic transition factor, with investors learning from market observations and periodic noisy disclosures, and examines it numerically.",
+          "limitations": "The abstract does not specify model details, numerical assumptions, robustness checks, or whether the analysis is validated using real data. The findings are reported from a numerical application and should not be treated as established empirical facts.",
+          "reason": "The focus is climate-informed portfolio choice, materially outside the site’s coverage of electronic execution, market microstructure, interest-rate models, yield curves, and rates.",
+          "tags": [
+            "dynamic portfolio choice",
+            "decarbonization",
+            "incomplete information",
+            "Bayesian learning",
+            "climate finance"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.18387": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "気候移行投資では、ベンチマークからの上方乖離も罰する対称的なリスク指標が投資機会を制約しうると論じる。",
+        "mainResult": "著者らは、気候リスクの資産間・時間軸の非対称性を踏まえ、分散やトラッキングエラーの代わりに下方リスクのみを測る指標を使うべきだと提案する。",
+        "practicalApplication": "機関投資家の運用マンデートで、対称的なトラッキングエラー予算を半分散などの下方リスク指標に置き換える案を示す。",
+        "methodology": "気候移行リスクとリスク指標の性質に関する概念的な議論およびマンデート設計の提案であり、抄録には実証分析の記載がない。",
+        "limitations": "抄録からは提案の定量的検証、下方リスク指標の具体的な定義や比較、実務上の効果を確認できない。対象分野は気候投資リスクで、サイトの主要領域との関連は限定的である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "リスク管理に関する議論ではあるが、電子取引、市場マイクロストラクチャー、金利モデル、イールドカーブ、金利研究を主題としないため、対象外と判定する。",
+        "tags": [
+          "気候移行リスク",
+          "投資リスク指標",
+          "トラッキングエラー",
+          "マンデート設計"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper argues that symmetric risk measures, which penalize upside deviations from a benchmark, may constrain climate-transition investment opportunities.",
+          "mainResult": "Given the asymmetry of climate risk across assets and over time, the authors propose using downside-only measures instead of variance or tracking error.",
+          "practicalApplication": "The paper proposes replacing symmetric tracking-error budgets in institutional investment mandates with downside-risk measures such as semivariance.",
+          "methodology": "It presents a conceptual discussion of climate-transition risk and risk-measure properties, along with mandate-design proposals; the abstract reports no empirical analysis.",
+          "limitations": "The abstract provides no quantitative validation, specific definitions or comparisons of the proposed downside measures, or evidence of practical effects. The topic is climate-investment risk, with limited relevance to the site's primary areas.",
+          "reason": "Although it concerns risk management, the paper does not focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates, so it is out of scope.",
+          "tags": [
+            "climate transition risk",
+            "investment risk measures",
+            "tracking error",
+            "mandate design"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.18706": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "rates",
+        "summary": "本研究は、Colored noiseと状態依存レバレッジを含む局所確率ボラティリティモデルを解析しています。提示された要旨では、金利やイールドカーブへの応用は扱われていません。",
+        "mainResult": "指数関数和のメモリー核について、成長条件下で解の存在・一意性・非爆発性を証明しています。また、特定条件下での有限次元マルコフ化、決定論的前進方程式、最小エントロピー測度下のプレミアム、および正則化校正問題の最小解の存在を報告しています。",
+        "practicalApplication": "確率ボラティリティのモデル化、オプション価格付けに関わる条件付き期待値の計算、効用ベースの測度変更、ビッド・アスク制約付き校正への理論的基礎を提供し得ます。",
+        "methodology": "GLEに基づくLSVモデルを理論解析し、指数関数和のメモリー核や一モード多項式ポテンシャルなどの設定で確率解析・確率微分方程式・最適化の結果を導いています。",
+        "limitations": "要旨は理論結果を中心にしており、実データでの検証、数値性能、既存モデルとの比較は示していません。複数の結論は構造条件や正則性仮定、特殊ケースでの検証に依存します。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "確率ボラティリティ研究としては関連性がありますが、対象領域の金利モデル、イールドカーブ、金利市場、電子執行、または市場マイクロストラクチャへの直接的な貢献は要旨から確認できません。",
+        "tags": [
+          "local stochastic volatility",
+          "generalized Langevin equation",
+          "colored noise",
+          "state-dependent leverage",
+          "model calibration"
+        ],
+        "english": {
+          "classification": "rates",
+          "summary": "This study analyzes a local stochastic volatility model with colored noise and state-dependent leverage. The abstract does not address applications to interest rates or yield curves.",
+          "mainResult": "For exponential-sum memory kernels, the paper proves existence, uniqueness, and non-explosion under a growth condition. It also reports finite-dimensional Markovian reduction under specific conditions, a deterministic forward equation, a premium under the minimal entropy measure, and existence of a minimizer for a regularized calibration problem.",
+          "practicalApplication": "The results may provide theoretical foundations for stochastic-volatility modeling, computing conditional expectations relevant to option pricing, utility-based changes of measure, and calibration subject to bid–ask constraints.",
+          "methodology": "The paper theoretically analyzes an LSV model based on a GLE, deriving results from stochastic analysis, stochastic differential equations, and optimization for settings including exponential-sum memory kernels and a one-mode polynomial potential.",
+          "limitations": "The abstract focuses on theoretical results and reports no empirical validation, numerical performance, or comparison with existing models. Several conclusions depend on structural or regularity assumptions, with some verified only in special cases.",
+          "reason": "The work is relevant to stochastic-volatility research, but the abstract does not establish a direct contribution to the target areas of interest-rate models, yield curves, rates markets, electronic execution, or market microstructure.",
+          "tags": [
+            "local stochastic volatility",
+            "generalized Langevin equation",
+            "colored noise",
+            "state-dependent leverage",
+            "model calibration"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "rates",
+        "summary": "本研究は、Colored noiseと状態依存レバレッジを含む局所確率ボラティリティモデルを解析しています。提示された要旨では、金利やイールドカーブへの応用は扱われていません。",
+        "mainResult": "指数関数和のメモリー核について、成長条件下で解の存在・一意性・非爆発性を証明しています。また、特定条件下での有限次元マルコフ化、決定論的前進方程式、最小エントロピー測度下のプレミアム、および正則化校正問題の最小解の存在を報告しています。",
+        "practicalApplication": "確率ボラティリティのモデル化、オプション価格付けに関わる条件付き期待値の計算、効用ベースの測度変更、ビッド・アスク制約付き校正への理論的基礎を提供し得ます。",
+        "methodology": "GLEに基づくLSVモデルを理論解析し、指数関数和のメモリー核や一モード多項式ポテンシャルなどの設定で確率解析・確率微分方程式・最適化の結果を導いています。",
+        "limitations": "要旨は理論結果を中心にしており、実データでの検証、数値性能、既存モデルとの比較は示していません。複数の結論は構造条件や正則性仮定、特殊ケースでの検証に依存します。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "確率ボラティリティ研究としては関連性がありますが、対象領域の金利モデル、イールドカーブ、金利市場、電子執行、または市場マイクロストラクチャへの直接的な貢献は要旨から確認できません。",
+        "tags": [
+          "local stochastic volatility",
+          "generalized Langevin equation",
+          "colored noise",
+          "state-dependent leverage",
+          "model calibration"
+        ],
+        "english": {
+          "classification": "rates",
+          "summary": "This study analyzes a local stochastic volatility model with colored noise and state-dependent leverage. The abstract does not address applications to interest rates or yield curves.",
+          "mainResult": "For exponential-sum memory kernels, the paper proves existence, uniqueness, and non-explosion under a growth condition. It also reports finite-dimensional Markovian reduction under specific conditions, a deterministic forward equation, a premium under the minimal entropy measure, and existence of a minimizer for a regularized calibration problem.",
+          "practicalApplication": "The results may provide theoretical foundations for stochastic-volatility modeling, computing conditional expectations relevant to option pricing, utility-based changes of measure, and calibration subject to bid–ask constraints.",
+          "methodology": "The paper theoretically analyzes an LSV model based on a GLE, deriving results from stochastic analysis, stochastic differential equations, and optimization for settings including exponential-sum memory kernels and a one-mode polynomial potential.",
+          "limitations": "The abstract focuses on theoretical results and reports no empirical validation, numerical performance, or comparison with existing models. Several conclusions depend on structural or regularity assumptions, with some verified only in special cases.",
+          "reason": "The work is relevant to stochastic-volatility research, but the abstract does not establish a direct contribution to the target areas of interest-rate models, yield curves, rates markets, electronic execution, or market microstructure.",
+          "tags": [
+            "local stochastic volatility",
+            "generalized Langevin equation",
+            "colored noise",
+            "state-dependent leverage",
+            "model calibration"
+          ]
+        }
+      }
+    },
+    "2610.18795": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、産業構成に基づく地域間ネットワークを毎年更新し、住宅ローンのデフォルトリスクを推定する離散時間生存モデルを提案する。",
+        "mainResult": "米国のローン単位データで、静的な産業グラフ仕様と比べて、動的モデルはインサンプル適合度とアウト・オブ・サンプル識別性能が高かったと報告する。推定結果は、グラフを介した地域間依存とリスクの時間的持続性も示す。",
+        "practicalApplication": "地域の産業構成の変化を反映した住宅ローン信用リスク評価に利用できる可能性があるが、電子取引、金利モデル、イールドカーブ分析への直接的な応用は示されていない。",
+        "methodology": "産業構成の類似性から年次更新されるグラフを構築し、条件付き自己回帰過程と一次自己回帰過程を組み合わせた離散時間生存モデルをINLAで推定する。米国の住宅ローンデータで静的グラフ仕様と比較する。",
+        "limitations": "抄録には、データ期間、比較指標の詳細、効果の大きさ、頑健性検証や他地域への一般化可能性が記されていない。報告された優位性は、提示された比較設定の範囲に限られる。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "住宅ローン信用リスクの研究であり、対象分野である電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究との実質的な関連がない。",
+        "tags": [
+          "住宅ローン信用リスク",
+          "離散時間生存モデル",
+          "動的産業グラフ",
+          "地域間依存",
+          "INLA"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study proposes a discrete-time survival model for mortgage default risk, using annually updated interregional networks based on industrial composition.",
+          "mainResult": "On U.S. loan-level data, the dynamic model reportedly achieves better in-sample fit and out-of-sample discrimination than static industrial-graph specifications. Its estimates also indicate graph-mediated cross-area dependence and temporal persistence in risk.",
+          "practicalApplication": "The approach may support mortgage credit-risk assessment that reflects changes in regional industrial composition, but no direct application to electronic trading, interest-rate models, or yield-curve analysis is presented.",
+          "methodology": "The authors construct graphs updated annually from industrial-composition similarity and estimate a discrete-time survival model combining a conditional autoregressive process with a first-order autoregressive process, using INLA. They compare it with static-graph specifications on U.S. mortgage data.",
+          "limitations": "The abstract does not specify the data period, comparison metrics, effect sizes, robustness checks, or generalizability to other regions. The reported advantage is limited to the comparison setting described.",
+          "reason": "This is research on mortgage credit risk and has no material connection to the target areas of electronic execution, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "mortgage credit risk",
+            "discrete-time survival model",
+            "dynamic industrial graph",
+            "cross-area dependence",
+            "INLA"
+          ]
+        }
+      },
+      "finalAnalysis": null
     }
   },
   "usage": [
@@ -1765,6 +1986,106 @@
       "pdfPages": null,
       "paperIds": [
         "2610.17481v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 868,
+      "outputTokens": 915,
+      "reasoningTokens": 130,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1783,
+      "estimatedCostUsd": 0.000544,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.17681v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 779,
+      "outputTokens": 825,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1604,
+      "estimatedCostUsd": 0.00049,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.18332v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 879,
+      "outputTokens": 700,
+      "reasoningTokens": 77,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1579,
+      "estimatedCostUsd": 0.000438,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.18387v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 841,
+      "outputTokens": 831,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1672,
+      "estimatedCostUsd": 0.0005,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.18706v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 844,
+      "outputTokens": 735,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1579,
+      "estimatedCostUsd": 0.000452,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.18795v1"
       ],
       "outcome": "completed"
     }

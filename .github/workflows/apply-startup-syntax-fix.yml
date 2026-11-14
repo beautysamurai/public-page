@@ -1,0 +1,156 @@
+name: Apply startup PowerShell syntax fix
+
+on:
+  push:
+    branches:
+      - fix/powershell-startup-syntax
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out fix branch
+        uses: actions/checkout@v7
+        with:
+          ref: fix/powershell-startup-syntax
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: Patch startup script and add parser regression test
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          script_path = Path("scripts/sync_on_startup.ps1")
+          script = script_path.read_text(encoding="utf-8")
+          old = '''    $currentHistory = Join-Path (
+                  $worktreeDirectory "content/chatgpt_scheduler_history.json"
+              )
+              $currentTranslation = Join-Path (
+                  $worktreeDirectory "site/data/i18n/en.json"
+              )
+          '''
+          new = '''    $currentHistory = Join-Path -Path $worktreeDirectory -ChildPath "content/chatgpt_scheduler_history.json"
+              $currentTranslation = Join-Path -Path $worktreeDirectory -ChildPath "site/data/i18n/en.json"
+          '''
+          if old in script:
+              script = script.replace(old, new, 1)
+              script_path.write_text(script, encoding="utf-8")
+          elif new not in script:
+              raise SystemExit("Neither the expected malformed nor corrected Join-Path block was found")
+
+          test_path = Path("tests/test_powershell_syntax.py")
+          test_path.write_text(
+              '''from __future__ import annotations
+
+import shutil
+import subprocess
+import unittest
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+class PowerShellSyntaxTests(unittest.TestCase):
+    def test_all_powershell_scripts_parse(self):
+        executable = shutil.which("pwsh") or shutil.which("powershell")
+        if executable is None:
+            self.skipTest("PowerShell is not installed in this environment")
+
+        command = r'''$failed = $false
+Get-ChildItem -Path scripts -Filter *.ps1 -File | ForEach-Object {
+    $scriptPath = $_.FullName
+    $tokens = $null
+    $parseErrors = $null
+    [System.Management.Automation.Language.Parser]::ParseFile(
+        $scriptPath,
+        [ref]$tokens,
+        [ref]$parseErrors
+    ) | Out-Null
+    foreach ($parseError in $parseErrors) {
+        $failed = $true
+        $lineNumber = $parseError.Extent.StartLineNumber
+        $message = $parseError.Message
+        Write-Output ("{0}:{1}: {2}" -f $scriptPath, $lineNumber, $message)
+    }
+}
+if ($failed) { exit 1 }
+'''
+        completed = subprocess.run(
+            [executable, "-NoProfile", "-NonInteractive", "-Command", command],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(
+            completed.returncode,
+            0,
+            msg=(completed.stdout + completed.stderr).strip(),
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()
+''',
+              encoding="utf-8",
+          )
+          PY
+
+      - name: Parse PowerShell scripts
+        shell: pwsh
+        run: |
+          $failed = $false
+          Get-ChildItem -Path scripts -Filter *.ps1 -File | ForEach-Object {
+            $scriptPath = $_.FullName
+            $tokens = $null
+            $parseErrors = $null
+            [System.Management.Automation.Language.Parser]::ParseFile(
+              $scriptPath,
+              [ref]$tokens,
+              [ref]$parseErrors
+            ) | Out-Null
+            foreach ($parseError in $parseErrors) {
+              $failed = $true
+              $lineNumber = $parseError.Extent.StartLineNumber
+              $message = $parseError.Message
+              Write-Output ("{0}:{1}: {2}" -f $scriptPath, $lineNumber, $message)
+            }
+          }
+          if ($failed) { throw "PowerShell parser errors were found." }
+
+      - name: Run validation
+        shell: bash
+        run: |
+          python -m unittest discover -s tests -v
+          node --test tests/test_model_math.cjs
+          python scripts/import_scheduler_history.py --check
+          git diff --check
+
+      - name: Commit and push source changes
+        shell: bash
+        run: |
+          if git diff --quiet -- scripts/sync_on_startup.ps1 tests/test_powershell_syntax.py; then
+            echo "Source fix is already present; nothing to commit."
+            exit 0
+          fi
+          git config user.name "Public Research Digest"
+          git config user.email "public-research-digest@users.noreply.github.com"
+          git add scripts/sync_on_startup.ps1 tests/test_powershell_syntax.py
+          git commit -m "fix: correct startup sync PowerShell syntax"
+          git push origin HEAD:fix/powershell-startup-syntax

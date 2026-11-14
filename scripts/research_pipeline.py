@@ -622,7 +622,8 @@ def validate_metadata(value: Mapping[str, Any]) -> None:
         min_items=1,
         max_items=100,
         max_string=300,
-        unique=True,
+        # arXiv can supply the same display name for distinct author entries.
+        unique=False,
     )
     submitted = _parse_date(value["submittedDate"], "metadata.submittedDate")
     updated = _parse_date(value["updatedDate"], "metadata.updatedDate")
@@ -3302,6 +3303,44 @@ def load_daily_reports(
     return reports
 
 
+def load_period_inputs(daily_dir: Path, period_start: date, period_end: date) -> list[dict[str, Any]]:
+    """Use confirmed archived scheduler editions when a pipeline batch is missing."""
+    reports = load_daily_reports(daily_dir, period_start, period_end)
+    content = daily_dir.parent.parent / "content"
+    catalogue = content / "legacy_daily_categories.json"
+    if not catalogue.is_file():
+        return reports
+    legacy = json.loads(catalogue.read_text(encoding="utf-8"))
+    if not (legacy["firstBatch"] <= period_end.isoformat() and period_start.isoformat() <= legacy["lastBatch"]):
+        return reports
+    completed = {r["reportDate"] for r in reports if r["status"] in (UPDATE_CONFIRMED, NO_RELEVANT_PAPERS)
+                 and r["reportDate"] == r["expectedBatchDate"] == r["observedBatchDate"]}
+    for edition in load_history(content / "chatgpt_scheduler_history.json")["editions"]:
+        batch = edition["observedBatchDate"]
+        if (edition["sourceKind"] != "chatgpt-scheduled-task" or edition["editionKind"] != DAILY
+                or edition["status"] not in (UPDATE_CONFIRMED, NO_RELEVANT_PAPERS) or not batch
+                or not legacy["firstBatch"] <= batch <= legacy["lastBatch"]
+                or not period_start.isoformat() <= batch <= period_end.isoformat()
+                or batch != edition["expectedBatchDate"] or batch in completed):
+            continue
+        papers = []
+        for paper in edition["papers"]:
+            metadata = {k: paper[k] for k in ("arxivId", "title", "authors", "submittedDate", "updatedDate")}
+            metadata["categories"] = legacy["categories"][paper["arxivId"]]
+            validate_metadata(metadata)
+            # These are synthesis inputs only. Preserve the original rating
+            # scale and avoid filling absent methodology, results or usage.
+            papers.append({"metadata": metadata, "finalAnalysis": {
+                k: paper[k] for k in ("schedulerSummary", "schedulerRating", "schedulerRatingScale",
+                                       "schedulerLabel", "topics")
+            }})
+        reports = [r for r in reports if r["reportDate"] != batch]
+        reports.append({"reportDate": batch, "expectedBatchDate": batch, "observedBatchDate": batch,
+                        "status": edition["status"], "papers": papers, "legacyInput": True})
+        completed.add(batch)
+    return sorted(reports, key=lambda r: r["reportDate"])
+
+
 def _unique_stored_papers(reports: Sequence[Mapping[str, Any]]) -> list[dict[str, Any]]:
     selected: dict[str, dict[str, Any]] = {}
     for report in reports:
@@ -3428,7 +3467,7 @@ def run_aggregate(
             raise StateError("stored aggregate identity mismatch")
         if existing["status"] in {UPDATE_CONFIRMED, NO_RELEVANT_PAPERS, NO_NEW_BATCH_EXPECTED}:
             return persist_report(existing, output_dir)
-    reports = load_daily_reports(daily_dir, period_start, period_end)
+    reports = load_period_inputs(daily_dir, period_start, period_end)
     stored_papers = _unique_stored_papers(reports)
     missing_dates = missing_batch_dates(config, reports, period_start, period_end)
     if missing_dates:
@@ -3440,7 +3479,8 @@ def run_aggregate(
             message="Coverage is incomplete: missing confirmed batches ("
                     + ", ".join(day.isoformat() for day in missing_dates) + "); synthesis was not run.",
             expected_batch_date=None, observed_batch_date=None,
-            period_start=period_start, period_end=period_end, papers=stored_papers,
+            period_start=period_start, period_end=period_end,
+            papers=_unique_stored_papers([r for r in reports if not r.get("legacyInput")]),
         ), output_dir)
 
     papers: list[dict[str, Any]] = []

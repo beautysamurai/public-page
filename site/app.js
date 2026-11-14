@@ -118,6 +118,7 @@
       NO_NEW_BATCH_EXPECTED: "fresh",
       UPDATE_NOT_CONFIRMED: "warn",
       UPDATER_OFFLINE: "offline",
+      PROVISIONAL_REVIEW: "warn",
       WEEKLY_REVIEW: "fresh",
       MONTHLY_REVIEW: "fresh"
     };
@@ -494,6 +495,10 @@
   }
 
   function editionFreshness(report, archived) {
+    if (report.status === "PROVISIONAL_REVIEW") {
+      var label = t("status.PROVISIONAL_REVIEW.label");
+      return { label: label, short: label, state: "warn" };
+    }
     if (archived) {
       return { label: t("freshness.archivedLabel"), short: t("freshness.archivedShort"), state: "archived" };
     }
@@ -847,7 +852,8 @@
       : report.sourceKind === "openai-responses-api"
         ? t("source.openai")
         : report.sourceKind === "local-arxiv-updater" ? t("source.local") : t("source.unknown");
-    elements.editionSource.textContent = sourceKindLabel;
+    elements.editionSource.textContent = report.sourceKind === "daily-review-archive"
+      ? t("source.dailyArchive") : sourceKindLabel;
     elements.editionId.textContent = report.editionId || t("unavailable");
 
     var period = report.periodStart && report.periodEnd

@@ -140,6 +140,14 @@ def write_base_bundle(root: Path) -> tuple[Path, Path]:
 
 
 class ResearchReportAdapterTests(unittest.TestCase):
+    def test_repeated_author_display_names_survive_publication(self):
+        report = completed_report()
+        authors = ["J. Liu", "J. Liu"]
+        report["papers"][0]["metadata"]["authors"] = authors
+        edition = publication.adapt_research_report(report).source_edition
+        history = importer.validate_history({"schemaVersion": 2, "editions": [edition]})
+        self.assertEqual(history["editions"][0]["papers"][0]["authors"], authors)
+
     def test_maps_daily_report_to_exact_public_schemas(self):
         adapted = publication.adapt_research_report(completed_report())
         source = adapted.source_edition

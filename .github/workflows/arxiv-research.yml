@@ -379,6 +379,14 @@ jobs:
           if explicit_end:
               candidates = [current_end]
           else:
+              # An old gap without source data must not displace a ready period
+              # from both historical slots on every scheduled run.
+              from research_pipeline import load_pipeline_config
+              from research_recovery import pending_periods
+              ready = {item["periodEnd"] for item in pending_periods(
+                  Path("."), load_pipeline_config(Path("config/research.json")), date.fromisoformat(current_end)
+              ) if item["reportKind"] == expected_kind and item["ready"]}
+              pending.sort(key=lambda end: end not in ready)
               # Bound recovery work while guaranteeing current-period coverage.
               candidates = [current_end, *pending[:2]]
           targets = [

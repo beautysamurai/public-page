@@ -646,12 +646,21 @@ python scripts/research_pipeline.py --env-file .env aggregate \
   --output-dir .local/research/reviews
 ~~~
 
-Any incomplete daily report or missing configured announcement-date report
-makes the period review `UPDATE_NOT_CONFIRMED`; completed daily papers may still
-be reused, but the aggregate cannot overstate its coverage. Missing
-weekend/holiday reports do not create a false research gap because no batch was
-due, while an explicit failed report on one of those days still blocks
-completion.
+When a weekly or monthly synthesis is pending, the Pages build publishes a
+provisional edition at its eventual archive URL if any scheduled batch has
+confirmed daily coverage. It lists covered and missing batch dates and reuses
+the original daily summaries, ratings and translations at no additional API
+cost. Readers can open these editions from the archive filters or the
+research-status disclosure. Each deployment refreshes the provisional
+edition; a published final edition takes precedence at the same URL.
+
+Only confirmed scheduled batches qualify for final synthesis. August's
+historical scheduler editions are matched by the observed and expected batch
+date, even when the newsletter arrived the next day. The small
+`content/legacy_daily_categories.json` catalogue supplies the arXiv subject
+codes verified on those versions' abstract pages. Daily retries prioritize the
+least recently attempted eligible batch. Holidays are specified in Eastern
+announcement dates.
 
 All stored papers are partitioned deterministically into bounded synthesis
 chunks before any API request. The defaults are at most 20 papers and 200,000

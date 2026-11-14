@@ -81,6 +81,16 @@ class CarryForwardTests(unittest.TestCase):
         self.assertEqual(result["latest"]["papers"], [])
         self.assertEqual(len(p.load_listing_snapshot(root / "research/listings/2026-09-15.json", CFG.categories)[0].items), 1)
 
+    def test_recently_attempted_old_batch_does_not_starve_the_next(self):
+        root = self.root()
+        for day, age in ((date(2026, 9, 10), 1), (date(2026, 9, 14), 3)):
+            pending(root, day, when=NOW - timedelta(days=age))
+            snapshot(root, day)
+        calls = []
+        r.run_daily_cycle(root, CFG, NOW, daily_runner=self.runner(calls=calls),
+                          capture=lambda *_: None, sleep_fn=lambda _: None)
+        self.assertEqual(calls, [None, date(2026, 9, 14)])
+
     def test_latest_owned_ids_are_not_analyzed_again_during_older_recovery(self):
         for classification in ("market_microstructure", "out_of_scope"):
             with self.subTest(classification=classification):

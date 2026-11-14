@@ -328,6 +328,7 @@ def _safe_string_list(
     maximum_items: int,
     maximum_string: int,
     english: bool = False,
+    unique: bool = True,
 ) -> list[str]:
     if (
         not isinstance(value, list)
@@ -355,7 +356,7 @@ def _safe_string_list(
                     f"{context}[{index}] must contain English text"
                 )
     folded = [item.casefold() for item in result]
-    if len(folded) != len(set(folded)):
+    if unique and len(folded) != len(set(folded)):
         raise ResearchReportSchemaError(f"{context} contains duplicate values")
     return result
 
@@ -545,6 +546,7 @@ def _validate_paper(value: object, index: int) -> dict[str, Any]:
         f"{context}.metadata.authors",
         maximum_items=100,
         maximum_string=300,
+        unique=False,
     )
     submitted_date = _safe_date(
         metadata["submittedDate"], f"{context}.metadata.submittedDate"

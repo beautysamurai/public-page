@@ -142,6 +142,46 @@ class LatestOnlyDailyTests(unittest.TestCase):
         self.assertFalse(parser.parse_args(["daily"]).recover_pending)
         self.assertTrue(parser.parse_args(["daily", "--recover-pending"]).recover_pending)
 
+    def test_historical_recovery_reuses_original_version_after_revision(self):
+        from dataclasses import replace
+        ids = ("2608.10001", "2608.10002")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            first = resilience.FakeAnalyzer()
+            first.usage_calls = [pipeline.research_usage.record({"status": "completed"},
+                model="gpt-6-luna", effort="low", stage="screen", paper_ids=[ids[0]+"v1"],
+                scope="abstract", pages=None)]
+            resilience.DailyResilienceTests._run_daily(root, ids, first,
+                run_config=resilience.config(daily_time_budget=5),
+                monotonic_fn=resilience.SequenceClock((0, 0, 0, 0, 5)))
+            original = resilience.entry(ids[0])
+            revised = replace(original, arxiv_id=ids[0]+"v2", abstract="Revised text.")
+            latest = {ids[0]: revised, ids[1]: resilience.entry(ids[1])}
+            analyzer = resilience.FakeAnalyzer()
+            with mock.patch.object(pipeline, "fetch_metadata", return_value={ids[0]: original}) as pinned:
+                report = pipeline.run_daily(resilience.config(), state_path=root/"state.json",
+                    output_dir=root/"daily", checked_at=resilience.CHECKED_AT,
+                    recover_pending=True, target_batch=date(2026, 8, 28),
+                    metadata_fetcher=lambda requested: {k: latest[k] for k in requested},
+                    analyzer=analyzer, sleep_fn=lambda _: None)
+            self.assertEqual(pinned.call_args.args[0], [ids[0]+"v1"])
+            self.assertTrue(pinned.call_args.kwargs["exact_versions"])
+            self.assertEqual(report["status"], pipeline.UPDATE_CONFIRMED)
+            self.assertEqual(analyzer.screened, [ids[1]])
+            self.assertIn(ids[0]+"v1", [paper["metadata"]["arxivId"] for paper in report["papers"]])
+
+    def test_unscreened_backfill_uses_last_version_available_on_batch_date(self):
+        from dataclasses import replace
+        key = "2608.10001"
+        original = resilience.entry(key)
+        versions = {key + "v" + str(v): replace(original, arxiv_id=key + "v" + str(v),
+                    updated_at=datetime(2026, 8, 26 + v, 0, tzinfo=timezone.utc)) for v in (1, 2, 3, 4)}
+        entries = {key: versions[key + "v4"]}
+        fetch = mock.Mock(side_effect=lambda ids: {key: versions[ids[0]]})
+        pipeline._restore_batch_versions(entries, date(2026, 8, 28), [], fetch)
+        self.assertEqual(entries[key].arxiv_id, key + "v2")
+        self.assertEqual(fetch.call_args_list, [mock.call([key + "v3"]), mock.call([key + "v2"])])
+
 
 if __name__ == "__main__":
     unittest.main()

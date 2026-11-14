@@ -76,13 +76,14 @@ def entry(
     *,
     title: str = "Electronic execution in rates markets",
     abstract: str = "We study market microstructure and yield-curve trading.",
+    submitted_day: int = 28,
 ) -> digest.AtomEntry:
     return digest.AtomEntry(
         arxiv_id=f"{arxiv_id}v1" if "v" not in arxiv_id else arxiv_id,
         title=title,
         authors=("Researcher One",),
-        submitted_at=datetime(2026, 8, 28, 8, 0, tzinfo=UTC),
-        updated_at=datetime(2026, 8, 28, 9, 0, tzinfo=UTC),
+        submitted_at=datetime(2026, 8, submitted_day, 8, 0, tzinfo=UTC),
+        updated_at=datetime(2026, 8, submitted_day, 9, 0, tzinfo=UTC),
         categories=("q-fin.TR",),
         abstract=abstract,
     )
@@ -1008,7 +1009,7 @@ class DailyWorkflowTests(unittest.TestCase):
                     ("Friday, 28 August 2026", ()),
                     ("Thursday, 27 August 2026", (arxiv_id,)),
                 ),
-                metadata_fetcher=lambda _ids: {arxiv_id: entry(arxiv_id)},
+                metadata_fetcher=lambda _ids: {arxiv_id: entry(arxiv_id, submitted_day=26)},
                 analyzer=FakeAnalyzer(),
                 sleep_fn=lambda _delay: None,
             )
@@ -1062,7 +1063,7 @@ class DailyWorkflowTests(unittest.TestCase):
                     ("Friday, 28 August 2026", ()),
                     ("Thursday, 27 August 2026", (arxiv_id,)),
                 ),
-                metadata_fetcher=lambda _ids: {arxiv_id: entry(arxiv_id)},
+                metadata_fetcher=lambda _ids: {arxiv_id: entry(arxiv_id, submitted_day=26)},
                 analyzer=FakeAnalyzer(),
                 sleep_fn=lambda _delay: None,
             )

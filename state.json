@@ -114,7 +114,19 @@
         "importance": 1,
         "recommended": false
       },
-      "status": "attempted"
+      "status": "compared",
+      "jev": {
+        "scores": {
+          "rates": 0.02,
+          "execution": 0.1,
+          "practical": 0.03
+        },
+        "route": "exclude",
+        "usage": {
+          "input_tokens": 768,
+          "output_tokens": 54
+        }
+      }
     },
     "2611.15211": {
       "batch": "2026-11-13",

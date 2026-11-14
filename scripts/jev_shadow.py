@@ -16,6 +16,7 @@ import os
 from pathlib import Path
 import re
 import subprocess
+import time
 import urllib.error
 import urllib.request
 
@@ -47,6 +48,8 @@ class AbstractPage(HTMLParser):
         self.meta = {}
         self.subjects = []
         self.byline = []
+        self.abstract = []
+        self.in_abstract = self.in_label = False
         self.in_subjects = self.in_authors = self.in_author = False
 
     def handle_starttag(self, tag, attrs):
@@ -54,8 +57,12 @@ class AbstractPage(HTMLParser):
         classes = (attrs.get("class") or "").split()
         if tag == "meta":
             name = attrs.get("name") or attrs.get("property")
-            if name in {"citation_title", "og:description"}:
+            if name == "citation_title":
                 self.meta[name] = attrs.get("content", "")
+        if tag == "blockquote" and "abstract" in classes:
+            self.in_abstract = True
+        if tag == "span" and self.in_abstract and "descriptor" in classes:
+            self.in_label = True
         if tag == "td" and "subjects" in classes:
             self.in_subjects = True
         if tag == "div" and "authors" in classes:
@@ -65,12 +72,18 @@ class AbstractPage(HTMLParser):
             self.in_author = True
 
     def handle_data(self, data):
+        if self.in_abstract and not self.in_label:
+            self.abstract.append(data)
         if self.in_subjects:
             self.subjects.append(data)
         if self.in_author:
             self.byline[-1] += data
 
     def handle_endtag(self, tag):
+        if tag == "blockquote":
+            self.in_abstract = False
+        if tag == "span":
+            self.in_label = False
         if tag == "td":
             self.in_subjects = False
         if tag == "div":
@@ -93,14 +106,17 @@ def fetch_version(version_id, opener):
         raise ValueError("versioned page identity mismatch")
     page = AbstractPage()
     page.feed(html)
+    version_dates = re.findall(
+        r'<strong>\s*(?:<a\b[^>]*>)?\[(v\d+)\](?:</a>)?\s*</strong>\s*'
+        r'[A-Za-z]{3}, (\d{1,2} [A-Za-z]{3} \d{4} [\d:]+) (?:UTC|GMT)', html)
     dates = {v: datetime.strptime(d, "%d %b %Y %H:%M:%S").replace(tzinfo=timezone.utc)
-             for v, d in re.findall(r"<strong>\[(v\d+)\]</strong>\s*[A-Za-z]{3}, (\d{1,2} [A-Za-z]{3} \d{4} [\d:]+) (?:UTC|GMT)", html)}
+             for v, d in version_dates}
     subjects = re.findall(r"\(([^()\s]+)\)", "".join(page.subjects))
     clean = lambda text: " ".join(text.split())
     entry = research.digest.AtomEntry(
         version_id, clean(page.meta["citation_title"]), tuple(clean(a) for a in page.byline),
         dates["v1"], dates["v" + version_id.rsplit("v", 1)[1]],
-        tuple(sorted(set(subjects), key=str.casefold)), clean(page.meta["og:description"]))
+        tuple(sorted(set(subjects), key=str.casefold)), clean("".join(page.abstract)))
     if not entry.abstract or not entry.authors or not entry.categories:
         raise ValueError("incomplete abstract page")
     return entry
@@ -325,7 +341,16 @@ def main():
         git("add", "--", "state.json", "review.md")
         if git("diff", "--cached", "--name-only"):
             git("commit", "-m", "Record shadow trial progress [skip ci]")
-            git("push", "origin", "HEAD:refs/heads/" + BRANCH)
+            # Retry the identical local commit, never the model request.
+            for delay in (0, 5, 15):
+                if delay:
+                    time.sleep(delay)
+                try:
+                    git("push", "origin", "HEAD:refs/heads/" + BRANCH)
+                    break
+                except subprocess.CalledProcessError:
+                    if delay == 15:
+                        raise
     pacer = research.ArxivRequestPacer()
     reason = run(state, root, persist, os.environ.get("TYPESAFE_API_KEY", "").strip(),
                  lambda vid: research._retry(lambda: fetch_version(vid, pacer.open), 2, pacer.sleep_fn), ask,

@@ -42,7 +42,7 @@ Lunaは抄録の一次判定です。どちらも正解ラベルではなく、�
 | [2611.15371v1](https://arxiv.org/abs/2611.15371v1) | 2026-11-13 | out_of_scope | 除外候補 | 0.02 | 0.04 | 0.02 |
 | [2611.15391v1](https://arxiv.org/abs/2611.15391v1) | 2026-11-13 | out_of_scope | 除外候補 | 0.05 | 0.05 | 0.05 |
 | [2611.15430v1](https://arxiv.org/abs/2611.15430v1) | 2026-11-13 | out_of_scope | 除外候補 | 0.02 | 0.02 | 0.02 |
-| [2611.15564v1](https://arxiv.org/abs/2611.15564v1) | 2026-11-13 | interest_rate_models | 送信待ち | — | — | — |
+| [2611.15564v1](https://arxiv.org/abs/2611.15564v1) | 2026-11-13 | interest_rate_models | 送信結果未確認 | — | — | — |
 | [2611.15646v1](https://arxiv.org/abs/2611.15646v1) | 2026-11-13 | out_of_scope | 送信待ち | — | — | — |
 | [2611.15657v1](https://arxiv.org/abs/2611.15657v1) | 2026-11-13 | out_of_scope | 送信待ち | — | — | — |
 | [2611.15747v1](https://arxiv.org/abs/2611.15747v1) | 2026-11-13 | out_of_scope | 送信待ち | — | — | — |

@@ -9810,6 +9810,323 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-08-28-weekly-openai-01",
+      "editionDate": "2026-08-28",
+      "editionKind": "weekly",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-11-14T06:45:41Z",
+      "status": "WEEKLY_REVIEW",
+      "message": "対象期間の週次レビューを生成しました。",
+      "expectedBatchDate": null,
+      "observedBatchDate": null,
+      "periodStart": "2026-08-22",
+      "periodEnd": "2026-08-28",
+      "sourceText": "## 2026年8月28日 — 週次レビュー\n\n対象期間の週次レビューを生成しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません）・未完了の試行 |\n| 週次統合 | gpt-6.1-sol / medium | 1 | 3,215 | 6,786 (275) | 0.0682 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. ABIDES-MARL: A Multi-Agent Reinforcement Learning Environment for Optimal Execution with Endogenous Liquidity\n\n**[arXiv:2511.02016v2](https://arxiv.org/abs/2511.02016v2) — Patrick Cheridito, Jean-Loup Dupret, Zhexin Wu**\n\n### 概要\n\n適応的なマーケットメーカーを含む環境で、最適執行と内生的流動性を扱う多主体強化学習研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 推奨 | 最適執行 / 多主体強化学習 / 内生的流動性 / 市場シミュレーション |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 内生的流動性と執行の相互作用は本サイトの中心課題であり、優先的な原資料確認に値する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません）・未完了の試行 |\n| 週次統合 | gpt-6.1-sol / medium | 1 | 3,215 | 6,786 (275) | 0.0682 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 保存レビューでは、執行主体と流動性供給者の相互作用をstochastic gameとして学習する枠組みが紹介されている。性能改善の数値は供給されていない。\n\n**手法:** ABIDESを用いた多主体強化学習環境で、適応的マーケットメーカーと執行主体を扱う。\n\n**実務への応用:** 他主体の応答によって流動性が変わる状況で、執行戦略を評価するシミュレーション基盤の候補となる。\n\n**限界・注意点:** 原資料の確認範囲は不明で、全文解析は確認できない。供給情報では報酬設計、比較手法、実市場での妥当性を評価できない。\n\n## 2. Calibrating Inelastic Markets to Options: The Lean Marketron and the Generalized Langevin Equation\n\n**[arXiv:2608.20589v1](https://arxiv.org/abs/2608.20589v1) — Andrey Itkin**\n\n### 概要\n\n注文フローとリターンの相互作用を縮約モデルで表し、オプション価格面への較正につなげる研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 推奨 | 注文フロー / 価格形成 / オプション較正 / 一般化ランジュバン方程式 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 注文フローとデリバティブ価格を接続する点が有用だが、較正と識別性の検証が必要である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません）・未完了の試行 |\n| 週次統合 | gpt-6.1-sol / medium | 1 | 3,215 | 6,786 (275) | 0.0682 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 保存レビューでは、注文フローとリターンを結ぶ識別可能なモデルが紹介されている。識別性の条件や較正精度は供給情報から確認できない。\n\n**手法:** Lean Marketronとgeneralized Langevin equationを用いて市場の動学を表現し、オプションへの較正を扱う。\n\n**実務への応用:** フロー由来の価格形成とオプション市場の整合性を検討するモデル候補となる。\n\n**限界・注意点:** 原資料の確認範囲は不明で、全文解析は確認できない。較正データ、識別条件、外部検証、無裁定性の扱いは供給情報にない。\n\n## 3. Surrender runs\n\n**[arXiv:2608.20982v1](https://arxiv.org/abs/2608.20982v1) — Andreas Löffler, Stefan Steins**\n\n### 概要\n\n金利上昇時の保険契約の集団解約を、ファンダメンタルズと自己実現的な行動の両面から扱う研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 非推奨 | 金利リスク / 保険解約 / 流動性リスク / 自己実現的ラン |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 金利リスクとの関連はあるが、執行や金利モデルそのものより保険の流動性リスクに重点がある。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません）・未完了の試行 |\n| 週次統合 | gpt-6.1-sol / medium | 1 | 3,215 | 6,786 (275) | 0.0682 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 保存レビューによれば、ファンダメンタルズ型と自己実現型の解約ランについて閾値を導いている。\n\n**手法:** 解約ランを理論モデルで分析し、二つの発生要因に対応する閾値を求める。\n\n**実務への応用:** 金利上昇に伴う保険負債の流出と流動性ストレスを検討する際の理論的参考となる。\n\n**限界・注意点:** 原資料の確認範囲は不明で、全文解析は確認できない。閾値の仮定、実証的裏付け、保険商品ごとの適用可能性は評価できない。\n\n## 4. Short-horizon mean reversion in cryptocurrency markets: a matched cross-market measurement\n\n**[arXiv:2608.21888v1](https://arxiv.org/abs/2608.21888v1) — Nadav A. Kitron, Jonathan M. Wengrowicz**\n\n### 概要\n\n暗号資産の15分程度の短期リバーサルを米国株と共通の測定手順で比較し、成行的フローとの関係を調べる研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 推奨 | 短期平均回帰 / 暗号資産 / 注文フロー / 市場横断比較 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 短期価格応答と注文フローを直接扱い、市場間比較の測定設計にも実務的価値がある。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません）・未完了の試行 |\n| 週次統合 | gpt-6.1-sol / medium | 1 | 3,215 | 6,786 (275) | 0.0682 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 保存レビューでは、市場横断の比較とaggressive flowとの関係測定が紹介されている。リバーサルの大きさや統計的有意性は供給されていない。\n\n**手法:** 暗号資産と米国株に共通のプロトコルを適用し、短期平均回帰と注文フローの関係を測定する。\n\n**実務への応用:** 短期シグナルや執行タイミングを検討する際に、市場間で測定条件をそろえる設計が参考となる。\n\n**限界・注意点:** 原資料の確認範囲は不明で、全文解析は確認できない。対象市場、標本期間、売買気配による影響、コスト控除後の収益性は評価できない。\n\n## 5. The Loop-Gain Matrix: Coupled Rebalancing Feedback and the Blind Spots of Scalar Stability Monitoring\n\n**[arXiv:2608.22768v1](https://arxiv.org/abs/2608.22768v1) — Jihwan Woo**\n\n### 概要\n\n複数商品のリバランスが生む相互フィードバックを行列で表し、単一指標による安定性監視の盲点を扱う研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 推奨 | リバランス / フィードバック / スペクトル半径 / クロスアセットリスク |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 市場インパクトの相互作用を監視する視点が有用で、単一商品のリスク指標を補完し得る。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません）・未完了の試行 |\n| 週次統合 | gpt-6.1-sol / medium | 1 | 3,215 | 6,786 (275) | 0.0682 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 保存レビューによれば、loop-gain matrixのスペクトル半径を用いて商品間の増幅を監視する枠組みを提示する。\n\n**手法:** リバランスの結合を行列化し、そのスペクトル特性からフィードバックの安定性を評価する。\n\n**実務への応用:** 個別商品の指標では捉えにくい、クロスアセットのリバランス連鎖を監視する設計候補となる。\n\n**限界・注意点:** 原資料の確認範囲は不明で、全文解析は確認できない。線形化の条件、係数推定、実データ検証は不明であり、実市場への適用可能性は未確認である。\n\n## 6. tse\\_tick: A Python Library for Parsing and Querying Nikkei NEEDS Tick Data from the Tokyo Stock Exchange\n\n**[arXiv:2608.23053v1](https://arxiv.org/abs/2608.23053v1) — Kazumi Li, Masataka Hayashi, Teruo Nakatsuma, Peter Romero**\n\n### 概要\n\n東証のNikkei NEEDSティックデータを解析・検索するPythonライブラリを紹介する研究基盤論文である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 推奨 | 東証 / ティックデータ / データ基盤 / Parquet / DuckDB |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 日本市場のデータ処理に直結するため有用だが、新たな市場の実証結果を示す研究とは区別すべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません）・未完了の試行 |\n| 週次統合 | gpt-6.1-sol / medium | 1 | 3,215 | 6,786 (275) | 0.0682 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 保存レビューでは、メモリ使用を意識した取り込みと、ParquetおよびDuckDBを用いた検索基盤が紹介されている。速度やメモリ削減の数値は供給されていない。\n\n**手法:** 専用パーサーでデータを取り込み、Parquet形式で保存し、DuckDBで検索する。\n\n**実務への応用:** 日本株のティックデータを用いた市場構造分析や執行研究の前処理基盤として検討できる。\n\n**限界・注意点:** 原資料の確認範囲は不明で、全文解析は確認できない。対応するデータ仕様、処理の正確性、比較ベンチマーク、利用条件は確認できない。\n\n## 7. Equilibrium in closed constant-function market maker economies\n\n**[arXiv:2608.23915v1](https://arxiv.org/abs/2608.23915v1) — Muqiao Huang, Ruodu Wang, Yiyun Wang**\n\n### 概要\n\n手数料のない閉鎖的なconstant-function market maker経済について、均衡と取引による到達可能性を理論的に扱う研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 非推奨 | CFMM / 市場設計 / 均衡 / Pareto最適性 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 市場設計には関連するが、供給情報の範囲では執行実務への直接的な示唆は限定的である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません）・未完了の試行 |\n| 週次統合 | gpt-6.1-sol / medium | 1 | 3,215 | 6,786 (275) | 0.0682 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 保存レビューでは、無取引均衡、Pareto最適性、到達可能性、収束を解析するとされる。各結果の厳密な成立条件は供給されていない。\n\n**手法:** 手数料のない閉鎖経済を対象に、CFMMの均衡と動学的性質を数学的に分析する。\n\n**実務への応用:** CFMMの市場設計や、取引過程と資源配分の関係を理解するための理論的参考となる。\n\n**限界・注意点:** 原資料の確認範囲は不明で、全文解析は確認できない。閉鎖経済・手数料なしという設定のため、外部市場との裁定や実運用への一般化には注意が必要である。\n\n## 8. Capital allocation on decentralized lending platforms\n\n**[arXiv:2608.24206v1](https://arxiv.org/abs/2608.24206v1) — Bastien Baude, Vincent Danos, Hamza El Khalloufi**\n\n### 概要\n\n分散型レンディング市場で、自らの資金供給が利用率と貸出金利を変える効果を考慮した資金配分研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 推奨 | DeFi / レンディング / 金利インパクト / 資金配分 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 配分が金利を変える内生性を扱い、DeFi金利のモデル化に直接関係する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません）・未完了の試行 |\n| 週次統合 | gpt-6.1-sol / medium | 1 | 3,215 | 6,786 (275) | 0.0682 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 保存レビューによれば、供給量による金利への自己インパクトを含め、複数市場への最適配分を導いている。\n\n**手法:** 供給量、利用率、貸出金利の関係を組み込んだ複数市場間の配分最適化を扱う。\n\n**実務への応用:** 表示金利を固定とみなさず、配分後の金利変化を織り込むDeFi運用設計の参考となる。\n\n**限界・注意点:** 原資料の確認範囲は不明で、全文解析は確認できない。金利関数、解の条件、信用・清算・スマートコントラクトリスクの扱いは供給情報から確認できない。\n\n## 9. Output-Only Identification and Spectral Monitoring of Coupled Feedback Networks with Known Time-Varying Actuation\n\n**[arXiv:2608.25844v1](https://arxiv.org/abs/2608.25844v1) — Jihwan Woo**\n\n### 概要\n\n既知の時変作動情報と観測出力から結合フィードバック網を同定し、スペクトルリスクとショック伝播を監視する研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 非推奨 | システム同定 / フィードバック網 / スペクトル監視 / ショック伝播 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 市場フィードバック監視への接点はあるが、供給情報では金融市場への適用実績が確認できず、関連性は応用候補にとどまる。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません）・未完了の試行 |\n| 週次統合 | gpt-6.1-sol / medium | 1 | 3,215 | 6,786 (275) | 0.0682 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 保存レビューでは、既知の時変ゲインと出力のみから結合を同定する枠組みが紹介されている。推定精度や金融市場での検証結果は供給されていない。\n\n**手法:** 既知の時変作動を利用したoutput-only identificationと、結合網のスペクトル監視を組み合わせる。\n\n**実務への応用:** 作動情報を把握できる取引システムで、戦略間の相互作用やショック伝播を監視する応用候補となる。\n\n**限界・注意点:** 原資料の確認範囲は不明で、全文解析は確認できない。同定条件、雑音への頑健性、市場で作動情報を既知とする妥当性は評価できない。\n\n## 10. Tabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal Generation\n\n**[arXiv:2608.27076v1](https://arxiv.org/abs/2608.27076v1) — Joshua Le Grice**\n\n### 概要\n\n米国大型株の日次シグナル生成で、複数レジームの取引成績を目的とするBayesian optimisationとモデルのアンサンブルを検証したMSc研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 推奨 | アルゴリズム取引 / 株式シグナル / Bayesian optimisation / レジーム頑健性 / アンサンブル / バックテスト |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** シグナル開発の設計例として有用だが、報告収益を執行可能な期待収益と解釈せず、独立検証を前提に参照すべきである。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません）・未完了の試行 |\n| 週次統合 | gpt-6.1-sol / medium | 1 | 3,215 | 6,786 (275) | 0.0682 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 保存レビューによれば、2025年のOOSでアンサンブルは総収益51.26%、Sharpe比2.44を報告した。XGBoostが最良の単体モデルで、TabNetとFT-Transformerは単独では上回らなかった。\n\n**手法:** 2015～2024年を学習・検証、2025年をOOSとし、複数レジームのwalk-forward評価で調整する。日次クロスセクション分類からドル中立ポートフォリオを構築する。\n\n**実務への応用:** 予測精度だけでなくコスト控除後のポートフォリオ成績で調整し、異種モデルのシグナルを組み合わせる設計の参考となる。\n\n**限界・注意点:** 原資料の確認範囲は不明で、全文解析は確認できない。保存レビューは、単年OOS、構成銘柄の生存者バイアス、固定コストと終値執行近似、借株制約・市場インパクトの未反映、多重試行への補正不足を指摘する。同条件の単一レジーム調整との比較もなく、レジーム横断調整の優位は確立していない。\n\n## 11. Rethinking Synthetic Scenario Realism: Compatibility, Not Fidelity, Drives Hedging Performance\n\n**[arXiv:2608.20842v1](https://arxiv.org/abs/2608.20842v1) — Ryuji Hashimoto, Masanori Hirano, Ryota Ozaki, Kentaro Imajo**\n\n### 概要\n\n合成価格経路を、統計的な現実性ではなく実市場でのヘッジへの適合性から評価する研究である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 2/10 | 非推奨 | 合成シナリオ / 動的ヘッジ / 生成モデル / 対象外 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 一般的な動的ヘッジとシナリオ生成が中心で、供給情報では本サイトの対象領域との実質的な関連が不足する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 週次統合 | gpt-6.1-sol（指定値・実績未記録） / medium | 1 | 未記録 | 未記録 (未記録) | 未記録 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません）・未完了の試行 |\n| 週次統合 | gpt-6.1-sol / medium | 1 | 3,215 | 6,786 (275) | 0.0682 | 保存済みレビュー・11論文の共有処理（論文単独の使用量ではありません） |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 題名と保存レビューは、ヘッジ性能には統計的忠実度より適合性が重要という主張を示すが、効果量や成立条件は供給されていない。\n\n**手法:** 合成経路の評価を、統計的現実性と実市場でのヘッジ適合性という観点から検討する。\n\n**実務への応用:** ヘッジ学習用シナリオを、分布の類似性だけでなく下流の運用目的で選ぶ際の参考となる。\n\n**限界・注意点:** 原資料の確認範囲は不明で、全文解析は確認できない。対象資産、生成モデル、比較実験の詳細は不明で、電子執行や金利との直接的関係も確認できない。",
+      "papers": [
+        {
+          "arxivId": "2511.02016v2",
+          "title": "ABIDES-MARL: A Multi-Agent Reinforcement Learning Environment for Optimal Execution with Endogenous Liquidity",
+          "authors": [
+            "Patrick Cheridito",
+            "Jean-Loup Dupret",
+            "Zhexin Wu"
+          ],
+          "submittedDate": "2025-11-03",
+          "updatedDate": "2025-11-05",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2511.02016v2",
+          "pdfUrl": "https://arxiv.org/pdf/2511.02016v2",
+          "schedulerRank": 1,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 4/10",
+          "schedulerSummary": "適応的なマーケットメーカーを含む環境で、最適執行と内生的流動性を扱う多主体強化学習研究である。\n\n週次統合: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 未完了の試行\n週次統合: gpt-6.1-sol / medium · トークン 入力 3,215 / 出力 6,786（うち推論 275） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0682",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.20589v1",
+          "title": "Calibrating Inelastic Markets to Options: The Lean Marketron and the Generalized Langevin Equation",
+          "authors": [
+            "Andrey Itkin"
+          ],
+          "submittedDate": "2026-08-20",
+          "updatedDate": "2026-08-20",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.20589v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.20589v1",
+          "schedulerRank": 2,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 4/10",
+          "schedulerSummary": "注文フローとリターンの相互作用を縮約モデルで表し、オプション価格面への較正につなげる研究である。\n\n週次統合: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 未完了の試行\n週次統合: gpt-6.1-sol / medium · トークン 入力 3,215 / 出力 6,786（うち推論 275） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0682",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.20982v1",
+          "title": "Surrender runs",
+          "authors": [
+            "Andreas Löffler",
+            "Stefan Steins"
+          ],
+          "submittedDate": "2026-08-21",
+          "updatedDate": "2026-08-21",
+          "topics": [
+            "Rates"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.20982v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.20982v1",
+          "schedulerRank": 3,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 4/10",
+          "schedulerSummary": "金利上昇時の保険契約の集団解約を、ファンダメンタルズと自己実現的な行動の両面から扱う研究である。\n\n週次統合: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 未完了の試行\n週次統合: gpt-6.1-sol / medium · トークン 入力 3,215 / 出力 6,786（うち推論 275） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0682",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.21888v1",
+          "title": "Short-horizon mean reversion in cryptocurrency markets: a matched cross-market measurement",
+          "authors": [
+            "Nadav A. Kitron",
+            "Jonathan M. Wengrowicz"
+          ],
+          "submittedDate": "2026-08-22",
+          "updatedDate": "2026-08-22",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.21888v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.21888v1",
+          "schedulerRank": 4,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 4/10",
+          "schedulerSummary": "暗号資産の15分程度の短期リバーサルを米国株と共通の測定手順で比較し、成行的フローとの関係を調べる研究である。\n\n週次統合: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 未完了の試行\n週次統合: gpt-6.1-sol / medium · トークン 入力 3,215 / 出力 6,786（うち推論 275） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0682",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.22768v1",
+          "title": "The Loop-Gain Matrix: Coupled Rebalancing Feedback and the Blind Spots of Scalar Stability Monitoring",
+          "authors": [
+            "Jihwan Woo"
+          ],
+          "submittedDate": "2026-08-24",
+          "updatedDate": "2026-08-24",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.22768v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.22768v1",
+          "schedulerRank": 5,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 4/10",
+          "schedulerSummary": "複数商品のリバランスが生む相互フィードバックを行列で表し、単一指標による安定性監視の盲点を扱う研究である。\n\n週次統合: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 未完了の試行\n週次統合: gpt-6.1-sol / medium · トークン 入力 3,215 / 出力 6,786（うち推論 275） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0682",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.23053v1",
+          "title": "tse_tick: A Python Library for Parsing and Querying Nikkei NEEDS Tick Data from the Tokyo Stock Exchange",
+          "authors": [
+            "Kazumi Li",
+            "Masataka Hayashi",
+            "Teruo Nakatsuma",
+            "Peter Romero"
+          ],
+          "submittedDate": "2026-08-24",
+          "updatedDate": "2026-08-24",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.23053v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.23053v1",
+          "schedulerRank": 6,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 4/10",
+          "schedulerSummary": "東証のNikkei NEEDSティックデータを解析・検索するPythonライブラリを紹介する研究基盤論文である。\n\n週次統合: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 未完了の試行\n週次統合: gpt-6.1-sol / medium · トークン 入力 3,215 / 出力 6,786（うち推論 275） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0682",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.23915v1",
+          "title": "Equilibrium in closed constant-function market maker economies",
+          "authors": [
+            "Muqiao Huang",
+            "Ruodu Wang",
+            "Yiyun Wang"
+          ],
+          "submittedDate": "2026-08-24",
+          "updatedDate": "2026-08-24",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.23915v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.23915v1",
+          "schedulerRank": 7,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 4/10",
+          "schedulerSummary": "手数料のない閉鎖的なconstant-function market maker経済について、均衡と取引による到達可能性を理論的に扱う研究である。\n\n週次統合: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 未完了の試行\n週次統合: gpt-6.1-sol / medium · トークン 入力 3,215 / 出力 6,786（うち推論 275） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0682",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.24206v1",
+          "title": "Capital allocation on decentralized lending platforms",
+          "authors": [
+            "Bastien Baude",
+            "Vincent Danos",
+            "Hamza El Khalloufi"
+          ],
+          "submittedDate": "2026-08-25",
+          "updatedDate": "2026-08-25",
+          "topics": [
+            "Interest-rate models"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.24206v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.24206v1",
+          "schedulerRank": 8,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 4/10",
+          "schedulerSummary": "分散型レンディング市場で、自らの資金供給が利用率と貸出金利を変える効果を考慮した資金配分研究である。\n\n週次統合: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 未完了の試行\n週次統合: gpt-6.1-sol / medium · トークン 入力 3,215 / 出力 6,786（うち推論 275） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0682",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.25844v1",
+          "title": "Output-Only Identification and Spectral Monitoring of Coupled Feedback Networks with Known Time-Varying Actuation",
+          "authors": [
+            "Jihwan Woo"
+          ],
+          "submittedDate": "2026-08-26",
+          "updatedDate": "2026-08-26",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.25844v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.25844v1",
+          "schedulerRank": 9,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 4/10",
+          "schedulerSummary": "既知の時変作動情報と観測出力から結合フィードバック網を同定し、スペクトルリスクとショック伝播を監視する研究である。\n\n週次統合: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 未完了の試行\n週次統合: gpt-6.1-sol / medium · トークン 入力 3,215 / 出力 6,786（うち推論 275） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0682",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.27076v1",
+          "title": "Tabular Deep Learning for Algorithmic Trading: Cross-Regime Bayesian Optimisation for Equity Signal Generation",
+          "authors": [
+            "Joshua Le Grice"
+          ],
+          "submittedDate": "2026-08-27",
+          "updatedDate": "2026-08-27",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.27076v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.27076v1",
+          "schedulerRank": 10,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 4/10",
+          "schedulerSummary": "米国大型株の日次シグナル生成で、複数レジームの取引成績を目的とするBayesian optimisationとモデルのアンサンブルを検証したMSc研究である。\n\n週次統合: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 未完了の試行\n週次統合: gpt-6.1-sol / medium · トークン 入力 3,215 / 出力 6,786（うち推論 275） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0682",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2608.20842v1",
+          "title": "Rethinking Synthetic Scenario Realism: Compatibility, Not Fidelity, Drives Hedging Performance",
+          "authors": [
+            "Ryuji Hashimoto",
+            "Masanori Hirano",
+            "Ryota Ozaki",
+            "Kentaro Imajo"
+          ],
+          "submittedDate": "2026-08-21",
+          "updatedDate": "2026-08-21",
+          "topics": [
+            "Out of scope"
+          ],
+          "absUrl": "https://arxiv.org/abs/2608.20842v1",
+          "pdfUrl": "https://arxiv.org/pdf/2608.20842v1",
+          "schedulerRank": 11,
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 2/10",
+          "schedulerSummary": "合成価格経路を、統計的な現実性ではなく実市場でのヘッジへの適合性から評価する研究である。\n\n週次統合: gpt-6.1-sol（指定値） / medium · トークン 入力 未記録 / 出力 未記録（うち推論 未記録） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 未完了の試行\n週次統合: gpt-6.1-sol / medium · トークン 入力 3,215 / 出力 6,786（うち推論 275） · 保存済み日次レビュー使用／11論文の共有処理。トークン数は論文単独ではなく共有分 · 推定 $0.0682",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 2,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

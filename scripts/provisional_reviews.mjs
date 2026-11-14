@@ -21,14 +21,16 @@ export function collectPeriod(kind, end, daily, holidays) {
       continue;
     }
     covered.push(day);
-    for (const source of sources) {
+    const confirmedPipeline = sources.filter(source => source.sourceKind === "openai-responses-api");
+    for (const source of confirmedPipeline.length ? confirmedPipeline : sources) {
       source.papers.forEach((paper, i) => {
         const key = paper.arxivId.replace(/v\d+$/i, "").toLowerCase();
         const previous = papers.get(key);
-        // Later batch and edition supersede an earlier appearance. Keep its
-        // original score, translation and version together.
-        if (!previous || source.importedAt >= previous.importedAt) {
-          papers.set(key, { paper, translation: source.translations[i], day, importedAt: source.importedAt });
+        // A delayed import of an old batch must not downgrade a revised paper.
+        const version = Number(/v(\d+)$/i.exec(paper.arxivId)?.[1] || 0);
+        if (!previous || version > previous.version || (version === previous.version &&
+            (day > previous.day || (day === previous.day && source.importedAt >= previous.importedAt)))) {
+          papers.set(key, { paper, translation: source.translations[i], day, version, importedAt: source.importedAt });
         }
       });
     }

@@ -1,5 +1,6 @@
 import copy
 import json
+import shutil
 import sys
 import tempfile
 import unittest
@@ -40,6 +41,29 @@ def ready_week(root):
 
 
 class CalendarRecoveryTests(unittest.TestCase):
+    def test_confirmed_august_archive_is_reusable_for_synthesis(self):
+        root = Path(__file__).resolve().parents[1]
+        start, end = date(2026, 8, 22), date(2026, 8, 28)
+        with tempfile.TemporaryDirectory() as tmp:
+            snapshot = Path(tmp)
+            (snapshot / "content").mkdir()
+            for name in ("chatgpt_scheduler_history.json", "legacy_daily_categories.json"):
+                shutil.copyfile(root / "content" / name, snapshot / "content" / name)
+            daily_dir = snapshot / "research/daily"
+            p.persist_report(daily(end), daily_dir)
+            inputs = p.load_period_inputs(daily_dir, start, end)
+            self.assertEqual(p.missing_batch_dates(CFG, inputs, start, end), [])
+            archived = next(r for r in inputs if r["reportDate"] == "2026-08-24")
+            source = archived["papers"][0]
+            self.assertTrue(source["finalAnalysis"]["schedulerSummary"])
+            self.assertTrue(source["metadata"]["categories"])
+            analyzer = FakeAnalyzer(synthesized=[{"arxivId": source["metadata"]["arxivId"],
+                                                  "finalAnalysis": analysis(importance=4)}])
+            result = p.run_aggregate(CFG, report_kind="weekly", period_start=start, period_end=end,
+                                     daily_dir=daily_dir, output_dir=snapshot / "weekly", analyzer=analyzer)
+        self.assertEqual(result["status"], p.UPDATE_CONFIRMED)
+        self.assertEqual(result["papers"][0]["metadata"], source["metadata"])
+
     def test_eastern_holiday_does_not_skip_prior_evening_batch(self):
         for day, expected in [(5, 4), (6, 4), (7, 7), (8, 7), (9, 9)]:
             self.assertEqual(p.expected_batch_date(NOW.replace(day=day), CFG.no_announcement_dates), date(2026, 9, expected))

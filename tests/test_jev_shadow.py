@@ -147,7 +147,9 @@ class ShadowTests(unittest.TestCase):
     def test_version_page_uses_submission_history_and_subjects_of_that_version(self):
         html = b"""<strong>arXiv:2611.00001v1</strong>
         <meta name="citation_title" content=" A title ">
-        <meta property="og:description" content="Rates &amp; execution.">
+        <meta property="og:description" content="Social preview with converted math">
+        <blockquote class="abstract mathjax"><span class="descriptor">Abstract:</span>
+        Rates &amp; execution with $x^2$.</blockquote>
         <div class="authors"><a>Author A</a>, <a>Author B</a></div>
         <td class="tablecell subjects"><span>Trading (q-fin.TR)</span>; Probability (math.PR)</td>
         <strong>[v1]</strong> Sat, 7 Nov 2026 11:12:13 UTC (10 KB)<br/>
@@ -156,8 +158,12 @@ class ShadowTests(unittest.TestCase):
         entry = s.fetch_version("2611.00001v1", opener)
         self.assertEqual(entry.updated_at, entry.submitted_at)
         self.assertEqual(entry.updated_at.day, 7)
-        self.assertEqual(entry.abstract, "Rates & execution.")
+        self.assertEqual(entry.abstract, "Rates & execution with $x^2$.")
         self.assertEqual(entry.categories, ("math.PR", "q-fin.TR"))
         self.assertEqual(entry.authors, ("Author A", "Author B"))
         with self.assertRaisesRegex(ValueError, "identity mismatch"):
             s.fetch_version("2611.00001v2", opener)
+        revision = html.replace(b"arXiv:2611.00001v1", b"arXiv:2611.00001v2").replace(
+            b"<strong>[v1]</strong>", b'<strong><a href="/abs/2611.00001v1">[v1]</a></strong>')
+        revised = s.fetch_version("2611.00001v2", Mock(return_value=io.BytesIO(revision)))
+        self.assertEqual((revised.submitted_at.day, revised.updated_at.day), (7, 9))

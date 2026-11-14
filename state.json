@@ -642,7 +642,19 @@
         "importance": 2,
         "recommended": false
       },
-      "status": "attempted"
+      "status": "compared",
+      "jev": {
+        "scores": {
+          "rates": 0.06,
+          "execution": 0.08,
+          "practical": 0.07
+        },
+        "route": "exclude",
+        "usage": {
+          "input_tokens": 605,
+          "output_tokens": 54
+        }
+      }
     },
     "2611.16657": {
       "batch": "2026-11-13",

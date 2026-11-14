@@ -10947,6 +10947,196 @@
           ]
         }
       ]
+    },
+    {
+      "editionId": "2026-10-19-daily-openai-01",
+      "editionDate": "2026-10-19",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-11-14T13:45:24Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-10-19",
+      "observedBatchDate": "2026-10-19",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年10月19日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 12 | 10,347 | 10,375 (512) | 0.0062 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 5 | 101,938 | 7,503 (963) | 0.3299 | PDF全文・10ページ / PDF全文・9ページ / PDF全文・16ページ / PDF全文・24ページ / PDF全文・19ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. OrderFlowDiT: Transport-Regularized Diffusion Transformer for Probabilistic Limit-Order Supply Forecasting\n\n**[arXiv:2610.22727v1](https://arxiv.org/abs/2610.22727v1) — Jung Hun Phee, Tucker Balch**\n\n### 概要\n\n現在の板と直近の注文フローから、次の5分間に新規提出される指値注文量の価格別・売買別同時分布を生成するOrderFlowDiTを提案する。予測対象は将来の残存板厚ではなく、取消・約定前の累積提出量である。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 市場マイクロストラクチャ / 指値注文供給予測 / 条件付き拡散モデル / 非均衡最適輸送 / 確率予測評価 / 予測較正 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 価格配置と絶対注文量を保持する生成学習と、予測精度・分布品質・較正を分ける評価設計が有用である。市場マイクロストラクチャ研究として推薦するが、実運用性能を示す証拠ではない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 835 | 794 (0) | 0.0005 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 19,023 | 1,357 (129) | 0.0611 | PDF全文・9ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 米国株30銘柄・1,950予測時点の検証データで、UOT補助損失の追加により、MSE単独比で全フィールド輸送コストが45.8%、輸送energy scoreが26.1%低下したと報告する。両指標は全銘柄で改善した。GRPO追加学習は輸送scoreと出来高CRPSを改善した一方、同時分布score、サンプル多様性、出来高の較正は悪化した。\n\n**手法:** LOBSTERの全板メッセージから、mid-price基準の10,001価格ビンに非正規化の提出株数を集計する。条件付きDiffusion Transformerを用い、denoising MSEに復号後フィールドのunbalanced Sinkhorn divergenceを加える。統計的ベースラインと比較し、輸送コスト、energy score、対数出来高CRPS、順位較正で評価する。輸送scoreは同時分布を一意に識別しないため、厳密にproperな同時フィールドscoreも併用する。\n\n**実務への応用:** 価格帯別の将来注文供給シナリオを生成し、流動性補充を考慮した執行計画やシミュレーションの入力に利用できる可能性がある。ただし、取引行動への市場反応や執行コスト改善は検証されていない。\n\n**限界・注意点:** 評価日はcheckpoint選択にも使用した単一日で、独立テスト結果はない。学習seedは各設定1つ、予測サンプルは各時点4本で、比較は記述的である。GRPO比較にはサンプラー変更、大型化比較にはデータ量・容量・学習予算の同時変更が交絡する。取消・約定・イベント順序を省くため、将来板や実行可能流動性を直接再現できず、他市場への一般化も未検証である。\n\n## 2. Basis-Only Funding Is Not Dividend Fair: Settlement Design in Crypto Equity Perpetuals\n\n**[arXiv:2610.22839v1](https://arxiv.org/abs/2610.22839v1) — Donghwa Seo, Doohwi Cha, Seunghan Son, Juyeong Lee, Minsuk Sung, Minjae Lee**\n\n### 概要\n\n株式永久先物のfundingについて、basisの安定化と配当の公平な決済を区別する研究である。連続的なbasis連動fundingでは離散配当を任意の保有区間について補償できないことを示し、取引所データで配当調整方式の違いを報告する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 株式永久先物 / ファンディング設計 / 配当決済 / 市場設計 / イベント時刻 / ベーシス |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 配当決済とbasis制御を分離する視点は市場設計上重要である。ただし、理論上の必要条件と実際の取引所の公平性を区別して読む必要があり、実証結論と一部の数学的主張には留保がある。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 879 | 912 (0) | 0.0005 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 15,074 | 1,596 (365) | 0.0536 | PDF全文・16ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** モデル上、公平な連続fundingは $f_tP_t=r_tS_t+\\mu_t^e-a_t$ を満たす必要がある。配当落ち時にbasisが変化しなければ、別途同時点の配当調整が必要となる。実証ではBinanceの対象5配当落ち日に配当相当の特別fundingを報告するが、これは任意の売買時点での公平性や純裁定利益の実証ではない。\n\n**手法:** 半マルチンゲールモデルでヘッジ残差のマルチンゲール条件を導き、測度の区間乖離から連続fundingによる配当原子の複製不可能性を示す。さらにbasisの十分統計量条件、加重射影、平均回帰モデル、シミュレーションを検討し、取引所固有のfunding・mark・indexと配当日程を比較する。\n\n**実務への応用:** 株式永久先物の契約設計や取引所比較に有用である。配当調整の有無だけでなく、価格調整との時刻整合性、funding外の口座入金、markとoracleの仕様を確認するための枠組みとなる。\n\n**限界・注意点:** Binanceのイベントは5件と少なく、公平fundingの推定や費用控除後の利益検証はない。特別fundingは配当落ち前日の米東部時間20時と報告される一方、価格調整との同時性は確認されず、論文自身の時刻一致条件を満たすか不明である。調整後の残差縮小だけでは弱い公平性を証明できない。funding履歴に記録がないことも、別経路の補償の不存在を意味しない。また、系1の区間乖離量をイベント時点外の総質量と等置する主張は、価格調整がその前後に分散する場合には一般に成立しない。\n\n## 3. From Alpha to Execution: Trading Horizons, Regimes, and Schedules under Concave Impact and Hurst Scaling\n\n**[arXiv:2610.23749v1](https://arxiv.org/abs/2610.23749v1) — Dnyanesh Kulkarni, Revant Nayar**\n\n### 概要\n\n凹型インパクトとHurst型価格変動の下で、取引損益のSharpe比による執行期間選択と、遅延コストによる執行配分を別々に解析する理論研究である。約定価格と予測終点価格の共分散を含めることで、このモデルでは執行の長期化が損益分散を減らすと示す。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 最適執行 / 市場インパクト / 執行期間 / アルファ実現 / Hurst指数 / 凸最適化 / Sharpe比 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** アルファ実現、価格共分散、期間依存インパクトを分離する視点は電子執行に有用である。全文では二段階設計の非最適性と保守的配分のSharpe損失も明示されており、実装済みの優位性ではなく研究・較正の枠組みとして推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 1,040 | 911 (83) | 0.0006 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 19,600 | 1,559 (167) | 0.0646 | PDF全文・19ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 期間選択はインパクトの期間弾力性と、アルファ実現からリスク低減効果を差し引いた純緊急性で整理される。ただし期間自体は注文量やインパクト係数に依存する。AMZNの例では最適期間87分に対し、最大Sharpe比から1%以内の範囲は16〜270分だった。固定期間の配分は $\\phi(t)\\propto[\\lambda-w(t)]_+^{1/\\beta}$ となり、同じ実行時間のTWAPよりエンベロープ費用を約10〜17%削減すると報告する。\n\n**手法:** 価格を決定論的アルファとfractional Brownian motionで表し、均等執行の損益平均・分散とSharpe比の厳密な一階条件を導出する。短期間近似でレジームを分類し、別途、局所インパクトと約定時点の遅延費用を含む凸最適化をKKT条件で解く。数値例では厳密な期間最適化と配分変更後のSharpe比も評価する。\n\n**実務への応用:** TCAからインパクトの期間弾力性を直接推定し、アルファ実現速度と合わせて執行速度を判断する枠組みとして使える。最適期間を一点ではなく許容帯で管理し、参加率上限付きの前倒し配分を設計できる。ただしエンベロープ強度は別途較正が必要である。\n\n**限界・注意点:** 期間と配分の同時Sharpe最大化ではない。レジーム分類には短期間近似などの条件があり、構造仮定 $a=\\beta-H$ は実証結果ではない。配分問題のインパクト尺度は早期完了しても名目期間に固定される。費用削減はエンベロープ上の値で、実現スリッページ改善を意味しない。AMZN例では強いエンベロープによりSharpe比が均等執行の約半分になる。市場入力は単一日の推定に限られ、広範な実証検証はない。\n\n## 4. Cross-product Modelling in Continuous Intraday Electricity Markets via Hawkes Processes\n\n**[arXiv:2610.23619v1](https://arxiv.org/abs/2610.23619v1) — Ayoub Jhabli, Tarek Alskaif, Kwabena E. Bennin, Bedir Tekinerdogan, Joost M. E. Pennings**\n\n### 概要\n\nオランダEPEX SPOTの2024年1・4・7・10月のLevel 3板データを用い、時間物と15分物の注文到着を状態依存Hawkes過程で分析する。流動性ストレス時には、商品間の注文フロー伝播が平時より対称化し、15分物から時間物への反応が速まると報告している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | 市場マイクロストラクチャー / 日中電力市場 / 状態依存Hawkes過程 / 商品間波及 / 流動性ストレス / 注文到着 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 商品横断の高頻度注文フローを流動性状態別に比較する研究として関連性が高い。ただし、内生性と累積伝播の解釈には重要な留保があり、実装根拠ではなく研究上の参考として推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 926 | 966 (76) | 0.0006 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 41,280 | 1,620 (190) | 0.1194 | PDF全文・24ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 3成分指数混合カーネルが比較対象中で最良だったが、2成分からの残差分布距離の改善は約1.5%にとどまる。推定された累積交差励起の方向別比率は平時の2.8からストレス時の1.5へ低下し、15分物から時間物への平均励起ラグは6.05秒から0.93秒へ短縮した。これは注文到着モデル上の結果であり、価格発見や流動性ショックの因果的伝播を直接実証するものではない。\n\n**手法:** 時間物1本と対応する15分物4本の同時取引可能期間を使い、注文提出を2種類のイベントに集約する。スプレッド、mid-price変動性、絶対queue imbalanceからストレス指標を作り、その75パーセンタイルで状態を分割する。2,915契約について4種類のカーネルを罰則付き最尤法で比較し、残差診断と累積伝播行列$\\Psi^{(x)}=(I-G^{(x)})^{-1}$などで評価する。\n\n**実務への応用:** 商品横断の注文監視や執行シミュレーションで、反応方向と時間尺度を流動性状態に応じて変更する設計の参考になる。ただし、執行費用の削減、収益性、ヘッジ改善は検証されていない。\n\n**限界・注意点:** 採用モデルでも残差独立性検定の非棄却率は26.8%で、系列依存が残る。本文の検定結果と、検定のp値を用いないとする付録にも不整合がある。スペクトル半径をそのまま「注文の約95%が内生的」と読む解釈や、状態別行列から状態切替下の安定性・累積伝播を判断する妥当性は十分に検証されていない。近臨界性には0.95を目標とする罰則の影響も確認が必要である。さらに、ミリ秒時刻、取消注文の除外、単一ランダム初期値、べき乗カーネルの履歴打切り、単一市場・4か月の標本が制約となる。標本外の執行性能は示されていない。\n\n## 5. Agentic AI in Automated Markets\n\n**[arXiv:2610.22522v1](https://arxiv.org/abs/2610.22522v1) — Irene Aldridge, Lourenco Belleau-Bhowmik, James Chan, Josh Chang, Kelly Deng, Pranav Dhingra, Xinda Ding, Haodong Fang, Satya Hanumanchi, Carter He, Shuang He, Yadong Hou, Vallab Karanam, Rithvik Kasarla, Tishya Khanna, Jihyun Kim, Sarah Konety, Abhinav Kotta, Anderson Lo, Jake Luther, Omar Mian, Ishan Patwardhan, Matteo Perona, Chenyue Qi, Shashank Ramachandran, Shubham Rateria, Jake Swain, David Thai, Michael Twersky, Susan Wu, Dean Xu, Helenna Yin, Jiachun Zheng**\n\n### 概要\n\n報酬設計で合理的運用者、操作的取引者、群集追随者を表現し、DQNとREINFORCEで暗号資産の保有比率を制御する探索的研究である。実証部分はAAVE、ETC、SUIの小規模な価格受容型バックテストであり、市場参加者間の相互作用や市場品質への影響は検証していない。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 非推奨 | 強化学習 / 暗号資産 / 報酬設計 / 取引行動 / 説明可能性 / 予備的実証 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 電子取引への関連性は高いが、主張の中心となる市場ストレスや規制への含意は未検証である。再現性情報の不足と実験記述の不整合もあり、現段階では優先的な紹介を推奨しない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 973 | 961 (70) | 0.0006 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 6,961 | 1,371 (112) | 0.0311 | PDF全文・10ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らは、群集追随型では短いストレスが頻発し、操作型では少数のストレスが長期化し、取引を継続した合理型ではSharpe比が比較的安定すると報告する。ただし単一試行の図示に基づく観察であり、統計的有意性や市場への因果効果は示されていない。合理型REINFORCEの一部は無保有に収束した。\n\n**手法:** 各資産約1,750時間のデータを用い、売却・維持・購入によってロング限定の保有比率を段階的に調整する。取引費用とリスクを考慮した基礎報酬に、回転売買やモメンタム追随への誘因を追加し、独立した環境でDQNとベースライン付きREINFORCEを比較する。戦略損失の頻度・持続性、ローリングSharpe比、収益率変動性を観察し、SHAPで入力特徴量の寄与を調べる。\n\n**実務への応用:** 取引目的に応じた報酬設計の比較、RL方策のSHAP分析、監視指標の仮説生成に利用できる。一方、実運用戦略の採用や行動別規制の導入を直接裏づける証拠にはならない。\n\n**限界・注意点:** 価格インパクト、エージェント間相互作用、明示的なAMM機構がなく、操作型の回転売買報酬も実際の相場操縦を再現しない。市場水準のStage 2検証は提示されず、戦略収益の指標から市場効率や流動性への効果は判断できない。5シード平均との記述は、結果・限界節の単一試行との記述と矛盾する。データ節は空欄で、取得元、対象期間、分割や主要設定の詳細も不足し、持続性は目視評価である。",
+      "papers": [
+        {
+          "arxivId": "2610.22727v1",
+          "title": "OrderFlowDiT: Transport-Regularized Diffusion Transformer for Probabilistic Limit-Order Supply Forecasting",
+          "authors": [
+            "Jung Hun Phee",
+            "Tucker Balch"
+          ],
+          "submittedDate": "2026-10-15",
+          "updatedDate": "2026-10-15",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.22727v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.22727v1",
+          "schedulerRank": 1,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "現在の板と直近の注文フローから、次の5分間に新規提出される指値注文量の価格別・売買別同時分布を生成するOrderFlowDiTを提案する。予測対象は将来の残存板厚ではなく、取消・約定前の累積提出量である。\n\n一次判定: gpt-6-luna / low · トークン 入力 835 / 出力 794（うち推論 0） · 推定 $0.0005\n論文解析: gpt-6.1-sol / medium · トークン 入力 19,023 / 出力 1,357（うち推論 129） · PDF 9 pages · 推定 $0.0611",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.22839v1",
+          "title": "Basis-Only Funding Is Not Dividend Fair: Settlement Design in Crypto Equity Perpetuals",
+          "authors": [
+            "Donghwa Seo",
+            "Doohwi Cha",
+            "Seunghan Son",
+            "Juyeong Lee",
+            "Minsuk Sung",
+            "Minjae Lee"
+          ],
+          "submittedDate": "2026-10-16",
+          "updatedDate": "2026-10-16",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.22839v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.22839v1",
+          "schedulerRank": 2,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "株式永久先物のfundingについて、basisの安定化と配当の公平な決済を区別する研究である。連続的なbasis連動fundingでは離散配当を任意の保有区間について補償できないことを示し、取引所データで配当調整方式の違いを報告する。\n\n一次判定: gpt-6-luna / low · トークン 入力 879 / 出力 912（うち推論 0） · 推定 $0.0005\n論文解析: gpt-6.1-sol / medium · トークン 入力 15,074 / 出力 1,596（うち推論 365） · PDF 16 pages · 推定 $0.0536",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.23749v1",
+          "title": "From Alpha to Execution: Trading Horizons, Regimes, and Schedules under Concave Impact and Hurst Scaling",
+          "authors": [
+            "Dnyanesh Kulkarni",
+            "Revant Nayar"
+          ],
+          "submittedDate": "2026-10-16",
+          "updatedDate": "2026-10-16",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.23749v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.23749v1",
+          "schedulerRank": 3,
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 8/10",
+          "schedulerSummary": "凹型インパクトとHurst型価格変動の下で、取引損益のSharpe比による執行期間選択と、遅延コストによる執行配分を別々に解析する理論研究である。約定価格と予測終点価格の共分散を含めることで、このモデルでは執行の長期化が損益分散を減らすと示す。\n\n一次判定: gpt-6-luna / low · トークン 入力 1,040 / 出力 911（うち推論 83） · 推定 $0.0006\n論文解析: gpt-6.1-sol / medium · トークン 入力 19,600 / 出力 1,559（うち推論 167） · PDF 19 pages · 推定 $0.0646",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 8,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.23619v1",
+          "title": "Cross-product Modelling in Continuous Intraday Electricity Markets via Hawkes Processes",
+          "authors": [
+            "Ayoub Jhabli",
+            "Tarek Alskaif",
+            "Kwabena E. Bennin",
+            "Bedir Tekinerdogan",
+            "Joost M. E. Pennings"
+          ],
+          "submittedDate": "2026-10-16",
+          "updatedDate": "2026-10-16",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.23619v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.23619v1",
+          "schedulerRank": 4,
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 6/10",
+          "schedulerSummary": "オランダEPEX SPOTの2024年1・4・7・10月のLevel 3板データを用い、時間物と15分物の注文到着を状態依存Hawkes過程で分析する。流動性ストレス時には、商品間の注文フロー伝播が平時より対称化し、15分物から時間物への反応が速まると報告している。\n\n一次判定: gpt-6-luna / low · トークン 入力 926 / 出力 966（うち推論 76） · 推定 $0.0006\n論文解析: gpt-6.1-sol / medium · トークン 入力 41,280 / 出力 1,620（うち推論 190） · PDF 24 pages · 推定 $0.1194",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 6,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.22522v1",
+          "title": "Agentic AI in Automated Markets",
+          "authors": [
+            "Irene Aldridge",
+            "Lourenco Belleau-Bhowmik",
+            "James Chan",
+            "Josh Chang",
+            "Kelly Deng",
+            "Pranav Dhingra",
+            "Xinda Ding",
+            "Haodong Fang",
+            "Satya Hanumanchi",
+            "Carter He",
+            "Shuang He",
+            "Yadong Hou",
+            "Vallab Karanam",
+            "Rithvik Kasarla",
+            "Tishya Khanna",
+            "Jihyun Kim",
+            "Sarah Konety",
+            "Abhinav Kotta",
+            "Anderson Lo",
+            "Jake Luther",
+            "Omar Mian",
+            "Ishan Patwardhan",
+            "Matteo Perona",
+            "Chenyue Qi",
+            "Shashank Ramachandran",
+            "Shubham Rateria",
+            "Jake Swain",
+            "David Thai",
+            "Michael Twersky",
+            "Susan Wu",
+            "Dean Xu",
+            "Helenna Yin",
+            "Jiachun Zheng"
+          ],
+          "submittedDate": "2026-10-15",
+          "updatedDate": "2026-10-15",
+          "topics": [
+            "Electronic trading"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.22522v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.22522v1",
+          "schedulerRank": 5,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 4/10",
+          "schedulerSummary": "報酬設計で合理的運用者、操作的取引者、群集追随者を表現し、DQNとREINFORCEで暗号資産の保有比率を制御する探索的研究である。実証部分はAAVE、ETC、SUIの小規模な価格受容型バックテストであり、市場参加者間の相互作用や市場品質への影響は検証していない。\n\n一次判定: gpt-6-luna / low · トークン 入力 973 / 出力 961（うち推論 70） · 推定 $0.0006\n論文解析: gpt-6.1-sol / medium · トークン 入力 6,961 / 出力 1,371（うち推論 112） · PDF 10 pages · 推定 $0.0311",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        }
+      ]
     }
   ]
 }

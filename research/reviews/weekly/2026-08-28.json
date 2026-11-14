@@ -2,14 +2,1009 @@
   "schemaVersion": 2,
   "reportKind": "weekly",
   "reportDate": "2026-08-28",
-  "generatedAt": "2026-09-13T00:34:46Z",
-  "status": "UPDATE_NOT_CONFIRMED",
-  "message": "Coverage is incomplete: missing confirmed batches (2026-08-24, 2026-08-25, 2026-08-26, 2026-08-27); synthesis was not run.",
+  "generatedAt": "2026-11-14T06:45:41Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "Synthesized 11 selected paper(s) from 11 stored paper(s) across 1 bounded request(s) and 5 daily report(s).",
   "expectedBatchDate": null,
   "observedBatchDate": null,
   "periodStart": "2026-08-22",
   "periodEnd": "2026-08-28",
   "papers": [
+    {
+      "metadata": {
+        "arxivId": "2511.02016v2",
+        "title": "ABIDES-MARL: A Multi-Agent Reinforcement Learning Environment for Optimal Execution with Endogenous Liquidity",
+        "authors": [
+          "Patrick Cheridito",
+          "Jean-Loup Dupret",
+          "Zhexin Wu"
+        ],
+        "submittedDate": "2025-11-03",
+        "updatedDate": "2025-11-05",
+        "categories": [
+          "cs.GT",
+          "cs.MA",
+          "eess.SY",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "適応的なマーケットメーカーを含む環境で、最適執行と内生的流動性を扱う多主体強化学習研究である。",
+        "mainResult": "保存レビューでは、執行主体と流動性供給者の相互作用をstochastic gameとして学習する枠組みが紹介されている。性能改善の数値は供給されていない。",
+        "practicalApplication": "他主体の応答によって流動性が変わる状況で、執行戦略を評価するシミュレーション基盤の候補となる。",
+        "methodology": "ABIDESを用いた多主体強化学習環境で、適応的マーケットメーカーと執行主体を扱う。",
+        "limitations": "原資料の確認範囲は不明で、全文解析は確認できない。供給情報では報酬設計、比較手法、実市場での妥当性を評価できない。",
+        "importance": 2,
+        "recommended": true,
+        "reason": "内生的流動性と執行の相互作用は本サイトの中心課題であり、優先的な原資料確認に値する。",
+        "tags": [
+          "最適執行",
+          "多主体強化学習",
+          "内生的流動性",
+          "市場シミュレーション"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This study uses multi-agent reinforcement learning to address optimal execution and endogenous liquidity in an environment with adaptive market makers.",
+          "mainResult": "The stored review describes a framework that learns interactions between execution agents and liquidity providers as a stochastic game. No numerical performance improvements are supplied.",
+          "practicalApplication": "It is a candidate simulation framework for evaluating execution strategies when liquidity changes in response to other agents.",
+          "methodology": "An ABIDES-based multi-agent reinforcement learning environment incorporates adaptive market makers and execution agents.",
+          "limitations": "The original source coverage is unknown, and full-text analysis cannot be confirmed. The supplied information does not permit evaluation of reward design, benchmarks, or real-market validity.",
+          "reason": "The interaction between endogenous liquidity and execution is central to this site's scope and warrants priority source review.",
+          "tags": [
+            "Optimal execution",
+            "Multi-agent reinforcement learning",
+            "Endogenous liquidity",
+            "Market simulation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "weekly",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 3215,
+          "outputTokens": 6786,
+          "reasoningTokens": 275,
+          "cachedInputTokens": 3212,
+          "cacheWriteTokens": 0,
+          "totalTokens": 10001,
+          "estimatedCostUsd": 0.068187,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2608.20589v1",
+        "title": "Calibrating Inelastic Markets to Options: The Lean Marketron and the Generalized Langevin Equation",
+        "authors": [
+          "Andrey Itkin"
+        ],
+        "submittedDate": "2026-08-20",
+        "updatedDate": "2026-08-20",
+        "categories": [
+          "physics.comp-ph",
+          "q-fin.CP",
+          "q-fin.MF",
+          "q-fin.PR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "注文フローとリターンの相互作用を縮約モデルで表し、オプション価格面への較正につなげる研究である。",
+        "mainResult": "保存レビューでは、注文フローとリターンを結ぶ識別可能なモデルが紹介されている。識別性の条件や較正精度は供給情報から確認できない。",
+        "practicalApplication": "フロー由来の価格形成とオプション市場の整合性を検討するモデル候補となる。",
+        "methodology": "Lean Marketronとgeneralized Langevin equationを用いて市場の動学を表現し、オプションへの較正を扱う。",
+        "limitations": "原資料の確認範囲は不明で、全文解析は確認できない。較正データ、識別条件、外部検証、無裁定性の扱いは供給情報にない。",
+        "importance": 2,
+        "recommended": true,
+        "reason": "注文フローとデリバティブ価格を接続する点が有用だが、較正と識別性の検証が必要である。",
+        "tags": [
+          "注文フロー",
+          "価格形成",
+          "オプション較正",
+          "一般化ランジュバン方程式"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study represents order-flow and return interactions through a reduced model and connects it to calibration against an option surface.",
+          "mainResult": "The stored review describes an identifiable model linking order flow and returns. Identifiability conditions and calibration accuracy cannot be verified from the supplied information.",
+          "practicalApplication": "It is a candidate model for examining consistency between flow-driven price formation and option markets.",
+          "methodology": "The study uses the Lean Marketron and a generalized Langevin equation to represent market dynamics and address calibration to options.",
+          "limitations": "The original source coverage is unknown, and full-text analysis cannot be confirmed. Calibration data, identification conditions, external validation, and treatment of no-arbitrage are not supplied.",
+          "reason": "Connecting order flow with derivative prices is useful, but calibration and identifiability require verification.",
+          "tags": [
+            "Order flow",
+            "Price formation",
+            "Option calibration",
+            "Generalized Langevin equation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "weekly",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 3215,
+          "outputTokens": 6786,
+          "reasoningTokens": 275,
+          "cachedInputTokens": 3212,
+          "cacheWriteTokens": 0,
+          "totalTokens": 10001,
+          "estimatedCostUsd": 0.068187,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2608.20982v1",
+        "title": "Surrender runs",
+        "authors": [
+          "Andreas Löffler",
+          "Stefan Steins"
+        ],
+        "submittedDate": "2026-08-21",
+        "updatedDate": "2026-08-21",
+        "categories": [
+          "econ.TH"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "rates",
+        "summary": "金利上昇時の保険契約の集団解約を、ファンダメンタルズと自己実現的な行動の両面から扱う研究である。",
+        "mainResult": "保存レビューによれば、ファンダメンタルズ型と自己実現型の解約ランについて閾値を導いている。",
+        "practicalApplication": "金利上昇に伴う保険負債の流出と流動性ストレスを検討する際の理論的参考となる。",
+        "methodology": "解約ランを理論モデルで分析し、二つの発生要因に対応する閾値を求める。",
+        "limitations": "原資料の確認範囲は不明で、全文解析は確認できない。閾値の仮定、実証的裏付け、保険商品ごとの適用可能性は評価できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "金利リスクとの関連はあるが、執行や金利モデルそのものより保険の流動性リスクに重点がある。",
+        "tags": [
+          "金利リスク",
+          "保険解約",
+          "流動性リスク",
+          "自己実現的ラン"
+        ],
+        "english": {
+          "classification": "rates",
+          "summary": "This study examines mass insurance surrenders during rising interest rates through both fundamentals and self-fulfilling behavior.",
+          "mainResult": "According to the stored review, it derives thresholds for fundamental-driven and self-fulfilling surrender runs.",
+          "practicalApplication": "It provides a theoretical reference for assessing insurance liability outflows and liquidity stress associated with rising rates.",
+          "methodology": "A theoretical model analyzes surrender runs and derives thresholds corresponding to two underlying mechanisms.",
+          "limitations": "The original source coverage is unknown, and full-text analysis cannot be confirmed. Threshold assumptions, empirical support, and applicability across insurance products cannot be evaluated.",
+          "reason": "It is relevant to interest-rate risk but emphasizes insurance liquidity risk rather than execution or interest-rate modeling itself.",
+          "tags": [
+            "Interest-rate risk",
+            "Insurance surrenders",
+            "Liquidity risk",
+            "Self-fulfilling runs"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "weekly",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 3215,
+          "outputTokens": 6786,
+          "reasoningTokens": 275,
+          "cachedInputTokens": 3212,
+          "cacheWriteTokens": 0,
+          "totalTokens": 10001,
+          "estimatedCostUsd": 0.068187,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2608.21888v1",
+        "title": "Short-horizon mean reversion in cryptocurrency markets: a matched cross-market measurement",
+        "authors": [
+          "Nadav A. Kitron",
+          "Jonathan M. Wengrowicz"
+        ],
+        "submittedDate": "2026-08-22",
+        "updatedDate": "2026-08-22",
+        "categories": [
+          "q-fin.ST",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "暗号資産の15分程度の短期リバーサルを米国株と共通の測定手順で比較し、成行的フローとの関係を調べる研究である。",
+        "mainResult": "保存レビューでは、市場横断の比較とaggressive flowとの関係測定が紹介されている。リバーサルの大きさや統計的有意性は供給されていない。",
+        "practicalApplication": "短期シグナルや執行タイミングを検討する際に、市場間で測定条件をそろえる設計が参考となる。",
+        "methodology": "暗号資産と米国株に共通のプロトコルを適用し、短期平均回帰と注文フローの関係を測定する。",
+        "limitations": "原資料の確認範囲は不明で、全文解析は確認できない。対象市場、標本期間、売買気配による影響、コスト控除後の収益性は評価できない。",
+        "importance": 2,
+        "recommended": true,
+        "reason": "短期価格応答と注文フローを直接扱い、市場間比較の測定設計にも実務的価値がある。",
+        "tags": [
+          "短期平均回帰",
+          "暗号資産",
+          "注文フロー",
+          "市場横断比較"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study compares roughly 15-minute cryptocurrency reversals with US equities using a common measurement protocol and examines their relationship with aggressive flow.",
+          "mainResult": "The stored review describes cross-market comparisons and measurement of relationships with aggressive flow. Reversal magnitudes and statistical significance are not supplied.",
+          "practicalApplication": "Its use of matched measurement conditions across markets may inform short-horizon signal and execution-timing research.",
+          "methodology": "A common protocol is applied to cryptocurrencies and US equities to measure short-horizon mean reversion and its relationship with order flow.",
+          "limitations": "The original source coverage is unknown, and full-text analysis cannot be confirmed. Markets, sample periods, bid-ask effects, and profitability after costs cannot be evaluated.",
+          "reason": "It directly addresses short-horizon price responses and order flow, with practical value in its cross-market measurement design.",
+          "tags": [
+            "Short-horizon mean reversion",
+            "Cryptocurrencies",
+            "Order flow",
+            "Cross-market comparison"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "weekly",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 3215,
+          "outputTokens": 6786,
+          "reasoningTokens": 275,
+          "cachedInputTokens": 3212,
+          "cacheWriteTokens": 0,
+          "totalTokens": 10001,
+          "estimatedCostUsd": 0.068187,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2608.22768v1",
+        "title": "The Loop-Gain Matrix: Coupled Rebalancing Feedback and the Blind Spots of Scalar Stability Monitoring",
+        "authors": [
+          "Jihwan Woo"
+        ],
+        "submittedDate": "2026-08-24",
+        "updatedDate": "2026-08-24",
+        "categories": [
+          "eess.SP",
+          "physics.soc-ph",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "複数商品のリバランスが生む相互フィードバックを行列で表し、単一指標による安定性監視の盲点を扱う研究である。",
+        "mainResult": "保存レビューによれば、loop-gain matrixのスペクトル半径を用いて商品間の増幅を監視する枠組みを提示する。",
+        "practicalApplication": "個別商品の指標では捉えにくい、クロスアセットのリバランス連鎖を監視する設計候補となる。",
+        "methodology": "リバランスの結合を行列化し、そのスペクトル特性からフィードバックの安定性を評価する。",
+        "limitations": "原資料の確認範囲は不明で、全文解析は確認できない。線形化の条件、係数推定、実データ検証は不明であり、実市場への適用可能性は未確認である。",
+        "importance": 2,
+        "recommended": true,
+        "reason": "市場インパクトの相互作用を監視する視点が有用で、単一商品のリスク指標を補完し得る。",
+        "tags": [
+          "リバランス",
+          "フィードバック",
+          "スペクトル半径",
+          "クロスアセットリスク"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study represents feedback from rebalancing across multiple instruments with a matrix and examines blind spots in scalar stability monitoring.",
+          "mainResult": "According to the stored review, it proposes monitoring cross-instrument amplification using the spectral radius of a loop-gain matrix.",
+          "practicalApplication": "It offers a candidate design for monitoring cross-asset rebalancing cascades that instrument-level indicators may miss.",
+          "methodology": "Rebalancing interactions are represented as a matrix, whose spectral properties are used to assess feedback stability.",
+          "limitations": "The original source coverage is unknown, and full-text analysis cannot be confirmed. Linearization conditions, coefficient estimation, and empirical validation are unspecified, leaving real-market applicability unverified.",
+          "reason": "Its perspective on interacting market impacts is useful and may complement single-instrument risk indicators.",
+          "tags": [
+            "Rebalancing",
+            "Feedback",
+            "Spectral radius",
+            "Cross-asset risk"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "weekly",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 3215,
+          "outputTokens": 6786,
+          "reasoningTokens": 275,
+          "cachedInputTokens": 3212,
+          "cacheWriteTokens": 0,
+          "totalTokens": 10001,
+          "estimatedCostUsd": 0.068187,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2608.23053v1",
+        "title": "tse_tick: A Python Library for Parsing and Querying Nikkei NEEDS Tick Data from the Tokyo Stock Exchange",
+        "authors": [
+          "Kazumi Li",
+          "Masataka Hayashi",
+          "Teruo Nakatsuma",
+          "Peter Romero"
+        ],
+        "submittedDate": "2026-08-24",
+        "updatedDate": "2026-08-24",
+        "categories": [
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "東証のNikkei NEEDSティックデータを解析・検索するPythonライブラリを紹介する研究基盤論文である。",
+        "mainResult": "保存レビューでは、メモリ使用を意識した取り込みと、ParquetおよびDuckDBを用いた検索基盤が紹介されている。速度やメモリ削減の数値は供給されていない。",
+        "practicalApplication": "日本株のティックデータを用いた市場構造分析や執行研究の前処理基盤として検討できる。",
+        "methodology": "専用パーサーでデータを取り込み、Parquet形式で保存し、DuckDBで検索する。",
+        "limitations": "原資料の確認範囲は不明で、全文解析は確認できない。対応するデータ仕様、処理の正確性、比較ベンチマーク、利用条件は確認できない。",
+        "importance": 2,
+        "recommended": true,
+        "reason": "日本市場のデータ処理に直結するため有用だが、新たな市場の実証結果を示す研究とは区別すべきである。",
+        "tags": [
+          "東証",
+          "ティックデータ",
+          "データ基盤",
+          "Parquet",
+          "DuckDB"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This infrastructure paper introduces a Python library for parsing and querying Nikkei NEEDS tick data from the Tokyo Stock Exchange.",
+          "mainResult": "The stored review describes memory-aware ingestion and a query infrastructure using Parquet and DuckDB. No numerical speed or memory improvements are supplied.",
+          "practicalApplication": "It may serve as a preprocessing foundation for Japanese equity microstructure and execution research using tick data.",
+          "methodology": "A dedicated parser ingests data, stores it in Parquet format, and supports queries through DuckDB.",
+          "limitations": "The original source coverage is unknown, and full-text analysis cannot be confirmed. Supported data specifications, processing accuracy, comparative benchmarks, and usage conditions cannot be verified.",
+          "reason": "It is useful for Japanese market data processing but should be distinguished from research presenting new empirical market findings.",
+          "tags": [
+            "Tokyo Stock Exchange",
+            "Tick data",
+            "Data infrastructure",
+            "Parquet",
+            "DuckDB"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "weekly",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 3215,
+          "outputTokens": 6786,
+          "reasoningTokens": 275,
+          "cachedInputTokens": 3212,
+          "cacheWriteTokens": 0,
+          "totalTokens": 10001,
+          "estimatedCostUsd": 0.068187,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2608.23915v1",
+        "title": "Equilibrium in closed constant-function market maker economies",
+        "authors": [
+          "Muqiao Huang",
+          "Ruodu Wang",
+          "Yiyun Wang"
+        ],
+        "submittedDate": "2026-08-24",
+        "updatedDate": "2026-08-24",
+        "categories": [
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "手数料のない閉鎖的なconstant-function market maker経済について、均衡と取引による到達可能性を理論的に扱う研究である。",
+        "mainResult": "保存レビューでは、無取引均衡、Pareto最適性、到達可能性、収束を解析するとされる。各結果の厳密な成立条件は供給されていない。",
+        "practicalApplication": "CFMMの市場設計や、取引過程と資源配分の関係を理解するための理論的参考となる。",
+        "methodology": "手数料のない閉鎖経済を対象に、CFMMの均衡と動学的性質を数学的に分析する。",
+        "limitations": "原資料の確認範囲は不明で、全文解析は確認できない。閉鎖経済・手数料なしという設定のため、外部市場との裁定や実運用への一般化には注意が必要である。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "市場設計には関連するが、供給情報の範囲では執行実務への直接的な示唆は限定的である。",
+        "tags": [
+          "CFMM",
+          "市場設計",
+          "均衡",
+          "Pareto最適性"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study theoretically examines equilibrium and reachability through trading in closed constant-function market maker economies without fees.",
+          "mainResult": "The stored review reports analysis of no-trade equilibrium, Pareto optimality, reachability, and convergence. The precise conditions for these results are not supplied.",
+          "practicalApplication": "It provides a theoretical reference for CFMM market design and the relationship between trading processes and resource allocation.",
+          "methodology": "The study mathematically analyzes CFMM equilibrium and dynamics in a closed economy without fees.",
+          "limitations": "The original source coverage is unknown, and full-text analysis cannot be confirmed. The closed, fee-free setting requires caution when generalizing to external-market arbitrage or practical operation.",
+          "reason": "It is relevant to market design, but direct implications for execution practice are limited in the supplied information.",
+          "tags": [
+            "CFMM",
+            "Market design",
+            "Equilibrium",
+            "Pareto optimality"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "weekly",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 3215,
+          "outputTokens": 6786,
+          "reasoningTokens": 275,
+          "cachedInputTokens": 3212,
+          "cacheWriteTokens": 0,
+          "totalTokens": 10001,
+          "estimatedCostUsd": 0.068187,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2608.24206v1",
+        "title": "Capital allocation on decentralized lending platforms",
+        "authors": [
+          "Bastien Baude",
+          "Vincent Danos",
+          "Hamza El Khalloufi"
+        ],
+        "submittedDate": "2026-08-25",
+        "updatedDate": "2026-08-25",
+        "categories": [
+          "q-fin.MF"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "分散型レンディング市場で、自らの資金供給が利用率と貸出金利を変える効果を考慮した資金配分研究である。",
+        "mainResult": "保存レビューによれば、供給量による金利への自己インパクトを含め、複数市場への最適配分を導いている。",
+        "practicalApplication": "表示金利を固定とみなさず、配分後の金利変化を織り込むDeFi運用設計の参考となる。",
+        "methodology": "供給量、利用率、貸出金利の関係を組み込んだ複数市場間の配分最適化を扱う。",
+        "limitations": "原資料の確認範囲は不明で、全文解析は確認できない。金利関数、解の条件、信用・清算・スマートコントラクトリスクの扱いは供給情報から確認できない。",
+        "importance": 2,
+        "recommended": true,
+        "reason": "配分が金利を変える内生性を扱い、DeFi金利のモデル化に直接関係する。",
+        "tags": [
+          "DeFi",
+          "レンディング",
+          "金利インパクト",
+          "資金配分"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This study examines capital allocation across decentralized lending markets while accounting for how an investor's own supply changes utilization and lending rates.",
+          "mainResult": "According to the stored review, it derives optimal allocation across markets while incorporating the investor's own impact on rates through supplied capital.",
+          "practicalApplication": "It may inform DeFi allocation designs that account for post-allocation rate changes rather than treating quoted rates as fixed.",
+          "methodology": "The study addresses multi-market allocation optimization incorporating relationships among capital supply, utilization, and lending rates.",
+          "limitations": "The original source coverage is unknown, and full-text analysis cannot be confirmed. Rate functions, solution conditions, and treatment of credit, liquidation, and smart-contract risks cannot be verified from the supplied information.",
+          "reason": "It addresses the endogeneity of rates to allocation and is directly relevant to modeling DeFi interest rates.",
+          "tags": [
+            "DeFi",
+            "Lending",
+            "Interest-rate impact",
+            "Capital allocation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "weekly",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 3215,
+          "outputTokens": 6786,
+          "reasoningTokens": 275,
+          "cachedInputTokens": 3212,
+          "cacheWriteTokens": 0,
+          "totalTokens": 10001,
+          "estimatedCostUsd": 0.068187,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2608.25844v1",
+        "title": "Output-Only Identification and Spectral Monitoring of Coupled Feedback Networks with Known Time-Varying Actuation",
+        "authors": [
+          "Jihwan Woo"
+        ],
+        "submittedDate": "2026-08-26",
+        "updatedDate": "2026-08-26",
+        "categories": [
+          "eess.SP",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "既知の時変作動情報と観測出力から結合フィードバック網を同定し、スペクトルリスクとショック伝播を監視する研究である。",
+        "mainResult": "保存レビューでは、既知の時変ゲインと出力のみから結合を同定する枠組みが紹介されている。推定精度や金融市場での検証結果は供給されていない。",
+        "practicalApplication": "作動情報を把握できる取引システムで、戦略間の相互作用やショック伝播を監視する応用候補となる。",
+        "methodology": "既知の時変作動を利用したoutput-only identificationと、結合網のスペクトル監視を組み合わせる。",
+        "limitations": "原資料の確認範囲は不明で、全文解析は確認できない。同定条件、雑音への頑健性、市場で作動情報を既知とする妥当性は評価できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "市場フィードバック監視への接点はあるが、供給情報では金融市場への適用実績が確認できず、関連性は応用候補にとどまる。",
+        "tags": [
+          "システム同定",
+          "フィードバック網",
+          "スペクトル監視",
+          "ショック伝播"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study identifies coupled feedback networks from known time-varying actuation information and observed outputs, and monitors spectral risk and shock transmission.",
+          "mainResult": "The stored review describes a framework for identifying coupling from known time-varying gains and outputs alone. Estimation accuracy and financial-market validation results are not supplied.",
+          "practicalApplication": "It is a potential approach to monitoring strategy interactions and shock transmission in trading systems with observable actuation information.",
+          "methodology": "The approach combines output-only identification using known time-varying actuation with spectral monitoring of coupled networks.",
+          "limitations": "The original source coverage is unknown, and full-text analysis cannot be confirmed. Identification conditions, robustness to noise, and the validity of assuming known actuation in markets cannot be evaluated.",
+          "reason": "It connects to market feedback monitoring, but financial-market applications cannot be verified from the supplied information, leaving relevance at the potential-application stage.",
+          "tags": [
+            "System identification",
+            "Feedback networks",
+            "Spectral monitoring",
+            "Shock transmission"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "weekly",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 3215,
+          "outputTokens": 6786,
+          "reasoningTokens": 275,
+          "cachedInputTokens": 3212,
+          "cacheWriteTokens": 0,
+          "totalTokens": 10001,
+          "estimatedCostUsd": 0.068187,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
     {
       "metadata": {
         "arxivId": "2608.27076v1",
@@ -27,44 +1022,275 @@
       },
       "finalAnalysis": {
         "classification": "electronic_trading",
-        "summary": "米国大型株約300銘柄の日次クロスセクション予測で、複数市場レジームの取引成績を同時に最適化するBayesian optimisationを検証したMSc研究である。XGBoost、MLP、TabNet、FT-Transformer等を比較し、XGBoostとTabNetのrank aggregation ensembleを提示する。",
-        "mainResult": "著者の2025年OOSバックテストでは、Hybrid ensembleは総収益51.26%、Sharpe 2.44、最大ドローダウン-7.76%で、CAPM年率alpha 0.423はp=0.011と報告された。XGBoostが最良の単体モデルであり、TabNetとFT-Transformerは単独ではXGBoostを上回らなかった。四半期別のLong/Short precisionは各々約23～26%で、外側decileの10%ランダム基準を上回ったとされる。",
-        "practicalApplication": "実務上は、予測精度ではなくコスト控除後のlong-short portfolio成績を目的に、複数レジームをまたぐwalk-forward validationとモデル間のsignal orthogonalityを用いる設計の参考になる。もっとも、終値執行近似、固定2.2bpコスト、短期借株料・availability・market impactの未反映により、提示収益をそのまま執行可能な期待収益として扱うべきではない。",
-        "methodology": "2015～2024年を学習・検証、2025年をOOSとし、2022～2024年のexpanding-window 3 foldで30 trial/modelのTPE Bayesian optimisationを行う。翌日リターンのクロスセクション上位・下位10%をLong/Short classとし、各日5～8銘柄ずつのドル中立・日次リバランスportfolioを構築する。目的関数はfold平均の年率リターン、Sharpe、drawdownと、負のfold成績へのペナルティである。",
-        "limitations": "OOSは2025年の252営業日のみで統計的検出力が限定的であり、多数の試行・ensemble選択に対するDeflated Sharpe Ratioも未算出である。期末時点のS&P 500構成銘柄を使うためsurvivorship biasがあり、Bloomberg由来データは独立再現を難しくする。さらに、cross-regime最適化と同一条件のsingle-regime tuning比較がなく、その因果的優位は直接には示されていない。Gaussian noiseテストは実運用で起こる構造的な欠損・データ障害を十分に再現しない。",
-        "importance": 5,
+        "summary": "米国大型株の日次シグナル生成で、複数レジームの取引成績を目的とするBayesian optimisationとモデルのアンサンブルを検証したMSc研究である。",
+        "mainResult": "保存レビューによれば、2025年のOOSでアンサンブルは総収益51.26%、Sharpe比2.44を報告した。XGBoostが最良の単体モデルで、TabNetとFT-Transformerは単独では上回らなかった。",
+        "practicalApplication": "予測精度だけでなくコスト控除後のポートフォリオ成績で調整し、異種モデルのシグナルを組み合わせる設計の参考となる。",
+        "methodology": "2015～2024年を学習・検証、2025年をOOSとし、複数レジームのwalk-forward評価で調整する。日次クロスセクション分類からドル中立ポートフォリオを構築する。",
+        "limitations": "原資料の確認範囲は不明で、全文解析は確認できない。保存レビューは、単年OOS、構成銘柄の生存者バイアス、固定コストと終値執行近似、借株制約・市場インパクトの未反映、多重試行への補正不足を指摘する。同条件の単一レジーム調整との比較もなく、レジーム横断調整の優位は確立していない。",
+        "importance": 2,
         "recommended": true,
-        "reason": "電子取引・株式シグナル生成に直接関係し、レジーム横断のportfolio目的hyperparameter tuningと異質モデルのensembleという実務的論点を具体化している。一方で、単年OOS、実行コストとshort constraintsの簡略化、survivorship bias、未査読のMSc研究という制約が大きく、手法アイデアとして参照しつつ独立した再検証が必要である。",
+        "reason": "シグナル開発の設計例として有用だが、報告収益を執行可能な期待収益と解釈せず、独立検証を前提に参照すべきである。",
         "tags": [
           "アルゴリズム取引",
-          "株式クロスセクション予測",
+          "株式シグナル",
           "Bayesian optimisation",
           "レジーム頑健性",
-          "TabNet",
-          "XGBoost",
           "アンサンブル",
           "バックテスト"
         ],
         "english": {
           "classification": "electronic_trading",
-          "summary": "This MSc study examines Bayesian optimisation that jointly targets trading performance across multiple market regimes for daily cross-sectional prediction of roughly 300 large-cap US equities. It compares XGBoost, MLP, TabNet, and FT-Transformer, among others, and presents a rank-aggregation ensemble of XGBoost and TabNet.",
-          "mainResult": "In the authors' 2025 OOS backtest, the Hybrid ensemble reportedly delivered a 51.26% total return, a 2.44 Sharpe ratio, and a -7.76% maximum drawdown; its annualized CAPM alpha of 0.423 was reported with p=0.011. XGBoost was the strongest standalone model, while TabNet and FT-Transformer did not surpass XGBoost individually. Quarterly Long/Short precision was reported at roughly 23-26%, above the 10% random benchmark implied by the outer-decile target.",
-          "practicalApplication": "In practice, the study is useful as a design reference for optimizing across multiple regimes with walk-forward validation and using signal orthogonality between models, rather than predictive accuracy alone, as a portfolio-selection criterion. However, its closing-price execution proxy, fixed 2.2bp cost, and omission of short borrow fees, availability, and market impact mean that the reported returns should not be treated as directly executable expected returns.",
-          "methodology": "The study uses 2015-2024 for training and validation and 2025 as OOS, with three expanding-window folds for 2022-2024 and 30 TPE Bayesian-optimisation trials per model. It labels the top and bottom 10% of next-day cross-sectional returns as Long and Short classes and constructs a daily rebalanced, dollar-neutral portfolio with 5-8 stocks on each side. The objective combines fold-average annualized return, Sharpe ratio, drawdown, and penalties for adverse fold outcomes.",
-          "limitations": "The OOS sample contains only 252 trading days in 2025, limiting statistical power; the study also does not calculate a Deflated Sharpe Ratio for the many trials and ensemble selections. Using end-of-sample S&P 500 constituents creates survivorship bias, while Bloomberg-sourced data limits independent replication. Moreover, there is no identically specified single-regime-tuning baseline, so a causal advantage of cross-regime optimisation is not directly established. Gaussian-noise tests also do not adequately represent structured missingness or data failures in live operations.",
-          "reason": "The paper is directly relevant to electronic trading and equity signal generation, and concretely develops practical issues of cross-regime, portfolio-objective hyperparameter tuning and heterogeneous-model ensembles. However, its single-year OOS test, simplified execution costs and short constraints, survivorship bias, and status as an unreviewed MSc study are material limitations; it should be used as a methodological idea requiring independent validation.",
+          "summary": "This MSc study evaluates Bayesian optimisation targeting trading performance across multiple regimes and model ensembles for daily signal generation in US large-cap equities.",
+          "mainResult": "According to the stored review, the ensemble reported a 51.26% total return and a Sharpe ratio of 2.44 in the 2025 out-of-sample period. XGBoost was the best standalone model; TabNet and FT-Transformer did not outperform it individually.",
+          "practicalApplication": "It offers a design reference for tuning against portfolio performance after costs rather than prediction accuracy alone, and for combining signals from different model types.",
+          "methodology": "The study uses 2015–2024 for training and validation and 2025 for out-of-sample testing, with tuning through multi-regime walk-forward evaluation. Daily cross-sectional classifications are used to construct dollar-neutral portfolios.",
+          "limitations": "The original source coverage is unknown, and full-text analysis cannot be confirmed. The stored review identifies a single-year out-of-sample period, constituent survivorship bias, fixed costs and closing-price execution approximations, omitted borrowing constraints and market impact, and insufficient correction for multiple trials. No matched single-regime tuning comparison establishes the superiority of cross-regime tuning.",
+          "reason": "It is useful as a signal-development design example, but reported returns should not be interpreted as executable expected returns and require independent validation.",
           "tags": [
-            "algorithmic trading",
-            "cross-sectional equity prediction",
+            "Algorithmic trading",
+            "Equity signals",
             "Bayesian optimisation",
-            "regime robustness",
-            "TabNet",
-            "XGBoost",
-            "ensemble",
-            "backtesting"
+            "Regime robustness",
+            "Ensembles",
+            "Backtesting"
           ]
         }
-      }
+      },
+      "usage": [
+        {
+          "stage": "weekly",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 3215,
+          "outputTokens": 6786,
+          "reasoningTokens": 275,
+          "cachedInputTokens": 3212,
+          "cacheWriteTokens": 0,
+          "totalTokens": 10001,
+          "estimatedCostUsd": 0.068187,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2608.20842v1",
+        "title": "Rethinking Synthetic Scenario Realism: Compatibility, Not Fidelity, Drives Hedging Performance",
+        "authors": [
+          "Ryuji Hashimoto",
+          "Masanori Hirano",
+          "Ryota Ozaki",
+          "Kentaro Imajo"
+        ],
+        "submittedDate": "2026-08-21",
+        "updatedDate": "2026-08-21",
+        "categories": [
+          "q-fin.CP"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "合成価格経路を、統計的な現実性ではなく実市場でのヘッジへの適合性から評価する研究である。",
+        "mainResult": "題名と保存レビューは、ヘッジ性能には統計的忠実度より適合性が重要という主張を示すが、効果量や成立条件は供給されていない。",
+        "practicalApplication": "ヘッジ学習用シナリオを、分布の類似性だけでなく下流の運用目的で選ぶ際の参考となる。",
+        "methodology": "合成経路の評価を、統計的現実性と実市場でのヘッジ適合性という観点から検討する。",
+        "limitations": "原資料の確認範囲は不明で、全文解析は確認できない。対象資産、生成モデル、比較実験の詳細は不明で、電子執行や金利との直接的関係も確認できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "一般的な動的ヘッジとシナリオ生成が中心で、供給情報では本サイトの対象領域との実質的な関連が不足する。",
+        "tags": [
+          "合成シナリオ",
+          "動的ヘッジ",
+          "生成モデル",
+          "対象外"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study evaluates synthetic price paths through their compatibility with real-market hedging rather than statistical realism.",
+          "mainResult": "The title and stored review suggest that compatibility matters more than statistical fidelity for hedging performance, but no effect sizes or conditions are supplied.",
+          "practicalApplication": "It may inform the selection of hedging-training scenarios based on downstream objectives rather than distributional similarity alone.",
+          "methodology": "Synthetic paths are considered from the perspectives of statistical realism and compatibility with real-market hedging.",
+          "limitations": "The original source coverage is unknown, and full-text analysis cannot be confirmed. Assets, generative models, and experimental details are unspecified, and a direct connection to electronic execution or rates cannot be established.",
+          "reason": "The focus is general dynamic hedging and scenario generation; the supplied information does not establish material relevance to this site's scope.",
+          "tags": [
+            "Synthetic scenarios",
+            "Dynamic hedging",
+            "Generative models",
+            "Out of scope"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "weekly",
+          "model": null,
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": null,
+          "outputTokens": null,
+          "reasoningTokens": null,
+          "cachedInputTokens": null,
+          "cacheWriteTokens": null,
+          "totalTokens": null,
+          "estimatedCostUsd": null,
+          "pricingDate": "2026-09-06",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "unconfirmed"
+        },
+        {
+          "stage": "weekly",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 3215,
+          "outputTokens": 6786,
+          "reasoningTokens": 275,
+          "cachedInputTokens": 3212,
+          "cacheWriteTokens": 0,
+          "totalTokens": 10001,
+          "estimatedCostUsd": 0.068187,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "stored_reviews",
+          "pdfPages": null,
+          "paperIds": [
+            "2511.02016v2",
+            "2608.20589v1",
+            "2608.20842v1",
+            "2608.20982v1",
+            "2608.21888v1",
+            "2608.22768v1",
+            "2608.23053v1",
+            "2608.23915v1",
+            "2608.24206v1",
+            "2608.25844v1",
+            "2608.27076v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "weekly",
+      "model": null,
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "stored_reviews",
+      "pdfPages": null,
+      "paperIds": [
+        "2511.02016v2",
+        "2608.20589v1",
+        "2608.20842v1",
+        "2608.20982v1",
+        "2608.21888v1",
+        "2608.22768v1",
+        "2608.23053v1",
+        "2608.23915v1",
+        "2608.24206v1",
+        "2608.25844v1",
+        "2608.27076v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "weekly",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 3215,
+      "outputTokens": 6786,
+      "reasoningTokens": 275,
+      "cachedInputTokens": 3212,
+      "cacheWriteTokens": 0,
+      "totalTokens": 10001,
+      "estimatedCostUsd": 0.068187,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "stored_reviews",
+      "pdfPages": null,
+      "paperIds": [
+        "2511.02016v2",
+        "2608.20589v1",
+        "2608.20842v1",
+        "2608.20982v1",
+        "2608.21888v1",
+        "2608.22768v1",
+        "2608.23053v1",
+        "2608.23915v1",
+        "2608.24206v1",
+        "2608.25844v1",
+        "2608.27076v1"
+      ],
+      "outcome": "completed"
     }
   ]
 }

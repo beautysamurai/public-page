@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "daily": {
     "status": "NO_NEW_BATCH_EXPECTED",
-    "checkedAt": "2026-11-14T06:54:16Z",
+    "checkedAt": "2026-11-14T07:10:00Z",
     "lastCompletedBatchDate": "2026-11-13",
     "pendingBatchDate": null
   },
@@ -35,14 +35,6 @@
     },
     {
       "reportKind": "weekly",
-      "periodEnd": "2026-10-16",
-      "missingBatchDates": [
-        "2026-10-14"
-      ],
-      "ready": false
-    },
-    {
-      "reportKind": "weekly",
       "periodEnd": "2026-10-23",
       "missingBatchDates": [
         "2026-10-19",
@@ -65,7 +57,6 @@
       "periodEnd": "2026-10-31",
       "missingBatchDates": [
         "2026-10-06",
-        "2026-10-14",
         "2026-10-19",
         "2026-10-20",
         "2026-10-21",
@@ -77,7 +68,6 @@
   ],
   "pendingDailyBatches": [
     "2026-10-06",
-    "2026-10-14",
     "2026-10-19",
     "2026-10-20",
     "2026-10-21",

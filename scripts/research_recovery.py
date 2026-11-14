@@ -102,7 +102,12 @@ def run_daily_cycle(root, config, now, *, daily_runner=None, capture=None, sleep
     latest = daily_runner(run_config, **kwargs)
     carried = []
     if latest["status"] in COMPLETE:
-        for batch in pending_daily_dates(root, config, expected):
+        def last_attempt(batch):
+            path = output_dir / f"{batch}.json"
+            return pipeline._read_persisted_report(path)["generatedAt"] if path.exists() else ""
+        # Give each outstanding batch a turn even when a previous one fails
+        # permanently. Equal attempt times retain chronological batch order.
+        for batch in sorted(pending_daily_dates(root, config, expected), key=last_attempt):
             if batch >= expected:
                 continue
             path = output_dir / f"{batch}.json"
@@ -167,7 +172,7 @@ def pending_periods(root: Path, config: pipeline.PipelineConfig, today: date) ->
                     raise pipeline.StateError("period report identity mismatch")
                 if report["status"] in COMPLETE:
                     continue
-            reports = pipeline.load_daily_reports(root / "research/daily", start, end)
+            reports = pipeline.load_period_inputs(root / "research/daily", start, end)
             missing = pipeline.missing_batch_dates(config, reports, start, end)
             results.append({"reportKind": kind, "periodEnd": str(end),
                             "missingBatchDates": [str(day) for day in missing],
@@ -182,7 +187,7 @@ def retry_one(root: Path, config: pipeline.PipelineConfig, now: datetime) -> boo
             continue
         kind, end = item["reportKind"], date.fromisoformat(item["periodEnd"])
         start = end - timedelta(days=6) if kind == "weekly" else end.replace(day=1)
-        papers = pipeline._unique_stored_papers(pipeline.load_daily_reports(root / "research/daily", start, end))
+        papers = pipeline._unique_stored_papers(pipeline.load_period_inputs(root / "research/daily", start, end))
         try:
             chunks = pipeline._build_synthesis_chunks(
                 papers, report_kind=kind, period_start=start, period_end=end,

@@ -28,9 +28,22 @@
         status.pendingPeriods.slice(0, 20).forEach(function (item) {
           if (!["weekly", "monthly"].includes(item.reportKind) || !datePattern.test(item.periodEnd)) return;
           var kind = en ? item.reportKind : item.reportKind === "weekly" ? "週次" : "月次";
-          pending.push(kind + " " + item.periodEnd + (item.ready
+          var entry = document.createElement("p");
+          if (item.provisionalEditionId === item.periodEnd + "-" + item.reportKind + "-openai-01") {
+            var link = document.createElement("a");
+            var url = new URL("./", document.baseURI);
+            url.searchParams.set("edition", item.provisionalEditionId);
+            if (en) url.searchParams.set("lang", "en");
+            url.hash = "digest";
+            link.href = url.href;
+            link.textContent = kind + " " + item.periodEnd + (en ? " · read provisional review" : " · 暫定版を読む");
+            entry.appendChild(link);
+          } else {
+            entry.textContent = kind + " " + item.periodEnd + (item.ready
             ? (en ? ": generation pending; queued for retry." : "：生成未完了・再試行待ち。")
-            : (en ? ": waiting for complete daily coverage or period end." : "：日次データの不足・対象期間の完了待ち。")));
+            : (en ? ": waiting for complete daily coverage or period end." : "：日次データの不足・対象期間の完了待ち。"));
+          }
+          pending.push(entry);
         });
         // Keep an explicitly opened disclosure open when switching language.
         var wasOpen = Boolean(container.querySelector("details[open]"));
@@ -42,7 +55,7 @@
           var summary = document.createElement("summary");
           summary.textContent = en ? "Pending reviews: " + pending.length : "未完了のレビュー：" + pending.length + "件";
           details.appendChild(summary);
-          pending.forEach(function (line) { var p = document.createElement("p"); p.textContent = line; details.appendChild(p); });
+          pending.forEach(function (entry) { details.appendChild(entry); });
           container.appendChild(details);
         }
         container.hidden = lines.length === 0 && pending.length === 0;

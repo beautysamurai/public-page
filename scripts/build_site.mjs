@@ -4,6 +4,7 @@ import path from "node:path";
 import { createRequire } from "node:module";
 import { createHash } from "node:crypto";
 import { build } from "esbuild";
+import { addProvisionalReviews } from "./provisional_reviews.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
@@ -22,6 +23,8 @@ const output = path.join(local, "site");
 const stage = mkdtempSync(path.join(local, "site-build-"));
 try {
   cpSync(path.join(root, "site"), stage, { recursive: true });
+  const researchConfig = JSON.parse(readFileSync(path.join(root, "config/research.json"), "utf8"));
+  addProvisionalReviews(stage, new Set(researchConfig.noAnnouncementDates));
   writeFileSync(path.join(stage, "personal-config.js"),
     "window.RatesPersonalConfig = " + JSON.stringify(config) + ";\n");
   const htmlPath = path.join(stage, "index.html");

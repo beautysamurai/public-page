@@ -1,102 +1,17 @@
 {
   "schemaVersion": 2,
-  "editionId": "2026-11-13-daily-openai-01",
-  "editionDate": "2026-11-13",
+  "editionId": "2026-11-14-daily-openai-01",
+  "editionDate": "2026-11-14",
   "editionKind": "daily",
   "sourceKind": "openai-responses-api",
   "sourceLabel": "OpenAI Responses API · automated research pipeline",
-  "importedAt": "2026-11-13T14:50:11Z",
-  "status": "UPDATE_CONFIRMED",
-  "message": "arXivの更新を確認し、対象論文を評価しました。",
+  "importedAt": "2026-11-14T06:54:16Z",
+  "status": "NO_NEW_BATCH_EXPECTED",
+  "message": "通常の公開スケジュール上、新しいarXivバッチは予定されていません。",
   "expectedBatchDate": "2026-11-13",
   "observedBatchDate": "2026-11-13",
   "periodStart": null,
   "periodEnd": null,
-  "sourceText": "## 2026年11月13日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 27 | 22,498 | 21,659 (1,492) | 0.0131 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 4 | 168,191 | 6,045 (635) | 0.4809 | PDF全文・46ページ / PDF全文・27ページ / PDF全文・31ページ / PDF全文・39ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. Improving Algorithmic Trading for BESS on Intraday Electricity Markets through Distributional Price Forecasts\n\n**[arXiv:2611.17170v1](https://arxiv.org/abs/2611.17170v1) — Simon Hirsch, David Schaurecker, David Wozabal**\n\n### 概要\n\nドイツの日中電力市場で、蓄電池（BESS）のrolling intrinsic戦略に残存取引時間の価格分布予測を組み込む研究である。板のmidprice分布から指値を設定し、即時執行と待機を選択することで、計算負荷を抑えながら将来の取引機会を考慮する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 電子取引 / 日中電力市場 / 蓄電池 / 指値注文板 / 分布予測 / ローリング内在価値戦略 / 執行リスク |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 分布予測を実際の指値注文と高速最適化に接続する具体的な設計があり、電子執行研究として有用である。最大改善率だけでなく、短時間電池での悪化と予測失敗時のリスク管理も読むべき論文である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 870 | 821 (83) | 0.0005 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 48,032 | 1,484 (157) | 0.1349 | PDF全文・31ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 2023年2月〜2024年12月の適応型LASSO戦略では、予測なしの戦略に対する利益改善率が2時間電池で0.7〜26.7%、4時間電池で13.4〜42.3%と報告された。一方、1時間電池では6.8〜28.0%悪化した。日次利益は予測誤差および予測更新幅と負に相関したが、これは因果効果の証明ではない。\n\n**手法:** 2022〜2024年のEPEX SPOT板イベントから、残存取引時間の時間加重midprice分布を構築し、その分位点をOLS・LASSOなどで毎時予測する。予測を仮想注文としてrolling intrinsicに追加し、11状態の動的計画近似で再最適化する。手数料、線形劣化費用、充放電効率を含む履歴シミュレーションを行い、適応型戦略では直近30日と1日の空白期間を用いて分位点設定とstop-loss閾値を選択する。\n\n**実務への応用:** BESSの執行システムで、現在の板を即時に取る注文と、予測価格で待つ指値注文の配分に利用できる。受渡し前の予測注文数量の段階的縮小とstop-lossを併用する設計は参考になるが、予測に依存する未完結ポジションには損失と物理的実行不能のリスクがある。\n\n**限界・注意点:** 検証はドイツ市場の時間単位商品と約2年間に限られ、自身の注文に対する市場参加者の反応はモデル化していない。midprice分布は約定可能価格や数量の保証ではなく、粗い状態離散化と線形劣化費用も近似である。本文には分位点パラメータと区間幅・約定比率の関係について説明の不整合があり、実装時の確認が必要である。\n\n## 2. Price-impact Martingale optimal transport\n\n**[arXiv:2611.17247v1](https://arxiv.org/abs/2611.17247v1) — Erhan Bayraktar, Shuoqing Deng, Daxin Huang, Dominykas Norgilas**\n\n### 概要\n\n原資産の動的ヘッジに二次の一時的価格インパクトを課し、vanilla optionに整合するモデル非依存の価格上下限を研究する。注文規模が大きいほど、請求権当たりの価格区間が広がる仕組みを理論と数値例で示す。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 8/10 | 推奨 | 価格インパクト / マルチンゲール最適輸送 / ロバストヘッジ / 注文規模 / オプション価格限界 / 弱最適輸送 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 執行摩擦をモデル非依存のデリバティブ価格限界へ結び付ける理論として有用である。電子執行アルゴリズムの直接的な改善策ではないが、大口取引の流動性調整とロバストヘッジを扱う読者に推奨する。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 781 | 906 (102) | 0.0005 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 37,088 | 1,426 (225) | 0.1070 | PDF全文・39ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 著者らは、superhedging価格と、期待ペイオフからmartingale逸脱ペナルティを差し引く輸送問題の双対性を証明する。有限二次モーメントの下で、インパクトを縮小するとMOT、大きくすると通常のOTへ収束する。単一資産・単一期間では、最適結合に共通する条件付きドリフトの一意性も示す。\n\n**手法:** 離散時間・複数資産のsemi-static hedgeを定式化し、静的輸送双対性とminimax定理で価格双対性を導く。単一期間ではweak optimal transportとWasserstein射影を用いる。数値分析では対数正規分布、SPXオプションから推定した周辺分布、離散バスケット例を用い、凸最適化と上下評価で計算精度を確認する。\n\n**実務への応用:** 大口エキゾチック取引の価格限界と、ヘッジ執行コストの注文規模感応度を評価する枠組みになる。SPX較正例では、注文を1単位から10単位へ増やすと、ATM forward-start callの売り手上限は1単位当たり220.66から281.60正規化bpへ上昇したと報告する。\n\n**限界・注意点:** 静的オプションは数量によらず同一価格で売買でき、基本モデルは固定係数の二次一時インパクトを仮定する。恒久的インパクト、cross-impact、板や約定過程は扱わず、SPX例のインパクト係数も市場データから推定していない。OT極限には有限二次モーメント、MOT側の線形収束率には追加の有界ヘッジ条件が必要であり、数値例は実現執行コストや収益性の検証ではない。\n\n## 3. A high-order recombination algorithm with adaptive scale selection for weak approximation of stochastic differential equations\n\n**[arXiv:2611.15564v1](https://arxiv.org/abs/2611.15564v1) — Yuming Ma, Syoiti Ninomiya**\n\n### 概要\n\n拡散過程の弱近似ツリーを、モーメントを保存しながら圧縮するAWLL法を提案する。増分の共分散とモデル係数から分割尺度を自動選択し、Hestonとシフト付きSABRで価格・感応度の計算を検証している。主な貢献は異方性そのものより、従来法の尺度パラメータ調整の自動化にある。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 6/10 | 推奨 | 金利モデル / シフト付きSABR / 弱近似 / 高次再結合 / 適応的尺度選択 / 感応度計算 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 金利デリバティブの決定論的な価格・感応度計算に関連し、尺度選択の実装上の問題を理論と実験の両面から扱っている。ただし、推奨対象は数値計算基盤の担当者であり、汎用的な高速化や異方性による精度改善として紹介すべきではない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 904 | 970 (0) | 0.0006 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 61,207 | 1,559 (165) | 0.1686 | PDF全文・46ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 初期価格・金利を100に換算した9分割の実験では、固定尺度 $\\lambda=1$ のWLL比で終端ノード数をHestonで約137分の1、シフト付きSABRで約1488分の1に削減し、参照値との誤差は概ね同程度だった。ただし、事後調整したWLLは同程度の精度でAWLLより小さいツリーを実現しており、異方的形状の優位性は示されていない。\n\n**手法:** 増分共分散とモデルの増分二次モーメントを混合し、ridgeで正定値化した行列を分割判定に用いる。5次までのモーメントを保存する正の測度縮約をNV法と組み合わせ、価格・感応度の共同誤差評価とノード数の条件付き上界を導く。batched basis exchangeの消去段階は、モーメント階数とパネル幅を固定すると $O(J)$ の演算量となる。\n\n**実務への応用:** シフト付きSABRによる欧州型・算術平均型オプションの価格、Delta、モデルvegaを同じツリーで計算する際の尺度調整とメモリ負担の軽減に役立つ。イールドカーブ構築や電子執行への直接的な応用は検証していない。\n\n**限界・注意点:** 金融モデルの検証は2モデル、時間分割数9までで、漸近的な計算量や広いパラメータ領域での有効性は未確認である。小さい初期価格のHestonではAWLLが約53倍のノードを保持し、精度も一様には改善しない。収束保証は継続価値の滑らかさと分割数の増加条件に依存し、自動的な誤差許容値保証や一般の座標単位変更に対する完全な不変性はない。参照値の一部は有限解像度の準Monte Carlo計算であり、SABRの数値階数過大評価も残る。線形演算量は階数判定と初期化を除き、既存の線形時間縮約法との実測比較はない。",
-  "papers": [
-    {
-      "arxivId": "2611.17170v1",
-      "title": "Improving Algorithmic Trading for BESS on Intraday Electricity Markets through Distributional Price Forecasts",
-      "authors": [
-        "Simon Hirsch",
-        "David Schaurecker",
-        "David Wozabal"
-      ],
-      "submittedDate": "2026-11-12",
-      "updatedDate": "2026-11-12",
-      "topics": [
-        "Electronic trading"
-      ],
-      "absUrl": "https://arxiv.org/abs/2611.17170v1",
-      "pdfUrl": "https://arxiv.org/pdf/2611.17170v1",
-      "schedulerRank": 1,
-      "schedulerRating": 8,
-      "schedulerRatingScale": 10,
-      "schedulerLabel": "推奨・テーマ重要度 8/10",
-      "schedulerSummary": "ドイツの日中電力市場で、蓄電池（BESS）のrolling intrinsic戦略に残存取引時間の価格分布予測を組み込む研究である。板のmidprice分布から指値を設定し、即時執行と待機を選択することで、計算負荷を抑えながら将来の取引機会を考慮する。\n\n一次判定: gpt-6-luna / low · トークン 入力 870 / 出力 821（うち推論 83） · 推定 $0.0005\n論文解析: gpt-6.1-sol / medium · トークン 入力 48,032 / 出力 1,484（うち推論 157） · PDF 31 pages · 推定 $0.1349",
-      "ratings": [
-        {
-          "label": "テーマ重要度",
-          "value": 8,
-          "scale": 10
-        }
-      ]
-    },
-    {
-      "arxivId": "2611.17247v1",
-      "title": "Price-impact Martingale optimal transport",
-      "authors": [
-        "Erhan Bayraktar",
-        "Shuoqing Deng",
-        "Daxin Huang",
-        "Dominykas Norgilas"
-      ],
-      "submittedDate": "2026-11-12",
-      "updatedDate": "2026-11-12",
-      "topics": [
-        "Market microstructure"
-      ],
-      "absUrl": "https://arxiv.org/abs/2611.17247v1",
-      "pdfUrl": "https://arxiv.org/pdf/2611.17247v1",
-      "schedulerRank": 2,
-      "schedulerRating": 8,
-      "schedulerRatingScale": 10,
-      "schedulerLabel": "推奨・テーマ重要度 8/10",
-      "schedulerSummary": "原資産の動的ヘッジに二次の一時的価格インパクトを課し、vanilla optionに整合するモデル非依存の価格上下限を研究する。注文規模が大きいほど、請求権当たりの価格区間が広がる仕組みを理論と数値例で示す。\n\n一次判定: gpt-6-luna / low · トークン 入力 781 / 出力 906（うち推論 102） · 推定 $0.0005\n論文解析: gpt-6.1-sol / medium · トークン 入力 37,088 / 出力 1,426（うち推論 225） · PDF 39 pages · 推定 $0.1070",
-      "ratings": [
-        {
-          "label": "テーマ重要度",
-          "value": 8,
-          "scale": 10
-        }
-      ]
-    },
-    {
-      "arxivId": "2611.15564v1",
-      "title": "A high-order recombination algorithm with adaptive scale selection for weak approximation of stochastic differential equations",
-      "authors": [
-        "Yuming Ma",
-        "Syoiti Ninomiya"
-      ],
-      "submittedDate": "2026-11-11",
-      "updatedDate": "2026-11-11",
-      "topics": [
-        "Interest-rate models"
-      ],
-      "absUrl": "https://arxiv.org/abs/2611.15564v1",
-      "pdfUrl": "https://arxiv.org/pdf/2611.15564v1",
-      "schedulerRank": 3,
-      "schedulerRating": 6,
-      "schedulerRatingScale": 10,
-      "schedulerLabel": "推奨・テーマ重要度 6/10",
-      "schedulerSummary": "拡散過程の弱近似ツリーを、モーメントを保存しながら圧縮するAWLL法を提案する。増分の共分散とモデル係数から分割尺度を自動選択し、Hestonとシフト付きSABRで価格・感応度の計算を検証している。主な貢献は異方性そのものより、従来法の尺度パラメータ調整の自動化にある。\n\n一次判定: gpt-6-luna / low · トークン 入力 904 / 出力 970（うち推論 0） · 推定 $0.0006\n論文解析: gpt-6.1-sol / medium · トークン 入力 61,207 / 出力 1,559（うち推論 165） · PDF 46 pages · 推定 $0.1686",
-      "ratings": [
-        {
-          "label": "テーマ重要度",
-          "value": 6,
-          "scale": 10
-        }
-      ]
-    }
-  ]
+  "sourceText": "## 2026年11月14日 — 日次レビュー\n\n通常の公開スケジュール上、新しいarXivバッチは予定されていません。\n\n### この号の利用状況\n\nモデル・effort・トークン数：未記録。\n\n\n**推薦論文: なし**",
+  "papers": []
 }

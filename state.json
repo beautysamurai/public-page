@@ -811,6 +811,140 @@
           "output_tokens": 54
         }
       }
+    },
+    "2611.17515": {
+      "batch": "2026-11-16",
+      "id": "2611.17515v1",
+      "fingerprint": "032015664872f1dd660768020469257eddf19f3492a3f69859c1a357860c720f",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.EC",
+        "q-fin.TR"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.17530": {
+      "batch": "2026-11-16",
+      "id": "2611.17530v1",
+      "fingerprint": "772cde3dee343a01ac5e9955f592fcc826a770f74830d8696818e0b96f462013",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.17902": {
+      "batch": "2026-11-16",
+      "id": "2611.17902v1",
+      "fingerprint": "267b9f7e85a4460e04780df42ac44eabeeea3ba1c07481f50176272a3188b6c0",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.MF"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "interest_rate_models",
+        "importance": 3,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.17984": {
+      "batch": "2026-11-16",
+      "id": "2611.17984v1",
+      "fingerprint": "a7e81b5f9fe683bc2d308d41c26ecbbdb5036deae684a1d9dee43af911034b92",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.18150": {
+      "batch": "2026-11-16",
+      "id": "2611.18150v1",
+      "fingerprint": "c6172860885c2fa6d09f7e561243ae6404b0342981a67d14e2edb3b3c8fa4dee",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.TR"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "electronic_trading",
+        "importance": 3,
+        "recommended": true
+      },
+      "status": "waiting"
+    },
+    "2611.18214": {
+      "batch": "2026-11-16",
+      "id": "2611.18214v1",
+      "fingerprint": "cbdf76f97ce3c40c0030ecc716593ab42b6b0eeb61aea0254a407b4c345d3b73",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.CP"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.18367": {
+      "batch": "2026-11-16",
+      "id": "2611.18367v1",
+      "fingerprint": "edbc96982041ffa8fd47e285b55c56c83fb6c6443dff9d07eb56f4169de56f1d",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.RM"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
     }
   }
 }

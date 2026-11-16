@@ -830,7 +830,19 @@
         "importance": 1,
         "recommended": false
       },
-      "status": "attempted"
+      "status": "compared",
+      "jev": {
+        "scores": {
+          "rates": 0.05,
+          "execution": 0.56,
+          "practical": 0.09
+        },
+        "route": "uncertain",
+        "usage": {
+          "input_tokens": 850,
+          "output_tokens": 54
+        }
+      }
     },
     "2611.17530": {
       "batch": "2026-11-16",

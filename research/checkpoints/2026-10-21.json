@@ -1,0 +1,789 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-10-21",
+  "fingerprint": "7e948542f060afbc729e00256fa0a5042dc52401b5d4ff728dab487f35d82374",
+  "candidateFingerprints": {
+    "2610.26919": "b960932bd34666349410c0821511b99a6acefc6121deb25a894724ca67ae1e14",
+    "2610.27100": "7d97653c275ed4ce87998eccc609e57e79318b05295d76e880b81742d3bc090c",
+    "2610.27214": "e115fb59dc6b8f10ad382848a5df6d892440e7b239224dc6943fd158c269a369",
+    "2610.27296": "4d1b8b73de3580df80a243a00b422707a25e958ce84832fa656203ad78967cb4",
+    "2610.27390": "7f959cee7e72c27779c5c00f7e936c8ac5207df73f96a350c328e4c1deaf01e3",
+    "2610.27576": "96778265d5d10e1907d52b3f07872e9a60fdfb8ed74c2f0fe5a2f013a2afef0a",
+    "2610.28071": "2769396e7f6876aefad0fc04c4e86a4ad5867dd98aeb3e2ca3d91f1f01697794",
+    "2610.28075": "b0451599738d23f69f298ca3ad21cc01556cc5c6802845880362fd3693a0e021",
+    "2610.28133": "190f42de16b6fa9939f3f184b163a2a88bd17bc8ce216f73b2068673dc3b0cd6",
+    "2610.28154": "21c056793d380c54f6acdebc6538fdfbcd4b51f9bc2adeca1da7b8804a1b8505"
+  },
+  "results": {
+    "2610.26919": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "連続時間市場で、対数リターンに基づく Range Value-at-Risk（RVaR）を用いた動的ポートフォリオ選択を分析する研究です。",
+        "mainResult": "動的最適化を静的な分位点問題に帰着させ、最適な終端資産の形をRVaR固有の凸包によって特徴づけています。パラメータによって複数の状態依存型ペイオフが生じ、VaRおよびExpected Shortfallの対応する解との極限関係も示します。",
+        "practicalApplication": "一定の投資機会の下では、閉形式の資産過程と複製戦略を導出しており、RVaRを制約または目的とするポートフォリオ設計の理論的参考になります。リスク領域から除外される極端な下方状態で、終端資産がゼロになり得る点は運用上の注意事項です。",
+        "methodology": "分位点表現、ラグランジュ最適化、凸化を用いて問題を解析し、数値例でリスクパラメータとリスク資産配分の関係を調べています。",
+        "limitations": "要約からは、実データによる検証、取引コストや流動性の考慮、モデル仮定への頑健性は確認できません。閉形式の戦略は一定の投資機会を仮定した結果です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "動的ポートフォリオ最適化と分位点リスクの理論研究であり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利を主題とするサイトの対象とは実質的に異なります。",
+        "tags": [
+          "ポートフォリオ最適化",
+          "Range Value-at-Risk",
+          "対数リターン",
+          "分位点リスク"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper studies dynamic portfolio selection in a continuous-time market using Range Value-at-Risk (RVaR) based on logarithmic returns.",
+          "mainResult": "It reduces the dynamic optimization to a static quantile problem and characterizes optimal terminal wealth through an RVaR-specific convex envelope. Depending on parameter values, the resulting state-dependent payoffs have multiple forms; the paper also establishes limiting connections to the corresponding VaR and Expected Shortfall solutions.",
+          "practicalApplication": "Under constant investment opportunities, the authors derive closed-form wealth processes and replicating strategies, providing theoretical guidance for portfolio design with RVaR. A practical concern is that terminal wealth may be zero in extreme downside states excluded from the risk region.",
+          "methodology": "The analysis uses quantile representation, Lagrangian optimization, and convexification, and numerical examples examine how risk parameters relate to risky-asset exposure.",
+          "limitations": "The abstract does not establish validation on real data or address transaction costs, liquidity, or robustness to model assumptions. The closed-form strategies rely on constant investment opportunities.",
+          "reason": "This is theoretical research on dynamic portfolio optimization and quantile risk, materially outside the site's focus on electronic trading, market microstructure, interest-rate models, yield curves, and rates.",
+          "tags": [
+            "portfolio optimization",
+            "Range Value-at-Risk",
+            "logarithmic returns",
+            "quantile risk"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.27100": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本研究は、生成型指値注文板モデルが注文フローに対する市場インパクトを再現できるか評価するベンチマークを提案する。",
+        "mainResult": "5つの自己回帰モデルと5銘柄を調べ、メタオーダー参加率に対するインパクト指数が0.63〜1.21となり、検証したモデル群では約定後のインパクト減衰を確認できなかったと報告する。",
+        "practicalApplication": "生成型LOBを取引エージェントのシミュレーターとして使う際、履歴データとの分布比較に加えて、エージェント注文への反実仮想応答を検証する用途がある。",
+        "methodology": "生成メッセージ列へのメタオーダー注入を行い、自由生成、注入中、約定後の各段階で既存のインパクト推定量を測定する。可視注入とシミュレーターのみのブラインド対照を比較し、学習された応答と通常の板の力学を分ける。",
+        "limitations": "要旨に記載された対象は5モデル・5銘柄に限られる。減衰が観測されない理由は短いコンテキスト窓による可能性として述べられており、確定的な説明ではない。結果は要旨に基づく。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "生成型市場シミュレーターの評価において、エージェント注文への市場インパクトという重要な未評価要素を扱い、再利用可能なベンチマークを提示するため。",
+        "tags": [
+          "市場インパクト",
+          "指値注文板",
+          "生成モデル",
+          "メタオーダー",
+          "シミュレーション評価"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study proposes a benchmark to assess whether generative limit order book models reproduce market impact in response to order flow.",
+          "mainResult": "Across five autoregressive models and five stocks, the reported impact exponents against metaorder participation range from 0.63 to 1.21; the tested model family showed no observable post-execution impact decay.",
+          "practicalApplication": "The benchmark can test counterfactual responses to agent orders, in addition to historical-distribution comparisons, when using generative LOBs as simulators for trading agents.",
+          "methodology": "The authors inject metaorders into generated message streams and measure established impact estimators during free generation, injection, and the post-execution window. They compare visible injections with a blind, simulator-only control to separate learned response from standard book mechanics.",
+          "limitations": "The abstract reports results for only five models and five stocks. The proposed explanation for the absence of observed decay—short context windows—is tentative, not established. This assessment is based on the abstract.",
+          "reason": "The paper addresses market impact from agent orders, an important dimension not covered by distributional evaluation alone, and proposes a reusable benchmark for generative market simulators.",
+          "tags": [
+            "market impact",
+            "limit order book",
+            "generative models",
+            "metaorders",
+            "simulation evaluation"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "生成型指値注文板モデルが、外生的な大口分割注文にどう反応するかを評価するベンチマークを提案する。5種類のニューラル生成モデルとNASDAQの5銘柄を検証し、分布の再現性だけでは執行環境としての妥当性を判断できないと報告する。",
+        "mainResult": "全25モデル・銘柄ペアで、板の機械的変化だけでは説明できないインパクトを検出した。ただし推定指数は$\\delta \\in [0.63,1.21]$で、全信頼区間が平方根則の指数を除外した。AMDの振幅は文献上の基準の約4〜17倍で、ドリフトを考慮した判定では全ペアで信頼できる執行後の減衰を確認できなかった。",
+        "practicalApplication": "執行アルゴリズムや強化学習エージェントの訓練前に、シミュレータのインパクト形状・振幅・減衰を検証する用途に有用である。価格や注文の分布が似ていても、非現実的な執行戦略を学習させる環境を排除する補完テストとなる。",
+        "methodology": "自由生成、メタオーダー注入、執行後観測の3段階で評価する。参加率10%、中央値サイズの成行子注文を用い、各方向・各段階で1,024ロールアウトを20営業日に分散した。注文をモデルに見せる条件と、約定処理だけ行いモデルには隠すblind条件を比較し、既知のカーネル対照で推定器を検証したうえで、営業日単位のクラスターブートストラップで区間推定する。",
+        "limitations": "検証は単一市場の1か月、5銘柄、固定参加率・子注文サイズ・攻撃的注文に限定され、EAは学習対象外である。実市場との比較基準は同一標本の実メタオーダーではなく主に先行文献に依存し、既知カーネルの対照も平方根則の判定を通過しない。短い文脈長が減衰欠如の原因という説明は仮説であり、長期ロールアウトのドリフトと月間変動も解釈を制約する。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "機械的な板消費と生成モデルの反応を分離する対照設計が、執行シミュレータの検証に直接役立つ。結果の一般化には制約があるものの、分布評価だけでは見逃す実務上重要な欠陥を可視化している。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "指値注文板",
+          "生成モデル",
+          "マーケットインパクト",
+          "最適執行",
+          "シミュレータ検証"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper proposes a benchmark for evaluating how generative limit order book models respond to exogenous metaorders. Testing five neural generators across five NASDAQ stocks, it reports that distributional fidelity alone cannot establish suitability as an execution environment.",
+          "mainResult": "Impact not explained by mechanical book changes alone was detected in all 25 model–stock pairs. However, estimated exponents were $\\delta \\in [0.63,1.21]$, with every confidence interval excluding the square-root exponent. On AMD, amplitudes were approximately 4–17 times the literature benchmark, and no pair exhibited credible post-execution relaxation under the drift-aware assessment.",
+          "practicalApplication": "The benchmark is useful for validating simulated impact shape, amplitude, and relaxation before training execution algorithms or reinforcement-learning agents. It complements distributional tests by identifying environments that could teach unrealistic execution strategies despite matching price and order distributions.",
+          "methodology": "Evaluation has three phases: free generation, metaorder injection, and post-execution observation. Median-sized aggressive child orders target 10% participation, with 1,024 rollouts per direction per phase spread across 20 trading days. Visible injections are compared with blind controls that execute orders without revealing them to the model; estimators are validated against known kernel controls, and intervals use trading-day cluster bootstrapping.",
+          "limitations": "Testing covers one month on one market, five stocks, and fixed participation, child size, and aggressive-order settings; EA is outside the training universe. Real-market reference values come mainly from prior literature rather than matched empirical metaorders, and even known-kernel controls fail the square-root-law criterion. Short context length as the cause of missing relaxation remains a hypothesis, while long-rollout drift and month-to-month variation further constrain interpretation.",
+          "reason": "The control design separating mechanical book consumption from generator responses is directly useful for execution-simulator validation. Although generalization is limited, the benchmark exposes practically important defects that distributional evaluation alone can miss.",
+          "tags": [
+            "Market microstructure",
+            "Limit order book",
+            "Generative models",
+            "Market impact",
+            "Optimal execution",
+            "Simulator validation"
+          ]
+        }
+      }
+    },
+    "2610.27214": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "rates",
+        "summary": "本研究は、深層強化学習ポリシーのCVaR最適化に極値理論（EVT）を組み込み、深層ヘッジ問題で評価している。",
+        "mainResult": "報告された実験では、通常時のヘッジ挙動はEVTと経験的CVaRで学習したポリシーで類似し、極端なシナリオでは、検討した各訓練サンプル数においてEVT学習ポリシーのヘッジ損失が低かった。",
+        "practicalApplication": "極端な市場変動の観測が乏しい状況で、深層ヘッジなどのニューラルポリシーをテールリスクに配慮して学習する方法として応用できる可能性がある。",
+        "methodology": "ピーク超過法とモーメント法によるEVTベースのCVaR目的関数を構成し、閾値を条件とした有限標本勾配を自動微分で計算する。既知の最適解を持つ実験で検証した後、深層ヘッジで経験的CVaRと比較した。",
+        "limitations": "評価対象は要旨に記載された制御実験と深層ヘッジ設定に限られ、実市場での有効性や他の市場・ポリシーへの一般化は示されていない。閾値選択などの詳細や統計的不確実性も要旨からは確認できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "主題は強化学習におけるテールリスク推定であり、金融応用として深層ヘッジを扱うものの、電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブを直接研究していない。",
+        "tags": [
+          "極値理論",
+          "CVaR",
+          "強化学習",
+          "深層ヘッジ",
+          "テールリスク"
+        ],
+        "english": {
+          "classification": "rates",
+          "summary": "This study incorporates extreme value theory (EVT) into CVaR optimization for deep reinforcement-learning policies and evaluates it in a deep-hedging problem.",
+          "mainResult": "In the reported experiments, hedging behavior under normal conditions was similar for policies trained with EVT and empirical CVaR, while EVT-trained policies had lower hedging losses in extreme-scenario evaluation at each training-sample size considered.",
+          "practicalApplication": "The method may help train neural policies with tail-risk awareness, such as deep-hedging policies, when observations of extreme market movements are scarce.",
+          "methodology": "The authors construct an EVT-based CVaR objective using peaks over threshold and method-of-moments estimation, and compute its finite-sample gradient by automatic differentiation conditional on the threshold. They validate it in an experiment with a known optimum, then compare it with empirical CVaR in deep hedging.",
+          "limitations": "Evaluation is limited to the controlled experiment and deep-hedging setting described in the abstract; effectiveness in live markets and generalization to other markets or policies are not established. Details such as threshold selection and statistical uncertainty are not available in the abstract.",
+          "reason": "The paper focuses on tail-risk estimation in reinforcement learning and includes deep hedging as a financial application, but does not directly study electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "extreme value theory",
+            "CVaR",
+            "reinforcement learning",
+            "deep hedging",
+            "tail risk"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "rates",
+        "summary": "本研究は、深層強化学習ポリシーのCVaR最適化に極値理論（EVT）を組み込み、深層ヘッジ問題で評価している。",
+        "mainResult": "報告された実験では、通常時のヘッジ挙動はEVTと経験的CVaRで学習したポリシーで類似し、極端なシナリオでは、検討した各訓練サンプル数においてEVT学習ポリシーのヘッジ損失が低かった。",
+        "practicalApplication": "極端な市場変動の観測が乏しい状況で、深層ヘッジなどのニューラルポリシーをテールリスクに配慮して学習する方法として応用できる可能性がある。",
+        "methodology": "ピーク超過法とモーメント法によるEVTベースのCVaR目的関数を構成し、閾値を条件とした有限標本勾配を自動微分で計算する。既知の最適解を持つ実験で検証した後、深層ヘッジで経験的CVaRと比較した。",
+        "limitations": "評価対象は要旨に記載された制御実験と深層ヘッジ設定に限られ、実市場での有効性や他の市場・ポリシーへの一般化は示されていない。閾値選択などの詳細や統計的不確実性も要旨からは確認できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "主題は強化学習におけるテールリスク推定であり、金融応用として深層ヘッジを扱うものの、電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブを直接研究していない。",
+        "tags": [
+          "極値理論",
+          "CVaR",
+          "強化学習",
+          "深層ヘッジ",
+          "テールリスク"
+        ],
+        "english": {
+          "classification": "rates",
+          "summary": "This study incorporates extreme value theory (EVT) into CVaR optimization for deep reinforcement-learning policies and evaluates it in a deep-hedging problem.",
+          "mainResult": "In the reported experiments, hedging behavior under normal conditions was similar for policies trained with EVT and empirical CVaR, while EVT-trained policies had lower hedging losses in extreme-scenario evaluation at each training-sample size considered.",
+          "practicalApplication": "The method may help train neural policies with tail-risk awareness, such as deep-hedging policies, when observations of extreme market movements are scarce.",
+          "methodology": "The authors construct an EVT-based CVaR objective using peaks over threshold and method-of-moments estimation, and compute its finite-sample gradient by automatic differentiation conditional on the threshold. They validate it in an experiment with a known optimum, then compare it with empirical CVaR in deep hedging.",
+          "limitations": "Evaluation is limited to the controlled experiment and deep-hedging setting described in the abstract; effectiveness in live markets and generalization to other markets or policies are not established. Details such as threshold selection and statistical uncertainty are not available in the abstract.",
+          "reason": "The paper focuses on tail-risk estimation in reinforcement learning and includes deep hedging as a financial application, but does not directly study electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "extreme value theory",
+            "CVaR",
+            "reinforcement learning",
+            "deep hedging",
+            "tail risk"
+          ]
+        }
+      }
+    },
+    "2610.27296": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、AI分野で研究者の注意が集中すると研究テーマの多様性が失われ、後続のブレークスルーが難しくなるという仮説を、大規模な論文・査読・研究者データで検討する。",
+        "mainResult": "著者らは、Transformer以降に計算機科学の研究対象がAIへ集中し、査読者の確信度も低下したと報告する。また、AlexNetから大規模言語モデルに至る各ブレークスルー後に、アイデアの消耗が強まるパターンを示したとしている。",
+        "practicalApplication": "AI研究機関における研究資金配分や査読制度を設計する際、研究テーマの多様性を保つ方策を検討する材料になりうる。金融市場の執行、マーケット・マイクロストラクチャー、金利モデルまたはイールドカーブへの直接的な応用は示されていない。",
+        "methodology": "36年間の計算機科学について、720万本の論文、73,089件の査読、370万人の研究者と研究テーマの移動を分析し、構造生物学との比較および政策シミュレーションを行ったと要旨は述べる。",
+        "limitations": "要旨のみでは、注意の集中と研究成果の因果関係、テーマ多様性や「アイデアの消耗」の測定方法、推定の頑健性、シミュレーションの仮定を評価できない。結果は金融研究への妥当性を示していない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "科学研究の制度やAIの進展に関する研究であり、対象サイトの金融・市場マイクロストラクチャー領域とは実質的な関連がない。",
+        "tags": [
+          "AI研究",
+          "研究テーマの多様性",
+          "査読制度",
+          "科学政策"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines the hypothesis that concentrated attention among researchers reduces the diversity of research topics and makes subsequent breakthroughs harder, using large-scale publication, peer-review, and researcher data.",
+          "mainResult": "The authors report that computer science research shifted toward AI after the Transformer and that reviewer confidence declined. They also report a pattern of stronger idea exhaustion following successive breakthroughs, from AlexNet to large language models.",
+          "practicalApplication": "The findings may inform efforts to preserve research-topic diversity when designing funding allocation and peer-review systems at AI research institutions. The abstract identifies no direct application to financial execution, market microstructure, interest-rate models, or yield curves.",
+          "methodology": "The abstract describes analyses of 7.2 million papers, 73,089 reviews, and 3.7 million researchers and their topic shifts over 36 years of computer science, alongside a comparison with structural biology and policy simulations.",
+          "limitations": "From the abstract alone, the causal relationship between concentrated attention and research outcomes, the measurement of topic diversity and “idea exhaustion,” the robustness of the estimates, and the simulation assumptions cannot be assessed. The results do not establish relevance to financial research.",
+          "reason": "This work concerns scientific institutions and AI progress, with no material connection to the site's focus on finance and market microstructure.",
+          "tags": [
+            "AI research",
+            "research-topic diversity",
+            "peer review",
+            "science policy"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.27390": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、都市公園のアクセシビリティ分析が地理空間データの選択によってどう変わるかを、2都市で比較しています。",
+        "mainResult": "OpenStreetMap、Esri、SafeGraph、The Trust for Public Landのデータには網羅性・カバレッジ・正確性の差があり、公園アクセスの分析結果に大きな相違が生じたと報告しています。",
+        "practicalApplication": "都市計画で公園アクセスを評価する際、データソースを慎重に選び、妥当性を検証する必要性を示す指針を提示しています。金融市場、電子取引、金利モデルへの直接的な応用は示されていません。",
+        "methodology": "4つの地理空間データソースを検証し、2都市における公園アクセスを比較しています。",
+        "limitations": "提供された抄録だけでは、検証手法や指標、都市の選定理由、差の定量的な大きさは分かりません。結果の一般化可能性も判断できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "都市計画と地理空間データの研究であり、対象サイトの金融・市場領域には実質的に関連しません。",
+        "tags": [
+          "都市計画",
+          "公園アクセシビリティ",
+          "地理空間データ",
+          "データ品質"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study compares how geospatial data source selection affects urban park accessibility analyses in two cities.",
+          "mainResult": "The paper reports substantial differences in park-access results across OpenStreetMap, Esri, SafeGraph, and The Trust for Public Land, associated with differences in completeness, coverage, and accuracy.",
+          "practicalApplication": "It offers guidance on selecting and validating data when assessing park access for urban planning. No direct application to finance, electronic trading, or interest-rate models is indicated.",
+          "methodology": "The authors validate four geospatial data sources and compare park access in two cities.",
+          "limitations": "The abstract does not specify validation methods, metrics, city selection, or the quantitative magnitude of the differences. Generalizability cannot be assessed.",
+          "reason": "This is research on urban planning and geospatial data, with no material relevance to the site's finance or markets focus.",
+          "tags": [
+            "Urban planning",
+            "Park accessibility",
+            "Geospatial data",
+            "Data quality"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.27576": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は韓国プロ野球の自動ボール・ストライク判定導入について、審判の裁量除去と判定ゾーン形状の変更を切り分けて分析する。金融市場の電子執行、マーケット・マイクロストラクチャー、金利・イールドカーブ研究には直接該当しない。",
+        "mainResult": "100万球超のデータ分析では、ABS導入によりカウント依存の判定、捕手のフレーミング価値、スター打者への小さな優位が消えた一方、身長に応じたゾーン形状による配分変化はプレー結果への影響が小さく、精度よく推定された値もほぼゼロだったと報告する。投手は速やかに投球位置を調整したが、打者の調整を示す証拠はなかった。",
+        "practicalApplication": "野球の審判制度設計や自動判定の影響評価に参考となる。金融市場への実務的含意は、要旨からは確認できない。",
+        "methodology": "2021～2026年の100万球超を用い、判定者の裁量除去とゾーン形状の変更を分けて比較したと要旨は述べる。",
+        "limitations": "要旨のみの評価であり、識別戦略、推定仕様、頑健性検証の詳細は不明である。対象は韓国プロ野球であり、結果の一般化には注意を要する。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "自動判定や制度変更を扱う実証研究だが、対象は野球であり、サイトの金融研究領域とは実質的な関連がない。",
+        "tags": [
+          "野球",
+          "自動判定",
+          "制度変更"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes the introduction of automated ball-strike calls in Korean professional baseball, separating the removal of umpire discretion from changes in strike-zone geometry. It is not directly about electronic execution, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "Using over one million pitches, the abstract reports that ABS eliminated count-dependent calls, catcher framing value, and a small advantage for star batters. Although the height-scaled zone redistributed strikes, its estimated effect on plate-appearance outcomes was close to zero. Pitchers adjusted their pitch locations quickly, while the authors found no evidence of batter adjustment.",
+          "practicalApplication": "The findings may inform baseball umpiring policy and evaluations of automated calls. The abstract establishes no practical application to financial markets.",
+          "methodology": "The abstract describes an analysis of over one million pitches from 2021 to 2026 that separates the removal of human discretion from changes in zone geometry.",
+          "limitations": "This assessment is based only on the abstract; details of the identification strategy, estimation specifications, and robustness checks are unavailable. The setting is Korean professional baseball, so generalization requires caution.",
+          "reason": "This is an empirical study of automated decisions and institutional change, but its subject is baseball and it has no material connection to the site's financial research scope.",
+          "tags": [
+            "baseball",
+            "automated calls",
+            "institutional change"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.28071": {
+      "status": "pdf_out_of_scope",
+      "screenAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "本研究はコモディティ先物とオプションを対象に、算術型の多因子確率的ボラティリティモデルを構築・推定しています。",
+        "mainResult": "WTIデータでは、ボラティリティの期間構造の水準と傾きを捉えるのに3つの確率的ボラティリティ因子が必要と報告されています。カレンダースプレッド・オプションを推定に加えると、隣接先物間の相関構造の推定と同オプションの価格付け・ヘッジが改善しました。",
+        "practicalApplication": "先物・バニラ・カレンダースプレッド・オプションを一体的に推定し、価格付けやヘッジに用いる可能性があります。報告では、因子ベースのヘッジがバニラ・オプションのポートフォリオの日次リスクをほぼ除去しました。",
+        "methodology": "低次元のマルコフ表現と半閉形式の価格式を備える算術型モデルを提案し、2013～2024年のWTI先物、バニラ・オプション、カレンダースプレッド・オプションのパネルを無香料カルマンフィルターで推定しています。幾何型モデルとの比較も行っています。",
+        "limitations": "評価対象はWTIの2013～2024年データであり、他の商品・市場への一般化や、実運用での取引コストを含む成果は要旨から確認できません。結果は著者らの報告であり、独立検証は示されていません。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "金利モデルや電子執行を主題とする研究ではありませんが、先物の期間構造とオプションの相関・ヘッジを扱うため、イールドカーブおよび市場構造に関心を持つ読者に隣接する定量的研究です。",
+        "tags": [
+          "コモディティ先物",
+          "確率的ボラティリティ",
+          "カレンダースプレッド・オプション",
+          "価格付け",
+          "ヘッジ",
+          "期間構造"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This study develops and estimates an arithmetic multifactor stochastic-volatility model for commodity futures and options.",
+          "mainResult": "For WTI data, the authors report that three stochastic-volatility factors are needed to capture the level and slope of the volatility term structure. Including calendar spread options in estimation improves the inferred dependence between adjacent futures and the pricing and hedging of those options.",
+          "practicalApplication": "The model could jointly estimate futures, vanilla options, and calendar spread options for pricing and hedging. The authors report that factor-based hedges remove almost all daily risk from a vanilla-options portfolio.",
+          "methodology": "The proposed arithmetic model has a low-dimensional Markov representation and semi-closed-form pricing formulas. It is estimated with an unscented Kalman filter on a 2013–2024 panel of WTI futures, vanilla options, and calendar spread options, and is compared with a geometric model.",
+          "limitations": "The evaluation uses WTI data from 2013–2024; generalization to other commodities or markets and performance including real-world transaction costs are not established by the abstract. The findings are reported by the authors, with no independent validation described.",
+          "reason": "Although the paper is not primarily about interest-rate models or electronic execution, it studies futures term structure, option dependence, and hedging, making it a relevant adjacent quantitative study for readers interested in yield curves and market structure.",
+          "tags": [
+            "commodity futures",
+            "stochastic volatility",
+            "calendar spread options",
+            "pricing",
+            "hedging",
+            "term structure"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "要旨とIntroductionのみを対象とする限定レビューであり、全69ページの本文は未提供である。著者らは、WTI先物とオプション向けに算術型多因子確率ボラティリティモデルを提案し、低次元のMarkov表現とカレンダースプレッド・オプションを含む半閉形式価格評価が可能だと主張している。",
+        "mainResult": "本文未提供のため、以下は要旨とIntroductionにおける著者らの主張である。ボラティリティ期間構造の水準と傾きの再現には3因子が必要で、その因子に基づくヘッジはバニラ・オプション群の日次リスクをほぼ除去するという。カレンダースプレッド・オプションを推定に含めると、隣接限月間の非相関化の過大評価と同オプションの過大価格評価が改善する。また、算術型は比較対象の幾何型より先物・バニラ価格への適合が良く、バニラのヘッジも小幅に改善すると報告している。",
+        "practicalApplication": "著者らの提案は、WTIオプションの共同評価、限月間依存構造の推定、因子ヘッジに応用できる可能性がある。特に、先物とバニラだけでは捉えにくい依存構造を推定するため、カレンダースプレッド・オプションを利用する意義を示唆する。",
+        "methodology": "著者らは、連続アフィン過程による算術型モデルを構築し、Laplace変換に基づく一次元数値積分でオプションを評価すると説明している。2013年1月から2024年2月のWTI先物・バニラ・カレンダースプレッド価格を用い、unscented Kalman filterと予測誤差分解により実測度とリスク中立測度の下で共同推定し、価格適合度とヘッジ性能を比較する。",
+        "limitations": "全69ページのうち要旨とIntroductionのみが提供されており、本文の証明、推定詳細、実験結果、付録は確認できない。著者ら自身も、一定のレバレッジ相関では観測されたスキュー変動の一部しか捉えられず、3因子によるカレンダースプレッドのヘッジ改善は限定的だと述べている。WTI以外への一般化、取引費用控除後の有効性、頑健性は提供資料から判断できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "商品先物オプションの評価・ヘッジが中心であり、対象分野の電子執行、市場マイクロストラクチャー、金利モデル、イールドカーブへの直接的な関連は乏しい。期間構造モデルの推定手法には参考価値がある。",
+        "tags": [
+          "商品先物",
+          "WTI原油",
+          "算術型モデル",
+          "確率ボラティリティ",
+          "カレンダースプレッド・オプション",
+          "無香料カルマンフィルタ",
+          "限定資料レビュー"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This limited-source review covers only the abstract and Introduction; the full 69-page paper was not provided. The authors propose an arithmetic multifactor stochastic volatility model for WTI futures and options, claiming a low-dimensional Markov representation and semi-closed-form pricing, including calendar spread options.",
+          "mainResult": "Because the full paper was not provided, the following are author claims from the abstract and Introduction. Three factors are said to be necessary to reproduce the level and slope of the volatility term structure, with factor-based hedges removing almost all daily risk from a vanilla option portfolio. Including calendar spread options in estimation reportedly reduces overstated decorrelation between adjacent maturities and the resulting overpricing of these options. The authors also report better futures and vanilla pricing fit, and slightly better vanilla hedging, than the geometric counterpart.",
+          "practicalApplication": "The proposed approach could support joint valuation of WTI options, estimation of cross-maturity dependence, and factor hedging. In particular, it suggests the value of calendar spread options for estimating dependence that futures and vanilla options alone may not capture.",
+          "methodology": "The authors describe an arithmetic model driven by a continuous affine process, with option valuation through one-dimensional numerical integration based on the Laplace transform. Using WTI futures, vanilla options, and calendar spread options from January 2013 to February 2024, they jointly estimate the model under physical and risk-neutral measures with an unscented Kalman filter and prediction error decomposition, and compare pricing fit and hedging performance.",
+          "limitations": "Only the abstract and Introduction of the 69-page paper were supplied; proofs, estimation details, experimental results, and appendices cannot be assessed. The authors themselves state that constant leverage correlations capture only part of observed skew variation and that three-factor hedging improvements for calendar spread options are limited. Generalization beyond WTI, effectiveness after transaction costs, and robustness cannot be assessed from the supplied material.",
+          "reason": "The paper focuses on commodity futures option pricing and hedging, with little direct relevance to electronic execution, market microstructure, interest-rate models, or yield curves. Its term-structure estimation methods may nevertheless offer useful methodological insights.",
+          "tags": [
+            "Commodity futures",
+            "WTI crude oil",
+            "Arithmetic models",
+            "Stochastic volatility",
+            "Calendar spread options",
+            "Unscented Kalman filter",
+            "Limited-source review"
+          ]
+        }
+      }
+    },
+    "2610.28075": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本研究は、英国電力市場における非物理的トレーダー（NPT）の投機的インバランス・ポジションが、2021～2024年の需給調整量、調整費用、インバランス価格および精算費用に与えた影響を反実仮想シミュレーションで分析する。",
+        "mainResult": "報告された推計では、NPTのポジションにより必要な純調整量が3.1～3.9 TWh（16～20%）、需給インバランスの標準偏差が48～65 MWh（13～17%）、調整費用が£347～396m（5.9～6.7%）、供給事業者のインバランス費用が£193～325m（65～75%）低下した。",
+        "practicalApplication": "NPTの取引を制限する政策の検討に際し、需給調整費用や精算負担への影響を評価する材料となる。ただし、卸市場、とくに直前の時間帯市場への波及も考慮する必要がある。",
+        "methodology": "2021～2024年の決済期間ごとの参加者別インバランスデータを用い、NPTの集計インバランスがない場合をシミュレーションして実績と比較した。",
+        "limitations": "結果は提示されたデータと反実仮想の設定に依存する。要旨だけではシミュレーションの詳細や推計の不確実性を確認できず、卸市場への影響や消費者負担への転嫁も確定的には示されていない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "電力市場のインバランス制度と取引行動の関係を定量化し、政策議論に関連する結果を報告している。一方、対象は英国電力市場であり、電子執行や金利分野との直接的な関連は限定的である。",
+        "tags": [
+          "電力市場",
+          "市場マイクロストラクチャー",
+          "インバランス",
+          "需給調整",
+          "反実仮想分析"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study uses counterfactual simulations to analyze how speculative imbalance positions by non-physical traders (NPTs) affected balancing volumes and costs, imbalance prices, and settlement costs in the Great Britain electricity market from 2021 to 2024.",
+          "mainResult": "The reported estimates indicate that NPT positions reduced the required net balancing volume by 3.1–3.9 TWh (16–20%), the standard deviation of system imbalance by 48–65 MWh (13–17%), balancing costs by £347–396m (5.9–6.7%), and supplier imbalance costs by £193–325m (65–75%).",
+          "practicalApplication": "The findings may inform policy assessments of restrictions on NPT trading by quantifying potential effects on balancing costs and settlement burdens. However, effects on wholesale markets, particularly late-stage intraday trading, also need consideration.",
+          "methodology": "The authors use party-level imbalance data for each settlement period from 2021 to 2024 and simulate a counterfactual in which aggregate NPT imbalance is absent, comparing it with observed outcomes.",
+          "limitations": "The results depend on the supplied data and counterfactual assumptions. The abstract does not provide enough detail to assess the simulation design or estimation uncertainty, and it does not establish the effects on wholesale markets or the pass-through of costs to consumers.",
+          "reason": "The paper quantifies the relationship between imbalance-market rules and trading behavior, reporting results relevant to policy discussion. Its focus is the GB electricity market, so its direct relevance to electronic execution and interest-rate research is limited.",
+          "tags": [
+            "Electricity markets",
+            "Market microstructure",
+            "Imbalance",
+            "System balancing",
+            "Counterfactual analysis"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "英国電力市場の非現物トレーダーによる投機的インバランス保有が、需給調整量と精算費用に及ぼす影響を分析する。2021～2024年の参加者別データを用いた反実仮想では、投機的ポジションが調整需要と精算リスクを抑えたと報告している。",
+        "mainResult": "投機的ポジションがない場合との比較で、絶対値ベースの純需給調整量は累計3.1～3.9 TWh、16～20%少ないと推計された。調整費用は3.47～3.96億ポンド、小売事業者のインバランス精算負担は1.93～3.25億ポンド少ない。ただし、2022年の一部シナリオでは調整費用への効果が逆転している。",
+        "practicalApplication": "単一インバランス価格制度や取引締切変更を評価する際に、裁定取引が調整市場へ与える影響を測る枠組みとして使える。投機の有用性を実現後の需給方向との一致だけで判断せず、投機がない場合の需給状態と比較する点が参考になる。",
+        "methodology": "欠損期間を除く68,823の30分精算期間について、非現物トレーダーの純インバランスを除いた反実仮想を構築する。全対象者を含むAMVと計量電力量ゼロの対象者に限るZMVを比較し、系統制約対応の調整を固定したメリットオーダー再配分から、調整費用、精算価格、参加者別精算収支を再計算する。",
+        "limitations": "他参加者のインバランス、調整市場の入札条件、系統制約対応を固定するため、結果はモデル依存であり、因果効果を直接識別したものではない。卸売価格、流動性、受動的調整の行動変化や送電制約への影響は内生化されず、消費者料金や総厚生の改善は直接検証されていない。AMVとZMVの幅はシナリオ差であり、信頼区間ではない。また、調整費用削減率には本文の金額・分母と整合しない記述がある。",
+        "importance": 1,
+        "recommended": true,
+        "reason": "裁定参加者と精算制度の相互作用を実データで検討しており、市場マイクロストラクチャー研究として推薦できる。ただし、金利・債券市場への直接的な応用はなく、政策結論には反実仮想の仮定を踏まえた慎重な解釈が必要である。",
+        "tags": [
+          "電力市場",
+          "市場マイクロストラクチャー",
+          "投機的裁定",
+          "インバランス精算",
+          "反実仮想シミュレーション",
+          "市場設計"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper examines how speculative imbalance positions held by non-physical traders affect balancing volumes and settlement costs in Great Britain’s electricity market. Counterfactual analysis using participant-level data from 2021–2024 reports that these positions reduced balancing requirements and settlement risk.",
+          "mainResult": "Relative to a counterfactual without speculative positions, cumulative absolute net balancing volume is estimated to be 3.1–3.9 TWh, or 16–20%, lower. Balancing costs are £347–396 million lower, and suppliers’ imbalance settlement liabilities are £193–325 million lower. However, the balancing-cost effect reverses in one scenario for 2022.",
+          "practicalApplication": "The framework can assess how arbitrage affects balancing markets when evaluating single imbalance pricing or changes to trading deadlines. A useful insight is to compare outcomes against the system balance without speculation rather than judging speculation solely by its alignment with the realized system balance.",
+          "methodology": "The study constructs counterfactuals removing aggregate non-physical-trader imbalances across 68,823 half-hour settlement periods after excluding missing observations. It compares AMV, covering all eligible traders, with ZMV, restricted to traders with zero metered volume, and recalculates balancing costs, settlement prices, and participant settlement cashflows through merit-order redispatch while holding constraint-management actions fixed.",
+          "limitations": "Other participants’ imbalances, balancing-market bids, and constraint-management actions are held fixed, making the results model-dependent rather than directly identified causal effects. Wholesale prices, liquidity, behavioral changes in passive balancing, and transmission-constraint effects are not endogenized, so improvements in consumer bills or total welfare are not directly tested. The AMV–ZMV range reflects scenario differences, not a confidence interval. Some reported balancing-cost reduction percentages are also inconsistent with the stated amounts and denominator.",
+          "reason": "The paper merits recommendation as market-microstructure research because it uses empirical data to examine interactions between arbitrage participants and settlement rules. However, it has no direct application to rates or bond markets, and its policy conclusions require cautious interpretation given the counterfactual assumptions.",
+          "tags": [
+            "Electricity markets",
+            "Market microstructure",
+            "Speculative arbitrage",
+            "Imbalance settlement",
+            "Counterfactual simulation",
+            "Market design"
+          ]
+        }
+      }
+    },
+    "2610.28133": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "職業間でタスクの分布を比較する枠組みを構築し、職業固有性の変化と賃金成長との関連を分析した研究です。",
+        "mainResult": "職業のタスク構成が他職業と似てくることは賃金成長の低さと関連し、追加・削除されたタスクの普及度によっても関連の方向が異なると報告しています。",
+        "practicalApplication": "労働経済学や職業変化の分析には有用ですが、電子取引、市場マイクロストラクチャー、金利モデル・イールドカーブ研究への直接的な適用は示されていません。",
+        "methodology": "1977～2018年の職業分類データに含まれる196,563件のタスク記述を用い、タスク量の変化と職業固有性の変化を区別して賃金成長との関連を調べています。",
+        "limitations": "提示された要旨だけでは、推定の詳細や因果識別の方法は確認できません。報告されているのは賃金成長との関連であり、因果効果とは限りません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "研究対象は職業構造と賃金であり、対象サイトの量的金融分野には実質的な関連がありません。",
+        "tags": [
+          "労働経済学",
+          "職業変化",
+          "賃金成長",
+          "タスク分布"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study develops a framework for comparing task distributions across occupations and analyzes how changes in occupational uniqueness relate to wage growth.",
+          "mainResult": "It reports that occupations becoming more similar to others in their task composition are associated with lower wage growth, and that wage associations also vary with how widely added or removed tasks are performed.",
+          "practicalApplication": "The framework may be useful in labor economics and research on occupational change, but no direct application to electronic trading, market microstructure, interest-rate models, or yield curves is indicated.",
+          "methodology": "Using 196,563 task statements in occupational classification data from 1977–2018, the study distinguishes changes in task quantity from changes in occupational uniqueness and examines their associations with wage growth.",
+          "limitations": "The abstract does not provide details of the estimation or causal identification methods. The reported findings are associations with wage growth and need not represent causal effects.",
+          "reason": "The research concerns occupational structure and wages, with no material relevance to the site's quantitative-finance topics.",
+          "tags": [
+            "labor economics",
+            "occupational change",
+            "wage growth",
+            "task distribution"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.28154": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は秘書問題を用いた逐次選択課題で、アンカリング、顕著性、社会的証明のデジタル・ナッジが停止行動と結果品質に与える影響を調べる。金融市場や金融意思決定を対象とした研究ではない。",
+        "mainResult": "参加者181人の要因計画実験では、アンカリングは探索を有意に増やし、顕著性の効果は最小だった。アンカリングと社会的証明の併用条件はアンカリング単独より結果品質が低く、ナッジの数が増えるほど品質が低下したと報告する。",
+        "practicalApplication": "デジタル・インターフェースで複数のナッジを併用する際の設計や倫理的配慮に示唆を与える可能性があるが、電子取引や金融実務への直接的な適用は示されていない。",
+        "methodology": "秘書問題に基づく逐次意思決定課題で、3種類のナッジの有無を組み合わせた$2^3$被験者間要因計画を実施した。",
+        "limitations": "要旨からは、効果の測定方法や参加者の属性、実験環境の詳細、統計的検出力、現実の選択場面への一般化可能性を評価できない。結果は単一課題・標本の報告であり、金融市場への適用を裏付けない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "主題は人間中心設計と一般的な逐次選択に関するもので、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利研究との実質的な関連が要旨に示されていない。",
+        "tags": [
+          "デジタル・ナッジ",
+          "逐次意思決定",
+          "秘書問題",
+          "実験研究"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study uses a secretary-problem sequential-choice task to examine how anchoring, salience, and social-proof digital nudges affect stopping behavior and outcome quality. It does not study financial markets or financial decision-making.",
+          "mainResult": "In a factorial experiment with 181 participants, anchoring significantly increased exploration, while salience had the smallest effect. The combined anchoring and social-proof condition had lower outcome quality than anchoring alone, and the authors report that quality declined as the number of nudges increased.",
+          "practicalApplication": "The findings may inform the design and ethical use of multiple nudges in digital interfaces, but no direct application to electronic trading or financial practice is established.",
+          "methodology": "The authors conducted a $2^3$ between-subjects factorial experiment using a sequential decision task based on the secretary problem.",
+          "limitations": "The abstract does not provide enough detail to assess outcome measurement, participant characteristics, experimental conditions, statistical power, or generalizability to real-world choice settings. The results concern a single task and sample and do not substantiate application to financial markets.",
+          "reason": "The topic concerns human-centered design and general sequential choice; the abstract shows no material connection to electronic trading, market microstructure, interest-rate models, yield curves, or rates research.",
+          "tags": [
+            "digital nudges",
+            "sequential decision-making",
+            "secretary problem",
+            "experimental study"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 968,
+      "outputTokens": 865,
+      "reasoningTokens": 111,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1833,
+      "estimatedCostUsd": 0.000529,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.26919v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 983,
+      "outputTokens": 701,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1684,
+      "estimatedCostUsd": 0.000449,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.27100v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 21734,
+      "outputTokens": 1440,
+      "reasoningTokens": 197,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 21731,
+      "totalTokens": 23174,
+      "estimatedCostUsd": 0.068734,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 9,
+      "paperIds": [
+        "2610.27100v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 797,
+      "outputTokens": 786,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1583,
+      "estimatedCostUsd": 0.000473,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.27214v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 857,
+      "outputTokens": 749,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1606,
+      "estimatedCostUsd": 0.00046,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.27296v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 786,
+      "outputTokens": 539,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1325,
+      "estimatedCostUsd": 0.000348,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.27390v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 794,
+      "outputTokens": 727,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1521,
+      "estimatedCostUsd": 0.000443,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.27576v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 861,
+      "outputTokens": 836,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1697,
+      "estimatedCostUsd": 0.000504,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28071v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 3151,
+      "outputTokens": 1490,
+      "reasoningTokens": 147,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 3148,
+      "totalTokens": 4641,
+      "estimatedCostUsd": 0.022776,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 69,
+      "paperIds": [
+        "2610.28071v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 917,
+      "outputTokens": 949,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1866,
+      "estimatedCostUsd": 0.000566,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28075v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 23645,
+      "outputTokens": 1492,
+      "reasoningTokens": 197,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 23642,
+      "totalTokens": 25137,
+      "estimatedCostUsd": 0.074031,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 36,
+      "paperIds": [
+        "2610.28075v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 902,
+      "outputTokens": 646,
+      "reasoningTokens": 56,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1548,
+      "estimatedCostUsd": 0.000413,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28133v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 803,
+      "outputTokens": 762,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1565,
+      "estimatedCostUsd": 0.000461,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28154v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

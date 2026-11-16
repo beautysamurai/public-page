@@ -1016,7 +1016,19 @@
         "importance": 1,
         "recommended": false
       },
-      "status": "attempted"
+      "status": "compared",
+      "jev": {
+        "scores": {
+          "rates": 0.04,
+          "execution": 0.03,
+          "practical": 0.06
+        },
+        "route": "exclude",
+        "usage": {
+          "input_tokens": 750,
+          "output_tokens": 54
+        }
+      }
     }
   }
 }

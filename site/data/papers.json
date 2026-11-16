@@ -2,6 +2,13 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-11-16-daily-openai-01",
+      "date": "2026-11-16",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": []
+    },
+    {
       "editionId": "2026-11-15-daily-openai-01",
       "date": "2026-11-15",
       "kind": "daily",
@@ -761,6 +768,60 @@
             "Market microstructure"
           ],
           "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-10-21-daily-openai-01",
+      "date": "2026-10-21",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.27100v1",
+          "title": "LOB-Impact Benchmark: Emergent Market Impact in Generative Limit Order Book Models",
+          "authors": [
+            "George Nigmatulin",
+            "Valentin Mohl",
+            "Sascha Frey",
+            "Kang Li",
+            "Aramis Marti-Shahandeh",
+            "Mihai Cucuringu",
+            "Anisoara Calinescu",
+            "Jakob Foerster",
+            "Stefan Zohren"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.27214v1",
+          "title": "Deep catastrophic-risk-aware reinforcement learning",
+          "authors": [
+            "Carlos Pérez Octavio Mendoza",
+            "Frédéric Godin"
+          ],
+          "topics": [
+            "Rates"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.28075v1",
+          "title": "Speculative Imbalance Positions by Non-Physical Traders: Impacts on Electricity System Balancing in Great Britain",
+          "authors": [
+            "Joseph Cary",
+            "Thomas Morstyn"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 2,
           "schedulerRatingScale": 10
         }
       ]

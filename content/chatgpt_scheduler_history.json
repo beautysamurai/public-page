@@ -11153,6 +11153,127 @@
       "periodEnd": null,
       "sourceText": "## 2026年11月15日 — 日次レビュー\n\n通常の公開スケジュール上、新しいarXivバッチは予定されていません。\n\n### この号の利用状況\n\nモデル・effort・トークン数：未記録。\n\n\n**推薦論文: なし**",
       "papers": []
+    },
+    {
+      "editionId": "2026-10-21-daily-openai-01",
+      "editionDate": "2026-10-21",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-11-16T16:19:23Z",
+      "status": "UPDATE_CONFIRMED",
+      "message": "arXivの更新を確認し、対象論文を評価しました。",
+      "expectedBatchDate": "2026-10-21",
+      "observedBatchDate": "2026-10-21",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年10月21日 — 日次レビュー\n\narXivの更新を確認し、対象論文を評価しました。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 10 | 8,668 | 7,560 (167) | 0.0046 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 3 | 48,530 | 4,422 (541) | 0.1655 | PDF全文・9ページ / 全69ページ（50ページ超）：abstractとIntroductionのみ・全文未解析 / PDF全文・36ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n## 1. LOB-Impact Benchmark: Emergent Market Impact in Generative Limit Order Book Models\n\n**[arXiv:2610.27100v1](https://arxiv.org/abs/2610.27100v1) — George Nigmatulin, Valentin Mohl, Sascha Frey, Kang Li, Aramis Marti-Shahandeh, Mihai Cucuringu, Anisoara Calinescu, Jakob Foerster, Stefan Zohren**\n\n### 概要\n\n生成型指値注文板モデルが、外生的な大口分割注文にどう反応するかを評価するベンチマークを提案する。5種類のニューラル生成モデルとNASDAQの5銘柄を検証し、分布の再現性だけでは執行環境としての妥当性を判断できないと報告する。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 10/10 | 推奨 | 市場マイクロストラクチャー / 指値注文板 / 生成モデル / マーケットインパクト / 最適執行 / シミュレータ検証 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 機械的な板消費と生成モデルの反応を分離する対照設計が、執行シミュレータの検証に直接役立つ。結果の一般化には制約があるものの、分布評価だけでは見逃す実務上重要な欠陥を可視化している。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 983 | 701 (0) | 0.0004 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 21,734 | 1,440 (197) | 0.0687 | PDF全文・9ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 全25モデル・銘柄ペアで、板の機械的変化だけでは説明できないインパクトを検出した。ただし推定指数は$\\delta \\in [0.63,1.21]$で、全信頼区間が平方根則の指数を除外した。AMDの振幅は文献上の基準の約4〜17倍で、ドリフトを考慮した判定では全ペアで信頼できる執行後の減衰を確認できなかった。\n\n**手法:** 自由生成、メタオーダー注入、執行後観測の3段階で評価する。参加率10%、中央値サイズの成行子注文を用い、各方向・各段階で1,024ロールアウトを20営業日に分散した。注文をモデルに見せる条件と、約定処理だけ行いモデルには隠すblind条件を比較し、既知のカーネル対照で推定器を検証したうえで、営業日単位のクラスターブートストラップで区間推定する。\n\n**実務への応用:** 執行アルゴリズムや強化学習エージェントの訓練前に、シミュレータのインパクト形状・振幅・減衰を検証する用途に有用である。価格や注文の分布が似ていても、非現実的な執行戦略を学習させる環境を排除する補完テストとなる。\n\n**限界・注意点:** 検証は単一市場の1か月、5銘柄、固定参加率・子注文サイズ・攻撃的注文に限定され、EAは学習対象外である。実市場との比較基準は同一標本の実メタオーダーではなく主に先行文献に依存し、既知カーネルの対照も平方根則の判定を通過しない。短い文脈長が減衰欠如の原因という説明は仮説であり、長期ロールアウトのドリフトと月間変動も解釈を制約する。\n\n## 2. Deep catastrophic-risk-aware reinforcement learning\n\n**[arXiv:2610.27214v1](https://arxiv.org/abs/2610.27214v1) — Carlos Pérez Octavio Mendoza, Frédéric Godin**\n\n### 概要\n\n本研究は、深層強化学習ポリシーのCVaR最適化に極値理論（EVT）を組み込み、深層ヘッジ問題で評価している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 4/10 | 非推奨 | 極値理論 / CVaR / 強化学習 / 深層ヘッジ / テールリスク |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 主題は強化学習におけるテールリスク推定であり、金融応用として深層ヘッジを扱うものの、電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブを直接研究していない。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 797 | 786 (0) | 0.0005 | Abstractのみ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 報告された実験では、通常時のヘッジ挙動はEVTと経験的CVaRで学習したポリシーで類似し、極端なシナリオでは、検討した各訓練サンプル数においてEVT学習ポリシーのヘッジ損失が低かった。\n\n**手法:** ピーク超過法とモーメント法によるEVTベースのCVaR目的関数を構成し、閾値を条件とした有限標本勾配を自動微分で計算する。既知の最適解を持つ実験で検証した後、深層ヘッジで経験的CVaRと比較した。\n\n**実務への応用:** 極端な市場変動の観測が乏しい状況で、深層ヘッジなどのニューラルポリシーをテールリスクに配慮して学習する方法として応用できる可能性がある。\n\n**限界・注意点:** 評価対象は要旨に記載された制御実験と深層ヘッジ設定に限られ、実市場での有効性や他の市場・ポリシーへの一般化は示されていない。閾値選択などの詳細や統計的不確実性も要旨からは確認できない。\n\n## 3. Speculative Imbalance Positions by Non-Physical Traders: Impacts on Electricity System Balancing in Great Britain\n\n**[arXiv:2610.28075v1](https://arxiv.org/abs/2610.28075v1) — Joseph Cary, Thomas Morstyn**\n\n### 概要\n\n英国電力市場の非現物トレーダーによる投機的インバランス保有が、需給調整量と精算費用に及ぼす影響を分析する。2021～2024年の参加者別データを用いた反実仮想では、投機的ポジションが調整需要と精算リスクを抑えたと報告している。\n\n### 判定結果\n\n| テーマ重要度 | 利用推奨 | タグ |\n| --- | --- | --- |\n| 2/10 | 推奨 | 電力市場 / 市場マイクロストラクチャー / 投機的裁定 / インバランス精算 / 反実仮想シミュレーション / 市場設計 |\n\nテーマ重要度は扱う問題の重要性であり、論文の正確性や採用推奨度の点数ではありません。利用推奨は根拠・限界も踏まえた別の判断です。\n\n**判定理由:** 裁定参加者と精算制度の相互作用を実データで検討しており、市場マイクロストラクチャー研究として推薦できる。ただし、金利・債券市場への直接的な応用はなく、政策結論には反実仮想の仮定を踏まえた慎重な解釈が必要である。\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 1 | 917 | 949 (0) | 0.0006 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 1 | 23,645 | 1,492 (197) | 0.0740 | PDF全文・36ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n### まとめ\n\n**主な結果:** 投機的ポジションがない場合との比較で、絶対値ベースの純需給調整量は累計3.1～3.9 TWh、16～20%少ないと推計された。調整費用は3.47～3.96億ポンド、小売事業者のインバランス精算負担は1.93～3.25億ポンド少ない。ただし、2022年の一部シナリオでは調整費用への効果が逆転している。\n\n**手法:** 欠損期間を除く68,823の30分精算期間について、非現物トレーダーの純インバランスを除いた反実仮想を構築する。全対象者を含むAMVと計量電力量ゼロの対象者に限るZMVを比較し、系統制約対応の調整を固定したメリットオーダー再配分から、調整費用、精算価格、参加者別精算収支を再計算する。\n\n**実務への応用:** 単一インバランス価格制度や取引締切変更を評価する際に、裁定取引が調整市場へ与える影響を測る枠組みとして使える。投機の有用性を実現後の需給方向との一致だけで判断せず、投機がない場合の需給状態と比較する点が参考になる。\n\n**限界・注意点:** 他参加者のインバランス、調整市場の入札条件、系統制約対応を固定するため、結果はモデル依存であり、因果効果を直接識別したものではない。卸売価格、流動性、受動的調整の行動変化や送電制約への影響は内生化されず、消費者料金や総厚生の改善は直接検証されていない。AMVとZMVの幅はシナリオ差であり、信頼区間ではない。また、調整費用削減率には本文の金額・分母と整合しない記述がある。",
+      "papers": [
+        {
+          "arxivId": "2610.27100v1",
+          "title": "LOB-Impact Benchmark: Emergent Market Impact in Generative Limit Order Book Models",
+          "authors": [
+            "George Nigmatulin",
+            "Valentin Mohl",
+            "Sascha Frey",
+            "Kang Li",
+            "Aramis Marti-Shahandeh",
+            "Mihai Cucuringu",
+            "Anisoara Calinescu",
+            "Jakob Foerster",
+            "Stefan Zohren"
+          ],
+          "submittedDate": "2026-10-19",
+          "updatedDate": "2026-10-19",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.27100v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.27100v1",
+          "schedulerRank": 1,
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 10/10",
+          "schedulerSummary": "生成型指値注文板モデルが、外生的な大口分割注文にどう反応するかを評価するベンチマークを提案する。5種類のニューラル生成モデルとNASDAQの5銘柄を検証し、分布の再現性だけでは執行環境としての妥当性を判断できないと報告する。\n\n一次判定: gpt-6-luna / low · トークン 入力 983 / 出力 701（うち推論 0） · 推定 $0.0004\n論文解析: gpt-6.1-sol / medium · トークン 入力 21,734 / 出力 1,440（うち推論 197） · PDF 9 pages · 推定 $0.0687",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 10,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.27214v1",
+          "title": "Deep catastrophic-risk-aware reinforcement learning",
+          "authors": [
+            "Carlos Pérez Octavio Mendoza",
+            "Frédéric Godin"
+          ],
+          "submittedDate": "2026-10-19",
+          "updatedDate": "2026-10-19",
+          "topics": [
+            "Rates"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.27214v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.27214v1",
+          "schedulerRank": 2,
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "非推奨・テーマ重要度 4/10",
+          "schedulerSummary": "本研究は、深層強化学習ポリシーのCVaR最適化に極値理論（EVT）を組み込み、深層ヘッジ問題で評価している。\n\n一次判定: gpt-6-luna / low · トークン 入力 797 / 出力 786（うち推論 0） · 推定 $0.0005",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 4,
+              "scale": 10
+            }
+          ]
+        },
+        {
+          "arxivId": "2610.28075v1",
+          "title": "Speculative Imbalance Positions by Non-Physical Traders: Impacts on Electricity System Balancing in Great Britain",
+          "authors": [
+            "Joseph Cary",
+            "Thomas Morstyn"
+          ],
+          "submittedDate": "2026-10-20",
+          "updatedDate": "2026-10-20",
+          "topics": [
+            "Market microstructure"
+          ],
+          "absUrl": "https://arxiv.org/abs/2610.28075v1",
+          "pdfUrl": "https://arxiv.org/pdf/2610.28075v1",
+          "schedulerRank": 3,
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10,
+          "schedulerLabel": "推奨・テーマ重要度 2/10",
+          "schedulerSummary": "英国電力市場の非現物トレーダーによる投機的インバランス保有が、需給調整量と精算費用に及ぼす影響を分析する。2021～2024年の参加者別データを用いた反実仮想では、投機的ポジションが調整需要と精算リスクを抑えたと報告している。\n\n一次判定: gpt-6-luna / low · トークン 入力 917 / 出力 949（うち推論 0） · 推定 $0.0006\n論文解析: gpt-6.1-sol / medium · トークン 入力 23,645 / 出力 1,492（うち推論 197） · PDF 36 pages · 推定 $0.0740",
+          "ratings": [
+            {
+              "label": "テーマ重要度",
+              "value": 2,
+              "scale": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "editionId": "2026-11-16-daily-openai-01",
+      "editionDate": "2026-11-16",
+      "editionKind": "daily",
+      "sourceKind": "openai-responses-api",
+      "sourceLabel": "OpenAI Responses API · automated research pipeline",
+      "importedAt": "2026-11-16T16:19:23Z",
+      "status": "NO_RELEVANT_PAPERS",
+      "message": "arXivの更新を確認しましたが、今回の条件に合う推薦論文はありませんでした。",
+      "expectedBatchDate": "2026-11-16",
+      "observedBatchDate": "2026-11-16",
+      "periodStart": null,
+      "periodEnd": null,
+      "sourceText": "## 2026年11月16日 — 日次レビュー\n\narXivの更新を確認しましたが、今回の条件に合う推薦論文はありませんでした。\n\n### この号の利用状況\n\n| 段階 | モデル / effort | 回数 | 入力 | 出力（うち推論） | 推定費用（USD） | 解析範囲 |\n| --- | --- | --- | --- | --- | --- | --- |\n| 一次判定 | gpt-6-luna / low | 7 | 6,194 | 6,008 (170) | 0.0036 | Abstractのみ |\n| 論文解析 | gpt-6.1-sol / medium | 2 | 75,016 | 2,818 (370) | 0.2157 | PDF全文・45ページ / PDF全文・15ページ |\n\n記録済みの再試行を含みます。未記録は0ではありません。推論トークンは出力の内数です。費用は推定値であり、請求額ではありません。\n\n\n**推薦論文: なし**",
+      "papers": []
     }
   ]
 }

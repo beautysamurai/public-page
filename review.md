@@ -66,7 +66,7 @@ Lunaは抄録の一次判定です。どちらも正解ラベルではなく、�
 | [2611.16992v1](https://arxiv.org/abs/2611.16992v1) | 2026-11-13 | electronic_trading | 要確認 | 0.02 | 0.75 | 0.28 |
 | [2611.17170v1](https://arxiv.org/abs/2611.17170v1) | 2026-11-13 | electronic_trading | 採用候補 | 0.03 | 0.89 | 0.46 |
 | [2611.17247v1](https://arxiv.org/abs/2611.17247v1) | 2026-11-13 | market_microstructure | 採用候補 | 0.12 | 0.84 | 0.24 |
-| [2611.17515v1](https://arxiv.org/abs/2611.17515v1) | 2026-11-16 | out_of_scope | 送信待ち | — | — | — |
+| [2611.17515v1](https://arxiv.org/abs/2611.17515v1) | 2026-11-16 | out_of_scope | 送信結果未確認 | — | — | — |
 | [2611.17530v1](https://arxiv.org/abs/2611.17530v1) | 2026-11-16 | out_of_scope | 送信待ち | — | — | — |
 | [2611.17902v1](https://arxiv.org/abs/2611.17902v1) | 2026-11-16 | interest_rate_models | 送信待ち | — | — | — |
 | [2611.17984v1](https://arxiv.org/abs/2611.17984v1) | 2026-11-16 | out_of_scope | 送信待ち | — | — | — |

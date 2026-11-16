@@ -2,12 +2,543 @@
   "schemaVersion": 2,
   "reportKind": "daily",
   "reportDate": "2026-10-21",
-  "generatedAt": "2026-10-21T12:14:04Z",
-  "status": "UPDATER_OFFLINE",
-  "message": "Collection or persistence failed; the review remains pending. Diagnostic: stage=metadata; error=TimeoutError.",
+  "generatedAt": "2026-11-16T16:19:23Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "Recovered carried arXiv batch 2026-10-21 from the bounded past-week listing with 3 relevant paper(s).",
   "expectedBatchDate": "2026-10-21",
   "observedBatchDate": "2026-10-21",
   "periodStart": null,
   "periodEnd": null,
-  "papers": []
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2610.27100v1",
+        "title": "LOB-Impact Benchmark: Emergent Market Impact in Generative Limit Order Book Models",
+        "authors": [
+          "George Nigmatulin",
+          "Valentin Mohl",
+          "Sascha Frey",
+          "Kang Li",
+          "Aramis Marti-Shahandeh",
+          "Mihai Cucuringu",
+          "Anisoara Calinescu",
+          "Jakob Foerster",
+          "Stefan Zohren"
+        ],
+        "submittedDate": "2026-10-19",
+        "updatedDate": "2026-10-19",
+        "categories": [
+          "cs.LG",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "生成型指値注文板モデルが、外生的な大口分割注文にどう反応するかを評価するベンチマークを提案する。5種類のニューラル生成モデルとNASDAQの5銘柄を検証し、分布の再現性だけでは執行環境としての妥当性を判断できないと報告する。",
+        "mainResult": "全25モデル・銘柄ペアで、板の機械的変化だけでは説明できないインパクトを検出した。ただし推定指数は$\\delta \\in [0.63,1.21]$で、全信頼区間が平方根則の指数を除外した。AMDの振幅は文献上の基準の約4〜17倍で、ドリフトを考慮した判定では全ペアで信頼できる執行後の減衰を確認できなかった。",
+        "practicalApplication": "執行アルゴリズムや強化学習エージェントの訓練前に、シミュレータのインパクト形状・振幅・減衰を検証する用途に有用である。価格や注文の分布が似ていても、非現実的な執行戦略を学習させる環境を排除する補完テストとなる。",
+        "methodology": "自由生成、メタオーダー注入、執行後観測の3段階で評価する。参加率10%、中央値サイズの成行子注文を用い、各方向・各段階で1,024ロールアウトを20営業日に分散した。注文をモデルに見せる条件と、約定処理だけ行いモデルには隠すblind条件を比較し、既知のカーネル対照で推定器を検証したうえで、営業日単位のクラスターブートストラップで区間推定する。",
+        "limitations": "検証は単一市場の1か月、5銘柄、固定参加率・子注文サイズ・攻撃的注文に限定され、EAは学習対象外である。実市場との比較基準は同一標本の実メタオーダーではなく主に先行文献に依存し、既知カーネルの対照も平方根則の判定を通過しない。短い文脈長が減衰欠如の原因という説明は仮説であり、長期ロールアウトのドリフトと月間変動も解釈を制約する。",
+        "importance": 5,
+        "recommended": true,
+        "reason": "機械的な板消費と生成モデルの反応を分離する対照設計が、執行シミュレータの検証に直接役立つ。結果の一般化には制約があるものの、分布評価だけでは見逃す実務上重要な欠陥を可視化している。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "指値注文板",
+          "生成モデル",
+          "マーケットインパクト",
+          "最適執行",
+          "シミュレータ検証"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper proposes a benchmark for evaluating how generative limit order book models respond to exogenous metaorders. Testing five neural generators across five NASDAQ stocks, it reports that distributional fidelity alone cannot establish suitability as an execution environment.",
+          "mainResult": "Impact not explained by mechanical book changes alone was detected in all 25 model–stock pairs. However, estimated exponents were $\\delta \\in [0.63,1.21]$, with every confidence interval excluding the square-root exponent. On AMD, amplitudes were approximately 4–17 times the literature benchmark, and no pair exhibited credible post-execution relaxation under the drift-aware assessment.",
+          "practicalApplication": "The benchmark is useful for validating simulated impact shape, amplitude, and relaxation before training execution algorithms or reinforcement-learning agents. It complements distributional tests by identifying environments that could teach unrealistic execution strategies despite matching price and order distributions.",
+          "methodology": "Evaluation has three phases: free generation, metaorder injection, and post-execution observation. Median-sized aggressive child orders target 10% participation, with 1,024 rollouts per direction per phase spread across 20 trading days. Visible injections are compared with blind controls that execute orders without revealing them to the model; estimators are validated against known kernel controls, and intervals use trading-day cluster bootstrapping.",
+          "limitations": "Testing covers one month on one market, five stocks, and fixed participation, child size, and aggressive-order settings; EA is outside the training universe. Real-market reference values come mainly from prior literature rather than matched empirical metaorders, and even known-kernel controls fail the square-root-law criterion. Short context length as the cause of missing relaxation remains a hypothesis, while long-rollout drift and month-to-month variation further constrain interpretation.",
+          "reason": "The control design separating mechanical book consumption from generator responses is directly useful for execution-simulator validation. Although generalization is limited, the benchmark exposes practically important defects that distributional evaluation alone can miss.",
+          "tags": [
+            "Market microstructure",
+            "Limit order book",
+            "Generative models",
+            "Market impact",
+            "Optimal execution",
+            "Simulator validation"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 983,
+          "outputTokens": 701,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1684,
+          "estimatedCostUsd": 0.000449,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.27100v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 21734,
+          "outputTokens": 1440,
+          "reasoningTokens": 197,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 21731,
+          "totalTokens": 23174,
+          "estimatedCostUsd": 0.068734,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 9,
+          "paperIds": [
+            "2610.27100v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.27214v1",
+        "title": "Deep catastrophic-risk-aware reinforcement learning",
+        "authors": [
+          "Carlos Pérez Octavio Mendoza",
+          "Frédéric Godin"
+        ],
+        "submittedDate": "2026-10-19",
+        "updatedDate": "2026-10-19",
+        "categories": [
+          "cs.LG",
+          "q-fin.RM"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "rates",
+        "summary": "本研究は、深層強化学習ポリシーのCVaR最適化に極値理論（EVT）を組み込み、深層ヘッジ問題で評価している。",
+        "mainResult": "報告された実験では、通常時のヘッジ挙動はEVTと経験的CVaRで学習したポリシーで類似し、極端なシナリオでは、検討した各訓練サンプル数においてEVT学習ポリシーのヘッジ損失が低かった。",
+        "practicalApplication": "極端な市場変動の観測が乏しい状況で、深層ヘッジなどのニューラルポリシーをテールリスクに配慮して学習する方法として応用できる可能性がある。",
+        "methodology": "ピーク超過法とモーメント法によるEVTベースのCVaR目的関数を構成し、閾値を条件とした有限標本勾配を自動微分で計算する。既知の最適解を持つ実験で検証した後、深層ヘッジで経験的CVaRと比較した。",
+        "limitations": "評価対象は要旨に記載された制御実験と深層ヘッジ設定に限られ、実市場での有効性や他の市場・ポリシーへの一般化は示されていない。閾値選択などの詳細や統計的不確実性も要旨からは確認できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "主題は強化学習におけるテールリスク推定であり、金融応用として深層ヘッジを扱うものの、電子取引、マーケット・マイクロストラクチャ、金利モデル、イールドカーブを直接研究していない。",
+        "tags": [
+          "極値理論",
+          "CVaR",
+          "強化学習",
+          "深層ヘッジ",
+          "テールリスク"
+        ],
+        "english": {
+          "classification": "rates",
+          "summary": "This study incorporates extreme value theory (EVT) into CVaR optimization for deep reinforcement-learning policies and evaluates it in a deep-hedging problem.",
+          "mainResult": "In the reported experiments, hedging behavior under normal conditions was similar for policies trained with EVT and empirical CVaR, while EVT-trained policies had lower hedging losses in extreme-scenario evaluation at each training-sample size considered.",
+          "practicalApplication": "The method may help train neural policies with tail-risk awareness, such as deep-hedging policies, when observations of extreme market movements are scarce.",
+          "methodology": "The authors construct an EVT-based CVaR objective using peaks over threshold and method-of-moments estimation, and compute its finite-sample gradient by automatic differentiation conditional on the threshold. They validate it in an experiment with a known optimum, then compare it with empirical CVaR in deep hedging.",
+          "limitations": "Evaluation is limited to the controlled experiment and deep-hedging setting described in the abstract; effectiveness in live markets and generalization to other markets or policies are not established. Details such as threshold selection and statistical uncertainty are not available in the abstract.",
+          "reason": "The paper focuses on tail-risk estimation in reinforcement learning and includes deep hedging as a financial application, but does not directly study electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "extreme value theory",
+            "CVaR",
+            "reinforcement learning",
+            "deep hedging",
+            "tail risk"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 797,
+          "outputTokens": 786,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1583,
+          "estimatedCostUsd": 0.000473,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.27214v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.28075v1",
+        "title": "Speculative Imbalance Positions by Non-Physical Traders: Impacts on Electricity System Balancing in Great Britain",
+        "authors": [
+          "Joseph Cary",
+          "Thomas Morstyn"
+        ],
+        "submittedDate": "2026-10-20",
+        "updatedDate": "2026-10-20",
+        "categories": [
+          "econ.GN",
+          "eess.SY",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "英国電力市場の非現物トレーダーによる投機的インバランス保有が、需給調整量と精算費用に及ぼす影響を分析する。2021～2024年の参加者別データを用いた反実仮想では、投機的ポジションが調整需要と精算リスクを抑えたと報告している。",
+        "mainResult": "投機的ポジションがない場合との比較で、絶対値ベースの純需給調整量は累計3.1～3.9 TWh、16～20%少ないと推計された。調整費用は3.47～3.96億ポンド、小売事業者のインバランス精算負担は1.93～3.25億ポンド少ない。ただし、2022年の一部シナリオでは調整費用への効果が逆転している。",
+        "practicalApplication": "単一インバランス価格制度や取引締切変更を評価する際に、裁定取引が調整市場へ与える影響を測る枠組みとして使える。投機の有用性を実現後の需給方向との一致だけで判断せず、投機がない場合の需給状態と比較する点が参考になる。",
+        "methodology": "欠損期間を除く68,823の30分精算期間について、非現物トレーダーの純インバランスを除いた反実仮想を構築する。全対象者を含むAMVと計量電力量ゼロの対象者に限るZMVを比較し、系統制約対応の調整を固定したメリットオーダー再配分から、調整費用、精算価格、参加者別精算収支を再計算する。",
+        "limitations": "他参加者のインバランス、調整市場の入札条件、系統制約対応を固定するため、結果はモデル依存であり、因果効果を直接識別したものではない。卸売価格、流動性、受動的調整の行動変化や送電制約への影響は内生化されず、消費者料金や総厚生の改善は直接検証されていない。AMVとZMVの幅はシナリオ差であり、信頼区間ではない。また、調整費用削減率には本文の金額・分母と整合しない記述がある。",
+        "importance": 1,
+        "recommended": true,
+        "reason": "裁定参加者と精算制度の相互作用を実データで検討しており、市場マイクロストラクチャー研究として推薦できる。ただし、金利・債券市場への直接的な応用はなく、政策結論には反実仮想の仮定を踏まえた慎重な解釈が必要である。",
+        "tags": [
+          "電力市場",
+          "市場マイクロストラクチャー",
+          "投機的裁定",
+          "インバランス精算",
+          "反実仮想シミュレーション",
+          "市場設計"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper examines how speculative imbalance positions held by non-physical traders affect balancing volumes and settlement costs in Great Britain’s electricity market. Counterfactual analysis using participant-level data from 2021–2024 reports that these positions reduced balancing requirements and settlement risk.",
+          "mainResult": "Relative to a counterfactual without speculative positions, cumulative absolute net balancing volume is estimated to be 3.1–3.9 TWh, or 16–20%, lower. Balancing costs are £347–396 million lower, and suppliers’ imbalance settlement liabilities are £193–325 million lower. However, the balancing-cost effect reverses in one scenario for 2022.",
+          "practicalApplication": "The framework can assess how arbitrage affects balancing markets when evaluating single imbalance pricing or changes to trading deadlines. A useful insight is to compare outcomes against the system balance without speculation rather than judging speculation solely by its alignment with the realized system balance.",
+          "methodology": "The study constructs counterfactuals removing aggregate non-physical-trader imbalances across 68,823 half-hour settlement periods after excluding missing observations. It compares AMV, covering all eligible traders, with ZMV, restricted to traders with zero metered volume, and recalculates balancing costs, settlement prices, and participant settlement cashflows through merit-order redispatch while holding constraint-management actions fixed.",
+          "limitations": "Other participants’ imbalances, balancing-market bids, and constraint-management actions are held fixed, making the results model-dependent rather than directly identified causal effects. Wholesale prices, liquidity, behavioral changes in passive balancing, and transmission-constraint effects are not endogenized, so improvements in consumer bills or total welfare are not directly tested. The AMV–ZMV range reflects scenario differences, not a confidence interval. Some reported balancing-cost reduction percentages are also inconsistent with the stated amounts and denominator.",
+          "reason": "The paper merits recommendation as market-microstructure research because it uses empirical data to examine interactions between arbitrage participants and settlement rules. However, it has no direct application to rates or bond markets, and its policy conclusions require cautious interpretation given the counterfactual assumptions.",
+          "tags": [
+            "Electricity markets",
+            "Market microstructure",
+            "Speculative arbitrage",
+            "Imbalance settlement",
+            "Counterfactual simulation",
+            "Market design"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 917,
+          "outputTokens": 949,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1866,
+          "estimatedCostUsd": 0.000566,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.28075v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 23645,
+          "outputTokens": 1492,
+          "reasoningTokens": 197,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 23642,
+          "totalTokens": 25137,
+          "estimatedCostUsd": 0.074031,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 36,
+          "paperIds": [
+            "2610.28075v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 968,
+      "outputTokens": 865,
+      "reasoningTokens": 111,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1833,
+      "estimatedCostUsd": 0.000529,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.26919v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 983,
+      "outputTokens": 701,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1684,
+      "estimatedCostUsd": 0.000449,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.27100v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 21734,
+      "outputTokens": 1440,
+      "reasoningTokens": 197,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 21731,
+      "totalTokens": 23174,
+      "estimatedCostUsd": 0.068734,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 9,
+      "paperIds": [
+        "2610.27100v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 797,
+      "outputTokens": 786,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1583,
+      "estimatedCostUsd": 0.000473,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.27214v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 857,
+      "outputTokens": 749,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1606,
+      "estimatedCostUsd": 0.00046,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.27296v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 786,
+      "outputTokens": 539,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1325,
+      "estimatedCostUsd": 0.000348,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.27390v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 794,
+      "outputTokens": 727,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1521,
+      "estimatedCostUsd": 0.000443,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.27576v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 861,
+      "outputTokens": 836,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1697,
+      "estimatedCostUsd": 0.000504,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28071v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 3151,
+      "outputTokens": 1490,
+      "reasoningTokens": 147,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 3148,
+      "totalTokens": 4641,
+      "estimatedCostUsd": 0.022776,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 69,
+      "paperIds": [
+        "2610.28071v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 917,
+      "outputTokens": 949,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1866,
+      "estimatedCostUsd": 0.000566,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28075v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 23645,
+      "outputTokens": 1492,
+      "reasoningTokens": 197,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 23642,
+      "totalTokens": 25137,
+      "estimatedCostUsd": 0.074031,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 36,
+      "paperIds": [
+        "2610.28075v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 902,
+      "outputTokens": 646,
+      "reasoningTokens": 56,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1548,
+      "estimatedCostUsd": 0.000413,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28133v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 803,
+      "outputTokens": 762,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1565,
+      "estimatedCostUsd": 0.000461,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.28154v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
 }

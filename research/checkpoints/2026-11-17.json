@@ -1,0 +1,549 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-11-17",
+  "fingerprint": "3d38d669cb70848ab625da3a058c16c9c4abb82057e21ef245381c9b394c0a25",
+  "candidateFingerprints": {
+    "2611.18651": "cebbf9253a1978527a8aa1e5b46c0ccf096a1ff9f116394e94ef035a82ca8da1",
+    "2611.18660": "3e2fac760bdc42c2ea8d6f71abb0042a28ba591025a43ba201975a1fede6e17d",
+    "2611.18677": "7b2bb3b3958fa8aa5fa1b2b719c4406ce6e59a89d01efa25a7789dfd7a5d9333",
+    "2611.18681": "4b5ca7040a4f9b2d2c194a67f7e0ed63fec3dd29059c33f1739bc8cd63a580dd",
+    "2611.18687": "3ce1fd524d34631b2738c68a12805fce4659e45cc900c2ad82f96ee385d72f7d",
+    "2611.18704": "17d791161ec78faf3b3139e40d2c001e1d566848ce8833ead9bc99d74e30965b",
+    "2611.18759": "220819f3005c86c79773b22660563586350645d97329bab7d8c1d5a6223d6def",
+    "2611.18767": "7f231b7b02b536cb9fa82b3860497dcb841e99816da57d5a67e09effdfc5cd57",
+    "2611.18872": "35e8d28ec3441da583ee5d66bc34afb3fa0a36dcb474855900e9d8daaf52a74a",
+    "2611.18934": "63ff917d78fcd9edae1e6dcd51802ea33055064e04b628fc665708fa274a50da",
+    "2611.18937": "6f6665783fa3ac3a61698eabafe24e7f037b4ab59d066d07bd6bb7468b1bdb26",
+    "2611.19028": "c7c0274df40e7f4f7bcc41d2b088852f3bb44e71f2f471531fd15865754caa3b",
+    "2611.19068": "cc2cb15d1cd5555f38f015acc50afde7fa204c2e2bf0b0461397de3ffd2921e3",
+    "2611.19662": "b3d60d7e208c87685bd85ecf8a328d048e0ba494bfb5b56d1b59ce2b4457e010",
+    "2611.19792": "c497f07fa52642ff358243dabc04001a1c6835a6ae6535573e424c314a6df280",
+    "2611.19870": "a153dd01dd9f57c568250f70eccf5d7cddfb2b2c3b3363ae0d3ad1dc0970d74d",
+    "2611.19937": "1ed5e59b08f29d2f72e7ed3681585859840c3e3e4950792715b721d26e45c7db",
+    "2611.20163": "b8b9cef7a15eabf7a8d551b5ce3b748a8c86aa71fb4abfab427eb17f09102003",
+    "2611.20242": "a01b88619ca068079e58e34b1e3c26634b92b1169bd04b74f93f20f23a2f7118",
+    "2611.20550": "53806b6073a180348098514a576b6a1c23423a9ac561c23985953fba84b6926f",
+    "2611.20589": "e8af5ae6855e5385e7df40d48df4654f515a1dbffb0d9570b23b4732cc24e7ae",
+    "2611.20746": "df473fd9d8f9a1df28ac2e2c534fd43c761a3046494c3cdd43ade1b6a54805fe",
+    "2611.20839": "51fffd3a768c4cfd46db1afd71afe416e9a6ecc6b78bbba01a29ab090d6eff76",
+    "2611.21070": "bb52755703826c735ba62518d8312a4a91eed6a25ad1f2ab37a1af267b269617",
+    "2611.21262": "5624508e21da1c224c5a82d755b5fe4414d47ce0cdef7d5212e1ca9161044c62",
+    "2611.21326": "7e262654a7940cab34ba8186ea1c86e2e088c057d60bcf26ea22b83e77467be1",
+    "2611.21364": "e4202f94128d76caa8d33fbdbefc5c2bcc0cd47c66928ab199239087241073c8",
+    "2611.21568": "5a0ab78dded9c56250f838101ac789c63622e1c5b7447811945ca452a6cd5a47"
+  },
+  "results": {
+    "2611.18651": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、信用デフォルトと決済不正の検知に向け、予測モデル、データ信頼性評価、説明可能性、適応的な意思決定を統合するマルチエージェント枠組みを提案する。",
+        "mainResult": "Home CreditとIEEE-CISで、適応型の枠組みは固定型ポリシーより少数クラスのリスク検知を改善したと報告される一方、誤検知による介入が増加した。適応型のROC-AUCはそれぞれ0.7584、0.9474だった。",
+        "practicalApplication": "信用審査や決済不正対応で、承認・審査・拒否を説明可能かつ設定可能に振り分ける用途が想定される。ただし、実運用での有効性は要検証である。",
+        "methodology": "2つの公開データセットで、ロジスティック回帰、ランダムフォレスト、XGBoost、LightGBM、MLPを含むベースラインと比較し、固定型・適応型ポリシーを評価した。SHAPによる説明も用いた。",
+        "limitations": "要約にはデータ分割、信頼区間、運用コストや実環境での検証の詳細がない。報告結果は信用・不正リスク管理に関するもので、電子取引、マーケットマイクロストラクチャ、金利モデルやイールドカーブへの直接的な貢献は示されない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "金融リスク管理の研究ではあるが、本サイトの主要対象である取引執行、市場構造、金利・イールドカーブ研究には直接該当しない。",
+        "tags": [
+          "信用リスク",
+          "不正検知",
+          "マルチエージェント",
+          "説明可能AI",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study proposes a multi-agent framework integrating predictive models, data-trust assessment, explainability, and adaptive decisions for credit-default and payment-fraud detection.",
+          "mainResult": "The adaptive framework reportedly improved minority-class risk detection over fixed policies on Home Credit and IEEE-CIS, but increased false-positive interventions. Its ROC-AUC values were 0.7584 and 0.9474, respectively.",
+          "practicalApplication": "Potential uses include explainable, configurable approve-review-decline decisions in credit assessment and payment-fraud response. Effectiveness in live operations remains to be validated.",
+          "methodology": "The authors evaluated fixed and adaptive policies on two public datasets against baselines including logistic regression, random forest, XGBoost, LightGBM, and MLP. They also used SHAP explanations.",
+          "limitations": "The abstract does not detail data splits, confidence intervals, operational costs, or validation in live settings. The reported work concerns credit and fraud risk management and shows no direct contribution to electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "reason": "Although this is financial risk-management research, it does not directly address the site's core topics of execution, market structure, rates, or yield curves.",
+          "tags": [
+            "credit risk",
+            "fraud detection",
+            "multi-agent systems",
+            "explainable AI",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.18660": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "保険ポートフォリオで契約解約が平均損失のリスクに与える影響を漸近的に分析する研究です。",
+        "mainResult": "要旨によると、単一契約の解約による影響はポートフォリオ規模に対して $n^{-3/2}$、一定割合の解約では $n^{-1/2}$ のオーダーと示されています。異なる解約率やリスク特性を持つセグメントへの拡張も扱います。",
+        "practicalApplication": "保険会社の視点から、解約手数料や解約コストを評価する理論的な基礎となり、代表的な生命保険商品を用いた数値例も報告されています。",
+        "methodology": "リスク尺度を解約前後の平均損失に適用し、一定割合の解約にはWasserstein距離での中心極限定理、単一契約の解約にはKantorovich–Rubinstein双対性とEdgeworth展開・Cornish–Fisher展開に基づく近似を用います。",
+        "limitations": "要旨のみの評価であり、具体的な数値結果や仮定の妥当性、実データでの検証範囲は確認できません。保険リスクが対象で、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブには直接関係しません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "保険ポートフォリオの解約リスクを扱う研究であり、対象サイトの中心領域とは実質的な関連がありません。",
+        "tags": [
+          "保険リスク",
+          "ポートフォリオ",
+          "解約",
+          "漸近解析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study asymptotically analyzes how policy cancellations affect the risk of average losses in an insurance portfolio.",
+          "mainResult": "According to the abstract, the effect of cancelling a single contract is of order $n^{-3/2}$ relative to portfolio size, while cancelling a fixed proportion has an effect of order $n^{-1/2}$. The study also extends the analysis to segments with different cancellation rates and risk characteristics.",
+          "practicalApplication": "The results provide a theoretical basis for insurers to assess surrender fees and cancellation costs. The abstract also reports numerical examples using representative life insurance products.",
+          "methodology": "The authors apply risk measures to average losses before and after cancellation. For proportional cancellation, they use central limit theorems in Wasserstein distance; for a single cancellation, they combine Kantorovich–Rubinstein duality with approximations based on Edgeworth and Cornish–Fisher expansions.",
+          "limitations": "This assessment is based only on the abstract; specific numerical results, the validity of assumptions, and the scope of empirical validation cannot be assessed. The paper concerns insurance risk and is not directly related to electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "reason": "The paper studies cancellation risk in insurance portfolios and has no material connection to the site's core subject areas.",
+          "tags": [
+            "insurance risk",
+            "portfolio",
+            "cancellation",
+            "asymptotic analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.18677": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "信用リスクモデル間で、格付け情報やデフォルト過程の違いを適応的 Wasserstein 距離で測る研究です。",
+        "mainResult": "要旨によれば、格付けレビューや多期間の格付け移行、同じ債券価格に較正した強度モデルについて距離の公式・性質を導き、ブートストラップ・ヘッジ誤差との関係を示しています。",
+        "practicalApplication": "同一の債券価格に較正された信用モデル間の差を評価し、ヘッジのモデル移転誤差を見積もる用途が示されています。",
+        "methodology": "適応的 Wasserstein 距離の理論解析、格付け遷移データへの適用、モンテカルロ実験を組み合わせています。",
+        "limitations": "要旨だけでは仮定や導出の詳細、実験規模、実データでの定量的なヘッジ改善幅を確認できません。主題は信用リスクであり、金利モデルやイールドカーブ自体が中心ではありません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "債券価格やクォートされたターム構造を扱いますが、主眼は格付け・デフォルトを含む信用リスクモデルの比較です。対象サイトの主要領域との関連は限定的です。",
+        "tags": [
+          "信用リスク",
+          "適応的 Wasserstein 距離",
+          "格付け遷移",
+          "モデル移転ヘッジ"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study measures differences between credit-risk models in rating information and default processes using the adapted Wasserstein distance.",
+          "mainResult": "According to the abstract, it derives distance formulas and properties for rating reviews, multi-period rating migrations, and intensity models calibrated to the same bond prices, and relates the distance to bootstrap-hedging error.",
+          "practicalApplication": "The proposed measures could assess differences between credit models calibrated to identical bond prices and estimate model-transfer errors in hedging.",
+          "methodology": "The study combines theoretical analysis of the adapted Wasserstein distance with applications to rating-transition data and Monte Carlo experiments.",
+          "limitations": "The abstract does not provide details of the assumptions or derivations, the scale of the experiments, or quantitative improvements in hedging on real data. The main subject is credit risk, not interest-rate models or yield curves themselves.",
+          "reason": "Although the paper concerns bond prices and a quoted term structure, its focus is comparison of credit-risk models involving ratings and default. Its relevance to the site's main areas is limited.",
+          "tags": [
+            "credit risk",
+            "adapted Wasserstein distance",
+            "rating migration",
+            "model-transfer hedging"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.18681": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "確率的投資収益を伴う多次元保険リスクモデルで、割引後総請求額が有限時間内に極端領域へ入る確率の漸近挙動を研究する。",
+        "mainResult": "集合ベースの多変量正則変動・強正則変動を導入し、異なる投資収益のモーメント条件の下で、明示的な漸近近似と多変量線形 single big jump 原理を示すと報告している。数値研究で近似精度とパラメータ感度を検討する。",
+        "practicalApplication": "請求額間の依存を柔軟に表現する保険数理上の極端損失評価や近似計算に応用できる可能性がある。",
+        "methodology": "新たな集合ベースの分布クラスの性質と例を提示し、確率的収益と請求ベクトルを含むモデルで漸近結果を導出、数値研究で近似を評価する。",
+        "limitations": "対象は保険数理上のリスクモデルであり、電子取引、マーケットマイクロストラクチャー、金利モデル・イールドカーブへの直接的な関連は薄い。抄録からは定理の具体的仮定や数値結果の詳細を確認できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "保険数理の漸近リスク解析が中心で、サイトの主要な研究対象には直接該当しない。",
+        "tags": [
+          "保険リスクモデル",
+          "多変量正則変動",
+          "極端損失",
+          "漸近解析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "Studies the finite-time asymptotic behavior of the probability that discounted aggregate claims enter an extreme region in a multidimensional risk model with stochastic investment returns.",
+          "mainResult": "The authors introduce set-based multivariate regular variation and strong regular variation, and report explicit asymptotic approximations under different moment conditions on investment returns, establishing a multivariate linear single big jump principle. A numerical study examines approximation accuracy and parameter sensitivity.",
+          "practicalApplication": "May support actuarial extreme-loss assessment and approximation with flexible representations of dependence among claims.",
+          "methodology": "The paper presents properties and examples of new set-based distribution classes, derives asymptotic results for a model with stochastic returns and claim vectors, and evaluates the approximation numerically.",
+          "limitations": "The subject is an actuarial risk model and has little direct connection to electronic trading, market microstructure, or interest-rate models and yield curves. The abstract does not provide the precise theorem assumptions or detailed numerical results.",
+          "reason": "The paper focuses on asymptotic risk analysis in insurance mathematics, outside the site's primary research areas.",
+          "tags": [
+            "insurance risk model",
+            "multivariate regular variation",
+            "extreme losses",
+            "asymptotic analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.18687": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、合成データで不正検知ルールのポートフォリオを選択・認証し、精度・再現率の下限制約に対する信頼性と導入率のトレードオフを調べています。電子取引や市場マイクロストラクチャ、金利・イールドカーブの研究ではありません。",
+        "mainResult": "著者らの実験では、Bonferroni調整付きClopper–Pearson下限による認証は、点推定による選択よりテスト時の制約違反を平均29.1ポイント減らす一方、導入率を31.7ポイント下げました。結果は条件により異なり、分布シフト下で一貫した改善は示されていません。",
+        "practicalApplication": "合成データで評価した範囲では、有限個のOR型ルールから選ぶ際の認証手法として参考になります。ただし、実取引データへの有効性はこの研究から判断できません。",
+        "methodology": "著者設計の2種類の合成生成器による6,400データセットの要因実験で、点推定選択、固定マージン、Bonferroni調整付きClopper–Pearson下限を比較しています。別途、分布シフトなしの標本数実験と公開合成BAFデータセットの時系列事例を報告しています。",
+        "limitations": "証拠は評価対象の合成生成器と公開合成BAFの単一事例に限られます。実際の取引母集団や任意の分布シフトへの頑健性は評価されておらず、事例ではテスト不正検知の捕捉率が1%未満でした。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "不正検知ルール選択に関する研究であり、対象サイトの電子取引、マーケットマイクロストラクチャ、金利モデル、イールドカーブ、金利研究には実質的に該当しません。",
+        "tags": [
+          "不正検知",
+          "合成データ",
+          "統計的認証",
+          "分布シフト"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines selection and certification of fraud-rule portfolios on synthetic data, focusing on the trade-off between reliability and deployment under precision or recall floors. It does not study electronic trading, market microstructure, interest rates, or yield curves.",
+          "mainResult": "In the authors’ experiments, certification using Bonferroni-adjusted Clopper–Pearson lower bounds reduced test-time floor violations by an average of 29.1 percentage points versus point-estimate selection, while lowering deployment by 31.7 points. Results varied by condition, and consistent improvement under distribution shift was not shown.",
+          "practicalApplication": "Within the evaluated synthetic-data setting, the method may inform certification when selecting from a finite set of OR-rule portfolios. The study does not establish its effectiveness on real transaction data.",
+          "methodology": "The authors compare point-estimate selection, a fixed margin, and Bonferroni-adjusted Clopper–Pearson lower bounds in a factorial experiment covering 6,400 datasets from two author-designed synthetic generators. They also report a no-shift sample-size experiment and a temporal case study using the public synthetic BAF dataset.",
+          "limitations": "Evidence is limited to the evaluated synthetic generators and one public synthetic BAF case study. Performance on real transaction populations and robustness to arbitrary distribution shift are not evaluated; in the case study, less than 1% of test fraud was captured.",
+          "reason": "The paper concerns fraud-rule selection and is not materially relevant to the site’s focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "fraud detection",
+            "synthetic data",
+            "statistical certification",
+            "distribution shift"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.18704": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "主請求とINAR(1)過程で表す付随請求を組み合わせた離散時間の保険リスクモデルを提案し、PFAS汚染の損害拡大への応用を論じる研究です。",
+        "mainResult": "破産確率の漸近解析を行い、依存性を緩和したモデルを含む複数の関連モデルと比較したと報告しています。比較結果の具体的な方向や数値は要旨に記載されていません。",
+        "practicalApplication": "PFASの環境中での拡散に伴う保険損害や付随請求の連鎖をモデル化する用途が想定されています。電子取引、金利モデル、イールドカーブの分析には直接結びつきません。",
+        "methodology": "主請求と、INAR(1)過程で計数する付随請求を含む一次元・離散時間の破産リスクモデルを構築し、破産確率の漸近挙動と依存性を緩和したモデルとの比較を行っています。",
+        "limitations": "評価は要旨に基づくため、仮定、漸近結果の条件、比較の詳細、実データによる検証の有無は確認できません。対象は保険リスク理論であり、本サイトの主要分野との関連は限定的です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "保険破産理論とPFAS損害を扱う研究であり、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブへの実質的な関連がありません。",
+        "tags": [
+          "保険リスク",
+          "破産理論",
+          "INAR(1)",
+          "PFAS"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study proposes a discrete-time insurance risk model combining main claims with by-claims represented by an INAR(1) process, and discusses its application to the spread of PFAS contamination.",
+          "mainResult": "The authors report asymptotic analysis of ruin probabilities and comparisons with several related models, including models with relaxed dependence assumptions. The abstract does not specify the direction or numerical details of the comparisons.",
+          "practicalApplication": "The model is intended to represent insurance losses and cascading by-claims associated with the environmental spread of PFAS. It is not directly concerned with electronic trading, interest-rate models, or yield-curve analysis.",
+          "methodology": "The study constructs a unidimensional, discrete-time ruin risk model with main claims and by-claims counted by an INAR(1) process, then analyzes asymptotic ruin probabilities and compares the model with variants having relaxed dependence assumptions.",
+          "limitations": "Based on the abstract alone, the assumptions, conditions for the asymptotic results, details of the comparisons, and whether the model is validated against data cannot be assessed. The work concerns insurance risk theory and has limited relevance to the site's primary topics.",
+          "reason": "The paper studies insurance ruin theory and PFAS-related losses, with no material connection to electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "Insurance risk",
+            "Ruin theory",
+            "INAR(1)",
+            "PFAS"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.18759": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "有限の均質ポートフォリオにおける累積デフォルト分布の期間間整合性を分析する研究です。",
+        "mainResult": "二項混合分布が単交差条件を満たす場合、デフォルト数全体の確率的順序は、無デフォルト確率と全件デフォルト確率に関する二つの不等式で特徴づけられると報告しています。1因子ガウスモデルでは、許容される後期相関の区間を厳密に求め、その区間がポートフォリオ規模の増加とともに縮小するとしています。",
+        "practicalApplication": "指定した複数期間のデフォルト分布が整合可能かを判定する、信用リスクモデルの実行可能性分析に利用できる可能性があります。",
+        "methodology": "確率的順序の特徴づけ、吸収結合の構成、逐次修正法、滑らかな期間曲線の微分条件を提示しています。相関区間は数値積分と括弧付き求根法で評価し、決定論的数値実験で全デフォルト数分布の制約を確認しています。",
+        "limitations": "要旨の結果は均質ポートフォリオと特定の混合・1因子ガウス設定に依存します。実データによる検証や、異質なポートフォリオへの適用可能性は要旨から確認できません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "信用デフォルト相関に関する数理的な実行可能性分析であり、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利を主題とする本サイトの対象範囲とは直接一致しません。",
+        "tags": [
+          "信用リスク",
+          "デフォルト相関",
+          "確率的順序",
+          "ポートフォリオ規模",
+          "実行可能性分析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes cross-horizon consistency of cumulative default distributions in finite homogeneous portfolios.",
+          "mainResult": "For binomial mixtures satisfying a single-crossing condition, the paper reports that stochastic ordering of the full default count is characterized by two inequalities involving the probabilities of no defaults and of all defaults. In a one-factor Gaussian model, it derives the exact interval of admissible later correlations and reports that the interval narrows as portfolio size increases.",
+          "practicalApplication": "The framework may help assess whether specified default distributions across multiple horizons are feasible within a credit-risk model.",
+          "methodology": "The paper presents a characterization of stochastic ordering, a constructive absorbing coupling, a sequential repair method, and differential conditions for smooth horizon curves. It evaluates correlation intervals using numerical integration and bracketed root finding, and uses deterministic numerical experiments to check restrictions on the full default-count distribution.",
+          "limitations": "The reported results depend on homogeneous portfolios and specific mixture and one-factor Gaussian settings. The abstract does not establish validation on real data or applicability to heterogeneous portfolios.",
+          "reason": "This is a mathematical feasibility analysis of credit default correlation, not directly within the site's focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "credit risk",
+            "default correlation",
+            "stochastic ordering",
+            "portfolio size",
+            "feasibility analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.18767": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本稿は、中国の地方政府債務処理から戦略支出やビットコイン需要へ至る条件付きの伝達枠組みを提示する。債務交換、銀行の貸出余力、支出配分、資産へのアクセスや資金調達環境が結果を左右すると論じる。",
+        "mainResult": "同じ財政ストレスを仮定しても、アクセス制約や世界的な資金調達環境によってビットコイン需要への影響は逆転し得る。債務交換は連結元本を増やさずに認識上の政府債務を増やし得るとし、ステーブルコイン需要とは区別する。",
+        "practicalApplication": "財政ストレスから暗号資産需要への伝達を評価する際、債務会計、銀行の資本調整、支出優先順位、資産アクセスを分けて確認する枠組みとして利用できる。",
+        "methodology": "条件付きの理論枠組みを構築し、有限ショックの閾値と符号の境界を導出する。再現可能な数値例とチャネル除去分析を示し、制度的背景には日付付き一次資料を用いる。",
+        "limitations": "債務からビットコイン需要への因果係数も価格への影響規模も推定していない。結果は条件付きの枠組みと数値例に基づき、無条件の価格予測や紛争確率の推論ではない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "暗号資産需要と財政・銀行の伝達を扱うが、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブの研究ではなく、本サイトの対象との関連は限定的である。",
+        "tags": [
+          "中国地方政府債務",
+          "ビットコイン需要",
+          "ステーブルコイン",
+          "財政伝達"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper presents a conditional framework linking the resolution of Chinese local-government debt to strategic spending and Bitcoin demand. It argues that outcomes depend on debt accounting, bank lending capacity, spending priorities, asset access, and funding conditions.",
+          "mainResult": "Even under the same assumed fiscal stress, access constraints and global funding conditions can reverse the effect on Bitcoin demand. The paper argues that a debt swap can increase recognized government debt without increasing consolidated principal, and distinguishes Bitcoin demand from stablecoin demand.",
+          "practicalApplication": "The framework can help assess transmission from fiscal stress to crypto-asset demand by separately examining debt accounting, bank capital adjustment, spending priorities, and access to assets.",
+          "methodology": "The paper develops a conditional theoretical framework and derives finite-shock thresholds and deterministic sign bounds. It provides reproducible numerical illustrations and channel-removal exercises, and uses dated primary sources for institutional context.",
+          "limitations": "It estimates neither a causal coefficient from debt to Bitcoin demand nor the scale of price impact. Its results rely on a conditional framework and numerical illustrations; it is not an unconditional price forecast or an inference about conflict probabilities.",
+          "reason": "The paper addresses crypto-asset demand and fiscal and banking transmission, but not electronic trading, market microstructure, interest-rate models, or yield curves, so its relevance to this site's scope is limited.",
+          "tags": [
+            "Chinese local-government debt",
+            "Bitcoin demand",
+            "stablecoins",
+            "fiscal transmission"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.18872": {
+      "status": "awaiting_pdf",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "AIの高度化が、価格に集約される私的情報を減らす一方で、公的情報の分析を価格経由で広く伝えるという、相反する効果を分析する。",
+        "mainResult": "理論条件、数値均衡計算、有限データのニューラル市場実験で両効果が生じることを示す。実験ではAIの普及により、限定的な分析能力を持つ投資家にとって価格の予測力が高まり、高度な投資家にとっては低下し、アップグレードの便益が44%減少したと報告する。",
+        "practicalApplication": "AI取引の導入や市場情報の評価では、価格の情報性が投資家の能力によって異なり得る点を考慮する示唆がある。",
+        "methodology": "理論分析に加え、数値均衡計算、有限データを用いたニューラル市場実験、アウト・オブ・サンプルの業績予測、制御された言語モデル課題を用いる。",
+        "limitations": "提供された抄録には理論条件の詳細、実験設計やデータ、推定の不確実性が記載されていない。異なる投資家間で結果がどう一般化するかも抄録だけでは判断できない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "AI取引が価格情報性や投資家間の情報格差に与える影響を直接扱い、理論と複数の実験的検討を組み合わせているため、マーケットマイクロストラクチャー分野で有用性が高い。",
+        "tags": [
+          "AI取引",
+          "価格情報性",
+          "私的情報",
+          "公的情報",
+          "市場マイクロストラクチャー"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "Analyzes the opposing effects of more capable AI: it may reduce private information incorporated into prices while making public-data analysis more widely available through prices.",
+          "mainResult": "The paper reports that both effects arise under its theoretical conditions, in numerical equilibrium calculations, and in finite-data neural-market experiments. In the experiment, wider AI adoption increased price predictiveness for less capable observers, reduced it for advanced observers, and cut the benefit of upgrading by 44%.",
+          "practicalApplication": "The findings suggest that assessments of AI adoption and market information should account for price informativeness varying with investors’ capabilities.",
+          "methodology": "Uses theoretical analysis, numerical equilibrium calculations, finite-data neural-market experiments, out-of-sample earnings forecasts, and controlled language-model tasks.",
+          "limitations": "The abstract does not provide details of the theoretical conditions, experimental designs or data, or estimation uncertainty. The generalizability of the results across different investor populations cannot be assessed from the abstract alone.",
+          "reason": "The paper directly examines how AI trading affects price informativeness and information differences among investors, combining theory with several empirical or experimental investigations, making it relevant to market microstructure.",
+          "tags": [
+            "AI trading",
+            "price informativeness",
+            "private information",
+            "public information",
+            "market microstructure"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 909,
+      "outputTokens": 737,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1646,
+      "estimatedCostUsd": 0.000459,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.18651v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 861,
+      "outputTokens": 771,
+      "reasoningTokens": 61,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1632,
+      "estimatedCostUsd": 0.000472,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.18660v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 818,
+      "outputTokens": 841,
+      "reasoningTokens": 171,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1659,
+      "estimatedCostUsd": 0.000502,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.18677v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 900,
+      "outputTokens": 724,
+      "reasoningTokens": 73,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1624,
+      "estimatedCostUsd": 0.000452,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.18681v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 958,
+      "outputTokens": 861,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1819,
+      "estimatedCostUsd": 0.000526,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.18687v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 716,
+      "outputTokens": 813,
+      "reasoningTokens": 93,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1529,
+      "estimatedCostUsd": 0.000478,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.18704v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 860,
+      "outputTokens": 851,
+      "reasoningTokens": 107,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1711,
+      "estimatedCostUsd": 0.000512,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.18759v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 806,
+      "outputTokens": 831,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1637,
+      "estimatedCostUsd": 0.000496,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.18767v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 765,
+      "outputTokens": 774,
+      "reasoningTokens": 78,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1539,
+      "estimatedCostUsd": 0.000463,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.18872v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

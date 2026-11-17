@@ -1029,6 +1029,179 @@
           "output_tokens": 54
         }
       }
+    },
+    "2611.18651": {
+      "batch": "2026-11-17",
+      "id": "2611.18651v1",
+      "fingerprint": "cebbf9253a1978527a8aa1e5b46c0ccf096a1ff9f116394e94ef035a82ca8da1",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.RM"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.18660": {
+      "batch": "2026-11-17",
+      "id": "2611.18660v1",
+      "fingerprint": "3e2fac760bdc42c2ea8d6f71abb0042a28ba591025a43ba201975a1fede6e17d",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.RM"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.18677": {
+      "batch": "2026-11-17",
+      "id": "2611.18677v1",
+      "fingerprint": "7b2bb3b3958fa8aa5fa1b2b719c4406ce6e59a89d01efa25a7789dfd7a5d9333",
+      "listing": [
+        "cross",
+        "new"
+      ],
+      "categories": [
+        "q-fin.MF",
+        "q-fin.RM"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.18681": {
+      "batch": "2026-11-17",
+      "id": "2611.18681v1",
+      "fingerprint": "4b5ca7040a4f9b2d2c194a67f7e0ed63fec3dd29059c33f1739bc8cd63a580dd",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.RM"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.18687": {
+      "batch": "2026-11-17",
+      "id": "2611.18687v1",
+      "fingerprint": "3ce1fd524d34631b2738c68a12805fce4659e45cc900c2ad82f96ee385d72f7d",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.RM"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.18704": {
+      "batch": "2026-11-17",
+      "id": "2611.18704v1",
+      "fingerprint": "17d791161ec78faf3b3139e40d2c001e1d566848ce8833ead9bc99d74e30965b",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.RM"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.18759": {
+      "batch": "2026-11-17",
+      "id": "2611.18759v1",
+      "fingerprint": "220819f3005c86c79773b22660563586350645d97329bab7d8c1d5a6223d6def",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.RM"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.18767": {
+      "batch": "2026-11-17",
+      "id": "2611.18767v1",
+      "fingerprint": "7f231b7b02b536cb9fa82b3860497dcb841e99816da57d5a67e09effdfc5cd57",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.18872": {
+      "batch": "2026-11-17",
+      "id": "2611.18872v1",
+      "fingerprint": "35e8d28ec3441da583ee5d66bc34afb3fa0a36dcb474855900e9d8daaf52a74a",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "market_microstructure",
+        "importance": 4,
+        "recommended": true
+      },
+      "status": "waiting"
     }
   }
 }

@@ -1,0 +1,290 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-11-18",
+  "generatedAt": "2026-11-18T15:55:27Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-11-18 was confirmed with 1 relevant paper(s).",
+  "expectedBatchDate": "2026-11-18",
+  "observedBatchDate": "2026-11-18",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2611.23126v1",
+        "title": "Which Past Matters? Training History and Multi-Forecast Horizon in Equity Transformers",
+        "authors": [
+          "Chariton Chalvatzis"
+        ],
+        "submittedDate": "2026-11-17",
+        "updatedDate": "2026-11-17",
+        "categories": [
+          "cs.LG",
+          "q-fin.CP",
+          "q-fin.ST"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "米国株の日中リターン予測で、学習履歴の量・抽出方法と予測期間の関係を検証した実証研究。Transformerと特徴量を固定した比較では、全予測期間で優位な履歴選択方針は見つからなかった。執行方式そのものではなく、電子取引に用いる予測モデルの設計が対象である。",
+        "mainResult": "個別モデルでは、5～15分先は6か月のrecency sampling、20～30分先はmulti-recency、60～120分先はuniform samplingが最高の平均Rank ICを示した。5分先の最高値は相関係数で$0.0190$だった。12モデルの等加重平均は15・20・25分先で全個別モデルを上回ったが、統計的に有意な改善とは確認されていない。",
+        "practicalApplication": "日中株式シグナルの開発で、学習窓と履歴抽出方法を予測期間別に検証する際の比較設計として使える。ただし予測値の較正は弱く、売買コスト控除後の収益性も未検証のため、そのまま注文量や期待収益に変換する根拠にはならない。",
+        "methodology": "最大1,000銘柄、572特徴量を用いる銘柄横断Transformerで、4方針と6・12・24か月の学習量を組み合わせた12構成を比較した。月次walk-forwardで264回再学習し、2025年1月から2026年10月20日までの451営業日を評価した。予測は30分間隔で発行し、5～120分先の8種類の累積五因子残差リターンに対する日次平均Spearman ICを主要指標とした。",
+        "limitations": "学習量と候補履歴の幅が同時に変わり、multi-recencyでは検証方法も異なるため、recencyの因果効果は識別できない。初期化seedは1種類で、ラベル観測率は約87％にとどまり、銘柄分類の時点整合性も保証されていない。最良構成は事後選択で、月次bootstrapは系列依存や多重比較を十分に扱わず、多くの比較で区間がゼロを含む。期間別の成績変動も大きく、約定・市場インパクト・純損益は評価していない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "日中予測の学習データ設計に実務的な示唆があり、予測順位と収益性を明確に区別している。電子取引の予測研究には推奨するが、執行や市場構造、金利モデルへの直接的な貢献は限定的である。",
+        "tags": [
+          "日中株式予測",
+          "学習履歴選択",
+          "銘柄横断Transformer",
+          "予測期間",
+          "コンセプトドリフト",
+          "予測アンサンブル"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This empirical study examines how training-history quantity and sampling interact with forecast horizon in intraday US equity return prediction. Holding the Transformer and features fixed, it finds no historical-selection policy that dominates across all horizons. Its focus is prediction-model design for electronic trading rather than execution methods themselves.",
+          "mainResult": "Among individual models, six-month recency sampling produced the highest mean Rank IC at 5–15 minutes, multi-recency at 20–30 minutes, and uniform sampling at 60–120 minutes. The highest five-minute correlation coefficient was $0.0190$. Equal averaging of the 12 models exceeded every individual model at 15, 20 and 25 minutes, but statistically significant improvements were not established.",
+          "practicalApplication": "The study provides a comparison framework for testing training windows and historical sampling separately by forecast horizon when developing intraday equity signals. However, weak forecast calibration and untested profitability after trading costs mean that its predictions do not directly justify order sizes or expected returns.",
+          "methodology": "A cross-sectional Transformer using up to 1,000 stocks and 572 features compared 12 configurations combining four policies with 6-, 12- and 24-month training quantities. Monthly walk-forward testing produced 264 refits and covered 451 sessions from January 2025 through 20 October 2026. Forecasts were issued every 30 minutes for eight cumulative five-factor residual-return horizons from 5 to 120 minutes, with daily-averaged Spearman IC as the primary metric.",
+          "limitations": "Training quantity and eligible historical breadth change together, while multi-recency also changes validation design, preventing identification of a causal recency effect. Only one initialization seed is used, label coverage is approximately 87%, and point-in-time security classification is not guaranteed. The best configurations are selected retrospectively, the monthly bootstrap does not adequately address serial dependence or multiple comparisons, and most reported comparison intervals include zero. Performance also varies substantially across periods, and fills, market impact and net profit are not evaluated.",
+          "reason": "The study offers practical guidance for intraday training-data design and clearly distinguishes predictive ranking from profitability. It is recommended for electronic-trading prediction research, but its direct contribution to execution, market microstructure and interest-rate models is limited.",
+          "tags": [
+            "Intraday equity forecasting",
+            "Training-history selection",
+            "Cross-sectional Transformer",
+            "Forecast horizon",
+            "Concept drift",
+            "Forecast ensemble"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 814,
+          "outputTokens": 884,
+          "reasoningTokens": 0,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1698,
+          "estimatedCostUsd": 0.000523,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.23126v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 24652,
+          "outputTokens": 1461,
+          "reasoningTokens": 147,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 24649,
+          "totalTokens": 26113,
+          "estimatedCostUsd": 0.076239,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 28,
+          "paperIds": [
+            "2611.23126v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 871,
+      "outputTokens": 766,
+      "reasoningTokens": 90,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1637,
+      "estimatedCostUsd": 0.00047,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.21641v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 962,
+      "outputTokens": 756,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1718,
+      "estimatedCostUsd": 0.000474,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.21672v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 894,
+      "outputTokens": 694,
+      "reasoningTokens": 39,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1588,
+      "estimatedCostUsd": 0.000436,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.22033v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 809,
+      "outputTokens": 741,
+      "reasoningTokens": 97,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1550,
+      "estimatedCostUsd": 0.000451,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.22119v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 800,
+      "outputTokens": 711,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1511,
+      "estimatedCostUsd": 0.000436,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.22517v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 907,
+      "outputTokens": 936,
+      "reasoningTokens": 96,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1843,
+      "estimatedCostUsd": 0.000559,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.22604v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 792,
+      "outputTokens": 562,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1354,
+      "estimatedCostUsd": 0.00036,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.22793v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 814,
+      "outputTokens": 884,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1698,
+      "estimatedCostUsd": 0.000523,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.23126v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 24652,
+      "outputTokens": 1461,
+      "reasoningTokens": 147,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 24649,
+      "totalTokens": 26113,
+      "estimatedCostUsd": 0.076239,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 28,
+      "paperIds": [
+        "2611.23126v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

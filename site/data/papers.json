@@ -2,6 +2,26 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-11-18-daily-openai-01",
+      "date": "2026-11-18",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2611.23126v1",
+          "title": "Which Past Matters? Training History and Multi-Forecast Horizon in Equity Transformers",
+          "authors": [
+            "Chariton Chalvatzis"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-11-16-daily-openai-01",
       "date": "2026-11-16",
       "kind": "daily",

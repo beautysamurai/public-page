@@ -1,0 +1,532 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-11-18",
+  "fingerprint": "8741a5001bebddbcd50223280d51e37c769f153dcadd00279dfda3fb420f1904",
+  "candidateFingerprints": {
+    "2611.21641": "a466ee667b0b50769cd4a59026253a035e32c636205a0c3323b1cbcac83f2663",
+    "2611.21672": "f902b54820f764536379e30230e0558328db60bdfefb1b63b396de6961dbec34",
+    "2611.22033": "804894d0e285ee749ed02243fdb6f3214790200b348201cab40755a99ca1c5d0",
+    "2611.22119": "17af537a17f7f112cf3849dcb7235fc0c456ac28fad852836f67abf9cb19c349",
+    "2611.22517": "1af6304b11db61bed6dec70f90f51066d11f6591b1f9abfa1cb68eb5badc2b55",
+    "2611.22604": "5a8e185f8b09a49af2da46ed87d18357f2a772b2310c3cb30cce27da8290a4e4",
+    "2611.22793": "17cf99f5ebcd7b4f977af27461496160cc65e82c71041bf3d258411394ee03d2",
+    "2611.23126": "0eed960f5ed43f93346d8f88153a1306e21ce7b23e80df862d0010049f3036b0"
+  },
+  "results": {
+    "2611.21641": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、実運用LLMの会話ログを用いて拒否が後続のユーザー再利用に与える影響を測るRAW手法を提案する。金融市場、電子取引、金利モデルに関する研究ではない。",
+        "mainResult": "著者らは、15種類のLLMを対象とした分析で、精度よく測定できたモデルの約半数では拒否後の再利用率が3〜17ポイント低下し、残りでは明確な影響を確認できなかったと報告する。",
+        "practicalApplication": "LLM提供者や導入事業者が、既存ログから拒否のユーザー側影響を評価する用途が示されているが、本サイトの対象分野への直接的な応用は限定的である。",
+        "methodology": "同一モデルへのほぼ同一のプロンプトに対する出力の確率的変動を自然実験として扱い、15モデルの会話ログをユーザー単位でクラスタリングして分析する。",
+        "limitations": "要旨だけでは識別仮定の妥当性や頑健性検証の詳細を評価できない。結果は対象ログとモデルに依存し、報告された関連を一般的な因果効果とみなすには追加の検証が必要である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "LLMの拒否行動とユーザー再利用を扱う研究であり、電子取引、マーケット・マイクロストラクチャー、金利、イールドカーブとの実質的な関連がない。",
+        "tags": [
+          "LLM",
+          "因果推論",
+          "ユーザー行動",
+          "範囲外"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper proposes RAW, a method for measuring how refusals by deployed LLMs affect subsequent user engagement using conversation logs. It does not study financial markets, electronic trading, or interest-rate models.",
+          "mainResult": "The authors report that for about half of the models they could measure precisely, refusal reduced subsequent re-engagement by 3–17 percentage points; for the others, no distinguishable effect was found.",
+          "practicalApplication": "The method is presented as a way for LLM providers and deployers to assess user-side effects of refusals from existing logs, but its direct application to this site's subject areas is limited.",
+          "methodology": "The study treats stochastic variation in responses to near-identical prompts to the same model as a natural experiment and analyzes logs from 15 models with user-clustered inference.",
+          "limitations": "The abstract does not provide enough detail to assess the validity of the identification assumptions or robustness checks. Results depend on the models and logs studied, and further validation is needed before generalizing the reported effects.",
+          "reason": "The paper concerns LLM refusal behavior and user re-engagement, with no material connection to electronic trading, market microstructure, rates, or yield curves.",
+          "tags": [
+            "LLMs",
+            "causal inference",
+            "user behavior",
+            "out of scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.21672": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、スペインの住宅建物について、地籍データと地形モデルから階・ファサード別の海の眺望可能性を推定する手法を提示します。",
+        "mainResult": "158,060棟の分析では、最上階から海が見える可能性のある建物は52%、20°以上の開けた眺望がある建物は36%と推定されました。写真ラベルとの識別性能はAUC 0.80でしたが、建物単位の判定基準では感度0.90に対し特異度0.45でした。",
+        "practicalApplication": "住宅の眺望評価や不動産分析への利用可能性がありますが、電子取引、金融市場のミクロ構造、金利モデル、イールドカーブや金利への直接的な応用は示されていません。",
+        "methodology": "地籍建物形状、階数、国の地形モデルを用いて、各建物の地上・中間・最上階からの眺望可能性を推定し、LiDAR地表データと販売住宅93件の写真ラベルで検証しました。",
+        "limitations": "未登録構造物は最上階の見える海の角度を平均6.1〜9.0°低下させました。住戸への階・ファサード割当てによって開けた眺望の推定比率は12〜45%に変動し、所得差の推論も実効クラスター数が約2と少なく不確実です。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "地理空間・住宅評価に関する研究であり、対象サイトの金融分野に実質的な関連性はありません。",
+        "tags": [
+          "眺望推定",
+          "地籍データ",
+          "住宅評価",
+          "地理空間分析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study presents a method for estimating sea-view potential by floor and façade for residential buildings in Spain using cadastral data and a terrain model.",
+          "mainResult": "Among 158,060 buildings, 52% were estimated to have potential sea views from the top floor and 36% to have an open view of at least 20°. Discrimination against photo labels had an AUC of 0.80, but at the building-level threshold sensitivity was 0.90 versus specificity of 0.45.",
+          "practicalApplication": "The method could support residential view assessment and property analysis, but no direct application to electronic trading, market microstructure, interest-rate models, yield curves, or rates is reported.",
+          "methodology": "The method estimates view potential from ground, middle, and top floors using cadastral building footprints, floor counts, and a national terrain model; validation used LiDAR surface data and photo labels for 93 homes for sale.",
+          "limitations": "Unrecorded structures reduced the sea angle visible from the top floor by 6.1–9.0° on average. Depending on dwelling-to-floor and façade allocation, the estimated share of dwellings with open-view potential ranged from 12% to 45%; income-difference inference is also uncertain, with about two effective clusters.",
+          "reason": "This is research on geospatial analysis and residential property assessment, with no material relevance to the site's finance topics.",
+          "tags": [
+            "view estimation",
+            "cadastral data",
+            "residential property assessment",
+            "geospatial analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.22033": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "買い物エージェントの推論努力、商品選択の正確性、自己申告信頼度の関係を評価した研究です。",
+        "mainResult": "3つのベンチマークと10モデルの評価では、推論努力を増やしても選択品質に統計的に有意な改善は見られず、自己申告信頼度は上昇したと報告しています。多くのモデルで信頼度の較正が不十分で、誤りにはモデル間の共通性がありました。",
+        "practicalApplication": "買い物エージェントの評価では、推論量や自己申告信頼度を品質の代用指標とせず、正確性と較正を個別に検証する必要性を示唆します。金融市場の執行や市場マイクロストラクチャへの直接的な応用は示されていません。",
+        "methodology": "WebShop、Amazon SQID、Wayfair WANDS由来の3ベンチマークで、10のフロンティアモデルを比較し、推論努力、選択結果、自己申告信頼度、誤りの共通性を評価しています。",
+        "limitations": "提示された要旨だけでは、ベンチマークの規模や構成、推論努力の操作方法、統計検定の詳細、結果の一般化可能性は確認できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "LLMエージェントの信頼性に関する研究ですが、対象は商品推薦であり、サイトの金融・金利分野には実質的に該当しません。",
+        "tags": [
+          "LLMエージェント",
+          "商品選択",
+          "信頼度較正",
+          "ベンチマーク"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study evaluates how reasoning effort relates to product-choice accuracy and self-reported confidence in shopping agents.",
+          "mainResult": "Across three benchmarks and ten models, the authors report no statistically meaningful improvement in choice quality from increased reasoning effort, while stated confidence rose significantly. Most models were poorly calibrated, and errors were shared across models.",
+          "practicalApplication": "The findings suggest evaluating shopping agents on accuracy and calibration separately rather than treating reasoning effort or reported confidence as proxies for quality. No direct application to financial execution or market microstructure is presented.",
+          "methodology": "The study compares ten frontier models on three benchmarks derived from WebShop, Amazon SQID, and Wayfair WANDS, evaluating reasoning effort, choices, stated confidence, and shared errors.",
+          "limitations": "The abstract does not specify benchmark size and composition, how reasoning effort was varied, statistical-testing details, or how broadly the results generalize.",
+          "reason": "This research concerns the reliability of LLM agents, but its focus is product recommendations and is not materially relevant to the site's finance and interest-rate topics.",
+          "tags": [
+            "LLM agents",
+            "product choice",
+            "confidence calibration",
+            "benchmarks"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.22119": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、最適化された確実性等価（OCE）を特徴づける経済的公理を提案し、複数の標準的リスク尺度の公理化を示す理論研究です。",
+        "mainResult": "要旨によれば、Fair-Coin Compensationと強いリスク回避、正規化によりOCEを特徴づけ、追加公理により標準的OCE、Expected Shortfall、Entropic Risk Measureをそれぞれ特徴づけます。また、Equal-Mean RandomizationによりMean–Variance基準を公理化します。",
+        "practicalApplication": "リスク尺度の理論的な選択や比較の基盤となる可能性がありますが、執行、マーケット・マイクロストラクチャ、金利モデルやイールドカーブへの直接的な応用は要旨から確認できません。",
+        "methodology": "損失のコイントス割当てに対する補償など、新たな公理を導入し、他の公理と組み合わせてリスク尺度を特徴づけています。",
+        "limitations": "評価は要旨に基づきます。証明の詳細、仮定の妥当性、実証検証や具体的な応用例は要旨に記載されていません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "リスク尺度の公理化として理論的意義はありますが、対象サイトの中心領域との直接的な関連性が乏しいためです。",
+        "tags": [
+          "リスク尺度",
+          "公理化",
+          "Expected Shortfall",
+          "Entropic Risk Measure",
+          "Mean–Variance"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This theoretical study proposes economic axioms characterizing optimized certainty equivalents (OCEs) and axiomatizes several standard risk measures.",
+          "mainResult": "According to the abstract, Fair-Coin Compensation, together with strong risk aversion and normalization, characterizes OCEs; additional axioms characterize standard OCEs, Expected Shortfall, and the Entropic Risk Measure. The paper also axiomatizes the Mean–Variance criterion using Equal-Mean Randomization.",
+          "practicalApplication": "The results may provide a theoretical basis for selecting and comparing risk measures, but the abstract establishes no direct application to execution, market microstructure, interest-rate models, or yield curves.",
+          "methodology": "The authors introduce new axioms, including compensation for a coin-toss assignment of losses, and combine them with other axioms to characterize risk measures.",
+          "limitations": "This assessment is based on the abstract. It does not describe proof details, the plausibility of assumptions, empirical validation, or concrete applications.",
+          "reason": "The axiomatization of risk measures has theoretical relevance, but the paper has little direct connection to the site's core subject areas.",
+          "tags": [
+            "risk measures",
+            "axiomatization",
+            "Expected Shortfall",
+            "Entropic Risk Measure",
+            "Mean–Variance"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.22517": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、気候への関心と米国のエネルギー関連部門における金融リスクおよび実体経済活動の関係を分析する。",
+        "mainResult": "要旨によれば、気候への懸念の高まりは炭素集約型エネルギー部門の持続的ボラティリティ上昇と関連し、関連するリスク指標の革新は、その後の石油・ガス部門の生産と雇用の低下に先行する。",
+        "practicalApplication": "気候リスクの部門別評価や実体経済への波及を検討する参考にはなるが、電子執行、金利モデル、イールドカーブに直接適用する内容ではない。",
+        "methodology": "日次の米国部門別株式リターンと月次の検索データ由来の気候関心指数を用い、GARCH-MIDASで持続的ボラティリティを推定し、ローカル・プロジェクションで実体活動への予測関係を調べる。",
+        "limitations": "提供された要旨だけでは、標本期間、推定仕様、効果量、識別仮定の詳細を確認できない。予測上の先行関係は因果効果を確立するものではなく、結果の外的妥当性も不明である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "気候関心、部門別金融リスク、実体活動を扱う研究であり、対象サイトの電子取引、マーケット・マイクロストラクチャー、金利・イールドカーブ領域とは実質的な関連が薄い。",
+        "tags": [
+          "気候リスク",
+          "部門別ボラティリティ",
+          "実体経済",
+          "GARCH-MIDAS",
+          "ローカル・プロジェクション"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes the relationship between climate attention, financial risk in U.S. energy-related sectors, and real economic activity.",
+          "mainResult": "According to the abstract, rising adverse climate concern is associated with higher persistent volatility in carbon-intensive energy activities, and innovations in the related risk measure precede declines in oil and gas production and employment.",
+          "practicalApplication": "It may inform sectoral climate-risk assessment and analysis of spillovers to real activity, but it does not directly address electronic execution, interest-rate models, or yield curves.",
+          "methodology": "The study uses daily U.S. sectoral equity returns and a monthly search-based climate concern index, estimates persistent volatility with GARCH-MIDAS, and examines predictive relationships with real activity using local projections.",
+          "limitations": "The abstract alone does not provide the sample period, specification details, effect sizes, or identification assumptions. Predictive lead-lag relationships do not establish causal effects, and external validity is unclear.",
+          "reason": "The paper concerns climate attention, sectoral financial risk, and real activity, with little material relevance to the site's focus on electronic trading, market microstructure, interest rates, or yield curves.",
+          "tags": [
+            "climate risk",
+            "sectoral volatility",
+            "real activity",
+            "GARCH-MIDAS",
+            "local projections"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.22604": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "レバレッジETFオプションのボラティリティ面を、局所ボラティリティモデルの下で効率よく構築する手法を比較する研究です。",
+        "mainResult": "条件付きGamma法は、条件付き積分分散のモーメントを用いてオプション価格を近似し、論文の報告ではベンチマークPDEに近いスマイルを保ちながら計算を158〜236倍高速化しました。TQQQの市場気配との比較では、多くのストライクで推定スマイルがビッド・アスク内に入ったと報告されています。",
+        "practicalApplication": "レバレッジETFオプションの価格付けやヘッジ向けスマイル構築に応用できる可能性があります。ただし、対象はETFオプションのモデル化であり、本サイトの電子執行、マーケットマイクロストラクチャ、金利モデル、イールドカーブの主題との関連は限定的です。",
+        "methodology": "校正済み局所ボラティリティモデルの下で、条件付き積分分散の平均・分散を求める1次元前進PDEを3本解き、モーメント一致のGamma分布で分散を近似します。2次元の同時分布PDEをベンチマークとし、ストライクリマッピング法などと比較します。",
+        "limitations": "要旨だけでは、校正・検証期間や誤差指標、ビッド・アスク比較の対象範囲などが分かりません。報告された性能は特定の指数・モデル・データに基づくもので、他市場への一般化は確認できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "オプション価格付けの計算効率化としては興味深いものの、研究対象はレバレッジETFであり、指定された金利・執行・市場構造分野には直接該当しません。",
+        "tags": [
+          "レバレッジETF",
+          "オプション価格付け",
+          "局所ボラティリティ",
+          "条件付きGamma近似",
+          "out_of_scope"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study compares methods for efficiently constructing leveraged ETF option volatility surfaces under a local-volatility model.",
+          "mainResult": "The conditional-Gamma method approximates option prices using moments of conditional integrated variance. The paper reports that it produces smiles close to the benchmark PDE while running 158–236 times faster. In comparison with TQQQ market quotes, the estimated smile is reported to fall inside the bid-ask spread at most strikes.",
+          "practicalApplication": "The method may be applicable to volatility-surface construction for pricing and hedging leveraged ETF options. However, its focus is ETF option modeling, with limited connection to this site's core topics of electronic execution, market microstructure, interest-rate models, and yield curves.",
+          "methodology": "Under a calibrated local-volatility model, three one-dimensional forward PDEs compute the conditional mean and variance of integrated variance, which is approximated by a moment-matched Gamma distribution. A two-dimensional joint-law PDE serves as the benchmark, and the method is compared with alternatives including strike remapping.",
+          "limitations": "The abstract does not specify the calibration and validation periods, error metrics, or full scope of the bid-ask comparison. The reported performance is based on particular indices, models, and data, and generalization to other markets is not established.",
+          "reason": "The computational improvement in option pricing is of interest, but the research concerns leveraged ETFs and does not directly address the specified rates, execution, or market-structure topics.",
+          "tags": [
+            "leveraged ETFs",
+            "option pricing",
+            "local volatility",
+            "conditional-Gamma approximation",
+            "out_of_scope"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.22793": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究はGitHub Copilot Reviewerの導入がオープンソース開発の投稿行動や保守負担に与える影響を分析する。",
+        "mainResult": "導入後、PR投稿と保守者のレビュー負担が当初増加し、AIレビューは人間によるPRのレビュー効率を高める一方、ボットPRのレビュー・マージには時間がかかったと報告する。",
+        "practicalApplication": "OSSプロジェクトでAIレビューを導入する際、投稿量の増加と人間・ボット別のレビュー所要時間を監視する参考となる。",
+        "methodology": "GitHub Copilot Reviewerの2025年の導入を自然実験として扱い、導入後の投稿・負担・レビュー効率を分析し、生存分析も用いた。",
+        "limitations": "提示された要旨だけでは、比較群や識別仮定、標本範囲、効果量などを確認できない。金融市場、電子取引、金利モデルとの実質的な関連も示されていない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "ソフトウェア保守とAIレビューが主題であり、対象サイトの金融・市場マイクロストラクチャ分野には実質的に該当しない。",
+        "tags": [
+          "AIレビュー",
+          "オープンソースソフトウェア",
+          "保守負担",
+          "生存分析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes how the introduction of GitHub Copilot Reviewer affects contribution behavior and maintenance burden in open-source software.",
+          "mainResult": "It reports an initial increase in PR submissions and maintainer review workload after adoption. AI review improved review efficiency for human PRs, while bot PRs took longer to review and merge.",
+          "practicalApplication": "The findings may inform OSS projects adopting AI review by highlighting the need to monitor contribution volume and review times separately for human and bot PRs.",
+          "methodology": "The study treats the 2025 introduction of GitHub Copilot Reviewer as a natural experiment and analyzes contributions, workload, and review efficiency, including through survival analysis.",
+          "limitations": "The abstract does not specify the comparison group, identification assumptions, sample scope, or effect sizes. It also establishes no material connection to financial markets, electronic trading, or interest-rate models.",
+          "reason": "The paper concerns software maintenance and AI review, not the financial and market microstructure topics covered by the site.",
+          "tags": [
+            "AI review",
+            "open-source software",
+            "maintenance burden",
+            "survival analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.23126": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本研究は、株式のイントラデイ予測において、学習データの量と過去データの選び方が予測時間軸ごとにどう関係するかを検証する。",
+        "mainResult": "報告では、短い予測時間では直近データを重視する設定、中程度では複数の時期を組み合わせる設定、長い時間では均等サンプリングの設定が個別モデルで優位だった。12モデルの等ウェイト・アンサンブルは15、20、25分で個別モデルの平均を上回ったが、他の時間軸では上回らなかった。",
+        "practicalApplication": "イントラデイ株式予測のモデル評価で、学習期間や履歴選択を予測時間軸ごとに比較する際の参考になり得る。ただし、特定の設定を普遍的な運用方針として推奨する結果ではない。",
+        "methodology": "固定したクロスセクショナルTransformerと特徴量を用い、4種類のサンプリング・検証方針と6、12、24か月の学習期間を組み合わせた12設定を比較した。2025年1月から2026年10月20日まで月次ウォークフォワードで264回再学習し、5～120分の予測について将来の5因子残差リターンとのクロスセクショナルSpearman情報係数を評価した。",
+        "limitations": "要約には、対象銘柄・取引コスト・統計的不確実性の詳細がない。評価期間とモデル構成が限定されており、著者らも普遍的な方針や直近データ重視の因果効果を主張していない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "履歴選択と予測時間軸を同時に評価する実証的知見は、株式予測モデルの設計・評価に関連する。ただし、執行や市場ミクロ構造への直接的な貢献は要約から確認できず、結果の一般化にも制約がある。",
+        "tags": [
+          "イントラデイ株式予測",
+          "Transformer",
+          "学習データ選択",
+          "予測時間軸",
+          "ウォークフォワード評価",
+          "アンサンブル"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This study examines how training-data quantity and historical selection relate to forecast horizons in intraday equity prediction.",
+          "mainResult": "The reported results favor recency sampling for individual models at short horizons, multi-recency configurations at medium horizons, and uniform sampling at longer horizons. An equal-weight ensemble of 12 models exceeds individual-model means at 15, 20, and 25 minutes, but not at other horizons.",
+          "practicalApplication": "The findings may inform comparisons of training periods and historical-selection policies by forecast horizon in intraday equity prediction. They do not establish a universally suitable operational policy.",
+          "methodology": "Using a fixed cross-sectional Transformer and feature set, the study compares 12 configurations combining four sampling and validation policies with 6-, 12-, and 24-month training quantities. It conducts 264 monthly walk-forward refits from January 2025 through October 20, 2026, evaluating forecasts from 5 to 120 minutes using cross-sectional Spearman information coefficients against future five-factor residual returns.",
+          "limitations": "The abstract does not detail the universe of securities, transaction costs, or statistical uncertainty. The evaluation period and model configuration are limited, and the authors claim neither a universal policy nor a causal benefit from recency.",
+          "reason": "The empirical findings on jointly evaluating historical selection and forecast horizon are relevant to equity-forecast model design and evaluation. However, the abstract indicates no direct contribution to execution or market microstructure, and generalizability is limited.",
+          "tags": [
+            "intraday equity prediction",
+            "Transformer",
+            "training-data selection",
+            "forecast horizon",
+            "walk-forward evaluation",
+            "ensemble"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "米国株の日中リターン予測で、学習履歴の量・抽出方法と予測期間の関係を検証した実証研究。Transformerと特徴量を固定した比較では、全予測期間で優位な履歴選択方針は見つからなかった。執行方式そのものではなく、電子取引に用いる予測モデルの設計が対象である。",
+        "mainResult": "個別モデルでは、5～15分先は6か月のrecency sampling、20～30分先はmulti-recency、60～120分先はuniform samplingが最高の平均Rank ICを示した。5分先の最高値は相関係数で$0.0190$だった。12モデルの等加重平均は15・20・25分先で全個別モデルを上回ったが、統計的に有意な改善とは確認されていない。",
+        "practicalApplication": "日中株式シグナルの開発で、学習窓と履歴抽出方法を予測期間別に検証する際の比較設計として使える。ただし予測値の較正は弱く、売買コスト控除後の収益性も未検証のため、そのまま注文量や期待収益に変換する根拠にはならない。",
+        "methodology": "最大1,000銘柄、572特徴量を用いる銘柄横断Transformerで、4方針と6・12・24か月の学習量を組み合わせた12構成を比較した。月次walk-forwardで264回再学習し、2025年1月から2026年10月20日までの451営業日を評価した。予測は30分間隔で発行し、5～120分先の8種類の累積五因子残差リターンに対する日次平均Spearman ICを主要指標とした。",
+        "limitations": "学習量と候補履歴の幅が同時に変わり、multi-recencyでは検証方法も異なるため、recencyの因果効果は識別できない。初期化seedは1種類で、ラベル観測率は約87％にとどまり、銘柄分類の時点整合性も保証されていない。最良構成は事後選択で、月次bootstrapは系列依存や多重比較を十分に扱わず、多くの比較で区間がゼロを含む。期間別の成績変動も大きく、約定・市場インパクト・純損益は評価していない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "日中予測の学習データ設計に実務的な示唆があり、予測順位と収益性を明確に区別している。電子取引の予測研究には推奨するが、執行や市場構造、金利モデルへの直接的な貢献は限定的である。",
+        "tags": [
+          "日中株式予測",
+          "学習履歴選択",
+          "銘柄横断Transformer",
+          "予測期間",
+          "コンセプトドリフト",
+          "予測アンサンブル"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This empirical study examines how training-history quantity and sampling interact with forecast horizon in intraday US equity return prediction. Holding the Transformer and features fixed, it finds no historical-selection policy that dominates across all horizons. Its focus is prediction-model design for electronic trading rather than execution methods themselves.",
+          "mainResult": "Among individual models, six-month recency sampling produced the highest mean Rank IC at 5–15 minutes, multi-recency at 20–30 minutes, and uniform sampling at 60–120 minutes. The highest five-minute correlation coefficient was $0.0190$. Equal averaging of the 12 models exceeded every individual model at 15, 20 and 25 minutes, but statistically significant improvements were not established.",
+          "practicalApplication": "The study provides a comparison framework for testing training windows and historical sampling separately by forecast horizon when developing intraday equity signals. However, weak forecast calibration and untested profitability after trading costs mean that its predictions do not directly justify order sizes or expected returns.",
+          "methodology": "A cross-sectional Transformer using up to 1,000 stocks and 572 features compared 12 configurations combining four policies with 6-, 12- and 24-month training quantities. Monthly walk-forward testing produced 264 refits and covered 451 sessions from January 2025 through 20 October 2026. Forecasts were issued every 30 minutes for eight cumulative five-factor residual-return horizons from 5 to 120 minutes, with daily-averaged Spearman IC as the primary metric.",
+          "limitations": "Training quantity and eligible historical breadth change together, while multi-recency also changes validation design, preventing identification of a causal recency effect. Only one initialization seed is used, label coverage is approximately 87%, and point-in-time security classification is not guaranteed. The best configurations are selected retrospectively, the monthly bootstrap does not adequately address serial dependence or multiple comparisons, and most reported comparison intervals include zero. Performance also varies substantially across periods, and fills, market impact and net profit are not evaluated.",
+          "reason": "The study offers practical guidance for intraday training-data design and clearly distinguishes predictive ranking from profitability. It is recommended for electronic-trading prediction research, but its direct contribution to execution, market microstructure and interest-rate models is limited.",
+          "tags": [
+            "Intraday equity forecasting",
+            "Training-history selection",
+            "Cross-sectional Transformer",
+            "Forecast horizon",
+            "Concept drift",
+            "Forecast ensemble"
+          ]
+        }
+      }
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 871,
+      "outputTokens": 766,
+      "reasoningTokens": 90,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1637,
+      "estimatedCostUsd": 0.00047,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.21641v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 962,
+      "outputTokens": 756,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1718,
+      "estimatedCostUsd": 0.000474,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.21672v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 894,
+      "outputTokens": 694,
+      "reasoningTokens": 39,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1588,
+      "estimatedCostUsd": 0.000436,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.22033v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 809,
+      "outputTokens": 741,
+      "reasoningTokens": 97,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1550,
+      "estimatedCostUsd": 0.000451,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.22119v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 800,
+      "outputTokens": 711,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1511,
+      "estimatedCostUsd": 0.000436,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.22517v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 907,
+      "outputTokens": 936,
+      "reasoningTokens": 96,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1843,
+      "estimatedCostUsd": 0.000559,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.22604v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 792,
+      "outputTokens": 562,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1354,
+      "estimatedCostUsd": 0.00036,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.22793v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 814,
+      "outputTokens": 884,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1698,
+      "estimatedCostUsd": 0.000523,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.23126v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 24652,
+      "outputTokens": 1461,
+      "reasoningTokens": 147,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 24649,
+      "totalTokens": 26113,
+      "estimatedCostUsd": 0.076239,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 28,
+      "paperIds": [
+        "2611.23126v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

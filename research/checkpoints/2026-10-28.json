@@ -1,0 +1,556 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-10-28",
+  "fingerprint": "77f17cfaf3884580956080e7602f5598b936e91a9279d1b90fa3903dabfa1947",
+  "candidateFingerprints": {
+    "2610.35887": "4c396062f92170af93cf8034de867ec998b4dfddc89948c48c75d04beee0cf07",
+    "2610.35893": "326541c34871b69bec66bc97d2d0f983c9c411c54d1c8011a9ca9716a115e09e",
+    "2610.35986": "92cc567b77172f409a096b99a855c045fd371bd522b0ad4eee3f787a3e47ba2c",
+    "2610.36008": "8d577b383b9b0f3b55f2ff66c24509689d56aff633df1a650491e468897cc493",
+    "2610.36083": "ee42d34a66e8dd5d772a12896ba000e9e622cc8cac46fcfc5fd50c7ef9f05c13",
+    "2610.36171": "5a0db0561b6de941f9e599af93baed48ad8c613722bcac5c86a482037635047e",
+    "2610.36274": "2afd0db4a2485d3171a6b01f80545a03268a53afa334a7f6f2cf683038b0d408",
+    "2610.36317": "a2af26633144c5d3779d86bc00a809c5b6e0a82ccad28219adc1eb4105698f90",
+    "2610.36392": "42b8b6e31d96d464ee282b0ecbd4fa33774420787dc8f5392eef8dabed99ca72",
+    "2610.36473": "491eb051f7cb7788637cfd0a16436d22a2aa06bcb561bded30c9ecdbaebc9f23",
+    "2610.36899": "5ee4e5edb3af5c599b32b370408e181750a0fdb212761675af7dc33cbaa1295c",
+    "2610.36921": "d59c086313d190b92d3f17f71a9da1be9e8e207f5131298daf0fa52aad8f0333",
+    "2610.37171": "911f8369bfcf50ed4302c5ff4669ad66aa6aaf117e939c457c7c1f5400d8c59a",
+    "2610.37306": "6155004201ecc1d29afbd3ec03c309f82069b392aa37c5e0894b725beb376d82",
+    "2610.37324": "2619b82ce39a8414bbe300f719b7b8f3a3fac78ea5b11979d5cfe97b58767374",
+    "2610.37445": "da48822be834f4cb6e8d0a7b2faa21463460a7ded1b7b0d3ffa5fab003f65448"
+  },
+  "results": {
+    "2610.35887": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "CME E-mini NASDAQ-100先物を対象に、ICTのAccumulation-Manipulation-Distribution（AMD）モデルを機械的ルールとして検証した研究です。",
+        "mainResult": "シグナルは取引日の44%で発生し、有効シグナルの57%では指定のエントリー時間前に目標到達しました。トレンドに沿う場合の正答率は62–71%、逆らう場合は25–30%で、著者らはこの実装ではトレンド regime を超える方向情報を確認できなかったと報告しています。",
+        "practicalApplication": "AMDの時間設定やトレンド条件を再検証する仮説を提示しますが、実運用への有効性は示していません。",
+        "methodology": "2022年1月から2026年7月までの15分足OHLCVデータを用い、484日のシグナルをカイ二乗検定、Benjamini–Hochberg補正、regime別分析で評価しています。",
+        "limitations": "対象は単一先物と特定のルール実装に限られます。要旨からは取引コスト、約定可能性、独立したアウト・オブ・サンプル検証の有無を確認できず、結果を実運用成績とはみなせません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "先物の短期売買ルール検証であり、電子執行、取引所の市場マイクロ構造、金利・イールドカーブを主題とする研究ではありません。",
+        "tags": [
+          "先物",
+          "日中取引",
+          "売買シグナル",
+          "トレンド regime"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper tests the ICT Accumulation-Manipulation-Distribution (AMD) model as a mechanical set of rules on CME E-mini NASDAQ-100 futures.",
+          "mainResult": "Signals occurred on 44% of trading days, and 57% of valid signals reached the target before the specified entry time. Accuracy was 62–71% when signals aligned with the trend and 25–30% when they opposed it; the authors report no directional information beyond the trend regime under this implementation.",
+          "practicalApplication": "The results suggest hypotheses for reassessing AMD timing and trend conditions, but do not establish effectiveness in live trading.",
+          "methodology": "The study evaluates 484 signal days using 15-minute OHLCV data from January 2022 to July 2026, with chi-square tests, Benjamini–Hochberg correction, and regime-conditional analysis.",
+          "limitations": "The analysis is limited to one futures contract and a specific rule implementation. The abstract does not establish whether transaction costs, execution feasibility, or independent out-of-sample validation were addressed; the findings should not be treated as live-trading performance.",
+          "reason": "This is a short-term futures trading-rule evaluation, not primarily research on electronic execution, market microstructure, interest rates, or yield curves.",
+          "tags": [
+            "futures",
+            "intraday trading",
+            "trading signals",
+            "trend regime"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.35893": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、欧州社会調査などの個票データから個人・集団別の人間開発指数（HDI）を再構成する手法を開発・検証する。",
+        "mainResult": "39,706人の有効データで再構成値は公式HDIと高い一致を示し、平均絶対誤差は0.0099、相関係数は0.917だったと報告する。",
+        "practicalApplication": "人口集団別の人間開発や社会経済的不平等の分析に利用できる可能性があるが、金融市場・金利分析への直接的な応用は示されていない。",
+        "methodology": "健康を国別平均余命と自己評価健康、所得をジニ係数で較正した対数正規倍率、教育を観測・期待就学年数から推定し、幾何平均で集約する。調査ウェイトとデルタ法による信頼区間を用いる。",
+        "limitations": "要約だけでは再構成仮定の妥当性や他地域・時点への一般化可能性を評価できない。健康・所得・教育の個人値は代理指標や較正に依存し、金融分野との関連も限定的である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "社会開発指標の個票推定に関する研究であり、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利を主題とするサイトの対象外である。",
+        "tags": [
+          "人間開発指数",
+          "調査ミクロデータ",
+          "不平等分析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study develops and validates a method for reconstructing the Human Development Index (HDI) from individual-level survey data to estimate outcomes for individuals and subgroups.",
+          "mainResult": "For 39,706 individuals with valid data, the reconstructed values reportedly agreed closely with the official HDI, with a mean absolute error of 0.0099 and a correlation of 0.917.",
+          "practicalApplication": "The method may support analyses of human development and socioeconomic inequality across population groups, but no direct application to financial markets or interest-rate analysis is presented.",
+          "methodology": "Health is estimated from national life expectancy and self-rated health, income from a lognormal multiplier calibrated to the Gini coefficient, and education from observed and expected years of schooling. The dimensions are aggregated by geometric mean, using survey weights and delta-method confidence intervals.",
+          "limitations": "The abstract does not allow assessment of the reconstruction assumptions or generalizability to other regions and periods. Individual health, income, and education values depend on proxies or calibration, and the connection to finance is limited.",
+          "reason": "The paper concerns microdata-based estimation of a social-development indicator, not electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "Human Development Index",
+            "survey microdata",
+            "inequality analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.35986": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、米国のMFN関税引き上げが輸入を減らすだけでなく、特恵関税を受ける輸出国へ貿易を振り向けるかを分析する。",
+        "mainResult": "構造的重力モデルによる推定では、MFN保護の強化は輸入を減少させる一方、特恵輸出国への貿易転換も促すと報告する。影響は産業・地域で異なり、中間財と資本財で損失が大きい。",
+        "practicalApplication": "貿易政策の影響評価や、関税変更が市場アクセスと貿易配分に及ぼす影響の検討に参考となりうる。金融取引や金利分析への直接的な適用は示されていない。",
+        "methodology": "国内・国際貿易データを用いて、CES整合的な二国間関税マージンを組み込んだ構造的重力モデルを推定し、近年の米国通商政策を応用例として分析する。",
+        "limitations": "評価は抄録に基づく。識別戦略、推定値の大きさ、不確実性、頑健性検証、対象期間などは抄録から確認できず、結果の因果的解釈や一般化可能性は判断できない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "関税と国際貿易配分を扱う研究であり、電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利を主題とするサイトの対象範囲には実質的に該当しない。",
+        "tags": [
+          "貿易政策",
+          "MFN関税",
+          "特恵関税",
+          "貿易転換",
+          "構造的重力モデル"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes whether increases in US MFN tariffs not only reduce imports but also divert trade toward exporters receiving preferential tariff treatment.",
+          "mainResult": "Estimates from a structural gravity model reportedly show that stronger MFN protection reduces imports while also redirecting trade toward preferential exporters. Effects vary across sectors and regions, with the largest losses in intermediate and capital goods.",
+          "practicalApplication": "The findings may inform assessments of trade policy and how tariff changes affect market access and trade allocation. No direct application to financial trading or interest-rate analysis is presented.",
+          "methodology": "The authors estimate a structural gravity model using domestic and international trade data, incorporating CES-consistent bilateral tariff margins, and use recent US trade-policy changes as an empirical application.",
+          "limitations": "This assessment is based on the abstract. The identification strategy, effect sizes, uncertainty, robustness checks, and sample period are not specified, so the causal interpretation and generalizability of the results cannot be assessed.",
+          "reason": "The paper studies tariffs and international trade allocation, rather than the site's core topics of electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "Trade policy",
+            "MFN tariffs",
+            "Preferential tariffs",
+            "Trade diversion",
+            "Structural gravity model"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.36008": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、生成AIの普及が米国の職業別賃金構造における学歴・職務経験の収益率に与える影響を分析する。金融市場や金利の研究ではない。",
+        "mainResult": "CPSデータを用いた比較では、ChatGPT公開後、AI曝露度の高い職業で学歴収益率が低下し、経験収益率は経験年数に応じて上昇・不変・低下に分かれたと報告する。",
+        "practicalApplication": "生成AIによる人材・技能評価の変化を考える労働市場や教育政策の分析には参考となるが、電子取引、金融市場のミクロ構造、金利分析への直接的な応用は示されていない。",
+        "methodology": "2018年から2026年6月までの米国CPS賃金データを用い、ChatGPT公開前のAI曝露指数に基づく職業群を比較する。パンデミック期をプラセボとする検証なども報告する。",
+        "limitations": "抄録だけでは推定仕様や効果の不確実性を確認できない。曝露度別の観察比較であり、ChatGPT公開による因果効果の識別には限界がありうる。また、観察期間が短く、結果の一般化には注意が必要である。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "主題は生成AIが賃金と人的資本の収益率に与える影響であり、対象分野である電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利には実質的に該当しない。",
+        "tags": [
+          "生成AI",
+          "労働経済学",
+          "賃金",
+          "教育収益率",
+          "職務経験"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study analyzes how generative AI adoption affects the returns to education and work experience in US occupational wage structures. It does not concern financial markets or interest rates.",
+          "mainResult": "A comparison using CPS data reports that after ChatGPT's release, returns to schooling declined in occupations with high AI exposure, while returns to experience rose, stayed unchanged, or fell depending on years of experience.",
+          "practicalApplication": "The findings may inform labor-market and education-policy analysis of how generative AI changes the valuation of skills and workers, but the abstract identifies no direct application to electronic trading, market microstructure, or rates analysis.",
+          "methodology": "The study uses US CPS earnings data from 2018 through June 2026 and compares occupational groups based on a pre-ChatGPT AI exposure index. It also reports checks including a pandemic placebo.",
+          "limitations": "The abstract does not provide enough detail to assess the estimation specification or uncertainty of the effects. The observational comparison across exposure groups may limit causal identification of ChatGPT's effects. The short observation period also cautions against generalization.",
+          "reason": "The paper concerns generative AI's effects on wages and returns to human capital, and is not materially relevant to electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "Generative AI",
+            "labor economics",
+            "wages",
+            "returns to education",
+            "work experience"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.36083": {
+      "status": "pdf_out_of_scope",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "FinLLM-KGは、SEC 10-K由来の企業知識を推論時にLLMへ加え、記事単体ではなく企業背景を踏まえた金融センチメント分析を行う枠組みである。",
+        "mainResult": "著者らのシミュレーションでは、FinLLM-KGが最先端ベースラインを一貫して上回るポートフォリオ成績を示した。",
+        "practicalApplication": "アルゴリズム取引のセンチメントシグナル生成に応用でき、予測根拠の確認を通じた人間によるレビューも支援しうる。",
+        "methodology": "因果LLMの重みを更新せず、SEC 10-Kから得た時間情報付き企業知識を、自然言語プロフィールまたは関連度順の事実トリプルとして推論時に付与する。記事の文単位および参照知識に基づく説明も行う。",
+        "limitations": "抄録にはシミュレーションのデータ、期間、評価指標、取引コスト、統計的有意性や頑健性の詳細がなく、実運用での優位性は判断できない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "センチメント分析をポートフォリオ運用へ結びつける点で電子取引に関連するが、抄録だけでは実証の強さを評価できない。",
+        "tags": [
+          "アルゴリズム取引",
+          "金融センチメント分析",
+          "大規模言語モデル",
+          "知識グラフ",
+          "説明可能性"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "FinLLM-KG is a framework that adds company knowledge derived from SEC 10-K filings to an LLM at inference time, enabling financial sentiment analysis to account for firm context rather than treating each article in isolation.",
+          "mainResult": "The authors report that simulations show FinLLM-KG consistently outperforming a state-of-the-art baseline in portfolio performance.",
+          "practicalApplication": "It could be used to generate sentiment signals for algorithmic trading and support human review by making prediction evidence inspectable.",
+          "methodology": "Without updating causal LLM weights, the framework supplies temporally grounded company knowledge from SEC 10-K filings at inference time, either as a natural-language profile or relevance-ranked factual triples. It also provides explanations based on article sentences and retrieved knowledge.",
+          "limitations": "The abstract does not specify the simulation data, period, evaluation metrics, transaction costs, statistical significance, or robustness, so the advantage in live deployment cannot be assessed.",
+          "reason": "The link between sentiment analysis and portfolio trading is relevant to electronic trading, but the abstract alone does not allow the strength of the evidence to be assessed.",
+          "tags": [
+            "algorithmic trading",
+            "financial sentiment analysis",
+            "large language models",
+            "knowledge graphs",
+            "explainability"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "FinLLM-KGは、公表済みのSEC 10-Kから得た企業知識を、重みを固定したLLMのニュース感情分析に追加する手法である。企業要約または関連事実4件を入力し、米国株ロング・ショート戦略で評価している。研究の中心は売買シグナル生成であり、電子執行や市場マイクロストラクチャーではない。",
+        "mainResult": "取引費用控除前の検証で、関連事実を追加する方式の累積収益率は329.54%、Sharpe比率は3.15と報告され、記事のみの基準モデルの275.04%、2.55を上回った。ただし、感情分類精度そのものの改善を示す独立した評価は提示されていない。",
+        "practicalApplication": "企業開示情報をニュース由来の株式シグナルに組み込み、SHAPによって文章と取得事実の寄与を点検する用途に参考となる。執行コスト削減、注文配置、金利商品の評価への直接的な適用は検証されていない。",
+        "methodology": "2015年2月から2021年6月のニュース約16万件とS&P 100を基礎とする株価データを使用する。記事公開前に提出された最新10-Kだけを検索対象とし、同じFinDPOモデルで記事単独、企業要約追加、関連事実追加を比較する。日次感情順位の上位35%を買い、下位35%を売り、翌営業日寄り付きから次の寄り付きまで保有する。",
+        "limitations": "取引費用、スリッページ、借株費用を考慮せず、統計的有意性や独立した期間外検証も示されていない。知識がない記事では拡張方式のスコアを未定義とするため、方式間で同一標本を比較できているか不明である。開示日の制限だけでは、後年に構築されたLLMの学習情報による先読みを排除できず、指数構成銘柄の履歴管理も明確ではない。SHAPはモデル出力の寄与分解であり、予測の正しさや経済的因果関係を保証しない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "知識検索を用いた株式アルファ研究として参考になるが、対象分野である電子執行、市場マイクロストラクチャー、金利モデル、イールドカーブへの実質的な貢献は示されていない。実運用上の有効性についても追加検証が必要である。",
+        "tags": [
+          "金融感情分析",
+          "知識グラフ",
+          "大規模言語モデル",
+          "株式アルファ",
+          "バックテスト",
+          "説明可能性"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "FinLLM-KG augments financial-news sentiment analysis by a frozen LLM with company knowledge extracted from publicly available SEC 10-K filings. It supplies either company summaries or four relevant facts and evaluates a US equity long–short strategy. The research focuses on trading-signal generation, not electronic execution or market microstructure.",
+          "mainResult": "Before transaction costs, the relevant-facts approach reportedly achieved a cumulative return of 329.54% and a Sharpe ratio of 3.15, versus 275.04% and 2.55 for the article-only baseline. However, no independent evaluation demonstrates improved sentiment-classification accuracy itself.",
+          "practicalApplication": "The approach may inform the integration of corporate disclosures into news-driven equity signals, with SHAP supporting inspection of sentence and retrieved-fact contributions. Direct applications to execution-cost reduction, order placement, or interest-rate instrument valuation are not tested.",
+          "methodology": "The study uses approximately 160,000 news articles from February 2015 through June 2021 and stock-price data based on the S&P 100. Retrieval is restricted to the latest 10-K filed before each article, and the same FinDPO model is compared across article-only, company-summary, and relevant-facts conditions. Portfolios buy the top 35% and sell the bottom 35% of daily sentiment rankings, holding from the next trading day's open to the following open.",
+          "limitations": "Transaction costs, slippage, and stock-borrow costs are excluded, and statistical significance and independent out-of-sample validation are not reported. Enhanced scores are undefined when knowledge is unavailable, leaving it unclear whether methods are compared on identical samples. Filing-date restrictions alone cannot exclude look-ahead through the training information of LLMs built later, and historical index-membership handling is unclear. SHAP decomposes model-output contributions; it does not establish prediction correctness or economic causality.",
+          "reason": "The paper is informative as equity-alpha research using knowledge retrieval, but it does not demonstrate a material contribution to electronic execution, market microstructure, interest-rate models, or yield curves. Its live-trading effectiveness also requires further validation.",
+          "tags": [
+            "Financial sentiment analysis",
+            "Knowledge graphs",
+            "Large language models",
+            "Equity alpha",
+            "Backtesting",
+            "Explainability"
+          ]
+        }
+      }
+    },
+    "2610.36171": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、関税引き上げが各輸出国の市場アクセスと相対的な競争条件に及ぼす影響を評価する実務的な枠組みを提示する。",
+        "mainResult": "自由化と保護主義は相対的な市場アクセスへの作用が異なるため、対称的な政策実験として扱うべきでないと論じる。",
+        "practicalApplication": "貿易政策の実証分析や反実仮想評価で、関税ショックの測定とモデルへの組み込み方を検討する際に参考となる。金融市場、金利、イールドカーブを直接扱う研究ではない。",
+        "methodology": "関税変化が直接影響を受ける輸出国だけでなく、競合する供給国の相対的市場アクセスも変える点に着目し、実証分析の枠組みを提案する。",
+        "limitations": "提供された抄録には、枠組みの具体的な仕様、データ、推定結果、適用事例が記載されていない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "貿易政策の実証分析を扱っており、対象サイトの電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利への実質的な関連性はない。",
+        "tags": [
+          "貿易政策",
+          "関税",
+          "実証分析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper presents a practical framework for assessing how tariff increases affect exporters’ market access and relative competitive conditions.",
+          "mainResult": "It argues that liberalization and protectionism affect relative market access differently and should not be treated as symmetric policy experiments.",
+          "practicalApplication": "The framework may inform the measurement and modeling of tariff shocks in empirical trade-policy analysis and counterfactual evaluations. The paper does not directly address financial markets, interest rates, or yield curves.",
+          "methodology": "The proposed framework focuses on how tariff changes affect not only directly targeted exporters but also the relative market access of competing suppliers.",
+          "limitations": "The supplied abstract does not specify the framework’s detailed formulation, data, estimation results, or applications.",
+          "reason": "The paper concerns empirical trade-policy analysis and has no material connection to the site’s focus on electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "trade policy",
+            "tariffs",
+            "empirical analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.36274": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本稿は、TVLと各種エコシステム活動指標を組み合わせた暗号資産ポートフォリオが、暗号市場・規模要因を超えるリターン情報を持つか検証します。",
+        "mainResult": "報告された2022～2025年の分析では、オンチェーン指標との6種の二重ソートはいずれも多重検定調整後にベンチマークを棄却せず、ソーシャル注目度の結果も頑健ではありませんでした。",
+        "practicalApplication": "DeFiトークンのリターン選別にTVLと活動指標を併用する根拠は、本稿の結果からは限定的です。",
+        "methodology": "TVL対時価総額比と7種の活動比率で週次の価値加重2×3ポートフォリオを構成し、暗号市場・規模要因に対して評価しています。Holm補正、ブロック・ブートストラップ、等ウェイト分析、安定性検定も実施しています。",
+        "limitations": "対象期間は2022～2025年で、ソーシャル指標の共通標本は83週です。抄録からは各指標の詳細、効果量、標本構成や外部標本での検証を確認できません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "暗号資産の実証的ポートフォリオ分析としては参考になりますが、対象分野の電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブや金利研究には実質的に該当しません。",
+        "tags": [
+          "暗号資産",
+          "DeFi",
+          "TVL",
+          "ポートフォリオ分析",
+          "多重検定"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper tests whether combining TVL with ecosystem-activity measures yields return information beyond crypto market and size factors.",
+          "mainResult": "In the reported 2022–2025 analyses, none of six double sorts using on-chain measures rejects the benchmark after multiple-testing adjustment; the social-attention result is also not robust.",
+          "practicalApplication": "The paper provides limited support for combining TVL and activity measures to select DeFi-token returns.",
+          "methodology": "It forms weekly value-weighted 2×3 portfolios sorted on TVL-to-market-cap and seven activity ratios, then evaluates them against crypto market and size factors. It also uses Holm adjustment, a moving-block bootstrap, equal-weighted portfolios, and stability tests.",
+          "limitations": "The sample covers 2022–2025, and the common sample for social-attention data is 83 weeks. The abstract does not provide details on individual measures, effect sizes, sample composition, or out-of-sample validation.",
+          "reason": "The study offers relevant empirical portfolio analysis of crypto assets, but is not materially about electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "tags": [
+            "crypto assets",
+            "DeFi",
+            "TVL",
+            "portfolio analysis",
+            "multiple testing"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2610.36317": {
+      "status": "awaiting_pdf",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本稿は、統合米国気配フィードの価格変化を用いた Hawkes 推定で、イベント定義が短期クラスタリングの解釈に与える影響を調べる。",
+        "mainResult": "著者によれば、大型ティック銘柄で見られるサブミリ秒のカーネル成分は、ロックや気配消失などフィード構成上の変化を励起と誤認した結果であり、1ミリ秒持続する仲値水準をイベントとすると消える。未処理データのカーネル質量は1秒以内でクリーンな推定値の約3倍となり、この差はシミュレーションで再現されたという。",
+        "practicalApplication": "気配データで Hawkes モデルを推定する際、イベントの定義とフィード由来の一時的な気配変化を点検する指針になり得る。",
+        "methodology": "統合気配フィード上の価格変化について Hawkes モデルを当てはめ、1ミリ秒持続する仲値水準をイベントとする定義と比較し、シミュレーションで未処理推定の差を再現した。総分枝比はベースラインとのトレードオフがあるとして、固定窓上のカーネル質量を報告する。",
+        "limitations": "提示された抄録だけでは、標本期間、銘柄数、推定の不確実性、シミュレーション設定や頑健性検証は分からない。報告内容は著者の結果であり、他市場や他のイベント定義への一般化は確認できない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "気配データの構成が市場マイクロストラクチャー推定に与える影響を具体的に示す研究で、イベント定義の実務的な注意点がある。一方、抄録からは実証範囲や頑健性を評価できない。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "Hawkes過程",
+          "気配フィード",
+          "イベント定義",
+          "価格変化クラスタリング"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper examines how event definitions affect interpretations of short-term clustering in Hawkes estimates of price changes in the consolidated US quote feed.",
+          "mainResult": "The authors report that the sub-millisecond kernel component found in large-tick stocks reflects feed-construction changes, such as locks or depleted quotes, misread as excitation; it disappears when events are defined as mid-price levels persisting for one millisecond. Raw data yield about three times the clean kernel mass within one second, a difference reproduced in simulation.",
+          "practicalApplication": "The findings may guide checks of event definitions and transient feed-induced quote changes when estimating Hawkes models from quote data.",
+          "methodology": "The paper fits Hawkes models to price changes in the consolidated quote feed, compares them with an event definition based on mid-price levels persisting for one millisecond, and uses simulation to reproduce the difference in raw estimates. Since total branching ratio trades off against the baseline, it reports kernel mass on a fixed window.",
+          "limitations": "The abstract does not provide the sample period, number of stocks, estimation uncertainty, simulation details, or robustness checks. These are the authors' reported findings, and generalization to other markets or event definitions is not established.",
+          "reason": "The study gives a concrete account of how quote-feed construction can affect market-microstructure estimates and offers a practical caution about event definitions. However, the abstract does not allow assessment of empirical scope or robustness.",
+          "tags": [
+            "market microstructure",
+            "Hawkes processes",
+            "quote feed",
+            "event definition",
+            "price-change clustering"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 976,
+      "outputTokens": 902,
+      "reasoningTokens": 143,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1878,
+      "estimatedCostUsd": 0.000549,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.35887v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 864,
+      "outputTokens": 742,
+      "reasoningTokens": 72,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1606,
+      "estimatedCostUsd": 0.000457,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.35893v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 766,
+      "outputTokens": 828,
+      "reasoningTokens": 43,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1594,
+      "estimatedCostUsd": 0.000491,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.35986v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 940,
+      "outputTokens": 826,
+      "reasoningTokens": 88,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1766,
+      "estimatedCostUsd": 0.000507,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.36008v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 853,
+      "outputTokens": 735,
+      "reasoningTokens": 92,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1588,
+      "estimatedCostUsd": 0.000453,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.36083v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 9255,
+      "outputTokens": 1499,
+      "reasoningTokens": 262,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 9252,
+      "totalTokens": 10754,
+      "estimatedCostUsd": 0.038126,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 5,
+      "paperIds": [
+        "2610.36083v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 767,
+      "outputTokens": 615,
+      "reasoningTokens": 65,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1382,
+      "estimatedCostUsd": 0.000384,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.36171v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 817,
+      "outputTokens": 689,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1506,
+      "estimatedCostUsd": 0.000426,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.36274v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 728,
+      "outputTokens": 938,
+      "reasoningTokens": 97,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1666,
+      "estimatedCostUsd": 0.000542,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.36317v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 44613,
+      "outputTokens": 16000,
+      "reasoningTokens": 145,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 44610,
+      "totalTokens": 60613,
+      "estimatedCostUsd": 0.271531,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 42,
+      "paperIds": [
+        "2610.36317v1"
+      ],
+      "outcome": "unconfirmed"
+    }
+  ]
+}

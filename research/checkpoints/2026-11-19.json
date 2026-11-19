@@ -1,0 +1,789 @@
+{
+  "schemaVersion": 2,
+  "batchDate": "2026-11-19",
+  "fingerprint": "6b3ef74ed2938662104abcc1ac098a25fe628d850d536acec318e01d6cf58395",
+  "candidateFingerprints": {
+    "2611.23354": "d56f62ac9c7926e3e4498596c845ab09480d14717d2e6e39a0c3544bac095477",
+    "2611.23495": "322c32dfb789929ce057b3143281a23c7e1f79af58fd7a0e2a3a18bcd578cde1",
+    "2611.23587": "7edf362934478db472a2527f7aa8063e1ed692dedcbcf16091918d22f8fc066a",
+    "2611.23723": "6fdea55d108b436de1a62fdde78c05f87eee10a4196fb643ee53c6af32598e86",
+    "2611.24028": "f163bf3624f887fab0126640347c71b1d0d1636c27e7c5d540a3bc3ab8112375",
+    "2611.24266": "b3074aa8af1d28521c39c7d1912e2033a93e3b17ddaa81ecb0c726541312d251",
+    "2611.24714": "b6564b28b69e77a0e0ead5437b12a52c936bf9939343bae2395df696c730ab45",
+    "2611.24845": "403aa0a583cbadbb0ab5d090eb6725beae9c004aa6e57e6e4d1efaf884df14c5",
+    "2611.24912": "925d4c24889c7bebb59b33c126fe9b15ccfa7f2a295a86e9268494d5ab875513"
+  },
+  "results": {
+    "2611.23354": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "米国の法律サービスを対象に、AIの普及が業務配分や専門事務所の価格設定に及ぼす影響を分析する。",
+        "mainResult": "連邦地区の差の差分析では、2025年度までに非受刑者の本人訴訟が受刑者の申立てに対して6.6ポイント増加した。一方、企業内弁護士雇用への明確な移行は見られず、大手事務所の売上は伸び、低価格事務所では需要の伸びが強かったと報告する。",
+        "practicalApplication": "法律事務所や専門サービスの業務配分・競争を考える際、AIによる低価格代替が必ずしも内製化や高価格サービスの値下げにつながらない可能性を示す。金融市場や金利分析への直接的な応用は限定的である。",
+        "methodology": "専門サービスの自己提供、企業の内製・外注選択、専門事務所の価格設定を結ぶ枠組みを示し、89の連邦地区の差の差分析、法律AIベンチマーク、事務所の雇用・売上・需要に関する指標を用いる。",
+        "limitations": "抄録のみでは推定の詳細や頑健性を評価できない。本人訴訟などの変化を生成AIの因果効果と特定できるとは限らず、抄録も業務再配分の一部が生成AI以前から進んでいたと述べている。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "法律サービス市場の組織と競争に関する研究であり、電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブへの実質的な関連性がない。",
+        "tags": [
+          "AI",
+          "法律サービス",
+          "業務配分",
+          "専門サービス"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper analyzes how AI adoption affects work allocation and specialist-firm pricing in U.S. legal services.",
+          "mainResult": "A difference-in-differences analysis across federal districts reports a 6.6-percentage-point increase by fiscal 2025 in non-prisoner self-representation relative to prisoner petitions. It finds no clear shift toward in-house lawyer employment; revenue grew at the largest firms, while demand growth was stronger at lower-priced firms.",
+          "practicalApplication": "The findings suggest that lower-priced AI-enabled alternatives need not lead to internalization or lower prices for premium services. Direct applications to financial markets or interest-rate analysis are limited.",
+          "methodology": "The paper presents a framework connecting self-provision, firms’ make-or-buy decisions, and specialist pricing. It uses a difference-in-differences analysis of 89 federal districts, legal-AI benchmarks, and indicators of firm employment, revenue, and demand.",
+          "limitations": "The abstract alone does not permit assessment of estimation details or robustness. Changes such as self-representation cannot necessarily be attributed causally to generative AI, and the abstract notes that some reallocation predates it.",
+          "reason": "This research concerns organization and competition in legal services and has no material connection to electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "AI",
+            "legal services",
+            "work allocation",
+            "professional services"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.23495": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本研究は、American optionsの価格がstrikeと満期に関して持つtotal positivity of order 2（TP2）の成立条件を調べる。",
+        "mainResult": "原資産のlog returnがlog-concave densityを持つ条件下で、American optionsのTP2性を示し、成立範囲はEuropean optionsより広いと報告する。実証では違反はまれで小さく、速やかに反転し、違反に逆らう取引は高い的中率を示した。",
+        "practicalApplication": "オプション価格の整合性検査や、TP2違反を利用する取引戦略の設計に示唆がある。ただし、実運用での収益性や取引コスト控除後の有効性は要約から確認できない。",
+        "methodology": "American optionsについてTP2性を理論的に導き、実証分析で違反の頻度・大きさ・持続性と違反に逆らう取引の的中率を調べている。",
+        "limitations": "要約には、実証データ、標本期間、価格形成モデル、統計的検定、取引戦略のリスク調整後成績やコストの詳細がない。対象はオプション価格特性であり、指定分野との直接的関連は限定的である。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "オプションの価格構造に関する理論・実証研究だが、電子執行、マーケット・マイクロストラクチャー、金利モデル、イールドカーブ、金利を主題としていないため、対象範囲外と判定する。",
+        "tags": [
+          "American options",
+          "European options",
+          "total positivity",
+          "TP2",
+          "log-concave density",
+          "option pricing"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This study examines conditions under which American option prices have total positivity of order 2 (TP2) in strike and time to expiration.",
+          "mainResult": "Under the condition that the underlying asset’s log returns have a log-concave density, the paper establishes TP2 for American options and reports that it holds more broadly than for European options. Empirically, violations are rare and small, reverse quickly, and trades betting against them have high hit rates.",
+          "practicalApplication": "The findings may inform option-price consistency checks and strategies that trade against TP2 violations. The abstract does not establish profitability in live trading or effectiveness after transaction costs.",
+          "methodology": "The paper derives TP2 properties theoretically for American options and empirically examines the frequency, magnitude, and persistence of violations, as well as the hit rate of trades betting against them.",
+          "limitations": "The abstract does not specify the empirical data, sample period, pricing models, statistical tests, or risk-adjusted strategy performance and costs. The subject is option-price behavior, with limited direct relevance to the site’s focus areas.",
+          "reason": "This is a theoretical and empirical study of option-price structure, not a study primarily about electronic execution, market microstructure, interest-rate models, yield curves, or rates; it is therefore outside scope.",
+          "tags": [
+            "American options",
+            "European options",
+            "total positivity",
+            "TP2",
+            "log-concave density",
+            "option pricing"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.23587": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "論文は、価格・時間方向に区分一定な局所ボラティリティの下で、ノックアウト障壁付きコリドー商品を評価するスペクトル法を提案する。電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブを主題とする研究ではない。",
+        "mainResult": "著者らのベンチマークでは、提案法は独立計算と丸め誤差程度で一致し、ボラティリティ境界でも精度を保った。テストした有限差分法より、コリドー累積時間分布の計算が約60倍速かったと報告する。",
+        "practicalApplication": "コリドー商品の累積時間分布やグリークス、レイヤー別ボラティリティ感応度の計算に応用できる可能性がある。",
+        "methodology": "空間スケーリングとGIT法により、殺し付きGreen関数の計算を小規模な対称三重対角系に帰着する。時間区間間の固有関数基底の接続と、時間・Fourier変換の反転を用いる。",
+        "limitations": "評価は要旨に記載されたベンチマークに限られ、対象市場やパラメータ範囲、実運用上の頑健性は示されていない。速度・精度の比較対象もテストした有限差分法に限定される。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "数値的なデリバティブ評価手法としては有用性がうかがえるが、サイトの中心領域である電子取引、マイクロストラクチャー、金利・イールドカーブ研究には直接該当しない。",
+        "tags": [
+          "コリドー商品",
+          "局所ボラティリティ",
+          "スペクトル法",
+          "数値評価"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper proposes a spectral method for pricing corridor products with knockout barriers under local volatility that is piecewise constant in price and time. It does not focus on electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "mainResult": "In the authors’ benchmarks, the method agreed with independent calculations to about rounding error and retained accuracy at volatility interfaces. They report that it computed the corridor accrual-time distribution about 60 times faster than the tested finite-difference method.",
+          "practicalApplication": "The method may be applicable to calculating corridor-product accrual-time distributions, Greeks, and sensitivities to volatility by layer.",
+          "methodology": "Spatial scaling and the GIT method reduce the killed Green’s function calculation to a small symmetric tridiagonal system. The method connects eigenfunction bases across time intervals and inverts time and Fourier transforms.",
+          "limitations": "The evaluation is limited to the benchmarks described in the abstract; market coverage, parameter ranges, and robustness in practical deployment are not established. The speed and accuracy comparison is limited to the tested finite-difference method.",
+          "reason": "The method appears useful for numerical derivatives pricing, but it does not directly address the site’s core areas of electronic trading, market microstructure, or interest rates and yield curves.",
+          "tags": [
+            "corridor products",
+            "local volatility",
+            "spectral method",
+            "numerical pricing"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.23723": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "本研究は、米国株の過去チャートから視覚的に類似する事例を検索し、その後のリターン予測に利用できるかを検証する。",
+        "mainResult": "要旨によれば、自然画像で事前学習した表現でも検索された類似チャートの実現リターンは株式横断面を予測し、将来リターンに合わせて表現を調整すると戦略のSharpe ratioは2倍超となり、チャート画像で直接学習するCNNを上回った。予測力は裁定制約の強い銘柄で大きく、ポートフォリオ形成前後のリターンと注文不均衡は一時的な売り圧力の部分的反転を示唆すると報告する。",
+        "practicalApplication": "類似する過去チャートを根拠として提示する株式シグナルや、売り圧力の反転を捉える戦略の候補となり得る。ただし、要旨だけでは取引費用や実運用時の性能は判断できない。",
+        "methodology": "3 दशकにわたる米国株価履歴から各銘柄に類似するチャートを視覚モデルで検索し、自然画像事前学習表現、リターン調整表現、画像学習CNNを比較する。注文不均衡やスパースオートエンコーダも分析する。",
+        "limitations": "要旨には、標本設計、検証期間の分離、手数料・スリッページ・流動性の扱い、統計的不確実性、外部市場での再現性が記されていない。したがって、実運用可能性や予測機構の因果的解釈は確立していない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "株式のリターン予測研究だが、一時的な売り圧力と注文不均衡に関する報告が市場マイクロストラクチャーに接点を持つ。要旨段階では実装・頑健性の評価が不足するため、関心を持つ読者向けの中程度の優先度とする。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "株式リターン予測",
+          "注文不均衡",
+          "一時的な売り圧力",
+          "チャート画像",
+          "機械学習"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This study tests whether visually similar historical charts from U.S. stocks can be retrieved and used to predict subsequent returns.",
+          "mainResult": "According to the abstract, realized returns of retrieved similar charts predict the cross-section of stocks even with a representation pretrained on natural images. Aligning the representation with future returns more than doubles the strategy's Sharpe ratio and outperforms a CNN trained directly on chart images. The abstract reports stronger predictability among stocks with greater limits to arbitrage; returns and order imbalances around portfolio formation suggest partial reversal of temporary selling pressure.",
+          "practicalApplication": "The approach could inform equity signals that present similar historical charts as supporting evidence, or strategies targeting reversals of selling pressure. The abstract alone does not establish performance after trading costs or in live trading.",
+          "methodology": "A vision model retrieves similar charts for each stock from three decades of U.S. price histories. The study compares a natural-image-pretrained representation, a return-aligned representation, and a CNN trained on chart images; it also analyzes order imbalances and uses a sparse autoencoder.",
+          "limitations": "The abstract does not describe sample design, separation of evaluation periods, treatment of fees, slippage or liquidity, statistical uncertainty, or replication in other markets. Live-trading viability and a causal interpretation of the proposed mechanism are therefore not established.",
+          "reason": "The paper primarily concerns stock-return prediction, but its reported findings on temporary selling pressure and order imbalances connect it to market microstructure. Given the abstract-only evidence and limited information about implementation and robustness, it merits moderate priority for interested readers.",
+          "tags": [
+            "market microstructure",
+            "equity return prediction",
+            "order imbalance",
+            "temporary selling pressure",
+            "chart images",
+            "machine learning"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "要旨とIntroductionのみの限定レビューで、155ページの全文は未提供である。著者らは、類似する過去チャートの事後リターンから米国株の短期リターンを予測でき、その予測力は一時的な売り圧力の反転や裁定制約と関連すると主張する。",
+        "mainResult": "全文未提供のため、以下は要旨とIntroductionに記載された著者らの主張である。2001–2025年の標本外期間に、リターンで調整したFT-DINOの等ウェイト買い持ち・売り持ち戦略は年率リターン$85\\%$、Sharpe比$6.37$を達成し、未調整モデルのSharpe比$2.81$を上回るという。時価総額上限付き加重ではSharpe比$2.38$、想定取引費用控除後の等ウェイト戦略では$4.12$と報告している。",
+        "practicalApplication": "短期株式アルファの候補生成と、予測根拠となる過去事例の可視化に応用できる可能性がある。執行への利用には、売買圧力の反転シグナルとしての有効性と、市場インパクト・借株制約を別途検証する必要がある。",
+        "methodology": "著者らは過去20営業日の価格・出来高チャートをDINOv2で埋め込み、近傍1,000件の事後5営業日リターンを平均して予測する。1993–1999年で追加学習し、2000年でモデル選択後に固定する設計で、履歴への追加は事後リターン確定後に限定する。疎なオートエンコーダによる解釈と、注文不均衡・裁定制約との関連分析も提示している。",
+        "limitations": "提供資料は要旨とIntroductionのみであり、155ページの全文、実験詳細、付録は確認していない。数値と頑健性は著者らの報告に限られ、データ処理、時点整合性、多重検定への対応を独立に評価できない。著者らの一時的売り圧力という解釈も因果関係の確証ではない。等ウェイトと時価総額上限付き加重の成績差が大きく、想定費用だけでは運用容量や実際の約定可能性を判断できない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "主題は株式リターン予測だが、注文フローと裁定制約を通じた短期反転の分析は市場マイクロストラクチャーに関連する。執行モデルではなく、追加検証を要するシグナル研究として読む価値がある。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "チャート画像検索",
+          "視覚表現学習",
+          "短期反転",
+          "注文不均衡",
+          "裁定制約",
+          "限定資料レビュー"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This review is limited to the abstract and Introduction; the full 155-page paper was not provided. The authors claim that subsequent returns of similar historical charts predict short-horizon US stock returns, with predictability related to reversals of temporary selling pressure and limits to arbitrage.",
+          "mainResult": "Because the full paper was not provided, the following are author claims from the abstract and Introduction. For the 2001–2025 out-of-sample period, return-aligned FT-DINO reportedly delivers an annual return of $85\\%$ and a Sharpe ratio of $6.37$ for an equal-weighted long–short strategy, versus $2.81$ for the unaligned model. The authors report a Sharpe ratio of $2.38$ under capped value weighting and $4.12$ for the equal-weighted strategy after assumed transaction costs.",
+          "practicalApplication": "Potential applications include generating short-horizon equity alpha candidates and displaying historical examples supporting each forecast. Execution applications require separate validation of selling-pressure reversal signals, market impact, and stock-borrow constraints.",
+          "methodology": "The authors embed charts of the preceding 20 trading days of prices and volume using DINOv2, then average subsequent five-trading-day returns across 1,000 nearest neighbors. Their design fine-tunes on 1993–1999 data, selects the model using 2000 data, and freezes it thereafter; historical observations enter the library only after subsequent returns are realized. They also present sparse-autoencoder interpretation and analyses linking the signal to order imbalances and limits to arbitrage.",
+          "limitations": "Only the abstract and Introduction were supplied; the full 155-page paper, experimental details, and appendices were not examined. Numerical results and robustness findings are author reports, and data processing, point-in-time integrity, and multiple-testing controls cannot be independently assessed. The authors' temporary-selling-pressure interpretation does not establish causality. The large performance difference between equal weighting and capped value weighting, together with assumed costs alone, leaves capacity and actual executability unresolved.",
+          "reason": "Although the main topic is equity return prediction, its analysis of short-term reversals through order flow and limits to arbitrage is relevant to market microstructure. It merits reading as signal research requiring further validation, rather than as an execution model.",
+          "tags": [
+            "Market microstructure",
+            "Chart image retrieval",
+            "Visual representation learning",
+            "Short-term reversal",
+            "Order imbalance",
+            "Limits to arbitrage",
+            "Limited-source review"
+          ]
+        }
+      }
+    },
+    "2611.24028": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "複数のマーケットメーカーが異なる情報参照期間で注文価格を更新するモデルから、注文フローの長期記憶とラフなボラティリティが生じうると論じる。",
+        "mainResult": "連続極限では注文板の出来高がDean–Kawasaki型の確率偏微分方程式に従い、各デスクの参照期間の違いがべき乗則で減衰する記憶を生むと報告する。予測の要点をエージェント・シミュレーションとBinanceの約6か月・約7億9千万件の注文データで確認し、流動性の高い市場の注文板がモデルと整合的だとする。",
+        "practicalApplication": "マーケットメーカーの更新ルールや参照期間の異質性を組み込んだ注文板・注文フローのモデル化に役立つ可能性がある。執行やリスク管理への具体的な改善効果は、要旨からは判断できない。",
+        "methodology": "各デスクがオラクルの目標注文距離に向けて確率的勾配降下で注文を更新するモデルを構築し、連続極限の解析、エージェント・シミュレーション、Binanceの注文データとの照合を行う。",
+        "limitations": "要旨では、オラクルや更新則などの仮定の妥当性、データ分析の詳細、比較対象や統計的不確実性は示されていない。実証はBinanceの約6か月のデータに限られ、モデルとの整合性は機構の因果的証明ではない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "アルゴリズム取引の注文更新から注文フローの記憶とラフなボラティリティが生じる機構を提示し、大規模な実データとの整合性も報告しており、市場マイクロストラクチャ研究に関連性が高い。",
+        "tags": [
+          "市場マイクロストラクチャ",
+          "マーケットメイキング",
+          "注文板",
+          "注文フロー",
+          "ラフボラティリティ",
+          "確率偏微分方程式"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper argues that persistent memory in order flow and rough volatility can arise when market makers update quote distances using different information lookback horizons.",
+          "mainResult": "In the continuum limit, the model makes order-book volume follow a Dean–Kawasaki-type stochastic partial differential equation; heterogeneity in desks’ lookback horizons produces memory that decays as a power law. The authors report confirming key predictions with agent simulations and about six months of Binance data covering roughly 790 million orders, and find that order books in liquid markets are consistent with the model.",
+          "practicalApplication": "The model may help incorporate market makers’ update rules and heterogeneous lookback horizons into models of order books and order flow. The abstract does not establish concrete benefits for execution or risk management.",
+          "methodology": "The authors model each desk as updating orders through stochastic gradient descent toward oracle-provided target distances, then use continuum-limit analysis, agent simulations, and comparisons with Binance order data.",
+          "limitations": "The abstract does not provide details on the validity of assumptions such as the oracle and update rule, the data analysis, comparison baselines, or statistical uncertainty. The empirical evidence is limited to about six months of Binance data, and consistency with the model is not causal proof of the proposed mechanism.",
+          "reason": "The paper proposes a mechanism by which algorithmic trading updates generate order-flow memory and rough volatility, and reports consistency with large-scale real data, making it highly relevant to market microstructure research.",
+          "tags": [
+            "market microstructure",
+            "market making",
+            "order book",
+            "order flow",
+            "rough volatility",
+            "stochastic partial differential equation"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "66ページの全文は未提供で、要旨とIntroductionのみを対象とする限定レビュー。著者は、情報に応じて非同期に注文を更新するマーケットメーカーと、その情報参照期間の異質性から、板を通じてrough volatilityが生じる機構を提案している。",
+        "mainResult": "要旨とIntroductionのみの記述によれば、著者は注文更新の連続体極限からDean–Kawasaki方程式を導き、異質な情報参照期間が注文フローにべき乗減衰の記憶を生み、標準的なスケーリング議論からrough volatilityにつながると主張する。また、エージェントシミュレーションとBinanceの6か月・約7.9億件の注文データが主要予測を支持すると報告する。全文未提供のため、導出や実証は確認していない。",
+        "practicalApplication": "板の注文更新と情報参照期間の異質性を組み込むシミュレーターや、マーケットメイクのリスク分析に示唆を与え得る。ただし、執行改善や収益性への効果は提供資料から判断できない。",
+        "methodology": "各デスクが未知のoracleによる目標注文距離へ一次勾配則で注文を動かし、固有の情報参照期間に基づいて非同期に更新するモデルを置く。著者はこれを情報駆動ノイズを伴うSGDとして扱い、板数量の保存型確率偏微分方程式と注文フローの記憶へ接続する。takerはモデル化せず、近傍数量の少ない板側へ仲値を動かす。",
+        "limitations": "全文66ページは未提供で、要旨とIntroduction以外の証明、実験、付録は未確認。oracleの仕様、べき乗記憶が成立する条件、推定手順、統計的不確実性は提供部分では評価できない。takerを除いた価格形成とマーケットメーカー主体の市場という設定は、他市場への一般化を制約し得る。著者の実証的主張だけでは因果機構の識別は判断できない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "アルゴリズムによる注文更新とrough volatilityを結ぶ、市場マイクロストラクチャに直接関連する提案である。理論・実証の妥当性を判断するには全文確認が必要だが、追加精読の候補として有用。",
+        "tags": [
+          "市場マイクロストラクチャ",
+          "アルゴリズム・マーケットメイク",
+          "ラフ・ボラティリティ",
+          "指値注文板",
+          "確率的勾配降下法",
+          "Dean–Kawasaki方程式",
+          "限定資料レビュー"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This limited-source review covers only the abstract and Introduction; the full 66-page paper was not provided. The author proposes a mechanism in which market makers updating orders asynchronously in response to information, together with heterogeneous information lookback horizons, generate rough volatility through the order book.",
+          "mainResult": "Based only on the abstract and Introduction, the author claims to derive a Dean–Kawasaki equation from the continuum limit of order updates, with heterogeneous information horizons generating power-law memory in order flow and standard scaling arguments leading to rough volatility. The author also reports support for key predictions from agent simulations and six months of Binance data containing about 790 million orders. The full paper was not provided, so the derivations and empirical analysis have not been checked.",
+          "practicalApplication": "The mechanism could inform simulators incorporating order-book updates and heterogeneous information horizons, as well as market-making risk analysis. However, the supplied material does not establish improvements in execution or profitability.",
+          "methodology": "The model assumes that each desk moves its orders toward target distances supplied by an unknown oracle using a first-order gradient rule, updating asynchronously according to its own information lookback horizon. The author treats this as SGD with information-driven noise and connects it to a conservative stochastic partial differential equation for book volume and to order-flow memory. Takers are not modeled; the mid price moves toward the side with less nearby volume.",
+          "limitations": "The full 66-page paper was not provided; proofs, experiments, and appendices beyond the abstract and Introduction have not been checked. The supplied material does not allow assessment of the oracle specification, conditions for power-law memory, estimation procedures, or statistical uncertainty. Price formation without takers and the focus on market-maker-dominated markets may limit generalization. The author's empirical claims alone do not establish whether the causal mechanism is identified.",
+          "reason": "The proposed link between algorithmic order updates and rough volatility is directly relevant to market microstructure. Assessing its theoretical and empirical validity requires the full paper, but it is a useful candidate for further reading.",
+          "tags": [
+            "Market microstructure",
+            "Algorithmic market making",
+            "Rough volatility",
+            "Limit order book",
+            "Stochastic gradient descent",
+            "Dean–Kawasaki equation",
+            "Limited-source review"
+          ]
+        }
+      }
+    },
+    "2611.24266": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "資本集約型投資のリアルオプション研究における感度分析の実施状況を、100本超の査読論文から調査したレビューです。",
+        "mainResult": "レビューでは、一因子ずつ変化させるOAT分析への依存が強く、全体的な感度分析（GSA）の採用が少ないと報告しています。著者らは、この不足がモデルの批判的検討や意思決定支援を弱めると論じ、GSA導入の提言を示しています。",
+        "practicalApplication": "リアルオプション研究でモデルの透明性や信頼性を高めるため、GSAの導入を検討する際の指針となり得ます。電子取引、マーケットマイクロストラクチャー、金利モデル、イールドカーブ、金利分析への直接的な応用は示されていません。",
+        "methodology": "査読済みリアルオプション論文100本超を対象に、感度分析対象の入力変数数、局所的手法か全体的手法か、入力と出力の関係形状の検討有無をレビューしています。",
+        "limitations": "抄録からは、対象論文の選定基準や分野・期間の範囲、各手法の定量的な採用率、提言の実証的評価は確認できません。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "感度分析に関する方法論的レビューですが、対象は主に投資プロジェクトのリアルオプションであり、このサイトの専門領域との直接的な関連性は低いと判断します。",
+        "tags": [
+          "リアルオプション",
+          "感度分析",
+          "系統的レビュー",
+          "グローバル感度分析"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This review examines sensitivity-analysis practices in real-options studies of capital-intensive investments, drawing on more than 100 peer-reviewed articles.",
+          "mainResult": "The review reports strong reliance on one-at-a-time (OAT) analysis and limited adoption of global sensitivity analysis (GSA). The authors argue that this shortfall weakens critical scrutiny of models and decision support, and recommend incorporating GSA.",
+          "practicalApplication": "The review may guide the use of GSA to improve transparency and credibility in real-options research. It presents no direct application to electronic trading, market microstructure, interest-rate models, yield curves, or rates.",
+          "methodology": "The authors review more than 100 peer-reviewed real-options articles, considering the number of input variables tested, whether local or global methods are used, and whether input-output relationship shapes are examined.",
+          "limitations": "The abstract does not specify article-selection criteria or the review's disciplinary and temporal scope, quantify adoption rates for each method, or report empirical evaluation of the recommendations.",
+          "reason": "This is a methodological review of sensitivity analysis, but its focus is real options for investment projects, with little direct relevance to this site's areas of focus.",
+          "tags": [
+            "real options",
+            "sensitivity analysis",
+            "systematic review",
+            "global sensitivity analysis"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.24714": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "本論文は、人口と領土面積から選挙結果に依存しない政党数の基準値（SNP）を構成する枠組みを提案する。",
+        "mainResult": "アフリカ諸国への適用により、政党システムの過少・過剰な分断を診断できると著者らは述べる。",
+        "practicalApplication": "選挙データが欠ける場合の政党システム比較や制度改革の検討に使うことを想定しているが、金融実務への直接的な適用は示されていない。",
+        "methodology": "座席積モデルと議会規模の立方根則に着想を得て、人口規模と領土面積から選挙結果非依存の基準を算出する。",
+        "limitations": "評価できるのは要旨のみで、推定式、実証検証、閾値設定、予測性能は確認できない。提示された研究対象は選挙制度であり、金融市場、取引、金利、イールドカーブへの実質的な関連はない。",
+        "importance": 1,
+        "recommended": false,
+        "reason": "選挙制度と政党システムに関する研究で、対象サイトの量的金融分野とは実質的に無関係である。",
+        "tags": [
+          "政党システム",
+          "選挙制度",
+          "アフリカ",
+          "測定指標"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "The paper proposes an outcome-independent baseline for party numbers (SNP), constructed from population and territorial area.",
+          "mainResult": "The authors say that applying the measure to African states can diagnose under- or over-fragmented party systems.",
+          "practicalApplication": "It is intended for comparing party systems and considering institutional reform when electoral data are unavailable, but no direct financial application is presented.",
+          "methodology": "Inspired by the seat-product model and the cube-root law of assembly size, the framework derives an outcome-independent baseline from population and territorial area.",
+          "limitations": "Only the abstract is available, so the formula, empirical validation, threshold choices, and predictive performance cannot be assessed. The subject is electoral systems, with no material connection to financial markets, trading, interest rates, or yield curves.",
+          "reason": "This research concerns electoral institutions and party systems, not the quantitative-finance topics covered by the site.",
+          "tags": [
+            "party systems",
+            "electoral systems",
+            "Africa",
+            "measurement"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    },
+    "2611.24845": {
+      "status": "completed",
+      "screenAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "Vibe-Tradingは、調査からバックテスト、ペーパートレード、任意のブローカー執行までを統合する取引エージェント向けのワークスペースを提案する。",
+        "mainResult": "結果に出典・時間範囲・設定・実行記録を結び付け、証拠の検証、研究記録の版管理、ライブ執行の明示的な権限ゲートを設ける設計を示した。要旨は性能改善の実証結果を報告していない。",
+        "practicalApplication": "取引エージェントの研究結果を再現・追跡し、権限を限定して執行へ移すためのシステム設計に参考となる。",
+        "methodology": "市場調査、データ、戦略生成、バックテスト、ポートフォリオ分析、ペーパートレード、複数エージェント連携、任意のブローカー執行を統合するフレームワークを提示する。",
+        "limitations": "要旨には実験設計、定量評価、比較対象、実運用での有効性や安全性の検証が記載されていない。提案された機能の有用性は要旨だけでは判断できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "電子取引エージェントの追跡可能性と執行権限管理に関連するが、要旨は主にシステム設計の提案であり、性能や実務上の効果を裏付ける評価を示していない。",
+        "tags": [
+          "取引エージェント",
+          "電子取引",
+          "バックテスト",
+          "ペーパートレード",
+          "再現性",
+          "執行権限"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "Vibe-Trading proposes a workspace for trading agents that integrates research, backtesting, paper trading, and optional broker execution.",
+          "mainResult": "The design links results to their sources, temporal scope, configuration, and run records, and provides evidence verification, versioned research records, and an explicit authority gate for live execution. The abstract reports no empirical performance gains.",
+          "practicalApplication": "The system design may inform workflows for reproducing and tracing trading-agent research and moving it to execution under bounded authority.",
+          "methodology": "The paper presents a framework integrating market research, data, strategy generation, backtesting, portfolio analysis, paper trading, multi-agent collaboration, and optional broker execution.",
+          "limitations": "The abstract provides no experimental design, quantitative evaluation, baseline comparison, or validation of effectiveness or safety in live trading. The usefulness of the proposed features cannot be assessed from the abstract alone.",
+          "reason": "The paper is relevant to traceability and execution-authority controls for electronic trading agents, but the abstract mainly proposes a system design and provides no evaluation supporting performance or practical impact.",
+          "tags": [
+            "trading agents",
+            "electronic trading",
+            "backtesting",
+            "paper trading",
+            "reproducibility",
+            "execution authority"
+          ]
+        }
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "Vibe-Tradingは、調査からバックテスト、ペーパートレード、任意のブローカー執行までを統合する取引エージェント向けのワークスペースを提案する。",
+        "mainResult": "結果に出典・時間範囲・設定・実行記録を結び付け、証拠の検証、研究記録の版管理、ライブ執行の明示的な権限ゲートを設ける設計を示した。要旨は性能改善の実証結果を報告していない。",
+        "practicalApplication": "取引エージェントの研究結果を再現・追跡し、権限を限定して執行へ移すためのシステム設計に参考となる。",
+        "methodology": "市場調査、データ、戦略生成、バックテスト、ポートフォリオ分析、ペーパートレード、複数エージェント連携、任意のブローカー執行を統合するフレームワークを提示する。",
+        "limitations": "要旨には実験設計、定量評価、比較対象、実運用での有効性や安全性の検証が記載されていない。提案された機能の有用性は要旨だけでは判断できない。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "電子取引エージェントの追跡可能性と執行権限管理に関連するが、要旨は主にシステム設計の提案であり、性能や実務上の効果を裏付ける評価を示していない。",
+        "tags": [
+          "取引エージェント",
+          "電子取引",
+          "バックテスト",
+          "ペーパートレード",
+          "再現性",
+          "執行権限"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "Vibe-Trading proposes a workspace for trading agents that integrates research, backtesting, paper trading, and optional broker execution.",
+          "mainResult": "The design links results to their sources, temporal scope, configuration, and run records, and provides evidence verification, versioned research records, and an explicit authority gate for live execution. The abstract reports no empirical performance gains.",
+          "practicalApplication": "The system design may inform workflows for reproducing and tracing trading-agent research and moving it to execution under bounded authority.",
+          "methodology": "The paper presents a framework integrating market research, data, strategy generation, backtesting, portfolio analysis, paper trading, multi-agent collaboration, and optional broker execution.",
+          "limitations": "The abstract provides no experimental design, quantitative evaluation, baseline comparison, or validation of effectiveness or safety in live trading. The usefulness of the proposed features cannot be assessed from the abstract alone.",
+          "reason": "The paper is relevant to traceability and execution-authority controls for electronic trading agents, but the abstract mainly proposes a system design and provides no evaluation supporting performance or practical impact.",
+          "tags": [
+            "trading agents",
+            "electronic trading",
+            "backtesting",
+            "paper trading",
+            "reproducibility",
+            "execution authority"
+          ]
+        }
+      }
+    },
+    "2611.24912": {
+      "status": "screened_out",
+      "screenAnalysis": {
+        "classification": "out_of_scope",
+        "summary": "限定参加モデルとべき型効用の下で、均衡の株式バブルを分析する研究です。",
+        "mainResult": "Guasoni、Larsen、Leoni（2025）のモデルにおいて、配当込み株価を状態価格で割り引いた過程が真の局所マルチンゲールではなく、狭義局所マルチンゲールであると証明したと報告しています。",
+        "practicalApplication": "資産価格理論や限定参加市場におけるバブル分析に関係しますが、要旨からは電子執行、マーケット・マイクロストラクチャー、金利分析への直接的な応用は確認できません。",
+        "methodology": "対象モデルで、非制約トレーダーが内生的に完備なモデルに直面することを示し、それを結果の証明に用いています。",
+        "limitations": "要旨のみでは仮定、証明の詳細、結果の適用範囲を評価できません。主題は本サイトの対象領域と直接には一致しません。",
+        "importance": 2,
+        "recommended": false,
+        "reason": "株式バブルに関する理論結果ですが、本サイトが扱う電子取引、マーケット・マイクロストラクチャー、金利モデル、イールドカーブへの実質的な関連性は要旨から認められません。",
+        "tags": [
+          "限定参加",
+          "株式バブル",
+          "べき型効用",
+          "局所マルチンゲール"
+        ],
+        "english": {
+          "classification": "out_of_scope",
+          "summary": "This paper analyzes stock bubbles in a limited-participation model with power utilities.",
+          "mainResult": "It reports proving that the state-price-deflated cum-dividend stock-price process in the model of Guasoni, Larsen, and Leoni (2025) is a strict local martingale rather than a true martingale.",
+          "practicalApplication": "The work is relevant to asset-pricing theory and bubble analysis under limited participation, but the abstract does not establish direct applications to electronic execution, market microstructure, or interest-rate analysis.",
+          "methodology": "The proof uses the result that the unrestricted trader faces an endogenously complete model.",
+          "limitations": "The abstract alone does not allow assessment of the assumptions, proof details, or scope of applicability. The topic does not directly match the site's areas of focus.",
+          "reason": "This is a theoretical result about stock bubbles, but the abstract shows no substantive relevance to electronic trading, market microstructure, interest-rate models, or yield curves.",
+          "tags": [
+            "limited participation",
+            "stock bubbles",
+            "power utilities",
+            "local martingale"
+          ]
+        }
+      },
+      "finalAnalysis": null
+    }
+  },
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 888,
+      "outputTokens": 809,
+      "reasoningTokens": 62,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1697,
+      "estimatedCostUsd": 0.000493,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.23354v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 773,
+      "outputTokens": 722,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1495,
+      "estimatedCostUsd": 0.000438,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.23495v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 879,
+      "outputTokens": 867,
+      "reasoningTokens": 128,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1746,
+      "estimatedCostUsd": 0.000521,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.23587v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 773,
+      "outputTokens": 1054,
+      "reasoningTokens": 125,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1827,
+      "estimatedCostUsd": 0.000604,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.23723v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 5487,
+      "outputTokens": 1508,
+      "reasoningTokens": 177,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 5484,
+      "totalTokens": 6995,
+      "estimatedCostUsd": 0.028796,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 155,
+      "paperIds": [
+        "2611.23723v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 905,
+      "outputTokens": 979,
+      "reasoningTokens": 117,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1884,
+      "estimatedCostUsd": 0.00058,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.24028v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": null,
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 66,
+      "paperIds": [
+        "2611.24028v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 1328,
+      "outputTokens": 1329,
+      "reasoningTokens": 117,
+      "cachedInputTokens": 1325,
+      "cacheWriteTokens": 0,
+      "totalTokens": 2657,
+      "estimatedCostUsd": 0.013428,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 66,
+      "paperIds": [
+        "2611.24028v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": null,
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.24266v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "screen",
+      "model": null,
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.24266v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 785,
+      "outputTokens": 752,
+      "reasoningTokens": 60,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1537,
+      "estimatedCostUsd": 0.000454,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.24266v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": null,
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.24714v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 832,
+      "outputTokens": 554,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1386,
+      "estimatedCostUsd": 0.00036,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.24714v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 847,
+      "outputTokens": 738,
+      "reasoningTokens": 61,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1585,
+      "estimatedCostUsd": 0.000454,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.24845v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": null,
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": null,
+      "outputTokens": null,
+      "reasoningTokens": null,
+      "cachedInputTokens": null,
+      "cacheWriteTokens": null,
+      "totalTokens": null,
+      "estimatedCostUsd": null,
+      "pricingDate": "2026-09-06",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.24912v1"
+      ],
+      "outcome": "unconfirmed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 642,
+      "outputTokens": 677,
+      "reasoningTokens": 96,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1319,
+      "estimatedCostUsd": 0.000403,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.24912v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

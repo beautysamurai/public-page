@@ -1510,6 +1510,184 @@
           "output_tokens": 54
         }
       }
+    },
+    "2611.23354": {
+      "batch": "2026-11-19",
+      "id": "2611.23354v1",
+      "fingerprint": "d56f62ac9c7926e3e4498596c845ab09480d14717d2e6e39a0c3544bac095477",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.23495": {
+      "batch": "2026-11-19",
+      "id": "2611.23495v1",
+      "fingerprint": "322c32dfb789929ce057b3143281a23c7e1f79af58fd7a0e2a3a18bcd578cde1",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.MF"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.23587": {
+      "batch": "2026-11-19",
+      "id": "2611.23587v1",
+      "fingerprint": "7edf362934478db472a2527f7aa8063e1ed692dedcbcf16091918d22f8fc066a",
+      "listing": [
+        "cross",
+        "new"
+      ],
+      "categories": [
+        "q-fin.CP",
+        "q-fin.MF",
+        "q-fin.PR"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.23723": {
+      "batch": "2026-11-19",
+      "id": "2611.23723v1",
+      "fingerprint": "6fdea55d108b436de1a62fdde78c05f87eee10a4196fb643ee53c6af32598e86",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.CP"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "market_microstructure",
+        "importance": 3,
+        "recommended": true
+      },
+      "status": "waiting"
+    },
+    "2611.24028": {
+      "batch": "2026-11-19",
+      "id": "2611.24028v1",
+      "fingerprint": "f163bf3624f887fab0126640347c71b1d0d1636c27e7c5d540a3bc3ab8112375",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.MF",
+        "q-fin.TR"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "market_microstructure",
+        "importance": 4,
+        "recommended": true
+      },
+      "status": "waiting"
+    },
+    "2611.24266": {
+      "batch": "2026-11-19",
+      "id": "2611.24266v1",
+      "fingerprint": "b3074aa8af1d28521c39c7d1912e2033a93e3b17ddaa81ecb0c726541312d251",
+      "listing": [
+        "new"
+      ],
+      "categories": [
+        "q-fin.CP"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.24714": {
+      "batch": "2026-11-19",
+      "id": "2611.24714v1",
+      "fingerprint": "b6564b28b69e77a0e0ead5437b12a52c936bf9939343bae2395df696c730ab45",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.EC"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 1,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.24845": {
+      "batch": "2026-11-19",
+      "id": "2611.24845v1",
+      "fingerprint": "403aa0a583cbadbb0ab5d090eb6725beae9c004aa6e57e6e4d1efaf884df14c5",
+      "listing": [
+        "cross"
+      ],
+      "categories": [
+        "q-fin.CP",
+        "q-fin.TR"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "electronic_trading",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
+    },
+    "2611.24912": {
+      "batch": "2026-11-19",
+      "id": "2611.24912v1",
+      "fingerprint": "925d4c24889c7bebb59b33c126fe9b15ccfa7f2a295a86e9268494d5ab875513",
+      "listing": [
+        "cross",
+        "new"
+      ],
+      "categories": [
+        "q-fin.MF",
+        "q-fin.TR"
+      ],
+      "luna": {
+        "model": "gpt-6-luna",
+        "effort": "low",
+        "classification": "out_of_scope",
+        "importance": 2,
+        "recommended": false
+      },
+      "status": "waiting"
     }
   }
 }

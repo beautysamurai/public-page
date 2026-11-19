@@ -2,6 +2,55 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-11-19-daily-openai-01",
+      "date": "2026-11-19",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2611.24028v1",
+          "title": "Algorithmic Market Making Can Lead to Rough Volatility Through the Order Book",
+          "authors": [
+            "Sai Niranjan Ramachandran"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.23723v1",
+          "title": "When Price Charts Rhyme: Historical Visual Retrieval for Stock Return Prediction",
+          "authors": [
+            "Hui Chen",
+            "Haoyu Liu",
+            "Ke Wu",
+            "Dexin Zhou"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.24845v1",
+          "title": "Vibe-Trading: Towards Agent-Native Trading",
+          "authors": [
+            "Haozhe Wu",
+            "Zhonghang Li",
+            "Chao Huang"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-11-18-daily-openai-01",
       "date": "2026-11-18",
       "kind": "daily",

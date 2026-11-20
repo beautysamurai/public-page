@@ -1,0 +1,705 @@
+{
+  "schemaVersion": 2,
+  "reportKind": "daily",
+  "reportDate": "2026-11-20",
+  "generatedAt": "2026-11-20T15:42:28Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "arXiv batch 2026-11-20 was confirmed with 3 relevant paper(s).",
+  "expectedBatchDate": "2026-11-20",
+  "observedBatchDate": "2026-11-20",
+  "periodStart": null,
+  "periodEnd": null,
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2611.25762v1",
+        "title": "Trading Before a Committed Rebalance",
+        "authors": [
+          "Khizar Qureshi"
+        ],
+        "submittedDate": "2026-11-19",
+        "updatedDate": "2026-11-19",
+        "categories": [
+          "math.OC",
+          "q-fin.MF",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "要旨とIntroductionのみを対象とする限定レビューであり、75ページの全文は未提供である。著者は、リバランスを必ず完了する機関投資家と、参加を選べる在庫供給者の執行ゲームを分析し、予測精度の向上が供給者の参入・退出を通じて機関投資家の費用を増やし得ると主張する。",
+        "mainResult": "要旨とIntroductionにおける著者の主張では、スカラー模型の固定参加者構成では情報精度の向上が有利だが、任意参加では参入境界だけでなく滑らかな内部均衡でも不利になり得る。一方、中心化された標的では無情報との比較が有利であり、中心化Gaussian族の精度向上も有利とされる。有限人数では連続体模型と費用比較が逆転し得て、ポートフォリオでは同じ予測誤差削減でも情報の方向により費用効果が逆になるという。全文は未提供であり、証明・実験・付録は確認していない。",
+        "practicalApplication": "指数入替やレバレッジETFのリバランスに関する情報公開・予測サービスの評価に示唆がある。予測誤差だけでなく、在庫供給者の参加反応、価格インパクトの持続性、情報が数量規模と構成のどちらを明らかにするかを検討する枠組みとして利用できる可能性がある。",
+        "methodology": "著者が説明する手法は、公開シグナル後に機関投資家の事前取引と供給者の参加・取引量を決める同時手番Bayesian数量ゲームである。共通の固定取引スケジュール、一時的に減衰する価格インパクト、私的な参加費用、終端の単一価格オークションを組み合わせる。均衡費用の事後平均に対する曲率から情報価値を評価し、有限人数模型とクロスインパクトを伴うポートフォリオ模型へ拡張する。ETF価格データによる補助的分析も紹介されている。",
+        "limitations": "利用できる資料は要旨とIntroductionのみで、75ページの全文は未提供である。結果は著者の主張として整理しており、証明、数値実験、実証仕様、付録の妥当性は確認していない。固定された取引スケジュール、価格に依存しない目標取引量、単一価格での終端清算は適用範囲を制約する。著者自身も、ファンドの過去のバランスシートと機関投資家の注文が観測できず、インパクト・参加費用のパラメータは例示的で、実証分析は参加行動や機関投資家の費用を識別しないとしている。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "情報精度と執行費用を同一視せず、内生的な流動性供給と情報の方向を考慮する点が電子執行研究に直接関連する。全文による検証を前提に、理論研究として精読候補に推奨する。",
+        "tags": [
+          "電子執行",
+          "内生的参加",
+          "情報価値",
+          "過渡的価格インパクト",
+          "Bayesianゲーム",
+          "ポートフォリオ・リバランス",
+          "限定資料レビュー"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "This limited-source review covers only the abstract and Introduction; the full 75-page paper was not provided. The author analyzes an execution game between an institution committed to completing a rebalance and inventory suppliers with optional participation, claiming that improved forecast accuracy can increase institutional costs through supplier entry and exit.",
+          "mainResult": "According to the author's claims in the abstract and Introduction, better information is beneficial with a fixed participation roster in the scalar model, but optional participation can make it harmful both at entry boundaries and in smooth interior equilibria. However, information is reportedly beneficial relative to no information for centered targets, as are precision gains within the centered Gaussian family. Finite populations can reportedly reverse cost comparisons from the continuum model, while portfolio signals delivering identical forecast-error reductions can have opposite cost effects depending on their direction. The full paper was not provided, and proofs, experiments, and appendices have not been checked.",
+          "practicalApplication": "The framework may inform evaluations of information disclosure and forecasting services for index changes and leveraged-ETF rebalancing. Beyond forecast error, it suggests considering inventory suppliers' participation responses, impact persistence, and whether information reveals target magnitude or composition.",
+          "methodology": "The author describes a simultaneous Bayesian quantity game in which an institution chooses pre-event trading and suppliers choose participation and quantities after a public signal. The framework combines a fixed common trading schedule, transient price impact, private activation costs, and a uniform-price terminal auction. Information value is evaluated through the curvature of equilibrium cost in the posterior mean, with extensions to finite populations and portfolios with cross-impact. Supplementary analysis using ETF price data is also described.",
+          "limitations": "Only the abstract and Introduction are available; the full 75-page paper was not provided. Results are presented as author claims, and the validity of proofs, numerical experiments, empirical specifications, and appendices has not been checked. A fixed trading schedule, price-independent target quantities, and uniform-price terminal completion constrain applicability. The author also states that historical fund balance sheets and institutional orders are unobserved, impact and activation-cost parameters are illustrative, and the empirical analysis does not identify participation behavior or institutional costs.",
+          "reason": "Distinguishing forecast accuracy from execution costs while incorporating endogenous liquidity supply and information direction is directly relevant to electronic execution research. Recommended as a theoretical paper for closer reading, subject to verification using the full text.",
+          "tags": [
+            "Electronic execution",
+            "Endogenous participation",
+            "Value of information",
+            "Transient price impact",
+            "Bayesian games",
+            "Portfolio rebalancing",
+            "Limited-source review"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 821,
+          "outputTokens": 827,
+          "reasoningTokens": 120,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1648,
+          "estimatedCostUsd": 0.000496,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.25762v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 1725,
+          "outputTokens": 1614,
+          "reasoningTokens": 163,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 1722,
+          "totalTokens": 3339,
+          "estimatedCostUsd": 0.020451,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract_introduction",
+          "pdfPages": 75,
+          "paperIds": [
+            "2611.25762v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.26623v1",
+        "title": "Path-Independent Deleveraging Rules",
+        "authors": [
+          "Christoph Schlegel",
+          "Akaki Mamageishvili"
+        ],
+        "submittedDate": "2026-11-19",
+        "updatedDate": "2026-11-19",
+        "categories": [
+          "cs.GT",
+          "q-fin.RM"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "暗号資産の永久先物における自動デレバレッジ（ADL）を、公平性・操作耐性・取引所リスクの観点から設計する研究。経路独立性などの公理から配分ルールを特徴付け、比例配分とwater-fillingの間の選択肢を提示する。",
+        "mainResult": "同等口座の平等取扱い、連続性、整合性、上下方向の経路独立性を満たすルールを、拡張log-exponential族として特徴付ける。この族で口座分割と統合の双方に耐えるのは比例配分のみ。同次的な主要ルール族の$-\\infty\\leq\\theta\\leq0$では、water-fillingに近づくほどモデル上の未回収損失が減る一方、削減率の格差が拡大する。反実仮想分析の$\\theta=-1$では、観測配分に対して負担Giniが0.834から0.386、24時間の維持証拠金抵触比率が1.176%から0.563%に低下したと報告する。",
+        "practicalApplication": "取引所が過去のストレス事例に対するリスク上限を設定し、それを満たす範囲で削減率の格差が最小となる固定パラメータを事前選択する設計に使える。トレーダーには、ADLによるヘッジ消失や口座再編の誘因を評価する枠組みとなる。",
+        "methodology": "公理的特徴付けと口座操作耐性の証明に、Lorenz順序による公平性比較、状態別損失によるリスク比較を組み合わせる。2025年10月10日のHyperliquid事例では、18市場・39,915口座市場観測を再構築し、市場別の総削減量を固定して代替配分を比較する。残存ポジションの受動保有評価と300本のブートストラップ価格経路による感応度分析も行う。",
+        "limitations": "実証は単一ストレス事例の選択された初期バッチに限られ、ADL連鎖全体や価格へのフィードバックを再現しない。証拠金を建玉時価に比例配分するためクロスマージン清算を再現せず、価格再構築やデータ除外にも依存する。事後売買、資金移動、資金調達料、清算、価格インパクトを省略し、抵触比率とピーク損失は実際の清算・取引所損失ではない。公平性は負担尺度に依存し、非同次的ルールが同じリスクでより公平となる例もあるため、主要ルール族の大域的最適性や将来の改善は保証されない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "ADLという具体的な市場制度について、配分の予測可能性、操作耐性、リスクと公平性の対立を統一的に扱う。金利研究ではないが、電子市場の制度設計と強制ポジション削減の分析に直接関係し、実証上の制約を踏まえて読む価値が高い。",
+        "tags": [
+          "市場制度設計",
+          "自動デレバレッジ",
+          "暗号資産永久先物",
+          "経路独立性",
+          "操作耐性",
+          "公平性とリスク",
+          "反実仮想分析"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "This paper designs auto-deleveraging (ADL) rules for crypto perpetual futures around fairness, manipulation resistance, and platform risk. It characterizes allocation rules through axioms including path independence and offers choices between proportional division and water-filling.",
+          "mainResult": "Rules satisfying equal treatment of equal accounts, continuity, consistency, and downward and upward path independence are characterized as an extended log-exponential family. Proportional division is the only member resistant to both account splitting and merging. Within the main homogeneous family over $-\\infty\\leq\\theta\\leq0$, moving toward water-filling reduces modeled uncovered losses but increases inequality in percentage reductions. In the counterfactual analysis, $\\theta=-1$ reportedly lowers the burden Gini from 0.834 to 0.386 and the 24-hour maintenance-margin breach share from 1.176% to 0.563% relative to the observed allocation.",
+          "practicalApplication": "Exchanges can set a risk bound using historical stress episodes and select in advance the fixed parameter that minimizes dispersion in percentage reductions subject to that bound. Traders can use the framework to assess ADL-induced hedge removal and incentives to restructure accounts.",
+          "methodology": "Axiomatic characterization and proofs of resistance to account manipulation are combined with Lorenz-order fairness comparisons and state-by-state loss comparisons. For Hyperliquid's October 10, 2025 episode, the authors reconstruct 39,915 account–market observations across 18 markets and compare alternative allocations while holding each market's aggregate reduction fixed. They also evaluate passive residual positions and conduct sensitivity analysis using 300 bootstrap price paths.",
+          "limitations": "The empirical analysis covers selected initial batches from one stress episode, not the full ADL cascade or price feedback. Allocating equity in proportion to position notionals does not reproduce cross-margin liquidation; results also depend on reconstructed prices and exclusions. Subsequent trading, collateral transfers, funding, liquidations, and price impact are omitted, and breach shares and peak losses are not actual liquidations or platform losses. Fairness depends on the burden metric, and examples show that nonhomogeneous rules can be fairer at the same risk, so neither global optimality of the main family nor future improvements are guaranteed.",
+          "reason": "The paper integrates allocation predictability, manipulation resistance, and the conflict between risk and fairness for a concrete market mechanism. Although unrelated to interest rates, it directly informs electronic-market design and forced position reductions and merits reading with its empirical limitations in mind.",
+          "tags": [
+            "Market design",
+            "Auto-deleveraging",
+            "Crypto perpetual futures",
+            "Path independence",
+            "Manipulation resistance",
+            "Fairness and risk",
+            "Counterfactual analysis"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 757,
+          "outputTokens": 923,
+          "reasoningTokens": 90,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1680,
+          "estimatedCostUsd": 0.000537,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.26623v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 35510,
+          "outputTokens": 1639,
+          "reasoningTokens": 146,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 35507,
+          "totalTokens": 37149,
+          "estimatedCostUsd": 0.105163,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 40,
+          "paperIds": [
+            "2611.26623v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2611.26200v1",
+        "title": "A Three-Factor Hull-White Scenario Generator for Macro-Financial Stress Forecasting",
+        "authors": [
+          "Ahmad Qadi",
+          "Thomas Schröder",
+          "Francesca Medda"
+        ],
+        "submittedDate": "2026-11-19",
+        "updatedDate": "2026-11-19",
+        "categories": [
+          "q-fin.GN",
+          "q-fin.RM"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "interest_rate_models",
+        "summary": "3因子Hull–Whiteモデルによる金利曲線生成と、週次マクロ金融変数のVARXを接続したストレスシナリオ研究である。リスク中立測度で価格付けし、実確率測度でシミュレーションする。主な価値は予測精度の改善ではなく、指定した金利曲線経路に条件付けた分布の生成にある。",
+        "mainResult": "2017～2024年の標本外評価では、金利予測の20比較中13でRMSEが最小だったが、ランダムウォークに対する有意な優位性はなかった。実現した将来の曲線を与えても、曲線入力なしより改善したのは15比較中5にとどまる。連続的に変動する3変数の区間被覆率は9比較中7で棄却されなかったが、密度予測でも曲線入力の明確な改善効果は示されていない。",
+        "practicalApplication": "金利の平行移動、逆転、スティープ化を段階的な経路として指定し、株式収益率、政策金利、景気、物価、銀行MESの条件付き分布を比較できる。ただし出力は過去の共変動を反映するため、金融引締めの因果効果とは区別すべきである。変化率への依存により、曲線が動かなくなるとシナリオ間の差は急速に消える。",
+        "methodology": "2010～2024年の米ドルゼロ金利5年限からPCA因子を抽出し、一定の市場リスク価格を持つGaussian 3因子Hull–Whiteモデルを推定する。曲線因子の週次変化をMinnesota事前分布付きVARXへ入力し、符号制約、政策金利への関連性フィルター、応答上限で政策ショックを識別する。拡大型標本外評価でRMSE、Diebold–Mariano検定、PIT、区間被覆率、CRPSを比較する。",
+        "limitations": "評価起点は29～31と少なく、被覆率の非棄却や小さなCRPS差は同等性の証明ではない。政策ショックの帯は上限等を通過した41回転に基づき、係数推定の不確実性を含む信頼区間ではなく、応答規模も識別条件に強く依存する。曲線の外生扱い、LIBORとSOFRの接続、週次化した物価、30年金利の過小な変動性、非公開のライセンスデータも制約となる。MES低下を割引率経路で説明する議論は、この分析だけでは確立されていない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "金利シナリオ生成と伝播モデルを分離し、単純な基準モデルとの比較で予測改善の乏しさまで示した点は実務上参考になる。ただし、完成した監督用ストレスモデルや政策効果の定量推計としてではなく、条件付きシナリオ設計の事例として推奨する。",
+        "tags": [
+          "3因子Hull–Whiteモデル",
+          "金利曲線",
+          "条件付きシナリオ生成",
+          "ストレステスト",
+          "ベイズVARX",
+          "標本外評価",
+          "銀行テールリスク"
+        ],
+        "english": {
+          "classification": "interest_rate_models",
+          "summary": "This stress-scenario study connects yield-curve generation using a three-factor Hull–White model to a weekly macro-financial VARX. Pricing uses the risk-neutral measure, while simulation uses the physical measure. Its main value is generating distributions conditional on specified yield-curve paths rather than improving forecast accuracy.",
+          "mainResult": "In out-of-sample evaluation over 2017–2024, yield forecasts achieved the lowest RMSE in 13 of 20 comparisons, but did not significantly outperform a random walk. Even conditioning on the realized future curve improved on the no-curve specification in only 5 of 15 comparisons. Interval coverage was not rejected in 7 of 9 comparisons for the three continuously moving variables, but density forecasts also showed no clear improvement from curve inputs.",
+          "practicalApplication": "Users can specify gradual parallel shifts, inversions, and steepening paths and compare conditional distributions of equity returns, policy rates, activity, inflation, and bank MES. Outputs reflect historical comovement and should therefore be distinguished from the causal effects of monetary tightening. Because transmission depends on changes, scenario differences disappear rapidly once the curve stops moving.",
+          "methodology": "PCA factors are extracted from five USD zero-rate maturities over 2010–2024, and a Gaussian three-factor Hull–White model with constant market prices of risk is estimated. Weekly curve-factor changes enter a Minnesota-prior VARX, while sign restrictions, a policy-rate relevance filter, and response caps identify policy shocks. Expanding-window evaluation compares RMSE, Diebold–Mariano tests, PIT, interval coverage, and CRPS.",
+          "limitations": "There are only 29–31 evaluation origins, so coverage non-rejection and small CRPS differences do not establish equivalence. Policy-shock bands use 41 rotations surviving caps and other restrictions; they are not confidence intervals incorporating coefficient uncertainty, and response magnitudes depend heavily on identification choices. Exogenous curves, the LIBOR–SOFR splice, weekly inflation construction, understated 30-year yield volatility, and proprietary licensed data are additional limitations. The explanation of falling MES through a discount-rate channel is not established by this analysis alone.",
+          "reason": "Separating rate-scenario generation from transmission and documenting limited forecast gains against simple benchmarks offers practical lessons. Recommended as a conditional-scenario design case study, not as a finished supervisory stress model or a quantitative estimate of policy effects.",
+          "tags": [
+            "Three-factor Hull–White model",
+            "Yield curve",
+            "Conditional scenario generation",
+            "Stress testing",
+            "Bayesian VARX",
+            "Out-of-sample evaluation",
+            "Bank tail risk"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 799,
+          "outputTokens": 915,
+          "reasoningTokens": 89,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1714,
+          "estimatedCostUsd": 0.000537,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2611.26200v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.1-sol",
+          "requestedModel": "gpt-6.1-sol",
+          "effort": "medium",
+          "inputTokens": 23441,
+          "outputTokens": 1620,
+          "reasoningTokens": 183,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 23438,
+          "totalTokens": 25061,
+          "estimatedCostUsd": 0.074801,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "full_text",
+          "pdfPages": 33,
+          "paperIds": [
+            "2611.26200v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 779,
+      "outputTokens": 822,
+      "reasoningTokens": 64,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1601,
+      "estimatedCostUsd": 0.000489,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2508.05022v2"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 763,
+      "outputTokens": 843,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1606,
+      "estimatedCostUsd": 0.000498,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.25047v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 47346,
+      "outputTokens": 1464,
+      "reasoningTokens": 113,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 47343,
+      "totalTokens": 48810,
+      "estimatedCostUsd": 0.133003,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 38,
+      "paperIds": [
+        "2611.25047v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 902,
+      "outputTokens": 789,
+      "reasoningTokens": 69,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1691,
+      "estimatedCostUsd": 0.000485,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.25218v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 763,
+      "outputTokens": 772,
+      "reasoningTokens": 103,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1535,
+      "estimatedCostUsd": 0.000462,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.25344v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 845,
+      "outputTokens": 1009,
+      "reasoningTokens": 121,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1854,
+      "estimatedCostUsd": 0.000589,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.25732v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 821,
+      "outputTokens": 827,
+      "reasoningTokens": 120,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1648,
+      "estimatedCostUsd": 0.000496,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.25762v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 1725,
+      "outputTokens": 1614,
+      "reasoningTokens": 163,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 1722,
+      "totalTokens": 3339,
+      "estimatedCostUsd": 0.020451,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract_introduction",
+      "pdfPages": 75,
+      "paperIds": [
+        "2611.25762v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 755,
+      "outputTokens": 907,
+      "reasoningTokens": 56,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1662,
+      "estimatedCostUsd": 0.000529,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.25869v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 788,
+      "outputTokens": 726,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1514,
+      "estimatedCostUsd": 0.000442,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.25881v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 861,
+      "outputTokens": 878,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1739,
+      "estimatedCostUsd": 0.000525,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.26119v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 839,
+      "outputTokens": 722,
+      "reasoningTokens": 54,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1561,
+      "estimatedCostUsd": 0.000445,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.26168v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 818,
+      "outputTokens": 833,
+      "reasoningTokens": 106,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1651,
+      "estimatedCostUsd": 0.000498,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.26197v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 799,
+      "outputTokens": 915,
+      "reasoningTokens": 89,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1714,
+      "estimatedCostUsd": 0.000537,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.26200v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 23441,
+      "outputTokens": 1620,
+      "reasoningTokens": 183,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 23438,
+      "totalTokens": 25061,
+      "estimatedCostUsd": 0.074801,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 33,
+      "paperIds": [
+        "2611.26200v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 808,
+      "outputTokens": 786,
+      "reasoningTokens": 51,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1594,
+      "estimatedCostUsd": 0.000474,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.26338v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 834,
+      "outputTokens": 845,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1679,
+      "estimatedCostUsd": 0.000506,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.26365v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 830,
+      "outputTokens": 854,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1684,
+      "estimatedCostUsd": 0.00051,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.26568v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 757,
+      "outputTokens": 923,
+      "reasoningTokens": 90,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1680,
+      "estimatedCostUsd": 0.000537,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2611.26623v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 35510,
+      "outputTokens": 1639,
+      "reasoningTokens": 146,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 35507,
+      "totalTokens": 37149,
+      "estimatedCostUsd": 0.105163,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 40,
+      "paperIds": [
+        "2611.26623v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
+}

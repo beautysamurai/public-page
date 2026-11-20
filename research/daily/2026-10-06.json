@@ -2,12 +2,114 @@
   "schemaVersion": 2,
   "reportKind": "daily",
   "reportDate": "2026-10-06",
-  "generatedAt": "2026-11-13T14:50:11Z",
+  "generatedAt": "2026-11-20T15:42:28Z",
   "status": "UPDATE_NOT_CONFIRMED",
-  "message": "The arXiv batch or structured analysis could not be validated; the review remains pending. Diagnostic: stage=candidate_validation; error=StructuredOutputError.",
+  "message": "The arXiv batch or structured analysis could not be validated; the review remains pending. Diagnostic: stage=paper_analysis; error=StructuredOutputError.",
   "expectedBatchDate": "2026-10-06",
   "observedBatchDate": "2026-10-06",
   "periodStart": null,
   "periodEnd": null,
-  "papers": []
+  "papers": [],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 848,
+      "outputTokens": 761,
+      "reasoningTokens": 58,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1609,
+      "estimatedCostUsd": 0.000465,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03791v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 795,
+      "outputTokens": 733,
+      "reasoningTokens": 59,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1528,
+      "estimatedCostUsd": 0.000446,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03793v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 792,
+      "outputTokens": 869,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1661,
+      "estimatedCostUsd": 0.000514,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03849v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 963,
+      "outputTokens": 929,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1892,
+      "estimatedCostUsd": 0.000561,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.03922v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.1-sol",
+      "requestedModel": "gpt-6.1-sol",
+      "effort": "medium",
+      "inputTokens": 27275,
+      "outputTokens": 16000,
+      "reasoningTokens": 110,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 27272,
+      "totalTokens": 43275,
+      "estimatedCostUsd": 0.228186,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "full_text",
+      "pdfPages": 33,
+      "paperIds": [
+        "2610.03922v1"
+      ],
+      "outcome": "unconfirmed"
+    }
+  ]
 }

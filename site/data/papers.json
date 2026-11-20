@@ -2,6 +2,53 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-11-20-daily-openai-01",
+      "date": "2026-11-20",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2611.25762v1",
+          "title": "Trading Before a Committed Rebalance",
+          "authors": [
+            "Khizar Qureshi"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.26623v1",
+          "title": "Path-Independent Deleveraging Rules",
+          "authors": [
+            "Christoph Schlegel",
+            "Akaki Mamageishvili"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2611.26200v1",
+          "title": "A Three-Factor Hull-White Scenario Generator for Macro-Financial Stress Forecasting",
+          "authors": [
+            "Ahmad Qadi",
+            "Thomas Schröder",
+            "Francesca Medda"
+          ],
+          "topics": [
+            "Interest-rate models"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-11-19-daily-openai-01",
       "date": "2026-11-19",
       "kind": "daily",

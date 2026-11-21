@@ -2,12 +2,1229 @@
   "schemaVersion": 2,
   "reportKind": "daily",
   "reportDate": "2026-10-20",
-  "generatedAt": "2026-11-15T14:15:05Z",
-  "status": "UPDATER_OFFLINE",
-  "message": "Collection or persistence failed; the review remains pending. Diagnostic: stage=metadata; error=TimeoutError.",
+  "generatedAt": "2026-11-21T14:53:53Z",
+  "status": "UPDATE_CONFIRMED",
+  "message": "Recovered carried arXiv batch 2026-10-20 from the bounded past-week listing with 6 relevant paper(s).",
   "expectedBatchDate": "2026-10-20",
   "observedBatchDate": "2026-10-20",
   "periodStart": null,
   "periodEnd": null,
-  "papers": []
+  "papers": [
+    {
+      "metadata": {
+        "arxivId": "2610.24439v2",
+        "title": "Dynamic Programming for Value-at-Risk Markov Decision Processes in Continuous Spaces",
+        "authors": [
+          "Xian Chen",
+          "Erick Delage",
+          "Weikai Wang"
+        ],
+        "submittedDate": "2026-10-17",
+        "updatedDate": "2026-10-20",
+        "categories": [
+          "math.OC",
+          "q-fin.RM"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本論文は、取引開始時に指定した総売却収入の分位点を、価格を観測しながら最大化する問題を扱う。各期に同じ水準のVaRを最大化し直すのではなく、観測結果に応じて残りの許容未達確率を更新する。著者らは、この方法を連続状態・行動を含む標準Borel空間上のマルコフ決定過程で正当化し、Almgren–Chriss型の執行モデルで最適な動的売却戦略を導く。",
+        "mainResult": "恒久的インパクト係数を$\\kappa$、一時的インパクト係数を$\\eta$、取引間隔を$\\tau$とする。$\\kappa\\geq 2\\eta/\\tau$では、全量売却か待機かを選ぶだけで最適となる。取引機会が$N=2$なら動的戦略に優位性はなく、$N\\geq 3$なら、収入の分位水準が$\\alpha>4^{-(N-1)}\\binom{2N-2}{N-1}$のとき、かつそのときに限り、最適な静的戦略を厳密に上回る。$\\kappa<2\\eta/\\tau$では分割売却も最適になり得る。こちらの優位性は数値比較であり、静的戦略に対する収入分位点の改善率は、基本設定では最大0.37%、全検証設定では最大1.93%と報告されている。",
+        "practicalApplication": "全量売却か待機かを選ぶ場合、標準化した累積価格変動の期間中の最大値について、目標とする分位点を事前に計算すればよい。取引開始時を含め、累積変動がその閾値に初めて達した時点で全量を売り、未到達なら最終期に売る。分割売却の場合は、残存在庫とリスク水準ごとの売却量を事前に計算し、価格変動を観測するたびにリスク水準を更新する。どちらも、固定スケジュールに対して価格への適応がどれだけ寄与するかを測るベンチマークになる。",
+        "methodology": "次状態ごとに許容未達確率を配分し、その条件付き平均を現在の水準以下に抑えるVaR分解を証明する。この分解によるBellman方程式と、独立な一様乱数で継続価値の分位点を評価する方程式が同じ最適値を与えることを示す。有限期間では後ろ向き帰納法を、割引無限期間では縮小写像を用いる。執行例では、閾値を数値積分と求根で求め、分割売却戦略を在庫・リスク水準の格子上で計算する。後者は静的戦略と共通の1,000本の模擬価格経路で比較し、ブートストラップ信頼区間を報告する。",
+        "limitations": "理論はコンパクトな行動集合や遷移核の弱連続性などを仮定し、無限期間の結果には有界な定常報酬と厳密な割引が必要である。執行例は正規価格変動と線形インパクトを仮定し、実際の約定データでは検証していない。分割売却の数値比較は3期と5期に限られ、$\\alpha>1/2$では静的ベンチマークの大域最適性も保証されない。また、特定の収入分位点の改善は、それを下回った場合の損失の縮小を意味しない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "執行研究者にとって有用なのは、動的戦略が有利になる条件だけでなく、価格を観測しても改善が得られない条件まで厳密に示した点である。閾値ルールは再現しやすい。一方、分割売却で報告された改善幅はモデル内の分位点の差であり、実市場での収益改善とは区別すべきである。",
+        "tags": [
+          "最適執行",
+          "VaR",
+          "分位点最適化",
+          "動的計画法",
+          "マルコフ決定過程",
+          "市場インパクト",
+          "最適停止",
+          "Almgren–Chrissモデル"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper asks how to maximize a quantile of total sale proceeds, specified before trading begins, while adapting to observed prices. Rather than reoptimizing VaR at the same level each period, the policy updates the remaining allowable shortfall probability after each observation. The authors justify this approach for Markov decision processes on standard Borel spaces, including continuous states and actions, and derive optimal adaptive liquidation strategies in an Almgren–Chriss execution model.",
+          "mainResult": "Let $\\kappa$ be the permanent impact coefficient, $\\eta$ the temporary impact coefficient, and $\\tau$ the trading interval. When $\\kappa\\geq 2\\eta/\\tau$, it is optimal to choose between selling everything and waiting. With $N=2$ trading opportunities, adaptation offers no advantage. For $N\\geq 3$, it strictly improves on the best static strategy if and only if the revenue quantile level satisfies $\\alpha>4^{-(N-1)}\\binom{2N-2}{N-1}$. When $\\kappa<2\\eta/\\tau$, partial sales can be optimal. The evidence for improvement in this regime is numerical: the authors report a maximum increase in the revenue quantile of 0.37% over the static strategy in the base case and 1.93% across all settings tested.",
+          "practicalApplication": "In the sell-or-wait regime, the trader can precompute the target quantile of the running maximum of standardized cumulative price innovations over the horizon. Sell the entire position at the first threshold crossing, checking from the start of trading, or at the deadline if the threshold is never reached. In the partial-sale regime, trade sizes can be precomputed by remaining inventory and risk level, with the risk level updated after each price observation. Both policies provide benchmarks for measuring what adaptation to prices adds over a fixed schedule.",
+          "methodology": "The authors prove a VaR decomposition that allocates allowable shortfall probabilities across next states while keeping their conditional average at or below the current level. They show that the resulting Bellman equation and an alternative equation that evaluates continuation quantiles using an independent uniform draw give the same optimal value. The proofs use backward induction for a finite horizon and a contraction argument for a discounted infinite horizon. For execution, the authors compute the stopping threshold by quadrature and root finding, and the partial-sale policy on an inventory and risk-level grid. They compare the latter with static schedules on 1,000 common simulated price paths and report bootstrap confidence intervals.",
+          "limitations": "The theory assumes, among other conditions, compact action sets and a weakly continuous transition kernel. The infinite-horizon result also requires bounded stationary rewards and strict discounting. The execution model assumes Gaussian price innovations and linear impact; it is not tested on actual fills. The partial-sale comparison covers only three and five trading stages, and global optimality of the static benchmark is not guaranteed for $\\alpha>1/2$. Improving a particular revenue quantile does not imply that losses below it are smaller.",
+          "reason": "The paper is useful for execution researchers because it identifies not only when adaptation pays, but also when observing prices cannot improve the target quantile. The threshold rule is straightforward to reproduce. The reported gains from partial sales, however, are differences in model-based quantiles, not demonstrated improvements in live trading revenue.",
+          "tags": [
+            "Optimal execution",
+            "VaR",
+            "Quantile optimization",
+            "Dynamic programming",
+            "Markov decision processes",
+            "Market impact",
+            "Optimal stopping",
+            "Almgren–Chriss model"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 747,
+          "outputTokens": 766,
+          "reasoningTokens": 101,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1513,
+          "estimatedCostUsd": 0.000458,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.24439v2"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.2-astra",
+          "requestedModel": "gpt-6.2-astra",
+          "effort": "high",
+          "inputTokens": 39077,
+          "outputTokens": 1977,
+          "reasoningTokens": 32,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 38865,
+          "totalTokens": 41054,
+          "estimatedCostUsd": 0.469426,
+          "pricingDate": "2026-11-21",
+          "sourceScope": "full_text",
+          "pdfPages": 35,
+          "paperIds": [
+            "2610.24439v2"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.24558v1",
+        "title": "Optimal Trading Filters and the Value of Predictive Signals",
+        "authors": [
+          "Matteo Smerlak"
+        ],
+        "submittedDate": "2026-10-17",
+        "updatedDate": "2026-10-17",
+        "categories": [
+          "math.OC",
+          "physics.soc-ph",
+          "q-fin.MF",
+          "q-fin.PM"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "本稿は、過去の売買による価格インパクトが残る市場で、リターン予測をどの速さでポジションに反映すべきかを分析する。予測シグナルの分散と価格ノイズの尺度をそろえ、正の在庫リスク罰則を固定すれば、摩擦のないMarkowitzモデルでは各シグナルの価値は等しい。売買コストがある場合は、将来のリターンを予測できる時間尺度と、低コストでポジションを調整できる時間尺度が合うかどうかで価値に差がつく。",
+        "mainResult": "将来のドリフトの条件付き予測を市場摩擦に応じて重み付けした量を $z_t$ とすると、最適純価値は $v^\\star=\\tfrac{1}{2}\\mathbb{E}[z_t^2]$ となる。Ornstein–Uhlenbeck（OU）シグナルと通常の保有ポジションでは、即時コストのみなら最適保有量は一つの指数移動平均で、指数減衰インパクトを加えると二つの指数移動平均で表せる。一方、純粋なべき乗型インパクト $\\widehat g(\\omega)\\propto |\\omega|^{2\\nu_m-2}$ とエクスポージャーの減衰率 $\\beta>0$ を仮定し、在庫罰則と即時コストをゼロとした場合、最適売買速度はシグナルの分数階微分に比例する。持続的なポジションの補充にも急速な調整にもコストがかかるため、OUシグナルの価値を最大化する平均回帰速度は $\\theta_s^\\star=\\beta(1-\\nu_m)/\\nu_m$ となる。図2の例では、この最適速度でも固定分散での価値上限の $57\\%$ にとどまり、同じシグナルの将来経路を完全に予見できても $68\\%$ である。",
+        "practicalApplication": "執行を考慮したシグナル選択では、予測精度だけでなく、予測が当たっても売買コストが高い時間尺度に偏っていないかを調べられる。完全予見時の価値と実際の情報で達成可能なモデル価値を比較すれば、コストの高い周波数に予測力が集中することによる損失と、将来が見えないことによる損失を区別できる。オプションのベガのように自然に減衰するエクスポージャーには補充コストも含める必要があるが、通常の株式保有では同じ中間速度を目標にすべきではない。論文が扱う在庫リスク付きの通常保有モデルでは、むしろ遅いシグナルが有利である。",
+        "methodology": "在庫罰則 $\\lambda$ とインパクトのスペクトル $\\widehat g$ から、ポジションにかかる摩擦を $\\widehat f(\\omega)=\\lambda+(\\beta^2+\\omega^2)\\widehat g(\\omega)$ と表し、Wiener–Hopf分解する。因果因子の逆の核 $h_+$ を使い、シグナル $\\alpha$ の予測を $z_t=\\int_0^\\infty h_+(s)\\mathbb{E}[\\alpha_{t+s}\\mid\\mathcal{F}_t]\\,ds$ に集約する。同じ核を現在までの $z$ に適用すると最適保有量が得られる。ガウス型Matérnシグナルの比較では、平滑度ごとに減衰速度を最適化すれば、滑らかな方の価値は下がらないことを示す。一方、速度を固定すると、エクスポージャーが減衰する場合には順位が逆転しうる。",
+        "limitations": "主結果は、既存の取引履歴があり、満期清算のない定常的な単一資産モデルに対するもので、売買速度に線形なインパクトと二次の目的関数に依存する。条件付き予測による解は非ガウス型にも適用できるが、シグナルのスペクトルだけから最適戦略が決まるとは限らない。数値例は市場データによる推定やバックテストではなく、固定したシグナル分散は同じ実現Sharpe比を意味しない。実用には、各シグナルが利用可能な情報の下でどの程度リターンを予測するかを、シグナルの時間特性や執行コストと併せて推定する必要がある。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "執行研究者に推薦できる。既知の指数移動平均型の戦略を再現するだけでなく、べき乗型インパクトでは、シグナル自体がマルコフ型でも有限次元の線形時不変フィルターでは最適執行を厳密に表せない理由を示している。実運用の収益を裏付ける論文ではなく、執行モデルやシグナルの時間尺度を比較するための理論的な基準として有用である。",
+        "tags": [
+          "最適執行",
+          "一過性の価格インパクト",
+          "シグナル評価",
+          "Wiener–Hopf分解",
+          "分数階フィルター",
+          "エクスポージャーの減衰",
+          "OU・Matérnシグナル"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The paper asks how quickly a trader should translate a return forecast into a position when past trades still affect prices. At equal predictor variance and price-noise scale, all signals have the same frictionless Markowitz value for a fixed positive inventory penalty. With trading costs, their values differ according to whether the horizons over which they predict returns match the horizons over which positions can be adjusted cheaply.",
+          "mainResult": "Let $z_t$ be the conditional forecast of future drift weighted by market friction. Optimal net value is $v^\\star=\\tfrac{1}{2}\\mathbb{E}[z_t^2]$. For an Ornstein–Uhlenbeck (OU) signal and ordinary holdings, the optimal position is one exponential moving average under instantaneous costs alone and a combination of two when exponentially decaying impact is added. With pure power-law impact $\\widehat g(\\omega)\\propto |\\omega|^{2\\nu_m-2}$, exposure decay at rate $\\beta>0$, and no inventory penalty or instantaneous cost, the optimal trading rate is instead proportional to a fractional derivative of the signal. Both replenishing a persistent position and adjusting rapidly are costly, so OU signal value peaks at the intermediate mean-reversion rate $\\theta_s^\\star=\\beta(1-\\nu_m)/\\nu_m$. In the Figure 2 example, even this optimal rate achieves only $57\\%$ of the fixed-variance value bound; perfect foresight of the same signal path raises that to just $68\\%$.",
+          "practicalApplication": "For execution-aware signal selection, the framework tests not only forecast accuracy but also whether a signal predicts returns at horizons that are expensive to trade. Comparing perfect-foresight value with model value attainable from available information separates the loss from concentrating predictive power at costly frequencies from the loss due to not knowing the future. Naturally decaying exposures such as option vega require a replenishment cost, but the same intermediate speed should not be a target for ordinary equity holdings. In the paper’s ordinary-holdings models with inventory risk, slower signals are favored.",
+          "methodology": "The inventory penalty $\\lambda$ and impact spectrum $\\widehat g$ determine the position friction spectrum $\\widehat f(\\omega)=\\lambda+(\\beta^2+\\omega^2)\\widehat g(\\omega)$, to which the author applies Wiener–Hopf factorization. The inverse causal factor has kernel $h_+$, which combines forecasts of the signal $\\alpha$ into $z_t=\\int_0^\\infty h_+(s)\\mathbb{E}[\\alpha_{t+s}\\mid\\mathcal{F}_t]\\,ds$. Applying the same kernel to current and past values of $z$ gives the optimal position. For Gaussian Matérn signals, the paper shows that smoother signals have no lower value when the decay rate is optimized separately at each smoothness level. Holding the rate fixed can reverse that ranking when exposure decays.",
+          "limitations": "The main results concern a stationary single-asset model with an established trading history and no terminal liquidation. They depend on impact that is linear in trading rate and on a quadratic objective. The conditional-forecast solution extends to non-Gaussian signals, but the signal spectrum alone need not determine the optimal strategy. The numerical examples are neither market-data estimates nor backtests, and equal signal variance does not imply equal realized Sharpe ratios. Practical use requires estimating how well each signal predicts returns given the available information, alongside its dynamics and execution costs.",
+          "reason": "Recommended for execution researchers. Beyond recovering familiar moving-average policies, the paper shows why a finite-dimensional linear time-invariant filter cannot represent optimal execution exactly under power-law impact, even when the signal itself is Markovian. Its contribution is a theoretical benchmark for comparing execution models and signal horizons, not evidence of live trading profitability.",
+          "tags": [
+            "optimal execution",
+            "transient price impact",
+            "signal valuation",
+            "Wiener–Hopf factorization",
+            "fractional filters",
+            "exposure decay",
+            "OU and Matérn signals"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 779,
+          "outputTokens": 1033,
+          "reasoningTokens": 79,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1812,
+          "estimatedCostUsd": 0.000594,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.24558v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.2-astra",
+          "requestedModel": "gpt-6.2-astra",
+          "effort": "high",
+          "inputTokens": 22780,
+          "outputTokens": 3415,
+          "reasoningTokens": 1091,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 22568,
+          "totalTokens": 26195,
+          "estimatedCostUsd": 0.363976,
+          "pricingDate": "2026-11-21",
+          "sourceScope": "full_text",
+          "pdfPages": 15,
+          "paperIds": [
+            "2610.24558v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.25495v1",
+        "title": "Probabilistic Limit Order Book Forecasting with Conditional Diffusion Models",
+        "authors": [
+          "Junyu Chen",
+          "Franklin Liu",
+          "Moshu Xu",
+          "Lijian Yang"
+        ],
+        "submittedDate": "2026-10-18",
+        "updatedDate": "2026-10-18",
+        "categories": [
+          "cs.LG",
+          "econ.EM",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "LOBGradは、直近のLevel-2板履歴から、各価格帯の注文数量と板の中心価格の変化を同時に予測する条件付き拡散モデルである。BTC/USDT、GOOGL、METAで最も一貫していたのは、履歴をLSTMで要約すると板の厚みの予測が改善するという結果であり、価格変化の予測では優位性は一様でなかった。",
+        "mainResult": "LOBGradは、履歴を平坦化して入力する拡散モデルを、3銘柄すべてで板数量の5指標すべてにおいて上回った。比較モデル全体でも、BTC/USDTでは5指標中4つ、GOOGLとMETAではそれぞれ3つで最良だった。BTC/USDTの板数量プロファイルの平均絶対誤差は、エンコーダなしの0.109に対し0.037だった。名目90%予測区間の実測カバレッジは、板数量で87.6%、最良気配の合計数量で89.2%、板の不均衡で90.0%だったが、価格変化では84.4%にとどまった。",
+        "practicalApplication": "BTCの売却実験では、予測経路ごとに即時成行と複数の指値を比較し、平均執行コストが最小になる注文を選ぶ。平均ショートフォールはBTC当たり0.03 USDTで、平均成績が最良の固定指値の0.56 USDTを下回った。損失が大きい方から5%の平均も47.86から41.69 USDTに低下したが、即時成行では8.45 USDTとさらに小さい。平均コストを抑える注文と、極端な執行損失を抑える注文は異なる。",
+        "methodology": "板数量を中心価格からの距離別に集計し、符号付き対数変換を施す。100枚のスナップショットを151次元のLSTM状態に要約し、それを条件に102段階の拡散過程で次の板を生成する。生成した板を履歴に加え、500の評価窓それぞれで20ステップの経路を100本生成した。5秒間隔のBTC/USDTでは予測期間は100秒に当たり、株式では同じ設定で銘柄別に再学習した。理論面では、定常性、指数的な混合性、滑らかな十分要約の存在などを仮定し、1ステップのノイズ予測に対する超過リスクの上界を導いた。さらに所定の収縮的な状態更新を仮定すると、エンコーダ近似項の次元は履歴全体の $s d_y$ から潜在状態の $m$ に置き換わる。",
+        "limitations": "理論上の保証は二乗損失の経験リスクを大域的に最小化した場合の1ステップ予測に限られる。実装はHuber損失とAdamを使っており、定理は20ステップの経路分布や執行成績を保証しない。検証期間は短く、BTC/USDTのテスト期間は4日間である。Level-2板では個々の注文の待ち順位や取消しを観測できず、指値約定は価格到達または板数量の減少で近似している。手数料や自己注文の市場インパクトを含む実取引でもコストが下がるかは示されていない。",
+        "importance": 4,
+        "recommended": true,
+        "reason": "板の厚みを確率的に予測したい研究者には有用である。エンコーダの有無を直接比較し、分布の誤差だけでなく予測区間の被覆率と注文選択への影響まで検証している。実運用可能な約定シミュレータの検証というより、流動性予測モデルを評価するためのベンチマークとして読む価値が高い。",
+        "tags": [
+          "市場マイクロストラクチャー",
+          "Level-2板データ",
+          "条件付き拡散モデル",
+          "LSTM",
+          "板の厚みの予測",
+          "予測区間の較正",
+          "指値注文執行"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "LOBGrad is a conditional diffusion model that uses recent Level-2 order book history to forecast queue volumes at each price band jointly with changes in the book’s center price. The most consistent finding across BTC/USDT, GOOGL, and META was that summarizing history with an LSTM improved depth forecasts. The advantage was less consistent for price changes.",
+          "mainResult": "LOBGrad outperformed the diffusion model conditioned on flattened history on all five queue metrics for each of the three assets. Among all models compared, it ranked first on four of five queue metrics for BTC/USDT and three each for GOOGL and META. On BTC/USDT, queue-profile mean absolute error was 0.037, versus 0.109 without the encoder. Empirical coverage of nominal 90% intervals was 87.6% for queue volumes, 89.2% for total best-level volume, and 90.0% for book imbalance, but only 84.4% for price changes.",
+          "practicalApplication": "In the BTC selling experiment, the policy evaluates an immediate market order and several limit prices on forecast paths, then selects the order with the lowest mean execution cost. Mean shortfall was 0.03 USDT per BTC, compared with 0.56 USDT for the best fixed limit price by mean performance. Average shortfall in the worst 5% of cases also fell from 47.86 to 41.69 USDT, but selling immediately had a much lower tail shortfall of 8.45 USDT. The order that reduces average cost is not the one that best limits extreme execution losses.",
+          "methodology": "Queue volumes are grouped by distance from the center price and transformed using a signed logarithm. An LSTM compresses 100 snapshots into a 151-dimensional state, which conditions a 102-step diffusion process for generating the next book. Generated books are appended to the history to produce 100 paths of 20 steps each for every one of 500 evaluation windows. At the five-second BTC/USDT sampling interval, the forecast horizon is 100 seconds. The equity models were refitted separately with the same settings. Assuming stationarity, exponential mixing, and the existence of a smooth sufficient summary, among other conditions, the authors derive an excess-risk bound for one-step noise prediction. Under a specified contractive state update, the dimension in the encoder approximation term changes from the full history dimension $s d_y$ to the latent dimension $m$.",
+          "limitations": "The theoretical guarantee applies to one-step prediction by a global minimizer of empirical squared loss. The implementation uses Huber loss and Adam, and the theorem does not guarantee the accuracy of 20-step path distributions or execution performance. Evaluation periods are short, with only four BTC/USDT test days. Level-2 snapshots do not reveal individual queue positions or cancellations, so limit fills are approximated by price touches or queue depletion. The study does not establish cost savings in live trading with fees and the trader’s own market impact.",
+          "reason": "The paper is useful for researchers forecasting order book depth probabilistically. It directly tests the contribution of the encoder and evaluates not only distributional errors but also interval coverage and the consequences for order choice. Its strongest use is as a benchmark for evaluating liquidity forecasts, rather than as validation of a production fill simulator.",
+          "tags": [
+            "Market microstructure",
+            "Level-2 order book data",
+            "Conditional diffusion models",
+            "LSTM",
+            "Order book depth forecasting",
+            "Prediction interval calibration",
+            "Limit order execution"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 819,
+          "outputTokens": 908,
+          "reasoningTokens": 79,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1727,
+          "estimatedCostUsd": 0.000536,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.25495v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.2-astra",
+          "requestedModel": "gpt-6.2-astra",
+          "effort": "high",
+          "inputTokens": 18665,
+          "outputTokens": 2156,
+          "reasoningTokens": 293,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 18453,
+          "totalTokens": 20821,
+          "estimatedCostUsd": 0.272466,
+          "pricingDate": "2026-11-21",
+          "sourceScope": "full_text",
+          "pdfPages": 9,
+          "paperIds": [
+            "2610.25495v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.25445v1",
+        "title": "Bias correcting transaction cost models for characteristic function based estimators",
+        "authors": [
+          "Abhik Rana",
+          "Sarvesh Ravichandran Iyer",
+          "Sandeep Juneja"
+        ],
+        "submittedDate": "2026-10-18",
+        "updatedDate": "2026-10-18",
+        "categories": [
+          "q-fin.MF",
+          "stat.AP"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "market_microstructure",
+        "summary": "気配値や売買方向がないときに、日次の約定価格差から実効半スプレッドを推定する研究。Gaussian Rollモデルの下で、経験特性関数（ECF）を評価する周波数の選び方により、推定バイアスの主要項を消せることを示す。重要なのは、バイアスの低下が推定精度の向上を意味しない点である。252日シミュレーションでは、拡張ECF–GMMのバイアスは一部の条件で小さいが、図3の全範囲でRMSEはRollとHasbrouckの両方を上回った。",
+        "mainResult": "固定した半スプレッド $c>0$ では、2周波数ECF推定量の $n^{-1}$ 次のバイアスを消し、残りを $O(n^{-2})$ にする周波数が存在する。その周波数のECF推定量とRoll推定量の凸結合が、Roll単独より絶対バイアスとMSEの主要項をともに小さくできる必要十分条件は、Rollの漸近分散係数が両推定量の漸近共分散係数を上回ることである。ただし、条件を満たしても改善幅は小さくなり得る。革新分散 $V$ が $V/c^2=2$ を満たす数値例では、最適な凸結合による主要MSEの低下は約0.075%にとどまる。",
+        "practicalApplication": "約定終値しかない銘柄では、バックテストに用いる片道のスプレッドコストをRoll以外の方法でも見積もり、損益がコスト仮定にどれほど敏感かを調べるのに使える。報告された252日パス当たりの平均時間はRollが0.276ミリ秒、ECF法が5.769ミリ秒、Hasbrouckが39.525秒であり、多銘柄での比較には計算上の利点がある。ただしこれは半スプレッドの推定であり、注文サイズに応じた価格インパクトや実際の執行損益を検証したものではない。",
+        "methodology": "周波数 $a$ と $2a$ での特性関数の比を使い、$0<ac<\\pi/4$ で革新分散を消去する。価格差の有限依存性とデルタ法から、ECFとRollの同時漸近分布とバイアス係数を導く。実装案では、パイロット標本と本推定標本の間で価格差を1期分捨てて独立性を確保し、信頼集合全体で改善を確認できなければRollに戻す。これとは別に、推定値ではなくECFのモーメントとRollの1期ラグ積を組み合わせる拡張ECF–GMMを検討する。最適加重で保証されるのはRoll以下の漸近分散係数であり、バイアスの改善ではない。",
+        "limitations": "理論は一定の半スプレッド、独立な正規革新、等確率かつ独立な売買符号に依存する。$c=0$ ではクリップした固定周波数ECFの収束速度は $n^{-1/8}$ で、Rollの $n^{-1/4}$ より遅い。パイロットによる保証は主要係数に限られ、252日分だけでは論文の認証条件を満たせない。各信号対雑音比で1,000パスを使った図3は拡張ECF–GMMの比較であり、認証付き凸結合の実証ではない。計時表も拡張ECF–GMMと記す一方、本文は別の大きなパイロットを使う凸結合の手順を含むとしており、内訳は不明である。インド大型株（2023年18社、2024年20社）ではECFとRollの推定値は近いことが多いが、気配値に基づく実効スプレッドとの照合がなく、どちらが正確かは判定できない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "価格だけで流動性を測る研究者には、RollにECFを加える価値がある条件と、スプレッドが小さいとその利点が失われる理由を明示した点で推奨できる。実務上はRollを置き換える根拠というより、バイアスとRMSEを分けてコスト推定器を選ぶための資料である。",
+        "tags": [
+          "市場マイクロストラクチャ",
+          "実効半スプレッド",
+          "経験特性関数",
+          "バイアス補正",
+          "Roll推定量",
+          "一般化モーメント法",
+          "日次終値",
+          "取引コスト"
+        ],
+        "english": {
+          "classification": "market_microstructure",
+          "summary": "The paper estimates the effective half-spread from daily transaction-price changes when quotes and trade directions are unavailable. Under the Gaussian Roll model, it shows that the choice of frequency at which to evaluate the empirical characteristic function (ECF) can eliminate the leading estimation bias. The key distinction is that lower bias need not mean greater accuracy. In the 252-day simulations, augmented ECF–GMM has smaller bias in some settings, but its RMSE exceeds that of both Roll and Hasbrouck throughout the range in Figure 3.",
+          "mainResult": "For a fixed half-spread $c>0$, there is a frequency that eliminates the $n^{-1}$ bias term of the two-frequency ECF estimator, leaving bias of order $O(n^{-2})$. A convex combination of the ECF estimator at that frequency and Roll can reduce both leading absolute bias and leading MSE relative to Roll alone if and only if Roll's asymptotic variance coefficient exceeds the asymptotic covariance coefficient of the two estimators. Even then, the gain can be small: in the numerical example with innovation variance $V$ satisfying $V/c^2=2$, the optimal convex combination reduces leading MSE by only about 0.075%.",
+          "practicalApplication": "For securities with only closing transaction prices, the method provides an alternative to Roll for estimating the one-way spread cost in a backtest and checking how sensitive profits are to that assumption. Reported mean times per 252-day path are 0.276 ms for Roll, 5.769 ms for the ECF method, and 39.525 s for Hasbrouck, giving the ECF approach a computational advantage over Hasbrouck for comparisons across many securities. The estimate covers the half-spread; the paper does not validate order-size-dependent price impact or realized execution P&L.",
+          "methodology": "A ratio of characteristic-function values at frequencies $a$ and $2a$ eliminates innovation variance when $0<ac<\\pi/4$. Finite dependence of price changes and the delta method yield the joint asymptotic distribution and bias coefficients for ECF and Roll. The proposed implementation discards one price change between the pilot and estimation samples to ensure independence and falls back to Roll if it cannot certify an improvement throughout the confidence set. A separate augmented ECF–GMM estimator combines ECF moments with Roll's lag-one product rather than combining estimates. Optimal weighting guarantees an asymptotic variance coefficient no greater than Roll's, not a bias improvement.",
+          "limitations": "The theory assumes a constant half-spread, independent Gaussian innovations, and independent, equally likely trade signs. At $c=0$, the clipped fixed-frequency ECF estimator converges at rate $n^{-1/8}$, slower than Roll's $n^{-1/4}$. The pilot guarantee concerns leading coefficients only, and 252 days alone cannot meet the paper's certification condition. Figure 3 uses 1,000 paths per signal-to-noise ratio to compare augmented ECF–GMM, not to validate the certified convex combination. The timing table also labels the method augmented ECF–GMM, while the text says it includes the convex-combination procedure with a separate, larger pilot; the breakdown is unclear. ECF and Roll often give similar estimates for Indian large-cap stocks (18 firms in 2023 and 20 in 2024), but there is no quote-based effective-spread benchmark to establish which is more accurate.",
+          "reason": "Recommended for researchers measuring liquidity from prices alone: the paper identifies when adding ECF information to Roll can help and explains why that advantage can disappear at small spreads. For practitioners, it is a guide to distinguishing bias from RMSE when choosing a cost estimator, rather than evidence for replacing Roll.",
+          "tags": [
+            "Market microstructure",
+            "Effective half-spread",
+            "Empirical characteristic function",
+            "Bias correction",
+            "Roll estimator",
+            "Generalized method of moments",
+            "Daily closing prices",
+            "Transaction costs"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 757,
+          "outputTokens": 716,
+          "reasoningTokens": 63,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1473,
+          "estimatedCostUsd": 0.000434,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.25445v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.2-astra",
+          "requestedModel": "gpt-6.2-astra",
+          "effort": "high",
+          "inputTokens": 26868,
+          "outputTokens": 2567,
+          "reasoningTokens": 443,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 26656,
+          "totalTokens": 29435,
+          "estimatedCostUsd": 0.370936,
+          "pricingDate": "2026-11-21",
+          "sourceScope": "full_text",
+          "pdfPages": 43,
+          "paperIds": [
+            "2610.25445v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.26324v1",
+        "title": "The Control Layer Behind Rule-Following Agents Trading Across Market Conditions",
+        "authors": [
+          "Saad Naja",
+          "Nasser Odtallah",
+          "Jake Van-Praag",
+          "Sarah May"
+        ],
+        "submittedDate": "2026-10-19",
+        "updatedDate": "2026-10-19",
+        "categories": [
+          "cs.AI",
+          "cs.LG",
+          "cs.MA",
+          "q-fin.RM",
+          "q-fin.TR"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "Hygentraは、異なる戦略を持つ4つのAIエージェントについて、2026年2月12日から8月27日までの決済済み2,627ポジションを分析した。モデルは人が定めた戦略の範囲で銘柄・方向・ストップ・目標価格を選び、執行エンジンが売買した。2,144件は実勢価格を使った模擬取引で、Hyperliquidの実注文を伴うものは483件だった。本稿の主眼は、モデルの予測力ではなく、システムが宣言した取引ルールを守ったかを約定記録から検証することにある。",
+        "mainResult": "著者らによれば、各取引のグロス損失率を合計すると、その$97.5\\%$が建玉時のストップの範囲内に収まった。これはストップを守った取引の割合ではない。同時保有5件の上限は24ラン中23ランで守られたが、成績首位の反転戦略は1ランで28日間上限を超え、最大7件を保有した。想定手数料控除後の平均リターンは全取引で$+0.050\\%$、4エージェントの等ウェイトでは$+0.221\\%$だった。成績順は実現勝率が各戦略の損益分岐勝率を上回った幅の順と一致し、銘柄構成をそろえても変わらなかった。一方、最下位のモメンタム戦略は全損失をストップで打ち切る反実仮想でも1取引平均$-0.023\\%$だった。全戦略が低ボラティリティの上昇局面で損失を出し、直近トレンドと同方向に売買することの優位性は検出されなかった。",
+        "practicalApplication": "導入前の監査では、建玉時のストップを後から動くトレーリングストップと区別して保存し、ストップ超過損失の分布、保有上限を超えた件数と時間、通常ルール以外で決済した取引を確認するとよい。収益性は別に判定し、模擬取引と実約定を分け、実際のサイズ、手数料、資金調達料、スリッページを反映しても損益分岐勝率を上回るかを新しい期間で検証する。",
+        "methodology": "5つの規律テストで損失の収まり方、ボラティリティ別のストップ幅、損失後のストップ幅と発注状況、ラン別の同時保有数を調べた。銘柄別の利益集中度、共通ウェイトへの再集計、1銘柄ずつの除外、固定効果回帰で銘柄選択の影響を検討した。市場局面はBTCの7日リターンの符号と30日実現ボラティリティの過去分布で分類し、各取引には前日のラベルを付けた。推論には日単位のブートストラップ、建玉日でクラスタ化した標準誤差、複数検定のHolm補正を用いた。",
+        "limitations": "約$89\\%$の記録でポジションサイズが欠け、往復手数料は一律$0.09\\%$、資金調達料は未算入のため、口座収益率やドローダウンは復元できない。8月には13日間ストップ・利確執行が無効になり、影響を受けた30件を除くとブレイクアウト戦略の損益は赤字に転じた。単一業者による自己評価で、対象は下落と回復の1サイクルに限られ、並行ランの建玉にも重複がある。銘柄・局面・売買方向を調整した首位と最下位の差は、日単位のクラスタ推論では有意でなかった（$p=0.10$）。また、損失後の取引が占める割合は単位時間当たりの発注頻度を測らず、ストップ幅が一定でも金額ベースのリスクが一定とはいえない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "電子取引システムの監査事例として推薦する。首位戦略の上限違反と、ルールを守っても赤字だった戦略を同じ記録から示した点が有用である。一方、損益分岐勝率との差は実現損益を分解した指標であり、将来の勝率や実資金での優位性を独立に裏付けるものではない。",
+        "tags": [
+          "電子取引",
+          "AI取引エージェント",
+          "執行リスク管理",
+          "取引ログ監査",
+          "ストップ執行",
+          "暗号資産無期限先物",
+          "損益分岐勝率",
+          "市場局面"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "Hygentra analyzed 2,627 closed positions from four AI agents with different strategies between February 12 and August 27, 2026. Within human-defined mandates, the models chose the instrument, direction, stop and target; an execution engine carried out the trades. Of the positions, 2,144 were simulated against live prices and 483 involved real Hyperliquid orders. The paper primarily asks whether trade records can establish that the system followed its declared rules, not whether the models could predict prices.",
+          "mainResult": "The authors report that $97.5\\%$ of the summed gross percentage losses fell within the stops declared at entry. This is not the percentage of trades that respected their stops. The five-position limit held in 23 of 24 runs, but the top-ranked reversal strategy exceeded it for 28 days in one run, holding as many as seven positions. After assumed fees, mean return was $+0.050\\%$ per trade when pooled and $+0.221\\%$ when the four agents were equally weighted. The performance ranking matched the ranking by realized win rate minus each strategy’s break-even win rate and was unchanged under a common asset mix. The bottom-ranked momentum strategy still averaged $-0.023\\%$ per trade when every loss was hypothetically capped at its stop. All four strategies lost in low-volatility uptrends, and no advantage was detected from trading in the direction of the recent trend.",
+          "practicalApplication": "For a pre-deployment audit, retain the opening stop separately from any subsequent trailing stop. Inspect the distribution of losses beyond stops, the magnitude and duration of position-limit breaches, and trades closed outside normal exit rules. Assess profitability separately: distinguish simulations from live fills, then test on a new period whether the win rate clears break-even after accounting for actual size, fees, funding and slippage.",
+          "methodology": "Five discipline tests examined loss containment, stop widths across volatility states, stop widths and trading activity after losses, and concurrent positions per run. The authors assessed asset selection through profit concentration by symbol, common-weight reallocation, leave-one-symbol-out tests and fixed-effects regressions. They classified market states using the sign of BTC’s seven-day return and the historical distribution of 30-day realized volatility, assigning each trade the previous day’s label. Inference included day-block bootstraps, standard errors clustered by opening date and Holm correction for multiple tests.",
+          "limitations": "Position size was missing for about $89\\%$ of records, the assumed round-trip fee was fixed at $0.09\\%$, and funding was excluded. Account returns and drawdowns therefore cannot be reconstructed. Stop and target execution was disabled for 13 days in August; removing 30 affected trades turned the breakout strategy’s result negative. This single-vendor self-evaluation covers one drawdown and recovery, with overlapping positions across parallel runs. After controlling for symbol, regime and trade direction, the top-to-bottom gap was not significant under day-clustered inference ($p=0.10$). The share of trades following losses does not measure orders per unit of time, and constant stop widths do not establish constant monetary risk.",
+          "reason": "Recommended as an audit case study for electronic trading systems. The same record reveals a limit breach by the best performer and a strategy that followed its rules yet lost money. The margin over break-even win rate, however, is a decomposition of realized performance, not independent evidence of a future win rate or a live-capital edge.",
+          "tags": [
+            "electronic trading",
+            "AI trading agents",
+            "execution risk controls",
+            "trade log auditing",
+            "stop execution",
+            "crypto perpetual futures",
+            "break-even win rate",
+            "market regimes"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 977,
+          "outputTokens": 923,
+          "reasoningTokens": 98,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1900,
+          "estimatedCostUsd": 0.000559,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.26324v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.2-astra",
+          "requestedModel": "gpt-6.2-astra",
+          "effort": "high",
+          "inputTokens": 28936,
+          "outputTokens": 2581,
+          "reasoningTokens": 506,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 28724,
+          "totalTokens": 31517,
+          "estimatedCostUsd": 0.392176,
+          "pricingDate": "2026-11-21",
+          "sourceScope": "full_text",
+          "pdfPages": 47,
+          "paperIds": [
+            "2610.26324v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "arxivId": "2610.26789v1",
+        "title": "Cooperative Multi-Agent Reinforcement Learning for Market Making on Prediction-Market Order Books",
+        "authors": [
+          "Skander Lejmi"
+        ],
+        "submittedDate": "2026-10-19",
+        "updatedDate": "2026-10-19",
+        "categories": [
+          "cs.LG",
+          "cs.MA",
+          "q-fin.TR",
+          "stat.ML"
+        ]
+      },
+      "finalAnalysis": {
+        "classification": "electronic_trading",
+        "summary": "Polymarketの5分物BTC騰落契約を対象に、単独のマーケットメーカーと、値付け担当・在庫管理担当に分けたデスクを比較した。値付け担当に約定時のスプレッド収益を与え、その後の在庫損益を在庫管理担当に負わせるだけでは、分業型の成績は最も悪かった。値付け担当の報酬に約定後の価格変動を反映すると損失は縮小したが、定期的なサンプル外評価で平均利益を示した構成はなかった。",
+        "mainResult": "評価日での1エピソード当たりの期末ポートフォリオ価値は、最終5回の評価平均で、単純分業が $-72.3$ ティックだった。デスク損益を一部共有する変更では $-41.0$、代わりに約定後5ステップのミッド価格変動（マークアウト）を値付け報酬に加える変更では $-5.9$ となった。報酬共有、マークアウトの段階的導入、損失制限などを組み合わせた構成が $-4.3$ で最良だった。別途、最終方策を決定論的に評価した48区間では、損失区間は単純分業の45に対し、マークアウトを加えた構成で6、複合構成で8だった。この48区間での合計はそれぞれ $+133$、$+67$ ティックだが、正の期待利益を示す結果ではない。",
+        "practicalApplication": "値付け方策を評価する際は、約定時に得たスプレッドだけでなく、買った後にミッド価格が下がったか、売った後に上がったかを測るとよい。気配提示と実際の流動性供給も区別すべきである。単独モデルの再設計で期末価値はベースラインの $-46.1$ から $-9.6$ ティックに改善し、学習中に気配を出さない行動の選択率は $19.2\\%$ から $4.4\\%$ に下がったが、1ステップ当たりの約定数量も $0.056$ から $0.032$ 単位に減った。",
+        "methodology": "4日分のUp・Downトークンの640ストリームで学習し、最終学習日の2週間後の1日、192ストリームを評価用に分離した。L2の板数量変化と約定記録から注文メッセージを推定し、JAX-LOBの価格・時間優先エンジンで各板を個別に再生した。6構成すべてで学習型の執行エージェントが同じ板に参加する。分業型では、値付け担当が気配を選び、在庫管理担当が即時執行または取消となる注文で建玉を閉じる。それぞれを独立した再帰型PPOで学習し、異なる学習報酬を直接比較せず、残存在庫を閉じた後の期末価値で採点した。",
+        "limitations": "各構成の学習は1シードのみで、評価も単一会場・単一商品群の1日に限られる。再構成した板は公表された集計数量と一致するが、注文IDは合成され、取消対象は待ち行列から無作為に選ばれるため、シミュレーション上の約定は実際の約定を再現したものではない。履歴注文の参加者はエージェントの気配に反応せず、取引手数料も含まれない。単独モデルでは観測・行動・予測ヘッド・在庫制限が同時に変わり、最良の分業型でも報酬以外に損失制限と予測設定が変わる。したがって改善を個々の変更、特に段階的学習だけには帰属できない。",
+        "importance": 3,
+        "recommended": true,
+        "reason": "電子マーケットメイクの報酬設計を検討する研究者に推奨する。特に有用なのは、同じ分業型デスクに対して、損益の一部共有と約定後マークアウトを別々に追加した比較である。実運用で利益が出る戦略の証拠ではなく、誰の注文が後の損失につながったかを学習報酬に反映するための実験例として読む価値がある。",
+        "tags": [
+          "電子マーケットメイク",
+          "予測市場",
+          "マルチエージェント強化学習",
+          "約定後マークアウト",
+          "逆選択",
+          "在庫リスク",
+          "注文板再構成"
+        ],
+        "english": {
+          "classification": "electronic_trading",
+          "summary": "The study compares a single market maker with a desk split into a quoter and an inventory manager on Polymarket’s five-minute BTC up/down contracts. The desk performed worst when the quoter earned the spread at execution while the inventory manager absorbed subsequent inventory gains and losses. Charging the quoter for adverse post-fill price moves reduced losses, but no configuration showed a positive mean profit in periodic out-of-sample evaluation.",
+          "mainResult": "Averaged over the last five evaluations on the held-out day, terminal portfolio value per episode was $-72.3$ ticks for the basic split. Partially sharing desk P&L improved this to $-41.0$; adding a five-step post-fill midprice markout to the quoter’s reward instead improved it to $-5.9$. A configuration combining reward sharing, a phased-in markout, a loss stop and other changes ranked first at $-4.3$. In a separate deterministic evaluation of the final policies on 48 windows, the basic split lost in 45 windows, compared with 6 for the markout variant and 8 for the combined configuration. The latter two totaled $+133$ and $+67$ ticks on those windows, respectively, which does not establish positive expected profit.",
+          "practicalApplication": "Evaluate a quoting policy not only on the spread earned at execution, but also on whether the midprice subsequently fell after a buy or rose after a sale. Distinguish quoting from supplying executed liquidity. The single-agent redesign improved terminal value from the baseline’s $-46.1$ to $-9.6$ ticks and reduced selection of the no-quote action during training from $19.2\\%$ to $4.4\\%$, yet executed volume also fell, from $0.056$ to $0.032$ units per step.",
+          "methodology": "Training used 640 Up and Down token streams from four days; 192 streams from a single day two weeks after the last training day were held out. The study inferred order messages from L2 depth changes and trade prints, then replayed each book separately through JAX-LOB’s price-time-priority engine. A learning execution agent participated in the same book in all six configurations. In the split desk, the quoter chose quotes and the inventory manager closed positions with immediate-or-cancel orders. Each trained with independent recurrent PPO. Rather than comparing their different training rewards, the study scored all configurations on terminal portfolio value after closing remaining inventory.",
+          "limitations": "Each configuration had one training seed, and evaluation covered one day, one venue and one instrument family. Reconstructed depth matches published aggregates, but order IDs are synthetic and cancellations select orders randomly from the queue; simulated fills are not observed historical executions. Historical participants do not react to the agents’ quotes, and trading fees are omitted. The single-agent redesign jointly changes observations, actions, the forecast head and inventory controls. The best split desk changes the loss stop and forecast settings as well as the rewards. The improvements therefore cannot be attributed to individual changes, particularly the curriculum alone.",
+          "reason": "Recommended for researchers designing rewards for electronic market making. The most informative comparison adds partial P&L sharing and post-fill markouts separately to the same split desk. Its value is as an experiment in assigning later losses to the agent whose orders created the exposure, not as evidence of a profitable live strategy.",
+          "tags": [
+            "Electronic market making",
+            "Prediction markets",
+            "Multi-agent reinforcement learning",
+            "Post-fill markout",
+            "Adverse selection",
+            "Inventory risk",
+            "Order book reconstruction"
+          ]
+        }
+      },
+      "usage": [
+        {
+          "stage": "screen",
+          "model": "gpt-6-luna",
+          "requestedModel": "gpt-6-luna",
+          "effort": "low",
+          "inputTokens": 939,
+          "outputTokens": 842,
+          "reasoningTokens": 104,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 0,
+          "totalTokens": 1781,
+          "estimatedCostUsd": 0.000515,
+          "pricingDate": "2026-10-03",
+          "sourceScope": "abstract",
+          "pdfPages": null,
+          "paperIds": [
+            "2610.26789v1"
+          ],
+          "outcome": "completed"
+        },
+        {
+          "stage": "paper",
+          "model": "gpt-6.2-astra",
+          "requestedModel": "gpt-6.2-astra",
+          "effort": "high",
+          "inputTokens": 34181,
+          "outputTokens": 2994,
+          "reasoningTokens": 991,
+          "cachedInputTokens": 0,
+          "cacheWriteTokens": 33969,
+          "totalTokens": 37175,
+          "estimatedCostUsd": 0.461146,
+          "pricingDate": "2026-11-21",
+          "sourceScope": "full_text",
+          "pdfPages": 50,
+          "paperIds": [
+            "2610.26789v1"
+          ],
+          "outcome": "completed"
+        }
+      ]
+    }
+  ],
+  "usage": [
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 857,
+      "outputTokens": 948,
+      "reasoningTokens": 49,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1805,
+      "estimatedCostUsd": 0.00056,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.23869v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 842,
+      "outputTokens": 814,
+      "reasoningTokens": 89,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1656,
+      "estimatedCostUsd": 0.000491,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.23901v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 845,
+      "outputTokens": 708,
+      "reasoningTokens": 68,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1553,
+      "estimatedCostUsd": 0.000438,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.24035v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 904,
+      "outputTokens": 751,
+      "reasoningTokens": 137,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1655,
+      "estimatedCostUsd": 0.000466,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.24169v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 835,
+      "outputTokens": 700,
+      "reasoningTokens": 99,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1535,
+      "estimatedCostUsd": 0.000434,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.24192v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 902,
+      "outputTokens": 730,
+      "reasoningTokens": 45,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1632,
+      "estimatedCostUsd": 0.000455,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.24267v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 747,
+      "outputTokens": 766,
+      "reasoningTokens": 101,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1513,
+      "estimatedCostUsd": 0.000458,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.24439v2"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.2-astra",
+      "requestedModel": "gpt-6.2-astra",
+      "effort": "high",
+      "inputTokens": 39077,
+      "outputTokens": 1977,
+      "reasoningTokens": 32,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 38865,
+      "totalTokens": 41054,
+      "estimatedCostUsd": 0.469426,
+      "pricingDate": "2026-11-21",
+      "sourceScope": "full_text",
+      "pdfPages": 35,
+      "paperIds": [
+        "2610.24439v2"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 830,
+      "outputTokens": 850,
+      "reasoningTokens": 124,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1680,
+      "estimatedCostUsd": 0.000508,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.24544v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 779,
+      "outputTokens": 1033,
+      "reasoningTokens": 79,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1812,
+      "estimatedCostUsd": 0.000594,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.24558v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.2-astra",
+      "requestedModel": "gpt-6.2-astra",
+      "effort": "high",
+      "inputTokens": 22780,
+      "outputTokens": 3415,
+      "reasoningTokens": 1091,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 22568,
+      "totalTokens": 26195,
+      "estimatedCostUsd": 0.363976,
+      "pricingDate": "2026-11-21",
+      "sourceScope": "full_text",
+      "pdfPages": 15,
+      "paperIds": [
+        "2610.24558v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 898,
+      "outputTokens": 836,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1734,
+      "estimatedCostUsd": 0.000508,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.24586v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 887,
+      "outputTokens": 748,
+      "reasoningTokens": 60,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1635,
+      "estimatedCostUsd": 0.000463,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.24792v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 757,
+      "outputTokens": 716,
+      "reasoningTokens": 63,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1473,
+      "estimatedCostUsd": 0.000434,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.25445v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.2-astra",
+      "requestedModel": "gpt-6.2-astra",
+      "effort": "high",
+      "inputTokens": 26868,
+      "outputTokens": 2567,
+      "reasoningTokens": 443,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 26656,
+      "totalTokens": 29435,
+      "estimatedCostUsd": 0.370936,
+      "pricingDate": "2026-11-21",
+      "sourceScope": "full_text",
+      "pdfPages": 43,
+      "paperIds": [
+        "2610.25445v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 819,
+      "outputTokens": 908,
+      "reasoningTokens": 79,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1727,
+      "estimatedCostUsd": 0.000536,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.25495v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.2-astra",
+      "requestedModel": "gpt-6.2-astra",
+      "effort": "high",
+      "inputTokens": 18665,
+      "outputTokens": 2156,
+      "reasoningTokens": 293,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 18453,
+      "totalTokens": 20821,
+      "estimatedCostUsd": 0.272466,
+      "pricingDate": "2026-11-21",
+      "sourceScope": "full_text",
+      "pdfPages": 9,
+      "paperIds": [
+        "2610.25495v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 926,
+      "outputTokens": 995,
+      "reasoningTokens": 78,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1921,
+      "estimatedCostUsd": 0.00059,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.25603v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 790,
+      "outputTokens": 815,
+      "reasoningTokens": 91,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1605,
+      "estimatedCostUsd": 0.000487,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.25671v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 693,
+      "outputTokens": 750,
+      "reasoningTokens": 79,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1443,
+      "estimatedCostUsd": 0.000444,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.25756v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 830,
+      "outputTokens": 943,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1773,
+      "estimatedCostUsd": 0.000554,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.25802v2"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.2-astra",
+      "requestedModel": "gpt-6.2-astra",
+      "effort": "high",
+      "inputTokens": 19046,
+      "outputTokens": 2084,
+      "reasoningTokens": 356,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 18834,
+      "totalTokens": 21130,
+      "estimatedCostUsd": 0.273396,
+      "pricingDate": "2026-11-21",
+      "sourceScope": "full_text",
+      "pdfPages": 9,
+      "paperIds": [
+        "2610.25802v2"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 795,
+      "outputTokens": 780,
+      "reasoningTokens": 108,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1575,
+      "estimatedCostUsd": 0.000469,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.26031v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 977,
+      "outputTokens": 923,
+      "reasoningTokens": 98,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1900,
+      "estimatedCostUsd": 0.000559,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.26324v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.2-astra",
+      "requestedModel": "gpt-6.2-astra",
+      "effort": "high",
+      "inputTokens": 28936,
+      "outputTokens": 2581,
+      "reasoningTokens": 506,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 28724,
+      "totalTokens": 31517,
+      "estimatedCostUsd": 0.392176,
+      "pricingDate": "2026-11-21",
+      "sourceScope": "full_text",
+      "pdfPages": 47,
+      "paperIds": [
+        "2610.26324v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 855,
+      "outputTokens": 918,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1773,
+      "estimatedCostUsd": 0.000544,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.26358v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 885,
+      "outputTokens": 943,
+      "reasoningTokens": 87,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1828,
+      "estimatedCostUsd": 0.00056,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.26456v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 970,
+      "outputTokens": 1008,
+      "reasoningTokens": 100,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1978,
+      "estimatedCostUsd": 0.000601,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.26746v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 939,
+      "outputTokens": 842,
+      "reasoningTokens": 104,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1781,
+      "estimatedCostUsd": 0.000515,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.26789v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "paper",
+      "model": "gpt-6.2-astra",
+      "requestedModel": "gpt-6.2-astra",
+      "effort": "high",
+      "inputTokens": 34181,
+      "outputTokens": 2994,
+      "reasoningTokens": 991,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 33969,
+      "totalTokens": 37175,
+      "estimatedCostUsd": 0.461146,
+      "pricingDate": "2026-11-21",
+      "sourceScope": "full_text",
+      "pdfPages": 50,
+      "paperIds": [
+        "2610.26789v1"
+      ],
+      "outcome": "completed"
+    },
+    {
+      "stage": "screen",
+      "model": "gpt-6-luna",
+      "requestedModel": "gpt-6-luna",
+      "effort": "low",
+      "inputTokens": 931,
+      "outputTokens": 935,
+      "reasoningTokens": 0,
+      "cachedInputTokens": 0,
+      "cacheWriteTokens": 0,
+      "totalTokens": 1866,
+      "estimatedCostUsd": 0.000561,
+      "pricingDate": "2026-10-03",
+      "sourceScope": "abstract",
+      "pdfPages": null,
+      "paperIds": [
+        "2610.26797v1"
+      ],
+      "outcome": "completed"
+    }
+  ]
 }

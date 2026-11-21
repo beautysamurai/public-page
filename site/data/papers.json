@@ -2,6 +2,13 @@
   "schemaVersion": 1,
   "editions": [
     {
+      "editionId": "2026-11-21-daily-openai-01",
+      "date": "2026-11-21",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": []
+    },
+    {
       "editionId": "2026-11-20-daily-openai-01",
       "date": "2026-11-20",
       "kind": "daily",
@@ -797,6 +804,321 @@
       "papers": []
     },
     {
+      "editionId": "2026-10-23-weekly-openai-01",
+      "date": "2026-10-23",
+      "kind": "weekly",
+      "periodEnd": "2026-10-23",
+      "papers": [
+        {
+          "arxivId": "2610.27100v1",
+          "title": "LOB-Impact Benchmark: Emergent Market Impact in Generative Limit Order Book Models",
+          "authors": [
+            "George Nigmatulin",
+            "Valentin Mohl",
+            "Sascha Frey",
+            "Kang Li",
+            "Aramis Marti-Shahandeh",
+            "Mihai Cucuringu",
+            "Anisoara Calinescu",
+            "Jakob Foerster",
+            "Stefan Zohren"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 10,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.22727v1",
+          "title": "OrderFlowDiT: Transport-Regularized Diffusion Transformer for Probabilistic Limit-Order Supply Forecasting",
+          "authors": [
+            "Jung Hun Phee",
+            "Tucker Balch"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.22839v1",
+          "title": "Basis-Only Funding Is Not Dividend Fair: Settlement Design in Crypto Equity Perpetuals",
+          "authors": [
+            "Donghwa Seo",
+            "Doohwi Cha",
+            "Seunghan Son",
+            "Juyeong Lee",
+            "Minsuk Sung",
+            "Minjae Lee"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.23749v1",
+          "title": "From Alpha to Execution: Trading Horizons, Regimes, and Schedules under Concave Impact and Hurst Scaling",
+          "authors": [
+            "Dnyanesh Kulkarni",
+            "Revant Nayar"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.24439v2",
+          "title": "Dynamic Programming for Value-at-Risk Markov Decision Processes in Continuous Spaces",
+          "authors": [
+            "Xian Chen",
+            "Erick Delage",
+            "Weikai Wang"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.24558v1",
+          "title": "Optimal Trading Filters and the Value of Predictive Signals",
+          "authors": [
+            "Matteo Smerlak"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.25495v1",
+          "title": "Probabilistic Limit Order Book Forecasting with Conditional Diffusion Models",
+          "authors": [
+            "Junyu Chen",
+            "Franklin Liu",
+            "Moshu Xu",
+            "Lijian Yang"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.28753v1",
+          "title": "Understanding the Inner Workings of a State-Space Foundation Model for Limit Order Books",
+          "authors": [
+            "Valentin Mohl",
+            "Alexandre Bismuth",
+            "Aramis Marti-Shahandeh",
+            "George Nigmatulin",
+            "Kang Li",
+            "Stefan Zohren",
+            "Jakob Foerster",
+            "Mihai Cucuringu",
+            "Anisoara Calinescu"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.28863v1",
+          "title": "A game-theoretic analysis of the market microstructure in decentralized exchanges with concentrated liquidity",
+          "authors": [
+            "Mikhail Belokon",
+            "Rostislav Berezovskiy"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.30891v1",
+          "title": "Equilibria and Learning in Competitive Market Making",
+          "authors": [
+            "Matteo Onger",
+            "Luigi Foscari"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.23619v1",
+          "title": "Cross-product Modelling in Continuous Intraday Electricity Markets via Hawkes Processes",
+          "authors": [
+            "Ayoub Jhabli",
+            "Tarek Alskaif",
+            "Kwabena E. Bennin",
+            "Bedir Tekinerdogan",
+            "Joost M. E. Pennings"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.25445v1",
+          "title": "Bias correcting transaction cost models for characteristic function based estimators",
+          "authors": [
+            "Abhik Rana",
+            "Sarvesh Ravichandran Iyer",
+            "Sandeep Juneja"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.26324v1",
+          "title": "The Control Layer Behind Rule-Following Agents Trading Across Market Conditions",
+          "authors": [
+            "Saad Naja",
+            "Nasser Odtallah",
+            "Jake Van-Praag",
+            "Sarah May"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.26789v1",
+          "title": "Cooperative Multi-Agent Reinforcement Learning for Market Making on Prediction-Market Order Books",
+          "authors": [
+            "Skander Lejmi"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.28075v1",
+          "title": "Speculative Imbalance Positions by Non-Physical Traders: Impacts on Electricity System Balancing in Great Britain",
+          "authors": [
+            "Joseph Cary",
+            "Thomas Morstyn"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.30539v1",
+          "title": "Dynamics of the Liquidity Profile in Concentrated Liquidity Provision: An SPIDE Approach",
+          "authors": [
+            "Cheuk Yin Lee",
+            "Jimmy Risk",
+            "Shen-Ning Tung",
+            "Tai-Ho Wang"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.31141v1",
+          "title": "Intraday Forecasting Ability and Liquidity Provision of Institutional Traders",
+          "authors": [
+            "Xinlei Hao",
+            "Jiajun Guo",
+            "Jussi Keppo",
+            "Xianhua Peng"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.22522v1",
+          "title": "Agentic AI in Automated Markets",
+          "authors": [
+            "Irene Aldridge",
+            "Lourenco Belleau-Bhowmik",
+            "James Chan",
+            "Josh Chang",
+            "Kelly Deng",
+            "Pranav Dhingra",
+            "Xinda Ding",
+            "Haodong Fang",
+            "Satya Hanumanchi",
+            "Carter He",
+            "Shuang He",
+            "Yadong Hou",
+            "Vallab Karanam",
+            "Rithvik Kasarla",
+            "Tishya Khanna",
+            "Jihyun Kim",
+            "Sarah Konety",
+            "Abhinav Kotta",
+            "Anderson Lo",
+            "Jake Luther",
+            "Omar Mian",
+            "Ishan Patwardhan",
+            "Matteo Perona",
+            "Chenyue Qi",
+            "Shashank Ramachandran",
+            "Shubham Rateria",
+            "Jake Swain",
+            "David Thai",
+            "Michael Twersky",
+            "Susan Wu",
+            "Dean Xu",
+            "Helenna Yin",
+            "Jiachun Zheng"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 4,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.27214v1",
+          "title": "Deep catastrophic-risk-aware reinforcement learning",
+          "authors": [
+            "Carlos Pérez Octavio Mendoza",
+            "Frédéric Godin"
+          ],
+          "topics": [
+            "Out of scope"
+          ],
+          "schedulerRating": 2,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
       "editionId": "2026-10-23-daily-openai-01",
       "date": "2026-10-23",
       "kind": "daily",
@@ -938,6 +1260,96 @@
             "Market microstructure"
           ],
           "schedulerRating": 2,
+          "schedulerRatingScale": 10
+        }
+      ]
+    },
+    {
+      "editionId": "2026-10-20-daily-openai-01",
+      "date": "2026-10-20",
+      "kind": "daily",
+      "periodEnd": null,
+      "papers": [
+        {
+          "arxivId": "2610.24439v2",
+          "title": "Dynamic Programming for Value-at-Risk Markov Decision Processes in Continuous Spaces",
+          "authors": [
+            "Xian Chen",
+            "Erick Delage",
+            "Weikai Wang"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.24558v1",
+          "title": "Optimal Trading Filters and the Value of Predictive Signals",
+          "authors": [
+            "Matteo Smerlak"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.25495v1",
+          "title": "Probabilistic Limit Order Book Forecasting with Conditional Diffusion Models",
+          "authors": [
+            "Junyu Chen",
+            "Franklin Liu",
+            "Moshu Xu",
+            "Lijian Yang"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 8,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.25445v1",
+          "title": "Bias correcting transaction cost models for characteristic function based estimators",
+          "authors": [
+            "Abhik Rana",
+            "Sarvesh Ravichandran Iyer",
+            "Sandeep Juneja"
+          ],
+          "topics": [
+            "Market microstructure"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.26324v1",
+          "title": "The Control Layer Behind Rule-Following Agents Trading Across Market Conditions",
+          "authors": [
+            "Saad Naja",
+            "Nasser Odtallah",
+            "Jake Van-Praag",
+            "Sarah May"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
+          "schedulerRatingScale": 10
+        },
+        {
+          "arxivId": "2610.26789v1",
+          "title": "Cooperative Multi-Agent Reinforcement Learning for Market Making on Prediction-Market Order Books",
+          "authors": [
+            "Skander Lejmi"
+          ],
+          "topics": [
+            "Electronic trading"
+          ],
+          "schedulerRating": 6,
           "schedulerRatingScale": 10
         }
       ]

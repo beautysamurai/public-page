@@ -10,10 +10,12 @@ PRICING_DATE = "2026-09-06"
 # Standard USD per million tokens; estimates, not billing records.
 RATES = {"gpt-5.6-luna": (.2, .02, 1.2), "gpt-5.6-terra": (2, .2, 12),
          "gpt-5.6-sol": (4, .4, 20), "gpt-6-astra": (10, 1, 50),
-         "gpt-6-luna": (.1, .01, .5), "gpt-6.1-sol": (2, .1, 10)}
+         "gpt-6-luna": (.1, .01, .5), "gpt-6.1-sol": (2, .1, 10),
+         "gpt-6.2-astra": (8, .4, 40)}
 # New model rates verified against their official model pages on this date.
 # Keep legacy rate dates (and already saved usage records) unchanged.
-PRICING_DATES = {"gpt-6-luna": "2026-10-03", "gpt-6.1-sol": "2026-10-03"}
+PRICING_DATES = {"gpt-6-luna": "2026-10-03", "gpt-6.1-sol": "2026-10-03",
+                 "gpt-6.2-astra": "2026-11-21"}
 SCOPES = {"abstract", "full_text", "abstract_introduction", "stored_reviews"}
 FIELDS = {"stage", "model", "requestedModel", "effort", "inputTokens", "outputTokens",
           "reasoningTokens", "cachedInputTokens", "cacheWriteTokens", "totalTokens", "estimatedCostUsd",

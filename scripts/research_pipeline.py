@@ -280,12 +280,12 @@ class PipelineConfig:
     categories: tuple[str, ...] = DEFAULT_CATEGORIES
     pdf_importance_threshold: int = 3
     screen_model: str = "gpt-6-luna"
-    full_model: str = "gpt-6.1-sol"
-    weekly_model: str = "gpt-6.1-sol"
-    monthly_model: str = "gpt-6-astra"
+    full_model: str = "gpt-6.2-astra"
+    weekly_model: str = "gpt-6.2-astra"
+    monthly_model: str = "gpt-6.2-astra"
     screen_reasoning_effort: str = "low"
-    full_reasoning_effort: str = "medium"
-    weekly_reasoning_effort: str = "medium"
+    full_reasoning_effort: str = "high"
+    weekly_reasoning_effort: str = "high"
     monthly_reasoning_effort: str = "high"
     text_verbosity: str = "low"
     pdf_detail: str = "low"
@@ -3834,23 +3834,23 @@ def load_pipeline_config(path: Path | None) -> PipelineConfig:
         ),
         full_model=model(
             "fullModel",
-            "gpt-6.1-sol",
+            "gpt-6.2-astra",
             ("OPENAI_FULL_TEXT_MODEL", "OPENAI_FULL_MODEL"),
         ),
         weekly_model=period_model(
-            "weeklyModel", "gpt-6.1-sol", "OPENAI_WEEKLY_MODEL"
+            "weeklyModel", "gpt-6.2-astra", "OPENAI_WEEKLY_MODEL"
         ),
         monthly_model=period_model(
-            "monthlyModel", "gpt-6-astra", "OPENAI_MONTHLY_MODEL"
+            "monthlyModel", "gpt-6.2-astra", "OPENAI_MONTHLY_MODEL"
         ),
         screen_reasoning_effort=effort(
             "screenReasoningEffort", "low", "OPENAI_SCREENING_REASONING_EFFORT"
         ),
         full_reasoning_effort=effort(
-            "fullReasoningEffort", "medium", "OPENAI_FULL_TEXT_REASONING_EFFORT"
+            "fullReasoningEffort", "high", "OPENAI_FULL_TEXT_REASONING_EFFORT"
         ),
         weekly_reasoning_effort=effort(
-            "weeklyReasoningEffort", "medium", "OPENAI_WEEKLY_REASONING_EFFORT"
+            "weeklyReasoningEffort", "high", "OPENAI_WEEKLY_REASONING_EFFORT"
         ),
         monthly_reasoning_effort=effort(
             "monthlyReasoningEffort", "high", "OPENAI_MONTHLY_REASONING_EFFORT"

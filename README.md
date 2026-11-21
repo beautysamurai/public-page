@@ -20,10 +20,10 @@ data-only PR into `main` and starts the existing GitHub Pages deployment.
 
 ~~~text
 official arXiv new-list pages + validated export metadata
-  -> abstract screening with GPT-5.6 Luna and strict Responses API JSON Schema
-  -> GPT-5.6 Terra full-PDF analysis only when importance >= threshold
+  -> abstract screening with GPT-6 Luna / low and strict Responses API JSON Schema
+  -> GPT-6.2 Astra / high full-PDF analysis only when importance >= threshold
   -> durable state + daily JSON/Markdown
-  -> GitHub Actions weekly Terra / monthly Sol synthesis from stored daily JSON
+  -> GitHub Actions weekly/monthly Astra / high synthesis from stored daily JSON
   -> scripts/research_publication.py
   -> content/chatgpt_scheduler_history.json + English overlay
   -> deterministic site/data generation
@@ -344,15 +344,15 @@ Runtime safety limits also have optional local overrides:
 - `OPENAI_SYNTHESIS_CHUNK_MAX_ITEMS` and
   `OPENAI_SYNTHESIS_CHUNK_MAX_BYTES` bound each weekly/monthly request.
 
-The token-efficient defaults (updated 2026-10-03) preserve reasoning depth by
-stage instead of lowering effort across all research:
+The defaults (updated 2026-11-21) use deeper reasoning for paper analysis and
+period reviews while keeping abstract screening inexpensive:
 
 | Stage | Model | Reasoning effort |
 | --- | --- | --- |
 | Abstract screening | `gpt-6-luna` | `low` |
-| Full-paper analysis | `gpt-6.1-sol` | `medium` |
-| Weekly synthesis | `gpt-6.1-sol` | `medium` |
-| Monthly synthesis | `gpt-6-astra` | `high` |
+| Full-paper analysis | `gpt-6.2-astra` | `high` |
+| Weekly synthesis | `gpt-6.2-astra` | `high` |
+| Monthly synthesis | `gpt-6.2-astra` | `high` |
 
 Each stage has a matching `OPENAI_*_REASONING_EFFORT` override shown in
 `.env.example`. Responses use `text.verbosity: low`; change `textVerbosity` in
@@ -363,6 +363,9 @@ output-token ceilings, PDF selection and the 50-page safeguard are unchanged.
 Pro mode is not enabled. Existing `.env` model/effort settings take precedence;
 remove obsolete overrides or update them to use these defaults. GitHub Actions
 reads the checked-in config; no new secret or schedule is required.
+Jev remains a separate 100-paper shadow comparison; it does not decide which
+papers enter the public reviews. New calls use the upgraded model. Previously
+completed analysis and its original model, effort and usage records are retained.
 
 Weekly/monthly requests send the primary Japanese analysis once, omitting only
 its duplicate English translation from the **input**. Every primary field,
@@ -380,10 +383,15 @@ comparison, not a measured model-token or quality benchmark. Check the saved
 actual input/output/reasoning usage and review quality on subsequent runs.
 The old vs new models have not been quality-benchmarked on this archive.
 
-Standard rates per million tokens verified on 2026-10-03 are $0.10 input /
-$0.50 output for [GPT-6 Luna](https://developers.openai.com/api/docs/models/gpt-6-luna),
-and $2 input / $10 output for
-[GPT-6.1 Sol](https://developers.openai.com/api/docs/models/gpt-6.1-sol).
+Standard rates per million tokens for
+[GPT-6.2 Astra](https://developers.openai.com/api/docs/models/gpt-6.2-astra),
+verified on 2026-11-21, are $8 input, $0.40 cached input, $10 for 30-minute cache
+writes and $40 output. Requests above 272,000 input tokens double the input and
+cache rates and multiply output rates by 1.5. The usage estimator includes these
+cache-write and long-context charges. GPT-6 Luna screening retains its recorded
+$0.10 input / $0.50 output rates (verified 2026-10-03).
+Higher reasoning effort may increase billed output tokens; reasoning tokens
+are already included in output usage and are not charged a second time.
 Price reductions do not imply proportional token reductions. New model prices
 are recorded with their verification date; legacy prices and saved cost records
 are retained. See the official [verbosity guidance](https://developers.openai.com/api/docs/guides/deployment-checklist)
@@ -789,8 +797,8 @@ Weekly and monthly outputs are stored under
 `research/reviews/weekly/YYYY-MM-DD.{json,md}` and
 `research/reviews/monthly/YYYY-MM-DD.{json,md}`. Period jobs reuse the daily
 JSON and never fetch arXiv metadata or PDFs again, but they do call the
-Responses API for synthesis using the configured weekly Terra/medium and
-monthly Sol/high settings. A completed period review is detected before the
+Responses API for synthesis using GPT-6.2 Astra/high for both weekly and monthly
+reviews by default. A completed period review is detected before the
 paid step and is reused without another API call. Each scheduled period run also
 carries forward up to the two oldest incomplete reviews of the same kind,
 alongside the current period, so transient failures are retried automatically

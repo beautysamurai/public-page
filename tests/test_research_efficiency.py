@@ -20,9 +20,9 @@ class ResearchEfficiencyTests(unittest.TestCase):
                        p.load_pipeline_config(Path(__file__).resolve().parents[1] / "config/research.json")]
         for cfg in configs:
             self.assertEqual((cfg.screen_model, cfg.screen_reasoning_effort), ("gpt-6-luna", "low"))
-            self.assertEqual((cfg.full_model, cfg.full_reasoning_effort), ("gpt-6.1-sol", "medium"))
-            self.assertEqual((cfg.weekly_model, cfg.weekly_reasoning_effort), ("gpt-6.1-sol", "medium"))
-            self.assertEqual((cfg.monthly_model, cfg.monthly_reasoning_effort), ("gpt-6-astra", "high"))
+            self.assertEqual((cfg.full_model, cfg.full_reasoning_effort), ("gpt-6.2-astra", "high"))
+            self.assertEqual((cfg.weekly_model, cfg.weekly_reasoning_effort), ("gpt-6.2-astra", "high"))
+            self.assertEqual((cfg.monthly_model, cfg.monthly_reasoning_effort), ("gpt-6.2-astra", "high"))
             self.assertEqual(cfg.text_verbosity, "low")
             self.assertEqual(cfg.pdf_importance_threshold, 3)
             self.assertEqual(cfg.pdf_detail, "low")
@@ -88,8 +88,12 @@ class ResearchEfficiencyTests(unittest.TestCase):
                             p._checkpoint_fingerprint(replace(cfg, text_verbosity="high"), date(2026, 8, 28), {}))
 
     def test_new_model_prices_keep_usage_and_legacy_rates_intact(self):
-        for model, expected in (("gpt-6-luna", .000241), ("gpt-6.1-sol", .00481),
-                                ("gpt-5.6-sol", .00964)):
+        for model, expected, pricing_date in (
+                ("gpt-6-luna", .000241, "2026-10-03"),
+                ("gpt-6.1-sol", .00481, "2026-10-03"),
+                ("gpt-5.6-sol", .00964, "2026-09-06"),
+                ("gpt-6-astra", .0241, "2026-09-06"),
+                ("gpt-6.2-astra", .01924, "2026-11-21")):
             response = {"model": model, "status": "completed", "usage": {
                 "input_tokens": 1000, "output_tokens": 300, "total_tokens": 1300,
                 "input_tokens_details": {"cached_tokens": 100, "cache_write_tokens": 0},
@@ -99,7 +103,21 @@ class ResearchEfficiencyTests(unittest.TestCase):
             self.assertAlmostEqual(call["estimatedCostUsd"], expected)
             self.assertEqual(call["totalTokens"], 1300)
             self.assertEqual(call["reasoningTokens"], 100)
-            self.assertEqual(call["pricingDate"], "2026-09-06" if model == "gpt-5.6-sol" else "2026-10-03")
+            self.assertEqual(call["pricingDate"], pricing_date)
+
+    def test_astra_prices_include_cache_writes_and_long_context(self):
+        for inputs, cached, writes, output, expected in (
+                (1000, 100, 200, 300, .01964),
+                (300000, 40000, 200000, 1000, 5.052)):
+            with self.subTest(inputs=inputs):
+                response = {"model": "gpt-6.2-astra", "status": "completed", "usage": {
+                    "input_tokens": inputs, "output_tokens": output,
+                    "total_tokens": inputs + output,
+                    "input_tokens_details": {"cached_tokens": cached, "cache_write_tokens": writes},
+                    "output_tokens_details": {"reasoning_tokens": 100}}}
+                call = p.research_usage.record(response, model="gpt-6.2-astra", effort="high",
+                    stage="paper", paper_ids=["2608.12345v1"], scope="full_text", pages=20)
+                self.assertAlmostEqual(call["estimatedCostUsd"], expected)
 
 
 if __name__ == "__main__":
